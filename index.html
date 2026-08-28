@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>HW1-Uday Patel</title>
+    </head>
+    <body>
+        <h1>
+            Community Sports League Fixtures
+        </h1>
+        
+        <form id = "fixtureForm">
+            <div style="margin-bottom: 20px;">
+                <!-- The autofocus will make the cursor focus on this -->
+                <label for="fixtureName">Fixture Name:</label>
+                <input type="text" id="fixtureName" name="fixtureName"
+                    placeholder="Enter the names of the teams playing" size = "50" required autofocus>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <label for="teamsPlayers">Teams / Players:</label>
+                <input type="text" id="teamsPlayers" name="teamsPlayers"
+                    placeholder="e.g. Team Milpitas Lions vs Team San Jose Tigers roster" required
+                    style="width: 500px; height: 50px;">
+            </div>
+
+
+            <div style="margin-bottom: 20px;">
+                <label for="submitterEmail">Your Email:</label>
+                <input type="email" id="submitterEmail" name="submitterEmail"
+                    placeholder="e.g. captain@leaguemail.com" required>
+            </div>
+
+
+
+
+            <div style="margin-bottom: 20px;">
+                <label for="description">Match Details:</label>
+                <textarea id="description" name="description"
+                        placeholder="Describe the match: rules, notes, special instructions..."
+                        required></textarea>
+            </div>
+
+
+
+            <div style="margin-bottom: 20px;">
+                <label for="category">Sport Type:</label>
+                <select id="category" name="category">
+                    <option value="soccer">Soccer</option>
+                    <option value="basketball">Basketball</option>
+                    <option value="volleyball">Volleyball</option>
+                    <option value="cricket">Cricket</option>
+                </select>
+            </div>
+
+            <div style = "margin-bottom: 20px;">
+                <input type="checkbox" id="agreeTerms" name="agreeTerms">
+                <label for="agreeTerms">I agree to the terms and conditions.</label>
+            </div>
+            
+            <div>
+                <button type="submit">Submit Fixture</button>
+            </div>
+        </form>
+        
+        <script src="app.js"></script>
+    </body>
+</html>
