@@ -18,8 +18,9 @@ from langchain_ollama import ChatOllama
 model = ChatOllama(model="qwen3:8b", temperature=0.7)
 
 
-def run_planner(title, content):
+def run_planner(title, content, llm=None):
     """Planner agent: proposes 3 tags + a <=25 word summary from the input."""
+    llm = llm or model
     prompt = f"""You are a Planner agent. Given a title and content, propose:
 - exactly 3 short topical tags (lowercase, 1-3 words each)
 - a one-sentence summary of at most 25 words
@@ -32,12 +33,13 @@ Content: {content}
 Respond ONLY with valid JSON in this exact format, nothing else:
 {{"tags": ["tag1", "tag2", "tag3"], "summary": "your summary here"}}
 """
-    response = model.invoke(prompt)
+    response = llm.invoke(prompt)
     return response.content
 
 
-def run_reviewer(planner_output, title, content):
+def run_reviewer(planner_output, title, content, llm=None):
     """Reviewer agent: checks the Planner's draft and corrects it if needed."""
+    llm = llm or model
     prompt = f"""You are a Reviewer agent. You will check another AI's draft tags and summary for quality.
 
 Original title: {title}
@@ -56,7 +58,7 @@ If not, correct it yourself.
 Respond ONLY with valid JSON in this exact format, nothing else:
 {{"tags": ["tag1", "tag2", "tag3"], "summary": "your summary here"}}
 """
-    response = model.invoke(prompt)
+    response = llm.invoke(prompt)
     return response.content
 
 

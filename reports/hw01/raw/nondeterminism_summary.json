@@ -1,0 +1,36 @@
+{
+  "0.7": {
+    "distinct_tag_sets": 13,
+    "tags_in_all_runs": [],
+    "tags_in_exactly_one_run": [
+      "bay area",
+      "fast bowling",
+      "game strategy",
+      "green pitch",
+      "league title race",
+      "middle order",
+      "strategic play",
+      "team rivalry",
+      "team standings",
+      "team strategies",
+      "top league teams"
+    ],
+    "latency_p50_ms": 49282.5,
+    "latency_p95_ms": 72209.5,
+    "latency_p99_ms": 79907.2,
+    "latency_mean_ms": 48377.1
+  },
+  "0.0": {
+    "distinct_tag_sets": 1,
+    "tags_in_all_runs": [
+      "bay area rivalry",
+      "cricket match",
+      "team rivalry"
+    ],
+    "tags_in_exactly_one_run": [],
+    "latency_p50_ms": 48720.5,
+    "latency_p95_ms": 49382.9,
+    "latency_p99_ms": 49721.1,
+    "latency_mean_ms": 48855.1
+  }
+}

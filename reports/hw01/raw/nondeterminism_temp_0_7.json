@@ -1,0 +1,202 @@
+[
+  {
+    "run": 1,
+    "temperature": 0.7,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "league standings"
+    ],
+    "latency_ms": 51873.7
+  },
+  {
+    "run": 2,
+    "temperature": 0.7,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "rivalry clash"
+    ],
+    "latency_ms": 66895.9
+  },
+  {
+    "run": 3,
+    "temperature": 0.7,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "rivalry clash"
+    ],
+    "latency_ms": 63997.8
+  },
+  {
+    "run": 4,
+    "temperature": 0.7,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "league title race"
+    ],
+    "latency_ms": 24763.7
+  },
+  {
+    "run": 5,
+    "temperature": 0.7,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "top league teams"
+    ],
+    "latency_ms": 27106.0
+  },
+  {
+    "run": 6,
+    "temperature": 0.7,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "cricket rivalry"
+    ],
+    "latency_ms": 71703.0
+  },
+  {
+    "run": 7,
+    "temperature": 0.7,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "cricket rivalry"
+    ],
+    "latency_ms": 81831.6
+  },
+  {
+    "run": 8,
+    "temperature": 0.7,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "rivalry clash"
+    ],
+    "latency_ms": 49852.0
+  },
+  {
+    "run": 9,
+    "temperature": 0.7,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "team strategies"
+    ],
+    "latency_ms": 36306.2
+  },
+  {
+    "run": 10,
+    "temperature": 0.7,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "game strategy"
+    ],
+    "latency_ms": 32841.4
+  },
+  {
+    "run": 11,
+    "temperature": 0.7,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "league standings"
+    ],
+    "latency_ms": 38255.9
+  },
+  {
+    "run": 12,
+    "temperature": 0.7,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "strategic play"
+    ],
+    "latency_ms": 30661.7
+  },
+  {
+    "run": 13,
+    "temperature": 0.7,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "team standings"
+    ],
+    "latency_ms": 50526.6
+  },
+  {
+    "run": 14,
+    "temperature": 0.7,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "rivalry clash"
+    ],
+    "latency_ms": 40337.8
+  },
+  {
+    "run": 15,
+    "temperature": 0.7,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "rivalry clash"
+    ],
+    "latency_ms": 60444.4
+  },
+  {
+    "run": 16,
+    "temperature": 0.7,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "fast bowling"
+    ],
+    "latency_ms": 33027.8
+  },
+  {
+    "run": 17,
+    "temperature": 0.7,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "rivalry clash"
+    ],
+    "latency_ms": 59641.7
+  },
+  {
+    "run": 18,
+    "temperature": 0.7,
+    "tags": [
+      "rivalry clash",
+      "bay area",
+      "cricket match"
+    ],
+    "latency_ms": 33842.1
+  },
+  {
+    "run": 19,
+    "temperature": 0.7,
+    "tags": [
+      "bay area rivalry",
+      "green pitch",
+      "middle order"
+    ],
+    "latency_ms": 64918.8
+  },
+  {
+    "run": 20,
+    "temperature": 0.7,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "team rivalry"
+    ],
+    "latency_ms": 48713.0
+  }
+]

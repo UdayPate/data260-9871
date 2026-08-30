@@ -1,0 +1,21 @@
+run,temperature,tags,latency_ms
+1,0.7,"[""bay area rivalry"", ""cricket match"", ""league standings""]",51873.7
+2,0.7,"[""bay area rivalry"", ""cricket match"", ""rivalry clash""]",66895.9
+3,0.7,"[""bay area rivalry"", ""cricket match"", ""rivalry clash""]",63997.8
+4,0.7,"[""bay area rivalry"", ""cricket match"", ""league title race""]",24763.7
+5,0.7,"[""bay area rivalry"", ""cricket match"", ""top league teams""]",27106.0
+6,0.7,"[""bay area rivalry"", ""cricket match"", ""cricket rivalry""]",71703.0
+7,0.7,"[""bay area rivalry"", ""cricket match"", ""cricket rivalry""]",81831.6
+8,0.7,"[""bay area rivalry"", ""cricket match"", ""rivalry clash""]",49852.0
+9,0.7,"[""bay area rivalry"", ""cricket match"", ""team strategies""]",36306.2
+10,0.7,"[""bay area rivalry"", ""cricket match"", ""game strategy""]",32841.4
+11,0.7,"[""bay area rivalry"", ""cricket match"", ""league standings""]",38255.9
+12,0.7,"[""bay area rivalry"", ""cricket match"", ""strategic play""]",30661.7
+13,0.7,"[""bay area rivalry"", ""cricket match"", ""team standings""]",50526.6
+14,0.7,"[""bay area rivalry"", ""cricket match"", ""rivalry clash""]",40337.8
+15,0.7,"[""bay area rivalry"", ""cricket match"", ""rivalry clash""]",60444.4
+16,0.7,"[""bay area rivalry"", ""cricket match"", ""fast bowling""]",33027.8
+17,0.7,"[""bay area rivalry"", ""cricket match"", ""rivalry clash""]",59641.7
+18,0.7,"[""rivalry clash"", ""bay area"", ""cricket match""]",33842.1
+19,0.7,"[""bay area rivalry"", ""green pitch"", ""middle order""]",64918.8
+20,0.7,"[""bay area rivalry"", ""cricket match"", ""team rivalry""]",48713.0

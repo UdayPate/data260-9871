@@ -1,0 +1,202 @@
+[
+  {
+    "run": 1,
+    "temperature": 0.0,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "team rivalry"
+    ],
+    "latency_ms": 49128.6
+  },
+  {
+    "run": 2,
+    "temperature": 0.0,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "team rivalry"
+    ],
+    "latency_ms": 49081.0
+  },
+  {
+    "run": 3,
+    "temperature": 0.0,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "team rivalry"
+    ],
+    "latency_ms": 49044.7
+  },
+  {
+    "run": 4,
+    "temperature": 0.0,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "team rivalry"
+    ],
+    "latency_ms": 48734.0
+  },
+  {
+    "run": 5,
+    "temperature": 0.0,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "team rivalry"
+    ],
+    "latency_ms": 48707.0
+  },
+  {
+    "run": 6,
+    "temperature": 0.0,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "team rivalry"
+    ],
+    "latency_ms": 48669.5
+  },
+  {
+    "run": 7,
+    "temperature": 0.0,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "team rivalry"
+    ],
+    "latency_ms": 48643.6
+  },
+  {
+    "run": 8,
+    "temperature": 0.0,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "team rivalry"
+    ],
+    "latency_ms": 48615.6
+  },
+  {
+    "run": 9,
+    "temperature": 0.0,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "team rivalry"
+    ],
+    "latency_ms": 48676.3
+  },
+  {
+    "run": 10,
+    "temperature": 0.0,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "team rivalry"
+    ],
+    "latency_ms": 48658.7
+  },
+  {
+    "run": 11,
+    "temperature": 0.0,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "team rivalry"
+    ],
+    "latency_ms": 48843.2
+  },
+  {
+    "run": 12,
+    "temperature": 0.0,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "team rivalry"
+    ],
+    "latency_ms": 49805.7
+  },
+  {
+    "run": 13,
+    "temperature": 0.0,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "team rivalry"
+    ],
+    "latency_ms": 48682.8
+  },
+  {
+    "run": 14,
+    "temperature": 0.0,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "team rivalry"
+    ],
+    "latency_ms": 48631.9
+  },
+  {
+    "run": 15,
+    "temperature": 0.0,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "team rivalry"
+    ],
+    "latency_ms": 48777.7
+  },
+  {
+    "run": 16,
+    "temperature": 0.0,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "team rivalry"
+    ],
+    "latency_ms": 49360.7
+  },
+  {
+    "run": 17,
+    "temperature": 0.0,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "team rivalry"
+    ],
+    "latency_ms": 48680.1
+  },
+  {
+    "run": 18,
+    "temperature": 0.0,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "team rivalry"
+    ],
+    "latency_ms": 48881.2
+  },
+  {
+    "run": 19,
+    "temperature": 0.0,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "team rivalry"
+    ],
+    "latency_ms": 48824.1
+  },
+  {
+    "run": 20,
+    "temperature": 0.0,
+    "tags": [
+      "bay area rivalry",
+      "cricket match",
+      "team rivalry"
+    ],
+    "latency_ms": 48654.7
+  }
+]
