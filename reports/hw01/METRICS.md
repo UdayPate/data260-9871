@@ -1,4 +1,4 @@
-# METRICS — HW1 Part 3: Measuring Non-Determinism
+# METRICS: HW1 Part 3: Measuring Non-Determinism
 
 ## Tag Set Variation
 
