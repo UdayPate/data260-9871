@@ -1,0 +1,99 @@
+DATA-260 HW1 - RUN_LOG.txt
+============================
+This log is built from the actual git commit history of the
+data260-9871 repository (git --no-pager log --pretty=format:"%ad | %s"
+--date=format:"%Y-%m-%d %H:%M:%S"), which records real timestamps for
+every stage of work on this assignment. A live PowerShell transcript
+of the verification script run (Part below) is appended after this
+historical timeline.
+
+Commit history (chronological):
+--------------------------------
+2026-08-26 15:11:02 | Initial commit
+2026-08-26 15:22:39 | Adding hw01 report skeleton
+2026-08-26 15:50:05 | Adding Domain Schema
+2026-08-26 15:53:53 | Fixed Domain schema
+2026-08-28 14:48:18 | Add HTML form and JS logic for fixture entity
+2026-08-28 15:36:34 | Fixed the file layout
+2026-08-28 16:15:01 | Adding a dockerfile
+2026-08-29 21:57:25 | Ignore venv folder
+2026-08-30 13:27:53 | Add agents_demo.py with Planner/Reviewer/Finalizer pipeline
+2026-08-30 14:43:01 | Add Part 3 non-determinism measurement script and results
+2026-08-30 14:49:07 | Added results to metrics.md
+2026-08-30 14:50:33 | Fixed the title
+2026-08-30 21:15:45 | Pushing part 4
+
+Summary of what happened at each stage:
+----------------------------------------
+2026-08-26: Repository created, reports/hw01 folder skeleton scaffolded,
+DOMAIN_SCHEMA.md written for the assigned domain (Community Sports
+League Fixtures, DOMAIN_ID=7).
+
+2026-08-28: Part 1 built - index.html and app.js written and tested in
+browser (validation, closures, destructuring, spread operator all
+verified working via DevTools console). Repo restructured per TA
+instructions (code/web_application/). Dockerfile added (Nginx-based,
+serving on PORT_BASE=8871), built and verified running on localhost
+via Docker. AWS ECR repository and ECS Fargate cluster/service created;
+app verified running on public IP (screenshot captured, service later
+torn down to avoid ongoing charges).
+
+2026-08-29: Python 3.12 virtual environment set up for Part 2/3/4 work
+(code/venv), isolated from system Python 3.13 per assignment
+requirements.
+
+2026-08-30: Part 2 built - agents_demo.py (Planner -> Reviewer ->
+Finalizer pipeline using qwen3:8b via Ollama/LangChain), verified
+producing valid JSON with 3 tags + <=25 word summary. Part 3 built -
+measure_nondeterminism.py run for 20 iterations at temperature 0.7 and
+20 at temperature 0.0 against the fixed input in
+reports/hw01/cases/nondeterminism_input.json; raw results saved to
+reports/hw01/raw/, summary statistics computed and recorded in
+METRICS.md. Part 4 built - src/model_client.py (reusable adapter with
+token accounting) and code/hw1_client.py (CLI demo with /stats
+command) written and verified with a 5-turn conversation, /stats
+captured after turn 3 and turn 5.
+
+Live verification run (PowerShell transcript, verify_hw01.py):
+----------------------------------------------------------------
+Start time: 2026-08-30 21:19:48
+End time:   2026-08-30 21:26:35
+Machine: DESKTOP-0B8PB15 (Microsoft Windows NT 10.0.26200.0)
+PowerShell 5.1.26100.9168, run inside the code/venv virtual
+environment (Python 3.12.10).
+
+First run of `python verify_hw01.py`:
+  - required_files_present: PASSED (all 9 required files present)
+  - ollama_model_available: FAILED - subprocess call to `ollama list`
+    raised WinError 2 (executable not found via subprocess despite
+    working interactively in the shell).
+  - model_client_importable: PASSED
+  - agent_pipeline_runs_end_to_end: PASSED - produced valid JSON with
+    3 tags and a summary.
+
+Second run, after switching the ollama check to `shell=True`:
+  - ollama_model_available: still FAILED - now with a clearer error,
+    "'ollama' is not recognized as an internal or external command" -
+    confirming this was a PATH-resolution issue specific to Python's
+    subprocess module on this machine, not an actual problem with
+    Ollama itself (which was demonstrably working, since the pipeline
+    check succeeded in the same run).
+  - All other checks: PASSED.
+
+Decision: removed the ollama_model_available check entirely, since
+agent_pipeline_runs_end_to_end already proves Ollama and qwen3:8b are
+reachable and working (the pipeline cannot produce valid output
+otherwise) - the CLI-based check was redundant and Windows-specific
+brittle.
+
+Third (final) run of `python verify_hw01.py`, after removing the
+redundant check:
+  - required_files_present: PASSED (all 9 required files present)
+  - model_client_importable: PASSED
+  - agent_pipeline_runs_end_to_end: PASSED - produced valid JSON:
+    {"tags": ["test fixture", "end to end", "json output"],
+     "summary": "Verifies Planner, Reviewer, Finalizer pipeline
+     end-to-end execution and ensures valid JSON output with three
+     tags and a summary."}
+  - all_checks_passed: true
+  - Output written to reports/hw01/verification.json
