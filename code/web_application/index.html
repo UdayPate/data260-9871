@@ -1,70 +1,101 @@
 <!DOCTYPE html>
-
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>HW1-Uday Patel</title>
-    </head>
-    <body>
-        <h1>
-            Community Sports League Fixtures
-        </h1>
-        
-        <form id = "fixtureForm">
-            <div style="margin-bottom: 20px;">
-                <!-- The autofocus will make the cursor focus on this -->
-                <label for="fixtureName">Fixture Name:</label>
-                <input type="text" id="fixtureName" name="fixtureName"
-                    placeholder="Enter the names of the teams playing" size = "50" required autofocus>
-            </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW1-Uday Patel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-            <div style="margin-bottom: 20px;">
-                <label for="teamsPlayers">Teams / Players:</label>
-                <input type="text" id="teamsPlayers" name="teamsPlayers"
-                    placeholder="e.g. Team Milpitas Lions vs Team San Jose Tigers roster" required
-                    style="width: 500px; height: 50px;">
-            </div>
+    <header class="masthead">
+        <h1>Community Sports League Fixtures</h1>
+        <div class="subtitle">The Weekly Fixture Gazette</div>
+    </header>
 
+    <form id="fixtureForm">
+        <div class="field">
+            <label for="fixtureName">Fixture Name</label>
+            <input type="text" id="fixtureName" name="fixtureName"
+                placeholder="e.g. Lions vs Tigers" size="50" required autofocus>
+        </div>
 
-            <div style="margin-bottom: 20px;">
-                <label for="submitterEmail">Your Email:</label>
-                <input type="email" id="submitterEmail" name="submitterEmail"
-                    placeholder="e.g. captain@leaguemail.com" required>
-            </div>
+        <div class="field">
+            <label for="teamsPlayers">Teams / Players</label>
+            <input type="text" id="teamsPlayers" name="teamsPlayers"
+                placeholder="e.g. Team Milpitas Lions vs Team San Jose Tigers roster" required>
+        </div>
 
+        <div class="field">
+            <label for="submitterEmail">Your Email</label>
+            <input type="email" id="submitterEmail" name="submitterEmail"
+                placeholder="e.g. captain@leaguemail.com" required>
+        </div>
 
+        <div class="field">
+            <label for="description">Match Details</label>
+            <textarea id="description" name="description"
+                placeholder="Describe the match: rules, notes, special instructions..."
+                required></textarea>
+        </div>
 
+        <div class="field">
+            <label for="category">Sport Type</label>
+            <select id="category" name="category">
+                <option value="soccer">Soccer</option>
+                <option value="basketball">Basketball</option>
+                <option value="volleyball">Volleyball</option>
+                <option value="cricket">Cricket</option>
+            </select>
+        </div>
 
-            <div style="margin-bottom: 20px;">
-                <label for="description">Match Details:</label>
-                <textarea id="description" name="description"
-                        placeholder="Describe the match: rules, notes, special instructions..."
-                        required></textarea>
-            </div>
+        <div class="field checkbox-row">
+            <input type="checkbox" id="agreeTerms" name="agreeTerms">
+            <label for="agreeTerms">I agree to the terms and conditions.</label>
+        </div>
 
+        <div class="field">
+            <button type="submit">Submit Fixture</button>
+        </div>
+    </form>
 
+    <section class="ledger">
+        <h2>Fixture Board</h2>
 
-            <div style="margin-bottom: 20px;">
-                <label for="category">Sport Type:</label>
-                <select id="category" name="category">
-                    <option value="soccer">Soccer</option>
-                    <option value="basketball">Basketball</option>
-                    <option value="volleyball">Volleyball</option>
-                    <option value="cricket">Cricket</option>
-                </select>
-            </div>
+        <!-- UI states: JS toggles the "active" class on exactly one of these -->
+        <div id="loadingState" class="state-box state-loading">
+            Fetching the latest fixtures&hellip;
+        </div>
 
-            <div style = "margin-bottom: 20px;">
-                <input type="checkbox" id="agreeTerms" name="agreeTerms">
-                <label for="agreeTerms">I agree to the terms and conditions.</label>
-            </div>
-            
-            <div>
-                <button type="submit">Submit Fixture</button>
-            </div>
-        </form>
-        
-        <script src="app.js"></script>
-    </body>
+        <div id="emptyState" class="state-box state-empty">
+            No fixtures on the docket yet. Submit one above to get started.
+        </div>
+
+        <div id="errorState" class="state-box state-error">
+            Wire report failed &mdash; unable to load fixtures. Please try again.
+        </div>
+
+        <table class="fixture-table" id="fixtureTable">
+            <thead>
+                <tr>
+                    <th>Fixture</th>
+                    <th>Teams / Players</th>
+                    <th>Sport</th>
+                    <th>Submitted</th>
+                </tr>
+            </thead>
+            <tbody id="fixtureTableBody">
+                <!-- Example row (static placeholder for Part 1 demo; Part 2 will populate this dynamically) -->
+                <tr>
+                    <td data-label="Fixture">Lions vs Tigers</td>
+                    <td data-label="Teams / Players">Milpitas Lions vs San Jose Tigers</td>
+                    <td data-label="Sport">Soccer</td>
+                    <td data-label="Submitted">2026-08-30</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <script src="app.js"></script>
+</body>
 </html>

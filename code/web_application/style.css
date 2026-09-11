@@ -1,0 +1,255 @@
+/* ==========================================================
+   Community Sports League Fixtures — Vintage Box-Score Theme
+   ========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap');
+
+:root {
+  --paper: #f4ecd8;
+  --paper-dark: #e8dcc0;
+  --ink: #2b2620;
+  --ink-light: #5a5248;
+  --rule: #2b2620;
+  --accent: #8b1e1e;
+  --accent-light: #f0d9d9;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 16px;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: Georgia, 'Times New Roman', serif;
+  line-height: 1.5;
+}
+
+.masthead {
+  max-width: 700px;
+  margin: 0 auto 24px;
+  text-align: center;
+  border-top: 4px solid var(--rule);
+  border-bottom: 4px solid var(--rule);
+  padding: 12px 0;
+}
+
+.masthead h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 900;
+  font-size: 1.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.masthead .subtitle {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-top: 4px;
+}
+
+/* ---------------- Form ---------------- */
+
+form {
+  max-width: 700px;
+  margin: 0 auto 32px;
+  background: var(--paper-dark);
+  border: 1px solid var(--rule);
+  padding: 20px;
+}
+
+.field {
+  margin-bottom: 18px;
+}
+
+.field label {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-bottom: 4px;
+}
+
+input[type="text"],
+input[type="email"],
+textarea,
+select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--rule);
+  border-radius: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Georgia, serif;
+  font-size: 1rem;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkbox-row label {
+  margin: 0;
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: 1rem;
+  color: var(--ink);
+}
+
+button[type="submit"] {
+  background: var(--accent);
+  color: var(--paper);
+  border: none;
+  padding: 10px 24px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background: var(--ink);
+}
+
+/* ---------------- Fixture Ledger (list) ---------------- */
+
+.ledger {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.ledger h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--rule);
+  padding-bottom: 6px;
+  margin-bottom: 12px;
+}
+
+table.fixture-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+table.fixture-table th,
+table.fixture-table td {
+  border-bottom: 1px solid var(--rule);
+  padding: 10px 8px;
+  text-align: left;
+}
+
+table.fixture-table th {
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  border-bottom: 2px solid var(--rule);
+}
+
+table.fixture-table tbody tr:nth-child(odd) {
+  background: var(--paper-dark);
+}
+
+/* ---------------- Loading / Empty / Error states ---------------- */
+
+.state-box {
+  max-width: 700px;
+  margin: 0 auto 16px;
+  padding: 16px;
+  border: 1px dashed var(--rule);
+  text-align: center;
+  font-style: italic;
+  color: var(--ink-light);
+  display: none; /* JS toggles visibility */
+}
+
+.state-box.active {
+  display: block;
+}
+
+.state-loading {
+  border-style: dashed;
+}
+
+.state-empty {
+  border-style: dashed;
+}
+
+.state-error {
+  border: 1px solid var(--accent);
+  background: var(--accent-light);
+  color: var(--accent);
+  font-style: normal;
+  font-weight: bold;
+}
+
+/* ==========================================================
+   Responsive: usable down to 375px width
+   ========================================================== */
+
+@media (max-width: 480px) {
+  body {
+    padding: 8px;
+  }
+
+  .masthead h1 {
+    font-size: 1.3rem;
+    letter-spacing: 0.03em;
+  }
+
+  form {
+    padding: 14px;
+  }
+
+  /* Reflow the box-score table into stacked cards on narrow screens */
+  table.fixture-table thead {
+    display: none;
+  }
+
+  table.fixture-table,
+  table.fixture-table tbody,
+  table.fixture-table tr,
+  table.fixture-table td {
+    display: block;
+    width: 100%;
+  }
+
+  table.fixture-table tr {
+    border: 1px solid var(--rule);
+    margin-bottom: 10px;
+    padding: 8px;
+  }
+
+  table.fixture-table td {
+    border: none;
+    padding: 4px 0;
+  }
+
+  table.fixture-table td::before {
+    content: attr(data-label) ": ";
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    color: var(--ink-light);
+  }
+}
