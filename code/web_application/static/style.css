@@ -253,3 +253,76 @@ table.fixture-table tbody tr:nth-child(odd) {
     color: var(--ink-light);
   }
 }
+
+/* ---------------- HW2 additions: action buttons + search ---------------- */
+
+.action-row {
+  max-width: 700px;
+  margin: 0 auto 24px;
+  display: flex;
+  gap: 12px;
+}
+
+.secondary-btn {
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  padding: 8px 18px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.secondary-btn:hover {
+  background: var(--accent);
+}
+
+.danger-btn {
+  background: var(--accent);
+}
+
+.danger-btn:hover {
+  background: #5c1414;
+}
+
+.search-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.search-row input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  font-family: Georgia, serif;
+}
+
+.search-row button {
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  padding: 8px 16px;
+  font-family: Georgia, serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.search-row button:hover {
+  background: var(--accent);
+}
+
+@media (max-width: 480px) {
+  .action-row {
+    flex-direction: column;
+  }
+  .search-row {
+    flex-direction: column;
+  }
+}

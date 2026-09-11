@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HW1-Uday Patel</title>
-    <link rel="stylesheet" href="style.css">
+    <title>HW2-Uday Patel</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
 
@@ -13,22 +13,23 @@
         <div class="subtitle">The Weekly Fixture Gazette</div>
     </header>
 
-    <form id="fixtureForm">
+    <!-- Create: classic form POST, server redirects back here on success -->
+    <form id="fixtureForm" method="POST" action="/fixtures/create">
         <div class="field">
             <label for="fixtureName">Fixture Name</label>
-            <input type="text" id="fixtureName" name="fixtureName"
-                placeholder="e.g. Lions vs Tigers" size="50" required autofocus>
+            <input type="text" id="fixtureName" name="fixture_name"
+                placeholder="e.g. Lions vs Tigers" required autofocus>
         </div>
 
         <div class="field">
             <label for="teamsPlayers">Teams / Players</label>
-            <input type="text" id="teamsPlayers" name="teamsPlayers"
+            <input type="text" id="teamsPlayers" name="teams_players"
                 placeholder="e.g. Team Milpitas Lions vs Team San Jose Tigers roster" required>
         </div>
 
         <div class="field">
             <label for="submitterEmail">Your Email</label>
-            <input type="email" id="submitterEmail" name="submitterEmail"
+            <input type="email" id="submitterEmail" name="submitter_email"
                 placeholder="e.g. captain@leaguemail.com" required>
         </div>
 
@@ -50,7 +51,7 @@
         </div>
 
         <div class="field checkbox-row">
-            <input type="checkbox" id="agreeTerms" name="agreeTerms">
+            <input type="checkbox" id="agreeTerms" name="agree_terms">
             <label for="agreeTerms">I agree to the terms and conditions.</label>
         </div>
 
@@ -59,8 +60,24 @@
         </div>
     </form>
 
+    <!-- Fixed actions: one-click update-record-1 and delete-highest-id -->
+    <div class="action-row">
+        <form method="POST" action="/fixtures/update-first">
+            <button type="submit" class="secondary-btn">Update Record #1</button>
+        </form>
+        <form method="POST" action="/fixtures/delete-highest">
+            <button type="submit" class="secondary-btn danger-btn">Delete Highest ID</button>
+        </form>
+    </div>
+
     <section class="ledger">
         <h2>Fixture Board</h2>
+
+        <div class="search-row">
+            <input type="text" id="searchInput" placeholder="Search by fixture name or teams/players...">
+            <button type="button" id="searchButton">Search</button>
+            <button type="button" id="clearSearchButton">Clear</button>
+        </div>
 
         <!-- UI states: JS toggles the "active" class on exactly one of these -->
         <div id="loadingState" class="state-box state-loading">
@@ -78,6 +95,7 @@
         <table class="fixture-table" id="fixtureTable">
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Fixture</th>
                     <th>Teams / Players</th>
                     <th>Sport</th>
@@ -85,17 +103,11 @@
                 </tr>
             </thead>
             <tbody id="fixtureTableBody">
-                <!-- Example row (static placeholder for Part 1 demo; Part 2 will populate this dynamically) -->
-                <tr>
-                    <td data-label="Fixture">Lions vs Tigers</td>
-                    <td data-label="Teams / Players">Milpitas Lions vs San Jose Tigers</td>
-                    <td data-label="Sport">Soccer</td>
-                    <td data-label="Submitted">2026-08-30</td>
-                </tr>
+                <!-- Populated dynamically by app.js via GET /api/fixtures -->
             </tbody>
         </table>
     </section>
 
-    <script src="app.js"></script>
+    <script src="/static/app.js"></script>
 </body>
 </html>
