@@ -15,8 +15,9 @@ import json
 import re
 import sys
 from pathlib import Path
-from typing import Any, Dict, TypedDict
+from typing import Any, Dict, List, TypedDict
 
+from pydantic import BaseModel, Field, field_validator
 from langgraph.graph import StateGraph, END
 
 # src/ is a sibling of code/ at the repo root - add it to the import path
@@ -41,6 +42,37 @@ class AgentState(TypedDict):
     reviewer_feedback: Dict[str, Any]
     turn_count: int
     turn_ceiling: int
+    schema_error: str
+
+
+# ---------------------------------------------------------------------
+# Part 4: Pydantic output schema
+# ---------------------------------------------------------------------
+
+class TagsSummarySchema(BaseModel):
+    """Exactly 3 string tags (3-30 chars each), and a summary of at most 25 words."""
+    tags: List[str] = Field(..., min_length=3, max_length=3)
+    summary: str
+
+    @field_validator("tags")
+    @classmethod
+    def check_tag_lengths(cls, tags: List[str]) -> List[str]:
+        for tag in tags:
+            if not (3 <= len(tag) <= 30):
+                raise ValueError(
+                    f"tag {tag!r} is {len(tag)} characters; each tag must be 3-30 characters"
+                )
+        return tags
+
+    @field_validator("summary")
+    @classmethod
+    def check_summary_word_count(cls, summary: str) -> str:
+        word_count = len(summary.split())
+        if word_count > 25:
+            raise ValueError(
+                f"summary has {word_count} words; must be at most 25 words"
+            )
+        return summary
 
 
 # ---------------------------------------------------------------------
@@ -64,7 +96,15 @@ def planner_node(state: AgentState) -> Dict[str, Any]:
     llm: ModelClient = state["llm"]
 
     feedback_note = ""
-    if state.get("reviewer_feedback") and state["reviewer_feedback"].get("issues"):
+    if state.get("schema_error"):
+        # A previous attempt failed Pydantic validation - this takes priority
+        # over reviewer feedback, since an invalid proposal never even
+        # reached the Reviewer.
+        feedback_note = (
+            f"\n\nYour previous attempt FAILED VALIDATION with this error: "
+            f"{state['schema_error']}. Fix this specific problem in your new attempt."
+        )
+    elif state.get("reviewer_feedback") and state["reviewer_feedback"].get("issues"):
         issues = state["reviewer_feedback"]["issues"]
         feedback_note = (
             f"\n\nThe Reviewer found issues with your previous attempt: {issues}. "
@@ -75,9 +115,10 @@ def planner_node(state: AgentState) -> Dict[str, Any]:
         {
             "role": "system",
             "content": "You are a Planner agent. Given a title and content, propose "
-                       "exactly 3 short topical tags (lowercase, 1-3 words each) and a "
-                       "one-sentence summary of at most 25 words. Derive both purely "
-                       "from the input text, not fixed categories.",
+                       "exactly 3 short topical tags (lowercase, 1-3 words each, "
+                       "3-30 characters each) and a one-sentence summary of at most "
+                       "25 words. Derive both purely from the input text, not fixed "
+                       "categories.",
         },
         {
             "role": "user",
@@ -88,12 +129,30 @@ def planner_node(state: AgentState) -> Dict[str, Any]:
         },
     ]
     raw = llm.complete(messages)
-    proposal = extract_json(raw)
-    print(f"  Proposal: {proposal}")
-    # Clear any stale reviewer_feedback from a previous attempt - a fresh
-    # proposal has not been reviewed yet, so the router must send it back
-    # to the Reviewer next, not loop straight back to the Planner again.
-    return {"planner_proposal": proposal, "reviewer_feedback": {}}
+    raw_proposal = extract_json(raw)
+    print(f"  Raw proposal: {raw_proposal}")
+
+    try:
+        validated = TagsSummarySchema(**raw_proposal)
+        print("  Schema validation: PASSED")
+        # Success - clear any stale error/feedback, a fresh unreviewed
+        # proposal must go to the Reviewer next.
+        return {
+            "planner_proposal": validated.model_dump(),
+            "schema_error": "",
+            "reviewer_feedback": {},
+        }
+    except Exception as e:
+        error_msg = str(e)
+        print(f"  Schema validation: FAILED - {error_msg}")
+        # Failure - do NOT set planner_proposal, so the router's existing
+        # "no proposal yet -> planner" rule sends this straight back for
+        # a retry, without ever reaching the Reviewer.
+        return {
+            "planner_proposal": {},
+            "schema_error": error_msg,
+            "reviewer_feedback": {},
+        }
 
 
 def reviewer_node(state: AgentState) -> Dict[str, Any]:
@@ -205,6 +264,7 @@ def main():
         "reviewer_feedback": {},
         "turn_count": 0,
         "turn_ceiling": 6,
+        "schema_error": "",
     }
 
     print("=== Streaming graph execution ===\n")
