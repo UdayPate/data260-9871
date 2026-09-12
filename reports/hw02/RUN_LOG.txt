@@ -1,0 +1,80 @@
+DATA-260 HW2 - RUN_LOG.txt
+============================
+This log is built from the actual git commit history of the
+data260-9871 repository (git --no-pager log --pretty=format:"%ad | %s"
+--date=format:"%Y-%m-%d %H:%M:%S"), which records real timestamps for
+every stage of HW2 work. All HW2 work was done in a single session on
+2026-09-11, extending the same repository used for HW1.
+
+Commit history (chronological, HW2 portion):
+----------------------------------------------
+2026-09-11 12:50:35 | Addd hw02 report skeleton
+2026-09-11 13:23:11 | Finished part 1 by adding old school newspaper styling to hw1 and made it so its usable at 375 width.
+2026-09-11 14:17:07 | Finished part 2 of the hw
+2026-09-11 15:26:54 | Finished part 3 of the hw, added a agent graph
+2026-09-11 15:36:00 | Finished part 4 of the hw, added a pydantic schema validation
+2026-09-11 17:10:32 | Add Part 4 Pydantic validation, loop-safety experiments, and METRICS.md
+
+Summary of what happened at each stage:
+----------------------------------------
+2026-09-11 12:50 - Repository extended with reports/hw02/ skeleton
+(cases/, raw/, RUN_LOG.txt, METRICS.md, AI_USE.md, verification.json
+placeholders), continuing the same data260-9871 repo from HW1 per the
+assignment's instructions not to create a separate copy.
+
+2026-09-11 13:23 - Part 1 built: the HW1 fixture form and list were
+restyled with a vintage newspaper/box-score theme (separate style.css),
+made responsive down to 375px width (verified via Chrome DevTools'
+iPhone SE preset), and a Fixture Board list section was added with
+visible loading, empty, and error states (JS-toggled state boxes).
+
+2026-09-11 14:17 - Part 2 built: a FastAPI backend (code/main.py) added
+on PORT_BASE (8871), using Jinja2 templates and an in-memory fixture
+store. Implements create (redirects to home), update record ID 1 to
+fixed domain-appropriate values (redirects to home), delete the
+highest-ID record (redirects to home), and search by primary/secondary
+field via a small JSON API consumed by frontend JS (which also drives
+the Part 1 loading/empty/error states). All four flows were manually
+tested in the browser and verified via server logs (200/303 status
+codes) before committing.
+
+2026-09-11 15:26 - Part 3 built: the HW1 sequential Planner->Reviewer
+script was refactored into a stateful LangGraph (code/agent_graph.py)
+implementing the supervisor pattern - a Supervisor node routes between
+Planner and Reviewer nodes via a router_logic function, with a
+turn_count/turn_ceiling safety valve preventing infinite loops. All LLM
+calls route through src/model_client.py's ModelClient adapter, per the
+assignment's requirement. The self-correction loop (Reviewer finds an
+issue -> Planner retries) was verified twice: once organically (a real
+qwen3:8b run flagged and fixed a generic tag on its own) and once by
+temporarily forcing reviewer_node to always report an issue, confirming
+the graph correctly stopped at the turn_ceiling instead of looping
+forever.
+
+2026-09-11 15:36 - 17:10 - Part 4 built: Pydantic schema validation
+(TagsSummarySchema: exactly 3 tags of 3-30 characters each, summary
+<=25 words) added to planner_node, with validation-failure errors fed
+back into the next Planner attempt for retry. Three experiments were
+then run against the real qwen3:8b setup: (1) a 30-run classification
+of outcomes on a fixed input (reports/hw02/cases/schema_input.json);
+(2) a 20-runs-each comparison of turn_ceiling=2 vs turn_ceiling=10 on
+the same input; (3) a 5-run test of one deliberately vague adversarial
+input (reports/hw02/cases/adversarial_input.json). Raw results were
+saved to reports/hw02/raw/, and summary statistics with a deployment
+recommendation were recorded in METRICS.md.
+
+Real experiment results (from live terminal output):
+------------------------------------------------------
+Experiment 1 (30 runs, turn_ceiling=6):
+  valid_first_attempt: 25/30, mean latency 35777.8ms
+  valid_after_1_retry: 4/30, mean latency 80595.1ms
+  valid_after_2plus_retries: 0/30
+  hit_turn_ceiling: 1/30, latency 81672.1ms
+
+Experiment 2 (20 runs each):
+  turn_ceiling=2: completion_rate=0%, mean latency 17526.5ms
+  turn_ceiling=10: completion_rate=100%, mean latency 46256.8ms
+
+Experiment 3 (adversarial, 5 runs, turn_ceiling=6):
+  hit_ceiling: 2/5 (40%)
+  success: 3/5 (60%)
