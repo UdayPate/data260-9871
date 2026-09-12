@@ -23,20 +23,30 @@ Local model: qwen3:8b, served via Ollama
 
 ```
 data260-9871/
-├── code/                    - shared application code (extended each HW)
-│   ├── web_application/     - index.html, app.js (HW1 Part 1)
+├── code/                          - shared application code (extended each HW)
+│   ├── web_application/
+│   │   ├── main.py                - FastAPI backend (HW2 Part 2)
+│   │   ├── templates/
+│   │   │   └── index.html         - Jinja2 template (HW1 Part 1, HW2 Parts 1-2)
+│   │   └── static/
+│   │       ├── app.js
+│   │       └── style.css          - vintage newspaper theme (HW2 Part 1)
 │   ├── Dockerfile
-│   ├── agents_demo.py       - HW1 Part 2
+│   ├── agents_demo.py             - HW1 Part 2 (sequential Planner/Reviewer)
+│   ├── agent_graph.py             - HW2 Part 3 (stateful LangGraph version)
+│   ├── loop_safety_experiments.py - HW2 Part 4 experiments
 │   ├── measure_nondeterminism.py  - HW1 Part 3
-│   ├── hw1_client.py        - HW1 Part 4
-│   ├── verify_hw01.py       - self-check script
-│   └── venv/                - Python 3.12 virtual environment (gitignored)
+│   ├── hw1_client.py              - HW1 Part 4
+│   ├── verify_hw01.py             - HW1 self-check
+│   ├── verify_hw02.py             - HW2 self-check
+│   └── venv/                      - Python 3.12 virtual environment (gitignored)
 ├── src/
-│   └── model_client.py      - reusable model adapter (HW1 Part 4)
+│   └── model_client.py            - reusable model adapter (HW1 Part 4, reused in HW2 Part 3)
 ├── reports/
-│   └── hw01/                - HW1 deliverables (report, metrics, logs, raw data)
-├── AGENT.md                 - system prompt for hw1_client.py's code-review agent
-├── DOMAIN_SCHEMA.md          - HW1 domain entity schema
+│   ├── hw01/                      - HW1 deliverables
+│   └── hw02/                      - HW2 deliverables (report, metrics, logs, raw data, cases)
+├── AGENT.md                       - system prompt for hw1_client.py's code-review agent
+├── DOMAIN_SCHEMA.md               - domain entity schema
 └── README.md
 ```
 
@@ -44,35 +54,31 @@ data260-9871/
 
 - Python 3.12 (NOT 3.13 - langchain has a numpy compatibility issue on 3.13)
 - [Ollama](https://ollama.com/download) installed and running, with `qwen3:8b` pulled
-- Docker Desktop (for Part 1 deployment)
-- An AWS account with the AWS CLI configured (for Part 1 ECS deployment)
+- Docker Desktop (for HW1 Part 1 deployment)
+- An AWS account with the AWS CLI configured (for HW1 Part 1 ECS deployment)
 - Git
 
 ## Setup
 
 ```powershell
-# Clone the repo
 git clone https://github.com/UdayPate/data260-9871.git
 cd data260-9871
 
-# Create and activate a Python 3.12 virtual environment
 cd code
 py -3.12 -m venv venv
 .\venv\Scripts\Activate.ps1
 
-# Install Python dependencies
 pip install -r requirements.txt
 
-# Pull the local model (if not already pulled)
 ollama pull qwen3:8b
 ```
 
+---
+
+# HW1
+
 ## Part 1 - Web application (HTML/JS + Docker + AWS ECS)
 
-Run locally (no Docker):
-Just open `code/web_application/index.html` directly in a browser.
-
-Run in Docker:
 ```powershell
 cd code
 docker build -t data260-9871-app .
@@ -83,8 +89,7 @@ Then visit http://localhost:8871
 AWS ECS deployment (summary - see reports/hw01/RUN_LOG.txt for the full
 session): image was pushed to Amazon ECR, then run as a single Fargate
 task in an ECS service with a security group allowing inbound TCP on
-port 8871. The service was torn down after verification to avoid
-ongoing AWS charges; it is not expected to be running at grading time.
+port 8871.
 
 ## Part 2 - Agentic AI pipeline
 
@@ -92,8 +97,6 @@ ongoing AWS charges; it is not expected to be running at grading time.
 cd code
 python agents_demo.py
 ```
-Runs the Planner -> Reviewer -> Finalizer pipeline once on a fixed
-sample fixture and prints all three stages plus the final JSON.
 
 ## Part 3 - Non-determinism measurement
 
@@ -101,16 +104,7 @@ sample fixture and prints all three stages plus the final JSON.
 cd code
 python measure_nondeterminism.py
 ```
-Runs the same pipeline 20 times at temperature 0.7 and 20 times at
-temperature 0.0 against the fixed input in
-`reports/hw01/cases/nondeterminism_input.json`. Raw per-run results are
-saved to `reports/hw01/raw/`; summary statistics are printed and also
-saved to `reports/hw01/raw/nondeterminism_summary.json`. See
-`reports/hw01/METRICS.md` for the filled-in results tables.
-
-Note: this takes a while (40 total pipeline runs, each with 2 LLM
-calls) - expect anywhere from ~10 minutes to over an hour depending on
-hardware.
+See `reports/hw01/METRICS.md` for results.
 
 ## Part 4 - Model client and token accounting
 
@@ -118,21 +112,82 @@ hardware.
 cd code
 python hw1_client.py
 ```
-Starts an interactive chat loop using the reusable adapter in
-`src/model_client.py`. The system prompt is loaded from `AGENT.md`
-(instructs the model to act as a strict, bullet-only code reviewer).
-Commands:
-- Type any message to chat normally.
-- `/stats` - shows turn count, cumulative token counts, and serialized
-  conversation-history length, without altering the history.
-- `/exit` - prints a final cumulative token summary and quits.
+Interactive CLI using `src/model_client.py`'s adapter. Commands:
+`/stats`, `/exit`.
 
-## Verification
+## HW1 Verification
 
 ```powershell
 cd code
 python verify_hw01.py
 ```
-Runs a self-check confirming required files are present, the model
-adapter imports correctly, and the full agent pipeline runs end-to-end
-producing valid JSON. Writes results to `reports/hw01/verification.json`.
+
+---
+
+# HW2
+
+HW2 extends the same codebase in place (no separate copy), per the
+assignment's instructions.
+
+## Part 1 - Responsive CSS + loading/empty/error states
+
+No separate command - this is the same web application, now styled
+with a vintage newspaper/box-score theme and usable down to 375px
+width. Visible loading, empty, and error states are shown by the
+Fixture Board list, driven by `static/app.js`.
+
+## Part 2 - FastAPI backend
+
+```powershell
+cd code\web_application
+python main.py
+```
+Starts the FastAPI app on PORT_BASE (8871). Visit http://localhost:8871
+
+- **Create**: fill out and submit the form - redirects to the home
+  view showing the updated Fixture Board.
+- **Update Record #1**: one-click button that updates the record with
+  ID 1 to fixed, domain-appropriate values.
+- **Delete Highest ID**: one-click button that removes the
+  highest-ID record.
+- **Search**: type in the search box and click Search (or press
+  Enter) to filter by fixture name or teams/players, without a full
+  page reload.
+
+Data is stored in-memory and resets when the server restarts - an
+intentional, documented simplification.
+
+## Part 3 - Stateful agent graph (LangGraph)
+
+```powershell
+cd code
+python agent_graph.py
+```
+Runs the LangGraph Planner/Reviewer/Supervisor graph once, streaming
+each node's output, and prints the final merged state plus token
+stats. All LLM calls route through `src/model_client.py`.
+
+## Part 4 - Schema validation and loop-safety experiments
+
+```powershell
+cd code
+python loop_safety_experiments.py
+```
+Runs three experiments against `agent_graph.py`: a 30-run
+classification, a turn-ceiling comparison (2 vs. 10, 20 runs each),
+and a 5-run adversarial-input test. Raw results go to
+`reports/hw02/raw/`; summary tables and the deployment recommendation
+are in `reports/hw02/METRICS.md`.
+
+Note: long-running (75 total graph runs) - expect roughly 1-3+ hours.
+
+## HW2 Verification
+
+```powershell
+cd code
+python verify_hw02.py
+```
+Confirms required files exist, actually starts FastAPI as a subprocess
+and checks it responds on PORT_BASE, and actually runs the LangGraph
+pipeline with a wall-clock timeout to confirm it terminates rather
+than hanging. Writes to `reports/hw02/verification.json`.
