@@ -1,0 +1,322 @@
+[
+  {
+    "run": 1,
+    "turn_ceiling": 10,
+    "outcome": "success",
+    "planner_call_count": 1,
+    "turn_count": 3,
+    "latency_ms": 23745.6,
+    "final_proposal": {
+      "tags": [
+        "bay area rivalry",
+        "cricket match",
+        "green pitch"
+      ],
+      "summary": "San Jose Strikers and Milpitas Warriors renew their Bay Area rivalry in a crucial league match at Cricket Ground South."
+    }
+  },
+  {
+    "run": 2,
+    "turn_ceiling": 10,
+    "outcome": "success",
+    "planner_call_count": 3,
+    "turn_count": 5,
+    "latency_ms": 99138.5,
+    "final_proposal": {
+      "tags": [
+        "bay area rivalry",
+        "san jose strikers",
+        "milpitas warriors"
+      ],
+      "summary": "San Jose Strikers face Milpitas Warriors in Bay Area rivalry clash at Cricket Ground South. Both teams near league top, strategies set for match."
+    }
+  },
+  {
+    "run": 3,
+    "turn_ceiling": 10,
+    "outcome": "success",
+    "planner_call_count": 1,
+    "turn_count": 3,
+    "latency_ms": 64638.2,
+    "final_proposal": {
+      "tags": [
+        "bay area rivalry",
+        "cricket ground south",
+        "top league teams"
+      ],
+      "summary": "San Jose Strikers and Milpitas Warriors renew their Bay Area rivalry at Cricket Ground South, with both teams vying for league supremacy."
+    }
+  },
+  {
+    "run": 4,
+    "turn_ceiling": 10,
+    "outcome": "success",
+    "planner_call_count": 1,
+    "turn_count": 3,
+    "latency_ms": 29695.5,
+    "final_proposal": {
+      "tags": [
+        "cricket rivalry",
+        "bay area cricket",
+        "league clash"
+      ],
+      "summary": "San Jose Strikers and Milpitas Warriors renew their Bay Area cricket rivalry in a key league clash this weekend."
+    }
+  },
+  {
+    "run": 5,
+    "turn_ceiling": 10,
+    "outcome": "success",
+    "planner_call_count": 1,
+    "turn_count": 3,
+    "latency_ms": 30083.6,
+    "final_proposal": {
+      "tags": [
+        "cricket match",
+        "bay area rivalry",
+        "league standings"
+      ],
+      "summary": "San Jose Strikers and Milpitas Warriors renew fierce Bay Area rivalry in key league match."
+    }
+  },
+  {
+    "run": 6,
+    "turn_ceiling": 10,
+    "outcome": "success",
+    "planner_call_count": 2,
+    "turn_count": 5,
+    "latency_ms": 62671.2,
+    "final_proposal": {
+      "tags": [
+        "bay area rivalry",
+        "fast bowling",
+        "middle order strategy"
+      ],
+      "summary": "San Jose Strikers and Milpitas Warriors face off in a Bay Area rivalry clash, vying for league supremacy with strategic approaches."
+    }
+  },
+  {
+    "run": 7,
+    "turn_ceiling": 10,
+    "outcome": "success",
+    "planner_call_count": 1,
+    "turn_count": 3,
+    "latency_ms": 24853.0,
+    "final_proposal": {
+      "tags": [
+        "bay area rivalry",
+        "cricket match",
+        "league standings"
+      ],
+      "summary": "San Jose Strikers and Milpitas Warriors renew Bay Area rivalry at Cricket Ground South, vying for league supremacy."
+    }
+  },
+  {
+    "run": 8,
+    "turn_ceiling": 10,
+    "outcome": "success",
+    "planner_call_count": 1,
+    "turn_count": 3,
+    "latency_ms": 34691.4,
+    "final_proposal": {
+      "tags": [
+        "bay area rivalry",
+        "cricket match",
+        "green pitch"
+      ],
+      "summary": "San Jose Strikers and Milpitas Warriors renew their Bay Area rivalry in a crucial cricket match focusing on pitch strategy and team tactics."
+    }
+  },
+  {
+    "run": 9,
+    "turn_ceiling": 10,
+    "outcome": "success",
+    "planner_call_count": 1,
+    "turn_count": 3,
+    "latency_ms": 25175.9,
+    "final_proposal": {
+      "tags": [
+        "bay area rivalry",
+        "cricket match",
+        "title race"
+      ],
+      "summary": "San Jose Strikers and Milpitas Warriors clash in a Bay Area rivalry game crucial for the league title race."
+    }
+  },
+  {
+    "run": 10,
+    "turn_ceiling": 10,
+    "outcome": "success",
+    "planner_call_count": 1,
+    "turn_count": 3,
+    "latency_ms": 52669.3,
+    "final_proposal": {
+      "tags": [
+        "bay area rivalry",
+        "cricket match",
+        "league standings"
+      ],
+      "summary": "San Jose Strikers and Milpitas Warriors clash in a Bay Area rivalry match, both near league top, at Cricket Ground South."
+    }
+  },
+  {
+    "run": 11,
+    "turn_ceiling": 10,
+    "outcome": "success",
+    "planner_call_count": 1,
+    "turn_count": 3,
+    "latency_ms": 29808.0,
+    "final_proposal": {
+      "tags": [
+        "bay area rivalry",
+        "cricket match",
+        "green pitch"
+      ],
+      "summary": "San Jose Strikers and Milpitas Warriors renew their fierce Bay Area rivalry in a crucial cricket match at Cricket Ground South."
+    }
+  },
+  {
+    "run": 12,
+    "turn_ceiling": 10,
+    "outcome": "success",
+    "planner_call_count": 1,
+    "turn_count": 3,
+    "latency_ms": 25385.5,
+    "final_proposal": {
+      "tags": [
+        "bay area rivalry",
+        "cricket match",
+        "green pitch"
+      ],
+      "summary": "San Jose Strikers and Milpitas Warriors renew their Bay Area rivalry in a crucial league match at Cricket Ground South."
+    }
+  },
+  {
+    "run": 13,
+    "turn_ceiling": 10,
+    "outcome": "success",
+    "planner_call_count": 1,
+    "turn_count": 3,
+    "latency_ms": 43514.9,
+    "final_proposal": {
+      "tags": [
+        "bay area rivalry",
+        "cricket match",
+        "green pitch"
+      ],
+      "summary": "San Jose Strikers and Milpitas Warriors renew their Bay Area rivalry in a crucial cricket match at Cricket Ground South."
+    }
+  },
+  {
+    "run": 14,
+    "turn_ceiling": 10,
+    "outcome": "success",
+    "planner_call_count": 1,
+    "turn_count": 3,
+    "latency_ms": 44620.2,
+    "final_proposal": {
+      "tags": [
+        "bay area rivalry",
+        "cricket match",
+        "league race"
+      ],
+      "summary": "San Jose Strikers and Milpitas Warriors clash in a Bay Area rivalry, both battling for league supremacy."
+    }
+  },
+  {
+    "run": 15,
+    "turn_ceiling": 10,
+    "outcome": "success",
+    "planner_call_count": 1,
+    "turn_count": 3,
+    "latency_ms": 42917.0,
+    "final_proposal": {
+      "tags": [
+        "bay area rivalry",
+        "cricket match",
+        "local derby"
+      ],
+      "summary": "San Jose Strikers and Milpitas Warriors renew their Bay Area rivalry in a crucial cricket match."
+    }
+  },
+  {
+    "run": 16,
+    "turn_ceiling": 10,
+    "outcome": "success",
+    "planner_call_count": 2,
+    "turn_count": 5,
+    "latency_ms": 61496.8,
+    "final_proposal": {
+      "tags": [
+        "bay area cricket",
+        "cricket ground south",
+        "fast bowlers"
+      ],
+      "summary": "San Jose Strikers and Milpitas Warriors clash in Bay Area rivalry at Cricket Ground South, with fast bowlers and middle order strategies key."
+    }
+  },
+  {
+    "run": 17,
+    "turn_ceiling": 10,
+    "outcome": "success",
+    "planner_call_count": 3,
+    "turn_count": 5,
+    "latency_ms": 62430.2,
+    "final_proposal": {
+      "tags": [
+        "bay area rivalry",
+        "cricket match",
+        "top league teams"
+      ],
+      "summary": "San Jose Strikers face Milpitas Warriors in Bay Area rivalry clash at Cricket Ground South, both competing for league top spots."
+    }
+  },
+  {
+    "run": 18,
+    "turn_ceiling": 10,
+    "outcome": "success",
+    "planner_call_count": 2,
+    "turn_count": 5,
+    "latency_ms": 69998.1,
+    "final_proposal": {
+      "tags": [
+        "bay area rivalry",
+        "cricket ground south",
+        "pitch strategy"
+      ],
+      "summary": "San Jose Strikers and Milpitas Warriors renew Bay Area rivalry at Cricket Ground South, with strategies focusing on pitch exploitation and middle order strength."
+    }
+  },
+  {
+    "run": 19,
+    "turn_ceiling": 10,
+    "outcome": "success",
+    "planner_call_count": 1,
+    "turn_count": 3,
+    "latency_ms": 29530.2,
+    "final_proposal": {
+      "tags": [
+        "bay area rivalry",
+        "cricket ground south",
+        "fast bowling strategy"
+      ],
+      "summary": "San Jose Strikers and Milpitas Warriors clash in a Bay Area rivalry match at Cricket Ground South, vying for league supremacy."
+    }
+  },
+  {
+    "run": 20,
+    "turn_ceiling": 10,
+    "outcome": "success",
+    "planner_call_count": 2,
+    "turn_count": 5,
+    "latency_ms": 68073.9,
+    "final_proposal": {
+      "tags": [
+        "bay area rivalry",
+        "cricket match",
+        "top league teams"
+      ],
+      "summary": "San Jose Strikers and Milpitas Warriors face off in a Bay Area rivalry clash, vying for league supremacy."
+    }
+  }
+]

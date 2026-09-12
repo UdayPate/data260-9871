@@ -1,0 +1,77 @@
+[
+  {
+    "run": 1,
+    "outcome": "success",
+    "planner_call_count": 2,
+    "turn_count": 5,
+    "latency_ms": 74848.8,
+    "final_proposal": {
+      "tags": [
+        "game outcome",
+        "match result",
+        "game experience"
+      ],
+      "summary": "Game happened, experience was fine."
+    }
+  },
+  {
+    "run": 2,
+    "outcome": "hit_ceiling",
+    "planner_call_count": 3,
+    "turn_count": 6,
+    "latency_ms": 79995.6,
+    "final_proposal": {
+      "tags": [
+        "game event",
+        "match outcome",
+        "play session"
+      ],
+      "summary": "a game took place, with a neutral assessment of the experience"
+    }
+  },
+  {
+    "run": 3,
+    "outcome": "success",
+    "planner_call_count": 2,
+    "turn_count": 5,
+    "latency_ms": 64401.7,
+    "final_proposal": {
+      "tags": [
+        "game event",
+        "match outcome",
+        "neutral review"
+      ],
+      "summary": "A brief game event with a neutral assessment."
+    }
+  },
+  {
+    "run": 4,
+    "outcome": "success",
+    "planner_call_count": 2,
+    "turn_count": 5,
+    "latency_ms": 78591.3,
+    "final_proposal": {
+      "tags": [
+        "game event",
+        "match result",
+        "outcome fine"
+      ],
+      "summary": "Game happened, found to be fine."
+    }
+  },
+  {
+    "run": 5,
+    "outcome": "hit_ceiling",
+    "planner_call_count": 3,
+    "turn_count": 6,
+    "latency_ms": 148456.6,
+    "final_proposal": {
+      "tags": [
+        "game event",
+        "match outcome",
+        "neutral assessment"
+      ],
+      "summary": "A game occurred with a neutral assessment."
+    }
+  }
+]

@@ -1,0 +1,35 @@
+{
+  "experiment_1": {
+    "valid_first_attempt": {
+      "count": 25,
+      "mean_latency_ms": 35777.8
+    },
+    "valid_after_1_retry": {
+      "count": 4,
+      "mean_latency_ms": 80595.1
+    },
+    "valid_after_2plus_retries": {
+      "count": 0,
+      "mean_latency_ms": null
+    },
+    "hit_turn_ceiling": {
+      "count": 1,
+      "mean_latency_ms": 81672.1
+    }
+  },
+  "experiment_2": {
+    "2": {
+      "completion_rate": 0.0,
+      "mean_latency_ms": 17526.5
+    },
+    "10": {
+      "completion_rate": 1.0,
+      "mean_latency_ms": 46256.8
+    }
+  },
+  "experiment_3": {
+    "ceiling_hits": 2,
+    "n_runs": 5,
+    "observed_rate": 0.4
+  }
+}
