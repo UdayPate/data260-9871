@@ -326,3 +326,98 @@ table.fixture-table tbody tr:nth-child(odd) {
     flex-direction: column;
   }
 }
+
+
+
+/* ---------------- HW3 Part 1: vintage theme applied to Bootstrap auth pages ---------------- */
+
+.navbar {
+  background-color: var(--ink) !important;
+  border-bottom: 3px solid var(--accent);
+}
+
+.navbar-brand {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+}
+
+.nav-link {
+  font-family: Georgia, serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.card {
+  background-color: var(--paper-dark);
+  border: 1px solid var(--rule);
+  border-radius: 0;
+}
+
+.card-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  border: none;
+  border-radius: 0;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.btn-primary:hover {
+  background-color: var(--ink);
+}
+
+.btn-outline-secondary {
+  color: var(--ink);
+  border-color: var(--rule);
+  border-radius: 0;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.btn-outline-secondary:hover {
+  background-color: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+.form-control {
+  border: 1px solid var(--rule);
+  border-radius: 0;
+  background-color: var(--paper);
+  font-family: Georgia, serif;
+}
+
+.form-control:focus {
+  border-color: var(--accent);
+  box-shadow: none;
+}
+
+.form-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+}
+
+.alert-danger {
+  border: 1px solid var(--accent);
+  border-radius: 0;
+  background-color: var(--accent-light);
+  color: var(--accent);
+  font-family: Georgia, serif;
+}

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card p-4 shadow-sm">
+    <h1>Welcome, {{ username }}!</h1>
+    <p class="lead">This is your League Admin Dashboard.</p>
+    <a href="/fixtures" class="btn btn-primary me-2">Manage Fixtures</a>
+    <a href="/logout" class="btn btn-outline-secondary">Log Out</a>
+</div>
+{% endblock %}

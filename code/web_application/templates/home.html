@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card p-4 shadow-sm">
+    <h1 class="mb-3">Welcome to the Community Sports League Fixtures Portal</h1>
+    <p class="lead">Track fixtures, manage matchups, and stay on top of your league schedule.</p>
+    {% if username %}
+        <p>You're logged in as <strong>{{ username }}</strong>.</p>
+        <a href="/dashboard" class="btn btn-primary me-2">Go to Dashboard</a>
+        <a href="/logout" class="btn btn-outline-secondary">Log Out</a>
+    {% else %}
+        <a href="/login" class="btn btn-primary">Log In</a>
+    {% endif %}
+</div>
+{% endblock %}

@@ -20,9 +20,22 @@ from fastapi.responses import RedirectResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
+from starlette.middleware.sessions import SessionMiddleware
+import auth
+
 BASE_DIR = Path(__file__).resolve().parent
 
 app = FastAPI(title="Community Sports League Fixtures")
+
+app.add_middleware(
+    SessionMiddleware,
+    secret_key="dev-secret-key-change-in-production",
+    session_cookie="session",
+    max_age=3600,
+    same_site="lax",
+    https_only=True,
+)
+app.include_router(auth.router)
 
 app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
 templates = Jinja2Templates(directory=BASE_DIR / "templates")
@@ -67,11 +80,8 @@ next_id = 3
 # Page routes
 # ---------------------------------------------------------------------
 
-@app.get("/")
-def home(request: Request):
-    """Renders the shell page. The fixture table itself is populated
-    client-side by JS calling GET /api/fixtures, which is what drives
-    the loading/empty/error states."""
+@app.get("/fixtures")
+def fixtures_page(request: Request):
     return templates.TemplateResponse(request, "index.html", {})
 
 
@@ -122,7 +132,7 @@ def create_fixture(
     next_id += 1
     # 303 See Other is the correct redirect status after a POST,
     # so the browser follows up with a GET rather than re-POSTing.
-    return RedirectResponse(url="/", status_code=303)
+    return RedirectResponse(url="/fixtures", status_code=303)
 
 
 # ---------------------------------------------------------------------
@@ -144,7 +154,7 @@ def update_first():
             f["agree_terms"] = True
             f["submitted"] = now_iso()
             break
-    return RedirectResponse(url="/", status_code=303)
+    return RedirectResponse(url="/fixtures", status_code=303)
 
 
 # ---------------------------------------------------------------------
@@ -156,7 +166,7 @@ def delete_highest():
     if fixtures:
         highest = max(fixtures, key=lambda f: f["id"])
         fixtures.remove(highest)
-    return RedirectResponse(url="/", status_code=303)
+    return RedirectResponse(url="/fixtures", status_code=303)
 
 
 if __name__ == "__main__":
