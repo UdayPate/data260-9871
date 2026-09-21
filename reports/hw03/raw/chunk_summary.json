@@ -1,0 +1,14 @@
+{
+  "Token": {
+    "num_chunks": 254,
+    "avg_chunk_length_chars": 952.8
+  },
+  "Semantic": {
+    "num_chunks": 109,
+    "avg_chunk_length_chars": 2055.2
+  },
+  "SentenceWindow": {
+    "num_chunks": 2020,
+    "avg_chunk_length_chars": 110.9
+  }
+}

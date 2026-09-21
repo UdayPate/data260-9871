@@ -1,0 +1,512 @@
+[
+  {
+    "technique": "Token",
+    "query": "In AYSO soccer, how many players per side are allowed on the field for the 8U age division, and are goalkeepers used?",
+    "latency_ms": 25.91,
+    "query_embedding_dim": 384,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.7369,
+        "cosine_sim": 0.6826,
+        "chunk_len": 438,
+        "preview": "T h e \u00a0o n l y \u00a0t e a m \u00a0m e m b e r ( s ) \u00a0a \u00a0h e a d \u00a0c o a c h \u00a0m a y \u00a0s p e c i f y \u00a0b e \u00a0o n \u00a0h i s / h e r \u00a0team\u00a0 is\u00a0 his/her\u00a0 own\u00a0 child\u00a0 or\u00a0 children.\u00a0 ",
+        "source_file": "soccer_ayso_national_rules.txt"
+      },
+      {
+        "rank": 2,
+        "store_score": 0.7274,
+        "cosine_sim": 0.7187,
+        "chunk_len": 523,
+        "preview": "6\u00a0 5\u00a0 6U\u00a0 4\u2010a\u2010side\u00a0 (No\u00a0goalkeepers)\u00a0 6\u00a0 5\u00a0 AYSO\u00a0 Schoolyard\u00a0 Soccer\u00a0 4\u2010a\u2010side\u00a0 (No\u00a0goalkeepers)\u00a0 6\u00a0 5\u00a0 AYSO\u00a0National\u00a0Rules\u00a0&\u00a0Regulations\u00a0 REGISTRATION\u00a0 \u00a0   8\u00a0 ",
+        "source_file": "soccer_ayso_national_rules.txt"
+      },
+      {
+        "rank": 3,
+        "store_score": 0.7245,
+        "cosine_sim": 0.7194,
+        "chunk_len": 959,
+        "preview": "Size varies according to age group. The correct weight and pressure can  be determined sufficiently by feel with some practice.     Law 3: The Number Of Players",
+        "source_file": "soccer_ayso_basic_rules.txt"
+      }
+    ],
+    "question_id": "q1",
+    "expected_source_file": "soccer_ayso_national_rules.txt"
+  },
+  {
+    "technique": "Token",
+    "query": "In the City of Las Vegas youth basketball rules, at how many team fouls does the free-throw bonus (1-and-1) begin, and when does the double bonus begin?",
+    "latency_ms": 18.24,
+    "query_embedding_dim": 384,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.7615,
+        "cosine_sim": 0.7526,
+        "chunk_len": 959,
+        "preview": "game.     I. Free-throw Bonus   1. Penalty free-throw bonus begins on the seventh team foul (1 and 1) and the double bonus  begins on the tenth team foul (2-sho",
+        "source_file": "basketball_las_vegas_youth_rules.txt"
+      },
+      {
+        "rank": 2,
+        "store_score": 0.7316,
+        "cosine_sim": 0.6091,
+        "chunk_len": 922,
+        "preview": "are not allowed more than three seconds inside it during play.   Jump Ball:  A method of putting the ball into play at the beginning of the game or overtime by ",
+        "source_file": "basketball_las_vegas_youth_rules.txt"
+      },
+      {
+        "rank": 3,
+        "store_score": 0.6007,
+        "cosine_sim": 0.449,
+        "chunk_len": 1024,
+        "preview": "team is ahead by (10) ten points at any time during the game, monitors will continue to  take score in the scorebook but not on the score clock.   4. The scorek",
+        "source_file": "basketball_las_vegas_youth_rules.txt"
+      }
+    ],
+    "question_id": "q2",
+    "expected_source_file": "basketball_las_vegas_youth_rules.txt"
+  },
+  {
+    "technique": "Token",
+    "query": "In a USPL Twenty20 cricket match, how long is each session (innings), and how is that time calculated?",
+    "latency_ms": 15.45,
+    "query_embedding_dim": 384,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.6764,
+        "cosine_sim": 0.6661,
+        "chunk_len": 1021,
+        "preview": "full quota of 20 overs, each innings will be played for 85 minutes without any drinks break.  7) Innings break will be for 15 minutes as defined in Table 1.0. I",
+        "source_file": "cricket_uspl_t20_rules.txt"
+      },
+      {
+        "rank": 2,
+        "store_score": 0.6733,
+        "cosine_sim": 0.6991,
+        "chunk_len": 980,
+        "preview": "fairness of the game for both the teams, the Neutral Umpire(s)  designated by the Umpire\u2019s committee or by the league will have the more power than the umpire f",
+        "source_file": "cricket_uspl_t20_rules.txt"
+      },
+      {
+        "rank": 3,
+        "store_score": 0.668,
+        "cosine_sim": 0.6694,
+        "chunk_len": 1097,
+        "preview": "happen;  \u2022 The umpires at the scheduled (or agreed upon) close of innings will note down the  number of overs  completed by the team bowling and inform either t",
+        "source_file": "cricket_uspl_t20_rules.txt"
+      }
+    ],
+    "question_id": "q3",
+    "expected_source_file": "cricket_uspl_t20_rules.txt"
+  },
+  {
+    "technique": "Token",
+    "query": "In the Fort Collins Adult Volleyball Manual, what is the time limit for a match, and how many games make up a match?",
+    "latency_ms": 15.34,
+    "query_embedding_dim": 384,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.8049,
+        "cosine_sim": 0.7138,
+        "chunk_len": 925,
+        "preview": "use basic formations for offense and defense.         Adult Volleyball Manual        Parks and Recreation 5       Indoor Volleyball Rules    Any rules that are ",
+        "source_file": "volleyball_fort_collins_manual.txt"
+      },
+      {
+        "rank": 2,
+        "store_score": 0.7727,
+        "cosine_sim": 0.6186,
+        "chunk_len": 966,
+        "preview": "get the nets set up.    2.  Coin Toss: Two options are available to the winner of the coin toss.  The winner may serve  or take the choice of court for the star",
+        "source_file": "volleyball_fort_collins_manual.txt"
+      },
+      {
+        "rank": 3,
+        "store_score": 0.725,
+        "cosine_sim": 0.597,
+        "chunk_len": 934,
+        "preview": "formats.   If matches are running late, the supervisor has the authority to  shorten the length/number of games if needed to complete the matches for that night",
+        "source_file": "volleyball_fort_collins_manual.txt"
+      }
+    ],
+    "question_id": "q4",
+    "expected_source_file": "volleyball_fort_collins_manual.txt"
+  },
+  {
+    "technique": "Token",
+    "query": "According to the Douglas County Parks & Recreation rules, what are the minimum and maximum roster sizes for adult volleyball?",
+    "latency_ms": 17.63,
+    "query_embedding_dim": 384,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.7588,
+        "cosine_sim": 0.7631,
+        "chunk_len": 918,
+        "preview": "limited for the following per sport:  \uf0b7 Flag Football \u2013 Minimum 6, Maximum 15  \uf0b7 Soccer \u2013 Minimum 9, Maximum 20  \uf0b7 Softball \u2013 Minimum 10, Maximum 20  \uf0b7 Volleyba",
+        "source_file": "general_douglas_county_all_sports_rules.txt"
+      },
+      {
+        "rank": 2,
+        "store_score": 0.7223,
+        "cosine_sim": 0.7034,
+        "chunk_len": 1100,
+        "preview": "friendly rivalry, wholesome recreation, and clean sportsmanship.         Adult Volleyball Manual        Parks and Recreation 3       Functions of Parks and Recr",
+        "source_file": "volleyball_fort_collins_manual.txt"
+      },
+      {
+        "rank": 3,
+        "store_score": 0.6863,
+        "cosine_sim": 0.6636,
+        "chunk_len": 485,
+        "preview": "4      League Classifications.  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .   4       Indoor  Volleyball Rules.  .  .  .  .  .  .  .  .  . ",
+        "source_file": "volleyball_fort_collins_manual.txt"
+      }
+    ],
+    "question_id": "q5",
+    "expected_source_file": "general_douglas_county_all_sports_rules.txt"
+  },
+  {
+    "technique": "Semantic",
+    "query": "In AYSO soccer, how many players per side are allowed on the field for the 8U age division, and are goalkeepers used?",
+    "latency_ms": 14.05,
+    "query_embedding_dim": 384,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.7223,
+        "cosine_sim": 0.7193,
+        "chunk_len": 2624,
+        "preview": "The correct weight and pressure can  be determined sufficiently by feel with some practice.     Law 3: The Number Of Players      10 AYSO Basic Soccer Rules \u2013 2",
+        "source_file": "soccer_ayso_basic_rules.txt"
+      },
+      {
+        "rank": 2,
+        "store_score": 0.672,
+        "cosine_sim": 0.6701,
+        "chunk_len": 3960,
+        "preview": "      AYSO Basic Soccer Rules \u2013 2009-2010 Edition 1          AYSO  Basic Soccer Rules    For New AYSO Parents and Volunteers         2 AYSO Basic Soccer Rules \u2013",
+        "source_file": "soccer_ayso_basic_rules.txt"
+      },
+      {
+        "rank": 3,
+        "store_score": 0.6486,
+        "cosine_sim": 0.6307,
+        "chunk_len": 1677,
+        "preview": "Additionally, another player  on the field may change places with the goalkeeper during a normal stoppage in  play, provided that the referee is first informed.",
+        "source_file": "soccer_ayso_basic_rules.txt"
+      }
+    ],
+    "question_id": "q1",
+    "expected_source_file": "soccer_ayso_national_rules.txt"
+  },
+  {
+    "technique": "Semantic",
+    "query": "In the City of Las Vegas youth basketball rules, at how many team fouls does the free-throw bonus (1-and-1) begin, and when does the double bonus begin?",
+    "latency_ms": 17.68,
+    "query_embedding_dim": 384,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.6443,
+        "cosine_sim": 0.5093,
+        "chunk_len": 6177,
+        "preview": "The scorekeepers will inform the officials to insure that the mercy rule is enforced.   H. Coaching Box Rule   The NFHS has authorized the use of a 14 \u2013foot coa",
+        "source_file": "basketball_las_vegas_youth_rules.txt"
+      },
+      {
+        "rank": 2,
+        "store_score": 0.5388,
+        "cosine_sim": 0.5439,
+        "chunk_len": 6413,
+        "preview": "     CITY OF LAS VEGAS                     YOUTH  RECREATION    BASKETBALL  RULES & REGULATIONS     1              SECTION 1: GENERAL LEAGUE INFORMATION .......",
+        "source_file": "basketball_las_vegas_youth_rules.txt"
+      },
+      {
+        "rank": 3,
+        "store_score": 0.5157,
+        "cosine_sim": 0.3708,
+        "chunk_len": 1021,
+        "preview": "D. Length of Playing Quarters: Playing Time   1. Game possession is decided by a coin toss for 6U only.   2. To start the game, jump ball will determine possess",
+        "source_file": "basketball_las_vegas_youth_rules.txt"
+      }
+    ],
+    "question_id": "q2",
+    "expected_source_file": "basketball_las_vegas_youth_rules.txt"
+  },
+  {
+    "technique": "Semantic",
+    "query": "In a USPL Twenty20 cricket match, how long is each session (innings), and how is that time calculated?",
+    "latency_ms": 15.4,
+    "query_embedding_dim": 384,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.5824,
+        "cosine_sim": 0.5686,
+        "chunk_len": 487,
+        "preview": "The Captain of the batting team may not declare his innings  closed at any time during the course of the match.    18 Forfeiture    The following situations can",
+        "source_file": "cricket_uspl_t20_rules.txt"
+      },
+      {
+        "rank": 2,
+        "store_score": 0.5559,
+        "cosine_sim": 0.5428,
+        "chunk_len": 12544,
+        "preview": "The umpire(s) will decide on the scenario as they feel  appropriate.    Team Batting First = Team A  Team Bowling First = Team B    5.3.1 First Session, Bowling",
+        "source_file": "cricket_uspl_t20_rules.txt"
+      },
+      {
+        "rank": 3,
+        "store_score": 0.5399,
+        "cosine_sim": 0.5525,
+        "chunk_len": 6756,
+        "preview": "        US Premier League (USPL)                        Code  of  Conduct  For  League Rules         For  Twenty20    Last  Updated:  01/30/2022    USPL  Rules ",
+        "source_file": "cricket_uspl_t20_rules.txt"
+      }
+    ],
+    "question_id": "q3",
+    "expected_source_file": "cricket_uspl_t20_rules.txt"
+  },
+  {
+    "technique": "Semantic",
+    "query": "In the Fort Collins Adult Volleyball Manual, what is the time limit for a match, and how many games make up a match?",
+    "latency_ms": 13.66,
+    "query_embedding_dim": 384,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.6525,
+        "cosine_sim": 0.6399,
+        "chunk_len": 1597,
+        "preview": ".     9                          Adult Volleyball Manual          Parks and Recreation  2    THANK YOU FOR YOUR PARTICIPATION IN  THE ADULT VOLLEYBALL PROGRAM! ",
+        "source_file": "volleyball_fort_collins_manual.txt"
+      },
+      {
+        "rank": 2,
+        "store_score": 0.6313,
+        "cosine_sim": 0.5371,
+        "chunk_len": 43,
+        "preview": ".     8      Outdoor Volleyball Rules.  .  ",
+        "source_file": "volleyball_fort_collins_manual.txt"
+      },
+      {
+        "rank": 3,
+        "store_score": 0.6312,
+        "cosine_sim": 0.5914,
+        "chunk_len": 7833,
+        "preview": ". 416-2489 x 5641    Purpose  The purpose of the league is to combine the interest of the volleyball teams of the community  into friendly rivalry, wholesome re",
+        "source_file": "volleyball_fort_collins_manual.txt"
+      }
+    ],
+    "question_id": "q4",
+    "expected_source_file": "volleyball_fort_collins_manual.txt"
+  },
+  {
+    "technique": "Semantic",
+    "query": "According to the Douglas County Parks & Recreation rules, what are the minimum and maximum roster sizes for adult volleyball?",
+    "latency_ms": 12.64,
+    "query_embedding_dim": 384,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.7187,
+        "cosine_sim": 0.7012,
+        "chunk_len": 7833,
+        "preview": ". 416-2489 x 5641    Purpose  The purpose of the league is to combine the interest of the volleyball teams of the community  into friendly rivalry, wholesome re",
+        "source_file": "volleyball_fort_collins_manual.txt"
+      },
+      {
+        "rank": 2,
+        "store_score": 0.6734,
+        "cosine_sim": 0.6917,
+        "chunk_len": 1597,
+        "preview": ".     9                          Adult Volleyball Manual          Parks and Recreation  2    THANK YOU FOR YOUR PARTICIPATION IN  THE ADULT VOLLEYBALL PROGRAM! ",
+        "source_file": "volleyball_fort_collins_manual.txt"
+      },
+      {
+        "rank": 3,
+        "store_score": 0.6317,
+        "cosine_sim": 0.6226,
+        "chunk_len": 760,
+        "preview": "                                                                                                          DOUGLAS COUNTY PARKS & RECREATION DEPARTMENT  ADULT SP",
+        "source_file": "general_douglas_county_all_sports_rules.txt"
+      }
+    ],
+    "question_id": "q5",
+    "expected_source_file": "general_douglas_county_all_sports_rules.txt"
+  },
+  {
+    "technique": "SentenceWindow",
+    "query": "In AYSO soccer, how many players per side are allowed on the field for the 8U age division, and are goalkeepers used?",
+    "latency_ms": 53.96,
+    "query_embedding_dim": 384,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.7494,
+        "cosine_sim": 0.7429,
+        "chunk_len": 377,
+        "preview": "of\u00a0team\u00a0 members\u00a0 18U\u00a0 11\u2010a\u2010side\u00a0 18\u00a0 12\u00a0 16U\u00a0 11\u2010a\u2010side\u00a0 18\u00a0 12\u00a0 14U\u00a0 11\u2010a\u2010side\u00a0 15\u00a0 12\u00a0 12U\u00a0 9\u2010a\u2010side\u00a0 12\u00a0 10\u00a0 10U\u00a0 7\u2010a\u2010side\u00a0 10\u00a0 8\u00a0 8U\u00a0 4\u2010a\u2010side\u00a0 (No\u00a0goalkee",
+        "source_file": "soccer_ayso_national_rules.txt"
+      },
+      {
+        "rank": 2,
+        "store_score": 0.7036,
+        "cosine_sim": 0.6495,
+        "chunk_len": 55,
+        "preview": "Age\u00a0 Division\u00a0 Players\u00a0per\u00a0team\u00a0on\u00a0field\u00a0 Maximum\u00a0 no.\u00a0",
+        "source_file": "soccer_ayso_national_rules.txt"
+      },
+      {
+        "rank": 3,
+        "store_score": 0.6607,
+        "cosine_sim": 0.4747,
+        "chunk_len": 168,
+        "preview": "F. In\u00a0 Regions\u00a0 where\u00a0 there\u00a0 are\u00a0 not\u00a0 enough\u00a0 registrants\u00a0 to\u00a0 make\u00a0 any\u00a0 or\u00a0 all\u00a0 standard\u00a0 age\u00a0 divisions,\u00a0 divisions\u00a0may\u00a0be\u00a0combined\u00a0so\u00a0that\u00a0teams\u00a0may\u00a0be\u00a0f",
+        "source_file": "soccer_ayso_national_rules.txt"
+      }
+    ],
+    "question_id": "q1",
+    "expected_source_file": "soccer_ayso_national_rules.txt"
+  },
+  {
+    "technique": "SentenceWindow",
+    "query": "In the City of Las Vegas youth basketball rules, at how many team fouls does the free-throw bonus (1-and-1) begin, and when does the double bonus begin?",
+    "latency_ms": 51.11,
+    "query_embedding_dim": 384,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.8732,
+        "cosine_sim": 0.7443,
+        "chunk_len": 145,
+        "preview": "Penalty free-throw bonus begins on the seventh team foul (1 and 1) and the double bonus  begins on the tenth team foul (2-shots) of each half.   ",
+        "source_file": "basketball_las_vegas_youth_rules.txt"
+      },
+      {
+        "rank": 2,
+        "store_score": 0.8241,
+        "cosine_sim": 0.6814,
+        "chunk_len": 138,
+        "preview": "Double Bonus:  The \u201cbonus\u201d free-throw situation awarded for non-shooting fouls after the  opposing team exceeds 10 team fouls in a half.  ",
+        "source_file": "basketball_las_vegas_youth_rules.txt"
+      },
+      {
+        "rank": 3,
+        "store_score": 0.7742,
+        "cosine_sim": 0.6264,
+        "chunk_len": 190,
+        "preview": "Also call the \u201cfree throw lane\u201d or \u201clane\u201d   One-and-One Bonus:  The \u201cbonus\u201d free-throw situation awarded for non-shooting fouls after  the opposing team exceeds",
+        "source_file": "basketball_las_vegas_youth_rules.txt"
+      }
+    ],
+    "question_id": "q2",
+    "expected_source_file": "basketball_las_vegas_youth_rules.txt"
+  },
+  {
+    "technique": "SentenceWindow",
+    "query": "In a USPL Twenty20 cricket match, how long is each session (innings), and how is that time calculated?",
+    "latency_ms": 70.44,
+    "query_embedding_dim": 384,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.7186,
+        "cosine_sim": 0.6452,
+        "chunk_len": 224,
+        "preview": "Also the calculation of the number of overs  for each side will be based on the time of 4.25 minutes per over and the game shall be rescheduled in  such a way t",
+        "source_file": "cricket_uspl_t20_rules.txt"
+      },
+      {
+        "rank": 2,
+        "store_score": 0.6985,
+        "cosine_sim": 0.5258,
+        "chunk_len": 99,
+        "preview": "6) The number of overs for all the calculation will be based at the rate of 4.25 minutes per over. ",
+        "source_file": "cricket_uspl_t20_rules.txt"
+      },
+      {
+        "rank": 3,
+        "store_score": 0.6812,
+        "cosine_sim": 0.608,
+        "chunk_len": 216,
+        "preview": "4 Hours of Play    1) Unless otherwise modified by the league or by the umpires on the field, the duration/hours of play  shall be as follows;      Event Timeli",
+        "source_file": "cricket_uspl_t20_rules.txt"
+      }
+    ],
+    "question_id": "q3",
+    "expected_source_file": "cricket_uspl_t20_rules.txt"
+  },
+  {
+    "technique": "SentenceWindow",
+    "query": "In the Fort Collins Adult Volleyball Manual, what is the time limit for a match, and how many games make up a match?",
+    "latency_ms": 50.81,
+    "query_embedding_dim": 384,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.8558,
+        "cosine_sim": 0.6642,
+        "chunk_len": 68,
+        "preview": "Time Limit: There will be a one (1) hour time limit for the match.  ",
+        "source_file": "volleyball_fort_collins_manual.txt"
+      },
+      {
+        "rank": 2,
+        "store_score": 0.8306,
+        "cosine_sim": 0.6614,
+        "chunk_len": 57,
+        "preview": "Time Limit: Matches will be scheduled every 40 minutes.  ",
+        "source_file": "volleyball_fort_collins_manual.txt"
+      },
+      {
+        "rank": 3,
+        "store_score": 0.8037,
+        "cosine_sim": 0.6248,
+        "chunk_len": 178,
+        "preview": "Scoring and Results of the Match: Each match will consist of three (3) games to twenty- five (25) points, winning by two (2) points with no cap, or the one (1) ",
+        "source_file": "volleyball_fort_collins_manual.txt"
+      }
+    ],
+    "question_id": "q4",
+    "expected_source_file": "volleyball_fort_collins_manual.txt"
+  },
+  {
+    "technique": "SentenceWindow",
+    "query": "According to the Douglas County Parks & Recreation rules, what are the minimum and maximum roster sizes for adult volleyball?",
+    "latency_ms": 52.32,
+    "query_embedding_dim": 384,
+    "results": [
+      {
+        "rank": 1,
+        "store_score": 0.7194,
+        "cosine_sim": 0.6967,
+        "chunk_len": 217,
+        "preview": "Roster amounts shall be limited for the following per sport:  \uf0b7 Flag Football \u2013 Minimum 6, Maximum 15  \uf0b7 Soccer \u2013 Minimum 9, Maximum 20  \uf0b7 Softball \u2013 Minimum 10",
+        "source_file": "general_douglas_county_all_sports_rules.txt"
+      },
+      {
+        "rank": 2,
+        "store_score": 0.6846,
+        "cosine_sim": 0.5597,
+        "chunk_len": 92,
+        "preview": "Teams must start with a minimum of 4  legal players for 6's and 3 legal players for 4's.    ",
+        "source_file": "volleyball_fort_collins_manual.txt"
+      },
+      {
+        "rank": 3,
+        "store_score": 0.6565,
+        "cosine_sim": 0.6029,
+        "chunk_len": 139,
+        "preview": "Number of Players: For Coed leagues, a maximum of 3 males for 6's and 2 for 4's may  participate on the court, if a full team is present.  ",
+        "source_file": "volleyball_fort_collins_manual.txt"
+      }
+    ],
+    "question_id": "q5",
+    "expected_source_file": "general_douglas_county_all_sports_rules.txt"
+  }
+]
