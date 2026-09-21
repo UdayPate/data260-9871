@@ -1,0 +1,54 @@
+{
+  "total_corpus_bytes": 232807,
+  "meets_200kb_requirement": true,
+  "documents": [
+    {
+      "filename": "reports/hw03/corpus/soccer_ayso_basic_rules.txt",
+      "sport": "soccer",
+      "title": "AYSO Basic Soccer Rules (2009-2010 Edition)",
+      "source_url": "https://dt5602vnjxv0c.cloudfront.net/portals/14501/docs/ayso_basic_soccer_rules.pdf",
+      "byte_size": 67709,
+      "sha256": "563c24c7a81ee38c0ac7ceb3caca12ed4dd2085ecb37ad91e0a8dcfd7c62ffe6"
+    },
+    {
+      "filename": "reports/hw03/corpus/soccer_ayso_national_rules.txt",
+      "sport": "soccer",
+      "title": "AYSO National Rules & Regulations (06/2018)",
+      "source_url": "https://dt5602vnjxv0c.cloudfront.net/portals/14715/docs/national-rules-regulations-2018-0616-marked.pdf",
+      "byte_size": 29763,
+      "sha256": "be62d66e9b6850f84f4f0110bf49cdeebf8e17bb2b1265d285973e90504a00c5"
+    },
+    {
+      "filename": "reports/hw03/corpus/basketball_las_vegas_youth_rules.txt",
+      "sport": "basketball",
+      "title": "City of Las Vegas Youth Recreation Basketball Rules & Regulations",
+      "source_url": "https://files.lasvegasnevada.gov/parks-recreation/CLV-Youth-Basketball-Rules.pdf",
+      "byte_size": 37544,
+      "sha256": "19f7a4d5ac998a3c4ee1fdcfd110920ce46a2a2e64f90d5161d54ab307f3d1cd"
+    },
+    {
+      "filename": "reports/hw03/corpus/volleyball_fort_collins_manual.txt",
+      "sport": "volleyball",
+      "title": "City of Fort Collins Adult Volleyball Manual",
+      "source_url": "https://www.fcgov.com/sports/pdf/2008vbmanagermanual.pdf",
+      "byte_size": 23985,
+      "sha256": "49d339716389360b96dea481469e6635c6c66c17112ed4c091f1fe0ac80d51c9"
+    },
+    {
+      "filename": "reports/hw03/corpus/cricket_uspl_t20_rules.txt",
+      "sport": "cricket",
+      "title": "US Premier League (USPL) Twenty20 League Rules",
+      "source_url": "https://www.cricuspl.com/wp-content/uploads/2022/05/twenty-20-rulebook-uspl.pdf",
+      "byte_size": 61419,
+      "sha256": "2c212d1b895801f33243d355acf2e44ae2f4e9225a3d0e593be93d95dae94aea"
+    },
+    {
+      "filename": "reports/hw03/corpus/general_douglas_county_all_sports_rules.txt",
+      "sport": "multi-sport (general community league policy)",
+      "title": "Douglas County Parks & Recreation Adult Sports Leagues Rules & Guidelines",
+      "source_url": "https://cdnsm5-hosted.civiclive.com/UserFiles/Servers/Server_12493019/File/Community%20Services/Recreation/Sports%20Leagues%20&%20Programs/Adult%20Sports/Valley/Volleyball/All%20Sports%20Rules%20and%20Guidlines.pdf",
+      "byte_size": 12387,
+      "sha256": "0001ce179399cc953d0bbbff5a71fd4dfb5e98c9021536b88995b74af5c28334"
+    }
+  ]
+}
