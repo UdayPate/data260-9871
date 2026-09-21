@@ -1,0 +1,38 @@
+# DATA-260 Homework 3 - Part 2: Domain Questions
+# Committed BEFORE running any retrieval experiments, so expected answers
+# are not influenced by seeing actual retrieval output.
+#
+# Domain: Community sports league fixtures (DOMAIN_ID=7)
+# Corpus: reports/hw03/corpus/ (6 real public league rulebooks, see
+# SOURCES.md and CORPUS_MANIFEST.json)
+
+questions:
+  - id: q1
+    question: "In AYSO soccer, how many players per side are allowed on the field for the 8U age division, and are goalkeepers used?"
+    expected_answer: "4-a-side, with no goalkeepers."
+    expected_source_file: "soccer_ayso_national_rules.txt"
+    single_source: true
+
+  - id: q2
+    question: "In the City of Las Vegas youth basketball rules, at how many team fouls does the free-throw bonus (1-and-1) begin, and when does the double bonus begin?"
+    expected_answer: "The 1-and-1 bonus begins on the 7th team foul; the double bonus (2 shots) begins on the 10th team foul of each half."
+    expected_source_file: "basketball_las_vegas_youth_rules.txt"
+    single_source: true
+
+  - id: q3
+    question: "In a USPL Twenty20 cricket match, how long is each session (innings), and how is that time calculated?"
+    expected_answer: "Each session is 85 minutes, calculated at a rate of 4.25 minutes per over for 20 overs."
+    expected_source_file: "cricket_uspl_t20_rules.txt"
+    single_source: true
+
+  - id: q4
+    question: "In the Fort Collins Adult Volleyball Manual, what is the time limit for a match, and how many games make up a match?"
+    expected_answer: "There is a one (1) hour time limit per match, and each match consists of three (3) games to twenty-five (25) points."
+    expected_source_file: "volleyball_fort_collins_manual.txt"
+    single_source: true
+
+  - id: q5
+    question: "According to the Douglas County Parks & Recreation rules, what are the minimum and maximum roster sizes for adult volleyball?"
+    expected_answer: "Minimum 6 players, maximum 12 players."
+    expected_source_file: "general_douglas_county_all_sports_rules.txt"
+    single_source: true
