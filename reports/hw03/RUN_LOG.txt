@@ -1,0 +1,110 @@
+DATA-260 HW3 - RUN_LOG.txt
+============================
+This log is built from the actual git commit history of the
+data260-9871 repository (git --no-pager log --pretty=format:"%ad | %s"
+--date=format:"%Y-%m-%d %H:%M:%S"), which records real timestamps for
+every stage of HW3 work, plus real terminal transcripts captured during
+the session for the auth system tests and the RAG chunking pipeline.
+
+Commit history (chronological, HW3 portion):
+----------------------------------------------
+2026-09-19 20:06:39 | Completed part 1 of the assignment
+2026-09-20 20:14:28 | Added HW3 domain corpus: 6 real public sports league documents, 227KB total
+2026-09-20 20:20:54 | Added my domain questions before running anything
+2026-09-20 20:50:21 | Add RAG chunking comparison script and real retrieval results for all 3 techniques x 5 questions
+2026-09-20 20:55:38 | Add HW3 summary metrics script, METRICS.md with real analysis
+
+Summary of what happened at each stage:
+----------------------------------------
+2026-09-19: Part 1 built - a FastAPI authentication router (auth.py) with
+Home, Login, Dashboard, and Logout routes, using Starlette's
+SessionMiddleware with a secure cookie (httponly, secure, samesite=lax
+all confirmed present in the real captured Set-Cookie header) and a
+server-side session revocation store (ACTIVE_SESSIONS) enabling genuine
+logout invalidation and a 30-second idle timeout - both independently
+verified via curl by replaying an old session cookie after logout (and
+separately after idle expiry) and confirming /dashboard correctly
+rejected it both times, redirecting to /login. The existing HW2 fixtures
+CRUD board was moved from "/" to "/fixtures" to make room for the new
+auth-aware home page. All four routes were restyled with the existing
+vintage newspaper theme applied on top of Bootstrap's components
+(navbar, cards, buttons, alerts, form controls).
+
+2026-09-20: Part 2 built across four stages:
+  (1) A domain corpus was assembled from 6 real, public, verified
+      documents (AYSO Basic Soccer Rules, AYSO National Rules &
+      Regulations, City of Las Vegas Youth Basketball Rules, Fort
+      Collins Adult Volleyball Manual, USPL Twenty20 Cricket Rules, and
+      Douglas County Parks & Recreation All-Sports Rules), totaling
+      232,807 bytes (227.4 KB), exceeding the 200KB requirement. Each
+      file's SHA-256 hash and byte size were computed and recorded in
+      CORPUS_MANIFEST.json, with source URLs and access dates in
+      SOURCES.md.
+  (2) 5 domain questions were written and committed to questions.yaml,
+      with expected answers and expected source files recorded BEFORE
+      any retrieval code was run, per the assignment's requirement.
+  (3) Three chunking pipelines (Token, Semantic, Sentence-window) were
+      built using LlamaIndex, each indexed into its own in-memory
+      SimpleVectorStore using the sentence-transformers/all-MiniLM-L6-v2
+      embedding model. A shared retrieval-only function was run against
+      all 3 techniques x 5 questions (15 total retrievals), printing and
+      saving query embedding dimensions/values, store scores, cosine
+      similarities, chunk lengths, and previews for every result.
+  (4) A separate summary script recomputed the final comparison table
+      (chunks, avg chunk length, top-1 cosine, mean@k cosine, recall@k,
+      mean latency) from the saved raw data, and a specific confidently-
+      scored recall miss (Semantic chunking, question q1) was traced and
+      explained in METRICS.md.
+
+Real terminal transcript - Part 1 auth verification (curl)
+-------------------------------------------------------------
+1. GET / (unauthenticated) -> showed "Login" link only.
+2. GET /dashboard (unauthenticated) -> HTTP/1.1 303 See Other, redirected to /login.
+3. POST /login with wrong credentials -> HTTP/1.1 401 Unauthorized, "Invalid username or password."
+4. POST /login with correct credentials -> HTTP/1.1 303 See Other -> /dashboard.
+   Set-Cookie header captured:
+   session=<signed-value>; path=/; Max-Age=3600; httponly; samesite=lax; secure
+5. GET /dashboard with valid cookie -> "Welcome, league_admin!"
+6. GET /logout with valid cookie -> HTTP/1.1 303 See Other -> /
+7. REPLAY the same pre-logout cookie against /dashboard -> HTTP/1.1 303 See
+   Other, redirected to /login (proves server-side revocation, not just
+   client-side cookie clearing).
+8. Fresh login, waited 32 seconds with no activity (idle_timeout=30s),
+   then GET /dashboard with the same cookie -> HTTP/1.1 303 See Other,
+   redirected to /login (proves idle timeout is enforced independently
+   of logout).
+
+Real terminal output - Part 2 corpus build
+--------------------------------------------
+python build_corpus.py (first run, 4 sources):
+  Total corpus size: 190,657 bytes (186.2 KB)
+  Meets 200KB requirement: False
+
+python build_corpus.py (second run, 6 sources after adding 2 more):
+  Total corpus size: 232,807 bytes (227.4 KB)
+  Meets 200KB requirement: True
+
+Real terminal output - Part 2 RAG chunking comparison
+---------------------------------------------------------
+python rag_chunking_comparison.py:
+  Loaded 6 documents, 5 questions.
+  Embedding model: sentence-transformers/all-MiniLM-L6-v2 (384 dimensions)
+  Token: 254 chunks produced
+  Semantic: 109 chunks produced
+  Sentence-window: 2020 chunks produced
+  All 15 (technique x question) retrievals completed successfully,
+  printing query embedding dims/values, store_score, cosine_sim,
+  chunk_len, and preview for each result; raw data saved to
+  reports/hw03/raw/chunking_comparison_raw.json and .csv.
+
+python summarize_chunking_comparison.py:
+  Technique        Chunks   AvgLen    Top1Cos   Mean@kCos  Recall@k   LatencyMS
+  Semantic         109      2055.2    0.6277    0.5928     4/5        14.69
+  SentenceWindow   2020     110.9     0.6987    0.6339     5/5        55.73
+  Token            254      952.8     0.7156    0.6684     5/5        18.51
+
+python find_semantic_miss.py:
+  MISS: question_id=q1 (Semantic chunking)
+  Expected source: soccer_ayso_national_rules.txt
+  Actually retrieved sources: soccer_ayso_basic_rules.txt (all 3 results)
+  Top result cosine_sim: 0.7193

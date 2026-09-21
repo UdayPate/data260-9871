@@ -1,0 +1,27 @@
+{
+  "homework": "HW3",
+  "sid4": "9871",
+  "commit_hash": "26b001ecdd2af3bb840235a819f0831266a3679e",
+  "model_config": "sentence-transformers/all-MiniLM-L6-v2 (embeddings); qwen3:8b (Ollama, Parts 1-2 agent work)",
+  "seed": "9871",
+  "verify_seed": "269871",
+  "timestamp_utc": "2026-09-21T04:04:40.153900+00:00",
+  "all_checks_passed": true,
+  "checks": [
+    {
+      "check": "required_files_present",
+      "passed": true,
+      "detail": "All 10 required files present."
+    },
+    {
+      "check": "fastapi_auth_home_and_protection",
+      "passed": true,
+      "detail": "Home responded 200 OK, and unauthenticated /dashboard correctly redirected to /login (protection enforced)."
+    },
+    {
+      "check": "corpus_size_and_hash_integrity",
+      "passed": true,
+      "detail": "Corpus totals 232807 bytes (>= 200KB requirement met), and all 6 file hashes match CORPUS_MANIFEST.json."
+    }
+  ]
+}
