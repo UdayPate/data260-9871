@@ -191,3 +191,92 @@ Confirms required files exist, actually starts FastAPI as a subprocess
 and checks it responds on PORT_BASE, and actually runs the LangGraph
 pipeline with a wall-clock timeout to confirm it terminates rather
 than hanging. Writes to `reports/hw02/verification.json`.
+
+
+---
+
+# HW3
+
+HW3 extends the same codebase in place, per the assignment's instructions.
+
+## Part 1 - FastAPI Authentication
+
+```powershell
+cd code\web_application
+python main.py
+```
+Starts the app on PORT_BASE (8871). Visit http://localhost:8871
+
+- **Home (`/`)**: shows a welcome message, with a Login link if logged
+  out, or Dashboard/Logout links if logged in.
+- **Login (`/login`)**: username `league_admin`, password `GoLions2026!`.
+  Shows a Bootstrap alert on invalid credentials.
+- **Dashboard (`/dashboard`)**: protected - redirects to `/login` if not
+  authenticated. Links to `/fixtures` (the HW2 board) and Logout.
+- **Logout (`/logout`)**: revokes the session server-side (not just the
+  client cookie - see `ACTIVE_SESSIONS` in `auth.py`) and redirects home.
+
+Session cookies are signed (via Starlette's `SessionMiddleware`) and set
+with `httponly`, `secure`, and `samesite=lax`. An idle timeout of 30
+seconds is enforced independently of logout, via a server-side session
+store rather than relying solely on the signed cookie's own expiry.
+
+## Part 2 - Chunking Technique Comparison (Retrieval-Only RAG)
+
+### Build the domain corpus (run once)
+
+```powershell
+pip install requests pypdf
+python build_corpus.py
+```
+Downloads 6 real public community-sports-league documents (one per sport
+in `DOMAIN_SCHEMA.md`, plus a general multi-sport policy document),
+extracts their text, and writes `reports/hw03/corpus/*.txt`,
+`reports/hw03/CORPUS_MANIFEST.json`, and `reports/hw03/SOURCES.md` with
+real SHA-256 hashes and byte sizes. Total corpus: ~227KB (exceeds the
+200KB requirement).
+
+### Domain questions
+
+`reports/hw03/questions.yaml` contains 5 domain questions with expected
+answers and expected source files, committed before any retrieval was
+run.
+
+### Run the chunking comparison
+
+```powershell
+pip install llama-index llama-index-embeddings-huggingface sentence-transformers faiss-cpu numpy pandas pyyaml
+python rag_chunking_comparison.py
+```
+Builds three separate in-memory vector indexes (Token, Semantic,
+Sentence-window chunking) over the corpus using
+`sentence-transformers/all-MiniLM-L6-v2` embeddings, then runs a
+retrieval-only comparison against all 5 questions for each technique
+(15 total retrievals). Prints and saves query embeddings, store scores,
+cosine similarities, chunk lengths, and previews to
+`reports/hw03/raw/chunking_comparison_raw.json` and `.csv`.
+
+Note: Semantic chunking embeds during chunking itself and is noticeably
+slower to build than the other two techniques.
+
+### Recompute the summary table
+
+```powershell
+python summarize_chunking_comparison.py
+```
+Reads the saved raw results and computes the final comparison table
+(chunks, avg chunk length, top-1 cosine, mean@k cosine, recall@k, mean
+latency) per technique. See `reports/hw03/METRICS.md` for the results
+and written analysis, including a specific confidently-scored retrieval
+that missed its expected source document.
+
+## HW3 Verification
+
+```powershell
+python verify_hw03.py
+```
+Confirms required files exist, actually starts the FastAPI app and
+confirms both the home page responds and unauthenticated `/dashboard`
+access is correctly blocked, and recomputes SHA-256 hashes for every
+corpus file to confirm they still match `CORPUS_MANIFEST.json`. Writes
+to `reports/hw03/verification.json`.
