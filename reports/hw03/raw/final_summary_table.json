@@ -1,0 +1,29 @@
+{
+  "Semantic": {
+    "num_chunks": 109,
+    "avg_chunk_length_chars": 2055.2,
+    "top1_cosine_mean": 0.6277,
+    "mean_at_k_cosine": 0.5928,
+    "recall_at_k": 0.8,
+    "recall_at_k_hits": "4/5",
+    "mean_retrieval_latency_ms": 14.69
+  },
+  "SentenceWindow": {
+    "num_chunks": 2020,
+    "avg_chunk_length_chars": 110.9,
+    "top1_cosine_mean": 0.6987,
+    "mean_at_k_cosine": 0.6339,
+    "recall_at_k": 1,
+    "recall_at_k_hits": "5/5",
+    "mean_retrieval_latency_ms": 55.73
+  },
+  "Token": {
+    "num_chunks": 254,
+    "avg_chunk_length_chars": 952.8,
+    "top1_cosine_mean": 0.7156,
+    "mean_at_k_cosine": 0.6684,
+    "recall_at_k": 1,
+    "recall_at_k_hits": "5/5",
+    "mean_retrieval_latency_ms": 18.51
+  }
+}
