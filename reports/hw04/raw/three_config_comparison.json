@@ -1,0 +1,624 @@
+[
+  {
+    "qid": "q1",
+    "config": "A",
+    "question": "In a USPL Twenty20 cricket match, how long is each session (innings), and how is that time calculated?",
+    "answer": "In a standard Twenty20 (T20) cricket match, each **session (innings)** is structured as follows:\n\n### **Duration of Each Session (Innings):**\n- **Maximum Overs:** Each team bats for **20 overs** (120 balls).\n- **Typical Time:** A single innings typically lasts **1 hour to 1.5 hours**, depending on the pace of play, fielding strategies, and interruptions (e.g., weather, delays).\n\n### **How Time is Calculated:**\n1. **Overs and Balls:**  \n   - Each over consists of 6 legal deliveries.  \n   - The total number of balls bowled in an innings is **120** (20 overs × 6 balls).  \n\n2. **Time per Over:**  \n   - Bowling an over takes approximately **1 minute** (including the bowler’s run-up, delivery, and recovery).  \n   - However, the actual time can vary based on the bowler’s speed and the batsmen’s scoring rate.  \n\n3. **Breaks Between Overs:**  \n   - After each over, there is a **short break** (typically **10–30 seconds**) for the bowler to change ends and the fielding team to adjust.  \n   - There are **19 breaks** between 20 overs, adding **~1–2 minutes** to the total time.  \n\n4. **Power Plays (Mandatory Periods):**  \n   - The first **6 overs** (Power Play 1) and the next **6 overs** (Power Play 2) require specific fielding restrictions, which may influence the tempo of the innings but do not directly affect the time calculation.  \n\n5. **Total Innings Time:**  \n   - **Minimum Time:** ~20 minutes (if overs are bowled at maximum speed with no breaks).  \n   - **Average Time:** ~1 hour to 1.5 hours (including breaks and natural pauses).  \n\n### **Total Match Duration:**\n- A full T20 match (both innings) typically lasts **3–3.5 hours**, with breaks between innings (e.g., 10–15 minutes) and additional time for fielding changes and administrative tasks.  \n\n### **Key Notes:**\n- **No Strict Formula:** The time is not strictly calculated by the number of overs but depends on the game’s flow, bowler’s pace, and interruptions.  \n- **League-Specific Rules:** Some leagues (e.g., with time limits) may impose restrictions, but this is not standard in most T20 formats.  \n\nIn summary, each session (innings) in a T20 match is **20 overs**, and the time is influenced by the pace of play, breaks, and fielding strategies, typically lasting **1–1.5 hours**.",
+    "context_chunk_ids": [],
+    "dropped": [],
+    "context_chars": 0,
+    "input_tokens": 36,
+    "output_tokens": 3187,
+    "latency_s": 89.18,
+    "correct_retrieval": null,
+    "correct_answer": false,
+    "grounded": null,
+    "refused": false,
+    "refused_when_needed": null,
+    "false_refusal": false,
+    "cites_source": false,
+    "format_ok": null,
+    "context_sources": [],
+    "messages": [
+      {
+        "role": "user",
+        "content": "In a USPL Twenty20 cricket match, how long is each session (innings), and how is that time calculated?"
+      }
+    ]
+  },
+  {
+    "qid": "q1",
+    "config": "B",
+    "question": "In a USPL Twenty20 cricket match, how long is each session (innings), and how is that time calculated?",
+    "answer": "In a USPL Twenty20 cricket match, each session (innings) lasts **85 minutes**. This time is calculated by allocating **4.25 minutes per over** for the 20 overs in an innings (20 × 4.25 = 85 minutes). The calculation ensures consistent timing across both sessions, with no extension of play beyond the scheduled hours unless specified by the league or umpires.",
+    "context_chunk_ids": [
+      "cricket_uspl_t20_rules::0029",
+      "cricket_uspl_t20_rules::0039",
+      "cricket_uspl_t20_rules::0046"
+    ],
+    "dropped": [],
+    "context_chars": 1486,
+    "input_tokens": 461,
+    "output_tokens": 444,
+    "latency_s": 10.68,
+    "correct_retrieval": true,
+    "correct_answer": true,
+    "grounded": true,
+    "refused": false,
+    "refused_when_needed": null,
+    "false_refusal": false,
+    "cites_source": false,
+    "format_ok": null,
+    "context_sources": [
+      "cricket_uspl_t20_rules.txt"
+    ],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful assistant. Answer the question using the context provided."
+      },
+      {
+        "role": "user",
+        "content": "Context:\nbowled short.\n12) Umpiring Fee for a Twenty20 Match has been fixed at $__ per umpire. USPL covers the\ncost.\n4 Hours of Play\n\n1) Unless otherwise modified by the league or by the umpires on the field, the duration/hours of play\nshall be as follows;\n\nEvent Timeline\nCoin Toss 10 minutes prior to scheduled game time.\nFirst Session 85 Minutes (4.25 minutes per over)\nInnings Break 15 Minutes\nSecond Session 85 Minutes (4.25 minutes per over)\n\nTable 1.0\n\n2) Both the Captains should have the list of\n\nof the team batting\n8 USPL league Rules Twenty20 – USPL Rules Committee\nLast Updated: 01/30/2022\n\nsecond will be limited to the same number of overs as the team batting first (except when the team\nbatting was guilty of wasting time). Also, the hours of play shall not be extended to complete the number\nof overs. Penalty as in Rule 5.3 is also applicable in such cases.\n3) If the team batting first is all out and the last wicket falls at or after the scheduled time for the interval,\nthe innings of\n\nthe overs shall\n9 USPL league Rules Twenty20 – USPL Rules Committee\nLast Updated: 01/30/2022\n\nbe reduced at the rate of 4.25 minutes per over for the time lost. If the team batting second does not\nget a minimum of 5 overs, the match shall be treated as “No Result”\n8) The team batting second shall not bat for a greater number of overs than the team batting first, unless\nthe latter has been all out in less than the agreed number of overs as in 4.2 (5).\n9) Fractions are to be ignored in all\n\nQuestion: In a USPL Twenty20 cricket match, how long is each session (innings), and how is that time calculated?\nAnswer:"
+      }
+    ]
+  },
+  {
+    "qid": "q1",
+    "config": "C",
+    "question": "In a USPL Twenty20 cricket match, how long is each session (innings), and how is that time calculated?",
+    "answer": "In a USPL Twenty20 cricket match, each session (innings) is **85 minutes** long, calculated at **4.25 minutes per over** [1]. This means each session consists of 20 overs (85 ÷ 4.25 = 20). The time calculation is standardized across both sessions, with no extension beyond this duration unless modified by the league or umpires [1].",
+    "context_chunk_ids": [
+      "cricket_uspl_t20_rules::0029",
+      "cricket_uspl_t20_rules::0039",
+      "cricket_uspl_t20_rules::0046"
+    ],
+    "dropped": [],
+    "context_chars": 1486,
+    "input_tokens": 682,
+    "output_tokens": 426,
+    "latency_s": 10.75,
+    "correct_retrieval": true,
+    "correct_answer": true,
+    "grounded": true,
+    "refused": false,
+    "refused_when_needed": null,
+    "false_refusal": false,
+    "cites_source": true,
+    "format_ok": true,
+    "context_sources": [
+      "cricket_uspl_t20_rules.txt"
+    ],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You answer questions about community sports league rules using ONLY the numbered sources in the context.\nRules:\n1. Use only facts stated in the sources. Do not use outside knowledge.\n2. Cite the source number in square brackets, like [1], after each fact you use.\n3. If the sources do not contain enough information to answer, reply with exactly: I cannot answer this question from the provided documents.\n4. If sources disagree, state each value and cite each source; say which file each comes from.\n5. If the question is ambiguous (for example it does not say which sport), say what is ambiguous and answer only for the interpretations the sources support, citing them. Do not guess."
+      },
+      {
+        "role": "user",
+        "content": "Sources:\n[1] (source file: cricket_uspl_t20_rules.txt, chunk: cricket_uspl_t20_rules::0029)\nbowled short.\n12) Umpiring Fee for a Twenty20 Match has been fixed at $__ per umpire. USPL covers the\ncost.\n4 Hours of Play\n\n1) Unless otherwise modified by the league or by the umpires on the field, the duration/hours of play\nshall be as follows;\n\nEvent Timeline\nCoin Toss 10 minutes prior to scheduled game time.\nFirst Session 85 Minutes (4.25 minutes per over)\nInnings Break 15 Minutes\nSecond Session 85 Minutes (4.25 minutes per over)\n\nTable 1.0\n\n2) Both the Captains should have the list of\n\n[2] (source file: cricket_uspl_t20_rules.txt, chunk: cricket_uspl_t20_rules::0039)\nof the team batting\n8 USPL league Rules Twenty20 – USPL Rules Committee\nLast Updated: 01/30/2022\n\nsecond will be limited to the same number of overs as the team batting first (except when the team\nbatting was guilty of wasting time). Also, the hours of play shall not be extended to complete the number\nof overs. Penalty as in Rule 5.3 is also applicable in such cases.\n3) If the team batting first is all out and the last wicket falls at or after the scheduled time for the interval,\nthe innings of\n\n[3] (source file: cricket_uspl_t20_rules.txt, chunk: cricket_uspl_t20_rules::0046)\nthe overs shall\n9 USPL league Rules Twenty20 – USPL Rules Committee\nLast Updated: 01/30/2022\n\nbe reduced at the rate of 4.25 minutes per over for the time lost. If the team batting second does not\nget a minimum of 5 overs, the match shall be treated as “No Result”\n8) The team batting second shall not bat for a greater number of overs than the team batting first, unless\nthe latter has been all out in less than the agreed number of overs as in 4.2 (5).\n9) Fractions are to be ignored in all\n\nQuestion: In a USPL Twenty20 cricket match, how long is each session (innings), and how is that time calculated?\nAnswer:"
+      }
+    ]
+  },
+  {
+    "qid": "q2",
+    "config": "A",
+    "question": "What is the maximum roster size for adult volleyball, and what is the time limit for a match?",
+    "answer": "In adult volleyball, the standard rules are governed by the **FIVB (International Volleyball Federation)** and **NCAA (National Collegiate Athletic Association)**, with slight variations depending on the league. Here's the breakdown:\n\n### **Maximum Roster Size**\n- **Standard Roster**: Teams typically field **6 players** on the court at a time.\n- **Maximum Roster**: The **maximum number of players** a team can have on its roster is **12**. This includes the 6 players on the court and additional players who may rotate in during the match (e.g., in college or professional leagues).\n\n### **Match Time Limit**\n- **No Set Time Limit**: Volleyball matches do **not** have a fixed time limit. Instead, they are structured around **sets** and **points**:\n  - **Best-of-five sets**: The first team to win **3 sets** wins the match.\n  - **Set Scoring**: Each set is played to **25 points** (with a **2-point lead** required to win). If tied at 24-24, play continues until one team leads by 2 points.\n  - **Fifth Set**: If the match reaches a fifth set, it is played to **15 points** (again requiring a 2-point lead).\n\n### **Exceptions**\n- **Tournament Variations**: Some leagues or tournaments may impose **time limits** for the entire match (e.g., 90 minutes) or **set time limits** (e.g., 25 minutes per set), but these are **not standard** in official FIVB or NCAA rules.\n\n### **Summary**\n- **Roster Size**: Up to **12 players** (6 on the court, 6 substitutes).\n- **Match Time**: No set time limit; matches are determined by **sets and points** (best-of-five format). \n\nAlways check specific league rules for variations, as some organizations may adjust these parameters.",
+    "context_chunk_ids": [],
+    "dropped": [],
+    "context_chars": 0,
+    "input_tokens": 30,
+    "output_tokens": 1178,
+    "latency_s": 31.08,
+    "correct_retrieval": null,
+    "correct_answer": false,
+    "grounded": null,
+    "refused": false,
+    "refused_when_needed": null,
+    "false_refusal": false,
+    "cites_source": false,
+    "format_ok": null,
+    "context_sources": [],
+    "messages": [
+      {
+        "role": "user",
+        "content": "What is the maximum roster size for adult volleyball, and what is the time limit for a match?"
+      }
+    ]
+  },
+  {
+    "qid": "q2",
+    "config": "B",
+    "question": "What is the maximum roster size for adult volleyball, and what is the time limit for a match?",
+    "answer": "The maximum roster size for adult volleyball is **12 players** (as specified under the \"Volleyball\" entry). The time limit for a match is **1 hour**, which includes an optional 5-minute warm-up period agreed upon by both teams.",
+    "context_chunk_ids": [
+      "general_douglas_county_all_sports_rules::0006",
+      "volleyball_fort_collins_manual::0019",
+      "volleyball_fort_collins_manual::0018"
+    ],
+    "dropped": [],
+    "context_chars": 1487,
+    "input_tokens": 461,
+    "output_tokens": 332,
+    "latency_s": 8.25,
+    "correct_retrieval": true,
+    "correct_answer": true,
+    "grounded": true,
+    "refused": false,
+    "refused_when_needed": null,
+    "false_refusal": false,
+    "cites_source": false,
+    "format_ok": null,
+    "context_sources": [
+      "general_douglas_county_all_sports_rules.txt",
+      "volleyball_fort_collins_manual.txt"
+    ],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful assistant. Answer the question using the context provided."
+      },
+      {
+        "role": "user",
+        "content": "Context:\nfor the following per sport:\n Flag Football – Minimum 6, Maximum 15\n Soccer – Minimum 9, Maximum 20\n Softball – Minimum 10, Maximum 20\n Volleyball – Minimum 6, Maximum 12\n\n6. Players are not allowed to change team rosters once they have played in 1 game.\n7. PENALTY: Player becomes ineligible to participate on any team during that season.\n\n8. Players must have played in a certain amount of games in order to be eligible for post -season play.\nNumber of games played are as follows:\n For 18\n\nno cap, or the one (1) hour time limit.\nFor the third game, a coin toss will determine serve or receive and side. If a game is tied\nwhen time expires, the next point will decide the winner.\n\n4. Number of Players: For Coed leagues, a maximum of 3 males for 6's and 2 for 4's may\nparticipate on the court, if a full team is present. Teams must start with a minimum of 4\nlegal players for 6's and 3 legal players for 4's.\n\n5. Forfeits: Teams that do not have the legal minimum number of players after\n\nwinner may\nserve/receive, or take the choice of the court for the start of play.\n\n2. Time Limit: There will be a one (1) hour time limit for the match. Included in the one\n(1) hour time limit will be an optional five (5) minute warm-up period. Both teams\nmust agree if a shorter warm-up period is decided.\n\n3. Scoring and Results of the Match: Each match will consist of three (3) games to twenty-\nfive (25) points, winning by two (2) points with no cap, or the one (1) hour time limit.\nFor the\n\nQuestion: What is the maximum roster size for adult volleyball, and what is the time limit for a match?\nAnswer:"
+      }
+    ]
+  },
+  {
+    "qid": "q2",
+    "config": "C",
+    "question": "What is the maximum roster size for adult volleyball, and what is the time limit for a match?",
+    "answer": "The maximum roster size for adult volleyball is 12 players [1]. The time limit for a match is one (1) hour, which includes an optional five (5) minute warm-up period [2].",
+    "context_chunk_ids": [
+      "general_douglas_county_all_sports_rules::0006",
+      "volleyball_fort_collins_manual::0019",
+      "volleyball_fort_collins_manual::0018"
+    ],
+    "dropped": [],
+    "context_chars": 1487,
+    "input_tokens": 684,
+    "output_tokens": 710,
+    "latency_s": 17.39,
+    "correct_retrieval": true,
+    "correct_answer": true,
+    "grounded": true,
+    "refused": false,
+    "refused_when_needed": null,
+    "false_refusal": false,
+    "cites_source": true,
+    "format_ok": true,
+    "context_sources": [
+      "general_douglas_county_all_sports_rules.txt",
+      "volleyball_fort_collins_manual.txt"
+    ],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You answer questions about community sports league rules using ONLY the numbered sources in the context.\nRules:\n1. Use only facts stated in the sources. Do not use outside knowledge.\n2. Cite the source number in square brackets, like [1], after each fact you use.\n3. If the sources do not contain enough information to answer, reply with exactly: I cannot answer this question from the provided documents.\n4. If sources disagree, state each value and cite each source; say which file each comes from.\n5. If the question is ambiguous (for example it does not say which sport), say what is ambiguous and answer only for the interpretations the sources support, citing them. Do not guess."
+      },
+      {
+        "role": "user",
+        "content": "Sources:\n[1] (source file: general_douglas_county_all_sports_rules.txt, chunk: general_douglas_county_all_sports_rules::0006)\nfor the following per sport:\n Flag Football – Minimum 6, Maximum 15\n Soccer – Minimum 9, Maximum 20\n Softball – Minimum 10, Maximum 20\n Volleyball – Minimum 6, Maximum 12\n\n6. Players are not allowed to change team rosters once they have played in 1 game.\n7. PENALTY: Player becomes ineligible to participate on any team during that season.\n\n8. Players must have played in a certain amount of games in order to be eligible for post -season play.\nNumber of games played are as follows:\n For 18\n\n[2] (source file: volleyball_fort_collins_manual.txt, chunk: volleyball_fort_collins_manual::0019)\nno cap, or the one (1) hour time limit.\nFor the third game, a coin toss will determine serve or receive and side. If a game is tied\nwhen time expires, the next point will decide the winner.\n\n4. Number of Players: For Coed leagues, a maximum of 3 males for 6's and 2 for 4's may\nparticipate on the court, if a full team is present. Teams must start with a minimum of 4\nlegal players for 6's and 3 legal players for 4's.\n\n5. Forfeits: Teams that do not have the legal minimum number of players after\n\n[3] (source file: volleyball_fort_collins_manual.txt, chunk: volleyball_fort_collins_manual::0018)\nwinner may\nserve/receive, or take the choice of the court for the start of play.\n\n2. Time Limit: There will be a one (1) hour time limit for the match. Included in the one\n(1) hour time limit will be an optional five (5) minute warm-up period. Both teams\nmust agree if a shorter warm-up period is decided.\n\n3. Scoring and Results of the Match: Each match will consist of three (3) games to twenty-\nfive (25) points, winning by two (2) points with no cap, or the one (1) hour time limit.\nFor the\n\nQuestion: What is the maximum roster size for adult volleyball, and what is the time limit for a match?\nAnswer:"
+      }
+    ]
+  },
+  {
+    "qid": "q3",
+    "config": "A",
+    "question": "How many players per side are used in AYSO soccer for the 8U (Under-8) division?",
+    "answer": "In the AYSO (American Youth Soccer Organization) soccer program, the **8U (Under-8)** division typically uses **7 players per side**. This is part of AYSO's structured approach to youth soccer, which adjusts the number of players based on age to ensure appropriate skill development and safety. \n\nHere's a quick breakdown of AYSO's standard player numbers by age group:\n- **U6 (Under 6):** 5 players per side  \n- **U8 (Under 8):** 7 players per side  \n- **U10 (Under 10):** 11 players per side  \n- **U12 and older:** 11 players per side  \n\nThus, for the **8U division**, the standard number of players per side is **7**. \n\n**Answer:** 7 players per side.",
+    "context_chunk_ids": [],
+    "dropped": [],
+    "context_chars": 0,
+    "input_tokens": 34,
+    "output_tokens": 769,
+    "latency_s": 18.21,
+    "correct_retrieval": null,
+    "correct_answer": false,
+    "grounded": null,
+    "refused": false,
+    "refused_when_needed": null,
+    "false_refusal": false,
+    "cites_source": false,
+    "format_ok": null,
+    "context_sources": [],
+    "messages": [
+      {
+        "role": "user",
+        "content": "How many players per side are used in AYSO soccer for the 8U (Under-8) division?"
+      }
+    ]
+  },
+  {
+    "qid": "q3",
+    "config": "B",
+    "question": "How many players per side are used in AYSO soccer for the 8U (Under-8) division?",
+    "answer": "The AYSO soccer 8U (Under-8) division uses **4 players per side**. This is specified in the context under the \"8U 4‐a‐side (No goalkeepers)\" entry, which indicates a 4-a-side format with no goalkeepers allowed. \n\n**Answer:** 4 players per side.",
+    "context_chunk_ids": [
+      "soccer_ayso_national_rules::0036",
+      "soccer_ayso_basic_rules::0024",
+      "soccer_ayso_national_rules::0025"
+    ],
+    "dropped": [],
+    "context_chars": 1485,
+    "input_tokens": 536,
+    "output_tokens": 463,
+    "latency_s": 11.45,
+    "correct_retrieval": false,
+    "correct_answer": false,
+    "grounded": true,
+    "refused": false,
+    "refused_when_needed": null,
+    "false_refusal": false,
+    "cites_source": false,
+    "format_ok": null,
+    "context_sources": [
+      "soccer_ayso_basic_rules.txt",
+      "soccer_ayso_national_rules.txt"
+    ],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful assistant. Answer the question using the context provided."
+      },
+      {
+        "role": "user",
+        "content": "Context:\nno. of team\nmembers\n18U 11‐a‐side 18 12\n16U 11‐a‐side 18 12\n14U 11‐a‐side 15 12\n12U 9‐a‐side 12 10\n10U 7‐a‐side 10 8\n8U 4‐a‐side\n(No goalkeepers) 6 5\n6U 4‐a‐side\n(No goalkeepers) 6 5\nAYSO\nSchoolyard\nSoccer\n4‐a‐side\n(No goalkeepers) 6 5\nAYSO National Rules & Regulations\nREGISTRATION\n\n8 AYSO National Rules & Regulations 06/2018\n\nIII. REGISTRATION\nA. The standard age divisions for the Boys and Girls programs are as follows:\nAge Division\nAges 3, 4 or 5 by the date of program commencement AYSO\n\nnumber of players on the\nfield at the time the goal was scored. This is true only if discovered by the referee\nbefore restarting play after the goal.\nSubstitution\nIn AYSO it is mandatory that all players who are present at the match play a\nminimum of one half of the game (the “Three Quarter Rule” is strongly encouraged\nwhich means no player on a team should play four ‘quarters’ in a given game, until\nall players on the team have played three ‘quarters’). Exceptions include: players\narriving\n\nof the Game as\nm o d i f i e d b y A Y S O ( w i t h p e r m i s s i o n ) , t h e AYSO National Rules & Regulations and the age\nappropriate AYSO Coach Manual.\n2. Small ‐sided games are permitted for all divisions.\nI. HEADING THE BALL\n1. Consistent with the US Soccer mandates on heading the ball, heading is banned for all division\nplayers 11U (12U and below for programs without single age divisions) and below in both\npractices and matches.\nHeading for players in 14U is limited to a maximum of\n\nQuestion: How many players per side are used in AYSO soccer for the 8U (Under-8) division?\nAnswer:"
+      }
+    ]
+  },
+  {
+    "qid": "q3",
+    "config": "C",
+    "question": "How many players per side are used in AYSO soccer for the 8U (Under-8) division?",
+    "answer": "The AYSO soccer 8U (Under-8) division uses **4 players per side** [1]. This is specified in the \"no. of team members\" column under the 8U entry, which lists \"4‐a‐side (No goalkeepers)\" [1]. The numbers \"6 5\" in the same row likely refer to total players and substitutes, but the question specifically asks about players per side.",
+    "context_chunk_ids": [
+      "soccer_ayso_national_rules::0036",
+      "soccer_ayso_basic_rules::0024",
+      "soccer_ayso_national_rules::0025"
+    ],
+    "dropped": [],
+    "context_chars": 1485,
+    "input_tokens": 755,
+    "output_tokens": 561,
+    "latency_s": 13.44,
+    "correct_retrieval": false,
+    "correct_answer": false,
+    "grounded": true,
+    "refused": false,
+    "refused_when_needed": null,
+    "false_refusal": false,
+    "cites_source": true,
+    "format_ok": true,
+    "context_sources": [
+      "soccer_ayso_basic_rules.txt",
+      "soccer_ayso_national_rules.txt"
+    ],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You answer questions about community sports league rules using ONLY the numbered sources in the context.\nRules:\n1. Use only facts stated in the sources. Do not use outside knowledge.\n2. Cite the source number in square brackets, like [1], after each fact you use.\n3. If the sources do not contain enough information to answer, reply with exactly: I cannot answer this question from the provided documents.\n4. If sources disagree, state each value and cite each source; say which file each comes from.\n5. If the question is ambiguous (for example it does not say which sport), say what is ambiguous and answer only for the interpretations the sources support, citing them. Do not guess."
+      },
+      {
+        "role": "user",
+        "content": "Sources:\n[1] (source file: soccer_ayso_national_rules.txt, chunk: soccer_ayso_national_rules::0036)\nno. of team\nmembers\n18U 11‐a‐side 18 12\n16U 11‐a‐side 18 12\n14U 11‐a‐side 15 12\n12U 9‐a‐side 12 10\n10U 7‐a‐side 10 8\n8U 4‐a‐side\n(No goalkeepers) 6 5\n6U 4‐a‐side\n(No goalkeepers) 6 5\nAYSO\nSchoolyard\nSoccer\n4‐a‐side\n(No goalkeepers) 6 5\nAYSO National Rules & Regulations\nREGISTRATION\n\n8 AYSO National Rules & Regulations 06/2018\n\nIII. REGISTRATION\nA. The standard age divisions for the Boys and Girls programs are as follows:\nAge Division\nAges 3, 4 or 5 by the date of program commencement AYSO\n\n[2] (source file: soccer_ayso_basic_rules.txt, chunk: soccer_ayso_basic_rules::0024)\nnumber of players on the\nfield at the time the goal was scored. This is true only if discovered by the referee\nbefore restarting play after the goal.\nSubstitution\nIn AYSO it is mandatory that all players who are present at the match play a\nminimum of one half of the game (the “Three Quarter Rule” is strongly encouraged\nwhich means no player on a team should play four ‘quarters’ in a given game, until\nall players on the team have played three ‘quarters’). Exceptions include: players\narriving\n\n[3] (source file: soccer_ayso_national_rules.txt, chunk: soccer_ayso_national_rules::0025)\nof the Game as\nm o d i f i e d b y A Y S O ( w i t h p e r m i s s i o n ) , t h e AYSO National Rules & Regulations and the age\nappropriate AYSO Coach Manual.\n2. Small ‐sided games are permitted for all divisions.\nI. HEADING THE BALL\n1. Consistent with the US Soccer mandates on heading the ball, heading is banned for all division\nplayers 11U (12U and below for programs without single age divisions) and below in both\npractices and matches.\nHeading for players in 14U is limited to a maximum of\n\nQuestion: How many players per side are used in AYSO soccer for the 8U (Under-8) division?\nAnswer:"
+      }
+    ]
+  },
+  {
+    "qid": "q4",
+    "config": "A",
+    "question": "What is the penalty for a foul?",
+    "answer": "The penalty for a foul depends on the sport, as different sports have distinct rules for fouls and their consequences. Here are examples for some common sports:\n\n### **Soccer (Football)**\n- **Foul**: Contact with an opponent (e.g., tripping, pushing, or handling the ball).\n- **Penalty**: \n  - A **free kick** is awarded to the opposing team.\n  - If the foul occurs in the **penalty area** and involves the **hands** (e.g., handball), a **penalty kick** is awarded.\n\n### **Basketball**\n- **Foul**: Contact with an opponent (e.g., pushing, blocking, or holding).\n- **Penalty**:\n  - **Free throws** are awarded based on the type of foul (e.g., personal foul, shooting foul).\n  - A player may be **disqualified** (e.g., 5 fouls in a game).\n\n### **American Football**\n- **Foul**: Illegal actions (e.g., holding, personal fouls, or unsportsmanlike conduct).\n- **Penalty**:\n  - A **10-yard penalty** or **15-yard penalty** is enforced, and the opposing team gets a first down.\n\n### **Hockey**\n- **Foul**: Contact (e.g., checking, slashing, or tripping).\n- **Penalty**:\n  - **Minor penalty**: 2 minutes in the penalty box.\n  - **Major penalty**: 5 minutes in the penalty box.\n  - **Double-minor penalty**: 4 minutes in the penalty box (e.g., for fighting).\n\n### **Other Sports**\n- **Baseball**: A **strike** or **out** may result from a foul ball (e.g., a foul tip is a strike, while a foul ball is not counted).\n- **Rugby**: Penalties include **free kicks** or **scrums** depending on the infraction.\n\n### **General Note**\nIf you’re referring to a specific sport, please clarify so I can provide a more accurate answer!",
+    "context_chunk_ids": [],
+    "dropped": [],
+    "context_chars": 0,
+    "input_tokens": 18,
+    "output_tokens": 766,
+    "latency_s": 17.67,
+    "correct_retrieval": null,
+    "correct_answer": true,
+    "grounded": null,
+    "refused": false,
+    "refused_when_needed": null,
+    "false_refusal": false,
+    "cites_source": false,
+    "format_ok": null,
+    "context_sources": [],
+    "messages": [
+      {
+        "role": "user",
+        "content": "What is the penalty for a foul?"
+      }
+    ]
+  },
+  {
+    "qid": "q4",
+    "config": "B",
+    "question": "What is the penalty for a foul?",
+    "answer": "The penalty for a **serious foul play** (deliberate violence against an opponent while the ball is in play) is a **sending-off offense**, which results in a **red card** (dismissal from the game). For less severe fouls, the referee may stop play, award a free kick, or issue a yellow card for misconduct. Temporary expulsions (\"sit outs\") are explicitly forbidden by FIFA.",
+    "context_chunk_ids": [
+      "soccer_ayso_basic_rules::0116",
+      "soccer_ayso_basic_rules::0016",
+      "soccer_ayso_basic_rules::0114"
+    ],
+    "dropped": [],
+    "context_chars": 1487,
+    "input_tokens": 374,
+    "output_tokens": 399,
+    "latency_s": 10.02,
+    "correct_retrieval": null,
+    "correct_answer": false,
+    "grounded": true,
+    "refused": false,
+    "refused_when_needed": null,
+    "false_refusal": false,
+    "cites_source": false,
+    "format_ok": null,
+    "context_sources": [
+      "soccer_ayso_basic_rules.txt"
+    ],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful assistant. Answer the question using the context provided."
+      },
+      {
+        "role": "user",
+        "content": "Context:\nGiving the coach this responsibility, which is where it belongs, is\nnot a violation of the Laws.\nFIFA has expressly forbidden mandatory temporary expulsions, sometimes called\n“sit outs”, by a referee for cautioned players to regain their composure or to ‘cool off.’\nSerious Foul Play\nIt is serious foul play, a sending-off offense, when a player uses deliberate violence\nwhen challenging for the ball against an opponent on the field of play while the ball is\nin play.\nViolent Conduct\nIt is violent\n\nwith a minimum of interruptions. Referees have considerable\nauthority and flexibility when determining whether or not to stop play. Violation of the\nletter of the Law may be overlooked if the referee considers it to be a trifling or\ndoubtful offense. The referee may also elect not to stop play for a foul when it would\nbe more of an advantage to the team that was fouled to continue playing. It is easy\nto fall into the trap of becoming overly concerned with the details of various rules and\n\nor her own penalty area.\nTemporary Expulsions\nIf a player cannot control his or her emotions and needs a ‘time -out’ to regain\ncontrol, either the player must recognize this and request permission to leave the\nfield of play or the coach should convince the player to do so. Players have the right\nto ask the referee for permission to leave the field of play for a variety of reasons,\nand the referee should grant this permission. Coaches also have the right to ask\nLaw 12: Fouls And Misconduct\n\n30\n\nQuestion: What is the penalty for a foul?\nAnswer:"
+      }
+    ]
+  },
+  {
+    "qid": "q4",
+    "config": "C",
+    "question": "What is the penalty for a foul?",
+    "answer": "I cannot answer this question from the provided documents. The sources mention that serious foul play is a sending-off offense [1], but they do not specify the penalty for all types of fouls. Additionally, the rules about referees' discretion in handling fouls are not tied to specific penalties [2]. The documents lack explicit details on penalties for general fouls.",
+    "context_chunk_ids": [
+      "soccer_ayso_basic_rules::0116",
+      "soccer_ayso_basic_rules::0016",
+      "soccer_ayso_basic_rules::0114"
+    ],
+    "dropped": [],
+    "context_chars": 1487,
+    "input_tokens": 589,
+    "output_tokens": 708,
+    "latency_s": 17.74,
+    "correct_retrieval": null,
+    "correct_answer": false,
+    "grounded": true,
+    "refused": true,
+    "refused_when_needed": null,
+    "false_refusal": true,
+    "cites_source": true,
+    "format_ok": true,
+    "context_sources": [
+      "soccer_ayso_basic_rules.txt"
+    ],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You answer questions about community sports league rules using ONLY the numbered sources in the context.\nRules:\n1. Use only facts stated in the sources. Do not use outside knowledge.\n2. Cite the source number in square brackets, like [1], after each fact you use.\n3. If the sources do not contain enough information to answer, reply with exactly: I cannot answer this question from the provided documents.\n4. If sources disagree, state each value and cite each source; say which file each comes from.\n5. If the question is ambiguous (for example it does not say which sport), say what is ambiguous and answer only for the interpretations the sources support, citing them. Do not guess."
+      },
+      {
+        "role": "user",
+        "content": "Sources:\n[1] (source file: soccer_ayso_basic_rules.txt, chunk: soccer_ayso_basic_rules::0116)\nGiving the coach this responsibility, which is where it belongs, is\nnot a violation of the Laws.\nFIFA has expressly forbidden mandatory temporary expulsions, sometimes called\n“sit outs”, by a referee for cautioned players to regain their composure or to ‘cool off.’\nSerious Foul Play\nIt is serious foul play, a sending-off offense, when a player uses deliberate violence\nwhen challenging for the ball against an opponent on the field of play while the ball is\nin play.\nViolent Conduct\nIt is violent\n\n[2] (source file: soccer_ayso_basic_rules.txt, chunk: soccer_ayso_basic_rules::0016)\nwith a minimum of interruptions. Referees have considerable\nauthority and flexibility when determining whether or not to stop play. Violation of the\nletter of the Law may be overlooked if the referee considers it to be a trifling or\ndoubtful offense. The referee may also elect not to stop play for a foul when it would\nbe more of an advantage to the team that was fouled to continue playing. It is easy\nto fall into the trap of becoming overly concerned with the details of various rules and\n\n[3] (source file: soccer_ayso_basic_rules.txt, chunk: soccer_ayso_basic_rules::0114)\nor her own penalty area.\nTemporary Expulsions\nIf a player cannot control his or her emotions and needs a ‘time -out’ to regain\ncontrol, either the player must recognize this and request permission to leave the\nfield of play or the coach should convince the player to do so. Players have the right\nto ask the referee for permission to leave the field of play for a variety of reasons,\nand the referee should grant this permission. Coaches also have the right to ask\nLaw 12: Fouls And Misconduct\n\n30\n\nQuestion: What is the penalty for a foul?\nAnswer:"
+      }
+    ]
+  },
+  {
+    "qid": "q5",
+    "config": "A",
+    "question": "What is the maximum number of substitutions allowed per team in a Major League Soccer (MLS) match?",
+    "answer": "In Major League Soccer (MLS), the maximum number of substitutions allowed per team in a regular match is **five**. This rule was introduced in 2019 to enhance tactical flexibility and game flow. Each team can make up to five substitutions during a single match, and there is no cap on the total number of substitutions across all teams in the league. This allows for greater strategic adaptability during games. \n\n**Answer:** The maximum number of substitutions allowed per team in an MLS match is **five**.",
+    "context_chunk_ids": [],
+    "dropped": [],
+    "context_chars": 0,
+    "input_tokens": 30,
+    "output_tokens": 782,
+    "latency_s": 17.92,
+    "correct_retrieval": null,
+    "correct_answer": false,
+    "grounded": null,
+    "refused": false,
+    "refused_when_needed": false,
+    "false_refusal": false,
+    "cites_source": false,
+    "format_ok": null,
+    "context_sources": [],
+    "messages": [
+      {
+        "role": "user",
+        "content": "What is the maximum number of substitutions allowed per team in a Major League Soccer (MLS) match?"
+      }
+    ]
+  },
+  {
+    "qid": "q5",
+    "config": "B",
+    "question": "What is the maximum number of substitutions allowed per team in a Major League Soccer (MLS) match?",
+    "answer": "The context provided does not specify the maximum number of substitutions allowed per team in a Major League Soccer (MLS) match. The information given relates to substitution rules for various sports, including soccer, but it primarily addresses team roster sizes (e.g., \"Soccer – Minimum 9, Maximum 20\") and general substitution procedures for youth leagues (e.g., 6U, 8U, 10U divisions). For MLS, which is a professional league, the standard substitution limit is typically **3 substitutions per team per match**, but this is not mentioned in the provided context. Therefore, based on the given text, the answer cannot be determined. \n\n**Answer:** The context does not specify the maximum number of substitutions allowed per team in an MLS match.",
+    "context_chunk_ids": [
+      "basketball_las_vegas_youth_rules::0045",
+      "soccer_ayso_national_rules::0009",
+      "general_douglas_county_all_sports_rules::0006"
+    ],
+    "dropped": [],
+    "context_chars": 1486,
+    "input_tokens": 440,
+    "output_tokens": 2256,
+    "latency_s": 54.33,
+    "correct_retrieval": null,
+    "correct_answer": false,
+    "grounded": false,
+    "refused": false,
+    "refused_when_needed": false,
+    "false_refusal": false,
+    "cites_source": false,
+    "format_ok": null,
+    "context_sources": [
+      "basketball_las_vegas_youth_rules.txt",
+      "general_douglas_county_all_sports_rules.txt",
+      "soccer_ayso_national_rules.txt"
+    ],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful assistant. Answer the question using the context provided."
+      },
+      {
+        "role": "user",
+        "content": "Context:\nplayed three.\nb. Any team that has more than 10 players will be allowed to substitute the eligible\nplayer(s) half way through the quarter. The substituted player(s) must check in at the\ntable one (1) minute prior to check in.\n2. STANDARD SUBSTITUTION PROCEDURES\nPlayer participation is controlled through proper substitution procedures as follows:\na. 6U, 8U, and 10U divisions can only substitute players at the start of each quarter (1st,\n2nd, 3rd and 4th). 12U division will be open substitution\n\no f e a c h t e a m m a y s u b s t i t u t e a s many team\nmembers, or none, including previously substituted team members, as long as all\neligible team members meet the minimum playing requirements.\ne. The referee shall allow for any time lost due to substitution o r other cause by\nstopping his/her watch or adding playing time. (See Article I.B .3. regarding reducing\nthe length of halves to permit proper substitution.)\n2. Substitution for injury:\na. If a player is injured, the coach may\n\nfor the following per sport:\n Flag Football – Minimum 6, Maximum 15\n Soccer – Minimum 9, Maximum 20\n Softball – Minimum 10, Maximum 20\n Volleyball – Minimum 6, Maximum 12\n\n6. Players are not allowed to change team rosters once they have played in 1 game.\n7. PENALTY: Player becomes ineligible to participate on any team during that season.\n\n8. Players must have played in a certain amount of games in order to be eligible for post -season play.\nNumber of games played are as follows:\n For 18\n\nQuestion: What is the maximum number of substitutions allowed per team in a Major League Soccer (MLS) match?\nAnswer:"
+      }
+    ]
+  },
+  {
+    "qid": "q5",
+    "config": "C",
+    "question": "What is the maximum number of substitutions allowed per team in a Major League Soccer (MLS) match?",
+    "answer": "I cannot answer this question from the provided documents. The sources do not specify substitution rules for Major League Soccer (MLS) matches. Source [2] discusses substitution rules for AYSO soccer (youth leagues), but MLS is not mentioned in any of the provided documents.",
+    "context_chunk_ids": [
+      "basketball_las_vegas_youth_rules::0045",
+      "soccer_ayso_national_rules::0009",
+      "general_douglas_county_all_sports_rules::0006"
+    ],
+    "dropped": [],
+    "context_chars": 1486,
+    "input_tokens": 669,
+    "output_tokens": 429,
+    "latency_s": 10.32,
+    "correct_retrieval": null,
+    "correct_answer": true,
+    "grounded": true,
+    "refused": true,
+    "refused_when_needed": true,
+    "false_refusal": false,
+    "cites_source": true,
+    "format_ok": true,
+    "context_sources": [
+      "basketball_las_vegas_youth_rules.txt",
+      "general_douglas_county_all_sports_rules.txt",
+      "soccer_ayso_national_rules.txt"
+    ],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You answer questions about community sports league rules using ONLY the numbered sources in the context.\nRules:\n1. Use only facts stated in the sources. Do not use outside knowledge.\n2. Cite the source number in square brackets, like [1], after each fact you use.\n3. If the sources do not contain enough information to answer, reply with exactly: I cannot answer this question from the provided documents.\n4. If sources disagree, state each value and cite each source; say which file each comes from.\n5. If the question is ambiguous (for example it does not say which sport), say what is ambiguous and answer only for the interpretations the sources support, citing them. Do not guess."
+      },
+      {
+        "role": "user",
+        "content": "Sources:\n[1] (source file: basketball_las_vegas_youth_rules.txt, chunk: basketball_las_vegas_youth_rules::0045)\nplayed three.\nb. Any team that has more than 10 players will be allowed to substitute the eligible\nplayer(s) half way through the quarter. The substituted player(s) must check in at the\ntable one (1) minute prior to check in.\n2. STANDARD SUBSTITUTION PROCEDURES\nPlayer participation is controlled through proper substitution procedures as follows:\na. 6U, 8U, and 10U divisions can only substitute players at the start of each quarter (1st,\n2nd, 3rd and 4th). 12U division will be open substitution\n\n[2] (source file: soccer_ayso_national_rules.txt, chunk: soccer_ayso_national_rules::0009)\no f e a c h t e a m m a y s u b s t i t u t e a s many team\nmembers, or none, including previously substituted team members, as long as all\neligible team members meet the minimum playing requirements.\ne. The referee shall allow for any time lost due to substitution o r other cause by\nstopping his/her watch or adding playing time. (See Article I.B .3. regarding reducing\nthe length of halves to permit proper substitution.)\n2. Substitution for injury:\na. If a player is injured, the coach may\n\n[3] (source file: general_douglas_county_all_sports_rules.txt, chunk: general_douglas_county_all_sports_rules::0006)\nfor the following per sport:\n Flag Football – Minimum 6, Maximum 15\n Soccer – Minimum 9, Maximum 20\n Softball – Minimum 10, Maximum 20\n Volleyball – Minimum 6, Maximum 12\n\n6. Players are not allowed to change team rosters once they have played in 1 game.\n7. PENALTY: Player becomes ineligible to participate on any team during that season.\n\n8. Players must have played in a certain amount of games in order to be eligible for post -season play.\nNumber of games played are as follows:\n For 18\n\nQuestion: What is the maximum number of substitutions allowed per team in a Major League Soccer (MLS) match?\nAnswer:"
+      }
+    ]
+  },
+  {
+    "qid": "q6",
+    "config": "A",
+    "question": "What is the boiling point of water at sea level?",
+    "answer": "The boiling point of water at sea level is **100 degrees Celsius (212 degrees Fahrenheit)** under standard atmospheric pressure (1 atmosphere). This is the standard reference point for the boiling point of water in scientific contexts. \n\n**Key Notes:**\n- **Atmospheric pressure** directly affects the boiling point. At higher altitudes, where atmospheric pressure is lower, water boils at a lower temperature.\n- The value **100°C** is based on the standard pressure of 1 atm (approximately 101.325 kPa), which is typical at sea level. \n\nIf you're referring to a different unit or context, feel free to clarify!",
+    "context_chunk_ids": [],
+    "dropped": [],
+    "context_chars": 0,
+    "input_tokens": 21,
+    "output_tokens": 702,
+    "latency_s": 15.91,
+    "correct_retrieval": null,
+    "correct_answer": false,
+    "grounded": null,
+    "refused": false,
+    "refused_when_needed": false,
+    "false_refusal": false,
+    "cites_source": false,
+    "format_ok": null,
+    "context_sources": [],
+    "messages": [
+      {
+        "role": "user",
+        "content": "What is the boiling point of water at sea level?"
+      }
+    ]
+  },
+  {
+    "qid": "q6",
+    "config": "B",
+    "question": "What is the boiling point of water at sea level?",
+    "answer": "The context provided does not contain any information about the boiling point of water. However, based on general scientific knowledge, the boiling point of water at sea level is **100°C (212°F)** under standard atmospheric pressure.",
+    "context_chunk_ids": [
+      "volleyball_fort_collins_manual::0015",
+      "basketball_las_vegas_youth_rules::0008",
+      "basketball_las_vegas_youth_rules::0043"
+    ],
+    "dropped": [],
+    "context_chars": 1387,
+    "input_tokens": 303,
+    "output_tokens": 274,
+    "latency_s": 7.05,
+    "correct_retrieval": null,
+    "correct_answer": false,
+    "grounded": false,
+    "refused": false,
+    "refused_when_needed": false,
+    "false_refusal": false,
+    "cites_source": false,
+    "format_ok": null,
+    "context_sources": [
+      "basketball_las_vegas_youth_rules.txt",
+      "volleyball_fort_collins_manual.txt"
+    ],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful assistant. Answer the question using the context provided."
+      },
+      {
+        "role": "user",
+        "content": "Context:\nA Level: Designed for those teams who wish to play for competitive reasons in the\nhighest level of competition offered. Players in this category should have a strong\nvolleyball background with organized playing experience. Teams employ multiple\noffensive attacks and defense strategies with consistent hitting and blocking.\nBB Level: Designed for teams who wish to play quality volleyball. Players in this\ncategory have above average volleyball skills. Team uses power volleyball skills well --\n\n8\nF. Game Clock........................................................................................................................................................................... 9\nG. Me rcy Rule ........................................................................................................................................................................ 9\nH. Coaching Box Rule\n\n19 Feet, 9\ninches\n8 Feet 10 Feet\n\nB. Number of Players and Forfeits\n1. If a team does not have at least four players on the floor ready to play at game time, the first\nperiod will be set, 7/8/10 minutes will be placed on the clock, and the clock will be started.\nGames will not start with less than four players. The late team will be penalized 1 point per\nminute up to (5) five points max.\n2. If the late team shows up within the first period, the game will commence from the time\nremaining on the\n\nQuestion: What is the boiling point of water at sea level?\nAnswer:"
+      }
+    ]
+  },
+  {
+    "qid": "q6",
+    "config": "C",
+    "question": "What is the boiling point of water at sea level?",
+    "answer": "I cannot answer this question from the provided documents.",
+    "context_chunk_ids": [],
+    "dropped": [
+      {
+        "chunk_id": "volleyball_fort_collins_manual::0015",
+        "reason": "score 0.154 < min_score 0.3"
+      },
+      {
+        "chunk_id": "basketball_las_vegas_youth_rules::0008",
+        "reason": "score 0.142 < min_score 0.3"
+      },
+      {
+        "chunk_id": "basketball_las_vegas_youth_rules::0043",
+        "reason": "score 0.135 < min_score 0.3"
+      }
+    ],
+    "context_chars": 0,
+    "input_tokens": 181,
+    "output_tokens": 136,
+    "latency_s": 3.54,
+    "correct_retrieval": null,
+    "correct_answer": true,
+    "grounded": true,
+    "refused": true,
+    "refused_when_needed": true,
+    "false_refusal": false,
+    "cites_source": false,
+    "format_ok": true,
+    "context_sources": [],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You answer questions about community sports league rules using ONLY the numbered sources in the context.\nRules:\n1. Use only facts stated in the sources. Do not use outside knowledge.\n2. Cite the source number in square brackets, like [1], after each fact you use.\n3. If the sources do not contain enough information to answer, reply with exactly: I cannot answer this question from the provided documents.\n4. If sources disagree, state each value and cite each source; say which file each comes from.\n5. If the question is ambiguous (for example it does not say which sport), say what is ambiguous and answer only for the interpretations the sources support, citing them. Do not guess."
+      },
+      {
+        "role": "user",
+        "content": "Sources:\n(No relevant sources were found.)\n\nQuestion: What is the boiling point of water at sea level?\nAnswer:"
+      }
+    ]
+  }
+]

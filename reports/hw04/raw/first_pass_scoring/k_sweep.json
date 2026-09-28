@@ -1,0 +1,1028 @@
+[
+  {
+    "qid": "q2",
+    "config": "B",
+    "question": "What is the maximum roster size for adult volleyball, and what is the time limit for a match?",
+    "answer": "The maximum roster size for adult volleyball is **12 players** (as specified in the context). However, the context does **not provide information** about the time limit for a match. Therefore, the time limit cannot be determined from the given data.",
+    "context_chunk_ids": [
+      "general_douglas_county_all_sports_rules::0006"
+    ],
+    "dropped": [],
+    "context_chars": 496,
+    "input_tokens": 193,
+    "output_tokens": 281,
+    "latency_s": 6.58,
+    "correct_retrieval": false,
+    "correct_answer": false,
+    "grounded": true,
+    "refused": false,
+    "refused_when_needed": null,
+    "false_refusal": false,
+    "cites_source": false,
+    "format_ok": null,
+    "context_sources": [
+      "general_douglas_county_all_sports_rules.txt"
+    ],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful assistant. Answer the question using the context provided."
+      },
+      {
+        "role": "user",
+        "content": "Context:\nfor the following per sport:\n Flag Football – Minimum 6, Maximum 15\n Soccer – Minimum 9, Maximum 20\n Softball – Minimum 10, Maximum 20\n Volleyball – Minimum 6, Maximum 12\n\n6. Players are not allowed to change team rosters once they have played in 1 game.\n7. PENALTY: Player becomes ineligible to participate on any team during that season.\n\n8. Players must have played in a certain amount of games in order to be eligible for post -season play.\nNumber of games played are as follows:\n For 18\n\nQuestion: What is the maximum roster size for adult volleyball, and what is the time limit for a match?\nAnswer:"
+      }
+    ],
+    "k": 1,
+    "retrieved": [
+      {
+        "source": "general_douglas_county_all_sports_rules.txt",
+        "chunk_id": "general_douglas_county_all_sports_rules::0006",
+        "score": 0.6687
+      }
+    ],
+    "irrelevant_chunks_retrieved": 0
+  },
+  {
+    "qid": "q2",
+    "config": "C",
+    "question": "What is the maximum roster size for adult volleyball, and what is the time limit for a match?",
+    "answer": "The maximum roster size for adult volleyball is 12 [1]. The sources provided do not specify a time limit for a match [1].",
+    "context_chunk_ids": [
+      "general_douglas_county_all_sports_rules::0006"
+    ],
+    "dropped": [],
+    "context_chars": 496,
+    "input_tokens": 358,
+    "output_tokens": 232,
+    "latency_s": 5.42,
+    "correct_retrieval": false,
+    "correct_answer": false,
+    "grounded": true,
+    "refused": false,
+    "refused_when_needed": null,
+    "false_refusal": false,
+    "cites_source": true,
+    "format_ok": true,
+    "context_sources": [
+      "general_douglas_county_all_sports_rules.txt"
+    ],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You answer questions about community sports league rules using ONLY the numbered sources in the context.\nRules:\n1. Use only facts stated in the sources. Do not use outside knowledge.\n2. Cite the source number in square brackets, like [1], after each fact you use.\n3. If the sources do not contain enough information to answer, reply with exactly: I cannot answer this question from the provided documents.\n4. If sources disagree, state each value and cite each source; say which file each comes from.\n5. If the question is ambiguous (for example it does not say which sport), say what is ambiguous and answer only for the interpretations the sources support, citing them. Do not guess."
+      },
+      {
+        "role": "user",
+        "content": "Sources:\n[1] (source file: general_douglas_county_all_sports_rules.txt, chunk: general_douglas_county_all_sports_rules::0006)\nfor the following per sport:\n Flag Football – Minimum 6, Maximum 15\n Soccer – Minimum 9, Maximum 20\n Softball – Minimum 10, Maximum 20\n Volleyball – Minimum 6, Maximum 12\n\n6. Players are not allowed to change team rosters once they have played in 1 game.\n7. PENALTY: Player becomes ineligible to participate on any team during that season.\n\n8. Players must have played in a certain amount of games in order to be eligible for post -season play.\nNumber of games played are as follows:\n For 18\n\nQuestion: What is the maximum roster size for adult volleyball, and what is the time limit for a match?\nAnswer:"
+      }
+    ],
+    "k": 1,
+    "retrieved": [
+      {
+        "source": "general_douglas_county_all_sports_rules.txt",
+        "chunk_id": "general_douglas_county_all_sports_rules::0006",
+        "score": 0.6687
+      }
+    ],
+    "irrelevant_chunks_retrieved": 0
+  },
+  {
+    "qid": "q2",
+    "config": "B",
+    "question": "What is the maximum roster size for adult volleyball, and what is the time limit for a match?",
+    "answer": "The maximum roster size for adult volleyball is **12 players** (as specified under the \"Volleyball\" entry). The time limit for a match is **1 hour**, which includes an optional 5-minute warm-up period.",
+    "context_chunk_ids": [
+      "general_douglas_county_all_sports_rules::0006",
+      "volleyball_fort_collins_manual::0019",
+      "volleyball_fort_collins_manual::0018"
+    ],
+    "dropped": [],
+    "context_chars": 1487,
+    "input_tokens": 461,
+    "output_tokens": 327,
+    "latency_s": 7.52,
+    "correct_retrieval": true,
+    "correct_answer": true,
+    "grounded": true,
+    "refused": false,
+    "refused_when_needed": null,
+    "false_refusal": false,
+    "cites_source": false,
+    "format_ok": null,
+    "context_sources": [
+      "general_douglas_county_all_sports_rules.txt",
+      "volleyball_fort_collins_manual.txt"
+    ],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful assistant. Answer the question using the context provided."
+      },
+      {
+        "role": "user",
+        "content": "Context:\nfor the following per sport:\n Flag Football – Minimum 6, Maximum 15\n Soccer – Minimum 9, Maximum 20\n Softball – Minimum 10, Maximum 20\n Volleyball – Minimum 6, Maximum 12\n\n6. Players are not allowed to change team rosters once they have played in 1 game.\n7. PENALTY: Player becomes ineligible to participate on any team during that season.\n\n8. Players must have played in a certain amount of games in order to be eligible for post -season play.\nNumber of games played are as follows:\n For 18\n\nno cap, or the one (1) hour time limit.\nFor the third game, a coin toss will determine serve or receive and side. If a game is tied\nwhen time expires, the next point will decide the winner.\n\n4. Number of Players: For Coed leagues, a maximum of 3 males for 6's and 2 for 4's may\nparticipate on the court, if a full team is present. Teams must start with a minimum of 4\nlegal players for 6's and 3 legal players for 4's.\n\n5. Forfeits: Teams that do not have the legal minimum number of players after\n\nwinner may\nserve/receive, or take the choice of the court for the start of play.\n\n2. Time Limit: There will be a one (1) hour time limit for the match. Included in the one\n(1) hour time limit will be an optional five (5) minute warm-up period. Both teams\nmust agree if a shorter warm-up period is decided.\n\n3. Scoring and Results of the Match: Each match will consist of three (3) games to twenty-\nfive (25) points, winning by two (2) points with no cap, or the one (1) hour time limit.\nFor the\n\nQuestion: What is the maximum roster size for adult volleyball, and what is the time limit for a match?\nAnswer:"
+      }
+    ],
+    "k": 3,
+    "retrieved": [
+      {
+        "source": "general_douglas_county_all_sports_rules.txt",
+        "chunk_id": "general_douglas_county_all_sports_rules::0006",
+        "score": 0.6687
+      },
+      {
+        "source": "volleyball_fort_collins_manual.txt",
+        "chunk_id": "volleyball_fort_collins_manual::0019",
+        "score": 0.6656
+      },
+      {
+        "source": "volleyball_fort_collins_manual.txt",
+        "chunk_id": "volleyball_fort_collins_manual::0018",
+        "score": 0.6153
+      }
+    ],
+    "irrelevant_chunks_retrieved": 0
+  },
+  {
+    "qid": "q2",
+    "config": "C",
+    "question": "What is the maximum roster size for adult volleyball, and what is the time limit for a match?",
+    "answer": "The maximum roster size for adult volleyball is 12 players [1]. The time limit for a match is one (1) hour, which includes an optional five (5) minute warm-up period [3]. \n\nFor the roster size, source [1] specifies \"Volleyball – Minimum 6, Maximum 12,\" while source [2] discusses Coed leagues with different player caps but does not override the general rule for adult volleyball. The time limit is explicitly stated in source [3] as a one-hour match duration.",
+    "context_chunk_ids": [
+      "general_douglas_county_all_sports_rules::0006",
+      "volleyball_fort_collins_manual::0019",
+      "volleyball_fort_collins_manual::0018"
+    ],
+    "dropped": [],
+    "context_chars": 1487,
+    "input_tokens": 684,
+    "output_tokens": 777,
+    "latency_s": 19.03,
+    "correct_retrieval": true,
+    "correct_answer": true,
+    "grounded": true,
+    "refused": false,
+    "refused_when_needed": null,
+    "false_refusal": false,
+    "cites_source": true,
+    "format_ok": true,
+    "context_sources": [
+      "general_douglas_county_all_sports_rules.txt",
+      "volleyball_fort_collins_manual.txt"
+    ],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You answer questions about community sports league rules using ONLY the numbered sources in the context.\nRules:\n1. Use only facts stated in the sources. Do not use outside knowledge.\n2. Cite the source number in square brackets, like [1], after each fact you use.\n3. If the sources do not contain enough information to answer, reply with exactly: I cannot answer this question from the provided documents.\n4. If sources disagree, state each value and cite each source; say which file each comes from.\n5. If the question is ambiguous (for example it does not say which sport), say what is ambiguous and answer only for the interpretations the sources support, citing them. Do not guess."
+      },
+      {
+        "role": "user",
+        "content": "Sources:\n[1] (source file: general_douglas_county_all_sports_rules.txt, chunk: general_douglas_county_all_sports_rules::0006)\nfor the following per sport:\n Flag Football – Minimum 6, Maximum 15\n Soccer – Minimum 9, Maximum 20\n Softball – Minimum 10, Maximum 20\n Volleyball – Minimum 6, Maximum 12\n\n6. Players are not allowed to change team rosters once they have played in 1 game.\n7. PENALTY: Player becomes ineligible to participate on any team during that season.\n\n8. Players must have played in a certain amount of games in order to be eligible for post -season play.\nNumber of games played are as follows:\n For 18\n\n[2] (source file: volleyball_fort_collins_manual.txt, chunk: volleyball_fort_collins_manual::0019)\nno cap, or the one (1) hour time limit.\nFor the third game, a coin toss will determine serve or receive and side. If a game is tied\nwhen time expires, the next point will decide the winner.\n\n4. Number of Players: For Coed leagues, a maximum of 3 males for 6's and 2 for 4's may\nparticipate on the court, if a full team is present. Teams must start with a minimum of 4\nlegal players for 6's and 3 legal players for 4's.\n\n5. Forfeits: Teams that do not have the legal minimum number of players after\n\n[3] (source file: volleyball_fort_collins_manual.txt, chunk: volleyball_fort_collins_manual::0018)\nwinner may\nserve/receive, or take the choice of the court for the start of play.\n\n2. Time Limit: There will be a one (1) hour time limit for the match. Included in the one\n(1) hour time limit will be an optional five (5) minute warm-up period. Both teams\nmust agree if a shorter warm-up period is decided.\n\n3. Scoring and Results of the Match: Each match will consist of three (3) games to twenty-\nfive (25) points, winning by two (2) points with no cap, or the one (1) hour time limit.\nFor the\n\nQuestion: What is the maximum roster size for adult volleyball, and what is the time limit for a match?\nAnswer:"
+      }
+    ],
+    "k": 3,
+    "retrieved": [
+      {
+        "source": "general_douglas_county_all_sports_rules.txt",
+        "chunk_id": "general_douglas_county_all_sports_rules::0006",
+        "score": 0.6687
+      },
+      {
+        "source": "volleyball_fort_collins_manual.txt",
+        "chunk_id": "volleyball_fort_collins_manual::0019",
+        "score": 0.6656
+      },
+      {
+        "source": "volleyball_fort_collins_manual.txt",
+        "chunk_id": "volleyball_fort_collins_manual::0018",
+        "score": 0.6153
+      }
+    ],
+    "irrelevant_chunks_retrieved": 0
+  },
+  {
+    "qid": "q2",
+    "config": "B",
+    "question": "What is the maximum roster size for adult volleyball, and what is the time limit for a match?",
+    "answer": "The maximum roster size for adult volleyball is **12 players** (as specified under the sport-specific rules for Volleyball: \"Minimum 6, Maximum 12\"). The time limit for a match is **1 hour**, which includes an optional 5-minute warm-up period.",
+    "context_chunk_ids": [
+      "general_douglas_county_all_sports_rules::0006",
+      "volleyball_fort_collins_manual::0019",
+      "volleyball_fort_collins_manual::0018",
+      "volleyball_fort_collins_manual::0041",
+      "volleyball_fort_collins_manual::0002"
+    ],
+    "dropped": [],
+    "context_chars": 2480,
+    "input_tokens": 738,
+    "output_tokens": 613,
+    "latency_s": 14.44,
+    "correct_retrieval": true,
+    "correct_answer": true,
+    "grounded": true,
+    "refused": false,
+    "refused_when_needed": null,
+    "false_refusal": false,
+    "cites_source": false,
+    "format_ok": null,
+    "context_sources": [
+      "general_douglas_county_all_sports_rules.txt",
+      "volleyball_fort_collins_manual.txt"
+    ],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful assistant. Answer the question using the context provided."
+      },
+      {
+        "role": "user",
+        "content": "Context:\nfor the following per sport:\n Flag Football – Minimum 6, Maximum 15\n Soccer – Minimum 9, Maximum 20\n Softball – Minimum 10, Maximum 20\n Volleyball – Minimum 6, Maximum 12\n\n6. Players are not allowed to change team rosters once they have played in 1 game.\n7. PENALTY: Player becomes ineligible to participate on any team during that season.\n\n8. Players must have played in a certain amount of games in order to be eligible for post -season play.\nNumber of games played are as follows:\n For 18\n\nno cap, or the one (1) hour time limit.\nFor the third game, a coin toss will determine serve or receive and side. If a game is tied\nwhen time expires, the next point will decide the winner.\n\n4. Number of Players: For Coed leagues, a maximum of 3 males for 6's and 2 for 4's may\nparticipate on the court, if a full team is present. Teams must start with a minimum of 4\nlegal players for 6's and 3 legal players for 4's.\n\n5. Forfeits: Teams that do not have the legal minimum number of players after\n\nwinner may\nserve/receive, or take the choice of the court for the start of play.\n\n2. Time Limit: There will be a one (1) hour time limit for the match. Included in the one\n(1) hour time limit will be an optional five (5) minute warm-up period. Both teams\nmust agree if a shorter warm-up period is decided.\n\n3. Scoring and Results of the Match: Each match will consist of three (3) games to twenty-\nfive (25) points, winning by two (2) points with no cap, or the one (1) hour time limit.\nFor the\n\nthe length/number of games if needed to complete the matches for that night.\nNumber of games and points played may be changed to complete all matches during the\ntime allotted.\n6. Number of Players: Coed 4’s leagues will have a maximum of two (2) males participating on\nthe court, if a full team is present. This means a team must have at least one (1) female and\nno more than two (2) males on the court at any time.\n7. Rotation: Players must serve in rotation, but may line up in any position. The\n\n. . . . . . . . . . . . . . . . . . . . 4\n\nIndoor Volleyball Rules. . . . . . . . . . . . . . . . . . . . . . 5\n\nCommunicable Disease Rule (Blood Rule). . . . . . . . . . . . 8\n\nOutdoor Volleyball Rules. . . . . . . . . . . . . . . . . . . . . 9\n\nAdult Volleyball Manual\n\nParks and Recreation\n2\n\nTHANK YOU FOR YOUR PARTICIPATION IN\nTHE ADULT VOLLEYBALL PROGRAM!\n\nGeneral Information\nAll managers are responsible for the information contained in this manual as well as making sure\nthat all players\n\nQuestion: What is the maximum roster size for adult volleyball, and what is the time limit for a match?\nAnswer:"
+      }
+    ],
+    "k": 5,
+    "retrieved": [
+      {
+        "source": "general_douglas_county_all_sports_rules.txt",
+        "chunk_id": "general_douglas_county_all_sports_rules::0006",
+        "score": 0.6687
+      },
+      {
+        "source": "volleyball_fort_collins_manual.txt",
+        "chunk_id": "volleyball_fort_collins_manual::0019",
+        "score": 0.6656
+      },
+      {
+        "source": "volleyball_fort_collins_manual.txt",
+        "chunk_id": "volleyball_fort_collins_manual::0018",
+        "score": 0.6153
+      },
+      {
+        "source": "volleyball_fort_collins_manual.txt",
+        "chunk_id": "volleyball_fort_collins_manual::0041",
+        "score": 0.6049
+      },
+      {
+        "source": "volleyball_fort_collins_manual.txt",
+        "chunk_id": "volleyball_fort_collins_manual::0002",
+        "score": 0.5979
+      }
+    ],
+    "irrelevant_chunks_retrieved": 0
+  },
+  {
+    "qid": "q2",
+    "config": "C",
+    "question": "What is the maximum roster size for adult volleyball, and what is the time limit for a match?",
+    "answer": "The maximum roster size for adult volleyball is **12 players** [1]. The time limit for a match is **one (1) hour**, which includes an optional five (5) minute warm-up period [2]. \n\nNote: Source [1] specifies volleyball's maximum roster size, while sources [2] and [3] describe the one-hour time limit for matches.",
+    "context_chunk_ids": [
+      "general_douglas_county_all_sports_rules::0006",
+      "volleyball_fort_collins_manual::0019",
+      "volleyball_fort_collins_manual::0018",
+      "volleyball_fort_collins_manual::0041",
+      "volleyball_fort_collins_manual::0002"
+    ],
+    "dropped": [],
+    "context_chars": 2480,
+    "input_tokens": 1019,
+    "output_tokens": 870,
+    "latency_s": 21.11,
+    "correct_retrieval": true,
+    "correct_answer": true,
+    "grounded": true,
+    "refused": false,
+    "refused_when_needed": null,
+    "false_refusal": false,
+    "cites_source": true,
+    "format_ok": true,
+    "context_sources": [
+      "general_douglas_county_all_sports_rules.txt",
+      "volleyball_fort_collins_manual.txt"
+    ],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You answer questions about community sports league rules using ONLY the numbered sources in the context.\nRules:\n1. Use only facts stated in the sources. Do not use outside knowledge.\n2. Cite the source number in square brackets, like [1], after each fact you use.\n3. If the sources do not contain enough information to answer, reply with exactly: I cannot answer this question from the provided documents.\n4. If sources disagree, state each value and cite each source; say which file each comes from.\n5. If the question is ambiguous (for example it does not say which sport), say what is ambiguous and answer only for the interpretations the sources support, citing them. Do not guess."
+      },
+      {
+        "role": "user",
+        "content": "Sources:\n[1] (source file: general_douglas_county_all_sports_rules.txt, chunk: general_douglas_county_all_sports_rules::0006)\nfor the following per sport:\n Flag Football – Minimum 6, Maximum 15\n Soccer – Minimum 9, Maximum 20\n Softball – Minimum 10, Maximum 20\n Volleyball – Minimum 6, Maximum 12\n\n6. Players are not allowed to change team rosters once they have played in 1 game.\n7. PENALTY: Player becomes ineligible to participate on any team during that season.\n\n8. Players must have played in a certain amount of games in order to be eligible for post -season play.\nNumber of games played are as follows:\n For 18\n\n[2] (source file: volleyball_fort_collins_manual.txt, chunk: volleyball_fort_collins_manual::0019)\nno cap, or the one (1) hour time limit.\nFor the third game, a coin toss will determine serve or receive and side. If a game is tied\nwhen time expires, the next point will decide the winner.\n\n4. Number of Players: For Coed leagues, a maximum of 3 males for 6's and 2 for 4's may\nparticipate on the court, if a full team is present. Teams must start with a minimum of 4\nlegal players for 6's and 3 legal players for 4's.\n\n5. Forfeits: Teams that do not have the legal minimum number of players after\n\n[3] (source file: volleyball_fort_collins_manual.txt, chunk: volleyball_fort_collins_manual::0018)\nwinner may\nserve/receive, or take the choice of the court for the start of play.\n\n2. Time Limit: There will be a one (1) hour time limit for the match. Included in the one\n(1) hour time limit will be an optional five (5) minute warm-up period. Both teams\nmust agree if a shorter warm-up period is decided.\n\n3. Scoring and Results of the Match: Each match will consist of three (3) games to twenty-\nfive (25) points, winning by two (2) points with no cap, or the one (1) hour time limit.\nFor the\n\n[4] (source file: volleyball_fort_collins_manual.txt, chunk: volleyball_fort_collins_manual::0041)\nthe length/number of games if needed to complete the matches for that night.\nNumber of games and points played may be changed to complete all matches during the\ntime allotted.\n6. Number of Players: Coed 4’s leagues will have a maximum of two (2) males participating on\nthe court, if a full team is present. This means a team must have at least one (1) female and\nno more than two (2) males on the court at any time.\n7. Rotation: Players must serve in rotation, but may line up in any position. The\n\n[5] (source file: volleyball_fort_collins_manual.txt, chunk: volleyball_fort_collins_manual::0002)\n. . . . . . . . . . . . . . . . . . . . 4\n\nIndoor Volleyball Rules. . . . . . . . . . . . . . . . . . . . . . 5\n\nCommunicable Disease Rule (Blood Rule). . . . . . . . . . . . 8\n\nOutdoor Volleyball Rules. . . . . . . . . . . . . . . . . . . . . 9\n\nAdult Volleyball Manual\n\nParks and Recreation\n2\n\nTHANK YOU FOR YOUR PARTICIPATION IN\nTHE ADULT VOLLEYBALL PROGRAM!\n\nGeneral Information\nAll managers are responsible for the information contained in this manual as well as making sure\nthat all players\n\nQuestion: What is the maximum roster size for adult volleyball, and what is the time limit for a match?\nAnswer:"
+      }
+    ],
+    "k": 5,
+    "retrieved": [
+      {
+        "source": "general_douglas_county_all_sports_rules.txt",
+        "chunk_id": "general_douglas_county_all_sports_rules::0006",
+        "score": 0.6687
+      },
+      {
+        "source": "volleyball_fort_collins_manual.txt",
+        "chunk_id": "volleyball_fort_collins_manual::0019",
+        "score": 0.6656
+      },
+      {
+        "source": "volleyball_fort_collins_manual.txt",
+        "chunk_id": "volleyball_fort_collins_manual::0018",
+        "score": 0.6153
+      },
+      {
+        "source": "volleyball_fort_collins_manual.txt",
+        "chunk_id": "volleyball_fort_collins_manual::0041",
+        "score": 0.6049
+      },
+      {
+        "source": "volleyball_fort_collins_manual.txt",
+        "chunk_id": "volleyball_fort_collins_manual::0002",
+        "score": 0.5979
+      }
+    ],
+    "irrelevant_chunks_retrieved": 0
+  },
+  {
+    "qid": "q3",
+    "config": "B",
+    "question": "How many players per side are used in AYSO soccer for the 8U (Under-8) division?",
+    "answer": "The AYSO soccer 8U (Under-8) division uses **4 players per side**. This is indicated by the \"4-a-side\" notation in the context provided.",
+    "context_chunk_ids": [
+      "soccer_ayso_national_rules::0036"
+    ],
+    "dropped": [],
+    "context_chars": 493,
+    "input_tokens": 282,
+    "output_tokens": 421,
+    "latency_s": 10.01,
+    "correct_retrieval": false,
+    "correct_answer": false,
+    "grounded": true,
+    "refused": false,
+    "refused_when_needed": null,
+    "false_refusal": false,
+    "cites_source": false,
+    "format_ok": null,
+    "context_sources": [
+      "soccer_ayso_national_rules.txt"
+    ],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful assistant. Answer the question using the context provided."
+      },
+      {
+        "role": "user",
+        "content": "Context:\nno. of team\nmembers\n18U 11‐a‐side 18 12\n16U 11‐a‐side 18 12\n14U 11‐a‐side 15 12\n12U 9‐a‐side 12 10\n10U 7‐a‐side 10 8\n8U 4‐a‐side\n(No goalkeepers) 6 5\n6U 4‐a‐side\n(No goalkeepers) 6 5\nAYSO\nSchoolyard\nSoccer\n4‐a‐side\n(No goalkeepers) 6 5\nAYSO National Rules & Regulations\nREGISTRATION\n\n8 AYSO National Rules & Regulations 06/2018\n\nIII. REGISTRATION\nA. The standard age divisions for the Boys and Girls programs are as follows:\nAge Division\nAges 3, 4 or 5 by the date of program commencement AYSO\n\nQuestion: How many players per side are used in AYSO soccer for the 8U (Under-8) division?\nAnswer:"
+      }
+    ],
+    "k": 1,
+    "retrieved": [
+      {
+        "source": "soccer_ayso_national_rules.txt",
+        "chunk_id": "soccer_ayso_national_rules::0036",
+        "score": 0.6964
+      }
+    ],
+    "irrelevant_chunks_retrieved": 0
+  },
+  {
+    "qid": "q3",
+    "config": "C",
+    "question": "How many players per side are used in AYSO soccer for the 8U (Under-8) division?",
+    "answer": "The AYSO soccer 8U (Under-8) division uses **4 players per side** [1]. This is specified in the \"4‐a‐side (No goalkeepers)\" entry for the 8U division.",
+    "context_chunk_ids": [
+      "soccer_ayso_national_rules::0036"
+    ],
+    "dropped": [],
+    "context_chars": 493,
+    "input_tokens": 441,
+    "output_tokens": 294,
+    "latency_s": 7.72,
+    "correct_retrieval": false,
+    "correct_answer": false,
+    "grounded": true,
+    "refused": false,
+    "refused_when_needed": null,
+    "false_refusal": false,
+    "cites_source": true,
+    "format_ok": true,
+    "context_sources": [
+      "soccer_ayso_national_rules.txt"
+    ],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You answer questions about community sports league rules using ONLY the numbered sources in the context.\nRules:\n1. Use only facts stated in the sources. Do not use outside knowledge.\n2. Cite the source number in square brackets, like [1], after each fact you use.\n3. If the sources do not contain enough information to answer, reply with exactly: I cannot answer this question from the provided documents.\n4. If sources disagree, state each value and cite each source; say which file each comes from.\n5. If the question is ambiguous (for example it does not say which sport), say what is ambiguous and answer only for the interpretations the sources support, citing them. Do not guess."
+      },
+      {
+        "role": "user",
+        "content": "Sources:\n[1] (source file: soccer_ayso_national_rules.txt, chunk: soccer_ayso_national_rules::0036)\nno. of team\nmembers\n18U 11‐a‐side 18 12\n16U 11‐a‐side 18 12\n14U 11‐a‐side 15 12\n12U 9‐a‐side 12 10\n10U 7‐a‐side 10 8\n8U 4‐a‐side\n(No goalkeepers) 6 5\n6U 4‐a‐side\n(No goalkeepers) 6 5\nAYSO\nSchoolyard\nSoccer\n4‐a‐side\n(No goalkeepers) 6 5\nAYSO National Rules & Regulations\nREGISTRATION\n\n8 AYSO National Rules & Regulations 06/2018\n\nIII. REGISTRATION\nA. The standard age divisions for the Boys and Girls programs are as follows:\nAge Division\nAges 3, 4 or 5 by the date of program commencement AYSO\n\nQuestion: How many players per side are used in AYSO soccer for the 8U (Under-8) division?\nAnswer:"
+      }
+    ],
+    "k": 1,
+    "retrieved": [
+      {
+        "source": "soccer_ayso_national_rules.txt",
+        "chunk_id": "soccer_ayso_national_rules::0036",
+        "score": 0.6964
+      }
+    ],
+    "irrelevant_chunks_retrieved": 0
+  },
+  {
+    "qid": "q3",
+    "config": "B",
+    "question": "How many players per side are used in AYSO soccer for the 8U (Under-8) division?",
+    "answer": "The AYSO soccer rules specify that for the 8U (Under-8) division, the number of players per side is **4**. This is explicitly stated in the context as \"4‐a‐side (No goalkeepers)\" under the 8U entry. \n\n**Answer:** 4 players per side.",
+    "context_chunk_ids": [
+      "soccer_ayso_national_rules::0036",
+      "soccer_ayso_basic_rules::0024",
+      "soccer_ayso_national_rules::0025"
+    ],
+    "dropped": [],
+    "context_chars": 1485,
+    "input_tokens": 536,
+    "output_tokens": 1728,
+    "latency_s": 45.46,
+    "correct_retrieval": false,
+    "correct_answer": false,
+    "grounded": true,
+    "refused": false,
+    "refused_when_needed": null,
+    "false_refusal": false,
+    "cites_source": false,
+    "format_ok": null,
+    "context_sources": [
+      "soccer_ayso_basic_rules.txt",
+      "soccer_ayso_national_rules.txt"
+    ],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful assistant. Answer the question using the context provided."
+      },
+      {
+        "role": "user",
+        "content": "Context:\nno. of team\nmembers\n18U 11‐a‐side 18 12\n16U 11‐a‐side 18 12\n14U 11‐a‐side 15 12\n12U 9‐a‐side 12 10\n10U 7‐a‐side 10 8\n8U 4‐a‐side\n(No goalkeepers) 6 5\n6U 4‐a‐side\n(No goalkeepers) 6 5\nAYSO\nSchoolyard\nSoccer\n4‐a‐side\n(No goalkeepers) 6 5\nAYSO National Rules & Regulations\nREGISTRATION\n\n8 AYSO National Rules & Regulations 06/2018\n\nIII. REGISTRATION\nA. The standard age divisions for the Boys and Girls programs are as follows:\nAge Division\nAges 3, 4 or 5 by the date of program commencement AYSO\n\nnumber of players on the\nfield at the time the goal was scored. This is true only if discovered by the referee\nbefore restarting play after the goal.\nSubstitution\nIn AYSO it is mandatory that all players who are present at the match play a\nminimum of one half of the game (the “Three Quarter Rule” is strongly encouraged\nwhich means no player on a team should play four ‘quarters’ in a given game, until\nall players on the team have played three ‘quarters’). Exceptions include: players\narriving\n\nof the Game as\nm o d i f i e d b y A Y S O ( w i t h p e r m i s s i o n ) , t h e AYSO National Rules & Regulations and the age\nappropriate AYSO Coach Manual.\n2. Small ‐sided games are permitted for all divisions.\nI. HEADING THE BALL\n1. Consistent with the US Soccer mandates on heading the ball, heading is banned for all division\nplayers 11U (12U and below for programs without single age divisions) and below in both\npractices and matches.\nHeading for players in 14U is limited to a maximum of\n\nQuestion: How many players per side are used in AYSO soccer for the 8U (Under-8) division?\nAnswer:"
+      }
+    ],
+    "k": 3,
+    "retrieved": [
+      {
+        "source": "soccer_ayso_national_rules.txt",
+        "chunk_id": "soccer_ayso_national_rules::0036",
+        "score": 0.6964
+      },
+      {
+        "source": "soccer_ayso_basic_rules.txt",
+        "chunk_id": "soccer_ayso_basic_rules::0024",
+        "score": 0.648
+      },
+      {
+        "source": "soccer_ayso_national_rules.txt",
+        "chunk_id": "soccer_ayso_national_rules::0025",
+        "score": 0.6411
+      }
+    ],
+    "irrelevant_chunks_retrieved": 0
+  },
+  {
+    "qid": "q3",
+    "config": "C",
+    "question": "How many players per side are used in AYSO soccer for the 8U (Under-8) division?",
+    "answer": "The AYSO soccer 8U (Under-8) division uses **4 players per side** [1]. This is specified in the \"no. of team members\" column under the 8U entry, which lists \"4‐a‐side (No goalkeepers) 6 5\" [1]. The \"4‐a‐side\" indicates 4 players per side, while the numbers 6 and 5 likely refer to total team members and substitutes, respectively.",
+    "context_chunk_ids": [
+      "soccer_ayso_national_rules::0036",
+      "soccer_ayso_basic_rules::0024",
+      "soccer_ayso_national_rules::0025"
+    ],
+    "dropped": [],
+    "context_chars": 1485,
+    "input_tokens": 755,
+    "output_tokens": 338,
+    "latency_s": 8.87,
+    "correct_retrieval": false,
+    "correct_answer": true,
+    "grounded": true,
+    "refused": false,
+    "refused_when_needed": null,
+    "false_refusal": false,
+    "cites_source": true,
+    "format_ok": true,
+    "context_sources": [
+      "soccer_ayso_basic_rules.txt",
+      "soccer_ayso_national_rules.txt"
+    ],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You answer questions about community sports league rules using ONLY the numbered sources in the context.\nRules:\n1. Use only facts stated in the sources. Do not use outside knowledge.\n2. Cite the source number in square brackets, like [1], after each fact you use.\n3. If the sources do not contain enough information to answer, reply with exactly: I cannot answer this question from the provided documents.\n4. If sources disagree, state each value and cite each source; say which file each comes from.\n5. If the question is ambiguous (for example it does not say which sport), say what is ambiguous and answer only for the interpretations the sources support, citing them. Do not guess."
+      },
+      {
+        "role": "user",
+        "content": "Sources:\n[1] (source file: soccer_ayso_national_rules.txt, chunk: soccer_ayso_national_rules::0036)\nno. of team\nmembers\n18U 11‐a‐side 18 12\n16U 11‐a‐side 18 12\n14U 11‐a‐side 15 12\n12U 9‐a‐side 12 10\n10U 7‐a‐side 10 8\n8U 4‐a‐side\n(No goalkeepers) 6 5\n6U 4‐a‐side\n(No goalkeepers) 6 5\nAYSO\nSchoolyard\nSoccer\n4‐a‐side\n(No goalkeepers) 6 5\nAYSO National Rules & Regulations\nREGISTRATION\n\n8 AYSO National Rules & Regulations 06/2018\n\nIII. REGISTRATION\nA. The standard age divisions for the Boys and Girls programs are as follows:\nAge Division\nAges 3, 4 or 5 by the date of program commencement AYSO\n\n[2] (source file: soccer_ayso_basic_rules.txt, chunk: soccer_ayso_basic_rules::0024)\nnumber of players on the\nfield at the time the goal was scored. This is true only if discovered by the referee\nbefore restarting play after the goal.\nSubstitution\nIn AYSO it is mandatory that all players who are present at the match play a\nminimum of one half of the game (the “Three Quarter Rule” is strongly encouraged\nwhich means no player on a team should play four ‘quarters’ in a given game, until\nall players on the team have played three ‘quarters’). Exceptions include: players\narriving\n\n[3] (source file: soccer_ayso_national_rules.txt, chunk: soccer_ayso_national_rules::0025)\nof the Game as\nm o d i f i e d b y A Y S O ( w i t h p e r m i s s i o n ) , t h e AYSO National Rules & Regulations and the age\nappropriate AYSO Coach Manual.\n2. Small ‐sided games are permitted for all divisions.\nI. HEADING THE BALL\n1. Consistent with the US Soccer mandates on heading the ball, heading is banned for all division\nplayers 11U (12U and below for programs without single age divisions) and below in both\npractices and matches.\nHeading for players in 14U is limited to a maximum of\n\nQuestion: How many players per side are used in AYSO soccer for the 8U (Under-8) division?\nAnswer:"
+      }
+    ],
+    "k": 3,
+    "retrieved": [
+      {
+        "source": "soccer_ayso_national_rules.txt",
+        "chunk_id": "soccer_ayso_national_rules::0036",
+        "score": 0.6964
+      },
+      {
+        "source": "soccer_ayso_basic_rules.txt",
+        "chunk_id": "soccer_ayso_basic_rules::0024",
+        "score": 0.648
+      },
+      {
+        "source": "soccer_ayso_national_rules.txt",
+        "chunk_id": "soccer_ayso_national_rules::0025",
+        "score": 0.6411
+      }
+    ],
+    "irrelevant_chunks_retrieved": 0
+  },
+  {
+    "qid": "q3",
+    "config": "B",
+    "question": "How many players per side are used in AYSO soccer for the 8U (Under-8) division?",
+    "answer": "The AYSO soccer rules specify that the **8U (Under-8) division uses 4 players per side**. This is explicitly stated in the table under the \"no. of team members\" section, which lists \"8U 4‐a‐side (No goalkeepers) 6 5.\" The \"4-a-side\" indicates 4 players on the field per team, with no goalkeepers allowed in this division. While the AYSO National Coaching Program recommends 5-a-side for U-8, the table reflects the standard rule for player numbers in the 8U division. \n\n**Answer: 4 players per side.**",
+    "context_chunk_ids": [
+      "soccer_ayso_national_rules::0036",
+      "soccer_ayso_basic_rules::0024",
+      "soccer_ayso_national_rules::0025",
+      "soccer_ayso_basic_rules::0023",
+      "soccer_ayso_national_rules::0019"
+    ],
+    "dropped": [],
+    "context_chars": 2480,
+    "input_tokens": 805,
+    "output_tokens": 1985,
+    "latency_s": 52.1,
+    "correct_retrieval": true,
+    "correct_answer": true,
+    "grounded": true,
+    "refused": false,
+    "refused_when_needed": null,
+    "false_refusal": false,
+    "cites_source": false,
+    "format_ok": null,
+    "context_sources": [
+      "soccer_ayso_basic_rules.txt",
+      "soccer_ayso_national_rules.txt"
+    ],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful assistant. Answer the question using the context provided."
+      },
+      {
+        "role": "user",
+        "content": "Context:\nno. of team\nmembers\n18U 11‐a‐side 18 12\n16U 11‐a‐side 18 12\n14U 11‐a‐side 15 12\n12U 9‐a‐side 12 10\n10U 7‐a‐side 10 8\n8U 4‐a‐side\n(No goalkeepers) 6 5\n6U 4‐a‐side\n(No goalkeepers) 6 5\nAYSO\nSchoolyard\nSoccer\n4‐a‐side\n(No goalkeepers) 6 5\nAYSO National Rules & Regulations\nREGISTRATION\n\n8 AYSO National Rules & Regulations 06/2018\n\nIII. REGISTRATION\nA. The standard age divisions for the Boys and Girls programs are as follows:\nAge Division\nAges 3, 4 or 5 by the date of program commencement AYSO\n\nnumber of players on the\nfield at the time the goal was scored. This is true only if discovered by the referee\nbefore restarting play after the goal.\nSubstitution\nIn AYSO it is mandatory that all players who are present at the match play a\nminimum of one half of the game (the “Three Quarter Rule” is strongly encouraged\nwhich means no player on a team should play four ‘quarters’ in a given game, until\nall players on the team have played three ‘quarters’). Exceptions include: players\narriving\n\nof the Game as\nm o d i f i e d b y A Y S O ( w i t h p e r m i s s i o n ) , t h e AYSO National Rules & Regulations and the age\nappropriate AYSO Coach Manual.\n2. Small ‐sided games are permitted for all divisions.\nI. HEADING THE BALL\n1. Consistent with the US Soccer mandates on heading the ball, heading is banned for all division\nplayers 11U (12U and below for programs without single age divisions) and below in both\npractices and matches.\nHeading for players in 14U is limited to a maximum of\n\nsmall-sided games (see Short-Sided Games Guide for Referees).\nMaximum and Minimum\nEleven-a-side is the norm, with a minimum of seven required. Fewer than that is\nallowed and strongly recommended for younger age groups. The AYSO National\nCoaching Program recommends 3-a-side for U-5 & U-6, 5-a-side for U-8, 7-a-side\nfor U-10 and 9-a-side for U-12. A goal should be disallowed if it is determined that\nthe team scoring the goal had more than the allowable number of players on the\nfield at the time\n\nArea, Sectional, National and tournament\nAYSO National Rules & Regulations\nMATCH CONDUCT\n\n4 AYSO National Rules & Regulations 06/2018\nplay), have in his/her possessio n all signed forms, rosters, wa ivers and/or\nidentification cards as may be required by AYSO policies so as to verify registration of\nteam members or confirm volunteer qualifications.\nF. SIZE OF BALL\nBall size for each division shall be as follows:\nAge Division Size Circumference Weight\nAYSO Schoolyard Soccer, 6U & 8U 3 23.0‐25.0\n\nQuestion: How many players per side are used in AYSO soccer for the 8U (Under-8) division?\nAnswer:"
+      }
+    ],
+    "k": 5,
+    "retrieved": [
+      {
+        "source": "soccer_ayso_national_rules.txt",
+        "chunk_id": "soccer_ayso_national_rules::0036",
+        "score": 0.6964
+      },
+      {
+        "source": "soccer_ayso_basic_rules.txt",
+        "chunk_id": "soccer_ayso_basic_rules::0024",
+        "score": 0.648
+      },
+      {
+        "source": "soccer_ayso_national_rules.txt",
+        "chunk_id": "soccer_ayso_national_rules::0025",
+        "score": 0.6411
+      },
+      {
+        "source": "soccer_ayso_basic_rules.txt",
+        "chunk_id": "soccer_ayso_basic_rules::0023",
+        "score": 0.6293
+      },
+      {
+        "source": "soccer_ayso_national_rules.txt",
+        "chunk_id": "soccer_ayso_national_rules::0019",
+        "score": 0.6241
+      }
+    ],
+    "irrelevant_chunks_retrieved": 0
+  },
+  {
+    "qid": "q3",
+    "config": "C",
+    "question": "How many players per side are used in AYSO soccer for the 8U (Under-8) division?",
+    "answer": "The AYSO soccer rules specify that the 8U (Under-8) division uses **4 players per side** in a 4-a-side format, with no goalkeepers [1]. This is explicitly stated in the source. While source [4] mentions a recommendation of 5-a-side for U-8, this is framed as a coaching guideline rather than a rule. Since the question asks about the rules, the answer is based on the explicit rule in source [1]. \n\nAnswer: 4 players per side [1].",
+    "context_chunk_ids": [
+      "soccer_ayso_national_rules::0036",
+      "soccer_ayso_basic_rules::0024",
+      "soccer_ayso_national_rules::0025",
+      "soccer_ayso_basic_rules::0023",
+      "soccer_ayso_national_rules::0019"
+    ],
+    "dropped": [],
+    "context_chars": 2480,
+    "input_tokens": 1084,
+    "output_tokens": 1261,
+    "latency_s": 31.88,
+    "correct_retrieval": true,
+    "correct_answer": true,
+    "grounded": true,
+    "refused": false,
+    "refused_when_needed": null,
+    "false_refusal": false,
+    "cites_source": true,
+    "format_ok": true,
+    "context_sources": [
+      "soccer_ayso_basic_rules.txt",
+      "soccer_ayso_national_rules.txt"
+    ],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You answer questions about community sports league rules using ONLY the numbered sources in the context.\nRules:\n1. Use only facts stated in the sources. Do not use outside knowledge.\n2. Cite the source number in square brackets, like [1], after each fact you use.\n3. If the sources do not contain enough information to answer, reply with exactly: I cannot answer this question from the provided documents.\n4. If sources disagree, state each value and cite each source; say which file each comes from.\n5. If the question is ambiguous (for example it does not say which sport), say what is ambiguous and answer only for the interpretations the sources support, citing them. Do not guess."
+      },
+      {
+        "role": "user",
+        "content": "Sources:\n[1] (source file: soccer_ayso_national_rules.txt, chunk: soccer_ayso_national_rules::0036)\nno. of team\nmembers\n18U 11‐a‐side 18 12\n16U 11‐a‐side 18 12\n14U 11‐a‐side 15 12\n12U 9‐a‐side 12 10\n10U 7‐a‐side 10 8\n8U 4‐a‐side\n(No goalkeepers) 6 5\n6U 4‐a‐side\n(No goalkeepers) 6 5\nAYSO\nSchoolyard\nSoccer\n4‐a‐side\n(No goalkeepers) 6 5\nAYSO National Rules & Regulations\nREGISTRATION\n\n8 AYSO National Rules & Regulations 06/2018\n\nIII. REGISTRATION\nA. The standard age divisions for the Boys and Girls programs are as follows:\nAge Division\nAges 3, 4 or 5 by the date of program commencement AYSO\n\n[2] (source file: soccer_ayso_basic_rules.txt, chunk: soccer_ayso_basic_rules::0024)\nnumber of players on the\nfield at the time the goal was scored. This is true only if discovered by the referee\nbefore restarting play after the goal.\nSubstitution\nIn AYSO it is mandatory that all players who are present at the match play a\nminimum of one half of the game (the “Three Quarter Rule” is strongly encouraged\nwhich means no player on a team should play four ‘quarters’ in a given game, until\nall players on the team have played three ‘quarters’). Exceptions include: players\narriving\n\n[3] (source file: soccer_ayso_national_rules.txt, chunk: soccer_ayso_national_rules::0025)\nof the Game as\nm o d i f i e d b y A Y S O ( w i t h p e r m i s s i o n ) , t h e AYSO National Rules & Regulations and the age\nappropriate AYSO Coach Manual.\n2. Small ‐sided games are permitted for all divisions.\nI. HEADING THE BALL\n1. Consistent with the US Soccer mandates on heading the ball, heading is banned for all division\nplayers 11U (12U and below for programs without single age divisions) and below in both\npractices and matches.\nHeading for players in 14U is limited to a maximum of\n\n[4] (source file: soccer_ayso_basic_rules.txt, chunk: soccer_ayso_basic_rules::0023)\nsmall-sided games (see Short-Sided Games Guide for Referees).\nMaximum and Minimum\nEleven-a-side is the norm, with a minimum of seven required. Fewer than that is\nallowed and strongly recommended for younger age groups. The AYSO National\nCoaching Program recommends 3-a-side for U-5 & U-6, 5-a-side for U-8, 7-a-side\nfor U-10 and 9-a-side for U-12. A goal should be disallowed if it is determined that\nthe team scoring the goal had more than the allowable number of players on the\nfield at the time\n\n[5] (source file: soccer_ayso_national_rules.txt, chunk: soccer_ayso_national_rules::0019)\nArea, Sectional, National and tournament\nAYSO National Rules & Regulations\nMATCH CONDUCT\n\n4 AYSO National Rules & Regulations 06/2018\nplay), have in his/her possessio n all signed forms, rosters, wa ivers and/or\nidentification cards as may be required by AYSO policies so as to verify registration of\nteam members or confirm volunteer qualifications.\nF. SIZE OF BALL\nBall size for each division shall be as follows:\nAge Division Size Circumference Weight\nAYSO Schoolyard Soccer, 6U & 8U 3 23.0‐25.0\n\nQuestion: How many players per side are used in AYSO soccer for the 8U (Under-8) division?\nAnswer:"
+      }
+    ],
+    "k": 5,
+    "retrieved": [
+      {
+        "source": "soccer_ayso_national_rules.txt",
+        "chunk_id": "soccer_ayso_national_rules::0036",
+        "score": 0.6964
+      },
+      {
+        "source": "soccer_ayso_basic_rules.txt",
+        "chunk_id": "soccer_ayso_basic_rules::0024",
+        "score": 0.648
+      },
+      {
+        "source": "soccer_ayso_national_rules.txt",
+        "chunk_id": "soccer_ayso_national_rules::0025",
+        "score": 0.6411
+      },
+      {
+        "source": "soccer_ayso_basic_rules.txt",
+        "chunk_id": "soccer_ayso_basic_rules::0023",
+        "score": 0.6293
+      },
+      {
+        "source": "soccer_ayso_national_rules.txt",
+        "chunk_id": "soccer_ayso_national_rules::0019",
+        "score": 0.6241
+      }
+    ],
+    "irrelevant_chunks_retrieved": 0
+  },
+  {
+    "qid": "q5",
+    "config": "B",
+    "question": "What is the maximum number of substitutions allowed per team in a Major League Soccer (MLS) match?",
+    "answer": "The context provided does not specify substitution rules for Major League Soccer (MLS) matches. It outlines substitution procedures for youth divisions (6U, 8U, 10U, 12U), such as substituting at the start of quarters or halfway through the quarter for the 12U division. However, these rules are unrelated to MLS. In standard MLS matches, the maximum number of substitutions allowed per team is **three** (as per typical professional soccer regulations). Since the context does not address MLS-specific rules, the answer cannot be determined from the provided information.",
+    "context_chunk_ids": [
+      "basketball_las_vegas_youth_rules::0045"
+    ],
+    "dropped": [],
+    "context_chars": 497,
+    "input_tokens": 181,
+    "output_tokens": 875,
+    "latency_s": 20.55,
+    "correct_retrieval": null,
+    "correct_answer": false,
+    "grounded": false,
+    "refused": false,
+    "refused_when_needed": false,
+    "false_refusal": false,
+    "cites_source": false,
+    "format_ok": null,
+    "context_sources": [
+      "basketball_las_vegas_youth_rules.txt"
+    ],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful assistant. Answer the question using the context provided."
+      },
+      {
+        "role": "user",
+        "content": "Context:\nplayed three.\nb. Any team that has more than 10 players will be allowed to substitute the eligible\nplayer(s) half way through the quarter. The substituted player(s) must check in at the\ntable one (1) minute prior to check in.\n2. STANDARD SUBSTITUTION PROCEDURES\nPlayer participation is controlled through proper substitution procedures as follows:\na. 6U, 8U, and 10U divisions can only substitute players at the start of each quarter (1st,\n2nd, 3rd and 4th). 12U division will be open substitution\n\nQuestion: What is the maximum number of substitutions allowed per team in a Major League Soccer (MLS) match?\nAnswer:"
+      }
+    ],
+    "k": 1,
+    "retrieved": [
+      {
+        "source": "basketball_las_vegas_youth_rules.txt",
+        "chunk_id": "basketball_las_vegas_youth_rules::0045",
+        "score": 0.637
+      }
+    ],
+    "irrelevant_chunks_retrieved": 1
+  },
+  {
+    "qid": "q5",
+    "config": "C",
+    "question": "What is the maximum number of substitutions allowed per team in a Major League Soccer (MLS) match?",
+    "answer": "I cannot answer this question from the provided documents. The sources only discuss basketball substitution rules for youth leagues in Las Vegas [1], not Major League Soccer (MLS) regulations. The question refers to a sport (soccer) and league (MLS) not mentioned in the provided materials.",
+    "context_chunk_ids": [
+      "basketball_las_vegas_youth_rules::0045"
+    ],
+    "dropped": [],
+    "context_chars": 497,
+    "input_tokens": 342,
+    "output_tokens": 333,
+    "latency_s": 7.9,
+    "correct_retrieval": null,
+    "correct_answer": true,
+    "grounded": true,
+    "refused": true,
+    "refused_when_needed": true,
+    "false_refusal": false,
+    "cites_source": true,
+    "format_ok": true,
+    "context_sources": [
+      "basketball_las_vegas_youth_rules.txt"
+    ],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You answer questions about community sports league rules using ONLY the numbered sources in the context.\nRules:\n1. Use only facts stated in the sources. Do not use outside knowledge.\n2. Cite the source number in square brackets, like [1], after each fact you use.\n3. If the sources do not contain enough information to answer, reply with exactly: I cannot answer this question from the provided documents.\n4. If sources disagree, state each value and cite each source; say which file each comes from.\n5. If the question is ambiguous (for example it does not say which sport), say what is ambiguous and answer only for the interpretations the sources support, citing them. Do not guess."
+      },
+      {
+        "role": "user",
+        "content": "Sources:\n[1] (source file: basketball_las_vegas_youth_rules.txt, chunk: basketball_las_vegas_youth_rules::0045)\nplayed three.\nb. Any team that has more than 10 players will be allowed to substitute the eligible\nplayer(s) half way through the quarter. The substituted player(s) must check in at the\ntable one (1) minute prior to check in.\n2. STANDARD SUBSTITUTION PROCEDURES\nPlayer participation is controlled through proper substitution procedures as follows:\na. 6U, 8U, and 10U divisions can only substitute players at the start of each quarter (1st,\n2nd, 3rd and 4th). 12U division will be open substitution\n\nQuestion: What is the maximum number of substitutions allowed per team in a Major League Soccer (MLS) match?\nAnswer:"
+      }
+    ],
+    "k": 1,
+    "retrieved": [
+      {
+        "source": "basketball_las_vegas_youth_rules.txt",
+        "chunk_id": "basketball_las_vegas_youth_rules::0045",
+        "score": 0.637
+      }
+    ],
+    "irrelevant_chunks_retrieved": 1
+  },
+  {
+    "qid": "q5",
+    "config": "B",
+    "question": "What is the maximum number of substitutions allowed per team in a Major League Soccer (MLS) match?",
+    "answer": "The context provided does not specify the maximum number of substitutions allowed per team in a Major League Soccer (MLS) match. Instead, it outlines general substitution rules for various sports, including soccer, which mention a **maximum of 20 players** on a team roster but do not explicitly limit the number of substitutions. Under the \"Standard Substitution Procedures,\" it states that teams may substitute **as many members as needed**, provided eligible players meet minimum requirements. \n\nHowever, in real-world MLS rules, substitutions are typically limited to **three per team per match** (with some exceptions for specific scenarios). Since the context does not address MLS-specific substitution limits, the answer based solely on the provided text would be that **there is no explicit maximum** mentioned, but this may not reflect actual MLS regulations. \n\n**Answer:** The context does not specify a maximum number of substitutions for MLS; it generally allows substitutions as needed, provided players meet eligibility criteria.",
+    "context_chunk_ids": [
+      "basketball_las_vegas_youth_rules::0045",
+      "soccer_ayso_national_rules::0009",
+      "general_douglas_county_all_sports_rules::0006"
+    ],
+    "dropped": [],
+    "context_chars": 1486,
+    "input_tokens": 440,
+    "output_tokens": 2088,
+    "latency_s": 51.17,
+    "correct_retrieval": null,
+    "correct_answer": false,
+    "grounded": false,
+    "refused": false,
+    "refused_when_needed": false,
+    "false_refusal": false,
+    "cites_source": false,
+    "format_ok": null,
+    "context_sources": [
+      "basketball_las_vegas_youth_rules.txt",
+      "general_douglas_county_all_sports_rules.txt",
+      "soccer_ayso_national_rules.txt"
+    ],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful assistant. Answer the question using the context provided."
+      },
+      {
+        "role": "user",
+        "content": "Context:\nplayed three.\nb. Any team that has more than 10 players will be allowed to substitute the eligible\nplayer(s) half way through the quarter. The substituted player(s) must check in at the\ntable one (1) minute prior to check in.\n2. STANDARD SUBSTITUTION PROCEDURES\nPlayer participation is controlled through proper substitution procedures as follows:\na. 6U, 8U, and 10U divisions can only substitute players at the start of each quarter (1st,\n2nd, 3rd and 4th). 12U division will be open substitution\n\no f e a c h t e a m m a y s u b s t i t u t e a s many team\nmembers, or none, including previously substituted team members, as long as all\neligible team members meet the minimum playing requirements.\ne. The referee shall allow for any time lost due to substitution o r other cause by\nstopping his/her watch or adding playing time. (See Article I.B .3. regarding reducing\nthe length of halves to permit proper substitution.)\n2. Substitution for injury:\na. If a player is injured, the coach may\n\nfor the following per sport:\n Flag Football – Minimum 6, Maximum 15\n Soccer – Minimum 9, Maximum 20\n Softball – Minimum 10, Maximum 20\n Volleyball – Minimum 6, Maximum 12\n\n6. Players are not allowed to change team rosters once they have played in 1 game.\n7. PENALTY: Player becomes ineligible to participate on any team during that season.\n\n8. Players must have played in a certain amount of games in order to be eligible for post -season play.\nNumber of games played are as follows:\n For 18\n\nQuestion: What is the maximum number of substitutions allowed per team in a Major League Soccer (MLS) match?\nAnswer:"
+      }
+    ],
+    "k": 3,
+    "retrieved": [
+      {
+        "source": "basketball_las_vegas_youth_rules.txt",
+        "chunk_id": "basketball_las_vegas_youth_rules::0045",
+        "score": 0.637
+      },
+      {
+        "source": "soccer_ayso_national_rules.txt",
+        "chunk_id": "soccer_ayso_national_rules::0009",
+        "score": 0.623
+      },
+      {
+        "source": "general_douglas_county_all_sports_rules.txt",
+        "chunk_id": "general_douglas_county_all_sports_rules::0006",
+        "score": 0.6067
+      }
+    ],
+    "irrelevant_chunks_retrieved": 3
+  },
+  {
+    "qid": "q5",
+    "config": "C",
+    "question": "What is the maximum number of substitutions allowed per team in a Major League Soccer (MLS) match?",
+    "answer": "I cannot answer this question from the provided documents. The sources mention substitution rules for youth basketball [1], AYSO soccer [2], and Douglas County sports [3], but none specify Major League Soccer (MLS) substitution limits. The AYSO rules [2] allow unlimited substitutions as long as players meet requirements, but this applies to youth soccer, not MLS. MLS substitution rules are not addressed in the provided documents.",
+    "context_chunk_ids": [
+      "basketball_las_vegas_youth_rules::0045",
+      "soccer_ayso_national_rules::0009",
+      "general_douglas_county_all_sports_rules::0006"
+    ],
+    "dropped": [],
+    "context_chars": 1486,
+    "input_tokens": 669,
+    "output_tokens": 415,
+    "latency_s": 10.57,
+    "correct_retrieval": null,
+    "correct_answer": true,
+    "grounded": true,
+    "refused": true,
+    "refused_when_needed": true,
+    "false_refusal": false,
+    "cites_source": true,
+    "format_ok": true,
+    "context_sources": [
+      "basketball_las_vegas_youth_rules.txt",
+      "general_douglas_county_all_sports_rules.txt",
+      "soccer_ayso_national_rules.txt"
+    ],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You answer questions about community sports league rules using ONLY the numbered sources in the context.\nRules:\n1. Use only facts stated in the sources. Do not use outside knowledge.\n2. Cite the source number in square brackets, like [1], after each fact you use.\n3. If the sources do not contain enough information to answer, reply with exactly: I cannot answer this question from the provided documents.\n4. If sources disagree, state each value and cite each source; say which file each comes from.\n5. If the question is ambiguous (for example it does not say which sport), say what is ambiguous and answer only for the interpretations the sources support, citing them. Do not guess."
+      },
+      {
+        "role": "user",
+        "content": "Sources:\n[1] (source file: basketball_las_vegas_youth_rules.txt, chunk: basketball_las_vegas_youth_rules::0045)\nplayed three.\nb. Any team that has more than 10 players will be allowed to substitute the eligible\nplayer(s) half way through the quarter. The substituted player(s) must check in at the\ntable one (1) minute prior to check in.\n2. STANDARD SUBSTITUTION PROCEDURES\nPlayer participation is controlled through proper substitution procedures as follows:\na. 6U, 8U, and 10U divisions can only substitute players at the start of each quarter (1st,\n2nd, 3rd and 4th). 12U division will be open substitution\n\n[2] (source file: soccer_ayso_national_rules.txt, chunk: soccer_ayso_national_rules::0009)\no f e a c h t e a m m a y s u b s t i t u t e a s many team\nmembers, or none, including previously substituted team members, as long as all\neligible team members meet the minimum playing requirements.\ne. The referee shall allow for any time lost due to substitution o r other cause by\nstopping his/her watch or adding playing time. (See Article I.B .3. regarding reducing\nthe length of halves to permit proper substitution.)\n2. Substitution for injury:\na. If a player is injured, the coach may\n\n[3] (source file: general_douglas_county_all_sports_rules.txt, chunk: general_douglas_county_all_sports_rules::0006)\nfor the following per sport:\n Flag Football – Minimum 6, Maximum 15\n Soccer – Minimum 9, Maximum 20\n Softball – Minimum 10, Maximum 20\n Volleyball – Minimum 6, Maximum 12\n\n6. Players are not allowed to change team rosters once they have played in 1 game.\n7. PENALTY: Player becomes ineligible to participate on any team during that season.\n\n8. Players must have played in a certain amount of games in order to be eligible for post -season play.\nNumber of games played are as follows:\n For 18\n\nQuestion: What is the maximum number of substitutions allowed per team in a Major League Soccer (MLS) match?\nAnswer:"
+      }
+    ],
+    "k": 3,
+    "retrieved": [
+      {
+        "source": "basketball_las_vegas_youth_rules.txt",
+        "chunk_id": "basketball_las_vegas_youth_rules::0045",
+        "score": 0.637
+      },
+      {
+        "source": "soccer_ayso_national_rules.txt",
+        "chunk_id": "soccer_ayso_national_rules::0009",
+        "score": 0.623
+      },
+      {
+        "source": "general_douglas_county_all_sports_rules.txt",
+        "chunk_id": "general_douglas_county_all_sports_rules::0006",
+        "score": 0.6067
+      }
+    ],
+    "irrelevant_chunks_retrieved": 3
+  },
+  {
+    "qid": "q5",
+    "config": "B",
+    "question": "What is the maximum number of substitutions allowed per team in a Major League Soccer (MLS) match?",
+    "answer": "The context provided states that substitutions are allowed **unlimited** times, as it explicitly mentions:  \n**\"Substitutions: There can be an unlimited number of substitutions. Players may...\"**  \n\nHowever, this context does not specifically address Major League Soccer (MLS) rules. In real-world MLS, the standard is **3 substitutions per team per match**. But based solely on the given text, the answer derived from the context is:  \n\n**Answer:** There is no maximum number of substitutions allowed; substitutions are unlimited.",
+    "context_chunk_ids": [
+      "basketball_las_vegas_youth_rules::0045",
+      "soccer_ayso_national_rules::0009",
+      "general_douglas_county_all_sports_rules::0006",
+      "volleyball_fort_collins_manual::0021",
+      "soccer_ayso_national_rules::0034"
+    ],
+    "dropped": [],
+    "context_chars": 2481,
+    "input_tokens": 714,
+    "output_tokens": 880,
+    "latency_s": 20.95,
+    "correct_retrieval": null,
+    "correct_answer": false,
+    "grounded": false,
+    "refused": false,
+    "refused_when_needed": false,
+    "false_refusal": false,
+    "cites_source": false,
+    "format_ok": null,
+    "context_sources": [
+      "basketball_las_vegas_youth_rules.txt",
+      "general_douglas_county_all_sports_rules.txt",
+      "soccer_ayso_national_rules.txt",
+      "volleyball_fort_collins_manual.txt"
+    ],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful assistant. Answer the question using the context provided."
+      },
+      {
+        "role": "user",
+        "content": "Context:\nplayed three.\nb. Any team that has more than 10 players will be allowed to substitute the eligible\nplayer(s) half way through the quarter. The substituted player(s) must check in at the\ntable one (1) minute prior to check in.\n2. STANDARD SUBSTITUTION PROCEDURES\nPlayer participation is controlled through proper substitution procedures as follows:\na. 6U, 8U, and 10U divisions can only substitute players at the start of each quarter (1st,\n2nd, 3rd and 4th). 12U division will be open substitution\n\no f e a c h t e a m m a y s u b s t i t u t e a s many team\nmembers, or none, including previously substituted team members, as long as all\neligible team members meet the minimum playing requirements.\ne. The referee shall allow for any time lost due to substitution o r other cause by\nstopping his/her watch or adding playing time. (See Article I.B .3. regarding reducing\nthe length of halves to permit proper substitution.)\n2. Substitution for injury:\na. If a player is injured, the coach may\n\nfor the following per sport:\n Flag Football – Minimum 6, Maximum 15\n Soccer – Minimum 9, Maximum 20\n Softball – Minimum 10, Maximum 20\n Volleyball – Minimum 6, Maximum 12\n\n6. Players are not allowed to change team rosters once they have played in 1 game.\n7. PENALTY: Player becomes ineligible to participate on any team during that season.\n\n8. Players must have played in a certain amount of games in order to be eligible for post -season play.\nNumber of games played are as follows:\n For 18\n\nnumber of players due to an on the court injury, they may\ncontinue play without penalty.\n\nOfficials cannot work or play in forfeited games. When a forfeit is declared, teams can\npractice until five (5) minutes before the next match is scheduled to begin.\n\n6. Time Outs: Every team will have two (2) 30-second time outs per game. In the event of\nan injury, the clock will be stopped for a reasonable amount of time.\n\n7. Substitutions: There can be an unlimited number of substitutions. Players may\n\n06/2018 7\n\nC. TEAM SIZE\n1. The following are the recommended team sizes:\n\n2. All divisions may play optionally with teams of smaller sizes f or mini‐soccer, indoor soccer or\nsmall‐sided matches.\nD. The maximum number of team members listed in Article II.C may be increased with approval of the\nArea Director, but no more than would allow each team member to p l a y a t l e a s t h a l f o f e a c h\nmatch.\nE. E a c h p r i m a r y s e a s o n , e v e r y e f f o r t s h a l l b e m a d e t o b a l\n\nQuestion: What is the maximum number of substitutions allowed per team in a Major League Soccer (MLS) match?\nAnswer:"
+      }
+    ],
+    "k": 5,
+    "retrieved": [
+      {
+        "source": "basketball_las_vegas_youth_rules.txt",
+        "chunk_id": "basketball_las_vegas_youth_rules::0045",
+        "score": 0.637
+      },
+      {
+        "source": "soccer_ayso_national_rules.txt",
+        "chunk_id": "soccer_ayso_national_rules::0009",
+        "score": 0.623
+      },
+      {
+        "source": "general_douglas_county_all_sports_rules.txt",
+        "chunk_id": "general_douglas_county_all_sports_rules::0006",
+        "score": 0.6067
+      },
+      {
+        "source": "volleyball_fort_collins_manual.txt",
+        "chunk_id": "volleyball_fort_collins_manual::0021",
+        "score": 0.5963
+      },
+      {
+        "source": "soccer_ayso_national_rules.txt",
+        "chunk_id": "soccer_ayso_national_rules::0034",
+        "score": 0.5912
+      }
+    ],
+    "irrelevant_chunks_retrieved": 5
+  },
+  {
+    "qid": "q5",
+    "config": "C",
+    "question": "What is the maximum number of substitutions allowed per team in a Major League Soccer (MLS) match?",
+    "answer": "I cannot answer this question from the provided documents. The sources do not mention Major League Soccer (MLS) substitution rules. The closest relevant information is from soccer AYSO rules [2], which state teams may substitute \"as many team members, or none,\" but this applies to youth soccer, not MLS. No source specifies MLS substitution limits.",
+    "context_chunk_ids": [
+      "basketball_las_vegas_youth_rules::0045",
+      "soccer_ayso_national_rules::0009",
+      "general_douglas_county_all_sports_rules::0006",
+      "volleyball_fort_collins_manual::0021",
+      "soccer_ayso_national_rules::0034"
+    ],
+    "dropped": [],
+    "context_chars": 2481,
+    "input_tokens": 1003,
+    "output_tokens": 385,
+    "latency_s": 9.26,
+    "correct_retrieval": null,
+    "correct_answer": true,
+    "grounded": true,
+    "refused": true,
+    "refused_when_needed": true,
+    "false_refusal": false,
+    "cites_source": true,
+    "format_ok": true,
+    "context_sources": [
+      "basketball_las_vegas_youth_rules.txt",
+      "general_douglas_county_all_sports_rules.txt",
+      "soccer_ayso_national_rules.txt",
+      "volleyball_fort_collins_manual.txt"
+    ],
+    "messages": [
+      {
+        "role": "system",
+        "content": "You answer questions about community sports league rules using ONLY the numbered sources in the context.\nRules:\n1. Use only facts stated in the sources. Do not use outside knowledge.\n2. Cite the source number in square brackets, like [1], after each fact you use.\n3. If the sources do not contain enough information to answer, reply with exactly: I cannot answer this question from the provided documents.\n4. If sources disagree, state each value and cite each source; say which file each comes from.\n5. If the question is ambiguous (for example it does not say which sport), say what is ambiguous and answer only for the interpretations the sources support, citing them. Do not guess."
+      },
+      {
+        "role": "user",
+        "content": "Sources:\n[1] (source file: basketball_las_vegas_youth_rules.txt, chunk: basketball_las_vegas_youth_rules::0045)\nplayed three.\nb. Any team that has more than 10 players will be allowed to substitute the eligible\nplayer(s) half way through the quarter. The substituted player(s) must check in at the\ntable one (1) minute prior to check in.\n2. STANDARD SUBSTITUTION PROCEDURES\nPlayer participation is controlled through proper substitution procedures as follows:\na. 6U, 8U, and 10U divisions can only substitute players at the start of each quarter (1st,\n2nd, 3rd and 4th). 12U division will be open substitution\n\n[2] (source file: soccer_ayso_national_rules.txt, chunk: soccer_ayso_national_rules::0009)\no f e a c h t e a m m a y s u b s t i t u t e a s many team\nmembers, or none, including previously substituted team members, as long as all\neligible team members meet the minimum playing requirements.\ne. The referee shall allow for any time lost due to substitution o r other cause by\nstopping his/her watch or adding playing time. (See Article I.B .3. regarding reducing\nthe length of halves to permit proper substitution.)\n2. Substitution for injury:\na. If a player is injured, the coach may\n\n[3] (source file: general_douglas_county_all_sports_rules.txt, chunk: general_douglas_county_all_sports_rules::0006)\nfor the following per sport:\n Flag Football – Minimum 6, Maximum 15\n Soccer – Minimum 9, Maximum 20\n Softball – Minimum 10, Maximum 20\n Volleyball – Minimum 6, Maximum 12\n\n6. Players are not allowed to change team rosters once they have played in 1 game.\n7. PENALTY: Player becomes ineligible to participate on any team during that season.\n\n8. Players must have played in a certain amount of games in order to be eligible for post -season play.\nNumber of games played are as follows:\n For 18\n\n[4] (source file: volleyball_fort_collins_manual.txt, chunk: volleyball_fort_collins_manual::0021)\nnumber of players due to an on the court injury, they may\ncontinue play without penalty.\n\nOfficials cannot work or play in forfeited games. When a forfeit is declared, teams can\npractice until five (5) minutes before the next match is scheduled to begin.\n\n6. Time Outs: Every team will have two (2) 30-second time outs per game. In the event of\nan injury, the clock will be stopped for a reasonable amount of time.\n\n7. Substitutions: There can be an unlimited number of substitutions. Players may\n\n[5] (source file: soccer_ayso_national_rules.txt, chunk: soccer_ayso_national_rules::0034)\n06/2018 7\n\nC. TEAM SIZE\n1. The following are the recommended team sizes:\n\n2. All divisions may play optionally with teams of smaller sizes f or mini‐soccer, indoor soccer or\nsmall‐sided matches.\nD. The maximum number of team members listed in Article II.C may be increased with approval of the\nArea Director, but no more than would allow each team member to p l a y a t l e a s t h a l f o f e a c h\nmatch.\nE. E a c h p r i m a r y s e a s o n , e v e r y e f f o r t s h a l l b e m a d e t o b a l\n\nQuestion: What is the maximum number of substitutions allowed per team in a Major League Soccer (MLS) match?\nAnswer:"
+      }
+    ],
+    "k": 5,
+    "retrieved": [
+      {
+        "source": "basketball_las_vegas_youth_rules.txt",
+        "chunk_id": "basketball_las_vegas_youth_rules::0045",
+        "score": 0.637
+      },
+      {
+        "source": "soccer_ayso_national_rules.txt",
+        "chunk_id": "soccer_ayso_national_rules::0009",
+        "score": 0.623
+      },
+      {
+        "source": "general_douglas_county_all_sports_rules.txt",
+        "chunk_id": "general_douglas_county_all_sports_rules::0006",
+        "score": 0.6067
+      },
+      {
+        "source": "volleyball_fort_collins_manual.txt",
+        "chunk_id": "volleyball_fort_collins_manual::0021",
+        "score": 0.5963
+      },
+      {
+        "source": "soccer_ayso_national_rules.txt",
+        "chunk_id": "soccer_ayso_national_rules::0034",
+        "score": 0.5912
+      }
+    ],
+    "irrelevant_chunks_retrieved": 5
+  }
+]

@@ -1,0 +1,124 @@
+qid,config,answer,context_chunk_ids,context_chars,input_tokens,output_tokens,latency_s,correct_retrieval,correct_answer,grounded,refused,refused_when_needed,false_refusal,cites_source,format_ok
+q1,A,"In a standard Twenty20 (T20) cricket match, each **session (innings)** is structured as follows:
+
+### **Duration of Each Session (Innings):**
+- **Maximum Overs:** Each team bats for **20 overs** (120 balls).
+- **Typical Time:** A single innings typically lasts **1 hour to 1.5 hours**, depending on the pace of play, fielding strategies, and interruptions (e.g., weather, delays).
+
+### **How Time is Calculated:**
+1. **Overs and Balls:**  
+   - Each over consists of 6 legal deliveries.  
+   - The total number of balls bowled in an innings is **120** (20 overs × 6 balls).  
+
+2. **Time per Over:**  
+   - Bowling an over takes approximately **1 minute** (including the bowler’s run-up, delivery, and recovery).  
+   - However, the actual time can vary based on the bowler’s speed and the batsmen’s scoring rate.  
+
+3. **Breaks Between Overs:**  
+   - After each over, there is a **short break** (typically **10–30 seconds**) for the bowler to change ends and the fielding team to adjust.  
+   - There are **19 breaks** between 20 overs, adding **~1–2 minutes** to the total time.  
+
+4. **Power Plays (Mandatory Periods):**  
+   - The first **6 overs** (Power Play 1) and the next **6 overs** (Power Play 2) require specific fielding restrictions, which may influence the tempo of the innings but do not directly affect the time calculation.  
+
+5. **Total Innings Time:**  
+   - **Minimum Time:** ~20 minutes (if overs are bowled at maximum speed with no breaks).  
+   - **Average Time:** ~1 hour to 1.5 hours (including breaks and natural pauses).  
+
+### **Total Match Duration:**
+- A full T20 match (both innings) typically lasts **3–3.5 hours**, with breaks between innings (e.g., 10–15 minutes) and additional time for fielding changes and administrative tasks.  
+
+### **Key Notes:**
+- **No Strict Formula:** The time is not strictly calculated by the number of overs but depends on the game’s flow, bowler’s pace, and interruptions.  
+- **League-Specific Rules:** Some leagues (e.g., with time limits) may impose restrictions, but this is not standard in most T20 formats.  
+
+In summary, each session (innings) in a T20 match is **20 overs**, and the time is influenced by the pace of play, breaks, and fielding strategies, typically lasting **1–1.5 hours**.",[],0,36,3187,89.18,,False,,False,,False,False,
+q1,B,"In a USPL Twenty20 cricket match, each session (innings) lasts **85 minutes**. This time is calculated by allocating **4.25 minutes per over** for the 20 overs in an innings (20 × 4.25 = 85 minutes). The calculation ensures consistent timing across both sessions, with no extension of play beyond the scheduled hours unless specified by the league or umpires.","[""cricket_uspl_t20_rules::0029"", ""cricket_uspl_t20_rules::0039"", ""cricket_uspl_t20_rules::0046""]",1486,461,444,10.68,True,True,True,False,,False,False,
+q1,C,"In a USPL Twenty20 cricket match, each session (innings) is **85 minutes** long, calculated at **4.25 minutes per over** [1]. This means each session consists of 20 overs (85 ÷ 4.25 = 20). The time calculation is standardized across both sessions, with no extension beyond this duration unless modified by the league or umpires [1].","[""cricket_uspl_t20_rules::0029"", ""cricket_uspl_t20_rules::0039"", ""cricket_uspl_t20_rules::0046""]",1486,682,426,10.75,True,True,True,False,,False,True,True
+q2,A,"In adult volleyball, the standard rules are governed by the **FIVB (International Volleyball Federation)** and **NCAA (National Collegiate Athletic Association)**, with slight variations depending on the league. Here's the breakdown:
+
+### **Maximum Roster Size**
+- **Standard Roster**: Teams typically field **6 players** on the court at a time.
+- **Maximum Roster**: The **maximum number of players** a team can have on its roster is **12**. This includes the 6 players on the court and additional players who may rotate in during the match (e.g., in college or professional leagues).
+
+### **Match Time Limit**
+- **No Set Time Limit**: Volleyball matches do **not** have a fixed time limit. Instead, they are structured around **sets** and **points**:
+  - **Best-of-five sets**: The first team to win **3 sets** wins the match.
+  - **Set Scoring**: Each set is played to **25 points** (with a **2-point lead** required to win). If tied at 24-24, play continues until one team leads by 2 points.
+  - **Fifth Set**: If the match reaches a fifth set, it is played to **15 points** (again requiring a 2-point lead).
+
+### **Exceptions**
+- **Tournament Variations**: Some leagues or tournaments may impose **time limits** for the entire match (e.g., 90 minutes) or **set time limits** (e.g., 25 minutes per set), but these are **not standard** in official FIVB or NCAA rules.
+
+### **Summary**
+- **Roster Size**: Up to **12 players** (6 on the court, 6 substitutes).
+- **Match Time**: No set time limit; matches are determined by **sets and points** (best-of-five format). 
+
+Always check specific league rules for variations, as some organizations may adjust these parameters.",[],0,30,1178,31.08,,False,,False,,False,False,
+q2,B,"The maximum roster size for adult volleyball is **12 players** (as specified under the ""Volleyball"" entry). The time limit for a match is **1 hour**, which includes an optional 5-minute warm-up period agreed upon by both teams.","[""general_douglas_county_all_sports_rules::0006"", ""volleyball_fort_collins_manual::0019"", ""volleyball_fort_collins_manual::0018""]",1487,461,332,8.25,True,True,True,False,,False,False,
+q2,C,"The maximum roster size for adult volleyball is 12 players [1]. The time limit for a match is one (1) hour, which includes an optional five (5) minute warm-up period [2].","[""general_douglas_county_all_sports_rules::0006"", ""volleyball_fort_collins_manual::0019"", ""volleyball_fort_collins_manual::0018""]",1487,684,710,17.39,True,True,True,False,,False,True,True
+q3,A,"In the AYSO (American Youth Soccer Organization) soccer program, the **8U (Under-8)** division typically uses **7 players per side**. This is part of AYSO's structured approach to youth soccer, which adjusts the number of players based on age to ensure appropriate skill development and safety. 
+
+Here's a quick breakdown of AYSO's standard player numbers by age group:
+- **U6 (Under 6):** 5 players per side  
+- **U8 (Under 8):** 7 players per side  
+- **U10 (Under 10):** 11 players per side  
+- **U12 and older:** 11 players per side  
+
+Thus, for the **8U division**, the standard number of players per side is **7**. 
+
+**Answer:** 7 players per side.",[],0,34,769,18.21,,False,,False,,False,False,
+q3,B,"The AYSO soccer 8U (Under-8) division uses **4 players per side**. This is specified in the context under the ""8U 4‐a‐side (No goalkeepers)"" entry, which indicates a 4-a-side format with no goalkeepers allowed. 
+
+**Answer:** 4 players per side.","[""soccer_ayso_national_rules::0036"", ""soccer_ayso_basic_rules::0024"", ""soccer_ayso_national_rules::0025""]",1485,536,463,11.45,False,False,True,False,,False,False,
+q3,C,"The AYSO soccer 8U (Under-8) division uses **4 players per side** [1]. This is specified in the ""no. of team members"" column under the 8U entry, which lists ""4‐a‐side (No goalkeepers)"" [1]. The numbers ""6 5"" in the same row likely refer to total players and substitutes, but the question specifically asks about players per side.","[""soccer_ayso_national_rules::0036"", ""soccer_ayso_basic_rules::0024"", ""soccer_ayso_national_rules::0025""]",1485,755,561,13.44,False,True,True,False,,False,True,True
+q4,A,"The penalty for a foul depends on the sport, as different sports have distinct rules for fouls and their consequences. Here are examples for some common sports:
+
+### **Soccer (Football)**
+- **Foul**: Contact with an opponent (e.g., tripping, pushing, or handling the ball).
+- **Penalty**: 
+  - A **free kick** is awarded to the opposing team.
+  - If the foul occurs in the **penalty area** and involves the **hands** (e.g., handball), a **penalty kick** is awarded.
+
+### **Basketball**
+- **Foul**: Contact with an opponent (e.g., pushing, blocking, or holding).
+- **Penalty**:
+  - **Free throws** are awarded based on the type of foul (e.g., personal foul, shooting foul).
+  - A player may be **disqualified** (e.g., 5 fouls in a game).
+
+### **American Football**
+- **Foul**: Illegal actions (e.g., holding, personal fouls, or unsportsmanlike conduct).
+- **Penalty**:
+  - A **10-yard penalty** or **15-yard penalty** is enforced, and the opposing team gets a first down.
+
+### **Hockey**
+- **Foul**: Contact (e.g., checking, slashing, or tripping).
+- **Penalty**:
+  - **Minor penalty**: 2 minutes in the penalty box.
+  - **Major penalty**: 5 minutes in the penalty box.
+  - **Double-minor penalty**: 4 minutes in the penalty box (e.g., for fighting).
+
+### **Other Sports**
+- **Baseball**: A **strike** or **out** may result from a foul ball (e.g., a foul tip is a strike, while a foul ball is not counted).
+- **Rugby**: Penalties include **free kicks** or **scrums** depending on the infraction.
+
+### **General Note**
+If you’re referring to a specific sport, please clarify so I can provide a more accurate answer!",[],0,18,766,17.67,,True,,False,,False,False,
+q4,B,"The penalty for a **serious foul play** (deliberate violence against an opponent while the ball is in play) is a **sending-off offense**, which results in a **red card** (dismissal from the game). For less severe fouls, the referee may stop play, award a free kick, or issue a yellow card for misconduct. Temporary expulsions (""sit outs"") are explicitly forbidden by FIFA.","[""soccer_ayso_basic_rules::0116"", ""soccer_ayso_basic_rules::0016"", ""soccer_ayso_basic_rules::0114""]",1487,374,399,10.02,,False,True,False,,False,False,
+q4,C,"I cannot answer this question from the provided documents. The sources mention that serious foul play is a sending-off offense [1], but they do not specify the penalty for all types of fouls. Additionally, the rules about referees' discretion in handling fouls are not tied to specific penalties [2]. The documents lack explicit details on penalties for general fouls.","[""soccer_ayso_basic_rules::0116"", ""soccer_ayso_basic_rules::0016"", ""soccer_ayso_basic_rules::0114""]",1487,589,708,17.74,,False,True,True,,True,True,True
+q5,A,"In Major League Soccer (MLS), the maximum number of substitutions allowed per team in a regular match is **five**. This rule was introduced in 2019 to enhance tactical flexibility and game flow. Each team can make up to five substitutions during a single match, and there is no cap on the total number of substitutions across all teams in the league. This allows for greater strategic adaptability during games. 
+
+**Answer:** The maximum number of substitutions allowed per team in an MLS match is **five**.",[],0,30,782,17.92,,False,,False,False,False,False,
+q5,B,"The context provided does not specify the maximum number of substitutions allowed per team in a Major League Soccer (MLS) match. The information given relates to substitution rules for various sports, including soccer, but it primarily addresses team roster sizes (e.g., ""Soccer – Minimum 9, Maximum 20"") and general substitution procedures for youth leagues (e.g., 6U, 8U, 10U divisions). For MLS, which is a professional league, the standard substitution limit is typically **3 substitutions per team per match**, but this is not mentioned in the provided context. Therefore, based on the given text, the answer cannot be determined. 
+
+**Answer:** The context does not specify the maximum number of substitutions allowed per team in an MLS match.","[""basketball_las_vegas_youth_rules::0045"", ""soccer_ayso_national_rules::0009"", ""general_douglas_county_all_sports_rules::0006""]",1486,440,2256,54.33,,False,False,False,False,False,False,
+q5,C,"I cannot answer this question from the provided documents. The sources do not specify substitution rules for Major League Soccer (MLS) matches. Source [2] discusses substitution rules for AYSO soccer (youth leagues), but MLS is not mentioned in any of the provided documents.","[""basketball_las_vegas_youth_rules::0045"", ""soccer_ayso_national_rules::0009"", ""general_douglas_county_all_sports_rules::0006""]",1486,669,429,10.32,,True,True,True,True,False,True,True
+q6,A,"The boiling point of water at sea level is **100 degrees Celsius (212 degrees Fahrenheit)** under standard atmospheric pressure (1 atmosphere). This is the standard reference point for the boiling point of water in scientific contexts. 
+
+**Key Notes:**
+- **Atmospheric pressure** directly affects the boiling point. At higher altitudes, where atmospheric pressure is lower, water boils at a lower temperature.
+- The value **100°C** is based on the standard pressure of 1 atm (approximately 101.325 kPa), which is typical at sea level. 
+
+If you're referring to a different unit or context, feel free to clarify!",[],0,21,702,15.91,,False,,False,False,False,False,
+q6,B,"The context provided does not contain any information about the boiling point of water. However, based on general scientific knowledge, the boiling point of water at sea level is **100°C (212°F)** under standard atmospheric pressure.","[""volleyball_fort_collins_manual::0015"", ""basketball_las_vegas_youth_rules::0008"", ""basketball_las_vegas_youth_rules::0043""]",1387,303,274,7.05,,False,False,False,False,False,False,
+q6,C,I cannot answer this question from the provided documents.,[],0,181,136,3.54,,True,True,True,True,False,False,True

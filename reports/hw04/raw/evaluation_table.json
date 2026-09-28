@@ -1,0 +1,222 @@
+{
+  "per_question": [
+    {
+      "qid": "q1",
+      "config": "A",
+      "correct_retrieval": null,
+      "correct_answer": false,
+      "grounded": null,
+      "refused_when_needed": null,
+      "false_refusal": false,
+      "cites_source": false,
+      "format_ok": null
+    },
+    {
+      "qid": "q1",
+      "config": "B",
+      "correct_retrieval": true,
+      "correct_answer": true,
+      "grounded": true,
+      "refused_when_needed": null,
+      "false_refusal": false,
+      "cites_source": false,
+      "format_ok": null
+    },
+    {
+      "qid": "q1",
+      "config": "C",
+      "correct_retrieval": true,
+      "correct_answer": true,
+      "grounded": true,
+      "refused_when_needed": null,
+      "false_refusal": false,
+      "cites_source": true,
+      "format_ok": true
+    },
+    {
+      "qid": "q2",
+      "config": "A",
+      "correct_retrieval": null,
+      "correct_answer": false,
+      "grounded": null,
+      "refused_when_needed": null,
+      "false_refusal": false,
+      "cites_source": false,
+      "format_ok": null
+    },
+    {
+      "qid": "q2",
+      "config": "B",
+      "correct_retrieval": true,
+      "correct_answer": true,
+      "grounded": true,
+      "refused_when_needed": null,
+      "false_refusal": false,
+      "cites_source": false,
+      "format_ok": null
+    },
+    {
+      "qid": "q2",
+      "config": "C",
+      "correct_retrieval": true,
+      "correct_answer": true,
+      "grounded": true,
+      "refused_when_needed": null,
+      "false_refusal": false,
+      "cites_source": true,
+      "format_ok": true
+    },
+    {
+      "qid": "q3",
+      "config": "A",
+      "correct_retrieval": null,
+      "correct_answer": false,
+      "grounded": null,
+      "refused_when_needed": null,
+      "false_refusal": false,
+      "cites_source": false,
+      "format_ok": null
+    },
+    {
+      "qid": "q3",
+      "config": "B",
+      "correct_retrieval": false,
+      "correct_answer": false,
+      "grounded": true,
+      "refused_when_needed": null,
+      "false_refusal": false,
+      "cites_source": false,
+      "format_ok": null
+    },
+    {
+      "qid": "q3",
+      "config": "C",
+      "correct_retrieval": false,
+      "correct_answer": false,
+      "grounded": true,
+      "refused_when_needed": null,
+      "false_refusal": false,
+      "cites_source": true,
+      "format_ok": true
+    },
+    {
+      "qid": "q4",
+      "config": "A",
+      "correct_retrieval": null,
+      "correct_answer": true,
+      "grounded": null,
+      "refused_when_needed": null,
+      "false_refusal": false,
+      "cites_source": false,
+      "format_ok": null
+    },
+    {
+      "qid": "q4",
+      "config": "B",
+      "correct_retrieval": null,
+      "correct_answer": false,
+      "grounded": true,
+      "refused_when_needed": null,
+      "false_refusal": false,
+      "cites_source": false,
+      "format_ok": null
+    },
+    {
+      "qid": "q4",
+      "config": "C",
+      "correct_retrieval": null,
+      "correct_answer": false,
+      "grounded": true,
+      "refused_when_needed": null,
+      "false_refusal": true,
+      "cites_source": true,
+      "format_ok": true
+    },
+    {
+      "qid": "q5",
+      "config": "A",
+      "correct_retrieval": null,
+      "correct_answer": false,
+      "grounded": null,
+      "refused_when_needed": false,
+      "false_refusal": false,
+      "cites_source": false,
+      "format_ok": null
+    },
+    {
+      "qid": "q5",
+      "config": "B",
+      "correct_retrieval": null,
+      "correct_answer": false,
+      "grounded": false,
+      "refused_when_needed": false,
+      "false_refusal": false,
+      "cites_source": false,
+      "format_ok": null
+    },
+    {
+      "qid": "q5",
+      "config": "C",
+      "correct_retrieval": null,
+      "correct_answer": true,
+      "grounded": true,
+      "refused_when_needed": true,
+      "false_refusal": false,
+      "cites_source": true,
+      "format_ok": true
+    },
+    {
+      "qid": "q6",
+      "config": "A",
+      "correct_retrieval": null,
+      "correct_answer": false,
+      "grounded": null,
+      "refused_when_needed": false,
+      "false_refusal": false,
+      "cites_source": false,
+      "format_ok": null
+    },
+    {
+      "qid": "q6",
+      "config": "B",
+      "correct_retrieval": null,
+      "correct_answer": false,
+      "grounded": false,
+      "refused_when_needed": false,
+      "false_refusal": false,
+      "cites_source": false,
+      "format_ok": null
+    },
+    {
+      "qid": "q6",
+      "config": "C",
+      "correct_retrieval": null,
+      "correct_answer": true,
+      "grounded": true,
+      "refused_when_needed": true,
+      "false_refusal": false,
+      "cites_source": false,
+      "format_ok": true
+    }
+  ],
+  "summary": {
+    "A": {
+      "accuracy": 0.167,
+      "faithfulness": null,
+      "format_compliance": null,
+      "robustness": 0.25
+    },
+    "B": {
+      "accuracy": 0.333,
+      "faithfulness": 0.667,
+      "format_compliance": null,
+      "robustness": 0.0
+    },
+    "C": {
+      "accuracy": 0.667,
+      "faithfulness": 1.0,
+      "format_compliance": 1.0,
+      "robustness": 0.5
+    }
+  }
+}

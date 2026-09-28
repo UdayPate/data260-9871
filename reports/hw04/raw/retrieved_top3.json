@@ -1,0 +1,140 @@
+{
+  "q1": [
+    {
+      "rank": 1,
+      "source": "cricket_uspl_t20_rules.txt",
+      "chunk_id": "cricket_uspl_t20_rules::0029",
+      "score": 0.7586212379132439,
+      "text": "bowled short.\n12) Umpiring Fee for a Twenty20 Match has been fixed at $__ per umpire. USPL covers the\ncost.\n4 Hours of Play\n\n1) Unless otherwise modified by the league or by the umpires on the field, the duration/hours of play\nshall be as follows;\n\nEvent Timeline\nCoin Toss 10 minutes prior to scheduled game time.\nFirst Session 85 Minutes (4.25 minutes per over)\nInnings Break 15 Minutes\nSecond Session 85 Minutes (4.25 minutes per over)\n\nTable 1.0\n\n2) Both the Captains should have the list of"
+    },
+    {
+      "rank": 2,
+      "source": "cricket_uspl_t20_rules.txt",
+      "chunk_id": "cricket_uspl_t20_rules::0039",
+      "score": 0.6974247390369351,
+      "text": "of the team batting\n8 USPL league Rules Twenty20 – USPL Rules Committee\nLast Updated: 01/30/2022\n\nsecond will be limited to the same number of overs as the team batting first (except when the team\nbatting was guilty of wasting time). Also, the hours of play shall not be extended to complete the number\nof overs. Penalty as in Rule 5.3 is also applicable in such cases.\n3) If the team batting first is all out and the last wicket falls at or after the scheduled time for the interval,\nthe innings of"
+    },
+    {
+      "rank": 3,
+      "source": "cricket_uspl_t20_rules.txt",
+      "chunk_id": "cricket_uspl_t20_rules::0046",
+      "score": 0.6538823013713403,
+      "text": "the overs shall\n9 USPL league Rules Twenty20 – USPL Rules Committee\nLast Updated: 01/30/2022\n\nbe reduced at the rate of 4.25 minutes per over for the time lost. If the team batting second does not\nget a minimum of 5 overs, the match shall be treated as “No Result”\n8) The team batting second shall not bat for a greater number of overs than the team batting first, unless\nthe latter has been all out in less than the agreed number of overs as in 4.2 (5).\n9) Fractions are to be ignored in all"
+    }
+  ],
+  "q2": [
+    {
+      "rank": 1,
+      "source": "general_douglas_county_all_sports_rules.txt",
+      "chunk_id": "general_douglas_county_all_sports_rules::0006",
+      "score": 0.6687448753317603,
+      "text": "for the following per sport:\n Flag Football – Minimum 6, Maximum 15\n Soccer – Minimum 9, Maximum 20\n Softball – Minimum 10, Maximum 20\n Volleyball – Minimum 6, Maximum 12\n\n6. Players are not allowed to change team rosters once they have played in 1 game.\n7. PENALTY: Player becomes ineligible to participate on any team during that season.\n\n8. Players must have played in a certain amount of games in order to be eligible for post -season play.\nNumber of games played are as follows:\n For 18"
+    },
+    {
+      "rank": 2,
+      "source": "volleyball_fort_collins_manual.txt",
+      "chunk_id": "volleyball_fort_collins_manual::0019",
+      "score": 0.665575417490744,
+      "text": "no cap, or the one (1) hour time limit.\nFor the third game, a coin toss will determine serve or receive and side. If a game is tied\nwhen time expires, the next point will decide the winner.\n\n4. Number of Players: For Coed leagues, a maximum of 3 males for 6's and 2 for 4's may\nparticipate on the court, if a full team is present. Teams must start with a minimum of 4\nlegal players for 6's and 3 legal players for 4's.\n\n5. Forfeits: Teams that do not have the legal minimum number of players after"
+    },
+    {
+      "rank": 3,
+      "source": "volleyball_fort_collins_manual.txt",
+      "chunk_id": "volleyball_fort_collins_manual::0018",
+      "score": 0.6153007735449648,
+      "text": "winner may\nserve/receive, or take the choice of the court for the start of play.\n\n2. Time Limit: There will be a one (1) hour time limit for the match. Included in the one\n(1) hour time limit will be an optional five (5) minute warm-up period. Both teams\nmust agree if a shorter warm-up period is decided.\n\n3. Scoring and Results of the Match: Each match will consist of three (3) games to twenty-\nfive (25) points, winning by two (2) points with no cap, or the one (1) hour time limit.\nFor the"
+    }
+  ],
+  "q3": [
+    {
+      "rank": 1,
+      "source": "soccer_ayso_national_rules.txt",
+      "chunk_id": "soccer_ayso_national_rules::0036",
+      "score": 0.6964388483665506,
+      "text": "no. of team\nmembers\n18U 11‐a‐side 18 12\n16U 11‐a‐side 18 12\n14U 11‐a‐side 15 12\n12U 9‐a‐side 12 10\n10U 7‐a‐side 10 8\n8U 4‐a‐side\n(No goalkeepers) 6 5\n6U 4‐a‐side\n(No goalkeepers) 6 5\nAYSO\nSchoolyard\nSoccer\n4‐a‐side\n(No goalkeepers) 6 5\nAYSO National Rules & Regulations\nREGISTRATION\n\n8 AYSO National Rules & Regulations 06/2018\n\nIII. REGISTRATION\nA. The standard age divisions for the Boys and Girls programs are as follows:\nAge Division\nAges 3, 4 or 5 by the date of program commencement AYSO"
+    },
+    {
+      "rank": 2,
+      "source": "soccer_ayso_basic_rules.txt",
+      "chunk_id": "soccer_ayso_basic_rules::0024",
+      "score": 0.6479872887786126,
+      "text": "number of players on the\nfield at the time the goal was scored. This is true only if discovered by the referee\nbefore restarting play after the goal.\nSubstitution\nIn AYSO it is mandatory that all players who are present at the match play a\nminimum of one half of the game (the “Three Quarter Rule” is strongly encouraged\nwhich means no player on a team should play four ‘quarters’ in a given game, until\nall players on the team have played three ‘quarters’). Exceptions include: players\narriving"
+    },
+    {
+      "rank": 3,
+      "source": "soccer_ayso_national_rules.txt",
+      "chunk_id": "soccer_ayso_national_rules::0025",
+      "score": 0.6410865153921992,
+      "text": "of the Game as\nm o d i f i e d b y A Y S O ( w i t h p e r m i s s i o n ) , t h e AYSO National Rules & Regulations and the age\nappropriate AYSO Coach Manual.\n2. Small ‐sided games are permitted for all divisions.\nI. HEADING THE BALL\n1. Consistent with the US Soccer mandates on heading the ball, heading is banned for all division\nplayers 11U (12U and below for programs without single age divisions) and below in both\npractices and matches.\nHeading for players in 14U is limited to a maximum of"
+    }
+  ],
+  "q4": [
+    {
+      "rank": 1,
+      "source": "soccer_ayso_basic_rules.txt",
+      "chunk_id": "soccer_ayso_basic_rules::0116",
+      "score": 0.5938171278249668,
+      "text": "Giving the coach this responsibility, which is where it belongs, is\nnot a violation of the Laws.\nFIFA has expressly forbidden mandatory temporary expulsions, sometimes called\n“sit outs”, by a referee for cautioned players to regain their composure or to ‘cool off.’\nSerious Foul Play\nIt is serious foul play, a sending-off offense, when a player uses deliberate violence\nwhen challenging for the ball against an opponent on the field of play while the ball is\nin play.\nViolent Conduct\nIt is violent"
+    },
+    {
+      "rank": 2,
+      "source": "soccer_ayso_basic_rules.txt",
+      "chunk_id": "soccer_ayso_basic_rules::0016",
+      "score": 0.5853656692359289,
+      "text": "with a minimum of interruptions. Referees have considerable\nauthority and flexibility when determining whether or not to stop play. Violation of the\nletter of the Law may be overlooked if the referee considers it to be a trifling or\ndoubtful offense. The referee may also elect not to stop play for a foul when it would\nbe more of an advantage to the team that was fouled to continue playing. It is easy\nto fall into the trap of becoming overly concerned with the details of various rules and"
+    },
+    {
+      "rank": 3,
+      "source": "soccer_ayso_basic_rules.txt",
+      "chunk_id": "soccer_ayso_basic_rules::0114",
+      "score": 0.5826960590452328,
+      "text": "or her own penalty area.\nTemporary Expulsions\nIf a player cannot control his or her emotions and needs a ‘time -out’ to regain\ncontrol, either the player must recognize this and request permission to leave the\nfield of play or the coach should convince the player to do so. Players have the right\nto ask the referee for permission to leave the field of play for a variety of reasons,\nand the referee should grant this permission. Coaches also have the right to ask\nLaw 12: Fouls And Misconduct\n\n30"
+    }
+  ],
+  "q5": [
+    {
+      "rank": 1,
+      "source": "basketball_las_vegas_youth_rules.txt",
+      "chunk_id": "basketball_las_vegas_youth_rules::0045",
+      "score": 0.6370141723531317,
+      "text": "played three.\nb. Any team that has more than 10 players will be allowed to substitute the eligible\nplayer(s) half way through the quarter. The substituted player(s) must check in at the\ntable one (1) minute prior to check in.\n2. STANDARD SUBSTITUTION PROCEDURES\nPlayer participation is controlled through proper substitution procedures as follows:\na. 6U, 8U, and 10U divisions can only substitute players at the start of each quarter (1st,\n2nd, 3rd and 4th). 12U division will be open substitution"
+    },
+    {
+      "rank": 2,
+      "source": "soccer_ayso_national_rules.txt",
+      "chunk_id": "soccer_ayso_national_rules::0009",
+      "score": 0.6229753035748711,
+      "text": "o f e a c h t e a m m a y s u b s t i t u t e a s many team\nmembers, or none, including previously substituted team members, as long as all\neligible team members meet the minimum playing requirements.\ne. The referee shall allow for any time lost due to substitution o r other cause by\nstopping his/her watch or adding playing time. (See Article I.B .3. regarding reducing\nthe length of halves to permit proper substitution.)\n2. Substitution for injury:\na. If a player is injured, the coach may"
+    },
+    {
+      "rank": 3,
+      "source": "general_douglas_county_all_sports_rules.txt",
+      "chunk_id": "general_douglas_county_all_sports_rules::0006",
+      "score": 0.6067352459643606,
+      "text": "for the following per sport:\n Flag Football – Minimum 6, Maximum 15\n Soccer – Minimum 9, Maximum 20\n Softball – Minimum 10, Maximum 20\n Volleyball – Minimum 6, Maximum 12\n\n6. Players are not allowed to change team rosters once they have played in 1 game.\n7. PENALTY: Player becomes ineligible to participate on any team during that season.\n\n8. Players must have played in a certain amount of games in order to be eligible for post -season play.\nNumber of games played are as follows:\n For 18"
+    }
+  ],
+  "q6": [
+    {
+      "rank": 1,
+      "source": "volleyball_fort_collins_manual.txt",
+      "chunk_id": "volleyball_fort_collins_manual::0015",
+      "score": 0.1535933532926825,
+      "text": "A Level: Designed for those teams who wish to play for competitive reasons in the\nhighest level of competition offered. Players in this category should have a strong\nvolleyball background with organized playing experience. Teams employ multiple\noffensive attacks and defense strategies with consistent hitting and blocking.\nBB Level: Designed for teams who wish to play quality volleyball. Players in this\ncategory have above average volleyball skills. Team uses power volleyball skills well --"
+    },
+    {
+      "rank": 2,
+      "source": "basketball_las_vegas_youth_rules.txt",
+      "chunk_id": "basketball_las_vegas_youth_rules::0008",
+      "score": 0.1420567345792511,
+      "text": "8\nF. Game Clock........................................................................................................................................................................... 9\nG. Me rcy Rule ........................................................................................................................................................................ 9\nH. Coaching Box Rule"
+    },
+    {
+      "rank": 3,
+      "source": "basketball_las_vegas_youth_rules.txt",
+      "chunk_id": "basketball_las_vegas_youth_rules::0043",
+      "score": 0.13493041890205137,
+      "text": "19 Feet, 9\ninches\n8 Feet 10 Feet\n\nB. Number of Players and Forfeits\n1. If a team does not have at least four players on the floor ready to play at game time, the first\nperiod will be set, 7/8/10 minutes will be placed on the clock, and the clock will be started.\nGames will not start with less than four players. The late team will be penalized 1 point per\nminute up to (5) five points max.\n2. If the late team shows up within the first period, the game will commence from the time\nremaining on the"
+    }
+  ]
+}

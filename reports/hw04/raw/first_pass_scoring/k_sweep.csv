@@ -1,0 +1,38 @@
+qid,config,k,irrelevant_chunks_retrieved,context_chars,input_tokens,correct_retrieval,correct_answer,grounded,refused,answer
+q2,B,1,0,496,193,False,False,True,False,"The maximum roster size for adult volleyball is **12 players** (as specified in the context). However, the context does **not provide information** about the time limit for a match. Therefore, the time limit cannot be determined from the given data."
+q2,C,1,0,496,358,False,False,True,False,The maximum roster size for adult volleyball is 12 [1]. The sources provided do not specify a time limit for a match [1].
+q2,B,3,0,1487,461,True,True,True,False,"The maximum roster size for adult volleyball is **12 players** (as specified under the ""Volleyball"" entry). The time limit for a match is **1 hour**, which includes an optional 5-minute warm-up period."
+q2,C,3,0,1487,684,True,True,True,False,"The maximum roster size for adult volleyball is 12 players [1]. The time limit for a match is one (1) hour, which includes an optional five (5) minute warm-up period [3]. 
+
+For the roster size, source [1] specifies ""Volleyball – Minimum 6, Maximum 12,"" while source [2] discusses Coed leagues with different player caps but does not override the general rule for adult volleyball. The time limit is explicitly stated in source [3] as a one-hour match duration."
+q2,B,5,0,2480,738,True,True,True,False,"The maximum roster size for adult volleyball is **12 players** (as specified under the sport-specific rules for Volleyball: ""Minimum 6, Maximum 12""). The time limit for a match is **1 hour**, which includes an optional 5-minute warm-up period."
+q2,C,5,0,2480,1019,True,True,True,False,"The maximum roster size for adult volleyball is **12 players** [1]. The time limit for a match is **one (1) hour**, which includes an optional five (5) minute warm-up period [2]. 
+
+Note: Source [1] specifies volleyball's maximum roster size, while sources [2] and [3] describe the one-hour time limit for matches."
+q3,B,1,0,493,282,False,False,True,False,"The AYSO soccer 8U (Under-8) division uses **4 players per side**. This is indicated by the ""4-a-side"" notation in the context provided."
+q3,C,1,0,493,441,False,False,True,False,"The AYSO soccer 8U (Under-8) division uses **4 players per side** [1]. This is specified in the ""4‐a‐side (No goalkeepers)"" entry for the 8U division."
+q3,B,3,0,1485,536,False,False,True,False,"The AYSO soccer rules specify that for the 8U (Under-8) division, the number of players per side is **4**. This is explicitly stated in the context as ""4‐a‐side (No goalkeepers)"" under the 8U entry. 
+
+**Answer:** 4 players per side."
+q3,C,3,0,1485,755,False,True,True,False,"The AYSO soccer 8U (Under-8) division uses **4 players per side** [1]. This is specified in the ""no. of team members"" column under the 8U entry, which lists ""4‐a‐side (No goalkeepers) 6 5"" [1]. The ""4‐a‐side"" indicates 4 players per side, while the numbers 6 and 5 likely refer to total team members and substitutes, respectively."
+q3,B,5,0,2480,805,True,True,True,False,"The AYSO soccer rules specify that the **8U (Under-8) division uses 4 players per side**. This is explicitly stated in the table under the ""no. of team members"" section, which lists ""8U 4‐a‐side (No goalkeepers) 6 5."" The ""4-a-side"" indicates 4 players on the field per team, with no goalkeepers allowed in this division. While the AYSO National Coaching Program recommends 5-a-side for U-8, the table reflects the standard rule for player numbers in the 8U division. 
+
+**Answer: 4 players per side.**"
+q3,C,5,0,2480,1084,True,True,True,False,"The AYSO soccer rules specify that the 8U (Under-8) division uses **4 players per side** in a 4-a-side format, with no goalkeepers [1]. This is explicitly stated in the source. While source [4] mentions a recommendation of 5-a-side for U-8, this is framed as a coaching guideline rather than a rule. Since the question asks about the rules, the answer is based on the explicit rule in source [1]. 
+
+Answer: 4 players per side [1]."
+q5,B,1,1,497,181,,False,False,False,"The context provided does not specify substitution rules for Major League Soccer (MLS) matches. It outlines substitution procedures for youth divisions (6U, 8U, 10U, 12U), such as substituting at the start of quarters or halfway through the quarter for the 12U division. However, these rules are unrelated to MLS. In standard MLS matches, the maximum number of substitutions allowed per team is **three** (as per typical professional soccer regulations). Since the context does not address MLS-specific rules, the answer cannot be determined from the provided information."
+q5,C,1,1,497,342,,True,True,True,"I cannot answer this question from the provided documents. The sources only discuss basketball substitution rules for youth leagues in Las Vegas [1], not Major League Soccer (MLS) regulations. The question refers to a sport (soccer) and league (MLS) not mentioned in the provided materials."
+q5,B,3,3,1486,440,,False,False,False,"The context provided does not specify the maximum number of substitutions allowed per team in a Major League Soccer (MLS) match. Instead, it outlines general substitution rules for various sports, including soccer, which mention a **maximum of 20 players** on a team roster but do not explicitly limit the number of substitutions. Under the ""Standard Substitution Procedures,"" it states that teams may substitute **as many members as needed**, provided eligible players meet minimum requirements. 
+
+However, in real-world MLS rules, substitutions are typically limited to **three per team per match** (with some exceptions for specific scenarios). Since the context does not address MLS-specific substitution limits, the answer based solely on the provided text would be that **there is no explicit maximum** mentioned, but this may not reflect actual MLS regulations. 
+
+**Answer:** The context does not specify a maximum number of substitutions for MLS; it generally allows substitutions as needed, provided players meet eligibility criteria."
+q5,C,3,3,1486,669,,True,True,True,"I cannot answer this question from the provided documents. The sources mention substitution rules for youth basketball [1], AYSO soccer [2], and Douglas County sports [3], but none specify Major League Soccer (MLS) substitution limits. The AYSO rules [2] allow unlimited substitutions as long as players meet requirements, but this applies to youth soccer, not MLS. MLS substitution rules are not addressed in the provided documents."
+q5,B,5,5,2481,714,,False,False,False,"The context provided states that substitutions are allowed **unlimited** times, as it explicitly mentions:  
+**""Substitutions: There can be an unlimited number of substitutions. Players may...""**  
+
+However, this context does not specifically address Major League Soccer (MLS) rules. In real-world MLS, the standard is **3 substitutions per team per match**. But based solely on the given text, the answer derived from the context is:  
+
+**Answer:** There is no maximum number of substitutions allowed; substitutions are unlimited."
+q5,C,5,5,2481,1003,,True,True,True,"I cannot answer this question from the provided documents. The sources do not mention Major League Soccer (MLS) substitution rules. The closest relevant information is from soccer AYSO rules [2], which state teams may substitute ""as many team members, or none,"" but this applies to youth soccer, not MLS. No source specifies MLS substitution limits."
