@@ -1,0 +1,51 @@
+# DATA-260 Homework 4 - Part 4: Grounded RAG test questions
+# To be committed BEFORE running rag.py, so expected behavior is not
+# influenced by seeing actual model output.
+#
+# Domain: Community sports league fixtures (DOMAIN_ID=7)
+# Corpus: reports/hw03/corpus/ (6 real public league rulebooks, reused
+# from HW3 Part 2 - see SOURCES.md and CORPUS_MANIFEST.json)
+
+questions:
+  - id: q1
+    type: single_chunk
+    question: "In a USPL Twenty20 cricket match, how long is each session (innings), and how is that time calculated?"
+    expected_answer: "Each session is 85 minutes, calculated at 4.25 minutes per over for 20 overs."
+    expected_sources: ["cricket_uspl_t20_rules.txt"]
+    expected_behavior: "answer"
+
+  - id: q2
+    type: two_chunks
+    question: "What is the maximum roster size for adult volleyball, and what is the time limit for a match?"
+    expected_answer: "Maximum roster is 12 players (Douglas County rules); a match has a one (1) hour time limit (Fort Collins manual)."
+    expected_sources: ["general_douglas_county_all_sports_rules.txt", "volleyball_fort_collins_manual.txt"]
+    expected_behavior: "answer"
+
+  - id: q3
+    type: similar_across_documents
+    question: "How many players per side are used in AYSO soccer for the 8U (Under-8) division?"
+    expected_answer: "The 06/2018 AYSO National Rules table says 8U is 4-a-side with no goalkeepers. The older 2009-2010 Basic Rules say 5-a-side for U-8. A good answer notes the discrepancy or prefers the newer edition."
+    expected_sources: ["soccer_ayso_national_rules.txt", "soccer_ayso_basic_rules.txt"]
+    expected_behavior: "answer_and_flag_conflict"
+
+  - id: q4
+    type: ambiguous
+    question: "What is the penalty for a foul?"
+    expected_answer: "No single answer: 'foul' means different things in soccer, basketball, and other sports in the corpus."
+    expected_sources: []
+    expected_behavior: "clarify_or_answer_per_sport_without_inventing"
+
+  - id: q5
+    type: not_in_documents
+    question: "What is the maximum number of substitutions allowed per team in a Major League Soccer (MLS) match?"
+    expected_answer: "Cannot be answered from the documents: the corpus covers amateur/youth community leagues, not MLS."
+    expected_sources: []
+    expected_behavior: "refuse"
+    verify_before_running: "Select-String -Path reports\\hw03\\corpus\\*.txt -Pattern 'MLS|Major League' must return no matches"
+
+  - id: q6
+    type: unrelated
+    question: "What is the boiling point of water at sea level?"
+    expected_answer: "Cannot be answered from the documents: unrelated to the league rulebooks."
+    expected_sources: []
+    expected_behavior: "refuse"
