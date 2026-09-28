@@ -1,0 +1,91 @@
+{
+  "homework": "HW4",
+  "sid4": "9871",
+  "commit_hash": "44604f8bf8c76512c17113372ef98a497c0f5a43",
+  "working_tree_clean": false,
+  "uncommitted_paths": [
+    "reports/hw04/sql/",
+    "verify_hw04.py"
+  ],
+  "model_config": "qwen3:8b via Ollama, temperature 0.0 (Part 4 RAG generation); sentence-transformers/all-MiniLM-L6-v2 (embeddings); FastAPI + MySQL 8 via SQLAlchemy; React client",
+  "ollama_qwen3_8b_available": true,
+  "seed": "9871",
+  "verify_seed": "269871",
+  "port_base": 8871,
+  "database": "s9871_rel",
+  "backend_started_by_script": true,
+  "timestamp_utc": "2026-09-28T18:47:45.797241+00:00",
+  "all_checks_passed": false,
+  "checks": [
+    {
+      "check": "required_files_present",
+      "passed": false,
+      "detail": "Missing 4 of 29: ['reports\\\\hw04\\\\RUN_LOG.txt', 'reports\\\\hw04\\\\METRICS.md', 'reports\\\\hw04\\\\AI_USE.md', 'reports\\\\hw04\\\\report.pdf']"
+    },
+    {
+      "check": "db_variable_name_and_schema",
+      "passed": true,
+      "detail": "db_session_basede26 defined; tables ['fixture_updates', 'fixtures', 'sessions', 'users'] present in s9871_rel; email unique."
+    },
+    {
+      "check": "seed_data_present",
+      "passed": true,
+      "detail": "fixtures=5001 (need >= 5000), fixture_updates=200 (need 200), orphaned related rows=0"
+    },
+    {
+      "check": "index_present_and_used_by_explain",
+      "passed": true,
+      "detail": "EXPLAIN: type=ref, key=idx_fixture_name, rows=1"
+    },
+    {
+      "check": "backend_responds_on_port_base",
+      "passed": true,
+      "detail": "GET /api/auth/me without a session -> HTTP 401 on port 8871 (expected 401)"
+    },
+    {
+      "check": "unauthenticated_requests_rejected",
+      "passed": true,
+      "detail": "unauthenticated status codes: {'/api/fixtures': 401, '/api/fixtures/1': 401, '/api/fixtures-naive?page_size=10': 401, '/api/fixtures-fixed?page_size=10': 401}"
+    },
+    {
+      "check": "login_cookie_is_httponly_and_opaque",
+      "passed": true,
+      "detail": "wrong password -> 401; login -> 200; cookie is HttpOnly, opaque (32 chars), holds no user data"
+    },
+    {
+      "check": "session_stored_server_side_in_mysql",
+      "passed": true,
+      "detail": "sessions row found: user_id=1, expires_at=2026-09-28 19:47:43"
+    },
+    {
+      "check": "crud_roundtrip_persists_in_mysql",
+      "passed": true,
+      "detail": "create id=5003; read; update persisted in MySQL; delete removed the row from MySQL"
+    },
+    {
+      "check": "naive_and_fixed_return_same_data_with_expected_query_counts",
+      "passed": true,
+      "detail": "page_size=50: naive returned 50 rows with 51 SQL queries (expected 51); fixed returned 50 rows with 2 SQL queries (expected 2); same data=True"
+    },
+    {
+      "check": "logout_revokes_the_session",
+      "passed": true,
+      "detail": "logout -> 200; old token then -> HTTP 401 (expected 401); sessions rows left=0"
+    },
+    {
+      "check": "n1_measurements_complete_and_consistent",
+      "passed": true,
+      "detail": "180 rows (3 sizes x 2 versions x 30); naive = 1+N queries, fixed = 2; p50 speed-up per page size: 10: 1.47x, 50: 3.77x, 200: 12.10x"
+    },
+    {
+      "check": "react_client_routes_hooks_and_props",
+      "passed": true,
+      "detail": "routes /, /login, /create, /update, /delete; hooks and props present; react-router-dom installed"
+    },
+    {
+      "check": "rag_results_complete_including_refusals",
+      "passed": true,
+      "detail": "6 questions, 6 documents, 18 comparison rows, k sweep over 1/3/5, config C refused Q5 and Q6, evaluation table present"
+    }
+  ]
+}
