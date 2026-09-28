@@ -1,1 +1,3 @@
 code/venv/
+__pycache__/
+*.pyc

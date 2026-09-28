@@ -6,9 +6,10 @@ a small JSON API the frontend JS uses to load/search the fixture list
 create / update-record-1 / delete-highest-id via classic HTML form
 POST + redirect back to the home view.
 
-Data is stored in-memory (a plain Python list) - it resets whenever
-the server restarts. That's an intentional, documented simplification;
-the assignment doesn't require persistence.
+HW4 additions: CORSMiddleware + api_v2's JSON API router (for the React
+client), now backed by real MySQL tables via SQLAlchemy. On startup, the
+tables are created if missing, and a demo user + starter fixtures are
+seeded (only if they don't already exist).
 """
 
 from datetime import datetime, timezone
@@ -19,13 +20,26 @@ from fastapi import FastAPI, Form, Request
 from fastapi.responses import RedirectResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from fastapi.middleware.cors import CORSMiddleware
 
 from starlette.middleware.sessions import SessionMiddleware
 import auth
+import api_v2
+from db import Base, engine, db_session_basede26
+import models
+from query_counter import register_query_counter, query_count_middleware
 
 BASE_DIR = Path(__file__).resolve().parent
 
 app = FastAPI(title="Community Sports League Fixtures")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.add_middleware(
     SessionMiddleware,
@@ -35,22 +49,35 @@ app.add_middleware(
     same_site="lax",
     https_only=True,
 )
+app.middleware("http")(query_count_middleware)
+register_query_counter(engine)
+
 app.include_router(auth.router)
+app.include_router(api_v2.router)
 
 app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
 templates = Jinja2Templates(directory=BASE_DIR / "templates")
 
 
+@app.on_event("startup")
+def on_startup():
+    Base.metadata.create_all(bind=engine)
+    db = db_session_basede26()
+    try:
+        api_v2.seed_demo_data(db)
+    finally:
+        db.close()
+
+
 # ---------------------------------------------------------------------
-# In-memory data store
+# In-memory data store (HW1-3 server-rendered fixtures page - unchanged,
+# still separate from the new React client's real-MySQL-backed data)
 # ---------------------------------------------------------------------
 
 def now_iso() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 
 
-# Seeded with two records so "update record ID 1" and "delete the
-# highest-ID record" both have something real to act on immediately.
 fixtures = [
     {
         "id": 1,
@@ -76,23 +103,13 @@ fixtures = [
 next_id = 3
 
 
-# ---------------------------------------------------------------------
-# Page routes
-# ---------------------------------------------------------------------
-
 @app.get("/fixtures")
 def fixtures_page(request: Request):
     return templates.TemplateResponse(request, "index.html", {})
 
 
-# ---------------------------------------------------------------------
-# JSON API - used by the frontend JS for loading the list and search
-# ---------------------------------------------------------------------
-
 @app.get("/api/fixtures")
 def list_fixtures(q: Optional[str] = None):
-    """Returns the fixture list as JSON, optionally filtered by a
-    case-insensitive match against fixture_name or teams_players."""
     if q:
         q_lower = q.lower()
         results = [
@@ -104,10 +121,6 @@ def list_fixtures(q: Optional[str] = None):
         results = fixtures
     return JSONResponse(content=results)
 
-
-# ---------------------------------------------------------------------
-# Create
-# ---------------------------------------------------------------------
 
 @app.post("/fixtures/create")
 def create_fixture(
@@ -130,20 +143,11 @@ def create_fixture(
         "submitted": now_iso(),
     })
     next_id += 1
-    # 303 See Other is the correct redirect status after a POST,
-    # so the browser follows up with a GET rather than re-POSTing.
     return RedirectResponse(url="/fixtures", status_code=303)
 
 
-# ---------------------------------------------------------------------
-# Update record with ID 1
-# ---------------------------------------------------------------------
-
 @app.post("/fixtures/update-first")
 def update_first():
-    """Updates the record with ID 1 to new domain-appropriate values.
-    This is a fixed, one-click action per the assignment's wording,
-    not a general "edit any record" form."""
     for f in fixtures:
         if f["id"] == 1:
             f["fixture_name"] = "Lions vs Tigers - RESCHEDULED"
@@ -156,10 +160,6 @@ def update_first():
             break
     return RedirectResponse(url="/fixtures", status_code=303)
 
-
-# ---------------------------------------------------------------------
-# Delete the highest-ID record
-# ---------------------------------------------------------------------
 
 @app.post("/fixtures/delete-highest")
 def delete_highest():
