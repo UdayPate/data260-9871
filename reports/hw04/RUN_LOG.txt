@@ -1,0 +1,848 @@
+RUN_LOG.txt - DATA-260 Homework 4
+Student: Uday Patel | SID4 9871 | PORT_BASE 8871 | PREFIX s9871 | SEED 9871 | VERIFY_SEED 269871 | DOMAIN_ID 7
+Machine: Lenovo Legion Slim 5 16" (Ryzen 5 7640HS, 16 GB RAM, RTX 4060 8 GB), Windows, PowerShell
+Local model: qwen3:8b via Ollama, temperature 0.0. Embeddings: sentence-transformers/all-MiniLM-L6-v2.
+
+HOW TO READ THIS LOG
+- Each section is real console output for one run, with the time it was run. Times are local (Pacific).
+- [terminal] sections were copied from the terminal window. [FILE] sections are inserted verbatim from a
+  saved file by the assembly script (reports/hw04/raw/...), so they are not retyped.
+- Where a tool printed no time and no file time exists, the section says "time not recorded" and gives the
+  window it falls in.
+- Long outputs are shortened only where the text says "[... omitted ...]". The complete Part 4 run is in section 4d.
+- Passwords are never shown. The one statement that contained the database password is replaced by a marked
+  placeholder in section 2a.
+
+======================================================================
+1. PART 1 - React client set-up
+   Time: 2026-09-26, about 7:14-7:35 PM (from the file times in the listing below)  [terminal]
+======================================================================
+PS C:\Users\patel\data260-9871> npm create vite@latest code/web_application/client -- --template react
+Need to install the following packages:
+create-vite@9.2.1
+Ok to proceed? (y) y
+
+
+> npx
+> create-vite code/web_application/client --template react
+
+│
+◇  Which linter to use?
+│  ESLint
+│
+◇  Install with npm and start now?
+│  Yes
+│
+◇  Scaffolding project in C:\Users\patel\data260-9871\code\web_application\client...
+│
+◇  Installing dependencies with npm...
+
+added 143 packages, and audited 144 packages in 25s
+
+31 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+│
+◇  Starting dev server...
+
+> client@0.0.0 dev
+> vite
+
+
+  VITE v8.3.1  ready in 860 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+
+PS C:\Users\patel\data260-9871\code\web_application\client> npm install react-router-dom
+
+added 4 packages, and audited 148 packages in 4s
+
+32 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+PS C:\Users\patel\data260-9871\code\web_application\client\src> ls
+
+    Directory: C:\Users\patel\data260-9871\code\web_application\client\src
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         9/26/2026   7:15 PM                assets
+-a----         9/26/2026   7:33 PM           1437 api.js
+-a----         9/26/2026   7:14 PM           2891 App.css
+-a----         9/26/2026   7:31 PM           2928 App.jsx
+-a----         9/26/2026   7:34 PM            988 CreateRecord.jsx
+-a----         9/26/2026   7:35 PM            617 DeleteRecord.jsx
+-a----         9/26/2026   7:34 PM            983 Home.jsx
+-a----         9/26/2026   7:14 PM           2169 index.css
+-a----         9/26/2026   7:34 PM           1208 Login.jsx
+-a----         9/26/2026   7:14 PM            229 main.jsx
+-a----         9/26/2026   7:35 PM           1298 UpdateRecord.jsx
+
+(The components were restyled later the same evening; this listing is the state at that point.)
+
+======================================================================
+2. PART 2 - MySQL database, tables, sessions
+======================================================================
+--- 2a. Database and application user   [terminal]
+    Time: 2026-09-26, not recorded; shortly before 20:13:32 (the table creation in 2b)
+mysql> CREATE DATABASE s9871_rel;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SHOW DATABASES;
+[... omitted: the other databases on this machine, unrelated to this course ...]
+| s9871_rel          |
+[... omitted ...]
+14 rows in set (0.02 sec)
+
+mysql> -- CREATE USER 'hw4app'@'localhost' IDENTIFIED BY '<password omitted>';
+mysql> -- GRANT ALL PRIVILEGES ON s9871_rel.* TO 'hw4app'@'localhost';
+mysql> -- FLUSH PRIVILEGES;
+[the three statements above were run as one line; the statement contained the real password, so it is shown here as a placeholder]
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+--- 2b. Creating the tables from the SQLAlchemy models   [terminal]
+    Time: 2026-09-26 20:13:32 (from the log lines)
+(venv) PS C:\Users\patel\data260-9871\code\web_application> python -c "from db import Base, engine; import models; Base.metadata.create_all(bind=engine); print('Tables created successfully.')"
+2026-09-26 20:13:32,785 INFO sqlalchemy.engine.Engine SELECT DATABASE()
+2026-09-26 20:13:32,785 INFO sqlalchemy.engine.Engine [raw sql] {}
+2026-09-26 20:13:32,785 INFO sqlalchemy.engine.Engine SELECT @@sql_mode
+2026-09-26 20:13:32,785 INFO sqlalchemy.engine.Engine [raw sql] {}
+2026-09-26 20:13:32,785 INFO sqlalchemy.engine.Engine SELECT @@lower_case_table_names
+2026-09-26 20:13:32,785 INFO sqlalchemy.engine.Engine [raw sql] {}
+2026-09-26 20:13:32,785 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-09-26 20:13:32,785 INFO sqlalchemy.engine.Engine DESCRIBE `s9871_rel`.`fixtures`
+2026-09-26 20:13:32,785 INFO sqlalchemy.engine.Engine [raw sql] {}
+2026-09-26 20:13:32,785 INFO sqlalchemy.engine.Engine DESCRIBE `s9871_rel`.`users`
+2026-09-26 20:13:32,785 INFO sqlalchemy.engine.Engine [raw sql] {}
+2026-09-26 20:13:32,785 INFO sqlalchemy.engine.Engine DESCRIBE `s9871_rel`.`sessions`
+2026-09-26 20:13:32,785 INFO sqlalchemy.engine.Engine [raw sql] {}
+2026-09-26 20:13:32,794 INFO sqlalchemy.engine.Engine 
+CREATE TABLE fixtures (
+        id INTEGER NOT NULL AUTO_INCREMENT, 
+        fixture_name VARCHAR(255) NOT NULL, 
+        teams_players VARCHAR(255) NOT NULL, 
+        PRIMARY KEY (id)
+)
+
+
+2026-09-26 20:13:32,794 INFO sqlalchemy.engine.Engine [no key 0.00009s] {}
+2026-09-26 20:13:32,815 INFO sqlalchemy.engine.Engine 
+CREATE TABLE users (
+        id INTEGER NOT NULL AUTO_INCREMENT, 
+        name VARCHAR(255) NOT NULL, 
+        email VARCHAR(255) NOT NULL, 
+        password_hash VARCHAR(255) NOT NULL, 
+        PRIMARY KEY (id), 
+        UNIQUE (email)
+)
+
+
+2026-09-26 20:13:32,815 INFO sqlalchemy.engine.Engine [no key 0.00020s] {}
+2026-09-26 20:13:32,839 INFO sqlalchemy.engine.Engine 
+CREATE TABLE sessions (
+        id VARCHAR(64) NOT NULL, 
+        user_id INTEGER NOT NULL, 
+        created_at DATETIME, 
+        expires_at DATETIME NOT NULL, 
+        PRIMARY KEY (id), 
+        FOREIGN KEY(user_id) REFERENCES users (id)
+)
+
+
+2026-09-26 20:13:32,839 INFO sqlalchemy.engine.Engine [no key 0.00017s] {}
+2026-09-26 20:13:32,863 INFO sqlalchemy.engine.Engine COMMIT
+Tables created successfully.
+
+--- 2c. Checking the tables from the mysql client   [terminal]
+    Time: 2026-09-26, not recorded; right after 2b (about 20:14)
+(venv) PS C:\Users\patel\data260-9871\code\web_application> & "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u hw4app -p s9871_rel -e "SHOW TABLES; DESCRIBE fixtures; DESCRIBE users; DESCRIBE sessions;"
+Enter password: *************
++---------------------+
+| Tables_in_s9871_rel |
++---------------------+
+| fixtures            |
+| sessions            |
+| users               |
++---------------------+
++---------------+--------------+------+-----+---------+----------------+
+| Field         | Type         | Null | Key | Default | Extra          |
++---------------+--------------+------+-----+---------+----------------+
+| id            | int          | NO   | PRI | NULL    | auto_increment |
+| fixture_name  | varchar(255) | NO   |     | NULL    |                |
+| teams_players | varchar(255) | NO   |     | NULL    |                |
++---------------+--------------+------+-----+---------+----------------+
++---------------+--------------+------+-----+---------+----------------+
+| Field         | Type         | Null | Key | Default | Extra          |
++---------------+--------------+------+-----+---------+----------------+
+| id            | int          | NO   | PRI | NULL    | auto_increment |
+| name          | varchar(255) | NO   |     | NULL    |                |
+| email         | varchar(255) | NO   | UNI | NULL    |                |
+| password_hash | varchar(255) | NO   |     | NULL    |                |
++---------------+--------------+------+-----+---------+----------------+
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| id         | varchar(64) | NO   | PRI | NULL    |       |
+| user_id    | int         | NO   | MUL | NULL    |       |
+| created_at | datetime    | YES  |     | NULL    |       |
+| expires_at | datetime    | NO   |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+
+--- 2d. Backend running while the React app was used (login, update, delete)   [terminal]
+    Time: 2026-09-26 20:19:35 to 20:22:05 (from the log lines)
+(venv) PS C:\Users\patel\data260-9871\code\web_application>  python main.py 
+INFO:     Started server process [51364]
+INFO:     Waiting for application startup.
+2026-09-26 20:19:35,116 INFO sqlalchemy.engine.Engine SELECT DATABASE()
+2026-09-26 20:19:35,116 INFO sqlalchemy.engine.Engine [raw sql] {}
+2026-09-26 20:19:35,116 INFO sqlalchemy.engine.Engine SELECT @@sql_mode
+2026-09-26 20:19:35,116 INFO sqlalchemy.engine.Engine [raw sql] {}
+2026-09-26 20:19:35,116 INFO sqlalchemy.engine.Engine SELECT @@lower_case_table_names
+2026-09-26 20:19:35,116 INFO sqlalchemy.engine.Engine [raw sql] {}
+2026-09-26 20:19:35,116 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-09-26 20:19:35,116 INFO sqlalchemy.engine.Engine DESCRIBE `s9871_rel`.`fixtures`
+2026-09-26 20:19:35,116 INFO sqlalchemy.engine.Engine [raw sql] {}
+2026-09-26 20:19:35,130 INFO sqlalchemy.engine.Engine DESCRIBE `s9871_rel`.`users`
+2026-09-26 20:19:35,130 INFO sqlalchemy.engine.Engine [raw sql] {}
+2026-09-26 20:19:35,131 INFO sqlalchemy.engine.Engine DESCRIBE `s9871_rel`.`sessions`
+2026-09-26 20:19:35,131 INFO sqlalchemy.engine.Engine [raw sql] {}
+2026-09-26 20:19:35,132 INFO sqlalchemy.engine.Engine COMMIT
+2026-09-26 20:19:35,133 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-09-26 20:19:35,136 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.password_hash AS users_password_hash 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2026-09-26 20:19:35,136 INFO sqlalchemy.engine.Engine [generated in 0.00016s] {'email_1': 'league_admin@example.com', 'param_1': 1}
+2026-09-26 20:19:35,139 INFO sqlalchemy.engine.Engine SELECT count(*) AS count_1 
+FROM (SELECT fixtures.id AS fixtures_id, fixtures.fixture_name AS fixtures_fixture_name, fixtures.teams_players AS fixtures_teams_players 
+FROM fixtures) AS anon_1
+2026-09-26 20:19:35,139 INFO sqlalchemy.engine.Engine [generated in 0.00017s] {}
+2026-09-26 20:19:35,140 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8871 (Press CTRL+C to quit)
+[... omitted: the React app's repeated "GET /api/auth/me 401 Unauthorized" checks made before logging in ...]
+INFO:     127.0.0.1:54359 - "OPTIONS /api/auth/login HTTP/1.1" 200 OK
+2026-09-26 20:21:43,027 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-09-26 20:21:43,027 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.password_hash AS users_password_hash 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2026-09-26 20:21:43,028 INFO sqlalchemy.engine.Engine [cached since 127.9s ago] {'email_1': 'league_admin@example.com', 'param_1': 1}
+2026-09-26 20:21:43,275 INFO sqlalchemy.engine.Engine INSERT INTO sessions (id, user_id, created_at, expires_at) VALUES (%(id)s, %(user_id)s, %(created_at)s, %(expires_at)s)
+2026-09-26 20:21:43,275 INFO sqlalchemy.engine.Engine [generated in 0.00028s] {'id': '6a7e313db4441271aa2553a0963a2b2a', 'user_id': 1, 'created_at': datetime.datetime(2026, 9, 27, 3, 21, 43, 275494, tzinfo=datetime.timezone.utc), 'expires_at': datetime.datetime(2026, 9, 27, 4, 21, 43, 275494)}
+2026-09-26 20:21:43,288 INFO sqlalchemy.engine.Engine COMMIT
+2026-09-26 20:21:43,297 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-09-26 20:21:43,297 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.password_hash AS users_password_hash 
+FROM users 
+WHERE users.id = %(pk_1)s
+2026-09-26 20:21:43,297 INFO sqlalchemy.engine.Engine [generated in 0.00017s] {'pk_1': 1}
+INFO:     127.0.0.1:62046 - "POST /api/auth/login HTTP/1.1" 200 OK
+2026-09-26 20:21:43,302 INFO sqlalchemy.engine.Engine ROLLBACK
+[... omitted: the list and update requests between 20:21:43 and 20:21:50 ...]
+2026-09-26 20:21:50,697 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-09-26 20:21:50,699 INFO sqlalchemy.engine.Engine SELECT sessions.id AS sessions_id, sessions.user_id AS sessions_user_id, sessions.created_at AS sessions_created_at, sessions.expires_at AS sessions_expires_at 
+FROM sessions 
+WHERE sessions.id = %(id_1)s 
+ LIMIT %(param_1)s
+2026-09-26 20:21:50,699 INFO sqlalchemy.engine.Engine [cached since 95.92s ago] {'id_1': '6a7e313db4441271aa2553a0963a2b2a', 'param_1': 1}
+2026-09-26 20:21:50,700 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.password_hash AS users_password_hash 
+FROM users 
+WHERE users.id = %(id_1)s 
+ LIMIT %(param_1)s
+2026-09-26 20:21:50,700 INFO sqlalchemy.engine.Engine [cached since 7.379s ago] {'id_1': 1, 'param_1': 1}
+2026-09-26 20:21:50,701 INFO sqlalchemy.engine.Engine SELECT fixtures.id AS fixtures_id, fixtures.fixture_name AS fixtures_fixture_name, fixtures.teams_players AS fixtures_teams_players 
+FROM fixtures 
+WHERE fixtures.id = %(id_1)s 
+ LIMIT %(param_1)s
+2026-09-26 20:21:50,701 INFO sqlalchemy.engine.Engine [cached since 2.89s ago] {'id_1': 1, 'param_1': 1}
+2026-09-26 20:21:50,702 INFO sqlalchemy.engine.Engine DELETE FROM fixtures WHERE fixtures.id = %(id)s
+2026-09-26 20:21:50,702 INFO sqlalchemy.engine.Engine [generated in 0.00015s] {'id': 1}
+2026-09-26 20:21:50,704 INFO sqlalchemy.engine.Engine COMMIT
+INFO:     127.0.0.1:62046 - "DELETE /api/fixtures/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62239 - "OPTIONS /api/fixtures/2 HTTP/1.1" 200 OK
+2026-09-26 20:22:05,227 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-09-26 20:22:05,227 INFO sqlalchemy.engine.Engine SELECT sessions.id AS sessions_id, sessions.user_id AS sessions_user_id, sessions.created_at AS sessions_created_at, sessions.expires_at AS sessions_expires_at 
+FROM sessions 
+WHERE sessions.id = %(id_1)s 
+ LIMIT %(param_1)s
+2026-09-26 20:22:05,227 INFO sqlalchemy.engine.Engine [cached since 110.5s ago] {'id_1': '6a7e313db4441271aa2553a0963a2b2a', 'param_1': 1}
+2026-09-26 20:22:05,228 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.password_hash AS users_password_hash 
+FROM users 
+WHERE users.id = %(id_1)s 
+ LIMIT %(param_1)s
+2026-09-26 20:22:05,228 INFO sqlalchemy.engine.Engine [cached since 21.91s ago] {'id_1': 1, 'param_1': 1}
+2026-09-26 20:22:05,229 INFO sqlalchemy.engine.Engine SELECT fixtures.id AS fixtures_id, fixtures.fixture_name AS fixtures_fixture_name, fixtures.teams_players AS fixtures_teams_players 
+FROM fixtures 
+WHERE fixtures.id = %(id_1)s 
+ LIMIT %(param_1)s
+2026-09-26 20:22:05,229 INFO sqlalchemy.engine.Engine [cached since 17.42s ago] {'id_1': 2, 'param_1': 1}
+2026-09-26 20:22:05,230 INFO sqlalchemy.engine.Engine UPDATE fixtures SET teams_players=%(teams_players)s WHERE fixtures.id = %(fixtures_id)s
+2026-09-26 20:22:05,231 INFO sqlalchemy.engine.Engine [generated in 0.00015s] {'teams_players': 'Milpitas Warriors vs San Jose Strikers at San Jose.', 'fixtures_id': 2}
+2026-09-26 20:22:05,240 INFO sqlalchemy.engine.Engine COMMIT
+2026-09-26 20:22:05,240 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-09-26 20:22:05,244 INFO sqlalchemy.engine.Engine SELECT fixtures.id, fixtures.fixture_name, fixtures.teams_players 
+FROM fixtures 
+WHERE fixtures.id = %(pk_1)s
+2026-09-26 20:22:05,244 INFO sqlalchemy.engine.Engine [cached since 17.43s ago] {'pk_1': 2}
+INFO:     127.0.0.1:61077 - "PUT /api/fixtures/2 HTTP/1.1" 200 OK
+2026-09-26 20:22:05,245 INFO sqlalchemy.engine.Engine ROLLBACK
+
+--- 2e. Checking the database directly, bypassing the app   [terminal]
+    Time: 2026-09-26, not recorded; right after 20:22:05
+(venv) PS C:\Users\patel\data260-9871> & "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u hw4app -p s9871_rel -e "SELECT * FROM fixtures; SELECT id, name, email FROM users; SELECT id, user_id, expires_at FROM sessions;"
+Enter password: *************
++----+----------------------+-----------------------------------------------------+
+| id | fixture_name         | teams_players                                       |
++----+----------------------+-----------------------------------------------------+
+|  2 | Warriors vs Strikers | Milpitas Warriors vs San Jose Strikers at San Jose. |
++----+----------------------+-----------------------------------------------------+
++----+--------------+--------------------------+
+| id | name         | email                    |
++----+--------------+--------------------------+
+|  1 | League Admin | league_admin@example.com |
++----+--------------+--------------------------+
++----------------------------------+---------+---------------------+
+| id                               | user_id | expires_at          |
++----------------------------------+---------+---------------------+
+| 6a7e313db4441271aa2553a0963a2b2a |       1 | 2026-09-27 04:21:43 |
++----------------------------------+---------+---------------------+
+(The session token shown above expired at 2026-09-27 04:21:43 UTC and is no longer usable.)
+
+======================================================================
+3. PART 3 - seeding, the N+1 measurement, the index
+======================================================================
+--- 3a. Seeding 5,000 fixtures and 200 related rows   [terminal]
+    Time: 2026-09-26 20:36:12 (from the log lines). Only the end of the run is shown: it logs one INSERT per row.
+(venv) PS C:\Users\patel\data260-9871\code\web_application> python seed_n1_data.py
+[... omitted: about 5,200 INSERT statements ...]
+2026-09-26 20:36:12,464 INFO sqlalchemy.engine.Engine INSERT INTO fixture_updates (fixture_id, note, created_at) VALUES (%(fixture_id)s, %(note)s, %(created_at)s)
+2026-09-26 20:36:12,464 INFO sqlalchemy.engine.Engine [cached since 0.07994s ago] {'fixture_id': 920, 'note': 'Update note #200: schedule confirmed.', 'created_at': datetime.datetime(2026, 9, 27, 3, 36, 12, 464913, tzinfo=datetime.timezone.utc)}
+2026-09-26 20:36:12,466 INFO sqlalchemy.engine.Engine COMMIT
+2026-09-26 20:36:12,470 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-09-26 20:36:12,470 INFO sqlalchemy.engine.Engine SELECT count(*) AS count_1 
+FROM (SELECT fixtures.id AS fixtures_id, fixtures.fixture_name AS fixtures_fixture_name, fixtures.teams_players AS fixtures_teams_players 
+FROM fixtures) AS anon_1
+2026-09-26 20:36:12,470 INFO sqlalchemy.engine.Engine [cached since 2.321s ago] {}
+2026-09-26 20:36:12,473 INFO sqlalchemy.engine.Engine SELECT count(*) AS count_1 
+FROM (SELECT fixture_updates.id AS fixture_updates_id, fixture_updates.fixture_id AS fixture_updates_fixture_id, fixture_updates.note AS fixture_updates_note, fixture_updates.created_at AS fixture_updates_created_at 
+FROM fixture_updates) AS anon_1
+2026-09-26 20:36:12,473 INFO sqlalchemy.engine.Engine [generated in 0.00019s] {}
+
+Done. fixtures=5001, fixture_updates=200
+2026-09-26 20:36:12,473 INFO sqlalchemy.engine.Engine ROLLBACK
+(5001 fixtures = the 5,000 seeded rows plus one row that already existed from Part 2.)
+
+--- 3b. N+1 measurement: 30 requests x 3 page sizes x 2 versions = 180 requests   [terminal]
+    Time: finished 2026-09-26 20:45:15 (the saved results file's time; the script prints no time)
+(venv) PS C:\Users\patel\data260-9871\code\web_application> python measure_n1.py
+Logging in...
+  Logged in as: League Admin
+
+Measuring: version=naive, page_size=10
+  run  1: queries=11  latency=16.63ms  results=10
+  run 30: queries=11  latency=10.92ms  results=10
+
+Measuring: version=naive, page_size=50
+  run  1: queries=51  latency=37.86ms  results=50
+  run 30: queries=51  latency=43.08ms  results=50
+
+Measuring: version=naive, page_size=200
+  run  1: queries=201  latency=164.62ms  results=200
+  run 30: queries=201  latency=166.01ms  results=200
+
+Measuring: version=fixed, page_size=10
+  run  1: queries=2  latency=10.87ms  results=10
+  run 30: queries=2  latency=7.75ms  results=10
+
+Measuring: version=fixed, page_size=50
+  run  1: queries=2  latency=19.02ms  results=50
+  run 30: queries=2  latency=10.10ms  results=50
+
+Measuring: version=fixed, page_size=200
+  run  1: queries=2  latency=14.44ms  results=200
+  run 30: queries=2  latency=15.41ms  results=200
+
+
+Raw data (180 rows) saved to:
+  C:\Users\patel\data260-9871\reports\hw04\raw\n1_measurements.json
+  C:\Users\patel\data260-9871\reports\hw04\raw\n1_measurements.csv
+
+Page size Version   SQL stmts/req  p50 (ms)   p95 (ms)   p99 (ms)   
+--------------------------------------------------------------------
+10        naive     11             12.02      17.42      19.35      
+50        naive     51             37.36      43.99      47.46      
+200       naive     201            174.56     219.36     228.14     
+10        fixed     2              8.15       10.83      12.49      
+50        fixed     2              9.91       11.35      16.92      
+200       fixed     2              14.43      17.28      40.84      
+
+Summary saved to: C:\Users\patel\data260-9871\reports\hw04\raw\n1_summary_table.json
+
+====================================================================
+Speedup (naive p50 / fixed p50) per page size:
+  page_size=10: naive=12.02ms, fixed=8.15ms, speedup=1.47x
+  page_size=50: naive=37.36ms, fixed=9.91ms, speedup=3.77x
+  page_size=200: naive=174.56ms, fixed=14.43ms, speedup=12.10x
+
+--- 3c. Which columns already have an index on the related table   [terminal]
+    Time: not recorded; after 3b and before the index experiment in 3d
+(venv) PS C:\Users\patel\data260-9871\code\web_application> & "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u hw4app -p s9871_rel -e "SHOW INDEX FROM fixture_updates;"
+Enter password: *************
++-----------------+------------+------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| Table           | Non_unique | Key_name   | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment | Visible | Expression |
++-----------------+------------+------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| fixture_updates |          0 | PRIMARY    |            1 | id          | A         |         200 |     NULL |   NULL |      | BTREE      |         |               | YES     | NULL       |
+| fixture_updates |          1 | fixture_id |            1 | fixture_id  | A         |         196 |     NULL |   NULL |      | BTREE      |         |               | YES     | NULL       |
++-----------------+------------+------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+(InnoDB had already created an index on the foreign key fixture_id, so a new index was put on fixtures.fixture_name instead.)
+
+--- 3d. EXPLAIN before and after adding the index   [FILE: reports/hw04/raw/explain_before_after.txt]
+    Time: 2026-09-28 11:49:10 (the timestamps are inside the file). An earlier run of the same steps
+    (times not recorded) gave identical plans: 4856 estimated rows before, 1 after.
+﻿[2026-09-28 11:49:10] Drop the index to capture the BEFORE plan
+> ALTER TABLE fixtures DROP INDEX idx_fixture_name;
+[2026-09-28 11:49:10] EXPLAIN before the index
+> EXPLAIN SELECT * FROM fixtures WHERE fixture_name = 'Lions vs Tigers';
++----+-------------+----------+------------+------+---------------+------+---------+------+------+----------+-------------+
+| id | select_type | table    | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra       |
++----+-------------+----------+------------+------+---------------+------+---------+------+------+----------+-------------+
+|  1 | SIMPLE      | fixtures | NULL       | ALL  | NULL          | NULL | NULL    | NULL | 4856 |    10.00 | Using where |
++----+-------------+----------+------------+------+---------------+------+---------+------+------+----------+-------------+
+[2026-09-28 11:49:10] Add the index (same statement as sql/add_index.sql)
+> ALTER TABLE fixtures ADD INDEX idx_fixture_name (fixture_name);
+[2026-09-28 11:49:10] EXPLAIN after the index
+> EXPLAIN SELECT * FROM fixtures WHERE fixture_name = 'Lions vs Tigers';
++----+-------------+----------+------------+------+------------------+------------------+---------+-------+------+----------+-------+
+| id | select_type | table    | partitions | type | possible_keys    | key              | key_len | ref   | rows | filtered | Extra |
++----+-------------+----------+------------+------+------------------+------------------+---------+-------+------+----------+-------+
+|  1 | SIMPLE      | fixtures | NULL       | ref  | idx_fixture_name | idx_fixture_name | 1022    | const |    1 |   100.00 | NULL  |
++----+-------------+----------+------------+------+------------------+------------------+---------+-------+------+----------+-------+
+
+--- 3e. Saving the table definitions (schema.sql)   [terminal]
+    Time: 2026-09-28, not recorded; see the file time of reports/hw04/sql/schema.sql in section 5
+(venv) PS C:\Users\patel\data260-9871> & "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysqldump.exe" -u hw4app -p --no-data --skip-comments --result-file=reports\hw04\sql\schema.sql s9871_rel
+Enter password: *************
+mysqldump: Error: 'Access denied; you need (at least one of) the PROCESS privilege(s) for this operation' when trying to dump tablespaces
+(venv) PS C:\Users\patel\data260-9871> & "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysqldump.exe" -u hw4app -p --no-data --skip-comments --no-tablespaces --result-file=reports\hw04\sql\schema.sql s9871_rel
+Enter password: *************
+(venv) PS C:\Users\patel\data260-9871> Select-String -Path reports\hw04\sql\schema.sql -Pattern "CREATE TABLE|idx_fixture_name"
+
+reports\hw04\sql\schema.sql:15:CREATE TABLE `fixture_updates` (
+reports\hw04\sql\schema.sql:28:CREATE TABLE `fixtures` (
+reports\hw04\sql\schema.sql:33:  KEY `idx_fixture_name` (`fixture_name`)
+reports\hw04\sql\schema.sql:39:CREATE TABLE `sessions` (
+reports\hw04\sql\schema.sql:52:CREATE TABLE `users` (
+
+======================================================================
+4. PART 4 - grounded RAG
+======================================================================
+--- 4a. Commit order (proves the questions were fixed before the run)   [git log, taken when this log was assembled]
+44604f8  2026-09-28 11:27:45  HW4 Part 4: grounded RAG (rag.py), rescoring, raw results
+f50eaef  2026-09-28 10:28:35  HW4 Parts 1-3: React client, MySQL with server-side sessions, N+1 measurement
+90703f3  2026-09-28 10:26:05  Add HW4 Part 4 questions (before running RAG)
+5f652d1  2026-09-21 13:47:04  Updated the report with final commit hash
+e9d4e08  2026-09-21 13:43:43  Adding hw3 report
+5c0b083  2026-09-20 21:10:37  Adding ther readme file
+f32c2fb  2026-09-20 21:05:15  Add HW3 RUN_LOG, AI_USE, and verify_hw03.py with real smoke test results
+26b001e  2026-09-20 20:55:38  Add HW3 summary metrics script, METRICS.md with real analysis
+
+--- 4b. Checks made before the full run   [terminal]
+    Time: 2026-09-28, not recorded; after questions.yaml was saved (10:24 AM) and before the full run started (about 10:51 AM)
+(venv) PS C:\Users\patel\data260-9871> Select-String -Path reports\hw03\corpus\*.txt -Pattern "MLS|Major League"
+(venv) PS C:\Users\patel\data260-9871> python -c "import json; d=json.load(open('reports/hw04/raw/retrieved_top3.json', encoding='utf-8')); [print(c['chunk_id'], '85' in c['text'], '4.25' in c['text']) for c in d['q1']]"
+cricket_uspl_t20_rules::0029 True True
+cricket_uspl_t20_rules::0039 False False
+cricket_uspl_t20_rules::0046 False True
+(venv) PS C:\Users\patel\data260-9871> Select-String -Path reports\hw03\corpus\soccer_ayso_basic_rules.txt -Encoding utf8 -Pattern "\bU-?8\b|Under.?8|5.{0,4}a.{0,4}side|5 ?v ?5" | Select-Object -First 8 | ForEach-Object { $_.Line.Trim() }
+Coaching Program recommends 3-a-side for U-5 & U-6, 5-a-side for U-8, 7-a-side
+(The first attempt at the second command failed with a UnicodeDecodeError because the JSON file is UTF-8; it was rerun with encoding='utf-8' as shown. The first command printing nothing means MLS is not mentioned in the corpus, so Q5 is a valid refusal test.)
+
+--- 4c. Retrieval-only run (no model calls), used to check the relevance cutoff   [terminal]
+    Time: 2026-09-28, not recorded; before the full run (about 10:51 AM). Its retrieval printout was identical to the one in 4d.
+(venv) PS C:\Users\patel\data260-9871> python rag.py --retrieval-only
+[... omitted: the corpus table and the six retrieval blocks, identical to 4d ...]
+=== Context engineering preview (min_score=0.3) ===
+q1: keep 3, drop 0
+q2: keep 3, drop 0
+q3: keep 3, drop 0
+q4: keep 3, drop 0
+q5: keep 3, drop 0
+q6: keep 0, drop 3
+    dropped volleyball_fort_collins_manual::0015: score 0.154 < min_score 0.3
+    dropped basketball_las_vegas_youth_rules::0008: score 0.142 < min_score 0.3
+    dropped basketball_las_vegas_youth_rules::0043: score 0.135 < min_score 0.3
+
+Retrieval-only run: no LLM calls made. Compare the scores above for the questions that have answers (Q1-Q3) against Q5/Q6 to choose --min-score.
+
+--- 4d. The full run: python rag.py   [FILE: reports/hw04/raw/run_transcript.txt]
+    Time: 2026-09-28, about 10:51 AM to 11:03 AM (see the file times in section 5). 36 model calls.
+    NOTE: the evaluation table printed at the end of this run is the FIRST scoring pass. It contained a scoring
+    error (Q3 / config C was marked correct). The corrected table is printed in section 4e.
+=== Corpus and index ===
+  basketball_las_vegas_youth_rules.txt                  36842 chars    83 chunks
+  cricket_uspl_t20_rules.txt                            60266 chars   132 chunks
+  general_douglas_county_all_sports_rules.txt           11980 chars    26 chunks
+  soccer_ayso_basic_rules.txt                           66166 chars   145 chunks
+  soccer_ayso_national_rules.txt                        25334 chars    53 chunks
+  volleyball_fort_collins_manual.txt                    23426 chars    50 chunks
+  total: 6 documents, 489 chunks (chunk_size=500, overlap=50 characters)
+
+=== Retrieval (top_k=3), printed before calling the LLM ===
+
+q1 [single_chunk]: In a USPL Twenty20 cricket match, how long is each session (innings), and how is that time calculated?
+  [1] score=0.7586  cricket_uspl_t20_rules.txt  cricket_uspl_t20_rules::0029
+      bowled short. 12) Umpiring Fee for a Twenty20 Match has been fixed at $__ per umpire. USPL covers the cost. 4 Hours of Play  1) Unless otherwise modified by the league or by the umpires on the field, the duration/hours of play shall be as follows;  Event Timeline Coin Toss 10 minutes prior to schedu...
+  [2] score=0.6974  cricket_uspl_t20_rules.txt  cricket_uspl_t20_rules::0039
+      of the team batting 8 USPL league Rules Twenty20 – USPL Rules Committee Last Updated: 01/30/2022  second will be limited to the same number of overs as the team batting first (except when the team batting was guilty of wasting time). Also, the hours of play shall not be extended to complete the numb...
+  [3] score=0.6539  cricket_uspl_t20_rules.txt  cricket_uspl_t20_rules::0046
+      the overs shall 9 USPL league Rules Twenty20 – USPL Rules Committee Last Updated: 01/30/2022  be reduced at the rate of 4.25 minutes per over for the time lost. If the team batting second does not get a minimum of 5 overs, the match shall be treated as “No Result” 8) The team batting second shall no...
+
+q2 [two_chunks]: What is the maximum roster size for adult volleyball, and what is the time limit for a match?
+  [1] score=0.6687  general_douglas_county_all_sports_rules.txt  general_douglas_county_all_sports_rules::0006
+      for the following per sport:  Flag Football – Minimum 6, Maximum 15  Soccer – Minimum 9, Maximum 20  Softball – Minimum 10, Maximum 20  Volleyball – Minimum 6, Maximum 12  6. Players are not allowed to change team rosters once they have played in 1 game. 7. PENALTY: Player becomes ineligible to ...
+  [2] score=0.6656  volleyball_fort_collins_manual.txt  volleyball_fort_collins_manual::0019
+      no cap, or the one (1) hour time limit. For the third game, a coin toss will determine serve or receive and side. If a game is tied when time expires, the next point will decide the winner.  4. Number of Players: For Coed leagues, a maximum of 3 males for 6's and 2 for 4's may participate on the cou...
+  [3] score=0.6153  volleyball_fort_collins_manual.txt  volleyball_fort_collins_manual::0018
+      winner may serve/receive, or take the choice of the court for the start of play.  2. Time Limit: There will be a one (1) hour time limit for the match. Included in the one (1) hour time limit will be an optional five (5) minute warm-up period. Both teams must agree if a shorter warm-up period is dec...
+
+q3 [similar_across_documents]: How many players per side are used in AYSO soccer for the 8U (Under-8) division?
+  [1] score=0.6964  soccer_ayso_national_rules.txt  soccer_ayso_national_rules::0036
+      no. of team members 18U 11‐a‐side 18 12 16U 11‐a‐side 18 12 14U 11‐a‐side 15 12 12U 9‐a‐side 12 10 10U 7‐a‐side 10 8 8U 4‐a‐side (No goalkeepers) 6 5 6U 4‐a‐side (No goalkeepers) 6 5 AYSO Schoolyard Soccer 4‐a‐side (No goalkeepers) 6 5 AYSO National Rules & Regulations REGISTRATION  8 AYSO National ...
+  [2] score=0.6480  soccer_ayso_basic_rules.txt  soccer_ayso_basic_rules::0024
+      number of players on the field at the time the goal was scored. This is true only if discovered by the referee before restarting play after the goal. Substitution In AYSO it is mandatory that all players who are present at the match play a minimum of one half of the game (the “Three Quarter Rule” is...
+  [3] score=0.6411  soccer_ayso_national_rules.txt  soccer_ayso_national_rules::0025
+      of the Game as m o d i f i e d b y A Y S O ( w i t h p e r m i s s i o n ) , t h e AYSO National Rules & Regulations and the age appropriate AYSO Coach Manual. 2. Small ‐sided games are permitted for all divisions. I. HEADING THE BALL 1. Consistent with the US Soccer mandates on heading the ball, he...
+
+q4 [ambiguous]: What is the penalty for a foul?
+  [1] score=0.5938  soccer_ayso_basic_rules.txt  soccer_ayso_basic_rules::0116
+      Giving the coach this responsibility, which is where it belongs, is not a violation of the Laws. FIFA has expressly forbidden mandatory temporary expulsions, sometimes called “sit outs”, by a referee for cautioned players to regain their composure or to ‘cool off.’ Serious Foul Play It is serious fo...
+  [2] score=0.5854  soccer_ayso_basic_rules.txt  soccer_ayso_basic_rules::0016
+      with a minimum of interruptions. Referees have considerable authority and flexibility when determining whether or not to stop play. Violation of the letter of the Law may be overlooked if the referee considers it to be a trifling or doubtful offense. The referee may also elect not to stop play for a...
+  [3] score=0.5827  soccer_ayso_basic_rules.txt  soccer_ayso_basic_rules::0114
+      or her own penalty area. Temporary Expulsions If a player cannot control his or her emotions and needs a ‘time -out’ to regain control, either the player must recognize this and request permission to leave the field of play or the coach should convince the player to do so. Players have the right to ...
+
+q5 [not_in_documents]: What is the maximum number of substitutions allowed per team in a Major League Soccer (MLS) match?
+  [1] score=0.6370  basketball_las_vegas_youth_rules.txt  basketball_las_vegas_youth_rules::0045
+      played three. b. Any team that has more than 10 players will be allowed to substitute the eligible player(s) half way through the quarter. The substituted player(s) must check in at the table one (1) minute prior to check in. 2. STANDARD SUBSTITUTION PROCEDURES Player participation is controlled thr...
+  [2] score=0.6230  soccer_ayso_national_rules.txt  soccer_ayso_national_rules::0009
+      o f e a c h t e a m m a y s u b s t i t u t e a s many team members, or none, including previously substituted team members, as long as all eligible team members meet the minimum playing requirements. e. The referee shall allow for any time lost due to substitution o r other cause by stopping his/he...
+  [3] score=0.6067  general_douglas_county_all_sports_rules.txt  general_douglas_county_all_sports_rules::0006
+      for the following per sport:  Flag Football – Minimum 6, Maximum 15  Soccer – Minimum 9, Maximum 20  Softball – Minimum 10, Maximum 20  Volleyball – Minimum 6, Maximum 12  6. Players are not allowed to change team rosters once they have played in 1 game. 7. PENALTY: Player becomes ineligible to ...
+
+q6 [unrelated]: What is the boiling point of water at sea level?
+  [1] score=0.1536  volleyball_fort_collins_manual.txt  volleyball_fort_collins_manual::0015
+      A Level: Designed for those teams who wish to play for competitive reasons in the highest level of competition offered. Players in this category should have a strong volleyball background with organized playing experience. Teams employ multiple offensive attacks and defense strategies with consisten...
+  [2] score=0.1421  basketball_las_vegas_youth_rules.txt  basketball_las_vegas_youth_rules::0008
+      8 F. Game Clock........................................................................................................................................................................... 9 G. Me rcy Rule ...................................................................................................
+  [3] score=0.1349  basketball_las_vegas_youth_rules.txt  basketball_las_vegas_youth_rules::0043
+      19 Feet, 9 inches 8 Feet 10 Feet  B. Number of Players and Forfeits 1. If a team does not have at least four players on the floor ready to play at game time, the first period will be set, 7/8/10 minutes will be placed on the clock, and the clock will be started. Games will not start with less than f...
+
+=== Three-configuration comparison ===
+
+--- q1 / config A (context chunks: 0, input tokens: 36) ---
+In a standard Twenty20 (T20) cricket match, each **session (innings)** is structured as follows:
+
+### **Duration of Each Session (Innings):**
+- **Maximum Overs:** Each team bats for **20 overs** (120 balls).
+- **Typical Time:** A single innings typically lasts **1 hour to 1.5 hours**, depending on the pace of play, fielding strategies, and interruptions (e.g., weather, delays).
+
+### **How Time is Calculated:**
+1. **Overs and Balls:**  
+   - Each over consists of 6 legal deliveries.  
+   - The total number of balls bowled in an innings is **120** (20 overs × 6 balls).  
+
+2. **Time per Over:**  
+   - Bowling an over takes approximately **1 minute** (including the bowler’s run-up, delivery, and recovery).  
+   - However, the actual time can vary based on the bowler’s speed and the batsmen’s scoring rate.  
+
+3. **Breaks Between Overs:**  
+   - After each over, there is a **short break** (typically **10–30 seconds**) for the bowler to change ends and the fielding team to adjust.  
+   - There are **19 breaks** between 20 overs, adding **~1–2 minutes** to the total time.  
+
+4. **Power Plays (Mandatory Periods):**  
+   - The first **6 overs** (Power Play 1) and the next **6 overs** (Power Play 2) require specific fielding restrictions, which may influence the tempo of the innings but do not directly affect the time calculation.  
+
+5. **Total Innings Time:**  
+   - **Minimum Time:** ~20 minutes (if overs are bowled at maximum speed with no breaks).  
+   - **Average Time:** ~1 hour to 1.5 hours (including breaks and natural pauses).  
+
+### **Total Match Duration:**
+- A full T20 match (both innings) typically lasts **3–3.5 hours**, with breaks between innings (e.g., 10–15 minutes) and additional time for fielding changes and administrative tasks.  
+
+### **Key Notes:**
+- **No Strict Formula:** The time is not strictly calculated by the number of overs but depends on the game’s flow, bowler’s pace, and interruptions.  
+- **League-Specific Rules:** Some leagues (e.g., with time limits) may impose restrictions, but this is not standard in most T20 formats.  
+
+In summary, each session (innings) in a T20 match is **20 overs**, and the time is influenced by the pace of play, breaks, and fielding strategies, typically lasting **1–1.5 hours**.
+
+--- q1 / config B (context chunks: 3, input tokens: 461) ---
+In a USPL Twenty20 cricket match, each session (innings) lasts **85 minutes**. This time is calculated by allocating **4.25 minutes per over** for the 20 overs in an innings (20 × 4.25 = 85 minutes). The calculation ensures consistent timing across both sessions, with no extension of play beyond the scheduled hours unless specified by the league or umpires.
+
+--- q1 / config C (context chunks: 3, input tokens: 682) ---
+In a USPL Twenty20 cricket match, each session (innings) is **85 minutes** long, calculated at **4.25 minutes per over** [1]. This means each session consists of 20 overs (85 ÷ 4.25 = 20). The time calculation is standardized across both sessions, with no extension beyond this duration unless modified by the league or umpires [1].
+
+--- q2 / config A (context chunks: 0, input tokens: 30) ---
+In adult volleyball, the standard rules are governed by the **FIVB (International Volleyball Federation)** and **NCAA (National Collegiate Athletic Association)**, with slight variations depending on the league. Here's the breakdown:
+
+### **Maximum Roster Size**
+- **Standard Roster**: Teams typically field **6 players** on the court at a time.
+- **Maximum Roster**: The **maximum number of players** a team can have on its roster is **12**. This includes the 6 players on the court and additional players who may rotate in during the match (e.g., in college or professional leagues).
+
+### **Match Time Limit**
+- **No Set Time Limit**: Volleyball matches do **not** have a fixed time limit. Instead, they are structured around **sets** and **points**:
+  - **Best-of-five sets**: The first team to win **3 sets** wins the match.
+  - **Set Scoring**: Each set is played to **25 points** (with a **2-point lead** required to win). If tied at 24-24, play continues until one team leads by 2 points.
+  - **Fifth Set**: If the match reaches a fifth set, it is played to **15 points** (again requiring a 2-point lead).
+
+### **Exceptions**
+- **Tournament Variations**: Some leagues or tournaments may impose **time limits** for the entire match (e.g., 90 minutes) or **set time limits** (e.g., 25 minutes per set), but these are **not standard** in official FIVB or NCAA rules.
+
+### **Summary**
+- **Roster Size**: Up to **12 players** (6 on the court, 6 substitutes).
+- **Match Time**: No set time limit; matches are determined by **sets and points** (best-of-five format). 
+
+Always check specific league rules for variations, as some organizations may adjust these parameters.
+
+--- q2 / config B (context chunks: 3, input tokens: 461) ---
+The maximum roster size for adult volleyball is **12 players** (as specified under the "Volleyball" entry). The time limit for a match is **1 hour**, which includes an optional 5-minute warm-up period agreed upon by both teams.
+
+--- q2 / config C (context chunks: 3, input tokens: 684) ---
+The maximum roster size for adult volleyball is 12 players [1]. The time limit for a match is one (1) hour, which includes an optional five (5) minute warm-up period [2].
+
+--- q3 / config A (context chunks: 0, input tokens: 34) ---
+In the AYSO (American Youth Soccer Organization) soccer program, the **8U (Under-8)** division typically uses **7 players per side**. This is part of AYSO's structured approach to youth soccer, which adjusts the number of players based on age to ensure appropriate skill development and safety. 
+
+Here's a quick breakdown of AYSO's standard player numbers by age group:
+- **U6 (Under 6):** 5 players per side  
+- **U8 (Under 8):** 7 players per side  
+- **U10 (Under 10):** 11 players per side  
+- **U12 and older:** 11 players per side  
+
+Thus, for the **8U division**, the standard number of players per side is **7**. 
+
+**Answer:** 7 players per side.
+
+--- q3 / config B (context chunks: 3, input tokens: 536) ---
+The AYSO soccer 8U (Under-8) division uses **4 players per side**. This is specified in the context under the "8U 4‐a‐side (No goalkeepers)" entry, which indicates a 4-a-side format with no goalkeepers allowed. 
+
+**Answer:** 4 players per side.
+
+--- q3 / config C (context chunks: 3, input tokens: 755) ---
+The AYSO soccer 8U (Under-8) division uses **4 players per side** [1]. This is specified in the "no. of team members" column under the 8U entry, which lists "4‐a‐side (No goalkeepers)" [1]. The numbers "6 5" in the same row likely refer to total players and substitutes, but the question specifically asks about players per side.
+
+--- q4 / config A (context chunks: 0, input tokens: 18) ---
+The penalty for a foul depends on the sport, as different sports have distinct rules for fouls and their consequences. Here are examples for some common sports:
+
+### **Soccer (Football)**
+- **Foul**: Contact with an opponent (e.g., tripping, pushing, or handling the ball).
+- **Penalty**: 
+  - A **free kick** is awarded to the opposing team.
+  - If the foul occurs in the **penalty area** and involves the **hands** (e.g., handball), a **penalty kick** is awarded.
+
+### **Basketball**
+- **Foul**: Contact with an opponent (e.g., pushing, blocking, or holding).
+- **Penalty**:
+  - **Free throws** are awarded based on the type of foul (e.g., personal foul, shooting foul).
+  - A player may be **disqualified** (e.g., 5 fouls in a game).
+
+### **American Football**
+- **Foul**: Illegal actions (e.g., holding, personal fouls, or unsportsmanlike conduct).
+- **Penalty**:
+  - A **10-yard penalty** or **15-yard penalty** is enforced, and the opposing team gets a first down.
+
+### **Hockey**
+- **Foul**: Contact (e.g., checking, slashing, or tripping).
+- **Penalty**:
+  - **Minor penalty**: 2 minutes in the penalty box.
+  - **Major penalty**: 5 minutes in the penalty box.
+  - **Double-minor penalty**: 4 minutes in the penalty box (e.g., for fighting).
+
+### **Other Sports**
+- **Baseball**: A **strike** or **out** may result from a foul ball (e.g., a foul tip is a strike, while a foul ball is not counted).
+- **Rugby**: Penalties include **free kicks** or **scrums** depending on the infraction.
+
+### **General Note**
+If you’re referring to a specific sport, please clarify so I can provide a more accurate answer!
+
+--- q4 / config B (context chunks: 3, input tokens: 374) ---
+The penalty for a **serious foul play** (deliberate violence against an opponent while the ball is in play) is a **sending-off offense**, which results in a **red card** (dismissal from the game). For less severe fouls, the referee may stop play, award a free kick, or issue a yellow card for misconduct. Temporary expulsions ("sit outs") are explicitly forbidden by FIFA.
+
+--- q4 / config C (context chunks: 3, input tokens: 589) ---
+I cannot answer this question from the provided documents. The sources mention that serious foul play is a sending-off offense [1], but they do not specify the penalty for all types of fouls. Additionally, the rules about referees' discretion in handling fouls are not tied to specific penalties [2]. The documents lack explicit details on penalties for general fouls.
+
+--- q5 / config A (context chunks: 0, input tokens: 30) ---
+In Major League Soccer (MLS), the maximum number of substitutions allowed per team in a regular match is **five**. This rule was introduced in 2019 to enhance tactical flexibility and game flow. Each team can make up to five substitutions during a single match, and there is no cap on the total number of substitutions across all teams in the league. This allows for greater strategic adaptability during games. 
+
+**Answer:** The maximum number of substitutions allowed per team in an MLS match is **five**.
+
+--- q5 / config B (context chunks: 3, input tokens: 440) ---
+The context provided does not specify the maximum number of substitutions allowed per team in a Major League Soccer (MLS) match. The information given relates to substitution rules for various sports, including soccer, but it primarily addresses team roster sizes (e.g., "Soccer – Minimum 9, Maximum 20") and general substitution procedures for youth leagues (e.g., 6U, 8U, 10U divisions). For MLS, which is a professional league, the standard substitution limit is typically **3 substitutions per team per match**, but this is not mentioned in the provided context. Therefore, based on the given text, the answer cannot be determined. 
+
+**Answer:** The context does not specify the maximum number of substitutions allowed per team in an MLS match.
+
+--- q5 / config C (context chunks: 3, input tokens: 669) ---
+I cannot answer this question from the provided documents. The sources do not specify substitution rules for Major League Soccer (MLS) matches. Source [2] discusses substitution rules for AYSO soccer (youth leagues), but MLS is not mentioned in any of the provided documents.
+
+--- q6 / config A (context chunks: 0, input tokens: 21) ---
+The boiling point of water at sea level is **100 degrees Celsius (212 degrees Fahrenheit)** under standard atmospheric pressure (1 atmosphere). This is the standard reference point for the boiling point of water in scientific contexts. 
+
+**Key Notes:**
+- **Atmospheric pressure** directly affects the boiling point. At higher altitudes, where atmospheric pressure is lower, water boils at a lower temperature.
+- The value **100°C** is based on the standard pressure of 1 atm (approximately 101.325 kPa), which is typical at sea level. 
+
+If you're referring to a different unit or context, feel free to clarify!
+
+--- q6 / config B (context chunks: 3, input tokens: 303) ---
+The context provided does not contain any information about the boiling point of water. However, based on general scientific knowledge, the boiling point of water at sea level is **100°C (212°F)** under standard atmospheric pressure.
+
+--- q6 / config C (context chunks: 0, input tokens: 181) ---
+  [dropped volleyball_fort_collins_manual::0015: score 0.154 < min_score 0.3]
+  [dropped basketball_las_vegas_youth_rules::0008: score 0.142 < min_score 0.3]
+  [dropped basketball_las_vegas_youth_rules::0043: score 0.135 < min_score 0.3]
+I cannot answer this question from the provided documents.
+
+=== top_k sweep ===
+q2 k=1 cfg=B: chunks_in_prompt=1 irrelevant_retrieved=0 correct=NO grounded=yes input_tokens=193
+q2 k=1 cfg=C: chunks_in_prompt=1 irrelevant_retrieved=0 correct=NO grounded=yes input_tokens=358
+q2 k=3 cfg=B: chunks_in_prompt=3 irrelevant_retrieved=0 correct=yes grounded=yes input_tokens=461
+q2 k=3 cfg=C: chunks_in_prompt=3 irrelevant_retrieved=0 correct=yes grounded=yes input_tokens=684
+q2 k=5 cfg=B: chunks_in_prompt=5 irrelevant_retrieved=0 correct=yes grounded=yes input_tokens=738
+q2 k=5 cfg=C: chunks_in_prompt=5 irrelevant_retrieved=0 correct=yes grounded=yes input_tokens=1019
+q3 k=1 cfg=B: chunks_in_prompt=1 irrelevant_retrieved=0 correct=NO grounded=yes input_tokens=282
+q3 k=1 cfg=C: chunks_in_prompt=1 irrelevant_retrieved=0 correct=NO grounded=yes input_tokens=441
+q3 k=3 cfg=B: chunks_in_prompt=3 irrelevant_retrieved=0 correct=NO grounded=yes input_tokens=536
+q3 k=3 cfg=C: chunks_in_prompt=3 irrelevant_retrieved=0 correct=yes grounded=yes input_tokens=755
+q3 k=5 cfg=B: chunks_in_prompt=5 irrelevant_retrieved=0 correct=yes grounded=yes input_tokens=805
+q3 k=5 cfg=C: chunks_in_prompt=5 irrelevant_retrieved=0 correct=yes grounded=yes input_tokens=1084
+q5 k=1 cfg=B: chunks_in_prompt=1 irrelevant_retrieved=1 correct=NO grounded=NO input_tokens=181
+q5 k=1 cfg=C: chunks_in_prompt=1 irrelevant_retrieved=1 correct=yes grounded=yes input_tokens=342
+q5 k=3 cfg=B: chunks_in_prompt=3 irrelevant_retrieved=3 correct=NO grounded=NO input_tokens=440
+q5 k=3 cfg=C: chunks_in_prompt=3 irrelevant_retrieved=3 correct=yes grounded=yes input_tokens=669
+q5 k=5 cfg=B: chunks_in_prompt=5 irrelevant_retrieved=5 correct=NO grounded=NO input_tokens=714
+q5 k=5 cfg=C: chunks_in_prompt=5 irrelevant_retrieved=5 correct=yes grounded=yes input_tokens=1003
+
+=== Evaluation table (automatic heuristics) ===
+## Per-question results
+
+| Q | Config | Correct retrieval | Correct answer | Grounded | Refused when needed | Cites source |
+|---|---|---|---|---|---|---|
+| q1 | A | n/a | NO | n/a | n/a | NO |
+| q1 | B | yes | yes | yes | n/a | NO |
+| q1 | C | yes | yes | yes | n/a | yes |
+| q2 | A | n/a | NO | n/a | n/a | NO |
+| q2 | B | yes | yes | yes | n/a | NO |
+| q2 | C | yes | yes | yes | n/a | yes |
+| q3 | A | n/a | NO | n/a | n/a | NO |
+| q3 | B | NO | NO | yes | n/a | NO |
+| q3 | C | NO | yes | yes | n/a | yes |
+| q4 | A | n/a | yes | n/a | n/a | NO |
+| q4 | B | n/a | NO | yes | n/a | NO |
+| q4 | C | n/a | NO | yes | n/a | yes |
+| q5 | A | n/a | NO | n/a | NO | NO |
+| q5 | B | n/a | NO | NO | NO | NO |
+| q5 | C | n/a | yes | yes | yes | yes |
+| q6 | A | n/a | NO | n/a | NO | NO |
+| q6 | B | n/a | NO | NO | NO | NO |
+| q6 | C | n/a | yes | yes | yes | NO |
+
+## Summary
+
+| Config | Accuracy | Faithfulness | Format compliance | Robustness (Q3-Q6) |
+|---|---|---|---|---|
+| A: No RAG | 17% | n/a | n/a | 25% |
+| B: Basic RAG | 33% | 67% | n/a | 0% |
+| C: Context-engineered | 83% | 100% | 100% | 75% |
+
+Definitions: accuracy = share of the 6 questions handled as expected (right answer, or a refusal where one was needed); faithfulness = share of RAG answers supported by the context they were given; format compliance = share of config C answers that cite a [n] source or use the exact refusal sentence (A and B were never told to, so n/a); robustness = accuracy on the four stress questions Q3-Q6. All values are automatic heuristics - check them against the saved raw answers.
+
+Saved everything to C:\Users\patel\data260-9871\reports\hw04\raw
+
+--- 4e. Re-scoring the saved answers with the corrected check: python rescore.py   [terminal]
+    Time: 2026-09-28, about 11:17 AM (the time the first_pass_scoring folder was created, section 5). No model calls.
+(venv) PS C:\Users\patel\data260-9871> python rescore.py
+Original scoring saved to C:\Users\patel\data260-9871\reports\hw04\raw\first_pass_scoring
+
+Verdicts changed by the corrected scoring rules (2):
+  main  q3/C: correct_answer yes -> NO
+  sweep q3/C k=3: correct_answer yes -> NO
+
+=== Evaluation table after re-scoring ===
+## Per-question results
+
+| Q | Config | Correct retrieval | Correct answer | Grounded | Refused when needed | Cites source |
+|---|---|---|---|---|---|---|
+| q1 | A | n/a | NO | n/a | n/a | NO |
+| q1 | B | yes | yes | yes | n/a | NO |
+| q1 | C | yes | yes | yes | n/a | yes |
+| q2 | A | n/a | NO | n/a | n/a | NO |
+| q2 | B | yes | yes | yes | n/a | NO |
+| q2 | C | yes | yes | yes | n/a | yes |
+| q3 | A | n/a | NO | n/a | n/a | NO |
+| q3 | B | NO | NO | yes | n/a | NO |
+| q3 | C | NO | NO | yes | n/a | yes |
+| q4 | A | n/a | yes | n/a | n/a | NO |
+| q4 | B | n/a | NO | yes | n/a | NO |
+| q4 | C | n/a | NO | yes | n/a | yes |
+| q5 | A | n/a | NO | n/a | NO | NO |
+| q5 | B | n/a | NO | NO | NO | NO |
+| q5 | C | n/a | yes | yes | yes | yes |
+| q6 | A | n/a | NO | n/a | NO | NO |
+| q6 | B | n/a | NO | NO | NO | NO |
+| q6 | C | n/a | yes | yes | yes | NO |
+
+## Summary
+
+| Config | Accuracy | Faithfulness | Format compliance | Robustness (Q3-Q6) |
+|---|---|---|---|---|
+| A: No RAG | 17% | n/a | n/a | 25% |
+| B: Basic RAG | 33% | 67% | n/a | 0% |
+| C: Context-engineered | 67% | 100% | 100% | 50% |
+
+Definitions: accuracy = share of the 6 questions handled as expected (right answer, or a refusal where one was needed); faithfulness = share of RAG answers supported by the context they were given; format compliance = share of config C answers that cite a [n] source or use the exact refusal sentence (A and B were never told to, so n/a); robustness = accuracy on the four stress questions Q3-Q6. All values are automatic heuristics - check them against the saved raw answers.
+
+=== top_k sweep after re-scoring ===
+q2 k=1 cfg=B: retrieval=NO correct=NO grounded=yes irrelevant_retrieved=0 input_tokens=193
+q2 k=1 cfg=C: retrieval=NO correct=NO grounded=yes irrelevant_retrieved=0 input_tokens=358
+q2 k=3 cfg=B: retrieval=yes correct=yes grounded=yes irrelevant_retrieved=0 input_tokens=461
+q2 k=3 cfg=C: retrieval=yes correct=yes grounded=yes irrelevant_retrieved=0 input_tokens=684
+q2 k=5 cfg=B: retrieval=yes correct=yes grounded=yes irrelevant_retrieved=0 input_tokens=738
+q2 k=5 cfg=C: retrieval=yes correct=yes grounded=yes irrelevant_retrieved=0 input_tokens=1019
+q3 k=1 cfg=B: retrieval=NO correct=NO grounded=yes irrelevant_retrieved=0 input_tokens=282
+q3 k=1 cfg=C: retrieval=NO correct=NO grounded=yes irrelevant_retrieved=0 input_tokens=441
+q3 k=3 cfg=B: retrieval=NO correct=NO grounded=yes irrelevant_retrieved=0 input_tokens=536
+q3 k=3 cfg=C: retrieval=NO correct=NO grounded=yes irrelevant_retrieved=0 input_tokens=755
+q3 k=5 cfg=B: retrieval=yes correct=yes grounded=yes irrelevant_retrieved=0 input_tokens=805
+q3 k=5 cfg=C: retrieval=yes correct=yes grounded=yes irrelevant_retrieved=0 input_tokens=1084
+q5 k=1 cfg=B: retrieval=n/a correct=NO grounded=NO irrelevant_retrieved=1 input_tokens=181
+q5 k=1 cfg=C: retrieval=n/a correct=yes grounded=yes irrelevant_retrieved=1 input_tokens=342
+q5 k=3 cfg=B: retrieval=n/a correct=NO grounded=NO irrelevant_retrieved=3 input_tokens=440
+q5 k=3 cfg=C: retrieval=n/a correct=yes grounded=yes irrelevant_retrieved=3 input_tokens=669
+q5 k=5 cfg=B: retrieval=n/a correct=NO grounded=NO irrelevant_retrieved=5 input_tokens=714
+q5 k=5 cfg=C: retrieval=n/a correct=yes grounded=yes irrelevant_retrieved=5 input_tokens=1003
+
+======================================================================
+5. TIMES OF THE SAVED RESULT FILES   [taken when this log was assembled]
+======================================================================
+(local time; these are the files' last-modified times)
+  2026-09-28 10:24:50  reports/hw04/questions.yaml   <- questions saved
+  2026-09-26 20:45:15  reports/hw04/raw/n1_measurements.json   <- N+1 measurement finished
+  2026-09-26 20:45:15  reports/hw04/raw/n1_summary_table.json   <- N+1 summary written
+  2026-09-28 11:49:10  reports/hw04/raw/explain_before_after.txt   <- EXPLAIN before/after captured
+  2026-09-28 11:40:44  reports/hw04/sql/schema.sql   <- schema.sql saved
+  2026-09-28 10:51:28  reports/hw04/raw/run_config.json   <- full python rag.py run: results started being written
+  2026-09-28 11:03:24  reports/hw04/raw/run_transcript.txt   <- full python rag.py run: finished
+  2026-09-28 11:17:40  reports/hw04/raw/first_pass_scoring   <- python rescore.py: started
+
+======================================================================
+6. NOTE
+======================================================================
+The result of the final run of verify_hw04.py, with its time, is saved in reports/hw04/verification.json.

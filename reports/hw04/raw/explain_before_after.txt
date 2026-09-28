@@ -1,0 +1,19 @@
+﻿[2026-09-28 11:49:10] Drop the index to capture the BEFORE plan
+> ALTER TABLE fixtures DROP INDEX idx_fixture_name;
+[2026-09-28 11:49:10] EXPLAIN before the index
+> EXPLAIN SELECT * FROM fixtures WHERE fixture_name = 'Lions vs Tigers';
++----+-------------+----------+------------+------+---------------+------+---------+------+------+----------+-------------+
+| id | select_type | table    | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra       |
++----+-------------+----------+------------+------+---------------+------+---------+------+------+----------+-------------+
+|  1 | SIMPLE      | fixtures | NULL       | ALL  | NULL          | NULL | NULL    | NULL | 4856 |    10.00 | Using where |
++----+-------------+----------+------------+------+---------------+------+---------+------+------+----------+-------------+
+[2026-09-28 11:49:10] Add the index (same statement as sql/add_index.sql)
+> ALTER TABLE fixtures ADD INDEX idx_fixture_name (fixture_name);
+[2026-09-28 11:49:10] EXPLAIN after the index
+> EXPLAIN SELECT * FROM fixtures WHERE fixture_name = 'Lions vs Tigers';
++----+-------------+----------+------------+------+------------------+------------------+---------+-------+------+----------+-------+
+| id | select_type | table    | partitions | type | possible_keys    | key              | key_len | ref   | rows | filtered | Extra |
++----+-------------+----------+------------+------+------------------+------------------+---------+-------+------+----------+-------+
+|  1 | SIMPLE      | fixtures | NULL       | ref  | idx_fixture_name | idx_fixture_name | 1022    | const |    1 |   100.00 | NULL  |
++----+-------------+----------+------------+------+------------------+------------------+---------+-------+------+----------+-------+
+
