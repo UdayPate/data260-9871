@@ -1,0 +1,649 @@
+{
+  "info": {
+    "name": "Uday Patel - DATA-260 HW5 Part 1.II",
+    "description": "Community Sports League Fixtures API (SID4 9871, PORT_BASE 8871, database s9871_rel).\n\nRun the requests top to bottom. 00 captures the session token; 01 and 05 store {{teamId}} and {{fixtureId}}; 13 and 14 clean up, so the collection is safe to run repeatedly.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "00 - Login (run this first)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/auth/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "auth",
+            "login"
+          ]
+        },
+        "description": "Authenticates and stores the session token in the {{token}} collection variable.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"league_admin@example.com\",\n  \"password\": \"GoLions2026!\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// The session cookie is marked Secure. Over plain http, Postman's cookie jar",
+              "// may refuse to store or resend it, so the token is pulled out of the raw",
+              "// Set-Cookie header and kept in a collection variable instead. Every other",
+              "// request then sends it explicitly as a Cookie header.",
+              "let token = \"\";",
+              "const h = pm.response.headers.find(x => x.key.toLowerCase() === \"set-cookie\");",
+              "if (h) { const m = /session_token=([^;]+)/.exec(h.value); if (m) token = m[1]; }",
+              "if (!token) { try { token = pm.cookies.get(\"session_token\") || \"\"; } catch (e) {} }",
+              "if (token) { pm.collectionVariables.set(\"token\", token); }",
+              "",
+              "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+              "pm.test(\"session token captured\", () => pm.expect(token).to.not.eql(\"\"));",
+              "console.log(token ? \"token captured, length \" + token.length",
+              "                  : \"NO TOKEN - see the Plan B note in the instructions\");"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "01 - Team CREATE (related entity: add new record)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Cookie",
+            "value": "session_token={{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams"
+          ]
+        },
+        "description": "Expect 201 with id, team_code and both timestamps.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"team_name\": \"Evergreen Kestrels\",\n  \"home_ground\": \"Evergreen Community Park, San Jose\",\n  \"team_code\": \"TM-0500\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"201 Created\", () => pm.response.to.have.status(201));",
+              "pm.collectionVariables.set(\"teamId\", pm.response.json().id);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "02 - Team LIST with pagination (retrieve all, paginated)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Cookie",
+            "value": "session_token={{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams?page=1&page_size=3",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "page_size",
+              "value": "3"
+            }
+          ]
+        },
+        "description": "Expect 200 with items[], page, page_size, total, total_pages."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "03 - Team GET one (get individual record)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Cookie",
+            "value": "session_token={{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/{{teamId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "{{teamId}}"
+          ]
+        },
+        "description": "Expect 200 for the team created in step 01."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "04 - Team UPDATE",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Cookie",
+            "value": "session_token={{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/{{teamId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "{{teamId}}"
+          ]
+        },
+        "description": "Expect 200; updated_at is later than created_at.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"team_name\": \"Evergreen Kestrels FC\",\n  \"home_ground\": \"Evergreen Community Park, San Jose\",\n  \"team_code\": \"TM-0500\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "05 - Fixture CREATE (primary entity: create)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Cookie",
+            "value": "session_token={{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/fixtures",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "fixtures"
+          ]
+        },
+        "description": "spots_available is omitted on purpose, to show the default of 22.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fixture_name\": \"Kestrels vs Lions\",\n  \"teams_players\": \"Evergreen Kestrels vs Milpitas Lions\",\n  \"fixture_code\": \"FX-9871-95001\",\n  \"home_team_id\": {{teamId}}\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"201 Created\", () => pm.response.to.have.status(201));",
+              "const j = pm.response.json();",
+              "pm.collectionVariables.set(\"fixtureId\", j.id);",
+              "pm.test(\"spots_available defaulted to 22\", () => pm.expect(j.spots_available).to.eql(22));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "06 - Fixture LIST (list)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Cookie",
+            "value": "session_token={{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/fixtures",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "fixtures"
+          ]
+        },
+        "description": "Expect 200. This returns every fixture (~5002 rows), so capture the status line plus the top of the response."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "07 - Fixture GET one (retrieve)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Cookie",
+            "value": "session_token={{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/fixtures/{{fixtureId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "fixtures",
+            "{{fixtureId}}"
+          ]
+        },
+        "description": "Expect 200 for the fixture created in step 05."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "08 - Fixture UPDATE",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Cookie",
+            "value": "session_token={{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/fixtures/{{fixtureId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "fixtures",
+            "{{fixtureId}}"
+          ]
+        },
+        "description": "Expect 200 with spots_available changed from 22 to 14.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fixture_name\": \"Kestrels vs Lions (RESCHEDULED)\",\n  \"teams_players\": \"Evergreen Kestrels vs Milpitas Lions\",\n  \"fixture_code\": \"FX-9871-95001\",\n  \"spots_available\": 14,\n  \"home_team_id\": {{teamId}}\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "09 - RELATIONSHIP QUERY (all fixtures for one team)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Cookie",
+            "value": "session_token={{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/{{teamId}}/fixtures",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "{{teamId}}",
+            "fixtures"
+          ]
+        },
+        "description": "The extra endpoint the assignment asks for. Expect 200 with fixture_count = 1 and the nested team object."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "10 - ERROR 404 resource not found",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Cookie",
+            "value": "session_token={{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/999999",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "999999"
+          ]
+        },
+        "description": "Expect 404 {\"detail\": \"Team 999999 not found\"}."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "11 - ERROR 422 validation (bad unique-field format)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Cookie",
+            "value": "session_token={{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams"
+          ]
+        },
+        "description": "team_code must match ^TM-\\d{4}$. Expect 422 naming the pattern.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"team_name\": \"Bad Code\",\n  \"home_ground\": \"Anywhere\",\n  \"team_code\": \"KESTRELS-1\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 422\", () => pm.response.to.have.status(422));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "12 - ERROR 409 constraint (delete team that still has fixtures)",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Cookie",
+            "value": "session_token={{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/{{teamId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "{{teamId}}"
+          ]
+        },
+        "description": "The no-cascade rule. Expect 409; the team is NOT deleted."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 409\", () => pm.response.to.have.status(409));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "13 - Fixture DELETE (delete)",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Cookie",
+            "value": "session_token={{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/fixtures/{{fixtureId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "fixtures",
+            "{{fixtureId}}"
+          ]
+        },
+        "description": "Expect 200. Removes the dependent row."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "14 - Team DELETE (now allowed)",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Cookie",
+            "value": "session_token={{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/teams/{{teamId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "teams",
+            "{{teamId}}"
+          ]
+        },
+        "description": "Expect 200, because step 13 removed the last fixture referencing it. This also leaves the database exactly as it was, so the whole collection can be re-run."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:8871"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "teamId",
+      "value": ""
+    },
+    {
+      "key": "fixtureId",
+      "value": ""
+    }
+  ]
+}

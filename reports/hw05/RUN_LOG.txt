@@ -1,0 +1,822 @@
+RUN_LOG.txt - DATA-260 Homework 5
+Student: Uday Patel | SID4 9871 | PORT_BASE 8871 | PREFIX s9871 | SEED 9871 | VERIFY_SEED 269871 | DOMAIN_ID 7
+Machine: Lenovo Legion Slim 5 16" (Ryzen 5 7640HS, 16 GB RAM, RTX 4060 8 GB), Windows
+Database: MySQL 8.0, schema s9871_rel, application user hw4app
+Local model: qwen3:8b via Ollama (used from Part 5 onward; Part 1 does not use a model)
+
+HOW TO READ THIS LOG
+- Each section is real console output from one run, with the time it was run. Times are local (Pacific).
+- Sections are inserted verbatim from the saved console capture of each run. Nothing is retyped or
+  reworded.
+- db.py sets echo=True, so MySQL-backed runs print every SQL statement SQLAlchemy sends. Those
+  echo lines are removed where a section says so, because they run to thousands of lines; the SQL
+  that matters (the migration DDL) is printed by the script itself and is kept.
+- Credentials are never shown. The MySQL password lives only in code/web_application/.env, which is
+  gitignored.
+
+PART 1 COVERAGE
+  1a  Part 1.I   schema migration against the real 5,001-row database
+  1b  Part 1.I   re-running the migration, to show it is idempotent
+  1c  Part 1.II  offline API test against a temporary SQLite copy (run BEFORE touching MySQL)
+  1d  Part 1.II  live API test with curl against the real server + real MySQL
+  1e  Part 1.I/II verification straight against MySQL, bypassing the API
+  1f  regression check that nothing from HW1-HW4 broke
+  1g  note on the Postman screenshot session (not console output)
+
+======================================================================
+1a. PART 1.I - schema migration (migrate_hw05.py, first run)
+   Time: 2026-09-28 21:00:40
+   [terminal] SQLAlchemy echo lines removed; the [DDL] lines are the script's own output.
+======================================================================
+DATA-260 HW5 Part 1.I migration
+database = s9871_rel   SEED = 9871
+
+=== Step 1: create and seed `teams` ===
+CREATE TABLE teams (
+	id INTEGER NOT NULL AUTO_INCREMENT, 
+	team_name VARCHAR(255) NOT NULL, 
+	home_ground VARCHAR(255) NOT NULL, 
+	team_code VARCHAR(20) NOT NULL, 
+	created_at DATETIME NOT NULL DEFAULT (now()), 
+	updated_at DATETIME NOT NULL DEFAULT (now()), 
+	PRIMARY KEY (id), 
+	UNIQUE (team_code)
+)
+
+  teams table present (created if it was missing)
+  seeded 12 teams (TM-0001 .. TM-0012)
+
+=== Step 2: add new `fixtures` columns ===
+  [DDL] ALTER TABLE fixtures ADD COLUMN fixture_code VARCHAR(24) NULL
+  [DDL] ALTER TABLE fixtures ADD COLUMN spots_available INT NOT NULL DEFAULT 22
+  [DDL] ALTER TABLE fixtures ADD COLUMN home_team_id INT NULL
+  [DDL] ALTER TABLE fixtures ADD COLUMN created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+  [DDL] ALTER TABLE fixtures ADD COLUMN updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+
+=== Step 3: backfill existing rows ===
+  fixtures rows to consider: 5001
+  backfilled fixture_code on 5001 rows (pattern FX-9871-00001)
+  backfilled home_team_id on 5001 rows (round-robin over team ids 1..12)
+
+=== Step 4: NOT NULL + UNIQUE + ON DELETE RESTRICT foreign key ===
+  [DDL] ALTER TABLE fixtures MODIFY fixture_code VARCHAR(24) NOT NULL
+  [DDL] ALTER TABLE fixtures MODIFY home_team_id INT NOT NULL
+  [DDL] ALTER TABLE fixtures ADD CONSTRAINT uq_fixtures_fixture_code UNIQUE (fixture_code)
+  [DDL] ALTER TABLE fixtures ADD CONSTRAINT fk_fixtures_home_team FOREIGN KEY (home_team_id) REFERENCES teams (id) ON DELETE RESTRICT
+
+=== Final schema ===
+
+CREATE TABLE `teams` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `team_name` varchar(255) NOT NULL,
+  `home_ground` varchar(255) NOT NULL,
+  `team_code` varchar(20) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT (now()),
+  `updated_at` datetime NOT NULL DEFAULT (now()),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `team_code` (`team_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `fixtures` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `fixture_name` varchar(255) NOT NULL,
+  `teams_players` varchar(255) NOT NULL,
+  `fixture_code` varchar(24) NOT NULL,
+  `spots_available` int NOT NULL DEFAULT '22',
+  `home_team_id` int NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_fixtures_fixture_code` (`fixture_code`),
+  KEY `idx_fixture_name` (`fixture_name`),
+  KEY `fk_fixtures_home_team` (`home_team_id`),
+  CONSTRAINT `fk_fixtures_home_team` FOREIGN KEY (`home_team_id`) REFERENCES `teams` (`id`) ON DELETE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=5005 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+row count teams = 12
+
+row count fixtures = 5001
+
+Migration complete.
+
+======================================================================
+1b. PART 1.I - migration re-run, showing it is idempotent
+   Time: 2026-09-28 21:00:53
+   [terminal] Same command again. Every step reports 'already present' and no DDL is issued.
+   SQLAlchemy echo lines removed; the trailing SHOW CREATE TABLE output is identical to 1a
+   and is omitted here [... omitted ...].
+======================================================================
+DATA-260 HW5 Part 1.I migration
+database = s9871_rel   SEED = 9871
+
+=== Step 1: create and seed `teams` ===
+  teams table present (created if it was missing)
+  teams already holds 12 rows - not re-seeding
+
+=== Step 2: add new `fixtures` columns ===
+  fixtures.fixture_code already present - skipping
+  fixtures.spots_available already present - skipping
+  fixtures.home_team_id already present - skipping
+  fixtures.created_at already present - skipping
+  fixtures.updated_at already present - skipping
+
+=== Step 3: backfill existing rows ===
+  fixtures rows to consider: 5001
+  fixture_code: nothing to backfill
+  home_team_id: nothing to backfill
+
+=== Step 4: NOT NULL + UNIQUE + ON DELETE RESTRICT foreign key ===
+  fixtures.fixture_code already NOT NULL
+  fixtures.home_team_id already NOT NULL
+  UNIQUE key uq_fixtures_fixture_code already present
+  foreign key fk_fixtures_home_team already present
+
+======================================================================
+1c. PART 1.II - offline API test against a temporary SQLite copy
+   Time: 2026-09-28 21:05:10
+   [terminal] Run BEFORE the MySQL migration, to catch bugs without needing credentials.
+   The app's get_db dependency is pointed at a throwaway SQLite file; no application code
+   is modified. 50 assertions covering every endpoint, status code and constraint path.
+======================================================================
+C:\Users\patel\data260-9871\code\venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient as TestClient  # noqa
+PASS  login 200
+
+--- auth guard ---
+PASS  unauthenticated GET /api/teams -> 401
+PASS  unauthenticated GET /api/fixtures -> 401
+
+--- teams: create ---
+PASS  create team -> 201
+PASS  create team returns timestamps
+
+--- teams: validation + constraint violations ---
+PASS  duplicate team_code -> 409
+PASS  malformed team_code -> 422
+PASS  too-short team_name -> 422
+PASS  missing team_name -> 422
+
+--- teams: read / pagination ---
+PASS  list teams page 1 size 2 -> 2 items
+PASS  pagination envelope total=4
+PASS  pagination total_pages=2
+PASS  page 2 returns different ids
+PASS  page=0 -> 422
+PASS  page_size=1000 -> 422
+PASS  get team -> 200
+PASS  get missing team -> 404
+
+--- teams: update ---
+PASS  update team -> 200 and name changed
+PASS  update to another team's code -> 409
+PASS  update missing team -> 404
+
+--- fixtures: create ---
+PASS  create fixture -> 201
+PASS  spots_available defaults to 22
+PASS  create fixture with explicit spots_available
+
+--- fixtures: validation + constraint violations ---
+PASS  duplicate fixture_code -> 409
+PASS  malformed fixture_code -> 422
+PASS  unknown home_team_id -> 404
+PASS  negative spots_available -> 422
+
+--- fixtures: read / update / delete ---
+PASS  list fixtures -> 200 array
+PASS  get fixture -> 200
+PASS  get missing fixture -> 404
+PASS  update fixture -> 200, fields + FK changed
+PASS  update missing fixture -> 404
+
+--- relationship query ---
+PASS  relationship query -> 200
+PASS  relationship query counts only that team's fixtures
+PASS  reassigned fixture now shows under new team
+PASS  relationship query for missing team -> 404
+
+--- delete protection (the RESTRICT rule) ---
+PASS  delete team that still has fixtures -> 409
+PASS  that team still exists after the refused delete
+PASS  delete fixture -> 200
+PASS  deleted fixture now 404
+PASS  delete now-empty team -> 200
+PASS  deleted team now 404
+PASS  delete missing team -> 404
+PASS  delete missing fixture -> 404
+
+--- direct database checks (bypassing the API) ---
+PASS  updated fixture really persisted in the DB
+PASS  timestamps really persisted
+PASS  deleted team really gone from the DB
+PASS  no plain-text password column on users
+PASS  stored credential is a bcrypt hash
+PASS  DB-level FK blocks deleting a team with fixtures
+
+==== 50/50 checks passed ====
+
+======================================================================
+1d. PART 1.II - live API test with curl (real server, real MySQL)
+   Time: 2026-09-28 21:02:19
+   [terminal] uvicorn main:app on 127.0.0.1:8871, database s9871_rel.
+   The session cookie is marked Secure, so it is passed explicitly with -b on every request
+   rather than relying on a cookie jar over plain http.
+======================================================================
+==============================================================
+HW5 Part 1.II - live API test   2026-09-28 21:02:16 PDT
+server: http://127.0.0.1:8871   database: s9871_rel
+session token acquired: e4fb5c9e... (32 chars)
+==============================================================
+
+### Authentication guard
+GET /api/teams with no session -> HTTP 401 (expected 401)
+RESULT: PASS
+
+### 1. Related entity (teams) - CREATE
+--------------------------------------------------------------
+$ curl -X POST http://127.0.0.1:8871/api/teams -d '{"team_name":"Berryessa Cobras","home_ground":"Berryessa Community Center, San Jose","team_code":"TM-0777"}'
+HTTP 201   (expected 201)
+{
+  "id": 13,
+  "team_name": "Berryessa Cobras",
+  "home_ground": "Berryessa Community Center, San Jose",
+  "team_code": "TM-0777",
+  "created_at": "2026-09-28T21:02:16",
+  "updated_at": "2026-09-28T21:02:16"
+}
+RESULT: PASS
+new team id = 13
+
+### 2. Related entity - constraint + validation failures
+--------------------------------------------------------------
+$ curl -X POST http://127.0.0.1:8871/api/teams -d '{"team_name":"Clash","home_ground":"Anywhere","team_code":"TM-0777"}'
+HTTP 409   (expected 409)
+{
+  "detail": "team_code 'TM-0777' is already in use"
+}
+RESULT: PASS
+--------------------------------------------------------------
+$ curl -X POST http://127.0.0.1:8871/api/teams -d '{"team_name":"Bad Code","home_ground":"Anywhere","team_code":"COBRAS-1"}'
+HTTP 422   (expected 422)
+{
+  "detail": [
+    {
+      "type": "string_pattern_mismatch",
+      "loc": [
+        "body",
+        "team_code"
+      ],
+      "msg": "String should match pattern '^TM-\\d{4}$'",
+      "input": "COBRAS-1",
+      "ctx": {
+        "pattern": "^TM-\\d{4}$"
+      }
+    }
+  ]
+}
+RESULT: PASS
+--------------------------------------------------------------
+$ curl -X POST http://127.0.0.1:8871/api/teams -d '{"home_ground":"Anywhere","team_code":"TM-0888"}'
+HTTP 422   (expected 422)
+{
+  "detail": [
+    {
+      "type": "missing",
+      "loc": [
+        "body",
+        "team_name"
+      ],
+      "msg": "Field required",
+      "input": {
+        "home_ground": "Anywhere",
+        "team_code": "TM-0888"
+      }
+    }
+  ]
+}
+RESULT: PASS
+
+### 3. Related entity - RETRIEVE ALL WITH PAGINATION
+--------------------------------------------------------------
+$ curl -X GET http://127.0.0.1:8871/api/teams?page=1&page_size=3 
+HTTP 200   (expected 200)
+{
+  "items": [
+    {
+      "id": 1,
+      "team_name": "Milpitas Lions",
+      "home_ground": "Milpitas Sports Complex, Field 1",
+      "team_code": "TM-0001",
+      "created_at": "2026-09-28T21:00:39",
+      "updated_at": "2026-09-28T21:00:39"
+    },
+    {
+      "id": 2,
+      "team_name": "San Jose Tigers",
+      "home_ground": "Watson Park, San Jose",
+      "team_code": "TM-0002",
+      "created_at": "2026-09-28T21:00:39",
+      "updated_at": "2026-09-28T21:00:39"
+    },
+    {
+      "id": 3,
+      "team_name": "Fremont Warriors",
+      "home_ground": "Central Park Fields, Fremont",
+      "team_code": "TM-0003",
+      "created_at": "2026-09-28T21:00:39",
+      "updated_at": "2026-09-28T21:00:39"
+    }
+  ],
+  "page": 1,
+  "page_size": 3,
+  "total": 13,
+  "total_pages": 5
+}
+RESULT: PASS
+--------------------------------------------------------------
+$ curl -X GET http://127.0.0.1:8871/api/teams?page=2&page_size=3 
+HTTP 200   (expected 200)
+{
+  "items": [
+    {
+      "id": 4,
+      "team_name": "Santa Clara Strikers",
+      "home_ground": "Central Park Softball Field, Santa Clara",
+      "team_code": "TM-0004",
+      "created_at": "2026-09-28T21:00:39",
+      "updated_at": "2026-09-28T21:00:39"
+    },
+    {
+      "id": 5,
+      "team_name": "Sunnyvale Falcons",
+      "home_ground": "Fair Oaks Park, Sunnyvale",
+      "team_code": "TM-0005",
+      "created_at": "2026-09-28T21:00:39",
+      "updated_at": "2026-09-28T21:00:39"
+    },
+    {
+      "id": 6,
+      "team_name": "Oakland Titans",
+      "home_ground": "Mosswood Park, Oakland",
+      "team_code": "TM-0006",
+      "created_at": "2026-09-28T21:00:39",
+      "updated_at": "2026-09-28T21:00:39"
+    }
+  ],
+  "page": 2,
+  "page_size": 3,
+  "total": 13,
+  "total_pages": 5
+}
+RESULT: PASS
+--------------------------------------------------------------
+$ curl -X GET http://127.0.0.1:8871/api/teams?page=0 
+HTTP 422   (expected 422)
+{
+  "detail": [
+    {
+      "type": "greater_than_equal",
+      "loc": [
+        "query",
+        "page"
+      ],
+      "msg": "Input should be greater than or equal to 1",
+      "input": "0",
+      "ctx": {
+        "ge": 1
+      }
+    }
+  ]
+}
+RESULT: PASS
+
+### 4. Related entity - RETRIEVE ONE / UPDATE
+--------------------------------------------------------------
+$ curl -X GET http://127.0.0.1:8871/api/teams/13 
+HTTP 200   (expected 200)
+{
+  "id": 13,
+  "team_name": "Berryessa Cobras",
+  "home_ground": "Berryessa Community Center, San Jose",
+  "team_code": "TM-0777",
+  "created_at": "2026-09-28T21:02:16",
+  "updated_at": "2026-09-28T21:02:16"
+}
+RESULT: PASS
+--------------------------------------------------------------
+$ curl -X GET http://127.0.0.1:8871/api/teams/999999 
+HTTP 404   (expected 404)
+{
+  "detail": "Team 999999 not found"
+}
+RESULT: PASS
+--------------------------------------------------------------
+$ curl -X PUT http://127.0.0.1:8871/api/teams/13 -d '{"team_name":"Berryessa Cobras FC","home_ground":"Berryessa Community Center, San Jose","team_code":"TM-0777"}'
+HTTP 200   (expected 200)
+{
+  "id": 13,
+  "team_name": "Berryessa Cobras FC",
+  "home_ground": "Berryessa Community Center, San Jose",
+  "team_code": "TM-0777",
+  "created_at": "2026-09-28T21:02:16",
+  "updated_at": "2026-09-28T21:02:17"
+}
+RESULT: PASS
+--------------------------------------------------------------
+$ curl -X PUT http://127.0.0.1:8871/api/teams/13 -d '{"team_name":"Berryessa Cobras FC","home_ground":"Berryessa Community Center, San Jose","team_code":"TM-0001"}'
+HTTP 409   (expected 409)
+{
+  "detail": "team_code 'TM-0001' is already in use by team 1"
+}
+RESULT: PASS
+--------------------------------------------------------------
+$ curl -X PUT http://127.0.0.1:8871/api/teams/999999 -d '{"team_name":"Ghost","home_ground":"Nowhere","team_code":"TM-0999"}'
+HTTP 404   (expected 404)
+{
+  "detail": "Team 999999 not found"
+}
+RESULT: PASS
+
+### 5. Primary entity (fixtures) - CREATE
+--------------------------------------------------------------
+$ curl -X POST http://127.0.0.1:8871/api/fixtures -d '{"fixture_name":"Cobras vs Lions","teams_players":"Berryessa Cobras vs Milpitas Lions","fixture_code":"FX-9871-90001","home_team_id":13}'
+HTTP 201   (expected 201)
+{
+  "id": 5005,
+  "fixture_name": "Cobras vs Lions",
+  "teams_players": "Berryessa Cobras vs Milpitas Lions",
+  "fixture_code": "FX-9871-90001",
+  "spots_available": 22,
+  "home_team_id": 13,
+  "created_at": "2026-09-28T21:02:17",
+  "updated_at": "2026-09-28T21:02:17"
+}
+RESULT: PASS
+new fixture id = 5005
+--------------------------------------------------------------
+$ curl -X POST http://127.0.0.1:8871/api/fixtures -d '{"fixture_name":"Cobras vs Tigers","teams_players":"Berryessa Cobras vs San Jose Tigers","fixture_code":"FX-9871-90002","spots_available":8,"home_team_id":13}'
+HTTP 201   (expected 201)
+{
+  "id": 5006,
+  "fixture_name": "Cobras vs Tigers",
+  "teams_players": "Berryessa Cobras vs San Jose Tigers",
+  "fixture_code": "FX-9871-90002",
+  "spots_available": 8,
+  "home_team_id": 13,
+  "created_at": "2026-09-28T21:02:18",
+  "updated_at": "2026-09-28T21:02:18"
+}
+RESULT: PASS
+
+### 6. Primary entity - constraint + validation failures
+--------------------------------------------------------------
+$ curl -X POST http://127.0.0.1:8871/api/fixtures -d '{"fixture_name":"Dup","teams_players":"A vs B","fixture_code":"FX-9871-90001","home_team_id":13}'
+HTTP 409   (expected 409)
+{
+  "detail": "fixture_code 'FX-9871-90001' is already in use"
+}
+RESULT: PASS
+--------------------------------------------------------------
+$ curl -X POST http://127.0.0.1:8871/api/fixtures -d '{"fixture_name":"Bad","teams_players":"A vs B","fixture_code":"FIXTURE-1","home_team_id":13}'
+HTTP 422   (expected 422)
+{
+  "detail": [
+    {
+      "type": "string_pattern_mismatch",
+      "loc": [
+        "body",
+        "fixture_code"
+      ],
+      "msg": "String should match pattern '^FX-9871-\\d{5}$'",
+      "input": "FIXTURE-1",
+      "ctx": {
+        "pattern": "^FX-9871-\\d{5}$"
+      }
+    }
+  ]
+}
+RESULT: PASS
+--------------------------------------------------------------
+$ curl -X POST http://127.0.0.1:8871/api/fixtures -d '{"fixture_name":"Ghost","teams_players":"A vs B","fixture_code":"FX-9871-90003","home_team_id":999999}'
+HTTP 404   (expected 404)
+{
+  "detail": "home_team_id 999999 does not refer to an existing team"
+}
+RESULT: PASS
+--------------------------------------------------------------
+$ curl -X POST http://127.0.0.1:8871/api/fixtures -d '{"fixture_name":"Neg","teams_players":"A vs B","fixture_code":"FX-9871-90004","spots_available":-1,"home_team_id":13}'
+HTTP 422   (expected 422)
+{
+  "detail": [
+    {
+      "type": "greater_than_equal",
+      "loc": [
+        "body",
+        "spots_available"
+      ],
+      "msg": "Input should be greater than or equal to 0",
+      "input": -1,
+      "ctx": {
+        "ge": 0
+      }
+    }
+  ]
+}
+RESULT: PASS
+
+### 7. Primary entity - RETRIEVE / UPDATE / DELETE
+--------------------------------------------------------------
+$ curl -X GET http://127.0.0.1:8871/api/fixtures/5005 
+HTTP 200   (expected 200)
+{
+  "id": 5005,
+  "fixture_name": "Cobras vs Lions",
+  "teams_players": "Berryessa Cobras vs Milpitas Lions",
+  "fixture_code": "FX-9871-90001",
+  "spots_available": 22,
+  "home_team_id": 13,
+  "created_at": "2026-09-28T21:02:17",
+  "updated_at": "2026-09-28T21:02:17"
+}
+RESULT: PASS
+--------------------------------------------------------------
+$ curl -X GET http://127.0.0.1:8871/api/fixtures/999999 
+HTTP 404   (expected 404)
+{
+  "detail": "Fixture 999999 not found"
+}
+RESULT: PASS
+--------------------------------------------------------------
+$ curl -X PUT http://127.0.0.1:8871/api/fixtures/5005 -d '{"fixture_name":"Cobras vs Lions (RESCHEDULED)","teams_players":"Berryessa Cobras vs Milpitas Lions","fixture_code":"FX-9871-90001","spots_available":15,"home_team_id":13}'
+HTTP 200   (expected 200)
+{
+  "id": 5005,
+  "fixture_name": "Cobras vs Lions (RESCHEDULED)",
+  "teams_players": "Berryessa Cobras vs Milpitas Lions",
+  "fixture_code": "FX-9871-90001",
+  "spots_available": 15,
+  "home_team_id": 13,
+  "created_at": "2026-09-28T21:02:17",
+  "updated_at": "2026-09-28T21:02:18"
+}
+RESULT: PASS
+--------------------------------------------------------------
+$ curl -X PUT http://127.0.0.1:8871/api/fixtures/999999 -d '{"fixture_name":"Ghost","teams_players":"A vs B","fixture_code":"FX-9871-90009","home_team_id":1}'
+HTTP 404   (expected 404)
+{
+  "detail": "Fixture 999999 not found"
+}
+RESULT: PASS
+
+### 8. RELATIONSHIP QUERY - fixtures for one team
+--------------------------------------------------------------
+$ curl -X GET http://127.0.0.1:8871/api/teams/13/fixtures 
+HTTP 200   (expected 200)
+{
+  "team": {
+    "id": 13,
+    "team_name": "Berryessa Cobras FC",
+    "home_ground": "Berryessa Community Center, San Jose",
+    "team_code": "TM-0777",
+    "created_at": "2026-09-28T21:02:16",
+    "updated_at": "2026-09-28T21:02:17"
+  },
+  "fixture_count": 2,
+  "fixtures": [
+    {
+      "id": 5005,
+      "fixture_name": "Cobras vs Lions (RESCHEDULED)",
+      "teams_players": "Berryessa Cobras vs Milpitas Lions",
+      "fixture_code": "FX-9871-90001",
+      "spots_available": 15,
+      "home_team_id": 13,
+      "created_at": "2026-09-28T21:02:17",
+      "updated_at": "2026-09-28T21:02:18"
+    },
+    {
+      "id": 5006,
+      "fixture_name": "Cobras vs Tigers",
+      "teams_players": "Berryessa Cobras vs San Jose Tigers",
+      "fixture_code": "FX-9871-90002",
+      "spots_available": 8,
+      "home_team_id": 13,
+      "created_at": "2026-09-28T21:02:18",
+      "updated_at": "2026-09-28T21:02:18"
+    }
+  ]
+}
+RESULT: PASS
+--------------------------------------------------------------
+$ curl -X GET http://127.0.0.1:8871/api/teams/1/fixtures 
+HTTP 200   (expected 200)
+{
+  "team": {
+    "id": 1,
+    "team_name": "Milpitas Lions",
+    "home_ground": "Milpitas Sports Complex, Field 1",
+    "team_code": "TM-0001",
+    "created_at": "2026-09-28T21:00:39",
+    "updated_at": "2026-09-28T21:00:39"
+  },
+  "fixture_count": 416,
+  "fixtures": [
+    {
+      "id": 13,
+      "fixture_name": "Panthers vs Titans (Soccer #11)",
+      "teams_players": "Oakland Panthers vs Milpitas Titans",
+      "fixture_code": "FX-9871-00013",
+      "spots_available": 22,
+      "home_team_id": 1,
+      "created_at": "2026-09-28T21:00:39",
+      "updated_at": "2026-09-28T21:00:39"
+    },
+    "... (416 total)",
+    {
+      "id": 4993,
+      "fixture_name": "Panthers vs Hawks (Basketball #4991)",
+      "teams_players": "Oakland Panthers vs Fremont Hawks",
+      "fixture_code": "FX-9871-04993",
+      "spots_available": 22,
+      "home_team_id": 1,
+      "created_at": "2026-09-28T21:00:39",
+      "updated_at": "2026-09-28T21:00:39"
+    }
+  ]
+}
+RESULT: PASS
+--------------------------------------------------------------
+$ curl -X GET http://127.0.0.1:8871/api/teams/999999/fixtures 
+HTTP 404   (expected 404)
+{
+  "detail": "Team 999999 not found"
+}
+RESULT: PASS
+
+### 9. DELETE PROTECTION on the related entity
+--------------------------------------------------------------
+$ curl -X DELETE http://127.0.0.1:8871/api/teams/13 
+HTTP 409   (expected 409)
+{
+  "detail": "Team 13 still has 2 associated fixture(s) and cannot be deleted"
+}
+RESULT: PASS
+--------------------------------------------------------------
+$ curl -X GET http://127.0.0.1:8871/api/teams/13 
+HTTP 200   (expected 200)
+{
+  "id": 13,
+  "team_name": "Berryessa Cobras FC",
+  "home_ground": "Berryessa Community Center, San Jose",
+  "team_code": "TM-0777",
+  "created_at": "2026-09-28T21:02:16",
+  "updated_at": "2026-09-28T21:02:17"
+}
+RESULT: PASS
+--------------------------------------------------------------
+$ curl -X DELETE http://127.0.0.1:8871/api/fixtures/5005 
+HTTP 200   (expected 200)
+{
+  "success": true,
+  "deleted_id": 5005
+}
+RESULT: PASS
+--------------------------------------------------------------
+$ curl -X DELETE http://127.0.0.1:8871/api/fixtures/5006 
+HTTP 200   (expected 200)
+{
+  "success": true,
+  "deleted_id": 5006
+}
+RESULT: PASS
+--------------------------------------------------------------
+$ curl -X DELETE http://127.0.0.1:8871/api/teams/13 
+HTTP 200   (expected 200)
+{
+  "success": true,
+  "deleted_id": 13
+}
+RESULT: PASS
+--------------------------------------------------------------
+$ curl -X GET http://127.0.0.1:8871/api/teams/13 
+HTTP 404   (expected 404)
+{
+  "detail": "Team 13 not found"
+}
+RESULT: PASS
+
+==============================================================
+curl checks: 32 passed, 0 failed
+==============================================================
+
+======================================================================
+1e. PART 1.I/II - verification straight against MySQL, bypassing the API
+   Time: 2026-09-28 21:03:10
+   [terminal] Confirms the schema, the constraints, the backfilled data and the MySQL-level
+   ON DELETE RESTRICT rule. SQLAlchemy echo lines removed.
+======================================================================
+=== schema ===
+  id                 int            null=NO   default=None                 auto_increment
+  fixture_name       varchar(255)   null=NO   default=None                 
+  teams_players      varchar(255)   null=NO   default=None                 
+  fixture_code       varchar(24)    null=NO   default=None                 
+  spots_available    int            null=NO   default=22                   
+  home_team_id       int            null=NO   default=None                 
+  created_at         datetime       null=NO   default=CURRENT_TIMESTAMP    DEFAULT_GENERATED
+  updated_at         datetime       null=NO   default=CURRENT_TIMESTAMP    DEFAULT_GENERATED on update CURRENT_TIMESTAMP
+PASS  fixtures has all 5 new columns
+PASS  fixture_code NOT NULL
+PASS  home_team_id NOT NULL
+PASS  spots_available default is 22
+PASS  teams has id/primary text/secondary text/unique code/timestamps
+
+=== constraints ===
+  ('fk_fixtures_home_team', 'RESTRICT', 'teams')
+PASS  FK fk_fixtures_home_team is ON DELETE RESTRICT -> teams
+PASS  UNIQUE index on fixture_code exists
+PASS  HW4's idx_fixture_name index still present
+
+=== data ===
+  fixtures=5001  teams=12
+PASS  all 5001 HW4 fixtures survived the migration
+PASS  12 teams seeded
+PASS  every fixture_code is distinct
+PASS  every fixture_code matches FX-9871-#####
+PASS  no orphan home_team_id
+  fixtures per home team: {1: 416, 2: 416, 3: 417, 4: 417, 5: 417, 6: 417, 7: 417, 8: 417, 9: 417, 10: 417, 11: 416, 12: 417}
+PASS  round-robin backfill spread across all 12 teams
+PASS  API test rows were cleaned up
+PASS  test team TM-0777 was cleaned up
+
+=== no plain-text passwords ===
+  users columns: ['email', 'id', 'name', 'password_hash']
+PASS  users has no 'password' column, only password_hash
+PASS  every stored credential is a bcrypt hash
+
+=== MySQL-level delete protection (raw SQL, no API involved) ===
+  attempting: DELETE FROM teams WHERE id = 12   (417 fixtures reference it)
+  MySQL refused: (pymysql.err.IntegrityError) (1451, 'Cannot delete or update a parent row: a foreign key constraint fails (`s9871_rel`.`fixtures`, CONSTRAINT `fk_fixtures_home_
+PASS  raw DELETE of a team with fixtures is blocked by MySQL
+PASS  that team still exists after the refused raw DELETE
+
+==== 20/20 direct-database checks passed ====
+
+======================================================================
+1f. PART 1 - regression check on HW1-HW4 behaviour
+   Time: 2026-09-28 21:05:02
+   [terminal] The HW4 N+1 query counts are unchanged (11 naive vs 2 fixed), the HW1-HW3
+   server-rendered pages still respond, and the auth failure paths still return 401.
+======================================================================
+HW5 Part 1 regression check - nothing from HW1-HW4 broke
+run at 2026-09-28 21:05:01 PDT
+
+### HW4 Part 3 N+1 endpoints (expected: naive=1+page_size, fixed=2)
+GET /api/fixtures-naive?page_size=10  ->  10 rows,  x-sql-query-count = 11
+GET /api/fixtures-fixed?page_size=10  ->  10 rows,  x-sql-query-count = 2
+
+### HW1-HW3 server-rendered pages still served
+GET /  ->  HTTP 200
+GET /fixtures  ->  HTTP 200
+GET /login  ->  HTTP 200
+
+### auth failure paths
+GET /api/fixtures with no session  ->  HTTP 401
+GET /api/teams   with no session  ->  HTTP 401
+POST /api/auth/login with a wrong password  ->  {"detail":"Invalid email or password"}HTTP 401
+
+======================================================================
+1g. PART 1.II - Postman screenshot session (note, not console output)
+   Time: 2026-09-28 21:32 to 21:58
+   [note] See reports/hw05/screenshots/ for the 15 images this section describes.
+======================================================================
+This section is a NOTE, not console output. Postman is a GUI, so it produces images
+rather than text; the images are the evidence and they live in
+reports/hw05/screenshots/.
+
+What was run
+  Collection: reports/hw05/postman/HW5_Part1_API.postman_collection.json
+              ("Uday Patel - DATA-260 HW5 Part 1.II", 15 requests)
+  Against:    uvicorn main:app on 127.0.0.1:8871, database s9871_rel
+  When:       2026-09-28, 21:32 to 21:58 local (from the image file times)
+
+Before the collection was handed over it was replayed request-for-request from the
+command line, with {{variables}} substituted into the raw JSON exactly the way
+Postman does, so the bytes sent were identical. That replay ran twice in a row and
+reported 15/15 both times. It also caught two defects that would otherwise have
+surfaced during the screenshot session:
+
+  1. "home_team_id": "{{teamId}}" was quoted, so Postman would have sent the value
+     as a JSON string. Corrected to "home_team_id": {{teamId}}, which substitutes
+     to a JSON integer. The real Postman run confirms it: request 05 returned
+     "home_team_id": 17, not "17".
+  2. Running any of the id-bearing requests before request 01 leaves the path as
+     /api/teams/ and FastAPI answers 307 Temporary Redirect. Fixed by documenting a
+     strict run order rather than by changing the API.
+
+Requests 13 and 14 delete what 01 and 05 created, so a full pass leaves the database
+exactly as it started (12 teams, 5001 fixtures). That was verified directly against
+MySQL after the session.
+
+One limitation is recorded in reports/hw05/SCREENSHOTS.md: the pagination image stops
+short of the page / page_size / total / total_pages fields. The full response
+including those fields is in section 1d of this log and is what the report quotes.
+

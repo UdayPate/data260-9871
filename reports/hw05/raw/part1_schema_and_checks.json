@@ -1,0 +1,232 @@
+{
+  "homework": 5,
+  "part": "1 (I. Database, II. API Implementation)",
+  "sid4": "9871",
+  "port_base": 8871,
+  "prefix": "s9871",
+  "seed": 9871,
+  "verify_seed": 269871,
+  "domain_id": 7,
+  "domain": "Community sports league fixtures",
+  "database": "s9871_rel",
+  "primary_entity": {
+    "table": "fixtures",
+    "primary_field": "fixture_name",
+    "unique_field": "fixture_code",
+    "unique_format": "^FX-9871-[0-9]{5}$",
+    "numeric_field": "spots_available",
+    "numeric_default": 22,
+    "foreign_key": "home_team_id -> teams.id"
+  },
+  "related_entity": {
+    "table": "teams",
+    "primary_text_field": "team_name",
+    "secondary_text_field": "home_ground",
+    "unique_field": "team_code",
+    "unique_format": "^TM-[0-9]{4}$"
+  },
+  "relationship_note": "A fixture involves two sides; the assignment asks for a single foreign key, so home_team_id models the HOME team only and the away side remains in the free-text teams_players column.",
+  "delete_protection": "ON DELETE RESTRICT, enforced by MySQL (error 1451) and by a 409 in the API",
+  "schema": {
+    "columns": {
+      "teams": [
+        {
+          "name": "id",
+          "type": "int",
+          "nullable": false,
+          "default": null,
+          "extra": "auto_increment"
+        },
+        {
+          "name": "team_name",
+          "type": "varchar(255)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "home_ground",
+          "type": "varchar(255)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "team_code",
+          "type": "varchar(20)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "now()",
+          "extra": "DEFAULT_GENERATED"
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "now()",
+          "extra": "DEFAULT_GENERATED"
+        }
+      ],
+      "fixtures": [
+        {
+          "name": "id",
+          "type": "int",
+          "nullable": false,
+          "default": null,
+          "extra": "auto_increment"
+        },
+        {
+          "name": "fixture_name",
+          "type": "varchar(255)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "teams_players",
+          "type": "varchar(255)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "fixture_code",
+          "type": "varchar(24)",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "spots_available",
+          "type": "int",
+          "nullable": false,
+          "default": "22",
+          "extra": ""
+        },
+        {
+          "name": "home_team_id",
+          "type": "int",
+          "nullable": false,
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "extra": "DEFAULT_GENERATED"
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP"
+        }
+      ]
+    },
+    "foreign_keys": [
+      {
+        "name": "fixture_updates_ibfk_1",
+        "table": "fixture_updates",
+        "column": "fixture_id",
+        "references": "fixtures.id",
+        "on_delete": "NO ACTION"
+      },
+      {
+        "name": "fk_fixtures_home_team",
+        "table": "fixtures",
+        "column": "home_team_id",
+        "references": "teams.id",
+        "on_delete": "RESTRICT"
+      },
+      {
+        "name": "sessions_ibfk_1",
+        "table": "sessions",
+        "column": "user_id",
+        "references": "users.id",
+        "on_delete": "NO ACTION"
+      }
+    ],
+    "unique_indexes": [
+      {
+        "table": "fixtures",
+        "index": "uq_fixtures_fixture_code",
+        "column": "fixture_code"
+      },
+      {
+        "table": "teams",
+        "index": "team_code",
+        "column": "team_code"
+      },
+      {
+        "table": "users",
+        "index": "email",
+        "column": "email"
+      }
+    ]
+  },
+  "row_counts": {
+    "teams": 12,
+    "fixtures": 5001,
+    "fixture_updates": 200,
+    "users": 1
+  },
+  "fixtures_per_home_team": {
+    "1": 416,
+    "2": 416,
+    "3": 417,
+    "4": 417,
+    "5": 417,
+    "6": 417,
+    "7": 417,
+    "8": 417,
+    "9": 417,
+    "10": 417,
+    "11": 416,
+    "12": 417
+  },
+  "test_runs": {
+    "offline_sqlite_api_test": {
+      "passed": 50,
+      "total": 50,
+      "log_section": "RUN_LOG.txt 1c"
+    },
+    "live_curl_api_test": {
+      "passed": 32,
+      "failed": 0,
+      "log_section": "RUN_LOG.txt 1d"
+    },
+    "direct_database_checks": {
+      "passed": 20,
+      "total": 20,
+      "log_section": "RUN_LOG.txt 1e"
+    },
+    "hw1_hw4_regression": {
+      "n1_naive_query_count": 11,
+      "n1_fixed_query_count": 2,
+      "log_section": "RUN_LOG.txt 1f"
+    },
+    "postman_collection_replay": {
+      "note": "The Postman collection replayed request-for-request from the command line with {{variables}} substituted into the raw JSON the way Postman does, to validate it before use.",
+      "requests": 15,
+      "passed": 15,
+      "consecutive_runs": 2,
+      "log_section": "RUN_LOG.txt 1g"
+    },
+    "postman_screenshots": {
+      "captured": 15,
+      "directory": "reports/hw05/screenshots/",
+      "index": "reports/hw05/SCREENSHOTS.md",
+      "log_section": "RUN_LOG.txt 1g"
+    }
+  },
+  "generated_at": "2026-09-28T22:00:25-07:00"
+}
