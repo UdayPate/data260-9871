@@ -1,0 +1,23 @@
+[
+  {
+    "injected_failure_rate": 0.0,
+    "calls": 50,
+    "success_rate": 1.0,
+    "mean_latency_ms": 13.120000000053551,
+    "p99_latency_ms": 31.000000002677552
+  },
+  {
+    "injected_failure_rate": 0.2,
+    "calls": 50,
+    "success_rate": 1.0,
+    "mean_latency_ms": 28.439999999973224,
+    "p99_latency_ms": 187.00000000892032
+  },
+  {
+    "injected_failure_rate": 0.5,
+    "calls": 50,
+    "success_rate": 0.94,
+    "mean_latency_ms": 80.0,
+    "p99_latency_ms": 428.35000000181026
+  }
+]

@@ -1,0 +1,5 @@
+# Normalizes line endings for text files on checkin, converts back to
+# native line endings on checkout. Matches the behavior already set
+# system-wide in Windows Git (core.autocrlf=true), so `git status` agrees
+# across WSL and Windows regardless of which side committed a file.
+* text=auto

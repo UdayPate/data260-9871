@@ -1,0 +1,1646 @@
+[
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 0,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 0.0,
+    "call_index": 1,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 2,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 15.999999995983671,
+    "call_index": 3,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 4,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 5,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 0.0,
+    "call_index": 6,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 7,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 30.999999995401595,
+    "call_index": 8,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 9,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 10,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 0.0,
+    "call_index": 11,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 15.999999995983671,
+    "call_index": 12,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 13,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 14,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 0.0,
+    "call_index": 15,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 16,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 17,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 15.999999995983671,
+    "call_index": 18,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 0.0,
+    "call_index": 19,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 20,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 30.999999995401595,
+    "call_index": 21,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 0.0,
+    "call_index": 22,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 31.000000002677552,
+    "call_index": 23,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 0.0,
+    "call_index": 24,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 25,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 26,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 0.0,
+    "call_index": 27,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 15.999999995983671,
+    "call_index": 28,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 29,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 0.0,
+    "call_index": 30,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 31,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 15.999999995983671,
+    "call_index": 32,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 33,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 34,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 35,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 36,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 15.999999995983671,
+    "call_index": 37,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 0.0,
+    "call_index": 38,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 39,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 0.0,
+    "call_index": 40,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 41,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 15.999999995983671,
+    "call_index": 42,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 43,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 44,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 45,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 0.0,
+    "call_index": 46,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 47,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 15.999999995983671,
+    "call_index": 48,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 31.000000002677552,
+    "call_index": 49,
+    "injected_failure_rate": 0.0
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 15.999999995983671,
+    "call_index": 0,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 2,
+    "latency_ms": 78.00000000133878,
+    "call_index": 1,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 2,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 3,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 15.999999995983671,
+    "call_index": 4,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 3,
+    "latency_ms": 187.0000000053551,
+    "call_index": 5,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 15.999999995983671,
+    "call_index": 6,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 7,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 8,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 15.999999995983671,
+    "call_index": 9,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 0.0,
+    "call_index": 10,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 11,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 46.000000002095476,
+    "call_index": 12,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 2,
+    "latency_ms": 78.99999999790452,
+    "call_index": 13,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 0.0,
+    "call_index": 14,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 15,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 16,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 17,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 15.999999995983671,
+    "call_index": 18,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 19,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 3,
+    "latency_ms": 186.99999999807915,
+    "call_index": 20,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 0.0,
+    "call_index": 21,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 22,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 23,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 2,
+    "latency_ms": 78.99999999790452,
+    "call_index": 24,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 0.0,
+    "call_index": 25,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 26,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 27,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 30.999999995401595,
+    "call_index": 28,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 0.0,
+    "call_index": 29,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 30,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 31,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 0.0,
+    "call_index": 32,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 15.999999995983671,
+    "call_index": 33,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 34,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 35,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 0.0,
+    "call_index": 36,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 37,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 38,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 2,
+    "latency_ms": 78.99999999790452,
+    "call_index": 39,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 40,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 41,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 42,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 0.0,
+    "call_index": 43,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 2,
+    "latency_ms": 93.99999999732245,
+    "call_index": 44,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 45,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 46,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 2,
+    "latency_ms": 78.99999999790452,
+    "call_index": 47,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 48,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 0.0,
+    "call_index": 49,
+    "injected_failure_rate": 0.2
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 0,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 2,
+    "latency_ms": 77.99999999406282,
+    "call_index": 1,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 2,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": false,
+    "data": null,
+    "error": "simulated failure (rate=0.5)",
+    "attempts": 4,
+    "latency_ms": 406.00000000267755,
+    "call_index": 3,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 2,
+    "latency_ms": 93.99999999732245,
+    "call_index": 4,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 5,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": false,
+    "data": null,
+    "error": "simulated failure (rate=0.5)",
+    "attempts": 4,
+    "latency_ms": 391.00000000325963,
+    "call_index": 6,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 3,
+    "latency_ms": 186.99999999807915,
+    "call_index": 7,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 15.999999995983671,
+    "call_index": 8,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 0.0,
+    "call_index": 9,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 10,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 2,
+    "latency_ms": 78.00000000133878,
+    "call_index": 11,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 30.999999995401595,
+    "call_index": 12,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 4,
+    "latency_ms": 391.00000000325963,
+    "call_index": 13,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 14,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 15,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 3,
+    "latency_ms": 186.99999999807915,
+    "call_index": 16,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 15.999999995983671,
+    "call_index": 17,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 18,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 19,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 0.0,
+    "call_index": 20,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 2,
+    "latency_ms": 78.00000000133878,
+    "call_index": 21,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 2,
+    "latency_ms": 78.00000000133878,
+    "call_index": 22,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 15.999999995983671,
+    "call_index": 23,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 2,
+    "latency_ms": 78.00000000133878,
+    "call_index": 24,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 0.0,
+    "call_index": 25,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 26,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 3,
+    "latency_ms": 202.99999999406282,
+    "call_index": 27,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 28,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 0.0,
+    "call_index": 29,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 4,
+    "latency_ms": 421.0000000020955,
+    "call_index": 30,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 15.999999995983671,
+    "call_index": 31,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 2,
+    "latency_ms": 78.00000000133878,
+    "call_index": 32,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 33,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 0.0,
+    "call_index": 34,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 2,
+    "latency_ms": 77.99999999406282,
+    "call_index": 35,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 0.0,
+    "call_index": 36,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 37,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": false,
+    "data": null,
+    "error": "simulated failure (rate=0.5)",
+    "attempts": 4,
+    "latency_ms": 389.9999999994179,
+    "call_index": 38,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 39,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 30.999999995401595,
+    "call_index": 40,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 2,
+    "latency_ms": 63.00000000192085,
+    "call_index": 41,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 2,
+    "latency_ms": 61.99999999807915,
+    "call_index": 42,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 3,
+    "latency_ms": 188.00000000192085,
+    "call_index": 43,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 44,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 16.00000000325963,
+    "call_index": 45,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 46,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 2,
+    "latency_ms": 78.99999999790452,
+    "call_index": 47,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 14.999999999417923,
+    "call_index": 48,
+    "injected_failure_rate": 0.5
+  },
+  {
+    "ok": true,
+    "data": {
+      "status": "ok"
+    },
+    "error": null,
+    "attempts": 1,
+    "latency_ms": 0.0,
+    "call_index": 49,
+    "injected_failure_rate": 0.5
+  }
+]
