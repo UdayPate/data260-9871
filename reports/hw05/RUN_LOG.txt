@@ -1109,3 +1109,12 @@ is a union (list[dict] | str, or dict | str here) those two paths can disagree i
 shape. Both representations carry the same data; Tool Result: Success and
 "Valid according to output schema" are shown in every case. This is a
 documented characteristic of the SDK version, not a defect in meals_server.py.
+
+======================================================================
+3a. PART 2B - domain MCP server (search, detail, aggregate), tested over real STDIO
+   Time: 2026-10-01
+======================================================================
+7/7 checks passed calling all three tools (one valid + one invalid input each) over
+real MCP STDIO against the live s9871_rel database: search_fixtures, fixture_details,
+team_fixture_counts. All three return the {ok, data, error} envelope; invalid input
+returns ok:false with a message instead of raising.
