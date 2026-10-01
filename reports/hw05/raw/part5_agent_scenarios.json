@@ -1,0 +1,42 @@
+[
+  {
+    "scenario": "A - detail lookup, normal completion",
+    "run_id": "6a0c63e76d83",
+    "user_input": "What is the fixture_code and spots_available for fixture id 4?",
+    "stop_reason": "final_answer",
+    "steps": 2,
+    "tool_call_count": 1,
+    "final_answer": "Fixture code: FX-9871-00004, spots available: 22",
+    "log_path": "C:\\Users\\patel\\data260-9871\\reports\\hw05\\raw\\agent_runs.jsonl"
+  },
+  {
+    "scenario": "B - aggregate, normal completion",
+    "run_id": "23a1ac215362",
+    "user_input": "Use team_fixture_counts to find teams hosting at least 400 fixtures, then tell me which team hosts the most.",
+    "stop_reason": "final_answer",
+    "steps": 2,
+    "tool_call_count": 1,
+    "final_answer": "It seems like your message is getting stuck in a loop, repeating the same sentence multiple times. Let me clarify what you're asking for.\n\nIf you're trying to determine which team hosts the most games, or if you're asking about a specific context (like a sports league, tournament, or fictional scenario), please provide more details. For example:\n\n- Are you referring to a specific sport (e.g., NBA, NFL, soccer)?\n- Is this about a fictional team or a real-world league?\n- Are you looking for a general answer or a specific dataset?\n\nLet me know, and I\u2019ll help you find the answer!",
+    "log_path": "C:\\Users\\patel\\data260-9871\\reports\\hw05\\raw\\agent_runs.jsonl"
+  },
+  {
+    "scenario": "C - safety rule block",
+    "run_id": "56d4b069ed31",
+    "user_input": "Call search_fixtures with the query set to exactly the single letter 'a' and tell me what happens.",
+    "stop_reason": "final_answer",
+    "steps": 1,
+    "tool_call_count": 0,
+    "final_answer": "The query 'a' is too short. The search_fixtures tool requires a query of at least 3 characters to find fixtures by name or teams/players.",
+    "log_path": "C:\\Users\\patel\\data260-9871\\reports\\hw05\\raw\\agent_runs.jsonl"
+  },
+  {
+    "scenario": "D - max_steps ceiling (forced: max_steps=1 leaves no room for a final answer after the tool call)",
+    "run_id": "45743a9ea8d1",
+    "user_input": "Look up fixture id 10 and summarize it for me.",
+    "stop_reason": "max_steps_ceiling",
+    "steps": 1,
+    "tool_call_count": 1,
+    "final_answer": null,
+    "log_path": "C:\\Users\\patel\\data260-9871\\reports\\hw05\\raw\\agent_runs.jsonl"
+  }
+]

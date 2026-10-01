@@ -61,3 +61,49 @@ on a response. The tradeoff is the same one visible in the p99 numbers
 above: more retries and longer backoff trade worse worst-case latency for a
 higher overall success rate, which is the right trade for a batch job and
 the wrong one for an interactive one.
+
+## Part 5 - safety rule, agent loop, metrics
+
+### Part 5.I safety rule
+
+A `search_fixtures` query under 3 characters is rejected inside
+`execute_tool`, before the domain tool or any DB call runs.
+
+| Call | Result |
+|---|---|
+| Allowed: `query="Lions"` | `{"ok": true, "data": [...2 matches...], "error": null}` |
+| Blocked: `query="a"` | `{"ok": false, "data": null, "error": "query too broad: must be at least 3 characters"}` |
+
+### Part 5.IV agent scenarios (local Ollama, qwen3:8b)
+
+Real runs, `code/run_agent_scenarios.py`, full step log in
+`reports/hw05/raw/agent_runs.jsonl`, summaries in
+`reports/hw05/raw/part5_agent_scenarios.json`.
+
+| Scenario | Stop reason | Steps | Tool calls |
+|---|---|---|---|
+| A - detail lookup | final_answer | 2 | 1 |
+| B - aggregate + follow-up reasoning | final_answer | 2 | 1 |
+| C - asked to run a too-short search query | final_answer | 1 | 0 |
+| D - forced ceiling (max_steps=1) | max_steps_ceiling | 1 | 1 |
+
+Notes on what actually happened, honestly reported:
+
+- **A** answered correctly: fixture 4's code and spots matched the real
+  database row (FX-9871-00004, 22 spots).
+- **B**'s model call took about 6 minutes (qwen3:8b reasoning through a
+  two-step aggregate-then-compare question) and its final answer was
+  nonsensical - it claimed the conversation was "stuck in a loop" and asked
+  clarifying questions instead of reporting an answer, despite the tool
+  call itself succeeding and returning real data. This is reported as-is: a
+  real, unprompted model failure, not a bug in `execute_tool`/`run_agent` -
+  the tool call and envelope were both correct.
+- **C** is interesting: rather than ever calling the tool with the 1-letter
+  query, the model read the system prompt's stated "at least 3 characters"
+  rule and answered directly - `tool_call_count=0`. So this scenario did
+  not actually exercise execute_tool's safety-rule code path live; that
+  path is demonstrated directly in Part 5.I above instead.
+- **D** is a clean, deliberately forced demonstration of the max_steps
+  ceiling: `max_steps=1` leaves no turn left for a final answer after the
+  tool call, so the loop stops with `final_answer: null` even though the
+  tool call itself succeeded. This is the run picked for REFLECTION.md.

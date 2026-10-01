@@ -1135,3 +1135,39 @@ rate=20%: success_rate=100%  mean=28.4ms  p99=187.0ms
 rate=50%: success_rate=94%  mean=80.0ms  p99=428.4ms
 
 wrote 150 call records + summary to reports/hw05/raw/
+
+======================================================================
+4a. PART 4 - execute_tool offline test runner (dependency injection, no DB/LLM)
+   Time: 2026-10-01
+======================================================================
+PASS  search_fixtures: valid input -> ok=true
+PASS  search_fixtures: invalid (empty query) -> ok=false, documented error
+PASS  fixture_details: valid input -> ok=true
+PASS  fixture_details: invalid (unknown id) -> ok=false, documented error
+PASS  team_fixture_counts: valid input -> ok=true
+PASS  team_fixture_counts: invalid (negative min_fixtures) -> ok=false, documented error
+PASS  execute_tool: unknown tool name -> ok=false, no crash
+
+7/7 tests passed
+
+======================================================================
+5a. PART 5 - safety rule demo, offline tests extended to 9/9, real agent scenarios
+   Time: 2026-10-01
+======================================================================
+Safety rule (execute_tool): allowed query="Lions" -> ok:true; blocked query="a" ->
+{"ok": false, "data": null, "error": "query too broad: must be at least 3 characters"}
+
+Offline suite extended with 2 new tests (safety-rule block, run_agent+MockModel
+hitting max_steps) - 9/9 passed, no DB/LLM touched:
+PASS  execute_tool: safety rule blocks a too-broad query, no crash
+PASS  run_agent + MockModel: stops at max_steps, offline
+
+4 real scenarios against local qwen3:8b (code/run_agent_scenarios.py), full log in
+reports/hw05/raw/agent_runs.jsonl, summary in reports/hw05/raw/part5_agent_scenarios.json:
+  A (detail lookup):      stop_reason=final_answer       steps=2  tool_calls=1  (correct answer)
+  B (aggregate+compare):  stop_reason=final_answer       steps=2  tool_calls=1  (tool call correct;
+                           model's final answer was nonsensical - reported as-is in METRICS.md)
+  C (asked for 1-char query): stop_reason=final_answer   steps=1  tool_calls=0  (model self-declined
+                           rather than calling the tool - see METRICS.md)
+  D (forced ceiling, max_steps=1): stop_reason=max_steps_ceiling  steps=1  tool_calls=1
+                           (picked for REFLECTION.md)
