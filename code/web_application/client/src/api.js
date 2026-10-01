@@ -1,35 +1,51 @@
-// Shared fetch helper. credentials: "include" is essential - without it,
-// the browser will NOT send the HTTP-only session cookie on cross-origin
-// requests (React on :5173, API on :8871), even though the cookie exists.
-const API_BASE = "http://localhost:8871/api";
+// Axios instance shared by the Redux thunks (HW5 Part 1.III).
+//
+// withCredentials: true is essential - without it the browser will NOT send
+// the HTTP-only session cookie on cross-origin requests (React on :5173,
+// API on :8871), even though the cookie exists. The cookie is also marked
+// Secure, which a browser accepts over http://localhost because localhost
+// counts as a trustworthy origin; a non-browser HTTP client would not
+// resend it and would need the cookie passed explicitly per request.
+import axios from "axios";
 
-async function apiFetch(path, options = {}) {
-  const response = await fetch(`${API_BASE}${path}`, {
-    ...options,
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-      ...options.headers,
-    },
-  });
-  if (!response.ok) {
-    const error = new Error(`Request failed: ${response.status}`);
-    error.status = response.status;
-    throw error;
+export const API_BASE = "http://localhost:8871/api";
+
+export const http = axios.create({
+  baseURL: API_BASE,
+  withCredentials: true,
+  headers: { "Content-Type": "application/json" },
+});
+
+/**
+ * Turns an axios error into a short string a reducer can store and a screen
+ * can render. FastAPI returns `detail` as a plain string for the 404/409
+ * HTTPExceptions raised in api_v2.py, but as an ARRAY of objects for
+ * Pydantic 422 validation errors - both shapes have to be handled or the UI
+ * ends up rendering "[object Object]".
+ */
+export function errorMessage(err) {
+  const detail = err?.response?.data?.detail;
+
+  if (typeof detail === "string") return detail;
+
+  if (Array.isArray(detail)) {
+    return detail
+      .map((d) => {
+        const field = Array.isArray(d.loc) ? d.loc[d.loc.length - 1] : "request";
+        return `${field}: ${d.msg}`;
+      })
+      .join("; ");
   }
-  // DELETE / some responses may have no body
-  const text = await response.text();
-  return text ? JSON.parse(text) : null;
+
+  if (err?.response?.status) return `Request failed (HTTP ${err.response.status})`;
+  return err?.message || "Network error";
 }
 
+// Auth stays outside Redux: it is not the primary domain entity, and the
+// assignment asks for a slice for the domain entity specifically.
 export const api = {
   login: (email, password) =>
-    apiFetch("/auth/login", { method: "POST", body: JSON.stringify({ email, password }) }),
-  me: () => apiFetch("/auth/me"),
-  logout: () => apiFetch("/auth/logout", { method: "POST" }),
-  listFixtures: () => apiFetch("/fixtures"),
-  getFixture: (id) => apiFetch(`/fixtures/${id}`),
-  createFixture: (data) => apiFetch("/fixtures", { method: "POST", body: JSON.stringify(data) }),
-  updateFixture: (id, data) => apiFetch(`/fixtures/${id}`, { method: "PUT", body: JSON.stringify(data) }),
-  deleteFixture: (id) => apiFetch(`/fixtures/${id}`, { method: "DELETE" }),
+    http.post("/auth/login", { email, password }).then((r) => r.data),
+  me: () => http.get("/auth/me").then((r) => r.data),
+  logout: () => http.post("/auth/logout").then((r) => r.data),
 };

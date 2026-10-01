@@ -124,3 +124,85 @@ table.fixture-table th {
   border-bottom: 2px solid var(--rule);
 }
 table.fixture-table a { color: var(--accent); margin-right: 10px; font-size: 0.85rem; }
+/* ---------------- HW5 Part 1.III: Redux screens ---------------- */
+
+/* Confirmation line shown on the Home screen after a create / update /
+   delete reducer runs. Green enough to read as "went through" while still
+   sitting inside the vintage palette. */
+.ok-text {
+  color: #2f5d2f;
+  font-weight: bold;
+}
+
+/* Helper text under the new form fields (code format, default spots). */
+.field small {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.75rem;
+  color: var(--ink-light);
+}
+.field small.error-text { color: var(--accent); }
+
+/* The new form controls need the same treatment the inputs already get. */
+.field select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Georgia, serif;
+  font-size: 1rem;
+}
+.field select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+/* Per-row delete button (Part 1.III.5). Sits next to the Edit link, so it
+   is sized to match the link rather than the page's primary button. */
+.btn-danger {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 3px 10px;
+  font-family: Georgia, serif;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.btn-danger:hover {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+/* Client-side pager under the fixture table. The whole list lives in Redux
+   state; only the visible slice is a UI concern. */
+.pager {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 16px;
+  font-size: 0.85rem;
+  color: var(--ink-light);
+}
+.pager button {
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  padding: 5px 14px;
+  font-family: Georgia, serif;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.pager button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.btn-primary:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+/* The row just created or updated, so the Home screen visibly "shows the
+   updated results" rather than only a confirmation line. */
+table.fixture-table tr.row-touched td {
+  background: var(--accent-light);
+  font-weight: bold;
+}
