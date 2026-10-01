@@ -1,6 +1,6 @@
 {
   "homework": 5,
-  "part": "1 (I. Database, II. API Implementation)",
+  "part": "1 (I. Database, II. API Implementation, III. Redux Client)",
   "sid4": "9871",
   "port_base": 8871,
   "prefix": "s9871",
@@ -226,7 +226,108 @@
       "directory": "reports/hw05/screenshots/",
       "index": "reports/hw05/SCREENSHOTS.md",
       "log_section": "RUN_LOG.txt 1g"
+    },
+    "vite_production_build": {
+      "modules_transformed": 96,
+      "result": "clean",
+      "log_section": "RUN_LOG.txt 1h"
+    },
+    "eslint": {
+      "files": 10,
+      "problems": 0,
+      "note": "project eslint.config.js with react-hooks + react-refresh"
+    },
+    "playwright_browser_test": {
+      "passed": 22,
+      "total": 22,
+      "consecutive_runs": 2,
+      "script": "code/web_application/test_redux_ui.py",
+      "covers": [
+        "login",
+        "home reads Redux state",
+        "pagination",
+        "create + MySQL persistence",
+        "409 and 422 surfaced on the form",
+        "update by id + updated_at advanced",
+        "per-row delete + MySQL removal",
+        "no uncaught JS errors"
+      ],
+      "log_section": "RUN_LOG.txt 1i"
+    },
+    "part2a_mcp_stdio_client": {
+      "passed": 19,
+      "total": 19,
+      "note": "meals server driven over real MCP STDIO; 4 tools, happy/empty/invalid paths",
+      "log_section": "RUN_LOG.txt 2a"
+    },
+    "part2a_stdout_purity": {
+      "passed": 5,
+      "total": 5,
+      "note": "stdout carries only JSON-RPC 2.0; logs go to stderr; no print() calls (AST-checked)",
+      "log_section": "RUN_LOG.txt 2b"
+    },
+    "part2a_mcp_dev_backslash_bug": {
+      "found": true,
+      "symptom": "mcp dev code\\\\meals_server.py --with typer -> Inspector loops on File not found: ...codemeals_server.py",
+      "root_cause": "Inspector browser client joins its argv array into one space-joined string before sending it to the proxy over the wire; the proxy re-splits that string using POSIX shell-escaping rules (backslash escapes next char), silently deleting the backslash. Confirmed from the raw proxy connection log, not assumed.",
+      "is_mcp_sdk_bug": false,
+      "is_server_bug": false,
+      "location": "@modelcontextprotocol/inspector client/proxy handshake",
+      "fix": "use forward slashes in the mcp dev file argument: mcp dev code/meals_server.py --with typer",
+      "log_section": "RUN_LOG.txt 2e"
+    },
+    "part2a_inspector_real_verification": {
+      "method": "actually connected through MCP Inspector in a real browser and ran all four tools, after fixing the backslash bug",
+      "tools_verified": {
+        "search_meals_by_name": {
+          "input": {
+            "query": "Arrabiata",
+            "limit": 5
+          },
+          "result": "Success",
+          "id": "52771"
+        },
+        "meals_by_ingredient": {
+          "input": {
+            "ingredient": "corn",
+            "limit": 12
+          },
+          "result": "Success",
+          "note": "no matches - verified against live API that 'corn' is not an exact TheMealDB ingredient name"
+        },
+        "meal_details": {
+          "input": {
+            "id": "52771"
+          },
+          "result": "Success",
+          "ingredients": 8
+        },
+        "random_meal": {
+          "input": {},
+          "result": "Success",
+          "id": "52877",
+          "name": "Lamb and Potato pie"
+        }
+      },
+      "screenshots": [
+        "reports/hw05/screenshots/p2a_search_meals_by_name.png",
+        "reports/hw05/screenshots/p2a_meals_by_ingredient.png",
+        "reports/hw05/screenshots/p2a_meal_details.png",
+        "reports/hw05/screenshots/p2a_random_meal.png"
+      ],
+      "observed_sdk_quirk": "structured vs unstructured content shape mismatch warning in the Inspector for union-typed (list|str, dict|str) return values; confirmed intentional/documented in mcp 2.2.0 source (Tool.convert_result docstring), non-blocking",
+      "log_section": "RUN_LOG.txt 2e"
     }
   },
-  "generated_at": "2026-09-28T22:00:25-07:00"
+  "generated_at": "2026-10-01T12:40:34-07:00",
+  "redux_client": {
+    "store": "client/src/store.js (Redux Toolkit configureStore)",
+    "slices": {
+      "fixtures": "primary domain entity; thunks fetchFixtures/createFixture/updateFixture/deleteFixture",
+      "teams": "related entity, read-only; populates the home-team dropdown"
+    },
+    "http_client": "axios instance with withCredentials: true (client/src/api.js)",
+    "list_strategy": "all 5001 fixtures held in Redux state; Home.jsx renders 25 per page with the page number in local component state. The API was left unchanged so every Part 1.II artefact stays valid.",
+    "show_updated_result": "the slice records lastTouchedId, and Home derives its opening page from it, so a newly created or updated fixture is visible and highlighted instead of sitting on an unseen last page."
+  }
 }

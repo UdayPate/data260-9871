@@ -22,6 +22,12 @@ PART 1 COVERAGE
   1e  Part 1.I/II verification straight against MySQL, bypassing the API
   1f  regression check that nothing from HW1-HW4 broke
   1g  note on the Postman screenshot session (not console output)
+  1h  Part 1.III  production build of the Redux client
+  1i  Part 1.III  real headless-browser test of the Redux client
+  2a  Part 2A     meals MCP server driven over real MCP STDIO
+  2b  Part 2A     stdout-purity check (the STDIO logging rule)
+  2c  Part 2A     MCP Inspector connect failure: diagnosis and fix
+  2d  Part 2A     Inspector UI driven in a real browser, end to end
 
 ======================================================================
 1a. PART 1.I - schema migration (migrate_hw05.py, first run)
@@ -820,3 +826,286 @@ One limitation is recorded in reports/hw05/SCREENSHOTS.md: the pagination image 
 short of the page / page_size / total / total_pages fields. The full response
 including those fields is in section 1d of this log and is what the report quotes.
 
+======================================================================
+1h. PART 1.III - production build of the Redux client
+   Time: 2026-09-28 22:29:04
+   [terminal] npm run build. A clean Vite build is the compile check for the JSX;
+   the project's own ESLint is run separately and is clean on all ten files.
+======================================================================
+
+> client@0.0.0 build
+> vite build
+
+vite v8.3.1 building client environment for production...
+transforming...
+✓ 96 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.59 kB │ gzip:   0.37 kB
+dist/assets/index-CSQ1dWdm.css    3.34 kB │ gzip:   0.94 kB
+dist/assets/index-DUALl19x.js   348.51 kB │ gzip: 112.88 kB
+
+✓ built in 200ms
+
+======================================================================
+1i. PART 1.III - real headless-browser test (Playwright + Chromium)
+   Time: 2026-09-28 22:28:35
+   [terminal] python test_redux_ui.py - drives the actual React app: real login, real
+   form fills, real clicks, real navigation. After every mutation it queries MySQL
+   directly, so a screen that looks right but never persisted would fail. This is the
+   SECOND consecutive run, which is why it reuses the already-running servers and still
+   leaves the database at 12 teams / 5001 fixtures. SQLAlchemy echo lines removed.
+======================================================================
+FastAPI already listening on 8871, reusing it
+Vite already listening on 5173, reusing it
+
+### Login
+PASS  login lands on an authenticated shell
+
+### Home screen (Part 1.III.3)
+PASS  Home reports the real row count (5001)
+PASS  Home renders one page of 25 rows
+PASS  Next advances the page
+
+### Create screen (Part 1.III.4)
+PASS  create returns to Home with the new fixture visible as a table row
+PASS  the new row is highlighted as the one just touched
+PASS  created fixture really persisted in MySQL
+PASS  Home count grew by one after create
+
+### Create screen error handling
+PASS  duplicate fixture_code shows the API's 409 message on the form
+PASS  malformed fixture_code shows the API's 422 message, field named
+
+### Update screen (Part 1.III.4)
+PASS  selecting by ID prefills the form from Redux state
+PASS  update returns to Home with the changed value visible as a table row
+PASS  updated row shows the new spots_available in the table
+PASS  update really persisted in MySQL
+PASS  updated_at advanced past created_at
+PASS  unknown id is reported instead of showing an empty form
+
+### Delete from the list (Part 1.III.5)
+PASS  per-row delete button is present for the new fixture
+PASS  delete shows a confirmation on the Home screen
+PASS  deleted row is gone from the rendered table
+PASS  delete really removed the row from MySQL
+
+### Browser console
+PASS  no uncaught JS or React exceptions during the whole flow
+PASS  no unexpected console errors (deliberate 401/409/422 network responses excluded)
+      for reference, 4 expected network-failure console lines were seen (the 401/409/422 this flow provokes)
+
+==== 22/22 browser checks passed ====
+
+======================================================================
+2a. PART 2A - meals MCP server driven over real MCP STDIO
+   Time: 2026-09-28 23:09:24
+   [terminal] Spawns code/meals_server.py as a subprocess, does the JSON-RPC
+   handshake and calls every tool - the same transport the MCP Inspector uses.
+   Covers each tool's happy path, its no-results path and its rejected-input path.
+   The server's own stderr log lines are filtered out of this capture.
+======================================================================
+### handshake
+PASS  initialize() completed over stdio
+    tools: ['meal_details', 'meals_by_ingredient', 'random_meal', 'search_meals_by_name']
+PASS  exactly the four required tools are exposed
+
+### search_meals_by_name
+PASS  returns a list
+    first: {"id": "52771", "name": "Spicy Arrabiata Penne", "area": "Italian", "category": "Vegetarian", "thumb": "https://www.themealdb.com/images/media/meals/u
+PASS  card has exactly id/name/area/category/thumb
+PASS  it really is the Arrabiata recipe
+PASS  limit is honoured (3 requested)
+    no-match -> "no matches for 'zzzznotathing'"
+PASS  no results returns a short message, not an empty list
+PASS  limit=99 is rejected as an error
+    error text: Error executing tool search_meals_by_name: limit must be between 1 and 25, got 99
+
+### meals_by_ingredient
+PASS  returns a list of at most 12
+    first: {"id": "52940", "name": "Brown Stew Chicken", "thumb": "https://www.themealdb.com/images/media/meals/sypxpx1515365095.jpg"}
+PASS  card has exactly id/name/thumb
+PASS  unknown ingredient returns a short message
+
+### meal_details
+PASS  returns an object
+PASS  has every documented field
+PASS  ingredients zipped into name/measure pairs
+PASS  no empty ingredient slots leaked through
+    Spicy Arrabiata Penne | Italian | Vegetarian | 8 ingredients
+PASS  accepts an int id as well as a str
+PASS  unknown id returns a short message
+PASS  non-numeric id is rejected as an error
+    error text: Error executing tool meal_details: id must be numeric, got 'not-a-number'
+
+### random_meal
+PASS  returns the same shape as meal_details
+    three calls returned ids: ['53499', '53510', '53571']
+
+==== 19/19 MCP client checks passed ====
+
+======================================================================
+2b. PART 2A - stdout-purity check (the STDIO logging rule)
+   Time: 2026-09-28 23:09:59
+   [terminal] A STDIO server must keep stdout for JSON-RPC alone; one stray print()
+   would corrupt the stream. This feeds raw JSON-RPC to the server and inspects both
+   streams directly.
+======================================================================
+stdout: 2 lines | stderr: 1 lines
+
+PASS  every stdout line is a valid JSON-RPC 2.0 message
+PASS  stdout produced at least the initialize + tools/list replies
+PASS  the server's own log lines went to stderr
+PASS  no log line leaked onto stdout
+PASS  source file makes no print() calls (AST-checked)
+
+first stderr line: 2026-09-28 23:09:59,483 INFO [meals] starting meals MCP server on stdio
+first stdout line: {"jsonrpc":"2.0","id":1,"result":{"capabilities":{"experimental":{},"prompts":{"listChanged":false},"resources
+
+==== 5/5 stdout-purity checks passed ====
+
+======================================================================
+2c. PART 2A - MCP Inspector connect failure: diagnosis and fix
+   Time: 2026-09-28 23:28:15
+   [terminal] The Inspector looped on "Unexpected token 'E', ...is not valid JSON".
+   The cause is in the mcp 2.2.0 CLI, not in meals_server.py. Reproduced by running
+   the exact command `mcp dev` hands the Inspector.
+======================================================================
+Reproducing the MCP Inspector connect failure, and the fix.
+
+`mcp dev` does not run the server in the project venv. It hands the Inspector this
+command (from mcp/cli/cli.py, _build_uv_command):
+
+    uv run --with mcp==2.2.0 mcp run code/meals_server.py
+
+Note it requests `mcp`, not `mcp[cli]`. Running that command by hand, with one
+initialize request on stdin:
+
+$ echo '{"jsonrpc":"2.0","id":1,"method":"initialize",...}' | uv run --with mcp==2.2.0 mcp run code/meals_server.py
+exit status 1
+
+  --- STDOUT (this is what the Inspector proxy tries to parse as JSON) ---
+Error: typer is required. Install with 'pip install mcp[cli]'
+
+  --- STDERR ---
+(empty)
+
+That stdout line is the whole failure: the JSON-RPC stream's first bytes are
+"Error: typ...", so the Inspector reports
+
+    SyntaxError: Unexpected token 'E', "Error: typ"... is not valid JSON
+
+and retries forever. The fatal error belongs on stderr; the mcp 2.2.0 CLI puts it
+on stdout. Nothing in meals_server.py is involved - the file never executes,
+because the `mcp run` entry point exits before importing it.
+
+Same command with typer added to the throwaway environment:
+
+$ echo '{...initialize...}' | uv run --with mcp==2.2.0 --with typer --with httpx mcp run code/meals_server.py
+exit status 0
+
+  --- STDOUT (first line, truncated) ---
+{"jsonrpc":"2.0","id":1,"result":{"capabilities":{"experimental":{},"prompts":{"listChanged":false},"resources":{"listChanged":false,"subscribe":false
+
+Clean JSON-RPC. The working invocation is therefore:
+
+    mcp dev code/meals_server.py --with typer
+
+httpx needs no flag: it is declared as MCPServer(..., dependencies=["httpx"]),
+and `mcp dev` appends each declared dependency to the uv command as another
+--with.
+
+======================================================================
+2d. PART 2A - Inspector UI driven in a real browser, end to end
+   Time: 2026-09-28 23:28:15
+   [terminal] Playwright drives the actual MCP Inspector page: clicks Connect, lists
+   the tools, runs one and reads the result back. This covers the whole mcp dev path
+   - uv-spawned server, proxy, browser client - which the earlier stdio tests did not.
+======================================================================
+inspector URL found
+PASS  Inspector UI loaded with a Connect button
+PASS  server connected (Tools tab available, no JSON parse loop)
+PASS  tool listed in the UI: search_meals_by_name
+PASS  tool listed in the UI: meals_by_ingredient
+PASS  tool listed in the UI: meal_details
+PASS  tool listed in the UI: random_meal
+PASS  Run Tool button present
+PASS  random_meal returned a recipe through the Inspector
+PASS  no JSON parse error anywhere on the page
+
+==== 9/9 Inspector UI checks passed ====
+
+
+======================================================================
+2e. PART 2A - backslash path bug: root cause and the real Inspector run
+   Time: 2026-09-29, continued 2026-10-01
+   [note + terminal excerpt] Section 2d above used a forward-slash path and worked.
+   The command handed to the user next used a Windows backslash path and failed -
+   this section documents that failure, its root cause, and the final verified run.
+======================================================================
+Failure reported by the user: with
+    mcp dev code\meals_server.py --with typer
+the Inspector looped on "File not found: C:\Users\patel\data260-9871\codemeals_server.py"
+- the path had been silently collapsed from code\meals_server.py to codemeals_server.py.
+
+Root cause, read directly from the Inspector proxy's own connection log
+(the exact bytes it received over the wire):
+
+    Query parameters: {"command":"uv","args":"run --with mcp==2.2.0 --with httpx --with typer mcp run code\\meals_server.py", ...}
+    STDIO transport: command=...uv.exe, args=run,--with,mcp==2.2.0,--with,httpx,--with,typer,mcp,run,codemeals_server.py
+
+The first line is JSON, so "code\\meals_server.py" there is the single literal
+string  code\meals_server.py  (one backslash). The Inspector's browser client had
+collapsed the server's argv array into one space-joined string and sent that single
+string to the proxy. The proxy then re-split that string using POSIX shell-escaping
+rules, where a backslash escapes the next character - so \m is consumed as an
+escape for m, and the backslash disappears. This is confirmed as a bug in the
+@modelcontextprotocol/inspector client/proxy handshake, not in the mcp Python SDK:
+_build_uv_command() and subprocess.list2cmdline() were independently checked and
+both preserve the backslash correctly (see 2c above).
+
+Fix: give the file argument with forward slashes, which every layer (Windows file
+APIs, uv, Python, and this buggy re-parse) accepts unambiguously:
+
+    mcp dev code/meals_server.py --with typer
+
+Re-verified by actually connecting through the Inspector (not just re-running a
+command and assuming success): all four tools called for real, through the browser
+UI, against the live TheMealDB API.
+
+  search_meals_by_name(query="Arrabiata", limit=5)
+    -> Tool Result: Success
+    -> id 52771, "Spicy Arrabiata Penne", Italian, Vegetarian
+    screenshot: reports/hw05/screenshots/p2a_search_meals_by_name.png
+
+  meals_by_ingredient(ingredient="corn", limit=12)
+    -> Tool Result: Success
+    -> "no matches for ingredient 'corn'"
+    Checked independently against the live API (not just trusted): TheMealDB's
+    filter.php requires an EXACT ingredient name; "corn" alone is not one of
+    theirs (their list has "Sweetcorn", "Corn Flour", "Creamed Corn", etc.),
+    so this is the server behaving correctly on an ingredient name that genuinely
+    has no exact match, not a tool bug.
+    screenshot: reports/hw05/screenshots/p2a_meals_by_ingredient.png
+
+  meal_details(id="52771")
+    -> Tool Result: Success
+    -> full recipe, 8 ingredients, source: null (TheMealDB has none for this recipe)
+    screenshot: reports/hw05/screenshots/p2a_meal_details.png
+
+  random_meal()
+    -> Tool Result: Success
+    -> id 52877, "Lamb and Potato pie", same shape as meal_details
+    screenshot: reports/hw05/screenshots/p2a_random_meal.png
+
+Observed, non-blocking SDK quirk: three of the four screenshots show an Inspector
+warning ("Parsed JSON does not match structured content" / "Unstructured content
+is not valid JSON"). Read directly from the mcp 2.2.0 source
+(mcp/server/mcpserver/tools/base.py, Tool.convert_result docstring): MCPServer
+builds "structured content" and the legacy "unstructured" text content via two
+separate code paths for backwards compatibility, and for a tool whose return type
+is a union (list[dict] | str, or dict | str here) those two paths can disagree in
+shape. Both representations carry the same data; Tool Result: Success and
+"Valid according to output schema" are shown in every case. This is a
+documented characteristic of the SDK version, not a defect in meals_server.py.

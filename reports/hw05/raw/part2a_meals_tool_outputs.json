@@ -1,0 +1,324 @@
+{
+  "homework": 5,
+  "part": "2A - TheMealDB tutorial MCP server",
+  "sid4": "9871",
+  "server_file": "code/meals_server.py",
+  "server_name": "meals",
+  "transport": "stdio",
+  "sdk": "mcp 2.2.0 (FastMCP renamed to MCPServer in 2.x)",
+  "api_base": "https://www.themealdb.com/api/json/v1/1",
+  "note": "Captured by driving the server over real MCP STDIO, the same transport the MCP Inspector uses. random_meal is non-deterministic, so its recorded output is one sample.",
+  "tool_input_schemas": {
+    "search_meals_by_name": {
+      "properties": {
+        "query": {
+          "title": "Query",
+          "type": "string"
+        },
+        "limit": {
+          "default": 5,
+          "title": "Limit",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "query"
+      ],
+      "type": "object",
+      "title": "search_meals_by_nameArguments"
+    },
+    "meals_by_ingredient": {
+      "properties": {
+        "ingredient": {
+          "title": "Ingredient",
+          "type": "string"
+        },
+        "limit": {
+          "default": 12,
+          "title": "Limit",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "ingredient"
+      ],
+      "type": "object",
+      "title": "meals_by_ingredientArguments"
+    },
+    "meal_details": {
+      "properties": {
+        "id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "Id"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "title": "meal_detailsArguments"
+    },
+    "random_meal": {
+      "properties": {},
+      "type": "object",
+      "title": "random_mealArguments"
+    }
+  },
+  "calls": [
+    {
+      "tool": "search_meals_by_name",
+      "case": "valid",
+      "input": {
+        "query": "Arrabiata",
+        "limit": 5
+      },
+      "is_error": false,
+      "output": [
+        {
+          "id": "52771",
+          "name": "Spicy Arrabiata Penne",
+          "area": "Italian",
+          "category": "Vegetarian",
+          "thumb": "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"
+        }
+      ]
+    },
+    {
+      "tool": "search_meals_by_name",
+      "case": "no matches",
+      "input": {
+        "query": "zzzznotathing",
+        "limit": 5
+      },
+      "is_error": false,
+      "output": "no matches for 'zzzznotathing'"
+    },
+    {
+      "tool": "search_meals_by_name",
+      "case": "invalid: limit out of range",
+      "input": {
+        "query": "Chicken",
+        "limit": 99
+      },
+      "is_error": true,
+      "error": "Error executing tool search_meals_by_name: limit must be between 1 and 25, got 99"
+    },
+    {
+      "tool": "meals_by_ingredient",
+      "case": "valid",
+      "input": {
+        "ingredient": "chicken",
+        "limit": 12
+      },
+      "is_error": false,
+      "output": [
+        {
+          "id": "52940",
+          "name": "Brown Stew Chicken",
+          "thumb": "https://www.themealdb.com/images/media/meals/sypxpx1515365095.jpg"
+        },
+        {
+          "id": "53161",
+          "name": "Chicken & chorizo rice pot",
+          "thumb": "https://www.themealdb.com/images/media/meals/fk80jp1763280767.jpg"
+        },
+        {
+          "id": "52846",
+          "name": "Chicken & mushroom Hotpot",
+          "thumb": "https://www.themealdb.com/images/media/meals/uuuspp1511297945.jpg"
+        },
+        {
+          "id": "52796",
+          "name": "Chicken Alfredo Primavera",
+          "thumb": "https://www.themealdb.com/images/media/meals/syqypv1486981727.jpg"
+        },
+        {
+          "id": "52934",
+          "name": "Chicken Basquaise",
+          "thumb": "https://www.themealdb.com/images/media/meals/wruvqv1511880994.jpg"
+        },
+        {
+          "id": "52956",
+          "name": "Chicken Congee",
+          "thumb": "https://www.themealdb.com/images/media/meals/1529446352.jpg"
+        },
+        {
+          "id": "52795",
+          "name": "Chicken Handi",
+          "thumb": "https://www.themealdb.com/images/media/meals/wyxwsp1486979827.jpg"
+        },
+        {
+          "id": "52831",
+          "name": "Chicken Karaage",
+          "thumb": "https://www.themealdb.com/images/media/meals/tyywsw1505930373.jpg"
+        },
+        {
+          "id": "53358",
+          "name": "Chicken Mandi",
+          "thumb": "https://www.themealdb.com/images/media/meals/er4d081765186828.jpg"
+        },
+        {
+          "id": "53186",
+          "name": "Chicken with saffron, raisins & pine nuts",
+          "thumb": "https://www.themealdb.com/images/media/meals/4mhr3u1763481087.jpg"
+        },
+        {
+          "id": "53220",
+          "name": "kabse",
+          "thumb": "https://www.themealdb.com/images/media/meals/utqnjv1763598650.jpg"
+        },
+        {
+          "id": "52813",
+          "name": "Kentucky Fried Chicken",
+          "thumb": "https://www.themealdb.com/images/media/meals/40r49m1763197022.jpg"
+        }
+      ]
+    },
+    {
+      "tool": "meals_by_ingredient",
+      "case": "no matches",
+      "input": {
+        "ingredient": "zzzznotathing",
+        "limit": 5
+      },
+      "is_error": false,
+      "output": "no matches for ingredient 'zzzznotathing'"
+    },
+    {
+      "tool": "meal_details",
+      "case": "valid",
+      "input": {
+        "id": "52771"
+      },
+      "is_error": false,
+      "output": {
+        "id": "52771",
+        "name": "Spicy Arrabiata Penne",
+        "category": "Vegetarian",
+        "area": "Italian",
+        "instructions": "Bring a large pot of water to a boil. Add kosher salt to the boiling water, then add the pasta. Cook according to the package instructions, about 9 minutes.\r\nIn a large skillet over medium-high heat, add the olive oil and heat until the oil starts to shimmer. Add the garlic and cook, stirring, until fragrant, 1 to 2 minutes. Add the chopped tomatoes, red chile flakes, Italian seasoning and salt and pepper to taste. Bring to a boil and cook for 5 minutes. Remove from the heat and add the chopped basil.\r\nDrain the pasta and add it to the sauce. Garnish with Parmigiano-Reggiano flakes and more basil and serve warm.",
+        "image": "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg",
+        "source": null,
+        "youtube": "https://www.youtube.com/watch?v=1IszT_guI08",
+        "ingredients": [
+          {
+            "name": "penne rigate",
+            "measure": "1 pound"
+          },
+          {
+            "name": "olive oil",
+            "measure": "1/4 cup"
+          },
+          {
+            "name": "garlic",
+            "measure": "3 cloves"
+          },
+          {
+            "name": "chopped tomatoes",
+            "measure": "1 tin"
+          },
+          {
+            "name": "red chilli flakes",
+            "measure": "1/2 teaspoon"
+          },
+          {
+            "name": "italian seasoning",
+            "measure": "1/2 teaspoon"
+          },
+          {
+            "name": "basil",
+            "measure": "6 leaves"
+          },
+          {
+            "name": "Parmigiano-Reggiano",
+            "measure": "sprinkling"
+          }
+        ]
+      }
+    },
+    {
+      "tool": "meal_details",
+      "case": "invalid: non-numeric id",
+      "input": {
+        "id": "not-a-number"
+      },
+      "is_error": true,
+      "error": "Error executing tool meal_details: id must be numeric, got 'not-a-number'"
+    },
+    {
+      "tool": "meal_details",
+      "case": "no such meal",
+      "input": {
+        "id": "99999999"
+      },
+      "is_error": false,
+      "output": "no meal found with id 99999999"
+    },
+    {
+      "tool": "random_meal",
+      "case": "valid (non-deterministic by design)",
+      "input": {},
+      "is_error": false,
+      "output": {
+        "id": "53389",
+        "name": "Apple Potato Mash (Hete bliksem) ",
+        "category": "Side",
+        "area": "Netherlands",
+        "instructions": "Clean and peel the potatoes and cut them into even size chunks. Boil them in salted water for about 10 min and then add the cleaned and chopped apples into the boiling water. Add the cinnamon stick as well. Leave to boil for another 10 minutes or until both apples and potatoes are to your liking. I like mine to be fairly chunky but that is a personal preference\r\nIn the mean time bake the streaky bacon in a dry frying pan until crispy and set aside to drain on paper towels.\r\nSlice a few apple pieces and melt a little butter in a fryin pan. Add the apple slices to it and add a bit of maple syrup into the pan as well as some cinnamon. Let it simmer until the apple is soft.\r\nPrepare a plate with one whisked egg and one plate with sesame seeds. Cut your cheese into the required size. The smaller it is, the easier it is too handle.\r\nDip the cheese into the egg and make sure it coats all sides. Then dip the cheese into the sesame seeds and make sure it is covered everywhere.\r\nHeat a non stick frying pan on high until nice and hot. Put the cheese slice in and bake until the sesame seeds are brown. You have to do this rather quickly or the cheese will melt completely. Turn and bake the other side.\r\nDrain the apples and potatoes and mash them together. Taste and add cinnamon and salt where needed. Remove the cinnamon stick before mashing",
+        "image": "https://www.themealdb.com/images/media/meals/pa03n41777540582.jpg",
+        "source": "https://insimoneskitchen.com/hete-bliksem-recipe-hot-lightning/#recipe",
+        "youtube": "",
+        "ingredients": [
+          {
+            "name": "Apples",
+            "measure": "250g"
+          },
+          {
+            "name": "Potatoes",
+            "measure": "250g"
+          },
+          {
+            "name": "Cinnamon Stick",
+            "measure": "1"
+          },
+          {
+            "name": "Maple Syrup",
+            "measure": "1 tsp"
+          },
+          {
+            "name": "Ground Cinnamon",
+            "measure": "Sprinkling"
+          },
+          {
+            "name": "Bacon",
+            "measure": "4"
+          },
+          {
+            "name": "Cheese",
+            "measure": "200g"
+          },
+          {
+            "name": "Salt",
+            "measure": "Pinch"
+          },
+          {
+            "name": "Egg",
+            "measure": "1"
+          },
+          {
+            "name": "Sesame Seed",
+            "measure": "50g"
+          }
+        ]
+      }
+    }
+  ],
+  "generated_at": "2026-09-28T23:10:36-07:00"
+}
