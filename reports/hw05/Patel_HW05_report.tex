@@ -1,0 +1,587 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.9in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{parskip}
+\definecolor{codebg}{RGB}{245,245,245}
+\lstset{basicstyle=\ttfamily\footnotesize, backgroundcolor=\color{codebg},
+  breaklines=true, frame=single, columns=fullflexible, keepspaces=true,
+  showstringspaces=false}
+
+\title{DATA-260 Homework 5 -- Report}
+\author{Uday Patel}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Section 0 -- Personal Configuration and Domain}
+\begin{tabular}{|l|l|}\hline
+\textbf{Value} & \textbf{Result} \\\hline
+SID4 & 9871 \\\hline
+PORT\_BASE & 8871 \\\hline
+PREFIX & s9871 \\\hline
+SEED & 9871 \\\hline
+VERIFY\_SEED & 269871 \\\hline
+DOMAIN\_ID & 7 -- Community sports league fixtures \\\hline
+\end{tabular}
+\vspace{1em}
+
+\textbf{Hardware:} Lenovo Legion Slim 5 16" (Ryzen 5 7640HS, 16GB RAM, RTX 4060 8GB, 512GB SSD). \\
+\textbf{Local model used:} qwen3:8b via Ollama (Part 5 agent); sentence-transformers/all-MiniLM-L6-v2 (not used in this homework). \\
+\textbf{Repository:} \url{https://github.com/UdayPate/data260-9871} \\
+\textbf{Tagged commit:} PLACEHOLDER\_HASH (to be filled in after the final commit
+and hw5 tag) \\ \url{https://github.com/UdayPate/data260-9871/tree/PLACEHOLDER_HASH} \\
+\textbf{Collaborator access:} confirmed working for Sbnikitha and supriyaselvanganesan.
+
+\section*{Part 1.I -- Database}
+
+Extended the existing \verb|s9871_rel| database (already holding 5{,}001
+\verb|fixtures| rows from HW4) rather than creating a new service. The
+related entity is \verb|teams|: one team is the home team of many
+fixtures. \verb|fixtures| gained a unique code, a defaulted numeric field,
+and a foreign key to \verb|teams| with \verb|ON DELETE RESTRICT|.
+
+\begin{lstlisting}
+class Team(Base):
+    __tablename__ = "teams"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    team_name = Column(String(255), nullable=False)             # primary text field
+    home_ground = Column(String(255), nullable=False)           # secondary text field
+    team_code = Column(String(20), nullable=False, unique=True) # unique field, TM-####
+    created_at = Column(DateTime, nullable=False, server_default=func.now())
+    updated_at = Column(DateTime, nullable=False, server_default=func.now(),
+                         onupdate=func.now())
+    fixtures = relationship("Fixture", back_populates="home_team")
+
+
+class Fixture(Base):
+    __tablename__ = "fixtures"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    fixture_name = Column(String(255), nullable=False)
+    teams_players = Column(String(255), nullable=False)
+    fixture_code = Column(String(24), nullable=False, unique=True)  # FX-9871-#####
+    spots_available = Column(Integer, nullable=False, server_default="22", default=22)
+    home_team_id = Column(Integer, ForeignKey("teams.id", ondelete="RESTRICT"),
+                           nullable=False)
+    created_at = Column(DateTime, nullable=False, server_default=func.now())
+    updated_at = Column(DateTime, nullable=False, server_default=func.now(),
+                         onupdate=func.now())
+    home_team = relationship("Team", back_populates="fixtures")
+\end{lstlisting}
+
+A fixture involves two sides, but the assignment asks for a single foreign
+key, so \verb|home_team_id| deliberately models only the home side; the
+away side stays in the free-text \verb|teams_players| column.
+
+Because \verb|fixtures| already held 5{,}001 rows, \verb|migrate_hw05.py| adds the
+new columns NULL-able, backfills them deterministically from the primary
+key, then tightens to NOT NULL and adds the UNIQUE key and foreign key --
+\verb|create_all()| cannot ALTER an existing table. Real schema after migration
+(no named tool requested a screenshot here, so the real console output
+substitutes):
+
+\begin{lstlisting}
+CREATE TABLE `teams` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `team_name` varchar(255) NOT NULL,
+  `home_ground` varchar(255) NOT NULL,
+  `team_code` varchar(20) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT (now()),
+  `updated_at` datetime NOT NULL DEFAULT (now()),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `team_code` (`team_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `fixtures` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `fixture_name` varchar(255) NOT NULL,
+  `teams_players` varchar(255) NOT NULL,
+  `fixture_code` varchar(24) NOT NULL,
+  `spots_available` int NOT NULL DEFAULT '22',
+  `home_team_id` int NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_fixtures_fixture_code` (`fixture_code`),
+  KEY `idx_fixture_name` (`fixture_name`),
+  KEY `fk_fixtures_home_team` (`home_team_id`),
+  CONSTRAINT `fk_fixtures_home_team` FOREIGN KEY (`home_team_id`)
+    REFERENCES `teams` (`id`) ON DELETE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=5005 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+row count teams = 12
+row count fixtures = 5001
+\end{lstlisting}
+
+\section*{Part 1.II -- API Implementation}
+
+Full CRUD for both entities, pagination on the team listing, and a
+relationship-query endpoint (shown in the code below). Deleting a
+team that still has fixtures is refused at the API (409) and independently
+at the database level (the foreign key above):
+
+\begin{lstlisting}
+@router.delete("/teams/{team_id}")
+def delete_team(team_id: int, user: User = Depends(get_current_user),
+                 db: DBSession = Depends(get_db)):
+    team = db.query(Team).filter(Team.id == team_id).first()
+    if not team:
+        raise HTTPException(status_code=404, detail=f"Team {team_id} not found")
+    dependents = db.query(Fixture).filter(Fixture.home_team_id == team_id).count()
+    if dependents:
+        raise HTTPException(status_code=409, detail=(
+            f"Team {team_id} still has {dependents} associated fixture(s) "
+            "and cannot be deleted"))
+    db.delete(team)
+    db.commit()
+    return {"success": True, "deleted_id": team_id}
+
+
+@router.get("/teams/{team_id}/fixtures")
+def list_fixtures_for_team(team_id: int, user: User = Depends(get_current_user),
+                            db: DBSession = Depends(get_db)):
+    team = db.query(Team).filter(Team.id == team_id).first()
+    if not team:
+        raise HTTPException(status_code=404, detail=f"Team {team_id} not found")
+    rows = db.query(Fixture).filter(Fixture.home_team_id == team_id)\
+             .order_by(Fixture.id).all()
+    return {"team": team_to_dict(team), "fixture_count": len(rows),
+            "fixtures": [fixture_to_dict(f) for f in rows]}
+\end{lstlisting}
+
+Tested against the real server and the real \verb|s9871_rel| database with
+a 15-request Postman collection, run twice consecutively (15/15 both
+times), fully self-cleaning.
+
+\includegraphics[width=0.8\textwidth]{screenshots/p1_team_create.png} \\
+\small \textit{Figure 1: Postman -- create team (201).}
+
+\includegraphics[width=0.8\textwidth]{screenshots/p1_team_list_paginated.png} \\
+\small \textit{Figure 2: Postman -- list teams, paginated (200).}
+
+\includegraphics[width=0.8\textwidth]{screenshots/p1_team_get_one.png} \\
+\small \textit{Figure 3: Postman -- get one team (200).}
+
+\includegraphics[width=0.8\textwidth]{screenshots/p1_team_update.png} \\
+\small \textit{Figure 4: Postman -- update team (200).}
+
+\includegraphics[width=0.8\textwidth]{screenshots/p1_fixture_create.png} \\
+\small \textit{Figure 5: Postman -- create fixture, spots\_available defaulted to 22 (201).}
+
+\includegraphics[width=0.8\textwidth]{screenshots/p1_fixture_list.png} \\
+\small \textit{Figure 6: Postman -- list fixtures (200).}
+
+\includegraphics[width=0.8\textwidth]{screenshots/p1_fixture_get_one.png} \\
+\small \textit{Figure 7: Postman -- get one fixture (200).}
+
+\includegraphics[width=0.8\textwidth]{screenshots/p1_fixture_update.png} \\
+\small \textit{Figure 8: Postman -- update fixture, spots 22 to 14 (200).}
+
+\includegraphics[width=0.8\textwidth]{screenshots/p1_relationship_query.png} \\
+\small \textit{Figure 9: Postman -- relationship query, fixtures for one team (200).}
+
+\includegraphics[width=0.8\textwidth]{screenshots/p1_error_404_not_found.png} \\
+\small \textit{Figure 10: Postman -- resource-not-found error (404).}
+
+\includegraphics[width=0.8\textwidth]{screenshots/p1_error_422_validation.png} \\
+\small \textit{Figure 11: Postman -- validation error on the unique-field format (422).}
+
+\includegraphics[width=0.8\textwidth]{screenshots/p1_error_409_constraint.png} \\
+\small \textit{Figure 12: Postman -- constraint violation, delete refused while fixtures exist (409).}
+
+\includegraphics[width=0.8\textwidth]{screenshots/p1_fixture_delete.png} \\
+\small \textit{Figure 13: Postman -- delete fixture (200).}
+
+\includegraphics[width=0.8\textwidth]{screenshots/p1_team_delete.png} \\
+\small \textit{Figure 14: Postman -- delete team, now allowed (200).}
+
+\section*{Part 1.III -- Redux Client}
+
+Redux Toolkit store with a \verb|fixtures| slice (the primary domain
+entity) and a small read-only \verb|teams| slice for the home-team
+dropdown. Four async thunks call the FastAPI endpoints via axios.
+
+\begin{lstlisting}
+export const store = configureStore({
+  reducer: { fixtures: fixturesReducer, teams: teamsReducer },
+});
+
+export const createFixture = createAsyncThunk("fixtures/create",
+  async (fixture, { rejectWithValue }) => {
+    try {
+      const response = await http.post("/fixtures", fixture);
+      return response.data;
+    } catch (err) { return rejectWithValue(errorMessage(err)); }
+  });
+
+export const updateFixture = createAsyncThunk("fixtures/update",
+  async ({ id, changes }, { rejectWithValue }) => {
+    try {
+      const response = await http.put(`/fixtures/${id}`, changes);
+      return response.data;
+    } catch (err) { return rejectWithValue(errorMessage(err)); }
+  });
+
+export const deleteFixture = createAsyncThunk("fixtures/delete",
+  async (id, { rejectWithValue }) => {
+    try {
+      await http.delete(`/fixtures/${id}`);
+      return Number(id);  // reducer needs the id to drop the row
+    } catch (err) { return rejectWithValue(errorMessage(err)); }
+  });
+\end{lstlisting}
+
+Home reads everything from the store via \verb|useSelector|, so the table
+updates itself after every create/update/delete with no manual refetch:
+
+\begin{lstlisting}
+export default function Home({ user }) {
+  const dispatch = useDispatch();
+  const fixtures = useSelector(selectFixtures);
+  const status = useSelector(selectFixturesStatus);
+  const lastTouchedId = useSelector(selectLastTouchedId);
+  const teams = useSelector(selectTeams);
+  // ... pagination (25/page) and per-row Edit/Delete rendered below
+\end{lstlisting}
+
+Verified with a real headless-browser test (Playwright): login, pagination,
+create + direct MySQL check, a forced 409 and 422 shown on the form, update
+by id with \verb|updated_at| advancing, and per-row delete confirmed gone
+from both the table and MySQL -- 22/22, twice consecutively.
+
+Per CLAUDE.md's established convention, ``code snippet and UI output
+together, in the same frame'' is satisfied here in the report layout: the
+relevant snippet directly above each screenshot, one caption below both.
+
+\includegraphics[width=0.8\textwidth]{screenshots/p1_redux_home.png} \\
+\small \textit{Figure 15: Home screen -- reads the fixture list from Redux state (code above).}
+
+\includegraphics[width=0.8\textwidth]{screenshots/p1_redux_create.png} \\
+\small \textit{Figure 16: Create screen -- dispatches createFixture (code above).}
+
+\includegraphics[width=0.8\textwidth]{screenshots/p1_redux_update.png} \\
+\small \textit{Figure 17: Update screen -- select by id, dispatches updateFixture (code above).}
+
+\includegraphics[width=0.8\textwidth]{screenshots/p1_redux_delete.png} \\
+\small \textit{Figure 18: Delete -- per-row delete button dispatches deleteFixture (code above).}
+
+\section*{Part 2.A -- TheMealDB Tutorial MCP Server}
+
+A local MCP server named \verb|meals| (\verb|code/meals_server.py|), four
+tools over STDIO against the real TheMealDB API. mcp 2.2.0 renamed
+FastMCP to MCPServer; the API is otherwise the same.
+
+\begin{lstlisting}
+def meal_details(id: str | int) -> dict | str:
+    """Look up one meal by its TheMealDB id and return the full recipe."""
+    meal_id = str(id).strip()
+    if not meal_id.isdigit():
+        raise ToolError(f"id must be numeric, got {id!r}")
+    data = _get("lookup.php", {"i": meal_id})
+    meals = data.get("meals")
+    if not meals:
+        return f"no meal found with id {meal_id}"
+    return _full(meals[0])
+\end{lstlisting}
+
+Errors are raised as \verb|ToolError| specifically -- in mcp 2.2.0 that is
+the only exception type whose message reaches the MCP client; others are
+masked as a generic string, which would hide the real reason in the
+Inspector.
+
+\includegraphics[width=0.8\textwidth]{screenshots/p2a_search_meals_by_name.png} \\
+\small \textit{Figure 19: MCP Inspector -- search\_meals\_by\_name(Arrabiata, 5) -- Spicy Arrabiata Penne.}
+
+\includegraphics[width=0.8\textwidth]{screenshots/p2a_meals_by_ingredient.png} \\
+\small \textit{Figure 20: MCP Inspector -- meals\_by\_ingredient.}
+
+\includegraphics[width=0.8\textwidth]{screenshots/p2a_meal_details.png} \\
+\small \textit{Figure 21: MCP Inspector -- meal\_details(52771), 8 ingredients.}
+
+\includegraphics[width=0.8\textwidth]{screenshots/p2a_random_meal.png} \\
+\small \textit{Figure 22: MCP Inspector -- random\_meal, same shape as meal\_details.}
+
+\section*{Part 2.B -- Domain MCP Server}
+
+A second server, \verb|domain|, over the real \verb|s9871_rel| data: exactly
+three tools, search / detail lookup / aggregate, all returning one shared
+envelope.
+
+\begin{lstlisting}
+def result(data: Any = None, error: str | None = None) -> dict:
+    """The one envelope shape every domain tool returns."""
+    return {"ok": error is None, "data": data, "error": error}
+
+@mcp.tool()
+def team_fixture_counts(min_fixtures: int = 0) -> dict:
+    """Aggregate: number of fixtures hosted by each team."""
+    if min_fixtures < 0:
+        return result(error=f"min_fixtures must be >= 0, got {min_fixtures}")
+    db = db_session_basede26()
+    try:
+        teams = db.query(Team).order_by(Team.id).all()
+        rows = db.query(Fixture.home_team_id, func.count(Fixture.id))\
+                 .group_by(Fixture.home_team_id).all()
+        counts = dict(rows)
+        data = [{"team_id": t.id, "team_code": t.team_code, "team_name": t.team_name,
+                 "fixture_count": counts.get(t.id, 0)}
+                for t in teams if counts.get(t.id, 0) >= min_fixtures]
+        return result(data=data)
+    finally:
+        db.close()
+\end{lstlisting}
+
+Validated in MCP Inspector with one successful and one intentionally
+invalid call per tool, against the live database:
+
+\includegraphics[width=0.8\textwidth]{screenshots/Search_fixtures_valid.png} \\
+\small \textit{Figure 23: search\_fixtures("lions") -- ok: true, 5 real matches.}
+
+\includegraphics[width=0.8\textwidth]{screenshots/Search_fixtures_invalid.png} \\
+\small \textit{Figure 24: search\_fixtures("") -- ok: false, "query must not be empty".}
+
+\includegraphics[width=0.8\textwidth]{screenshots/fixture_details_valid.png} \\
+\small \textit{Figure 25: fixture\_details(4) -- ok: true, nested home\_team.}
+
+\includegraphics[width=0.8\textwidth]{screenshots/Fixture_details_invalid.png} \\
+\small \textit{Figure 26: fixture\_details(999999) -- ok: false, "fixture 999999 not found".}
+
+\includegraphics[width=0.8\textwidth]{screenshots/team_fixtures_valid.png} \\
+\small \textit{Figure 27: team\_fixture\_counts(min\_fixtures=100) -- ok: true, real per-team counts.}
+
+\includegraphics[width=0.8\textwidth]{screenshots/team_fixures_invalid.png} \\
+\small \textit{Figure 28: team\_fixture\_counts(min\_fixtures=-2) -- ok: false, "min\_fixtures must be >= 0, got -2".}
+
+\section*{Part 3 -- Tool Contracts Under Stress}
+
+\textbf{3.18 -- expected schema, rejected input, returned error} (same three
+tools and rejected calls as Part 2.B above):
+
+{\small\begin{tabular}{|p{3.4cm}|p{4.0cm}|p{3.0cm}|p{3.8cm}|}\hline
+\textbf{Tool} & \textbf{Expected schema} & \textbf{Rejected input} & \textbf{Returned error} \\\hline
+search\_fixtures & \{query: string (req.), limit: int=10\} & \{"query": ""\} & "query must not be empty" \\\hline
+fixture\_details & \{id: integer (req.)\} & \{"id": 999999\} & "fixture 999999 not found" \\\hline
+team\_fixture\_counts & \{min\_fixtures: int=0\} & \{"min\_fixtures": -2\} & "min\_fixtures must be >= 0, got -2" \\\hline
+\end{tabular}}
+\vspace{0.5em}
+
+\textbf{3.19 -- retry/timeout policy}, each attempt in a worker thread so
+the timeout is a real enforced cutoff, not just a latency measurement:
+
+\begin{lstlisting}
+def call_with_retry(operation, *, max_retries=3, base_delay_s=0.05,
+                     max_delay_s=1.0, timeout_s=2.0) -> dict:
+    start = time.monotonic()
+    last_err = None
+    for attempt in range(max_retries + 1):
+        future = _executor.submit(operation)
+        try:
+            data = future.result(timeout=timeout_s)
+            return {"ok": True, "data": data, "error": None, "attempts": attempt + 1,
+                    "latency_ms": (time.monotonic() - start) * 1000}
+        except FutureTimeoutError:
+            last_err = f"timed out after {timeout_s}s"
+        except Exception as exc:
+            last_err = str(exc)
+        if attempt < max_retries:
+            time.sleep(min(base_delay_s * (2**attempt), max_delay_s))
+    return {"ok": False, "data": None, "error": last_err, "attempts": max_retries + 1,
+            "latency_ms": (time.monotonic() - start) * 1000}
+\end{lstlisting}
+
+Demonstrated, real output:
+
+\begin{lstlisting}
+1. success on first attempt: {"ok": true, "data": {"status": "ok"}, "error": null,
+   "attempts": 1, "latency_ms": 0.0}
+2. failure then success on retry: {"ok": true, "data": {"status": "ok",
+   "succeeded_on_attempt": 2}, "error": null, "attempts": 2, "latency_ms": 47.0}
+3. failure after all retries: {"ok": false, "data": null, "error": "operation always
+   fails", "attempts": 4, "latency_ms": 156.0}
+\end{lstlisting}
+
+\textbf{3.20 -- VERIFY\_SEED fault injection}, 150 calls (50 per rate),
+VERIFY\_SEED = 269871, raw data in \verb|reports/hw05/raw/|:
+
+\begin{tabular}{|l|l|l|l|}\hline
+\textbf{Injected failure rate} & \textbf{Success rate} & \textbf{Mean latency (ms)} & \textbf{p99 latency (ms)} \\\hline
+0\%  & 100\% & 13.1 & 31.0 \\\hline
+20\% & 100\% & 28.4 & 187.0 \\\hline
+50\% & 94\%  & 80.0 & 428.4 \\\hline
+\end{tabular}
+\vspace{0.5em}
+
+With max\_retries=3 (4 attempts total), the policy fully absorbs 0\% and
+20\% injected failure -- failing 4 attempts in a row at 20\% has
+probability $0.2^4 \approx 0.16\%$. At 50\%, failing all 4 has probability
+$0.5^4 = 6.25\%$, matching the observed 6\% failure almost exactly. p99
+grows much faster than the mean because it is dominated by the calls that
+need several retries with exponential backoff.
+
+\textbf{Interactive vs.\ batch:} suitable for an interactive assistant up
+to about 20\% failure -- every call still succeeds and p99 stays under
+200ms. At 50\%, a p99 of 428ms feels sluggish and 1 in 17 requests still
+fails outright. For batch processing, increase max\_retries (5--6) and
+raise max\_delay\_s (5--10s) so a transient outage gets more chances to
+clear -- worse worst-case latency traded for a higher overall success rate,
+the right trade when nothing is blocking an interactive user.
+
+\section*{Part 4 -- One Safe Tool Entry Point and Offline Tests}
+
+\verb|execute_tool(name, inputs)| is the single function Part 5's agent
+calls. It dispatches through the retry policy above and always returns a
+JSON string in the \{ok, data, error\} shape -- never raises, even on an
+unknown tool name or a missing argument.
+
+\begin{lstlisting}
+def execute_tool(name: str, inputs: dict, tools: dict | None = None) -> str:
+    registry = tools or TOOLS
+    fn = registry.get(name)
+    if fn is None:
+        return json.dumps({"ok": False, "data": None,
+                            "error": f"unknown tool: {name!r} (known: {sorted(registry)})"})
+
+    if name == "search_fixtures":            # Part 5.I safety rule
+        query = (inputs.get("query") or "").strip()
+        if 0 < len(query) < 3:
+            return json.dumps({"ok": False, "data": None,
+                "error": "query too broad: must be at least 3 characters"})
+
+    def call():
+        return fn(**inputs)
+
+    outcome = call_with_retry(call, max_retries=2, base_delay_s=0.05, timeout_s=5.0)
+    envelope = outcome["data"] if outcome["ok"] else \
+        {"ok": False, "data": None, "error": outcome["error"]}
+    return json.dumps(envelope)
+\end{lstlisting}
+
+A Python test runner using \verb|assert|-backed checks, 7 tests covering
+one valid and one invalid input per domain tool plus \verb|execute_tool|'s
+own unknown-tool-name dispatch, via dependency injection (fake tool
+callables, no MySQL, no LLM, fully offline and repeatable):
+
+\includegraphics[width=0.8\textwidth]{screenshots/p4_execute_tool_tests.png} \\
+\small \textit{Figure 29: terminal -- Part 4 offline test runner, 7/7, PASS/FAIL per test and final summary.}
+
+\section*{Part 5 -- Agent Loop, Safety Rule, and Reflection}
+
+\textbf{I. Safety rule} -- a \verb|search_fixtures| query under 3
+characters is rejected inside \verb|execute_tool|, before the domain tool
+or any DB call runs:
+
+\begin{lstlisting}
+allowed: query="Lions" -> {"ok": true, "data": [...2 matches...], "error": null}
+blocked: query="a"     -> {"ok": false, "data": null,
+                            "error": "query too broad: must be at least 3 characters"}
+\end{lstlisting}
+
+\textbf{II. Agent loop} -- \verb|run_agent(user_input)| asks qwen3:8b
+(through the existing \verb|ModelClient| adapter from HW1/2) each turn to
+either call one of the three tools or give a final answer, in a strict
+JSON protocol; a turn counter enforces \verb|max_steps|; every step and the
+final stop reason are logged to \verb|agent_runs.jsonl|.
+
+\begin{lstlisting}
+class MockModel:
+    """Always asks for another tool call - guarantees max_steps is hit."""
+    def complete(self, messages, tools=None):
+        return json.dumps({"action": "tool", "tool": "team_fixture_counts", "inputs": {}})
+
+while step < max_steps:
+    step += 1
+    raw = model.complete(messages)
+    parsed = _extract_json(raw)   # tolerant of <think> blocks / stray prose
+    if parsed.get("action") == "final":
+        final_answer = parsed.get("answer", ""); stop_reason = "final_answer"; break
+    if parsed.get("action") == "tool":
+        result = json.loads(execute_tool(parsed["tool"], parsed.get("inputs") or {},
+                                          tools=tools))
+        tool_call_count += 1
+        log({"step": step, "tool": parsed["tool"], "result": result})
+        if not result.get("ok") and "query too broad" in (result.get("error") or ""):
+            stop_reason = "safety_rule_block"; break
+        messages.append({"role": "user",
+                          "content": f"Tool result: {json.dumps(result)}"})
+        continue
+# loop exits with stop_reason = "max_steps_ceiling" if nothing else set it
+\end{lstlisting}
+
+\textbf{III. Additional offline tests} -- two tests added to the existing
+Part 4 suite (9 total), both fully offline (fake tools, \verb|MockModel|,
+no API key/live model/database):
+
+\begin{lstlisting}
+PASS  search_fixtures: valid input -> ok=true
+PASS  search_fixtures: invalid (empty query) -> ok=false, documented error
+PASS  fixture_details: valid input -> ok=true
+PASS  fixture_details: invalid (unknown id) -> ok=false, documented error
+PASS  team_fixture_counts: valid input -> ok=true
+PASS  team_fixture_counts: invalid (negative min_fixtures) -> ok=false, documented error
+PASS  execute_tool: unknown tool name -> ok=false, no crash
+PASS  execute_tool: safety rule blocks a too-broad query, no crash
+PASS  run_agent + MockModel: stops at max_steps, offline
+
+9/9 tests passed
+\end{lstlisting}
+
+\textbf{IV. Metrics} -- 4 real scenarios against local qwen3:8b:
+
+\begin{tabular}{|p{5.3cm}|l|l|l|}\hline
+\textbf{Scenario} & \textbf{Stop reason} & \textbf{Steps} & \textbf{Tool calls} \\\hline
+A -- detail lookup & final\_answer & 2 & 1 \\\hline
+B -- aggregate + follow-up reasoning & final\_answer & 2 & 1 \\\hline
+C -- asked to run a too-short search query & final\_answer & 1 & 0 \\\hline
+D -- forced ceiling (max\_steps=1) & max\_steps\_ceiling & 1 & 1 \\\hline
+\end{tabular}
+\vspace{0.5em}
+
+Honestly reported: Scenario A answered correctly (fixture 4's real code and
+spots). Scenario B's tool call succeeded with real data, but the model's
+final answer was nonsensical -- it claimed the conversation was ``stuck in
+a loop'' rather than reporting the aggregate result; this is a genuine
+model failure, not a bug in \verb|execute_tool|/\verb|run_agent|, and is
+reported as-is rather than re-run for a cleaner result. Scenario C is
+notable: the model read the system prompt's stated 3-character rule and
+declined the tool call itself (\verb|tool_call_count=0|), so the live agent
+never actually exercised the safety-rule code path -- that path is
+demonstrated directly above instead. Scenario D is a clean, deliberately
+forced \verb|max_steps_ceiling|.
+
+\textbf{V. Reflection} (REFLECTION.md, run\_id \verb|45743a9ea8d1|, scenario
+D):
+
+On turn 1, \verb|run_agent| sent the system prompt and the question ``Look
+up fixture id 10 and summarize it for me.'' to qwen3:8b. The model replied
+\verb|{"action": "tool", "tool": "fixture_details", "inputs": {...}}|,
+correctly recognizing the question needed a tool call, not a guess.
+\verb|execute_tool| ran \verb|fixture_details(id=10)| through the retry
+policy, succeeding on the first attempt and returning the real row:
+``Bears vs Panthers (Volleyball \#8)'', code FX-9871-00010, 22 spots
+available, home team Santa Clara Bears. That envelope was logged as the
+step record and appended to the conversation for the model's next turn.
+
+That is where the run stopped. \verb|max_steps| was deliberately set to 1,
+so the loop condition was already false after the one turn that produced
+the tool call -- no second turn remained for the model to read the result
+and write a summary. \verb|run_agent| exits, finds no final answer and no
+safety-rule block, and falls back to \verb|stop_reason = "max_steps_ceiling"|.
+The final log record shows exactly this: \verb|tool_call_count: 1|,
+\verb|steps: 1|, \verb|final_answer: null| -- the agent had the right data
+but ran out of turns before reporting it.
+
+This illustrates why \verb|max_steps| matters even when nothing goes
+wrong: a correctly-behaving agent can still hit a step budget too low for
+the task. This question needed at least two turns -- call the tool, then
+read the result back -- and \verb|max_steps=1| wasn't enough by design. The
+harness stopped cleanly rather than looping forever or guessing without
+the data it had just fetched.
+
+\end{document}
