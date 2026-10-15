@@ -1,0 +1,113 @@
+===== HW6 Part 1 - test_part1.py =====
+Run at 2026-10-15T11:22:25
+
+### POST valid fixture
+-> HTTP 201
+{"id":"6ad119e1798202185e5a8ce6","fixture_name":"Milpitas Lions vs San Jose Tigers","description":"Season opener, 7 a side","status":"scheduled","category":"Soccer","match_date":"2026-11-01T18:00:00Z","created_at":"2026-10-15T18:22:25.056842Z","updated_at":"2026-10-15T18:22:25.056842Z"}
+[PASS] create returns 201
+[PASS] default status is 'scheduled'
+[PASS] created_at == updated_at on create
+
+### GET all
+-> HTTP 200
+[{"id":"6ad119e1798202185e5a8ce6","fixture_name":"Milpitas Lions vs San Jose Tigers","description":"Season opener, 7 a side","status":"scheduled","category":"Soccer","match_date":"2026-11-01T18:00:00Z","created_at":"2026-10-15T18:22:25.056000Z","updated_at":"2026-10-15T18:22:25.056000Z"}]
+[PASS] list contains created fixture
+
+### GET one
+-> HTTP 200
+{"id":"6ad119e1798202185e5a8ce6","fixture_name":"Milpitas Lions vs San Jose Tigers","description":"Season opener, 7 a side","status":"scheduled","category":"Soccer","match_date":"2026-11-01T18:00:00Z","created_at":"2026-10-15T18:22:25.056000Z","updated_at":"2026-10-15T18:22:25.056000Z"}
+[PASS] get by id returns 200
+
+### PUT update
+-> HTTP 200
+{"id":"6ad119e1798202185e5a8ce6","fixture_name":"Milpitas Lions vs San Jose Tigers","description":"Final: 3-1","status":"completed","category":"Soccer","match_date":"2026-11-01T18:00:00Z","created_at":"2026-10-15T18:22:25.056000Z","updated_at":"2026-10-15T18:22:25.071000Z"}
+[PASS] update returns 200 + new status
+[PASS] updated_at advanced
+
+### POST missing required fixture_name
+-> HTTP 422
+{"detail":"validation failed","errors":[{"field":"fixture_name","message":"Field required","type":"missing"}]}
+[PASS] POST missing required fixture_name -> 422
+
+### POST name too long (101 chars)
+-> HTTP 422
+{"detail":"validation failed","errors":[{"field":"fixture_name","message":"String should have at most 100 characters","type":"string_too_long"}]}
+[PASS] POST name too long (101 chars) -> 422
+
+### POST invalid category enum
+-> HTTP 422
+{"detail":"validation failed","errors":[{"field":"category","message":"Input should be 'Soccer', 'Basketball', 'Volleyball' or 'Cricket'","type":"enum"}]}
+[PASS] POST invalid category enum -> 422
+
+### POST invalid status enum
+-> HTTP 422
+{"detail":"validation failed","errors":[{"field":"status","message":"Input should be 'scheduled', 'in_progress', 'completed' or 'cancelled'","type":"enum"}]}
+[PASS] POST invalid status enum -> 422
+
+### POST bad date format
+-> HTTP 422
+{"detail":"validation failed","errors":[{"field":"match_date","message":"Input should be a valid datetime or date, invalid character in year","type":"datetime_from_date_parsing"}]}
+[PASS] POST bad date format -> 422
+
+### POST wrong type (name is a number)
+-> HTTP 422
+{"detail":"validation failed","errors":[{"field":"fixture_name","message":"Input should be a valid string","type":"string_type"}]}
+[PASS] POST wrong type (name is a number) -> 422
+
+### POST unknown extra field
+-> HTTP 422
+{"detail":"validation failed","errors":[{"field":"venue","message":"Extra inputs are not permitted","type":"extra_forbidden"}]}
+[PASS] POST unknown extra field -> 422
+
+### POST malformed JSON
+-> HTTP 422
+{"detail":"validation failed","errors":[{"field":"1","message":"JSON decode error","type":"json_invalid"}]}
+[PASS] malformed JSON -> 422
+
+### GET unknown id (valid ObjectId)
+-> HTTP 404
+{"detail":"fixture not found"}
+[PASS] unknown id -> 404
+
+### GET malformed id
+-> HTTP 400
+{"detail":"'not-an-id' is not a valid fixture id"}
+[PASS] malformed id -> 400
+
+### PUT unknown id
+-> HTTP 404
+{"detail":"fixture not found"}
+[PASS] PUT unknown id -> 404
+
+### PUT invalid body
+-> HTTP 422
+{"detail":"validation failed","errors":[{"field":"category","message":"Input should be 'Soccer', 'Basketball', 'Volleyball' or 'Cricket'","type":"enum"}]}
+[PASS] PUT invalid enum -> 422
+
+### Direct MongoDB document (bypassing API)
+ {'_id': ObjectId('6ad119e1798202185e5a8ce6'), 'fixture_name': 'Milpitas Lions vs San Jose Tigers', 'description': 'Final: 3-1', 'status': 'completed', 'category': 'Soccer', 'match_date': datetime.datetime(2026, 11, 1, 18, 0, tzinfo=FixedOffset(datetime.timedelta(0), 'UTC')), 'created_at': datetime.datetime(2026, 10, 15, 18, 22, 25, 56000, tzinfo=FixedOffset(datetime.timedelta(0), 'UTC')), 'updated_at': datetime.datetime(2026, 10, 15, 18, 22, 25, 71000, tzinfo=FixedOffset(datetime.timedelta(0), 'UTC'))}
+[PASS] DB doc persisted with updated status
+[PASS] DB stores match_date as BSON date
+direct insert rejected: WriteError
+[PASS] DB validator rejects 101-char name
+
+### DELETE
+-> HTTP 204
+<empty body>
+[PASS] delete returns 204
+
+### GET after delete
+-> HTTP 404
+{"detail":"fixture not found"}
+[PASS] get after delete -> 404
+
+### DELETE again
+-> HTTP 404
+{"detail":"fixture not found"}
+[PASS] second delete -> 404
+[PASS] DB doc really gone
+
+26/26 checks passed
+
+===== Seed data via API (seed_part1.py) 2026-10-15T11:22:34 =====
+5 sample fixtures POSTed (201 each); collection left populated for screenshots.
