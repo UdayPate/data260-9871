@@ -5,16 +5,18 @@ Run from this folder:  python main.py
 """
 
 import logging
+from pathlib import Path
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
 from pymongo.errors import PyMongoError
 
 import config
 import db
+import chat_routes
 import routes
 
 log = logging.getLogger("doc_api")
@@ -67,7 +69,14 @@ def health():
     return {"status": "ok", "db": config.MONGO_DB}
 
 
+@app.get("/chat", include_in_schema=False)
+def chat_page():
+    """Optional mini chat UI for Part 2 (calls POST /api/chat on the same origin)."""
+    return FileResponse(Path(__file__).resolve().parent / "static" / "chat.html")
+
+
 app.include_router(routes.router)
+app.include_router(chat_routes.router)
 
 if __name__ == "__main__":
     import uvicorn

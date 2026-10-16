@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>League Assistant - Memory Chat</title>
+<style>
+  :root { --bg:#f5f6f8; --card:#fff; --ink:#1d2330; --muted:#667085; --user:#2563eb; --bot:#eef1f6; --line:#d9dee7; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:14px/1.45 system-ui, sans-serif; background:var(--bg); color:var(--ink); }
+  header { padding:12px 20px; background:#16213a; color:#fff; display:flex; gap:16px; align-items:center; flex-wrap:wrap; }
+  header h1 { font-size:16px; margin:0; flex:1; }
+  header label { font-size:12px; opacity:.85; }
+  header input { margin-left:6px; padding:4px 8px; border-radius:6px; border:0; width:140px; }
+  main { display:grid; grid-template-columns: 1fr 340px; gap:16px; padding:16px 20px; height:calc(100vh - 56px); }
+  #chat, #side { background:var(--card); border:1px solid var(--line); border-radius:10px; display:flex; flex-direction:column; min-height:0; }
+  #log { flex:1; overflow-y:auto; padding:14px; display:flex; flex-direction:column; gap:10px; }
+  .msg { max-width:80%; padding:8px 12px; border-radius:12px; white-space:pre-wrap; }
+  .user { align-self:flex-end; background:var(--user); color:#fff; }
+  .bot { align-self:flex-start; background:var(--bot); }
+  .err { align-self:center; background:#fde8e8; color:#9b1c1c; }
+  form { display:flex; gap:8px; padding:10px; border-top:1px solid var(--line); }
+  #msg { flex:1; padding:9px 12px; border:1px solid var(--line); border-radius:8px; font:inherit; }
+  button { padding:9px 18px; border:0; border-radius:8px; background:var(--user); color:#fff; font:inherit; cursor:pointer; }
+  button:disabled { opacity:.5; cursor:wait; }
+  #side { padding:12px 14px; overflow-y:auto; }
+  #side h2 { font-size:13px; margin:0 0 6px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  #side section { margin-bottom:14px; }
+  #side ul { margin:0; padding-left:18px; }
+  #side pre { margin:0; white-space:pre-wrap; font:12px/1.4 inherit; background:var(--bg); padding:8px; border-radius:6px; }
+  .pill { display:inline-block; padding:1px 8px; border-radius:99px; background:var(--bot); font-size:12px; margin-right:4px; }
+  .score { color:var(--muted); font-size:12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Community Sports League - Memory Chat</h1>
+  <label>user_id <input id="user" value="uday_ui"></label>
+  <label>session_id <input id="session" placeholder="(new)" readonly></label>
+</header>
+<main>
+  <div id="chat">
+    <div id="log" aria-live="polite"></div>
+    <form id="form">
+      <input id="msg" autocomplete="off" placeholder="Type a message..." maxlength="4000" required>
+      <button id="send" type="submit">Send</button>
+    </form>
+  </div>
+  <aside id="side">
+    <section><h2>Memory used this turn</h2><div id="used"><span class="score">Send a message to see it.</span></div></section>
+    <section><h2>Episodic facts retrieved</h2><div id="eps"></div></section>
+    <section><h2>Long-term summary</h2><div id="lt"></div></section>
+    <section><h2>Usage</h2><div id="usage"></div></section>
+  </aside>
+</main>
+<script>
+const $ = id => document.getElementById(id);
+let sessionId = null;
+
+function add(cls, text) {
+  const d = document.createElement("div");
+  d.className = "msg " + cls; d.textContent = text;
+  $("log").appendChild(d); $("log").scrollTop = $("log").scrollHeight;
+  return d;
+}
+function esc(s) { const d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
+
+$("form").addEventListener("submit", async ev => {
+  ev.preventDefault();
+  const message = $("msg").value.trim();
+  if (!message) return;
+  $("msg").value = ""; $("send").disabled = true;
+  add("user", message);
+  const pending = add("bot", "...");
+  try {
+    const res = await fetch("/api/chat", {
+      method: "POST", headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({user_id: $("user").value.trim(), session_id: sessionId, message})
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.errors ? data.errors.map(e => e.field + ": " + e.message).join("; ") : data.detail);
+    sessionId = data.session_id; $("session").value = sessionId.slice(0, 8) + "...";
+    pending.textContent = data.reply;
+    const m = data.memory_used, w = data.memory_written;
+    $("used").innerHTML =
+      `<span class="pill">short-term: ${m.short_term_count} msgs</span>` +
+      `<span class="pill">session summary: ${m.session_summary ? "yes" : "no"}</span>` +
+      `<span class="pill">lifetime: ${m.long_term_summary ? "yes" : "no"}</span>` +
+      (w.new_episodes.length ? `<div class="score">+ ${w.new_episodes.length} new episodic fact(s) saved</div>` : "");
+    $("eps").innerHTML = m.episodic_facts.length
+      ? "<ul>" + m.episodic_facts.map(e => `<li>${esc(e.fact)} <span class="score">(sim ${e.score})</span></li>`).join("") + "</ul>"
+      : '<span class="score">none yet</span>';
+    $("lt").innerHTML = m.long_term_summary ? `<pre>${esc(m.long_term_summary)}</pre>`
+      : m.session_summary ? `<pre>${esc(m.session_summary)}</pre>` : '<span class="score">none yet</span>';
+    $("usage").innerHTML = `<span class="score">prompt ${data.usage.prompt_tokens} tok &middot; completion ${data.usage.completion_tokens} tok &middot; ${Math.round(data.usage.latency_ms)} ms</span>`;
+  } catch (err) {
+    pending.className = "msg err"; pending.textContent = "Error: " + err.message;
+  } finally { $("send").disabled = false; $("msg").focus(); }
+});
+</script>
+</body>
+</html>

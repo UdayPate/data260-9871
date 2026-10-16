@@ -111,3 +111,433 @@ direct insert rejected: WriteError
 
 ===== Seed data via API (seed_part1.py) 2026-10-15T11:22:34 =====
 5 sample fixtures POSTed (201 each); collection left populated for screenshots.
+
+===== HW6 Part 2 - test_part2.py RUN 1 (before fixes) - 2026-10-15T12:53:47 =====
+NOTE: this run passed 17/17 but the transcript shows two quality bugs: turn 8 stored the false fact
+"The user's team is the San Jose Tigers" (they are the rival), which turn 12 then repeated; and the lifetime
+summary ended with model commentary. (Mojibake below is the Windows console codepage, not the data.)
+Run at 2026-10-15T12:50:34 | user: uday_demo
+settings: {'SHORT_TERM_N': 12, 'SUMMARIZE_EVERY_USER_MSGS': 6, 'EPISODE_TOP_K': 3, 'LIFETIME_EVERY_N_SESSION_SUMMARIES': 2, 'MAX_FACTS_PER_MESSAGE': 3}
+
+--- turn 1 ---
+USER     : Hi! I'm Uday and I coach the Milpitas Lions, a U12 soccer team.
+ASSISTANT: Hi Uday! Welcome to the community sports league. I'm here to help with any questions about fixtures, teams, or scheduling for the Milpitas Lions. Let me know how I can assist!
+  used   : short_term=0 session_summary=no lifetime=no episodes=[]
+  wrote  : new_episodes=['User coaches the Milpitas Lions', 'User coaches a U12 soccer team'] session_summary=False lifetime=False
+  usage  : prompt=91 completion=42 latency=1902.0ms
+
+--- turn 2 ---
+USER     : We usually play on Saturday mornings at Cesar Chavez Park.
+ASSISTANT: Great to know! The Milpitas Lions play on Saturday mornings at Cesar Chavez Park. Let me know if you need help with scheduling or any other details!
+  used   : short_term=2 session_summary=no lifetime=no episodes=['User coaches a U12 soccer team', 'User coaches the Milpitas Lions']
+  wrote  : new_episodes=['The user usually plays on Saturday mornings', 'The user plays at Cesar Chavez Park'] session_summary=False lifetime=False
+  usage  : prompt=180 completion=34 latency=1397.6ms
+
+--- turn 3 ---
+USER     : Our team colors are green and white.
+ASSISTANT: The Milpitas Lions wear green and white! Thanks for the details � let me know if you need anything else!
+  used   : short_term=4 session_summary=no lifetime=no episodes=['User coaches a U12 soccer team', 'User coaches the Milpitas Lions', 'The user plays at Cesar Chavez Park']
+  wrote  : new_episodes=["The user's team colors are green and white"] session_summary=False lifetime=False
+  usage  : prompt=241 completion=25 latency=1160.9ms
+
+--- turn 4 ---
+USER     : Can you remind me what kind of team I coach?
+ASSISTANT: You coach the Milpitas Lions, a U12 soccer team that wears green and white. Let me know if you need anything else!
+  used   : short_term=6 session_summary=no lifetime=no episodes=['User coaches a U12 soccer team', 'User coaches the Milpitas Lions', "The user's team colors are green and white"]
+  wrote  : new_episodes=[] session_summary=False lifetime=False
+  usage  : prompt=287 completion=30 latency=1280.1ms
+
+--- turn 5 ---
+USER     : My assistant coach is Priya and she can't make games in November.
+ASSISTANT: Priya, your assistant coach, can't make games in November. Let me know if you need help adjusting the schedule or anything else!
+  used   : short_term=8 session_summary=no lifetime=no episodes=['User coaches a U12 soccer team', 'User coaches the Milpitas Lions', 'The user usually plays on Saturday mornings']
+  wrote  : new_episodes=['Assistant coach is Priya', "Priya can't make games in November"] session_summary=False lifetime=False
+  usage  : prompt=339 completion=29 latency=1260.1ms
+
+--- turn 6 ---
+USER     : I'm allergic to peanuts, so please no peanut snacks at team events.
+ASSISTANT: Thanks for letting me know � no peanut snacks at team events, and Priya can't make games in November. Let me know if you need help with anything else!
+  used   : short_term=10 session_summary=no lifetime=no episodes=['User coaches a U12 soccer team', "The user's team colors are green and white", 'Assistant coach is Priya']
+  wrote  : new_episodes=['User has a peanut allergy'] session_summary=True lifetime=False
+  usage  : prompt=392 completion=35 latency=1465.0ms
+
+--- turn 7 ---
+USER     : What day do we usually play?
+ASSISTANT: You usually play on Saturday mornings at Cesar Chavez Park. Let me know if you need anything else!
+  used   : short_term=12 session_summary=yes lifetime=no episodes=['The user usually plays on Saturday mornings', "Priya can't make games in November", "The user's team colors are green and white"]
+  wrote  : new_episodes=[] session_summary=False lifetime=False
+  usage  : prompt=522 completion=22 latency=1590.9ms
+
+--- turn 8 ---
+USER     : We have a tough rival: the San Jose Tigers, who play on Sundays.
+ASSISTANT: The Milpitas Lions have a tough rival: the San Jose Tigers, who play on Sundays. Let me know if you need help with scheduling or anything else!
+  used   : short_term=12 session_summary=yes lifetime=no episodes=['User coaches the Milpitas Lions', "The user's team colors are green and white", 'User coaches a U12 soccer team']
+  wrote  : new_episodes=["The user's team is the San Jose Tigers", 'The San Jose Tigers play on Sundays'] session_summary=False lifetime=False
+  usage  : prompt=496 completion=34 latency=1836.5ms
+
+--- turn 9 ---
+USER     : Our next fixture is on November 1st at 6pm against the Tigers.
+ASSISTANT: Wait � the San Jose Tigers play on Sundays, but your team, the Milpitas Lions, have a fixture against them on November 1st at 6pm. Let me know if you need help adjusting the schedule!
+  used   : short_term=12 session_summary=yes lifetime=no episodes=['The San Jose Tigers play on Sundays', "The user's team is the San Jose Tigers", 'User coaches the Milpitas Lions']
+  wrote  : new_episodes=['The next fixture is on November 1st at 6pm'] session_summary=False lifetime=False
+  usage  : prompt=500 completion=47 latency=2169.1ms
+
+--- turn 10 ---
+USER     : Who is my assistant coach and when is she unavailable?
+ASSISTANT: Your assistant coach is Priya, and she is unavailable in November. Let me know if you need help with anything else!
+  used   : short_term=12 session_summary=yes lifetime=no episodes=['Assistant coach is Priya', 'User coaches a U12 soccer team', 'User coaches the Milpitas Lions']
+  wrote  : new_episodes=[] session_summary=False lifetime=False
+  usage  : prompt=522 completion=26 latency=1594.8ms
+
+--- turn 11 ---
+USER     : Please remember I prefer email reminders over text messages.
+ASSISTANT: I'll send you email reminders instead of text messages. Let me know if you need help with anything else!
+  used   : short_term=12 session_summary=yes lifetime=no episodes=['The user usually plays on Saturday mornings', 'The San Jose Tigers play on Sundays', 'User coaches the Milpitas Lions']
+  wrote  : new_episodes=['User prefers email reminders over text messages'] session_summary=False lifetime=False
+  usage  : prompt=518 completion=23 latency=1580.8ms
+
+--- turn 12 ---
+USER     : What do you remember about me and my team?
+ASSISTANT: I remember you're the coach of the San Jose Tigers, a U12 soccer team with green and white colors. Let me know if you need help with anything else!
+  used   : short_term=12 session_summary=yes lifetime=no episodes=["The user's team is the San Jose Tigers", 'User coaches a U12 soccer team', "The user's team colors are green and white"]
+  wrote  : new_episodes=[] session_summary=True lifetime=True
+  usage  : prompt=512 completion=36 latency=1911.5ms
+[PASS] all 12 turns returned 200
+
+### GET /api/memory
+HTTP 200
+{'user_id': 'uday_demo', 'messages': '<16 items>', 'latest_session_summary': {'session_id': '4b4cf11d-76a1-45eb-806b-af3de6b3da6a', 'text': "- Uday coaches the Milpitas Lions, a U12 soccer team.  \n- The team plays on Saturday mornings at Cesar Chavez Park.  \n- Team colors are green and white.  \n- Assistant coach Priya cannot attend games in November.  \n- No peanut snacks are allowed at team events due to Uday's peanut allergy.", 'created_at': '2026-10-15T19:53:23.392000+00:00'}, 'latest_lifetime_summary': {'text': "- Uday coaches the Milpitas Lions, a U12 soccer team.  \n- The team plays on Saturday mornings at Cesar Chavez Park.  \n- Team colors are green and white.  \n- Assistant coach Priya cannot attend games in November.  \n- No peanut snacks are allowed at team events due to Uday's peanut allergy.  \n- (No additional information to add beyond 6 points.)", 'created_at': '2026-10-15T19:53:26.524000+00:00'}, 'episodes': '<12 items>'}
+[PASS] memory: 200
+[PASS] memory: last 16 messages returned (24 stored)
+[PASS] memory: has session summary
+[PASS] memory: has lifetime summary (scope=user)
+[PASS] memory: episodes returned with embeddings stored (dim 384)
+
+### GET /api/aggregate
+HTTP 200 [{'date': '2026-10-15', 'count': 24}] | recent_summaries=3
+[PASS] aggregate: 200 + 24 messages counted today
+
+### chat: empty message -> HTTP 422 {"detail":"validation failed","errors":[{"field":"message","message":"String should have at least 1 character","type":"string_too_short"}]}
+[PASS] chat empty message -> 422
+
+### chat: missing user_id -> HTTP 422 {"detail":"validation failed","errors":[{"field":"user_id","message":"Field required","type":"missing"}]}
+[PASS] chat missing user_id -> 422
+
+### chat: bad user_id characters -> HTTP 422 {"detail":"validation failed","errors":[{"field":"user_id","message":"String should match pattern '^[A-Za-z0-9_.@-]{1,64}$'","type":"string_pattern_mismatch"}]}
+[PASS] chat bad user_id characters -> 422
+
+### chat: unknown extra field -> HTTP 422 {"detail":"validation failed","errors":[{"field":"foo","message":"Extra inputs are not permitted","type":"extra_forbidden"}]}
+[PASS] chat unknown extra field -> 422
+
+### memory unknown user -> HTTP 404 {"detail":"no memory stored for user 'no_such_user_xyz'"}
+[PASS] memory unknown user -> 404
+[PASS] settings rejects SHORT_TERM_N=-5 -> 422
+
+### Direct MongoDB: messages=24 (assistant=12) session_summaries=2 lifetime_summaries=1 episodes=12
+[PASS] DB: 24 messages (12 user + 12 assistant)
+[PASS] DB: 2 session summaries (every 6 user msgs)
+[PASS] DB: lifetime summary has scope=user and session_id=null
+[PASS] DB: episodes have 384-float embeddings and importance in [0,1]
+sample episodes: [('User coaches the Milpitas Lions', 0.9), ('User coaches a U12 soccer team', 0.8), ('The user usually plays on Saturday mornings', 0.8), ('The user plays at Cesar Chavez Park', 0.7), ("The user's team colors are green and white", 0.8)]
+
+lifetime summary text:
+ - Uday coaches the Milpitas Lions, a U12 soccer team.  
+- The team plays on Saturday mornings at Cesar Chavez Park.  
+- Team colors are green and white.  
+- Assistant coach Priya cannot attend games in November.  
+- No peanut snacks are allowed at team events due to Uday's peanut allergy.  
+- (No additional information to add beyond 6 points.)
+
+17/17 checks passed
+
+===== HW6 Part 2 - test_part2.py RUN 2 (after extraction/summary prompt fixes) - 2026-10-15T12:55:25 =====
+Run at 2026-10-15T12:54:14 | user: uday_demo
+settings: {'SHORT_TERM_N': 12, 'SUMMARIZE_EVERY_USER_MSGS': 6, 'EPISODE_TOP_K': 3, 'LIFETIME_EVERY_N_SESSION_SUMMARIES': 2, 'MAX_FACTS_PER_MESSAGE': 3}
+
+--- turn 1 ---
+USER     : Hi! I'm Uday and I coach the Milpitas Lions, a U12 soccer team.
+ASSISTANT: Hi Uday! Welcome to the community sports league. I'm here to help with any questions about fixtures, teams, or scheduling for the Milpitas Lions. Let me know how I can assist!
+  used   : short_term=0 session_summary=no lifetime=no episodes=[]
+  wrote  : new_episodes=["The user's team is Milpitas Lions"] session_summary=False lifetime=False
+  usage  : prompt=91 completion=42 latency=1777.4ms
+
+--- turn 2 ---
+USER     : We usually play on Saturday mornings at Cesar Chavez Park.
+ASSISTANT: Great to know! The Milpitas Lions typically play on Saturday mornings at Cesar Chavez Park. Let me know if you need help with scheduling or any other details!
+  used   : short_term=2 session_summary=no lifetime=no episodes=["The user's team is Milpitas Lions"]
+  wrote  : new_episodes=["The user's team usually plays on Saturday mornings", "The user's team plays at Cesar Chavez Park"] session_summary=False lifetime=False
+  usage  : prompt=172 completion=35 latency=1399.8ms
+
+--- turn 3 ---
+USER     : Our team colors are green and white.
+ASSISTANT: The Milpitas Lions have green and white as their team colors — great choice! Let me know if you need help with anything else.
+  used   : short_term=4 session_summary=no lifetime=no episodes=["The user's team is Milpitas Lions", "The user's team usually plays on Saturday mornings", "The user's team plays at Cesar Chavez Park"]
+  wrote  : new_episodes=["The user's team colors are green and white"] session_summary=False lifetime=False
+  usage  : prompt=247 completion=29 latency=1234.1ms
+
+--- turn 4 ---
+USER     : Can you remind me what kind of team I coach?
+ASSISTANT: You coach the Milpitas Lions, a U12 soccer team with green and white as your team colors, who usually play on Saturday mornings. Let me know if you need anything else!
+  used   : short_term=6 session_summary=no lifetime=no episodes=["The user's team is Milpitas Lions", "The user's team colors are green and white", "The user's team usually plays on Saturday mornings"]
+  wrote  : new_episodes=[] session_summary=False lifetime=False
+  usage  : prompt=295 completion=40 latency=1642.4ms
+
+--- turn 5 ---
+USER     : My assistant coach is Priya and she can't make games in November.
+ASSISTANT: Priya, your assistant coach, can't make games in November. Let me know if you need help adjusting the schedule or sharing this information with the team!
+  used   : short_term=8 session_summary=no lifetime=no episodes=["The user's team usually plays on Saturday mornings", "The user's team is Milpitas Lions", "The user's team plays at Cesar Chavez Park"]
+  wrote  : new_episodes=["The user's assistant coach is Priya", 'Priya cannot make games in November'] session_summary=False lifetime=False
+  usage  : prompt=360 completion=33 latency=1400.2ms
+
+--- turn 6 ---
+USER     : I'm allergic to peanuts, so please no peanut snacks at team events.
+ASSISTANT: Got it — no peanut snacks at Milpitas Lions team events. Let me know if you need help sharing this with the team or adjusting any event details!
+  used   : short_term=10 session_summary=no lifetime=no episodes=["The user's team colors are green and white", "The user's team usually plays on Saturday mornings", "The user's team plays at Cesar Chavez Park"]
+  wrote  : new_episodes=['The user has a peanut allergy'] session_summary=True lifetime=False
+  usage  : prompt=417 completion=33 latency=1398.1ms
+
+--- turn 7 ---
+USER     : What day do we usually play?
+ASSISTANT: The Milpitas Lions usually play on Saturday mornings at Cesar Chavez Park. Let me know if you need any adjustments or reminders!
+  used   : short_term=12 session_summary=yes lifetime=no episodes=["The user's team usually plays on Saturday mornings", 'Priya cannot make games in November', "The user's team plays at Cesar Chavez Park"]
+  wrote  : new_episodes=[] session_summary=False lifetime=False
+  usage  : prompt=537 completion=28 latency=1665.2ms
+
+--- turn 8 ---
+USER     : We have a tough rival: the San Jose Tigers, who play on Sundays.
+ASSISTANT: The Milpitas Lions usually play on Saturday mornings at Cesar Chavez Park, while your rival, the San Jose Tigers, play on Sundays. Let me know if you need help with scheduling or game-day details!
+  used   : short_term=12 session_summary=yes lifetime=no episodes=["The user's team is Milpitas Lions", "The user's team usually plays on Saturday mornings", "The user's team plays at Cesar Chavez Park"]
+  wrote  : new_episodes=["The user's rival/opponent is San Jose Tigers"] session_summary=False lifetime=False
+  usage  : prompt=519 completion=44 latency=2225.2ms
+
+--- turn 9 ---
+USER     : Our next fixture is on November 1st at 6pm against the Tigers.
+ASSISTANT: Your next fixture is on November 1st at 6pm against the San Jose Tigers — that’s a bit later than your usual Saturday morning games! Let me know if you need help with anything else.
+  used   : short_term=12 session_summary=yes lifetime=no episodes=["The user's rival/opponent is San Jose Tigers", "The user's team usually plays on Saturday mornings", "The user's team is Milpitas Lions"]
+  wrote  : new_episodes=["The user's team is playing against the Tigers on November 1st at 6pm"] session_summary=False lifetime=False
+  usage  : prompt=533 completion=43 latency=2217.5ms
+
+--- turn 10 ---
+USER     : Who is my assistant coach and when is she unavailable?
+ASSISTANT: Your assistant coach is Priya, and she is unavailable during November. Let me know if you need help adjusting the schedule!
+  used   : short_term=12 session_summary=yes lifetime=no episodes=["The user's assistant coach is Priya", "The user's team usually plays on Saturday mornings", "The user's team is Milpitas Lions"]
+  wrote  : new_episodes=[] session_summary=False lifetime=False
+  usage  : prompt=548 completion=26 latency=1651.0ms
+
+--- turn 11 ---
+USER     : Please remember I prefer email reminders over text messages.
+ASSISTANT: I'll set email reminders for your games and important dates — no texts for you! Let me know if you need help with anything else.
+  used   : short_term=12 session_summary=yes lifetime=no episodes=["The user's team usually plays on Saturday mornings", "The user's assistant coach is Priya", "The user's team is playing against the Tigers on November 1st at 6pm"]
+  wrote  : new_episodes=['The user prefers email reminders over text messages'] session_summary=False lifetime=False
+  usage  : prompt=542 completion=29 latency=1709.5ms
+
+--- turn 12 ---
+USER     : What do you remember about me and my team?
+ASSISTANT: I remember you're the coach of the Milpitas Lions, whose team colors are green and white. Your main rival is the San Jose Tigers. Let me know if you need help with anything else!
+  used   : short_term=12 session_summary=yes lifetime=no episodes=["The user's team is Milpitas Lions", "The user's team colors are green and white", "The user's rival/opponent is San Jose Tigers"]
+  wrote  : new_episodes=[] session_summary=True lifetime=True
+  usage  : prompt=526 completion=42 latency=2281.5ms
+[PASS] all 12 turns returned 200
+
+### GET /api/memory
+HTTP 200
+{'user_id': 'uday_demo', 'messages': '<16 items>', 'latest_session_summary': {'session_id': 'c41bd13b-c149-4369-a7bf-4e48bfcb4a4b', 'text': "- Uday coaches the Milpitas Lions, a U12 soccer team.\n- The team plays on Saturday mornings at Cesar Chavez Park.\n- Team colors are green and white.\n- Assistant coach Priya cannot attend games in November.\n- No peanut snacks are allowed at team events due to Uday's peanut allergy.", 'created_at': '2026-10-15T19:55:23.237000+00:00'}, 'latest_lifetime_summary': {'text': "- Uday coaches the Milpitas Lions, a U12 soccer team.\n- The team plays on Saturday mornings at Cesar Chavez Park.\n- Team colors are green and white.\n- Assistant coach Priya cannot attend games in November.\n- No peanut snacks are allowed at team events due to Uday's peanut allergy.", 'created_at': '2026-10-15T19:55:25.873000+00:00'}, 'episodes': '<10 items>'}
+[PASS] memory: 200
+[PASS] memory: last 16 messages returned (24 stored)
+[PASS] memory: has session summary
+[PASS] memory: has lifetime summary (scope=user)
+[PASS] memory: episodes returned with embeddings stored (dim 384)
+
+### GET /api/aggregate
+HTTP 200 [{'date': '2026-10-15', 'count': 24}] | recent_summaries=3
+[PASS] aggregate: 200 + 24 messages counted today
+
+### chat: empty message -> HTTP 422 {"detail":"validation failed","errors":[{"field":"message","message":"String should have at least 1 character","type":"string_too_short"}]}
+[PASS] chat empty message -> 422
+
+### chat: missing user_id -> HTTP 422 {"detail":"validation failed","errors":[{"field":"user_id","message":"Field required","type":"missing"}]}
+[PASS] chat missing user_id -> 422
+
+### chat: bad user_id characters -> HTTP 422 {"detail":"validation failed","errors":[{"field":"user_id","message":"String should match pattern '^[A-Za-z0-9_.@-]{1,64}$'","type":"string_pattern_mismatch"}]}
+[PASS] chat bad user_id characters -> 422
+
+### chat: unknown extra field -> HTTP 422 {"detail":"validation failed","errors":[{"field":"foo","message":"Extra inputs are not permitted","type":"extra_forbidden"}]}
+[PASS] chat unknown extra field -> 422
+
+### memory unknown user -> HTTP 404 {"detail":"no memory stored for user 'no_such_user_xyz'"}
+[PASS] memory unknown user -> 404
+[PASS] settings rejects SHORT_TERM_N=-5 -> 422
+
+### Direct MongoDB: messages=24 (assistant=12) session_summaries=2 lifetime_summaries=1 episodes=10
+[PASS] DB: 24 messages (12 user + 12 assistant)
+[PASS] DB: 2 session summaries (every 6 user msgs)
+[PASS] DB: lifetime summary has scope=user and session_id=null
+[PASS] DB: episodes have 384-float embeddings and importance in [0,1]
+sample episodes: [("The user's team is Milpitas Lions", 1.0), ("The user's team usually plays on Saturday mornings", 0.8), ("The user's team plays at Cesar Chavez Park", 0.8), ("The user's team colors are green and white", 1.0), ("The user's assistant coach is Priya", 1.0)]
+
+lifetime summary text:
+ - Uday coaches the Milpitas Lions, a U12 soccer team.
+- The team plays on Saturday mornings at Cesar Chavez Park.
+- Team colors are green and white.
+- Assistant coach Priya cannot attend games in November.
+- No peanut snacks are allowed at team events due to Uday's peanut allergy.
+
+17/17 checks passed
+
+===== HW6 Part 2 - test_part2.py RUN 3 (FINAL: summary prompt now updates previous summary) - 2026-10-15T12:57:23 =====
+NOTE: run 2 passed 17/17 but its 2nd session summary was identical to the 1st (dropped turns 7-12 facts).
+Run at 2026-10-15T12:56:10 | user: uday_demo
+settings: {'SHORT_TERM_N': 12, 'SUMMARIZE_EVERY_USER_MSGS': 6, 'EPISODE_TOP_K': 3, 'LIFETIME_EVERY_N_SESSION_SUMMARIES': 2, 'MAX_FACTS_PER_MESSAGE': 3}
+
+--- turn 1 ---
+USER     : Hi! I'm Uday and I coach the Milpitas Lions, a U12 soccer team.
+ASSISTANT: Hi Uday! Welcome to the community sports league. I'm here to help with anything related to fixtures, teams, or scheduling for the Milpitas Lions U12 soccer team. Let me know how I can assist!
+  used   : short_term=0 session_summary=no lifetime=no episodes=[]
+  wrote  : new_episodes=["The user's team is Milpitas Lions"] session_summary=False lifetime=False
+  usage  : prompt=91 completion=47 latency=1958.0ms
+
+--- turn 2 ---
+USER     : We usually play on Saturday mornings at Cesar Chavez Park.
+ASSISTANT: Great to know! The Milpitas Lions U12 team plays on Saturday mornings at Cesar Chavez Park. Let me know if you need help with scheduling or fixtures!
+  used   : short_term=2 session_summary=no lifetime=no episodes=["The user's team is Milpitas Lions"]
+  wrote  : new_episodes=["The user's team usually plays on Saturday mornings", "The user's team plays at Cesar Chavez Park"] session_summary=False lifetime=False
+  usage  : prompt=177 completion=36 latency=1429.8ms
+
+--- turn 3 ---
+USER     : Our team colors are green and white.
+ASSISTANT: The Milpitas Lions U12 team wears green and white. Let me know if you need help with anything else!
+  used   : short_term=4 session_summary=no lifetime=no episodes=["The user's team is Milpitas Lions", "The user's team usually plays on Saturday mornings", "The user's team plays at Cesar Chavez Park"]
+  wrote  : new_episodes=["The user's team colors are green and white"] session_summary=False lifetime=False
+  usage  : prompt=253 completion=26 latency=1164.7ms
+
+--- turn 4 ---
+USER     : Can you remind me what kind of team I coach?
+ASSISTANT: You coach the Milpitas Lions U12 soccer team, who wear green and white and usually play on Saturday mornings. Let me know if you need anything else!
+  used   : short_term=6 session_summary=no lifetime=no episodes=["The user's team is Milpitas Lions", "The user's team colors are green and white", "The user's team usually plays on Saturday mornings"]
+  wrote  : new_episodes=[] session_summary=False lifetime=False
+  usage  : prompt=298 completion=35 latency=1446.7ms
+
+--- turn 5 ---
+USER     : My assistant coach is Priya and she can't make games in November.
+ASSISTANT: Priya, your assistant coach, can't make games in November. Let me know if you need help adjusting the schedule or assigning substitutes!
+  used   : short_term=8 session_summary=no lifetime=no episodes=["The user's team usually plays on Saturday mornings", "The user's team is Milpitas Lions", "The user's team plays at Cesar Chavez Park"]
+  wrote  : new_episodes=["The user's assistant coach is Priya", "Priya can't make games in November"] session_summary=False lifetime=False
+  usage  : prompt=358 completion=29 latency=1260.4ms
+
+--- turn 6 ---
+USER     : I'm allergic to peanuts, so please no peanut snacks at team events.
+ASSISTANT: Got it — no peanut snacks at Milpitas Lions U12 team events. Let me know if you need help with anything else!
+  used   : short_term=10 session_summary=no lifetime=no episodes=["The user's team colors are green and white", "The user's team usually plays on Saturday mornings", "The user's team plays at Cesar Chavez Park"]
+  wrote  : new_episodes=['The user has a peanut allergy'] session_summary=True lifetime=False
+  usage  : prompt=411 completion=29 latency=1319.5ms
+
+--- turn 7 ---
+USER     : What day do we usually play?
+ASSISTANT: The Milpitas Lions U12 team usually plays on Saturday mornings at Cesar Chavez Park. Let me know if you need help with anything else!
+  used   : short_term=12 session_summary=yes lifetime=no episodes=["The user's team usually plays on Saturday mornings", "The user's team plays at Cesar Chavez Park", "Priya can't make games in November"]
+  wrote  : new_episodes=[] session_summary=False lifetime=False
+  usage  : prompt=530 completion=32 latency=1803.8ms
+
+--- turn 8 ---
+USER     : We have a tough rival: the San Jose Tigers, who play on Sundays.
+ASSISTANT: The Milpitas Lions U12 team plays on Saturday mornings at Cesar Chavez Park, while the San Jose Tigers, your rival, play on Sundays. Let me know if you need help with fixtures!
+  used   : short_term=12 session_summary=yes lifetime=no episodes=["The user's team is Milpitas Lions", "The user's team usually plays on Saturday mornings", "The user's team plays at Cesar Chavez Park"]
+  wrote  : new_episodes=["The user's rival/opponent is San Jose Tigers"] session_summary=False lifetime=False
+  usage  : prompt=510 completion=43 latency=2132.1ms
+
+--- turn 9 ---
+USER     : Our next fixture is on November 1st at 6pm against the Tigers.
+ASSISTANT: Your next fixture is on November 1st at 6pm against the San Jose Tigers. Let me know if you need help with anything else!
+  used   : short_term=12 session_summary=yes lifetime=no episodes=["The user's rival/opponent is San Jose Tigers", "The user's team usually plays on Saturday mornings", "The user's team is Milpitas Lions"]
+  wrote  : new_episodes=["The user's team is playing against the Tigers on November 1st at 6pm"] session_summary=False lifetime=False
+  usage  : prompt=522 completion=31 latency=1765.2ms
+
+--- turn 10 ---
+USER     : Who is my assistant coach and when is she unavailable?
+ASSISTANT: Your assistant coach is Priya, and she is unavailable in November. Let me know if you need help with substitutes or scheduling!
+  used   : short_term=12 session_summary=yes lifetime=no episodes=["The user's assistant coach is Priya", "The user's team usually plays on Saturday mornings", "The user's team is Milpitas Lions"]
+  wrote  : new_episodes=[] session_summary=False lifetime=False
+  usage  : prompt=528 completion=27 latency=1706.5ms
+
+--- turn 11 ---
+USER     : Please remember I prefer email reminders over text messages.
+ASSISTANT: I'll send you email reminders for your next game on November 1st against the Tigers. Let me know if you need help with anything else!
+  used   : short_term=12 session_summary=yes lifetime=no episodes=["The user's team usually plays on Saturday mornings", "The user's assistant coach is Priya", "The user's team is playing against the Tigers on November 1st at 6pm"]
+  wrote  : new_episodes=['The user prefers email reminders over text messages'] session_summary=False lifetime=False
+  usage  : prompt=528 completion=31 latency=1778.6ms
+
+--- turn 12 ---
+USER     : What do you remember about me and my team?
+ASSISTANT: I remember you're the coach of the Milpitas Lions U12 team, whose colors are green and white. Your main rival is the San Jose Tigers. Let me know if you need help with anything else!
+  used   : short_term=12 session_summary=yes lifetime=no episodes=["The user's team is Milpitas Lions", "The user's team colors are green and white", "The user's rival/opponent is San Jose Tigers"]
+  wrote  : new_episodes=[] session_summary=True lifetime=True
+  usage  : prompt=518 completion=45 latency=2268.3ms
+[PASS] all 12 turns returned 200
+
+### GET /api/memory
+HTTP 200
+{'user_id': 'uday_demo', 'messages': '<16 items>', 'latest_session_summary': {'session_id': 'f7c95aa2-d5fb-4785-bb89-7176346f5bbc', 'text': "- Uday coaches the Milpitas Lions U12 soccer team.\n- The team plays on Saturday mornings at Cesar Chavez Park.\n- The team colors are green and white.\n- Priya, the assistant coach, cannot attend games in November.\n- No peanut snacks are allowed at team events due to Uday's peanut allergy.\n- The next fixture is on November 1st at 6pm against the San Jose Tigers.\n- Email reminders are preferred over text messages.\n- The San Jose Tigers are the main rival, playing on Sundays.", 'created_at': '2026-10-15T19:57:20.260000+00:00'}, 'latest_lifetime_summary': {'text': "- Uday coaches the Milpitas Lions U12 soccer team.\n- The team plays on Saturday mornings at Cesar Chavez Park.\n- The team colors are green and white.\n- Priya, the assistant coach, cannot attend games in November.\n- No peanut snacks are allowed at team events due to Uday's peanut allergy.\n- The next fixture is on November 1st at 6pm against the San Jose Tigers.", 'created_at': '2026-10-15T19:57:23.800000+00:00'}, 'episodes': '<10 items>'}
+[PASS] memory: 200
+[PASS] memory: last 16 messages returned (24 stored)
+[PASS] memory: has session summary
+[PASS] memory: has lifetime summary (scope=user)
+[PASS] memory: episodes returned with embeddings stored (dim 384)
+
+### GET /api/aggregate
+HTTP 200 [{'date': '2026-10-15', 'count': 24}] | recent_summaries=3
+[PASS] aggregate: 200 + 24 messages counted today
+
+### chat: empty message -> HTTP 422 {"detail":"validation failed","errors":[{"field":"message","message":"String should have at least 1 character","type":"string_too_short"}]}
+[PASS] chat empty message -> 422
+
+### chat: missing user_id -> HTTP 422 {"detail":"validation failed","errors":[{"field":"user_id","message":"Field required","type":"missing"}]}
+[PASS] chat missing user_id -> 422
+
+### chat: bad user_id characters -> HTTP 422 {"detail":"validation failed","errors":[{"field":"user_id","message":"String should match pattern '^[A-Za-z0-9_.@-]{1,64}$'","type":"string_pattern_mismatch"}]}
+[PASS] chat bad user_id characters -> 422
+
+### chat: unknown extra field -> HTTP 422 {"detail":"validation failed","errors":[{"field":"foo","message":"Extra inputs are not permitted","type":"extra_forbidden"}]}
+[PASS] chat unknown extra field -> 422
+
+### memory unknown user -> HTTP 404 {"detail":"no memory stored for user 'no_such_user_xyz'"}
+[PASS] memory unknown user -> 404
+[PASS] settings rejects SHORT_TERM_N=-5 -> 422
+
+### Direct MongoDB: messages=24 (assistant=12) session_summaries=2 lifetime_summaries=1 episodes=10
+[PASS] DB: 24 messages (12 user + 12 assistant)
+[PASS] DB: 2 session summaries (every 6 user msgs)
+[PASS] DB: lifetime summary has scope=user and session_id=null
+[PASS] DB: episodes have 384-float embeddings and importance in [0,1]
+sample episodes: [("The user's team is Milpitas Lions", 1.0), ("The user's team usually plays on Saturday mornings", 0.8), ("The user's team plays at Cesar Chavez Park", 0.8), ("The user's team colors are green and white", 1.0), ("The user's assistant coach is Priya", 1.0)]
+
+lifetime summary text:
+ - Uday coaches the Milpitas Lions U12 soccer team.
+- The team plays on Saturday mornings at Cesar Chavez Park.
+- The team colors are green and white.
+- Priya, the assistant coach, cannot attend games in November.
+- No peanut snacks are allowed at team events due to Uday's peanut allergy.
+- The next fixture is on November 1st at 6pm against the San Jose Tigers.
+
+17/17 checks passed
+
+===== HW6 Part 2 - capture_chat_ui.py (Playwright, real /chat page) - 2026-10-15T21:03:10 =====
+NOTE: an earlier attempt (21:01) was discarded: my tool timeout left a first run alive in the background, so two runs
+wrote interleaved messages for the same user (22 messages instead of 12). Screenshots were deleted and the run repeated
+alone; the run below is the clean one (12 messages, exit 0).
+Run at 2026-10-15T21:02:47
+turn 1: USER: Hi! I'm Uday and I coach the Milpitas Lions, a U12 soccer team.
+        BOT : Hello, Uday! Welcome to the community sports league. I'm here to help with any questions about fixtures, teams, or scheduling for the Milpitas Lions. Let me know how I can assist!
+turn 2: USER: We play Saturday mornings at Cesar Chavez Park.
+        BOT : Great to know! The Milpitas Lions play Saturday mornings at Cesar Chavez Park. Let me know if you need help with scheduling or any other details!
+turn 3: USER: My assistant coach is Priya and she can't make games in November.
+        BOT : Got it — Priya, your assistant coach, can't make games in November. Let me know if you need help adjusting schedules or making notes about her availability!
+turn 4: USER: Our rival is the San Jose Tigers and they play on Sundays.
+        BOT : Interesting — the San Jose Tigers, your rivals, play on Sundays. Let me know if you need help tracking matchups or scheduling tips!
+turn 5: USER: Please remember I prefer email reminders over text messages.
+        BOT : Got it — you prefer email reminders over text messages. I'll make sure to send all updates and reminders via email for the Milpitas Lions!
+turn 6: USER: What do you remember about me, my team and my assistant coach?
+        BOT : I remember that you're the coach of the Milpitas Lions, your assistant coach is Priya, and your rival is the San Jose Tigers. Let me know if you need anything else!
+invalid user_id -> Error: user_id: String should match pattern '^[A-Za-z0-9_.@-]{1,64}$'
+Direct MongoDB: messages for uday_ui = 12
+OK: UI conversation persisted; 6 turns
+EXIT=0

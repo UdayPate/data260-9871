@@ -1,0 +1,182 @@
+{
+    "user_id": "uday_demo",
+    "messages": [
+        {
+            "session_id": "f7c95aa2-d5fb-4785-bb89-7176346f5bbc",
+            "role": "user",
+            "content": "My assistant coach is Priya and she can't make games in November.",
+            "created_at": "2026-10-15T19:56:51.514000+00:00"
+        },
+        {
+            "session_id": "f7c95aa2-d5fb-4785-bb89-7176346f5bbc",
+            "role": "assistant",
+            "content": "Priya, your assistant coach, can't make games in November. Let me know if you need help adjusting the schedule or assigning substitutes!",
+            "created_at": "2026-10-15T19:56:52.802000+00:00"
+        },
+        {
+            "session_id": "f7c95aa2-d5fb-4785-bb89-7176346f5bbc",
+            "role": "user",
+            "content": "I'm allergic to peanuts, so please no peanut snacks at team events.",
+            "created_at": "2026-10-15T19:56:54.560000+00:00"
+        },
+        {
+            "session_id": "f7c95aa2-d5fb-4785-bb89-7176346f5bbc",
+            "role": "assistant",
+            "content": "Got it — no peanut snacks at Milpitas Lions U12 team events. Let me know if you need help with anything else!",
+            "created_at": "2026-10-15T19:56:55.903000+00:00"
+        },
+        {
+            "session_id": "f7c95aa2-d5fb-4785-bb89-7176346f5bbc",
+            "role": "user",
+            "content": "What day do we usually play?",
+            "created_at": "2026-10-15T19:56:59.851000+00:00"
+        },
+        {
+            "session_id": "f7c95aa2-d5fb-4785-bb89-7176346f5bbc",
+            "role": "assistant",
+            "content": "The Milpitas Lions U12 team usually plays on Saturday mornings at Cesar Chavez Park. Let me know if you need help with anything else!",
+            "created_at": "2026-10-15T19:57:01.676000+00:00"
+        },
+        {
+            "session_id": "f7c95aa2-d5fb-4785-bb89-7176346f5bbc",
+            "role": "user",
+            "content": "We have a tough rival: the San Jose Tigers, who play on Sundays.",
+            "created_at": "2026-10-15T19:57:01.841000+00:00"
+        },
+        {
+            "session_id": "f7c95aa2-d5fb-4785-bb89-7176346f5bbc",
+            "role": "assistant",
+            "content": "The Milpitas Lions U12 team plays on Saturday mornings at Cesar Chavez Park, while the San Jose Tigers, your rival, play on Sundays. Let me know if you need help with fixtures!",
+            "created_at": "2026-10-15T19:57:04+00:00"
+        },
+        {
+            "session_id": "f7c95aa2-d5fb-4785-bb89-7176346f5bbc",
+            "role": "user",
+            "content": "Our next fixture is on November 1st at 6pm against the Tigers.",
+            "created_at": "2026-10-15T19:57:05.082000+00:00"
+        },
+        {
+            "session_id": "f7c95aa2-d5fb-4785-bb89-7176346f5bbc",
+            "role": "assistant",
+            "content": "Your next fixture is on November 1st at 6pm against the San Jose Tigers. Let me know if you need help with anything else!",
+            "created_at": "2026-10-15T19:57:06.880000+00:00"
+        },
+        {
+            "session_id": "f7c95aa2-d5fb-4785-bb89-7176346f5bbc",
+            "role": "user",
+            "content": "Who is my assistant coach and when is she unavailable?",
+            "created_at": "2026-10-15T19:57:08.306000+00:00"
+        },
+        {
+            "session_id": "f7c95aa2-d5fb-4785-bb89-7176346f5bbc",
+            "role": "assistant",
+            "content": "Your assistant coach is Priya, and she is unavailable in November. Let me know if you need help with substitutes or scheduling!",
+            "created_at": "2026-10-15T19:57:10.040000+00:00"
+        },
+        {
+            "session_id": "f7c95aa2-d5fb-4785-bb89-7176346f5bbc",
+            "role": "user",
+            "content": "Please remember I prefer email reminders over text messages.",
+            "created_at": "2026-10-15T19:57:10.260000+00:00"
+        },
+        {
+            "session_id": "f7c95aa2-d5fb-4785-bb89-7176346f5bbc",
+            "role": "assistant",
+            "content": "I'll send you email reminders for your next game on November 1st against the Tigers. Let me know if you need help with anything else!",
+            "created_at": "2026-10-15T19:57:12.062000+00:00"
+        },
+        {
+            "session_id": "f7c95aa2-d5fb-4785-bb89-7176346f5bbc",
+            "role": "user",
+            "content": "What do you remember about me and my team?",
+            "created_at": "2026-10-15T19:57:13.030000+00:00"
+        },
+        {
+            "session_id": "f7c95aa2-d5fb-4785-bb89-7176346f5bbc",
+            "role": "assistant",
+            "content": "I remember you're the coach of the Milpitas Lions U12 team, whose colors are green and white. Your main rival is the San Jose Tigers. Let me know if you need help with anything else!",
+            "created_at": "2026-10-15T19:57:15.333000+00:00"
+        }
+    ],
+    "latest_session_summary": {
+        "session_id": "f7c95aa2-d5fb-4785-bb89-7176346f5bbc",
+        "text": "- Uday coaches the Milpitas Lions U12 soccer team.\n- The team plays on Saturday mornings at Cesar Chavez Park.\n- The team colors are green and white.\n- Priya, the assistant coach, cannot attend games in November.\n- No peanut snacks are allowed at team events due to Uday's peanut allergy.\n- The next fixture is on November 1st at 6pm against the San Jose Tigers.\n- Email reminders are preferred over text messages.\n- The San Jose Tigers are the main rival, playing on Sundays.",
+        "created_at": "2026-10-15T19:57:20.260000+00:00"
+    },
+    "latest_lifetime_summary": {
+        "text": "- Uday coaches the Milpitas Lions U12 soccer team.\n- The team plays on Saturday mornings at Cesar Chavez Park.\n- The team colors are green and white.\n- Priya, the assistant coach, cannot attend games in November.\n- No peanut snacks are allowed at team events due to Uday's peanut allergy.\n- The next fixture is on November 1st at 6pm against the San Jose Tigers.",
+        "created_at": "2026-10-15T19:57:23.800000+00:00"
+    },
+    "episodes": [
+        {
+            "session_id": "f7c95aa2-d5fb-4785-bb89-7176346f5bbc",
+            "fact": "The user prefers email reminders over text messages",
+            "importance": 1.0,
+            "created_at": "2026-10-15T19:57:13.018000+00:00",
+            "embedding_dim": 384
+        },
+        {
+            "session_id": "f7c95aa2-d5fb-4785-bb89-7176346f5bbc",
+            "fact": "The user's team is playing against the Tigers on November 1st at 6pm",
+            "importance": 0.8,
+            "created_at": "2026-10-15T19:57:08.284000+00:00",
+            "embedding_dim": 384
+        },
+        {
+            "session_id": "f7c95aa2-d5fb-4785-bb89-7176346f5bbc",
+            "fact": "The user's rival/opponent is San Jose Tigers",
+            "importance": 1.0,
+            "created_at": "2026-10-15T19:57:05.064000+00:00",
+            "embedding_dim": 384
+        },
+        {
+            "session_id": "f7c95aa2-d5fb-4785-bb89-7176346f5bbc",
+            "fact": "The user has a peanut allergy",
+            "importance": 1.0,
+            "created_at": "2026-10-15T19:56:56.847000+00:00",
+            "embedding_dim": 384
+        },
+        {
+            "session_id": "f7c95aa2-d5fb-4785-bb89-7176346f5bbc",
+            "fact": "Priya can't make games in November",
+            "importance": 1.0,
+            "created_at": "2026-10-15T19:56:54.540000+00:00",
+            "embedding_dim": 384
+        },
+        {
+            "session_id": "f7c95aa2-d5fb-4785-bb89-7176346f5bbc",
+            "fact": "The user's assistant coach is Priya",
+            "importance": 1.0,
+            "created_at": "2026-10-15T19:56:54.525000+00:00",
+            "embedding_dim": 384
+        },
+        {
+            "session_id": "f7c95aa2-d5fb-4785-bb89-7176346f5bbc",
+            "fact": "The user's team colors are green and white",
+            "importance": 1.0,
+            "created_at": "2026-10-15T19:56:49.850000+00:00",
+            "embedding_dim": 384
+        },
+        {
+            "session_id": "f7c95aa2-d5fb-4785-bb89-7176346f5bbc",
+            "fact": "The user's team plays at Cesar Chavez Park",
+            "importance": 0.8,
+            "created_at": "2026-10-15T19:56:47.608000+00:00",
+            "embedding_dim": 384
+        },
+        {
+            "session_id": "f7c95aa2-d5fb-4785-bb89-7176346f5bbc",
+            "fact": "The user's team usually plays on Saturday mornings",
+            "importance": 0.8,
+            "created_at": "2026-10-15T19:56:47.589000+00:00",
+            "embedding_dim": 384
+        },
+        {
+            "session_id": "f7c95aa2-d5fb-4785-bb89-7176346f5bbc",
+            "fact": "The user's team is Milpitas Lions",
+            "importance": 1.0,
+            "created_at": "2026-10-15T19:56:44.297000+00:00",
+            "embedding_dim": 384
+        }
+    ]
+}

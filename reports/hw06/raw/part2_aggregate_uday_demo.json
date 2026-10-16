@@ -1,0 +1,29 @@
+{
+    "user_id": "uday_demo",
+    "daily_message_counts": [
+        {
+            "date": "2026-10-15",
+            "count": 24
+        }
+    ],
+    "recent_summaries": [
+        {
+            "session_id": null,
+            "scope": "user",
+            "text": "- Uday coaches the Milpitas Lions U12 soccer team.\n- The team plays on Saturday mornings at Cesar Chavez Park.\n- The team colors are green and white.\n- Priya, the assistant coach, cannot attend games in November.\n- No peanut snacks are allowed at team events due to Uday's peanut allergy.\n- The next fixture is on November 1st at 6pm against the San Jose Tigers.",
+            "created_at": "2026-10-15T19:57:23.800000+00:00"
+        },
+        {
+            "session_id": "f7c95aa2-d5fb-4785-bb89-7176346f5bbc",
+            "scope": "session",
+            "text": "- Uday coaches the Milpitas Lions U12 soccer team.\n- The team plays on Saturday mornings at Cesar Chavez Park.\n- The team colors are green and white.\n- Priya, the assistant coach, cannot attend games in November.\n- No peanut snacks are allowed at team events due to Uday's peanut allergy.\n- The next fixture is on November 1st at 6pm against the San Jose Tigers.\n- Email reminders are preferred over text messages.\n- The San Jose Tigers are the main rival, playing on Sundays.",
+            "created_at": "2026-10-15T19:57:20.260000+00:00"
+        },
+        {
+            "session_id": "f7c95aa2-d5fb-4785-bb89-7176346f5bbc",
+            "scope": "session",
+            "text": "- Uday coaches the Milpitas Lions U12 soccer team.\n- The team plays on Saturday mornings at Cesar Chavez Park.\n- The team colors are green and white.\n- Priya, the assistant coach, cannot attend games in November.\n- No peanut snacks are allowed at team events due to Uday's peanut allergy.",
+            "created_at": "2026-10-15T19:56:59.843000+00:00"
+        }
+    ]
+}

@@ -59,5 +59,39 @@ def init_db() -> None:
     else:
         db.command("collMod", name, validator=FIXTURE_VALIDATOR,
                    validationLevel="strict", validationAction="error")
+    _init_memory_collections(db)
     db[name].create_index([("match_date", ASCENDING)])
     db[name].create_index([("category", ASCENDING), ("status", ASCENDING)])
+
+
+def _init_memory_collections(d) -> None:
+    """HW6 Part 2: messages / summaries / episodes (Part 1's collection untouched)."""
+    specs = {
+        "messages": {
+            "required": ["user_id", "session_id", "role", "content", "created_at"],
+            "properties": {"role": {"enum": ["user", "assistant"]},
+                           "content": {"bsonType": "string"}},
+            "indexes": [[("user_id", ASCENDING), ("session_id", ASCENDING), ("created_at", ASCENDING)]],
+        },
+        "summaries": {
+            "required": ["user_id", "session_id", "scope", "text", "created_at"],
+            "properties": {"scope": {"enum": ["session", "user"]},
+                           "session_id": {"bsonType": ["string", "null"]}},
+            "indexes": [[("user_id", ASCENDING), ("scope", ASCENDING), ("created_at", ASCENDING)]],
+        },
+        "episodes": {
+            "required": ["user_id", "session_id", "fact", "importance", "embedding", "created_at"],
+            "properties": {"importance": {"bsonType": "double", "minimum": 0, "maximum": 1},
+                           "embedding": {"bsonType": "array"}},
+            "indexes": [[("user_id", ASCENDING), ("created_at", ASCENDING)]],
+        },
+    }
+    for name, spec in specs.items():
+        validator = {"$jsonSchema": {"bsonType": "object", "required": spec["required"],
+                                     "properties": spec["properties"]}}
+        if name not in d.list_collection_names():
+            d.create_collection(name, validator=validator)
+        else:
+            d.command("collMod", name, validator=validator)
+        for idx in spec["indexes"]:
+            d[name].create_index(idx)
