@@ -1646,3 +1646,86 @@ identical after restart: {
 RESULT: file facts + Mongo memory persisted; un-saved conversation buffer was lost
 EXIT=0
 live MEMORY.md hash after: e58c81edad7a0dc0
+
+===== HW6 verify_hw06.py - FIRST RUN on the real (committed) state - 2026-10-16T12:03:45 =====
+NOTE: 14/15 as expected: only 'required_files' failed, because AI_USE.md, the .tex report and report.pdf did not exist yet.
+[FAIL] required_files_and_screenshots_present
+        Missing files ['reports/hw06/AI_USE.md', 'reports/hw06/Patel_HW06_report.tex', 'reports/hw06/report.pdf']; missing screenshots []
+[PASS] mongodb_database_collections_and_validator
+        collections ['episodes', 'fixtures', 'messages', 'summaries'] in s9871_doc; fixtures validator required=['fixture_name', 'status', 'category', 'match_date', 'created_at', 'updated_at'], name maxLength=100
+[PASS] backend_responds_on_port_base
+        GET /api/health -> 200 {"status":"ok","db":"s9871_doc"}
+[PASS] fixtures_crud_roundtrip_persists_in_mongodb
+        {"create persisted in Mongo": true, "GET by id 200": true, "listed": true, "PUT persisted": true, "DELETE 204 and gone from Mongo": true}
+[PASS] fixtures_validation_and_error_codes
+        status codes {'missing name': 422, '101-char name': 422, 'bad category': 422, 'bad date': 422, 'unknown id': 404, 'malformed id': 400}
+[PASS] chat_returns_reply_and_writes_memory
+        {"every turn returned a non-empty reply": true, "short-term window grew (turn 3 used 4 messages)": true, "response lists memory_used keys": true, "messages persisted (3 user + 3 assistant)": true, "episodes have 384-float embeddings and importance in [0,1]": true, "token usage recorded": true, "usage_log row written": true}; episodes stored: 2
+[PASS] memory_and_aggregate_endpoints
+        {"memory 200 with expected keys": true, "memory returns the stored messages (<=16)": true, "aggregate daily counts sum to stored messages": true, "unknown user -> 404": true}
+[PASS] read_only_chat_writes_nothing
+        counts before [6, 2, 0], after [6, 2, 0]
+[PASS] chat_input_validation
+        status codes [422, 422, 422]
+[PASS] part3_results_complete_and_consistent
+        {"4 settings x 3 runs": true, "360 per-turn rows (4 x 3 x 30), tokens positive": true, "5 probes in memory_probes.yaml with a 1-5 rubric": true, "60 probe answers scored within 1-5": true, "mean prompt tokens recomputed from the CSV matches summary": true, "best/worst follow the stated rule": true}
+[PASS] agent_md_has_five_instructions_in_three_categories
+        8 numbered instructions; categories present: ['Project description', 'Technology stack', 'Coding conventions', 'Testing approach', 'Prohibited actions']
+[PASS] file_memory_triggers_commands_and_prompt
+        {"40 entries fresh -> not needed": true, "41 entries -> needed": true, "25h-old timestamp -> needed": true, "comment/blank lines not counted": true, "/help lists the 4 commands": true, "/memory shows AGENT.md and MEMORY.md": true, "unknown command reported": true, "system prompt contains AGENT.md and MEMORY.md text": true}
+[PASS] consolidation_and_dream_work_on_temp_files
+        {"entry count dropped": true, "duplicate captain lines merged to one": true, "same-date contradiction flagged unresolved with BOTH texts kept": true, "independent facts kept": true, "backup of the original written": true, "timestamp refreshed with entry count": true, "/dream added a dated durable fact (not a duplicate)": true}; consolidate before/after entries = 7/6
+[PASS] part4_artifacts_55_to_under_40_lines_committed
+        {"original is 55 lines with >=3 duplicate groups and >=3 contradictions": true, "consolidated is under 40 lines": true, "consolidated has an explicit Conflicts section": true, "no independent fact lost": true, "both versions are committed in Git": true}
+[PASS] generated_function_follows_agent_md
+        {"every stored AGENT.md-guided function passes an independent AST re-check": true, "the generated code behaved correctly when executed": true, "control (no AGENT.md) is worse": true, "review mode answered with bullets only": true}
+
+14/15 checks passed.  Written to: C:\Users\patel\data260-9871\reports\hw06\verification.json
+(server log for debugging: C:\Users\patel\AppData\Local\Temp\verify_hw06_uvicorn.log)
+EXIT=1
+
+===== HW6 verify_hw06.py - DELIBERATELY BROKEN STATES (script must fail when it should) - 2026-10-16T12:06:13 =====
+A = AGENT.md cut to 2 instructions, part3_cost.json number altered, memory_probes.yaml removed, MEMORY_consolidated.md replaced by the 55-line original,
+    stored generated function replaced by code with no type hints/print/eval. B = MongoDB container stopped. All files were backed up and restored afterwards.
+######## BROKEN STATE A: tampered files (Mongo up) ########
++ ... NG='utf-8'; .\code\venv\Scripts\python.exe verify_hw06.py 2>&1; 'EXIT ...
+[FAIL] required_files_and_screenshots_present
+[PASS] mongodb_database_collections_and_validator
+[PASS] backend_responds_on_port_base
+[PASS] fixtures_crud_roundtrip_persists_in_mongodb
+[PASS] fixtures_validation_and_error_codes
+[PASS] chat_returns_reply_and_writes_memory
+[PASS] memory_and_aggregate_endpoints
+[PASS] read_only_chat_writes_nothing
+[PASS] chat_input_validation
+[FAIL] part3_results_complete_and_consistent
+[FAIL] agent_md_has_five_instructions_in_three_categories
+[FAIL] file_memory_triggers_commands_and_prompt
+[PASS] consolidation_and_dream_work_on_temp_files
+[FAIL] part4_artifacts_55_to_under_40_lines_committed
+[FAIL] generated_function_follows_agent_md
+9/15 checks passed.  Written to: C:\Users\patel\data260-9871\reports\hw06\verification.json
+EXIT=1
+######## BROKEN STATE B: MongoDB stopped (files intact) ########
++ ... NG='utf-8'; .\code\venv\Scripts\python.exe verify_hw06.py 2>&1; 'EXIT ...
+[FAIL] required_files_and_screenshots_present
+[FAIL] mongodb_database_collections_and_validator
+[FAIL] backend_responds_on_port_base
+[FAIL] fixtures_crud_roundtrip_persists_in_mongodb
+[FAIL] fixtures_validation_and_error_codes
+[FAIL] chat_returns_reply_and_writes_memory
+[FAIL] memory_and_aggregate_endpoints
+[FAIL] read_only_chat_writes_nothing
+[FAIL] chat_input_validation
+[PASS] part3_results_complete_and_consistent
+[PASS] agent_md_has_five_instructions_in_three_categories
+[PASS] file_memory_triggers_commands_and_prompt
+[PASS] consolidation_and_dream_work_on_temp_files
+[PASS] part4_artifacts_55_to_under_40_lines_committed
+[PASS] generated_function_follows_agent_md
+6/15 checks passed.  Written to: C:\Users\patel\data260-9871\reports\hw06\verification.json
+EXIT=1
+######## restored; git diff of the tampered files (empty = clean) ########
+warning: in the working copy of 'reports/hw06/memory_probes.yaml', LF will be replaced by CRLF the next time Git touches it
+reports/hw06/memory_probes.yaml
+s9871-mongo Up 2 seconds
