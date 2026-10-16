@@ -80,7 +80,8 @@ SCREENSHOTS = ["part1_post_create", "part1_get_all", "part1_get_one", "part1_put
 def git(*args):
     try:
         r = subprocess.run(["git", *args], capture_output=True, text=True, timeout=20, cwd=str(REPO_ROOT))
-        return r.stdout.strip()
+        # rstrip only: strip() would eat the leading space of the first `git status --porcelain` line
+        return r.stdout.rstrip("\n")
     except Exception:
         return ""
 
@@ -429,7 +430,7 @@ def cleanup():
 
 
 def main():
-    commit = git("rev-parse", "HEAD") or "unknown"
+    commit = git("rev-parse", "HEAD").strip() or "unknown"
     dirty = [l for l in git("status", "--porcelain").splitlines()
              if l.strip() and not l.strip().endswith("reports/hw06/verification.json")]
     proc, started = start_server_if_needed()
