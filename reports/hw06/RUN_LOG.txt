@@ -1729,3 +1729,23 @@ EXIT=1
 warning: in the working copy of 'reports/hw06/memory_probes.yaml', LF will be replaced by CRLF the next time Git touches it
 reports/hw06/memory_probes.yaml
 s9871-mongo Up 2 seconds
+
+===== HW6 verify_hw06.py - FINAL RUN on committed state cf7de93 - 2026-10-16T12:58:44 =====
++ ... NG='utf-8'; .\code\venv\Scripts\python.exe verify_hw06.py 2>&1; 'EXIT ...
+[PASS] required_files_and_screenshots_present
+[PASS] mongodb_database_collections_and_validator
+[PASS] backend_responds_on_port_base
+[PASS] fixtures_crud_roundtrip_persists_in_mongodb
+[PASS] fixtures_validation_and_error_codes
+[PASS] chat_returns_reply_and_writes_memory
+[PASS] memory_and_aggregate_endpoints
+[PASS] read_only_chat_writes_nothing
+[PASS] chat_input_validation
+[PASS] part3_results_complete_and_consistent
+[PASS] agent_md_has_five_instructions_in_three_categories
+[PASS] file_memory_triggers_commands_and_prompt
+[PASS] consolidation_and_dream_work_on_temp_files
+[PASS] part4_artifacts_55_to_under_40_lines_committed
+[PASS] generated_function_follows_agent_md
+15/15 checks passed.  Written to: C:\Users\patel\data260-9871\reports\hw06\verification.json
+EXIT=0

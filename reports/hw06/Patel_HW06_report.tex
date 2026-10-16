@@ -1953,7 +1953,31 @@ Facts that must not be forgotten & Weak guarantee: a fact survives only if extra
 \end{center}
 \textbf{Reading.} File memory suits a small set of facts that must always apply (rules, names, preferences); MongoDB memory suits a large history that can only be searched per turn. They fail differently: Mongo forgets silently by ranking and summarising, the file fails loudly by running out of room.
 \section*{Verification}
-(verification.json not generated yet)
+\verb|verify_hw06.py| starts the real system, runs 15 objective checks (behaviour, not wording) and writes \verb|reports/hw06/verification.json| (homework, SID4, commit hash, model/config, SEED/VERIFY\_SEED, each check). Result: \textbf{15/15 checks passed} on commit \texttt{cf7de93}. Tested against two deliberately broken states: with five files tampered it scored 9/15 and with MongoDB stopped 6/15 (both exit 1, \verb|RUN_LOG.txt|).
+\begin{center}
+\small\setlength{\tabcolsep}{4pt}
+\begin{tabular}{p{0.7\linewidth}r}
+\toprule
+\textbf{Check} & \textbf{Result} \\
+\midrule
+required\_files\_and\_screenshots\_present & PASS \\
+mongodb\_database\_collections\_and\_validator & PASS \\
+backend\_responds\_on\_port\_base & PASS \\
+fixtures\_crud\_roundtrip\_persists\_in\_mongodb & PASS \\
+fixtures\_validation\_and\_error\_codes & PASS \\
+chat\_returns\_reply\_and\_writes\_memory & PASS \\
+memory\_and\_aggregate\_endpoints & PASS \\
+read\_only\_chat\_writes\_nothing & PASS \\
+chat\_input\_validation & PASS \\
+part3\_results\_complete\_and\_consistent & PASS \\
+agent\_md\_has\_five\_instructions\_in\_three\_categories & PASS \\
+file\_memory\_triggers\_commands\_and\_prompt & PASS \\
+consolidation\_and\_dream\_work\_on\_temp\_files & PASS \\
+part4\_artifacts\_55\_to\_under\_40\_lines\_committed & PASS \\
+generated\_function\_follows\_agent\_md & PASS \\
+\bottomrule
+\end{tabular}
+\end{center}
 \section*{AI Use}
 \subsection*{1. What did you use an AI assistant for, and what did you do yourself?}
 I used Claude Code as a tutoring and debugging assistant while completing HW6. I wrote and implemented the code myself, including the MongoDB fixtures API, chat and memory endpoints, cost and probe scripts, file-based memory and consolidation features, tests, and verification script. Whenever I got stuck, I asked Claude Code to explain concepts, help me understand errors, or suggest possible approaches. I made the final implementation decisions and reviewed and modified the code myself.
