@@ -1,0 +1,41 @@
+{
+ "facts_at_turns": {
+  "1": "Hi! I'm Uday, I coach the Milpitas Lions",
+  "4": "My assistant coach is Priya, and she can",
+  "8": "I'm allergic to peanuts, so please make ",
+  "15": "Our main rival is the San Jose Tigers, a",
+  "23": "Please remember that I prefer to get rem"
+ },
+ "messages": [
+  "Hi! I'm Uday, I coach the Milpitas Lions, an under-12 (U12) soccer team in our community league.",
+  "We practice on Tuesdays and Thursdays at 5pm.",
+  "Our team colors are green and white.",
+  "My assistant coach is Priya, and she can't make any games in November.",
+  "We have 14 players on the roster this season.",
+  "Can you suggest a simple warm-up routine for kids this age?",
+  "The referee fee for each game is 40 dollars.",
+  "I'm allergic to peanuts, so please make sure there are no peanut snacks at team events.",
+  "Our home games are played at Cesar Chavez Park.",
+  "What is a good way to keep young players motivated after a loss?",
+  "Dana, one of the parents, usually brings the orange slices at halftime.",
+  "Our goalkeeper wears number 1 and our captain wears number 7.",
+  "How long should a U12 match be, roughly?",
+  "We train with cones and small-sided games most weeks.",
+  "Our main rival is the San Jose Tigers, and they play their games on Sundays.",
+  "The league fee this season was 120 dollars per player.",
+  "Can you suggest a fun drill for practicing passing?",
+  "We just bought two new match balls, size 4.",
+  "One of our defenders is recovering from a sprained ankle.",
+  "What should I say to the team before a big game?",
+  "The league requires shin guards for every player.",
+  "We usually bring a first-aid kit and a cooler of water.",
+  "Please remember that I prefer to get reminders by email rather than by text message.",
+  "Our season has 12 games in total.",
+  "Can you suggest a cool-down stretch for after the game?",
+  "A parent offered to keep score on a tablet at games.",
+  "We are thinking about printing team banners.",
+  "How do I handle a parent who is too loud on the sideline?",
+  "The final tournament is held at the end of the season.",
+  "Thanks for the help today!"
+ ]
+}

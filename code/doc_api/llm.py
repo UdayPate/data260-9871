@@ -20,6 +20,8 @@ import config  # noqa: E402
 
 _lock = threading.Lock()
 _client = None
+_client_seed = None
+_local = threading.local()   # per-request list of call records (see track())
 
 
 class LLMError(RuntimeError):
@@ -27,9 +29,11 @@ class LLMError(RuntimeError):
 
 
 def _get_client() -> ModelClient:
-    global _client
-    if _client is None:
-        _client = ModelClient(model=config.LLM_MODEL, temperature=0.3, reasoning=False)
+    global _client, _client_seed
+    seed = config.settings["LLM_SEED"]
+    if _client is None or _client_seed != seed:
+        _client = ModelClient(model=config.LLM_MODEL, temperature=0.3, reasoning=False, seed=seed)
+        _client_seed = seed
     return _client
 
 
@@ -45,9 +49,23 @@ def complete(messages: list[dict]) -> dict:
         except Exception as exc:  # connection refused, model missing, ...
             raise LLMError(f"model call failed: {exc}") from exc
         latency_ms = (time.perf_counter() - t0) * 1000
-        return {
+        result = {
             "text": (text or "").strip(),
             "prompt_tokens": client.cumulative_input_tokens - before_in,
             "completion_tokens": client.cumulative_output_tokens - before_out,
             "latency_ms": round(latency_ms, 1),
         }
+    calls = getattr(_local, "calls", None)
+    if calls is not None:
+        calls.append({k: v for k, v in result.items() if k != "text"})
+    return result
+
+
+def start_tracking() -> None:
+    """Begin recording every complete() call made on this thread (one request)."""
+    _local.calls = []
+
+
+def stop_tracking() -> list[dict]:
+    calls, _local.calls = getattr(_local, "calls", []), None
+    return calls

@@ -541,3 +541,583 @@ invalid user_id -> Error: user_id: String should match pattern '^[A-Za-z0-9_.@-]
 Direct MongoDB: messages for uday_ui = 12
 OK: UI conversation persisted; 6 turns
 EXIT=0
+
+===== HW6 Part 3 - scorer self-check on synthetic answers (incl. wrong ones) =====
+(re-run after the P5 contradiction phrases were widened; the first smoke run below is what exposed the gap)
+OK   P1 5 (want 5 ) You coach the Milpitas Lions, a U12 soccer team.
+OK   P1 4 (want 4 ) I think you coach the Milpitas Lions, a U12 team.
+OK   P1 3 (want 3 ) You coach the Milpitas Lions.
+OK   P1 1 (want 1 ) You coach some team.
+OK   P2 3 (want 3 ) Your assistant coach is Priya.
+OK   P2 1 (want 1 ) I don't have that information.
+OK   P3 5 (want 5 ) No peanut snacks please.
+OK   P3 1 (want 1 ) You didn't mention any food.
+OK   P4 5 (want 5 ) Your rival is the San Jose Tigers, who play on Sundays.
+OK   P4 3 (want 3 ) Your rival is the San Jose Tigers.
+OK   P5 5 (want 5 ) You prefer email reminders.
+OK   P5 1 (want 1 ) You prefer SMS.
+OK   P5 3 (want 3 ) I'll send you reminders via email and text message.
+scorer self-check: ALL OK
+
+===== HW6 Part 3 - SMOKE TEST, 8 turns, N4 + COMPRESS (small dataset first, per CLAUDE.md) - 2026-10-15T22:00:36 =====
+NOTE: found 3 issues, all fixed before the full sweep: (1) turn 1 took 51s (cold model/tokenizer/embedder load) -> warm-up call added;
+(2) P5 answer 'reminders via email and text message' scored 5 although it contradicts the stored preference -> contradiction phrases widened;
+(3) run-to-run noise suspected -> 3 seeds per setting (9871, 9872, 9873).
+Sweep started 2026-10-15T21:58:47 | turns: 8 | configs: N4,COMPRESS | repeat: 1
+
+=== N4 rep 1 (user smoke_n4_r1) settings: POLICY=none N=4 ===
+  turn  1: reply_prompt= 101 total_prompt=  277 window= 0 req_latency=  51087ms
+  turn  2: reply_prompt= 215 total_prompt=  372 window= 2 req_latency=   2556ms
+  turn  3: reply_prompt= 280 total_prompt=  432 window= 4 req_latency=   2043ms
+  turn  4: reply_prompt= 247 total_prompt=  408 window= 4 req_latency=   2845ms
+  turn  5: reply_prompt= 240 total_prompt=  396 window= 4 req_latency=   2519ms
+  turn  6: reply_prompt= 251 total_prompt=  825 window= 4 req_latency=   4652ms
+  turn  7: reply_prompt= 340 total_prompt=  496 window= 4 req_latency=   1425ms
+  turn  8: reply_prompt= 345 total_prompt=  508 window= 4 req_latency=   2134ms
+  conversation took 71s
+  P1 score=5 matched=['team_name', 'age_group'] :: 'The team you coach is the Milpitas Lions U12 soccer team.'
+  P2 score=5 matched=['coach_name', 'unavailable_month'] :: 'Your assistant coach is Priya, and she is unavailable for all November games. Let me know if you need help adj'
+  P3 score=5 matched=['food'] :: "Yes, you mentioned being allergic to peanuts, so we'll keep peanut snacks out of team events. Let me know if y"
+  P4 score=1 matched=[] :: "I don't have information about your team's main rival or their schedule. Would you like help checking the leag"
+  P5 score=5 matched=['channel'] :: "I'll send you reminders via email and text message. Let me know if you'd like to adjust how you receive them!"
+  -> {'mean_reply_prompt_tokens_per_turn': 252.38, 'mean_total_prompt_tokens_per_turn': 464.25, 'mean_reply_completion_tokens_per_turn': 39.38, 'mean_total_completion_tokens_per_turn': 77.38, 'mean_reply_latency_ms': 3120.25, 'mean_request_latency_ms': 8657.67, 'mean_probe_score': 4.2}
+
+=== COMPRESS rep 1 (user smoke_compress_r1) settings: POLICY=compress N=30 ===
+  turn  1: reply_prompt= 101 total_prompt=  277 window= 0 req_latency=   3836ms
+  turn  2: reply_prompt= 215 total_prompt=  372 window= 2 req_latency=   2360ms
+  turn  3: reply_prompt= 280 total_prompt=  670 window= 4 req_latency=   4289ms
+  turn  4: reply_prompt= 405 total_prompt=  566 window= 6 req_latency=   2750ms
+  turn  5: reply_prompt= 369 total_prompt=  525 window= 6 req_latency=   2217ms
+  turn  6: reply_prompt= 355 total_prompt= 1047 window= 6 req_latency=   7527ms
+  turn  7: reply_prompt= 498 total_prompt=  654 window= 6 req_latency=   1579ms
+  turn  8: reply_prompt= 496 total_prompt=  659 window= 6 req_latency=   2040ms
+  conversation took 27s
+  P1 score=5 matched=['team_name', 'age_group'] :: 'You coach the Milpitas Lions U12 soccer team. Let me know if you need help with anything else!'
+  P2 score=3 matched=['coach_name'] :: 'Your assistant coach is Priya. She is unavailable on Mondays and Fridays. Let me know if you need help with an'
+  P3 score=5 matched=['food'] :: "Yes, you mentioned being allergic to peanuts, so we'll keep peanut snacks out of team events. Let me know if y"
+  P4 score=1 matched=[] :: "I don't have information about your team's main rival or their game days. Let me know if you'd like help sched"
+  P5 score=5 matched=['channel'] :: "I'll send you reminders via email and text. Let me know if you'd like to adjust how you receive them!"
+  -> {'mean_reply_prompt_tokens_per_turn': 339.88, 'mean_total_prompt_tokens_per_turn': 596.25, 'mean_reply_completion_tokens_per_turn': 35.38, 'mean_total_completion_tokens_per_turn': 96.0, 'mean_reply_latency_ms': 1381.6, 'mean_request_latency_ms': 3324.89, 'mean_probe_score': 3.8}
+
+Sweep finished 2026-10-15T22:00:36
+EXIT=0
+
+===== HW6 Part 3 - FULL SWEEP: 4 settings x 3 seeds x 30 turns + 5 probes (run_part3_sweep.py --repeat 3) =====
+Sweep started 2026-10-15T22:01:46 | turns: 30 | configs: N4,N12,N30,COMPRESS | repeat: 3
+  warm-up call: 44.1s (not measured)
+
+=== N4 rep 1 (user p3_n4_r1) settings: POLICY=none N=4 seed=9871 ===
+  turn  1: reply_prompt= 101 total_prompt=  277 window= 0 req_latency=   4132ms
+  turn  2: reply_prompt= 215 total_prompt=  372 window= 2 req_latency=   2678ms
+  turn  3: reply_prompt= 280 total_prompt=  432 window= 4 req_latency=   2160ms
+  turn  4: reply_prompt= 247 total_prompt=  408 window= 4 req_latency=   3034ms
+  turn  5: reply_prompt= 240 total_prompt=  396 window= 4 req_latency=   2258ms
+  turn  6: reply_prompt= 248 total_prompt=  814 window= 4 req_latency=   4343ms
+  turn  7: reply_prompt= 332 total_prompt=  488 window= 4 req_latency=   1800ms
+  turn  8: reply_prompt= 354 total_prompt=  517 window= 4 req_latency=   2308ms
+  turn  9: reply_prompt= 337 total_prompt=  492 window= 4 req_latency=   2356ms
+  turn 10: reply_prompt= 321 total_prompt=  479 window= 4 req_latency=   1443ms
+  turn 11: reply_prompt= 314 total_prompt=  473 window= 4 req_latency=   1664ms
+  turn 12: reply_prompt= 325 total_prompt= 1230 window= 4 req_latency=   9619ms
+  turn 13: reply_prompt= 484 total_prompt=  640 window= 4 req_latency=   1857ms
+  turn 14: reply_prompt= 483 total_prompt=  638 window= 4 req_latency=   2345ms
+  turn 15: reply_prompt= 482 total_prompt=  643 window= 4 req_latency=   3054ms
+  turn 16: reply_prompt= 479 total_prompt=  637 window= 4 req_latency=   1746ms
+  turn 17: reply_prompt= 488 total_prompt=  642 window= 4 req_latency=   2112ms
+  turn 18: reply_prompt= 481 total_prompt= 1227 window= 4 req_latency=   8210ms
+  turn 19: reply_prompt= 560 total_prompt=  716 window= 4 req_latency=   3687ms
+  turn 20: reply_prompt= 559 total_prompt=  715 window= 4 req_latency=   2096ms
+  turn 21: reply_prompt= 543 total_prompt=  696 window= 4 req_latency=   1826ms
+  turn 22: reply_prompt= 535 total_prompt=  693 window= 4 req_latency=   1664ms
+  turn 23: reply_prompt= 531 total_prompt=  691 window= 4 req_latency=   2470ms
+  turn 24: reply_prompt= 527 total_prompt= 2075 window= 4 req_latency=  12886ms
+  turn 25: reply_prompt= 592 total_prompt=  748 window= 4 req_latency=   2208ms
+  turn 26: reply_prompt= 604 total_prompt=  760 window= 4 req_latency=   2059ms
+  turn 27: reply_prompt= 594 total_prompt=  746 window= 4 req_latency=   2429ms
+  turn 28: reply_prompt= 592 total_prompt=  750 window= 4 req_latency=   2051ms
+  turn 29: reply_prompt= 600 total_prompt=  756 window= 4 req_latency=   2342ms
+  turn 30: reply_prompt= 591 total_prompt= 1417 window= 4 req_latency=  11466ms
+  conversation took 106s
+  P1 score=5 matched=['team_name', 'age_group'] :: 'You coach the Milpitas Lions U12 soccer team. The team has 14 players on the roster this season.'
+  P2 score=5 matched=['coach_name', 'unavailable_month'] :: 'Your assistant coach is Priya, and she is unavailable for all November games.'
+  P3 score=5 matched=['food'] :: 'Yes, peanuts are kept out of team events due to a peanut allergy. You can bring other snacks like orange slice'
+  P4 score=5 matched=['rival_name', 'rival_day'] :: 'Your main rival is the San Jose Tigers, and they play their games on Sundays.'
+  P5 score=5 matched=['channel'] :: 'You prefer to receive reminders via email. Let me know if you need any updates or confirmations sent that way!'
+  -> {'mean_reply_prompt_tokens_per_turn': 434.63, 'mean_total_prompt_tokens_per_turn': 718.93, 'mean_reply_completion_tokens_per_turn': 42.2, 'mean_total_completion_tokens_per_turn': 97.43, 'mean_reply_latency_ms': 1661.32, 'mean_request_latency_ms': 3476.83, 'mean_probe_score': 5.0}
+  warm-up call: 3.1s (not measured)
+
+=== N4 rep 2 (user p3_n4_r2) settings: POLICY=none N=4 seed=9872 ===
+  turn  1: reply_prompt= 101 total_prompt=  277 window= 0 req_latency=   3987ms
+  turn  2: reply_prompt= 215 total_prompt=  372 window= 2 req_latency=   4792ms
+  turn  3: reply_prompt= 280 total_prompt=  432 window= 4 req_latency=   2045ms
+  turn  4: reply_prompt= 245 total_prompt=  406 window= 4 req_latency=   3223ms
+  turn  5: reply_prompt= 235 total_prompt=  391 window= 4 req_latency=   3724ms
+  turn  6: reply_prompt= 255 total_prompt=  825 window= 4 req_latency=   5748ms
+  turn  7: reply_prompt= 342 total_prompt=  498 window= 4 req_latency=   2675ms
+  turn  8: reply_prompt= 332 total_prompt=  495 window= 4 req_latency=   1829ms
+  turn  9: reply_prompt= 303 total_prompt=  458 window= 4 req_latency=   2098ms
+  turn 10: reply_prompt= 297 total_prompt=  455 window= 4 req_latency=   1296ms
+  turn 11: reply_prompt= 300 total_prompt=  459 window= 4 req_latency=   1654ms
+  turn 12: reply_prompt= 315 total_prompt= 1170 window= 4 req_latency=  10234ms
+  turn 13: reply_prompt= 483 total_prompt=  639 window= 4 req_latency=   2282ms
+  turn 14: reply_prompt= 485 total_prompt=  640 window= 4 req_latency=   1645ms
+  turn 15: reply_prompt= 486 total_prompt=  647 window= 4 req_latency=   3135ms
+  turn 16: reply_prompt= 484 total_prompt=  642 window= 4 req_latency=   2087ms
+  turn 17: reply_prompt= 489 total_prompt=  643 window= 4 req_latency=   1930ms
+  turn 18: reply_prompt= 473 total_prompt= 1199 window= 4 req_latency=   8080ms
+  turn 19: reply_prompt= 533 total_prompt=  689 window= 4 req_latency=   2175ms
+  turn 20: reply_prompt= 529 total_prompt=  685 window= 4 req_latency=   1564ms
+  turn 21: reply_prompt= 509 total_prompt=  662 window= 4 req_latency=   1262ms
+  turn 22: reply_prompt= 501 total_prompt=  659 window= 4 req_latency=   1687ms
+  turn 23: reply_prompt= 514 total_prompt=  674 window= 4 req_latency=   2090ms
+  turn 24: reply_prompt= 516 total_prompt= 1996 window= 4 req_latency=  11534ms
+  turn 25: reply_prompt= 575 total_prompt=  731 window= 4 req_latency=   2194ms
+  turn 26: reply_prompt= 588 total_prompt=  744 window= 4 req_latency=   2193ms
+  turn 27: reply_prompt= 598 total_prompt=  750 window= 4 req_latency=   2312ms
+  turn 28: reply_prompt= 597 total_prompt=  755 window= 4 req_latency=   1821ms
+  turn 29: reply_prompt= 604 total_prompt=  760 window= 4 req_latency=   1820ms
+  turn 30: reply_prompt= 593 total_prompt= 1414 window= 4 req_latency=  10677ms
+  conversation took 106s
+  P1 score=5 matched=['team_name', 'age_group'] :: 'The team you coach is the Milpitas Lions U12 soccer team. They have 14 players on the roster this season.'
+  P2 score=5 matched=['coach_name', 'unavailable_month'] :: 'Your assistant coach is Priya. She is unavailable for all November games.'
+  P3 score=5 matched=['food'] :: 'Yes, you asked to keep peanut snacks out of team events due to a peanut allergy. Make sure to follow that guid'
+  P4 score=5 matched=['rival_name', 'rival_day'] :: 'Your main rival is the San Jose Tigers, and they play on Sundays. Make sure to keep your team motivated for th'
+  P5 score=5 matched=['channel'] :: 'You prefer to receive reminders via email. Let me know if you need any game or practice reminders sent that wa'
+  -> {'mean_reply_prompt_tokens_per_turn': 425.9, 'mean_total_prompt_tokens_per_turn': 705.57, 'mean_reply_completion_tokens_per_turn': 37.27, 'mean_total_completion_tokens_per_turn': 91.6, 'mean_reply_latency_ms': 1691.48, 'mean_request_latency_ms': 3459.83, 'mean_probe_score': 5.0}
+  warm-up call: 1.4s (not measured)
+
+=== N4 rep 3 (user p3_n4_r3) settings: POLICY=none N=4 seed=9873 ===
+  turn  1: reply_prompt= 101 total_prompt=  277 window= 0 req_latency=   3768ms
+  turn  2: reply_prompt= 215 total_prompt=  372 window= 2 req_latency=   2432ms
+  turn  3: reply_prompt= 280 total_prompt=  432 window= 4 req_latency=   2004ms
+  turn  4: reply_prompt= 245 total_prompt=  406 window= 4 req_latency=   2618ms
+  turn  5: reply_prompt= 236 total_prompt=  392 window= 4 req_latency=   2164ms
+  turn  6: reply_prompt= 239 total_prompt=  787 window= 4 req_latency=   4186ms
+  turn  7: reply_prompt= 319 total_prompt=  475 window= 4 req_latency=   1206ms
+  turn  8: reply_prompt= 328 total_prompt=  491 window= 4 req_latency=   2080ms
+  turn  9: reply_prompt= 311 total_prompt=  466 window= 4 req_latency=   2072ms
+  turn 10: reply_prompt= 303 total_prompt=  461 window= 4 req_latency=   1449ms
+  turn 11: reply_prompt= 303 total_prompt=  462 window= 4 req_latency=   1620ms
+  turn 12: reply_prompt= 323 total_prompt= 1189 window= 4 req_latency=   9554ms
+  turn 13: reply_prompt= 483 total_prompt=  639 window= 4 req_latency=   1793ms
+  turn 14: reply_prompt= 481 total_prompt=  636 window= 4 req_latency=   1592ms
+  turn 15: reply_prompt= 487 total_prompt=  648 window= 4 req_latency=   3181ms
+  turn 16: reply_prompt= 488 total_prompt=  646 window= 4 req_latency=   1635ms
+  turn 17: reply_prompt= 489 total_prompt=  643 window= 4 req_latency=   1840ms
+  turn 18: reply_prompt= 470 total_prompt= 1198 window= 4 req_latency=   6879ms
+  turn 19: reply_prompt= 508 total_prompt=  664 window= 4 req_latency=   1965ms
+  turn 20: reply_prompt= 505 total_prompt=  661 window= 4 req_latency=   1483ms
+  turn 21: reply_prompt= 487 total_prompt=  640 window= 4 req_latency=   1603ms
+  turn 22: reply_prompt= 489 total_prompt=  647 window= 4 req_latency=   1630ms
+  turn 23: reply_prompt= 503 total_prompt=  663 window= 4 req_latency=   2747ms
+  turn 24: reply_prompt= 502 total_prompt= 1927 window= 4 req_latency=  10626ms
+  turn 25: reply_prompt= 553 total_prompt=  709 window= 4 req_latency=   1995ms
+  turn 26: reply_prompt= 556 total_prompt=  712 window= 4 req_latency=   1937ms
+  turn 27: reply_prompt= 568 total_prompt=  720 window= 4 req_latency=   1874ms
+  turn 28: reply_prompt= 567 total_prompt=  725 window= 4 req_latency=   1840ms
+  turn 29: reply_prompt= 573 total_prompt=  729 window= 4 req_latency=   2155ms
+  turn 30: reply_prompt= 575 total_prompt= 1378 window= 4 req_latency=   9540ms
+  conversation took 92s
+  P1 score=5 matched=['team_name', 'age_group'] :: 'You coach the Milpitas Lions U12 soccer team. The team has 14 players on the roster this season.'
+  P2 score=5 matched=['coach_name', 'unavailable_month'] :: 'Your assistant coach is Priya, and she is unavailable for all games in November.'
+  P3 score=5 matched=['food'] :: 'Yes, you asked to keep peanut snacks out of team events due to a peanut allergy. Make sure to continue avoidin'
+  P4 score=5 matched=['rival_name', 'rival_day'] :: 'Your main rival is the San Jose Tigers, who play their games on Sundays. Make sure to keep your team motivated'
+  P5 score=5 matched=['channel'] :: 'You prefer to receive reminders via email. Let me know if you need any adjustments or additional reminders for'
+  -> {'mean_reply_prompt_tokens_per_turn': 416.23, 'mean_total_prompt_tokens_per_turn': 693.17, 'mean_reply_completion_tokens_per_turn': 38.4, 'mean_total_completion_tokens_per_turn': 89.1, 'mean_reply_latency_ms': 1446.54, 'mean_request_latency_ms': 3048.91, 'mean_probe_score': 5.0}
+  warm-up call: 1.9s (not measured)
+
+=== N12 rep 1 (user p3_n12_r1) settings: POLICY=none N=12 seed=9871 ===
+  turn  1: reply_prompt= 101 total_prompt=  277 window= 0 req_latency=   3784ms
+  turn  2: reply_prompt= 215 total_prompt=  372 window= 2 req_latency=   2575ms
+  turn  3: reply_prompt= 280 total_prompt=  432 window= 4 req_latency=   2129ms
+  turn  4: reply_prompt= 335 total_prompt=  496 window= 6 req_latency=   2699ms
+  turn  5: reply_prompt= 388 total_prompt=  544 window= 8 req_latency=   2427ms
+  turn  6: reply_prompt= 442 total_prompt= 1043 window=10 req_latency=   6128ms
+  turn  7: reply_prompt= 626 total_prompt=  782 window=12 req_latency=   1906ms
+  turn  8: reply_prompt= 602 total_prompt=  765 window=12 req_latency=   2936ms
+  turn  9: reply_prompt= 588 total_prompt=  743 window=12 req_latency=   3040ms
+  turn 10: reply_prompt= 584 total_prompt=  742 window=12 req_latency=   2684ms
+  turn 11: reply_prompt= 595 total_prompt=  754 window=12 req_latency=   3359ms
+  turn 12: reply_prompt= 598 total_prompt= 1474 window=12 req_latency=  11958ms
+  turn 13: reply_prompt= 701 total_prompt=  857 window=12 req_latency=   2269ms
+  turn 14: reply_prompt= 706 total_prompt=  861 window=12 req_latency=   2682ms
+  turn 15: reply_prompt= 712 total_prompt=  873 window=12 req_latency=   3790ms
+  turn 16: reply_prompt= 751 total_prompt=  909 window=12 req_latency=   2516ms
+  turn 17: reply_prompt= 765 total_prompt=  919 window=12 req_latency=   2844ms
+  turn 18: reply_prompt= 777 total_prompt= 1545 window=12 req_latency=   8711ms
+  turn 19: reply_prompt= 846 total_prompt= 1002 window=12 req_latency=   3304ms
+  turn 20: reply_prompt= 855 total_prompt= 1011 window=12 req_latency=   4052ms
+  turn 21: reply_prompt= 879 total_prompt= 1032 window=12 req_latency=   2656ms
+  turn 22: reply_prompt= 881 total_prompt= 1039 window=12 req_latency=   2306ms
+  turn 23: reply_prompt= 876 total_prompt= 1036 window=12 req_latency=   2737ms
+  turn 24: reply_prompt= 858 total_prompt= 2487 window=12 req_latency=  13556ms
+  turn 25: reply_prompt= 934 total_prompt= 1090 window=12 req_latency=   2646ms
+  turn 26: reply_prompt= 927 total_prompt= 1083 window=12 req_latency=   2657ms
+  turn 27: reply_prompt= 913 total_prompt= 1065 window=12 req_latency=   3284ms
+  turn 28: reply_prompt= 926 total_prompt= 1084 window=12 req_latency=   2680ms
+  turn 29: reply_prompt= 938 total_prompt= 1094 window=12 req_latency=   2558ms
+  turn 30: reply_prompt= 942 total_prompt= 1850 window=12 req_latency=  11795ms
+  conversation took 125s
+  P1 score=5 matched=['team_name', 'age_group'] :: 'You coach the Milpitas Lions U12 soccer team.'
+  P2 score=5 matched=['coach_name', 'unavailable_month'] :: 'Your assistant coach is Priya, and she is unavailable for all games in November.'
+  P3 score=5 matched=['food'] :: 'Yes, you asked to keep peanut snacks out of team events due to a peanut allergy. Make sure to follow that rule'
+  P4 score=5 matched=['rival_name', 'rival_day'] :: 'Your main rival is the San Jose Tigers, and they play their games on Sundays.'
+  P5 score=5 matched=['channel'] :: 'You prefer email reminders over text messages. Let me know if you need help setting up reminders for practices'
+  -> {'mean_reply_prompt_tokens_per_turn': 684.7, 'mean_total_prompt_tokens_per_turn': 975.37, 'mean_reply_completion_tokens_per_turn': 48.93, 'mean_total_completion_tokens_per_turn': 103.9, 'mean_reply_latency_ms': 2203.07, 'mean_request_latency_ms': 4088.9, 'mean_probe_score': 5.0}
+  warm-up call: 1.6s (not measured)
+
+=== N12 rep 2 (user p3_n12_r2) settings: POLICY=none N=12 seed=9872 ===
+  turn  1: reply_prompt= 101 total_prompt=  277 window= 0 req_latency=   3882ms
+  turn  2: reply_prompt= 215 total_prompt=  372 window= 2 req_latency=   3124ms
+  turn  3: reply_prompt= 280 total_prompt=  432 window= 4 req_latency=   1938ms
+  turn  4: reply_prompt= 333 total_prompt=  494 window= 6 req_latency=   2676ms
+  turn  5: reply_prompt= 386 total_prompt=  542 window= 8 req_latency=   2223ms
+  turn  6: reply_prompt= 440 total_prompt= 1038 window=10 req_latency=   6532ms
+  turn  7: reply_prompt= 623 total_prompt=  779 window=12 req_latency=   5485ms
+  turn  8: reply_prompt= 599 total_prompt=  762 window=12 req_latency=   2529ms
+  turn  9: reply_prompt= 592 total_prompt=  747 window=12 req_latency=   2557ms
+  turn 10: reply_prompt= 587 total_prompt=  745 window=12 req_latency=   2416ms
+  turn 11: reply_prompt= 608 total_prompt=  767 window=12 req_latency=   1900ms
+  turn 12: reply_prompt= 610 total_prompt= 1502 window=12 req_latency=  10843ms
+  turn 13: reply_prompt= 717 total_prompt=  873 window=12 req_latency=   1943ms
+  turn 14: reply_prompt= 722 total_prompt=  877 window=12 req_latency=   1580ms
+  turn 15: reply_prompt= 724 total_prompt=  885 window=12 req_latency=   3080ms
+  turn 16: reply_prompt= 739 total_prompt=  897 window=12 req_latency=   2457ms
+  turn 17: reply_prompt= 745 total_prompt=  899 window=12 req_latency=   2628ms
+  turn 18: reply_prompt= 759 total_prompt= 1502 window=12 req_latency=   7270ms
+  turn 19: reply_prompt= 786 total_prompt=  942 window=12 req_latency=   2842ms
+  turn 20: reply_prompt= 790 total_prompt=  946 window=12 req_latency=   2408ms
+  turn 21: reply_prompt= 804 total_prompt=  957 window=12 req_latency=   2078ms
+  turn 22: reply_prompt= 811 total_prompt=  969 window=12 req_latency=   2112ms
+  turn 23: reply_prompt= 805 total_prompt=  965 window=12 req_latency=   2741ms
+  turn 24: reply_prompt= 784 total_prompt= 2293 window=12 req_latency=  16480ms
+  turn 25: reply_prompt= 864 total_prompt= 1020 window=12 req_latency=   2706ms
+  turn 26: reply_prompt= 876 total_prompt= 1032 window=12 req_latency=   2558ms
+  turn 27: reply_prompt= 872 total_prompt= 1024 window=12 req_latency=   2023ms
+  turn 28: reply_prompt= 871 total_prompt= 1029 window=12 req_latency=   2696ms
+  turn 29: reply_prompt= 882 total_prompt= 1038 window=12 req_latency=   2630ms
+  turn 30: reply_prompt= 884 total_prompt= 1740 window=12 req_latency=  11390ms
+  conversation took 119s
+  P1 score=5 matched=['team_name', 'age_group'] :: 'You coach the Milpitas Lions U12 soccer team. The team has 14 players on the roster this season. Let me know i'
+  P2 score=5 matched=['coach_name', 'unavailable_month'] :: 'Your assistant coach is Priya, and she is unavailable for all games in November. Let me know if you need help '
+  P3 score=5 matched=['food'] :: 'Yes, you mentioned that peanut snacks are kept out of team events due to a peanut allergy. Make sure to avoid '
+  P4 score=5 matched=['rival_name', 'rival_day'] :: 'Your main rival is the San Jose Tigers, and they play their games on Sundays. Make sure to plan around their s'
+  P5 score=5 matched=['channel'] :: 'You prefer to receive reminders via email. Let me know if you need help setting up email reminders for practic'
+  -> {'mean_reply_prompt_tokens_per_turn': 660.3, 'mean_total_prompt_tokens_per_turn': 944.83, 'mean_reply_completion_tokens_per_turn': 45.73, 'mean_total_completion_tokens_per_turn': 98.0, 'mean_reply_latency_ms': 2023.44, 'mean_request_latency_ms': 3924.19, 'mean_probe_score': 5.0}
+  warm-up call: 2.8s (not measured)
+
+=== N12 rep 3 (user p3_n12_r3) settings: POLICY=none N=12 seed=9873 ===
+  turn  1: reply_prompt= 101 total_prompt=  277 window= 0 req_latency=   4252ms
+  turn  2: reply_prompt= 215 total_prompt=  372 window= 2 req_latency=   2844ms
+  turn  3: reply_prompt= 280 total_prompt=  432 window= 4 req_latency=   2313ms
+  turn  4: reply_prompt= 333 total_prompt=  494 window= 6 req_latency=   3010ms
+  turn  5: reply_prompt= 386 total_prompt=  542 window= 8 req_latency=   2265ms
+  turn  6: reply_prompt= 440 total_prompt= 1028 window=10 req_latency=   5666ms
+  turn  7: reply_prompt= 613 total_prompt=  769 window=12 req_latency=   5746ms
+  turn  8: reply_prompt= 579 total_prompt=  742 window=12 req_latency=   7329ms
+  turn  9: reply_prompt= 562 total_prompt=  717 window=12 req_latency=   6506ms
+  turn 10: reply_prompt= 558 total_prompt=  716 window=12 req_latency=   2284ms
+  turn 11: reply_prompt= 579 total_prompt=  738 window=12 req_latency=   2504ms
+  turn 12: reply_prompt= 583 total_prompt= 1443 window=12 req_latency=  12108ms
+  turn 13: reply_prompt= 686 total_prompt=  842 window=12 req_latency=   1688ms
+  turn 14: reply_prompt= 701 total_prompt=  856 window=12 req_latency=   1091ms
+  turn 15: reply_prompt= 702 total_prompt=  863 window=12 req_latency=   2593ms
+  turn 16: reply_prompt= 721 total_prompt=  879 window=12 req_latency=   1656ms
+  turn 17: reply_prompt= 716 total_prompt=  870 window=12 req_latency=   1750ms
+  turn 18: reply_prompt= 720 total_prompt= 1428 window=12 req_latency=   7233ms
+  turn 19: reply_prompt= 796 total_prompt=  952 window=12 req_latency=   2332ms
+  turn 20: reply_prompt= 793 total_prompt=  949 window=12 req_latency=   1399ms
+  turn 21: reply_prompt= 797 total_prompt=  950 window=12 req_latency=   1409ms
+  turn 22: reply_prompt= 786 total_prompt=  944 window=12 req_latency=   1981ms
+  turn 23: reply_prompt= 798 total_prompt=  958 window=12 req_latency=   2048ms
+  turn 24: reply_prompt= 775 total_prompt= 2344 window=12 req_latency=  22161ms
+  turn 25: reply_prompt= 846 total_prompt= 1002 window=12 req_latency=   2117ms
+  turn 26: reply_prompt= 865 total_prompt= 1021 window=12 req_latency=   2066ms
+  turn 27: reply_prompt= 885 total_prompt= 1037 window=12 req_latency=   1677ms
+  turn 28: reply_prompt= 906 total_prompt= 1064 window=12 req_latency=   2656ms
+  turn 29: reply_prompt= 925 total_prompt= 1081 window=12 req_latency=   1622ms
+  turn 30: reply_prompt= 922 total_prompt= 1832 window=12 req_latency=  11106ms
+  conversation took 127s
+  P1 score=5 matched=['team_name', 'age_group'] :: 'You coach the Milpitas Lions U12 soccer team.'
+  P2 score=5 matched=['coach_name', 'unavailable_month'] :: 'Your assistant coach is Priya, and she is unavailable for all games in November.'
+  P3 score=5 matched=['food'] :: 'Yes, you mentioned there are no peanut snacks at team events due to a peanut allergy. Make sure to keep that i'
+  P4 score=5 matched=['rival_name', 'rival_day'] :: 'Your main rival is the San Jose Tigers, and they play their games on Sundays. Your team practices on Tuesdays '
+  P5 score=5 matched=['channel'] :: 'You prefer to receive reminders via email. Let me know if you need help setting up email reminders for practic'
+  -> {'mean_reply_prompt_tokens_per_turn': 652.3, 'mean_total_prompt_tokens_per_turn': 938.07, 'mean_reply_completion_tokens_per_turn': 42.23, 'mean_total_completion_tokens_per_turn': 97.2, 'mean_reply_latency_ms': 2053.16, 'mean_request_latency_ms': 4180.41, 'mean_probe_score': 5.0}
+  warm-up call: 1.5s (not measured)
+
+=== N30 rep 1 (user p3_n30_r1) settings: POLICY=none N=30 seed=9871 ===
+  turn  1: reply_prompt= 101 total_prompt=  277 window= 0 req_latency=   3264ms
+  turn  2: reply_prompt= 215 total_prompt=  372 window= 2 req_latency=   1976ms
+  turn  3: reply_prompt= 280 total_prompt=  432 window= 4 req_latency=   1582ms
+  turn  4: reply_prompt= 335 total_prompt=  496 window= 6 req_latency=   2245ms
+  turn  5: reply_prompt= 388 total_prompt=  544 window= 8 req_latency=   1876ms
+  turn  6: reply_prompt= 442 total_prompt= 1043 window=10 req_latency=   4762ms
+  turn  7: reply_prompt= 626 total_prompt=  782 window=12 req_latency=   1285ms
+  turn  8: reply_prompt= 690 total_prompt=  853 window=14 req_latency=   1702ms
+  turn  9: reply_prompt= 747 total_prompt=  902 window=16 req_latency=   1919ms
+  turn 10: reply_prompt= 798 total_prompt=  956 window=18 req_latency=   1683ms
+  turn 11: reply_prompt= 876 total_prompt= 1035 window=20 req_latency=   1296ms
+  turn 12: reply_prompt= 943 total_prompt= 1856 window=22 req_latency=   8671ms
+  turn 13: reply_prompt=1160 total_prompt= 1316 window=24 req_latency=   1806ms
+  turn 14: reply_prompt=1211 total_prompt= 1366 window=26 req_latency=   1970ms
+  turn 15: reply_prompt=1277 total_prompt= 1438 window=28 req_latency=   2486ms
+  turn 16: reply_prompt=1344 total_prompt= 1502 window=30 req_latency=   1639ms
+  turn 17: reply_prompt=1329 total_prompt= 1483 window=30 req_latency=   2662ms
+  turn 18: reply_prompt=1335 total_prompt= 2076 window=30 req_latency=   8876ms
+  turn 19: reply_prompt=1460 total_prompt= 1616 window=30 req_latency=   2677ms
+  turn 20: reply_prompt=1455 total_prompt= 1611 window=30 req_latency=   2734ms
+  turn 21: reply_prompt=1480 total_prompt= 1633 window=30 req_latency=   2377ms
+  turn 22: reply_prompt=1437 total_prompt= 1595 window=30 req_latency=   2408ms
+  turn 23: reply_prompt=1454 total_prompt= 1614 window=30 req_latency=   3020ms
+  turn 24: reply_prompt=1440 total_prompt= 3119 window=30 req_latency=  29871ms
+  turn 25: reply_prompt=1525 total_prompt= 1681 window=30 req_latency=   2699ms
+  turn 26: reply_prompt=1520 total_prompt= 1676 window=30 req_latency=   2469ms
+  turn 27: reply_prompt=1519 total_prompt= 1671 window=30 req_latency=   2535ms
+  turn 28: reply_prompt=1537 total_prompt= 1695 window=30 req_latency=   2514ms
+  turn 29: reply_prompt=1560 total_prompt= 1716 window=30 req_latency=   2429ms
+  turn 30: reply_prompt=1566 total_prompt= 2489 window=30 req_latency=  12007ms
+  conversation took 123s
+  P1 score=5 matched=['team_name', 'age_group'] :: 'You coach the Milpitas Lions U12 soccer team, which has 14 players on the roster this season. Let me know if y'
+  P2 score=5 matched=['coach_name', 'unavailable_month'] :: 'Your assistant coach is Priya, and she is unavailable for all games in November. Let me know if you need help '
+  P3 score=5 matched=['food'] :: 'Yes, peanuts are off-limits at team events due to a peanut allergy. You can still bring orange slices, as Dana'
+  P4 score=5 matched=['rival_name', 'rival_day'] :: 'Your main rival is the San Jose Tigers, and they play their games on Sundays. Your team practices on Tuesdays '
+  P5 score=5 matched=['channel'] :: "You prefer to receive reminders via email, so I'll send you email updates for practices, games, and any import"
+  -> {'mean_reply_prompt_tokens_per_turn': 1068.33, 'mean_total_prompt_tokens_per_turn': 1361.5, 'mean_reply_completion_tokens_per_turn': 46.4, 'mean_total_completion_tokens_per_turn': 105.37, 'mean_reply_latency_ms': 1720.11, 'mean_request_latency_ms': 3981.35, 'mean_probe_score': 5.0}
+  warm-up call: 1.6s (not measured)
+
+=== N30 rep 2 (user p3_n30_r2) settings: POLICY=none N=30 seed=9872 ===
+  turn  1: reply_prompt= 101 total_prompt=  277 window= 0 req_latency=   3373ms
+  turn  2: reply_prompt= 215 total_prompt=  372 window= 2 req_latency=   5116ms
+  turn  3: reply_prompt= 280 total_prompt=  432 window= 4 req_latency=   1560ms
+  turn  4: reply_prompt= 333 total_prompt=  494 window= 6 req_latency=   2151ms
+  turn  5: reply_prompt= 386 total_prompt=  542 window= 8 req_latency=   1887ms
+  turn  6: reply_prompt= 440 total_prompt= 1038 window=10 req_latency=   6968ms
+  turn  7: reply_prompt= 623 total_prompt=  779 window=12 req_latency=   4982ms
+  turn  8: reply_prompt= 687 total_prompt=  850 window=14 req_latency=   1655ms
+  turn  9: reply_prompt= 737 total_prompt=  892 window=16 req_latency=   1940ms
+  turn 10: reply_prompt= 787 total_prompt=  945 window=18 req_latency=   1479ms
+  turn 11: reply_prompt= 862 total_prompt= 1021 window=20 req_latency=   1327ms
+  turn 12: reply_prompt= 930 total_prompt= 1829 window=22 req_latency=   9819ms
+  turn 13: reply_prompt=1144 total_prompt= 1300 window=24 req_latency=   2076ms
+  turn 14: reply_prompt=1202 total_prompt= 1357 window=26 req_latency=   1671ms
+  turn 15: reply_prompt=1270 total_prompt= 1431 window=28 req_latency=   2634ms
+  turn 16: reply_prompt=1337 total_prompt= 1495 window=30 req_latency=   1607ms
+  turn 17: reply_prompt=1322 total_prompt= 1476 window=30 req_latency=   3210ms
+  turn 18: reply_prompt=1346 total_prompt= 2103 window=30 req_latency=   7580ms
+  turn 19: reply_prompt=1422 total_prompt= 1578 window=30 req_latency=   2663ms
+  turn 20: reply_prompt=1424 total_prompt= 1580 window=30 req_latency=   2691ms
+  turn 21: reply_prompt=1445 total_prompt= 1598 window=30 req_latency=   2962ms
+  turn 22: reply_prompt=1401 total_prompt= 1559 window=30 req_latency=   2516ms
+  turn 23: reply_prompt=1411 total_prompt= 1571 window=30 req_latency=   3162ms
+  turn 24: reply_prompt=1409 total_prompt= 2965 window=30 req_latency=  14551ms
+  turn 25: reply_prompt=1483 total_prompt= 1639 window=30 req_latency=   3889ms
+  turn 26: reply_prompt=1516 total_prompt= 1672 window=30 req_latency=   2620ms
+  turn 27: reply_prompt=1499 total_prompt= 1651 window=30 req_latency=   2625ms
+  turn 28: reply_prompt=1505 total_prompt= 1663 window=30 req_latency=   3094ms
+  turn 29: reply_prompt=1522 total_prompt= 1678 window=30 req_latency=   2977ms
+  turn 30: reply_prompt=1528 total_prompt= 2415 window=30 req_latency=  11381ms
+  conversation took 123s
+  P1 score=5 matched=['team_name', 'age_group'] :: 'You coach the Milpitas Lions U12 soccer team, which has 14 players on the roster this season. Let me know if y'
+  P2 score=5 matched=['coach_name', 'unavailable_month'] :: 'Your assistant coach is Priya, and she is unavailable for all games in November. Let me know if you need help '
+  P3 score=5 matched=['food'] :: 'Yes, you mentioned there are no peanut snacks at team events due to a peanut allergy. Make sure to keep peanut'
+  P4 score=5 matched=['rival_name', 'rival_day'] :: 'Your main rival is the San Jose Tigers, who play their games on Sundays. Let me know if you need help preparin'
+  P5 score=5 matched=['channel'] :: 'You prefer to receive reminders via email. I’ll make sure all updates and reminders for your team are sent to '
+  -> {'mean_reply_prompt_tokens_per_turn': 1052.23, 'mean_total_prompt_tokens_per_turn': 1340.07, 'mean_reply_completion_tokens_per_turn': 45.83, 'mean_total_completion_tokens_per_turn': 99.43, 'mean_reply_latency_ms': 2006.78, 'mean_request_latency_ms': 3872.2, 'mean_probe_score': 5.0}
+  warm-up call: 4.0s (not measured)
+
+=== N30 rep 3 (user p3_n30_r3) settings: POLICY=none N=30 seed=9873 ===
+  turn  1: reply_prompt= 101 total_prompt=  277 window= 0 req_latency=   3343ms
+  turn  2: reply_prompt= 215 total_prompt=  372 window= 2 req_latency=   8698ms
+  turn  3: reply_prompt= 280 total_prompt=  432 window= 4 req_latency=   1598ms
+  turn  4: reply_prompt= 333 total_prompt=  494 window= 6 req_latency=   3294ms
+  turn  5: reply_prompt= 386 total_prompt=  542 window= 8 req_latency=   1944ms
+  turn  6: reply_prompt= 440 total_prompt= 1028 window=10 req_latency=  10238ms
+  turn  7: reply_prompt= 613 total_prompt=  769 window=12 req_latency=  11775ms
+  turn  8: reply_prompt= 667 total_prompt=  830 window=14 req_latency=   1826ms
+  turn  9: reply_prompt= 723 total_prompt=  878 window=16 req_latency=   2298ms
+  turn 10: reply_prompt= 774 total_prompt=  932 window=18 req_latency=   1861ms
+  turn 11: reply_prompt= 856 total_prompt= 1015 window=20 req_latency=   1422ms
+  turn 12: reply_prompt= 921 total_prompt= 1821 window=22 req_latency=  12971ms
+  turn 13: reply_prompt=1135 total_prompt= 1291 window=24 req_latency=   2019ms
+  turn 14: reply_prompt=1187 total_prompt= 1342 window=26 req_latency=   1532ms
+  turn 15: reply_prompt=1260 total_prompt= 1421 window=28 req_latency=   2592ms
+  turn 16: reply_prompt=1325 total_prompt= 1483 window=30 req_latency=   1683ms
+  turn 17: reply_prompt=1306 total_prompt= 1460 window=30 req_latency=   2474ms
+  turn 18: reply_prompt=1305 total_prompt= 2029 window=30 req_latency=   7641ms
+  turn 19: reply_prompt=1383 total_prompt= 1539 window=30 req_latency=   3474ms
+  turn 20: reply_prompt=1391 total_prompt= 1547 window=30 req_latency=   3754ms
+  turn 21: reply_prompt=1412 total_prompt= 1565 window=30 req_latency=   2922ms
+  turn 22: reply_prompt=1367 total_prompt= 1525 window=30 req_latency=   2385ms
+  turn 23: reply_prompt=1395 total_prompt= 1555 window=30 req_latency=   2844ms
+  turn 24: reply_prompt=1382 total_prompt= 2936 window=30 req_latency=  21757ms
+  turn 25: reply_prompt=1454 total_prompt= 1610 window=30 req_latency=   3524ms
+  turn 26: reply_prompt=1450 total_prompt= 1606 window=30 req_latency=   2957ms
+  turn 27: reply_prompt=1440 total_prompt= 1592 window=30 req_latency=   2145ms
+  turn 28: reply_prompt=1440 total_prompt= 1598 window=30 req_latency=   3037ms
+  turn 29: reply_prompt=1473 total_prompt= 1629 window=30 req_latency=   2714ms
+  turn 30: reply_prompt=1468 total_prompt= 2328 window=30 req_latency=  11662ms
+  conversation took 147s
+  P1 score=5 matched=['team_name', 'age_group'] :: 'You coach the Milpitas Lions U12 soccer team, which has 14 players on the roster this season. Let me know if y'
+  P2 score=5 matched=['coach_name', 'unavailable_month'] :: 'Your assistant coach is Priya, and she is unavailable for all games in November. Let me know if you need help '
+  P3 score=5 matched=['food'] :: "Yes, you mentioned there are no peanut snacks at team events due to a user's allergy. Make sure to keep all pe"
+  P4 score=5 matched=['rival_name', 'rival_day'] :: 'Your main rival is the San Jose Tigers, and they play their games on Sundays. Make sure to plan your schedule '
+  P5 score=5 matched=['channel'] :: "You prefer to receive reminders via email, so I'll send you email updates for practices, games, and important "
+  -> {'mean_reply_prompt_tokens_per_turn': 1029.4, 'mean_total_prompt_tokens_per_turn': 1314.87, 'mean_reply_completion_tokens_per_turn': 43.47, 'mean_total_completion_tokens_per_turn': 97.63, 'mean_reply_latency_ms': 2289.17, 'mean_request_latency_ms': 4746.15, 'mean_probe_score': 5.0}
+  warm-up call: 4.7s (not measured)
+
+=== COMPRESS rep 1 (user p3_compress_r1) settings: POLICY=compress N=30 seed=9871 ===
+  turn  1: reply_prompt= 101 total_prompt=  277 window= 0 req_latency=   4088ms
+  turn  2: reply_prompt= 215 total_prompt=  372 window= 2 req_latency=   6145ms
+  turn  3: reply_prompt= 280 total_prompt=  670 window= 4 req_latency=   7446ms
+  turn  4: reply_prompt= 405 total_prompt=  566 window= 6 req_latency=   2584ms
+  turn  5: reply_prompt= 369 total_prompt=  525 window= 6 req_latency=   2116ms
+  turn  6: reply_prompt= 355 total_prompt= 1047 window= 6 req_latency=  10401ms
+  turn  7: reply_prompt= 498 total_prompt=  654 window= 6 req_latency=   1234ms
+  turn  8: reply_prompt= 496 total_prompt=  659 window= 6 req_latency=   1719ms
+  turn  9: reply_prompt= 492 total_prompt=  945 window= 6 req_latency=   5719ms
+  turn 10: reply_prompt= 504 total_prompt=  662 window= 6 req_latency=   1433ms
+  turn 11: reply_prompt= 519 total_prompt=  678 window= 6 req_latency=   1148ms
+  turn 12: reply_prompt= 523 total_prompt= 1674 window= 6 req_latency=  10308ms
+  turn 13: reply_prompt= 570 total_prompt=  726 window= 6 req_latency=   2063ms
+  turn 14: reply_prompt= 568 total_prompt=  723 window= 6 req_latency=   1903ms
+  turn 15: reply_prompt= 566 total_prompt= 1126 window= 6 req_latency=   9532ms
+  turn 16: reply_prompt= 627 total_prompt=  785 window= 6 req_latency=   1502ms
+  turn 17: reply_prompt= 621 total_prompt=  775 window= 6 req_latency=   1650ms
+  turn 18: reply_prompt= 629 total_prompt= 2066 window= 6 req_latency=  10484ms
+  turn 19: reply_prompt= 634 total_prompt=  790 window= 6 req_latency=   2970ms
+  turn 20: reply_prompt= 651 total_prompt=  807 window= 6 req_latency=   1513ms
+  turn 21: reply_prompt= 641 total_prompt= 1140 window= 6 req_latency=   4577ms
+  turn 22: reply_prompt= 656 total_prompt=  814 window= 6 req_latency=   2132ms
+  turn 23: reply_prompt= 661 total_prompt=  821 window= 6 req_latency=   2094ms
+  turn 24: reply_prompt= 654 total_prompt= 1941 window= 6 req_latency=   7108ms
+  turn 25: reply_prompt= 512 total_prompt=  668 window= 6 req_latency=   2365ms
+  turn 26: reply_prompt= 505 total_prompt=  661 window= 6 req_latency=   2277ms
+  turn 27: reply_prompt= 516 total_prompt= 1008 window= 6 req_latency=   4847ms
+  turn 28: reply_prompt= 538 total_prompt=  696 window= 6 req_latency=   2328ms
+  turn 29: reply_prompt= 540 total_prompt=  696 window= 6 req_latency=   2215ms
+  turn 30: reply_prompt= 526 total_prompt= 1494 window= 6 req_latency=   6750ms
+  conversation took 126s
+  P1 score=5 matched=['team_name', 'age_group'] :: 'You coach the Milpitas Lions U12 soccer team, which has 14 players on the roster this season.'
+  P2 score=3 matched=['coach_name'] :: 'Your assistant coach is Priya. She is unavailable on Tuesdays and Thursdays during practice times, as those ar'
+  P3 score=5 matched=['food'] :: 'Yes, you mentioned having a peanut allergy, so please keep all peanut-containing foods out of team events. Mak'
+  P4 score=5 matched=['rival_name', 'rival_day'] :: 'Your main rival is the San Jose Tigers, who play on Sundays. Make sure to coordinate practices and games aroun'
+  P5 score=5 matched=['channel'] :: 'I prefer to receive reminders via email. Let me know if you need help setting up email reminders for practices'
+  -> {'mean_reply_prompt_tokens_per_turn': 512.4, 'mean_total_prompt_tokens_per_turn': 882.2, 'mean_reply_completion_tokens_per_turn': 40.73, 'mean_total_completion_tokens_per_turn': 115.33, 'mean_reply_latency_ms': 1525.96, 'mean_request_latency_ms': 4088.28, 'mean_probe_score': 4.6}
+  warm-up call: 4.1s (not measured)
+
+=== COMPRESS rep 2 (user p3_compress_r2) settings: POLICY=compress N=30 seed=9872 ===
+  turn  1: reply_prompt= 101 total_prompt=  277 window= 0 req_latency=   4110ms
+  turn  2: reply_prompt= 215 total_prompt=  372 window= 2 req_latency=   3984ms
+  turn  3: reply_prompt= 280 total_prompt=  668 window= 4 req_latency=   5724ms
+  turn  4: reply_prompt= 404 total_prompt=  565 window= 6 req_latency=   4351ms
+  turn  5: reply_prompt= 368 total_prompt=  524 window= 6 req_latency=   1935ms
+  turn  6: reply_prompt= 361 total_prompt= 1065 window= 6 req_latency=  19115ms
+  turn  7: reply_prompt= 509 total_prompt=  665 window= 6 req_latency=   1236ms
+  turn  8: reply_prompt= 507 total_prompt=  670 window= 6 req_latency=   1951ms
+  turn  9: reply_prompt= 501 total_prompt=  960 window= 6 req_latency=   6511ms
+  turn 10: reply_prompt= 541 total_prompt=  699 window= 6 req_latency=   1347ms
+  turn 11: reply_prompt= 561 total_prompt=  720 window= 6 req_latency=   1041ms
+  turn 12: reply_prompt= 559 total_prompt= 1814 window= 6 req_latency=  10664ms
+  turn 13: reply_prompt= 606 total_prompt=  762 window= 6 req_latency=   1824ms
+  turn 14: reply_prompt= 603 total_prompt=  758 window= 6 req_latency=    924ms
+  turn 15: reply_prompt= 603 total_prompt= 1211 window= 6 req_latency=  10484ms
+  turn 16: reply_prompt= 693 total_prompt=  851 window= 6 req_latency=   1760ms
+  turn 17: reply_prompt= 699 total_prompt=  853 window= 6 req_latency=   1823ms
+  turn 18: reply_prompt= 716 total_prompt= 2345 window= 6 req_latency=   6999ms
+  turn 19: reply_prompt= 523 total_prompt=  679 window= 6 req_latency=   2737ms
+  turn 20: reply_prompt= 520 total_prompt=  676 window= 6 req_latency=   1651ms
+  turn 21: reply_prompt= 513 total_prompt= 1027 window= 6 req_latency=   3762ms
+  turn 22: reply_prompt= 498 total_prompt=  656 window= 6 req_latency=   1942ms
+  turn 23: reply_prompt= 516 total_prompt=  676 window= 6 req_latency=   2222ms
+  turn 24: reply_prompt= 495 total_prompt= 1704 window= 6 req_latency=   8062ms
+  turn 25: reply_prompt= 563 total_prompt=  719 window= 6 req_latency=   1911ms
+  turn 26: reply_prompt= 549 total_prompt=  705 window= 6 req_latency=   1710ms
+  turn 27: reply_prompt= 551 total_prompt= 1080 window= 6 req_latency=   6209ms
+  turn 28: reply_prompt= 590 total_prompt=  748 window= 6 req_latency=   2887ms
+  turn 29: reply_prompt= 604 total_prompt=  760 window= 6 req_latency=   1675ms
+  turn 30: reply_prompt= 586 total_prompt= 1881 window= 6 req_latency=  10509ms
+  conversation took 137s
+  P1 score=5 matched=['team_name', 'age_group'] :: 'You coach the Milpitas Lions U12 soccer team. The team has 14 players on the roster this season.'
+  P2 score=3 matched=['coach_name'] :: 'Your assistant coach is Priya. She is unavailable on Mondays and Fridays due to her other commitments. Let me '
+  P3 score=5 matched=['food'] :: "Yes, you asked to keep peanut-free snacks out of team events to ensure everyone's safety. Make sure to bring o"
+  P4 score=5 matched=['rival_name', 'rival_day'] :: 'Your main rival is the San Jose Tigers, and they play their games on Sundays. Make sure to keep the team focus'
+  P5 score=5 matched=['channel'] :: 'You prefer to receive reminders via email. Let me know if you need any updates or reminders sent your way! Hav'
+  -> {'mean_reply_prompt_tokens_per_turn': 511.17, 'mean_total_prompt_tokens_per_turn': 903.0, 'mean_reply_completion_tokens_per_turn': 41.03, 'mean_total_completion_tokens_per_turn': 123.43, 'mean_reply_latency_ms': 1474.21, 'mean_request_latency_ms': 4368.66, 'mean_probe_score': 4.6}
+  warm-up call: 3.7s (not measured)
+
+=== COMPRESS rep 3 (user p3_compress_r3) settings: POLICY=compress N=30 seed=9873 ===
+  turn  1: reply_prompt= 101 total_prompt=  277 window= 0 req_latency=   3728ms
+  turn  2: reply_prompt= 215 total_prompt=  372 window= 2 req_latency=   2209ms
+  turn  3: reply_prompt= 280 total_prompt=  668 window= 4 req_latency=   3517ms
+  turn  4: reply_prompt= 403 total_prompt=  564 window= 6 req_latency=   2568ms
+  turn  5: reply_prompt= 367 total_prompt=  523 window= 6 req_latency=   1699ms
+  turn  6: reply_prompt= 353 total_prompt= 1045 window= 6 req_latency=   6870ms
+  turn  7: reply_prompt= 498 total_prompt=  654 window= 6 req_latency=   9106ms
+  turn  8: reply_prompt= 496 total_prompt=  659 window= 6 req_latency=   1524ms
+  turn  9: reply_prompt= 492 total_prompt=  945 window= 6 req_latency=   5798ms
+  turn 10: reply_prompt= 505 total_prompt=  663 window= 6 req_latency=   1681ms
+  turn 11: reply_prompt= 530 total_prompt=  689 window= 6 req_latency=   1026ms
+  turn 12: reply_prompt= 533 total_prompt= 1694 window= 6 req_latency=  16336ms
+  turn 13: reply_prompt= 578 total_prompt=  734 window= 6 req_latency=   7405ms
+  turn 14: reply_prompt= 566 total_prompt=  721 window= 6 req_latency=   1141ms
+  turn 15: reply_prompt= 571 total_prompt= 1140 window= 6 req_latency=  10007ms
+  turn 16: reply_prompt= 590 total_prompt=  748 window= 6 req_latency=   1424ms
+  turn 17: reply_prompt= 587 total_prompt=  741 window= 6 req_latency=   1427ms
+  turn 18: reply_prompt= 585 total_prompt= 1916 window= 6 req_latency=   6113ms
+  turn 19: reply_prompt= 479 total_prompt=  635 window= 6 req_latency=   2151ms
+  turn 20: reply_prompt= 485 total_prompt=  641 window= 6 req_latency=   1420ms
+  turn 21: reply_prompt= 480 total_prompt=  964 window= 6 req_latency=   3822ms
+  turn 22: reply_prompt= 487 total_prompt=  645 window= 6 req_latency=   2233ms
+  turn 23: reply_prompt= 517 total_prompt=  677 window= 6 req_latency=   2719ms
+  turn 24: reply_prompt= 510 total_prompt= 1596 window= 6 req_latency=   6924ms
+  turn 25: reply_prompt= 534 total_prompt=  690 window= 6 req_latency=   2108ms
+  turn 26: reply_prompt= 525 total_prompt=  681 window= 6 req_latency=   1414ms
+  turn 27: reply_prompt= 519 total_prompt= 1031 window= 6 req_latency=   5545ms
+  turn 28: reply_prompt= 572 total_prompt=  730 window= 6 req_latency=   1646ms
+  turn 29: reply_prompt= 558 total_prompt=  714 window= 6 req_latency=   1641ms
+  turn 30: reply_prompt= 551 total_prompt= 1719 window= 6 req_latency=   8175ms
+  conversation took 126s
+  P1 score=5 matched=['team_name', 'age_group'] :: 'You coach the Milpitas Lions U12 soccer team. The team has 14 players on the roster this season.'
+  P2 score=3 matched=['coach_name'] :: 'Your assistant coach is Priya. She is unavailable on Mondays and Fridays for other commitments. Let me know if'
+  P3 score=1 matched=[] :: 'No, there’s no specific food you asked to keep out of team events. Just make sure to follow any league guideli'
+  P4 score=5 matched=['rival_name', 'rival_day'] :: 'Your main rival is the San Jose Tigers, who play their games on Sundays. Let me know if you need help with sch'
+  P5 score=5 matched=['channel'] :: "You prefer email reminders, so I'll send you updates via email. Let me know if you need any adjustments!"
+  -> {'mean_reply_prompt_tokens_per_turn': 482.23, 'mean_total_prompt_tokens_per_turn': 849.2, 'mean_reply_completion_tokens_per_turn': 39.33, 'mean_total_completion_tokens_per_turn': 111.67, 'mean_reply_latency_ms': 1750.01, 'mean_request_latency_ms': 4112.61, 'mean_probe_score': 3.8}
+
+Sweep finished 2026-10-15T22:28:43
+EXIT=0
+
+===== HW6 Part 3 - analyze_part3.py (reads only raw/part3_*.json|csv) - 2026-10-15T22:30:09 =====
+=== Part 3 results table (means over 30 turns x 3 runs per setting) ===
+Setting                                                     prompt tok/turn  total prompt  req latency ms  reply lat ms  probe 1-5
+SHORT_TERM_N=4                                                        425.6         705.9            3329          1600       5.00
+SHORT_TERM_N=12                                                       665.8         952.8            4064          2093       5.00
+SHORT_TERM_N=30                                                      1050.0        1338.8            4200          2005       5.00
+Compression policy (keep last 6 + summary every 3)                    501.9         878.1            4190          1583       4.33
+
+probe score per seed run: {'N4': [5.0, 5.0, 5.0], 'N12': [5.0, 5.0, 5.0], 'N30': [5.0, 5.0, 5.0], 'COMPRESS': [4.6, 4.6, 3.8]}
+reply-prompt-token range across the 3 seed runs: {'N4': [416.2, 434.6], 'N12': [652.3, 684.7], 'N30': [1029.4, 1068.3], 'COMPRESS': [482.2, 512.4]}
+
+=== Mean prompt-token breakdown per turn (reply call) ===
+Setting         system_primer  long_term_summary  short_term_window     episodic_facts    current_message  template_overhead
+N4                       48.0              178.2              105.9               47.9               13.1               32.5
+N12                      48.0              179.6              324.0               47.9               13.1               53.1
+N30                      48.0              186.7              666.8               47.9               13.1               87.5
+COMPRESS                 48.0              196.3              158.7               47.9               13.1               37.9
+
+=== Savings of the compression policy vs the full-history baseline (N=30) ===
+  reply prompt tokens/turn: 1050.0 -> 501.9  (52.2% saved)
+  all-call prompt tokens/turn: 1338.8 -> 878.1  (34.4% saved)
+  probe quality: 5.00 -> 4.33
+  vs N=4 for reference: reply prompt tokens 501.9 vs 425.6, probe 4.33 vs 5.00
+
+=== Estimated cost of 10,000 x 30-turn conversations (input $1/M, output $5/M) ===
+Setting                                                     all model calls  reply call only
+SHORT_TERM_N=4                                             $        350.83 $        186.61
+SHORT_TERM_N=12                                            $        435.38 $        268.18
+SHORT_TERM_N=30                                            $        552.86 $        382.85
+Compression policy (keep last 6 + summary every 3)         $        438.66 $        211.13
+
+Rule: worst = most expensive; best = cheapest with mean probe score >= top(5.00) - 0.5.
+Eligible for best: ['N4', 'N12', 'N30']  ->  BEST = N4 ($350.83),  WORST = N30 ($552.86)

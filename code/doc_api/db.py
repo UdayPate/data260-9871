@@ -86,6 +86,7 @@ def _init_memory_collections(d) -> None:
             "indexes": [[("user_id", ASCENDING), ("created_at", ASCENDING)]],
         },
     }
+    d["usage_log"].create_index([("user_id", ASCENDING), ("ts", ASCENDING)])  # Part 3 cost log (no validator)
     for name, spec in specs.items():
         validator = {"$jsonSchema": {"bsonType": "object", "required": spec["required"],
                                      "properties": spec["properties"]}}

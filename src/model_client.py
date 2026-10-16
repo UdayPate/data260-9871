@@ -15,11 +15,13 @@ class ModelClient:
     """Wraps a local Ollama model behind a stable complete() interface,
     tracking conversation history and cumulative token usage."""
 
-    def __init__(self, model="qwen3:8b", temperature=0.7, reasoning=None):
+    def __init__(self, model="qwen3:8b", temperature=0.7, reasoning=None, seed=None):
         # HW6: `reasoning=False` turns off qwen3's hidden thinking phase
         # (Ollama think=False). Default None keeps the earlier homeworks'
         # behaviour unchanged.
         extra = {} if reasoning is None else {"reasoning": reasoning}
+        if seed is not None:  # HW6 Part 3: reproducible runs (SEED from CLAUDE.md)
+            extra["seed"] = seed
         self._llm = ChatOllama(model=model, temperature=temperature, **extra)
         self.history = []  # list of {"role": ..., "content": ...} dicts
 

@@ -135,11 +135,11 @@ def _transcript(msgs: list[dict]) -> str:
     return "\n".join(f"{m['role']}: {m['content']}" for m in msgs)
 
 
-def maybe_summarize(user_id: str, session_id: str) -> dict:
+def maybe_summarize(user_id: str, session_id: str, every: int | None = None) -> dict:
     """Every SUMMARIZE_EVERY_USER_MSGS user messages: write a session summary
     (scope='session'); every LIFETIME_EVERY_N_SESSION_SUMMARIES session summaries,
     condense into the lifetime summary (scope='user', session_id=None)."""
-    every = config.settings["SUMMARIZE_EVERY_USER_MSGS"]
+    every = config.effective_memory_params()[1] if every is None else every
     n_user = count_user_messages(user_id, session_id)
     out = {"session_summary": None, "lifetime_summary": None}
     if every <= 0 or n_user == 0 or n_user % every != 0:

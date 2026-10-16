@@ -1,0 +1,65 @@
+# DATA-260 HW6 Part 3 - memory probes (SID4 9871, Domain 7: community sports league fixtures)
+# Written BEFORE any sweep was run. Asked after a fixed 30-turn conversation
+# (code/doc_api/part3_conversation.json). Each probe targets one fact planted at a known turn:
+#   turn 1 (team + age group), turn 4 (assistant coach), turn 8 (food restriction),
+#   turn 15 (rival), turn 23 (reminder preference).
+# Probes are asked with read_only=true, so no probe's answer can leak into the next.
+
+version: 1
+seed: 9871
+scoring:
+  # Deterministic scorer (code/doc_api/run_part3_sweep.py); every answer is also stored
+  # verbatim in raw/part3_probes.json so scores can be re-checked by hand.
+  matching: "case-insensitive substring match; an element counts if ANY of its keywords appears"
+  rubric:
+    5: "Every expected element is present and nothing contradicts the stored fact."
+    4: "Every expected element is present, but the answer hedges (e.g. 'I think', 'not sure')."
+    3: "Every element present but the answer also states a contradicting claim; OR at least half of the elements are present."
+    2: "Some elements present, but fewer than half."
+    1: "No expected element present (the model does not recall, says it does not know, or answers wrongly)."
+  hedge_phrases: ["i think", "i believe", "not sure", "if i recall", "might be", "possibly", "i'm not certain"]
+
+probes:
+  - id: P1
+    planted_at_turn: 1
+    question: "What is the name of the team I coach, and what age group is it?"
+    expected_answer: "Milpitas Lions, an under-12 (U12) soccer team"
+    elements:
+      - {name: team_name, any_of: ["milpitas lions", "lions"]}
+      - {name: age_group, any_of: ["u12", "under-12", "under 12", "under twelve"]}
+    contradictions: ["san jose tigers are my team", "i coach the tigers"]
+
+  - id: P2
+    planted_at_turn: 4
+    question: "Who is my assistant coach, and when is she unavailable?"
+    expected_answer: "Priya; she cannot make games in November"
+    elements:
+      - {name: coach_name, any_of: ["priya"]}
+      - {name: unavailable_month, any_of: ["november"]}
+    contradictions: []
+
+  - id: P3
+    planted_at_turn: 8
+    question: "Is there any food I asked to keep out of team events?"
+    expected_answer: "Peanuts (the user is allergic)"
+    elements:
+      - {name: food, any_of: ["peanut"]}
+    contradictions: []
+
+  - id: P4
+    planted_at_turn: 15
+    question: "Which team is our main rival, and which day do they play?"
+    expected_answer: "San Jose Tigers; they play on Sundays"
+    elements:
+      - {name: rival_name, any_of: ["tigers"]}
+      - {name: rival_day, any_of: ["sunday"]}
+    contradictions: ["saturday are the tigers", "tigers play on saturday"]
+
+  - id: P5
+    planted_at_turn: 23
+    question: "How do I prefer to receive reminders?"
+    expected_answer: "By email, rather than text message"
+    elements:
+      - {name: channel, any_of: ["email"]}
+    contradictions: ["prefer text messages over email", "prefer text over email", "prefer sms",
+                     "email and text", "email or text", "text and email", "and text message", "email and sms"]

@@ -1,0 +1,1353 @@
+[
+ {
+  "setting": "N4",
+  "repeat": 1,
+  "probe": "P1",
+  "planted_at_turn": 1,
+  "question": "What is the name of the team I coach, and what age group is it?",
+  "expected": "Milpitas Lions, an under-12 (U12) soccer team",
+  "answer": "You coach the Milpitas Lions U12 soccer team. The team has 14 players on the roster this season.",
+  "episodes_retrieved": [
+   "The user coaches an under-12 (U12) soccer team",
+   "The user's team has 14 players on the roster this season",
+   "The user coaches the Milpitas Lions"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "team_name",
+   "age_group"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N4",
+  "repeat": 1,
+  "probe": "P2",
+  "planted_at_turn": 4,
+  "question": "Who is my assistant coach, and when is she unavailable?",
+  "expected": "Priya; she cannot make games in November",
+  "answer": "Your assistant coach is Priya, and she is unavailable for all November games.",
+  "episodes_retrieved": [
+   "The user's assistant coach is Priya",
+   "The user coaches the Milpitas Lions",
+   "The user coaches an under-12 (U12) soccer team"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "coach_name",
+   "unavailable_month"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N4",
+  "repeat": 1,
+  "probe": "P3",
+  "planted_at_turn": 8,
+  "question": "Is there any food I asked to keep out of team events?",
+  "expected": "Peanuts (the user is allergic)",
+  "answer": "Yes, peanuts are kept out of team events due to a peanut allergy. You can bring other snacks like orange slices, which are already a favorite at halftime! 🍊",
+  "episodes_retrieved": [
+   "The user's team practices on Tuesdays and Thursdays at 5pm",
+   "The user's team trains with cones and small-sided games most weeks",
+   "The user's team is in their community league"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "food"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N4",
+  "repeat": 1,
+  "probe": "P4",
+  "planted_at_turn": 15,
+  "question": "Which team is our main rival, and which day do they play?",
+  "expected": "San Jose Tigers; they play on Sundays",
+  "answer": "Your main rival is the San Jose Tigers, and they play their games on Sundays.",
+  "episodes_retrieved": [
+   "The user's rival/opponent is San Jose Tigers",
+   "The San Jose Tigers play their games on Sundays",
+   "The user's team practices on Tuesdays and Thursdays at 5pm"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "rival_name",
+   "rival_day"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N4",
+  "repeat": 1,
+  "probe": "P5",
+  "planted_at_turn": 23,
+  "question": "How do I prefer to receive reminders?",
+  "expected": "By email, rather than text message",
+  "answer": "You prefer to receive reminders via email. Let me know if you need any updates or confirmations sent that way!",
+  "episodes_retrieved": [
+   "The user prefers to receive reminders via email rather than text message",
+   "The user's team practices on Tuesdays and Thursdays at 5pm",
+   "The user's team trains with cones and small-sided games most weeks"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "channel"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N4",
+  "repeat": 2,
+  "probe": "P1",
+  "planted_at_turn": 1,
+  "question": "What is the name of the team I coach, and what age group is it?",
+  "expected": "Milpitas Lions, an under-12 (U12) soccer team",
+  "answer": "The team you coach is the Milpitas Lions U12 soccer team. They have 14 players on the roster this season.",
+  "episodes_retrieved": [
+   "The user coaches an under-12 (U12) soccer team",
+   "The user's team has 14 players on the roster this season",
+   "The user coaches the Milpitas Lions"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "team_name",
+   "age_group"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N4",
+  "repeat": 2,
+  "probe": "P2",
+  "planted_at_turn": 4,
+  "question": "Who is my assistant coach, and when is she unavailable?",
+  "expected": "Priya; she cannot make games in November",
+  "answer": "Your assistant coach is Priya. She is unavailable for all November games.",
+  "episodes_retrieved": [
+   "The user's assistant coach is Priya",
+   "The user coaches the Milpitas Lions",
+   "The user coaches an under-12 (U12) soccer team"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "coach_name",
+   "unavailable_month"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N4",
+  "repeat": 2,
+  "probe": "P3",
+  "planted_at_turn": 8,
+  "question": "Is there any food I asked to keep out of team events?",
+  "expected": "Peanuts (the user is allergic)",
+  "answer": "Yes, you asked to keep peanut snacks out of team events due to a peanut allergy. Make sure to follow that guideline to keep everyone safe.",
+  "episodes_retrieved": [
+   "The user's team practices on Tuesdays and Thursdays at 5pm",
+   "The user's team is in their community league",
+   "The user's team colors are green and white"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "food"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N4",
+  "repeat": 2,
+  "probe": "P4",
+  "planted_at_turn": 15,
+  "question": "Which team is our main rival, and which day do they play?",
+  "expected": "San Jose Tigers; they play on Sundays",
+  "answer": "Your main rival is the San Jose Tigers, and they play on Sundays. Make sure to keep your team motivated for those important matches!",
+  "episodes_retrieved": [
+   "The user's rival/opponent is San Jose Tigers",
+   "The San Jose Tigers play their games on Sundays",
+   "The user's team practices on Tuesdays and Thursdays at 5pm"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "rival_name",
+   "rival_day"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N4",
+  "repeat": 2,
+  "probe": "P5",
+  "planted_at_turn": 23,
+  "question": "How do I prefer to receive reminders?",
+  "expected": "By email, rather than text message",
+  "answer": "You prefer to receive reminders via email. Let me know if you need any game or practice reminders sent that way!",
+  "episodes_retrieved": [
+   "The user prefers to receive reminders via email rather than text message",
+   "The user's team practices on Tuesdays and Thursdays at 5pm",
+   "The San Jose Tigers play their games on Sundays"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "channel"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N4",
+  "repeat": 3,
+  "probe": "P1",
+  "planted_at_turn": 1,
+  "question": "What is the name of the team I coach, and what age group is it?",
+  "expected": "Milpitas Lions, an under-12 (U12) soccer team",
+  "answer": "You coach the Milpitas Lions U12 soccer team. The team has 14 players on the roster this season.",
+  "episodes_retrieved": [
+   "The user coaches an under-12 (U12) soccer team",
+   "The user's team has 14 players on the roster this season",
+   "The user coaches the Milpitas Lions"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "team_name",
+   "age_group"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N4",
+  "repeat": 3,
+  "probe": "P2",
+  "planted_at_turn": 4,
+  "question": "Who is my assistant coach, and when is she unavailable?",
+  "expected": "Priya; she cannot make games in November",
+  "answer": "Your assistant coach is Priya, and she is unavailable for all games in November.",
+  "episodes_retrieved": [
+   "The user's assistant coach is Priya",
+   "The user coaches the Milpitas Lions",
+   "The user coaches an under-12 (U12) soccer team"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "coach_name",
+   "unavailable_month"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N4",
+  "repeat": 3,
+  "probe": "P3",
+  "planted_at_turn": 8,
+  "question": "Is there any food I asked to keep out of team events?",
+  "expected": "Peanuts (the user is allergic)",
+  "answer": "Yes, you asked to keep peanut snacks out of team events due to a peanut allergy. Make sure to continue avoiding them at all events!",
+  "episodes_retrieved": [
+   "The user's team practices on Tuesdays and Thursdays at 5pm",
+   "The user's team is in their community league",
+   "The user's team colors are green and white"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "food"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N4",
+  "repeat": 3,
+  "probe": "P4",
+  "planted_at_turn": 15,
+  "question": "Which team is our main rival, and which day do they play?",
+  "expected": "San Jose Tigers; they play on Sundays",
+  "answer": "Your main rival is the San Jose Tigers, who play their games on Sundays. Make sure to keep your team motivated for the upcoming matches!",
+  "episodes_retrieved": [
+   "The user's rival/opponent is San Jose Tigers",
+   "The San Jose Tigers play their games on Sundays",
+   "The user's team practices on Tuesdays and Thursdays at 5pm"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "rival_name",
+   "rival_day"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N4",
+  "repeat": 3,
+  "probe": "P5",
+  "planted_at_turn": 23,
+  "question": "How do I prefer to receive reminders?",
+  "expected": "By email, rather than text message",
+  "answer": "You prefer to receive reminders via email. Let me know if you need any adjustments or additional reminders for upcoming games or practices!",
+  "episodes_retrieved": [
+   "The user prefers to receive reminders via email rather than text message",
+   "The user's team practices on Tuesdays and Thursdays at 5pm",
+   "The San Jose Tigers play their games on Sundays"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "channel"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N12",
+  "repeat": 1,
+  "probe": "P1",
+  "planted_at_turn": 1,
+  "question": "What is the name of the team I coach, and what age group is it?",
+  "expected": "Milpitas Lions, an under-12 (U12) soccer team",
+  "answer": "You coach the Milpitas Lions U12 soccer team.",
+  "episodes_retrieved": [
+   "The user coaches an under-12 (U12) soccer team",
+   "The user's team has 14 players on the roster this season",
+   "The user coaches the Milpitas Lions"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "team_name",
+   "age_group"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N12",
+  "repeat": 1,
+  "probe": "P2",
+  "planted_at_turn": 4,
+  "question": "Who is my assistant coach, and when is she unavailable?",
+  "expected": "Priya; she cannot make games in November",
+  "answer": "Your assistant coach is Priya, and she is unavailable for all games in November.",
+  "episodes_retrieved": [
+   "The user's assistant coach is Priya",
+   "The user coaches the Milpitas Lions",
+   "The user coaches an under-12 (U12) soccer team"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "coach_name",
+   "unavailable_month"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N12",
+  "repeat": 1,
+  "probe": "P3",
+  "planted_at_turn": 8,
+  "question": "Is there any food I asked to keep out of team events?",
+  "expected": "Peanuts (the user is allergic)",
+  "answer": "Yes, you asked to keep peanut snacks out of team events due to a peanut allergy. Make sure to follow that rule to keep everyone safe!",
+  "episodes_retrieved": [
+   "The user's team practices on Tuesdays and Thursdays at 5pm",
+   "The user's team trains with cones and small-sided games most weeks",
+   "The user's team is in their community league"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "food"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N12",
+  "repeat": 1,
+  "probe": "P4",
+  "planted_at_turn": 15,
+  "question": "Which team is our main rival, and which day do they play?",
+  "expected": "San Jose Tigers; they play on Sundays",
+  "answer": "Your main rival is the San Jose Tigers, and they play their games on Sundays.",
+  "episodes_retrieved": [
+   "The user's rival/opponent is San Jose Tigers",
+   "The San Jose Tigers play their games on Sundays",
+   "The user's team practices on Tuesdays and Thursdays at 5pm"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "rival_name",
+   "rival_day"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N12",
+  "repeat": 1,
+  "probe": "P5",
+  "planted_at_turn": 23,
+  "question": "How do I prefer to receive reminders?",
+  "expected": "By email, rather than text message",
+  "answer": "You prefer email reminders over text messages. Let me know if you need help setting up reminders for practices or games! 📧",
+  "episodes_retrieved": [
+   "The user prefers to receive reminders via email rather than text message",
+   "The user's team practices on Tuesdays and Thursdays at 5pm",
+   "The user's team trains with cones and small-sided games most weeks"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "channel"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N12",
+  "repeat": 2,
+  "probe": "P1",
+  "planted_at_turn": 1,
+  "question": "What is the name of the team I coach, and what age group is it?",
+  "expected": "Milpitas Lions, an under-12 (U12) soccer team",
+  "answer": "You coach the Milpitas Lions U12 soccer team. The team has 14 players on the roster this season. Let me know if you need help with anything else! 🟢⚪️",
+  "episodes_retrieved": [
+   "The user coaches an under-12 (U12) soccer team",
+   "The user's team has 14 players on the roster this season",
+   "The user coaches the Milpitas Lions"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "team_name",
+   "age_group"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N12",
+  "repeat": 2,
+  "probe": "P2",
+  "planted_at_turn": 4,
+  "question": "Who is my assistant coach, and when is she unavailable?",
+  "expected": "Priya; she cannot make games in November",
+  "answer": "Your assistant coach is Priya, and she is unavailable for all games in November. Let me know if you need help planning around her absence!",
+  "episodes_retrieved": [
+   "The user's assistant coach is Priya",
+   "The user coaches the Milpitas Lions",
+   "The user coaches an under-12 (U12) soccer team"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "coach_name",
+   "unavailable_month"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N12",
+  "repeat": 2,
+  "probe": "P3",
+  "planted_at_turn": 8,
+  "question": "Is there any food I asked to keep out of team events?",
+  "expected": "Peanuts (the user is allergic)",
+  "answer": "Yes, you mentioned that peanut snacks are kept out of team events due to a peanut allergy. Make sure to avoid any foods containing peanuts at practices and games! 🟢⚪️",
+  "episodes_retrieved": [
+   "The user's team practices on Tuesdays and Thursdays at 5pm",
+   "The user's team is in their community league",
+   "The user's team colors are green and white"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "food"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N12",
+  "repeat": 2,
+  "probe": "P4",
+  "planted_at_turn": 15,
+  "question": "Which team is our main rival, and which day do they play?",
+  "expected": "San Jose Tigers; they play on Sundays",
+  "answer": "Your main rival is the San Jose Tigers, and they play their games on Sundays. Make sure to plan around their schedule for the final tournament! 🟢⚪️",
+  "episodes_retrieved": [
+   "The user's rival/opponent is San Jose Tigers",
+   "The San Jose Tigers play their games on Sundays",
+   "The user's team practices on Tuesdays and Thursdays at 5pm"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "rival_name",
+   "rival_day"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N12",
+  "repeat": 2,
+  "probe": "P5",
+  "planted_at_turn": 23,
+  "question": "How do I prefer to receive reminders?",
+  "expected": "By email, rather than text message",
+  "answer": "You prefer to receive reminders via email. Let me know if you need help setting up email reminders for practices or games! 📧",
+  "episodes_retrieved": [
+   "The user prefers to receive reminders via email rather than text message",
+   "The user's team practices on Tuesdays and Thursdays at 5pm",
+   "The San Jose Tigers play their games on Sundays"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "channel"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N12",
+  "repeat": 3,
+  "probe": "P1",
+  "planted_at_turn": 1,
+  "question": "What is the name of the team I coach, and what age group is it?",
+  "expected": "Milpitas Lions, an under-12 (U12) soccer team",
+  "answer": "You coach the Milpitas Lions U12 soccer team.",
+  "episodes_retrieved": [
+   "The user coaches an under-12 (U12) soccer team",
+   "The user's team has 14 players on the roster this season",
+   "The user coaches the Milpitas Lions"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "team_name",
+   "age_group"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N12",
+  "repeat": 3,
+  "probe": "P2",
+  "planted_at_turn": 4,
+  "question": "Who is my assistant coach, and when is she unavailable?",
+  "expected": "Priya; she cannot make games in November",
+  "answer": "Your assistant coach is Priya, and she is unavailable for all games in November.",
+  "episodes_retrieved": [
+   "The user's assistant coach is Priya",
+   "The user coaches the Milpitas Lions",
+   "The user coaches an under-12 (U12) soccer team"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "coach_name",
+   "unavailable_month"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N12",
+  "repeat": 3,
+  "probe": "P3",
+  "planted_at_turn": 8,
+  "question": "Is there any food I asked to keep out of team events?",
+  "expected": "Peanuts (the user is allergic)",
+  "answer": "Yes, you mentioned there are no peanut snacks at team events due to a peanut allergy. Make sure to keep that in mind for all food brought to practices and games! 🐾⚽",
+  "episodes_retrieved": [
+   "The user's team practices on Tuesdays and Thursdays at 5pm",
+   "The user's team is in their community league",
+   "The user's team colors are green and white"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "food"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N12",
+  "repeat": 3,
+  "probe": "P4",
+  "planted_at_turn": 15,
+  "question": "Which team is our main rival, and which day do they play?",
+  "expected": "San Jose Tigers; they play on Sundays",
+  "answer": "Your main rival is the San Jose Tigers, and they play their games on Sundays. Your team practices on Tuesdays and Thursdays at 5pm.",
+  "episodes_retrieved": [
+   "The user's rival/opponent is San Jose Tigers",
+   "The San Jose Tigers play their games on Sundays",
+   "The user's team practices on Tuesdays and Thursdays at 5pm"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "rival_name",
+   "rival_day"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N12",
+  "repeat": 3,
+  "probe": "P5",
+  "planted_at_turn": 23,
+  "question": "How do I prefer to receive reminders?",
+  "expected": "By email, rather than text message",
+  "answer": "You prefer to receive reminders via email. Let me know if you need help setting up email reminders for practices, games, or any other team events! 📧⚽",
+  "episodes_retrieved": [
+   "The user prefers to receive reminders via email rather than text message",
+   "The user's team practices on Tuesdays and Thursdays at 5pm",
+   "The San Jose Tigers play their games on Sundays"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "channel"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N30",
+  "repeat": 1,
+  "probe": "P1",
+  "planted_at_turn": 1,
+  "question": "What is the name of the team I coach, and what age group is it?",
+  "expected": "Milpitas Lions, an under-12 (U12) soccer team",
+  "answer": "You coach the Milpitas Lions U12 soccer team, which has 14 players on the roster this season. Let me know if you need help with anything else! 🟢⚪",
+  "episodes_retrieved": [
+   "The user coaches an under-12 (U12) soccer team",
+   "The user's team has 14 players on the roster this season",
+   "The user coaches the Milpitas Lions"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "team_name",
+   "age_group"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N30",
+  "repeat": 1,
+  "probe": "P2",
+  "planted_at_turn": 4,
+  "question": "Who is my assistant coach, and when is she unavailable?",
+  "expected": "Priya; she cannot make games in November",
+  "answer": "Your assistant coach is Priya, and she is unavailable for all games in November. Let me know if you need help adjusting schedules or game plans!",
+  "episodes_retrieved": [
+   "The user's assistant coach is Priya",
+   "The user coaches the Milpitas Lions",
+   "The user coaches an under-12 (U12) soccer team"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "coach_name",
+   "unavailable_month"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N30",
+  "repeat": 1,
+  "probe": "P3",
+  "planted_at_turn": 8,
+  "question": "Is there any food I asked to keep out of team events?",
+  "expected": "Peanuts (the user is allergic)",
+  "answer": "Yes, peanuts are off-limits at team events due to a peanut allergy. You can still bring orange slices, as Dana usually brings those for halftime! Let me know if you need help with food planning. 🟢⚪",
+  "episodes_retrieved": [
+   "The user's team practices on Tuesdays and Thursdays at 5pm",
+   "The user's team trains with cones and small-sided games most weeks",
+   "The user's team is in their community league"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "food"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N30",
+  "repeat": 1,
+  "probe": "P4",
+  "planted_at_turn": 15,
+  "question": "Which team is our main rival, and which day do they play?",
+  "expected": "San Jose Tigers; they play on Sundays",
+  "answer": "Your main rival is the San Jose Tigers, and they play their games on Sundays. Your team practices on Tuesdays and Thursdays at 5pm. Let me know if you need help scheduling or preparing for the matchup!",
+  "episodes_retrieved": [
+   "The user's rival/opponent is San Jose Tigers",
+   "The San Jose Tigers play their games on Sundays",
+   "The user's team practices on Tuesdays and Thursdays at 5pm"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "rival_name",
+   "rival_day"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N30",
+  "repeat": 1,
+  "probe": "P5",
+  "planted_at_turn": 23,
+  "question": "How do I prefer to receive reminders?",
+  "expected": "By email, rather than text message",
+  "answer": "You prefer to receive reminders via email, so I'll send you email updates for practices, games, and any important team events. Let me know if you need help with anything else! 🟢⚪",
+  "episodes_retrieved": [
+   "The user prefers to receive reminders via email rather than text message",
+   "The user's team practices on Tuesdays and Thursdays at 5pm",
+   "The user's team trains with cones and small-sided games most weeks"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "channel"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N30",
+  "repeat": 2,
+  "probe": "P1",
+  "planted_at_turn": 1,
+  "question": "What is the name of the team I coach, and what age group is it?",
+  "expected": "Milpitas Lions, an under-12 (U12) soccer team",
+  "answer": "You coach the Milpitas Lions U12 soccer team, which has 14 players on the roster this season. Let me know if you need help with anything else! 🟢⚪️",
+  "episodes_retrieved": [
+   "The user coaches an under-12 (U12) soccer team",
+   "The user's team has 14 players on the roster this season",
+   "The user coaches the Milpitas Lions"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "team_name",
+   "age_group"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N30",
+  "repeat": 2,
+  "probe": "P2",
+  "planted_at_turn": 4,
+  "question": "Who is my assistant coach, and when is she unavailable?",
+  "expected": "Priya; she cannot make games in November",
+  "answer": "Your assistant coach is Priya, and she is unavailable for all games in November. Let me know if you need help adjusting the schedule or game-day plans!",
+  "episodes_retrieved": [
+   "The user's assistant coach is Priya",
+   "The user coaches the Milpitas Lions",
+   "The user coaches an under-12 (U12) soccer team"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "coach_name",
+   "unavailable_month"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N30",
+  "repeat": 2,
+  "probe": "P3",
+  "planted_at_turn": 8,
+  "question": "Is there any food I asked to keep out of team events?",
+  "expected": "Peanuts (the user is allergic)",
+  "answer": "Yes, you mentioned there are no peanut snacks at team events due to a peanut allergy. Make sure to keep peanut products out of team events to ensure everyone's safety! 🟢⚪️",
+  "episodes_retrieved": [
+   "The user's team practices on Tuesdays and Thursdays at 5pm",
+   "The user's team is in their community league",
+   "The user's team colors are green and white"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "food"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N30",
+  "repeat": 2,
+  "probe": "P4",
+  "planted_at_turn": 15,
+  "question": "Which team is our main rival, and which day do they play?",
+  "expected": "San Jose Tigers; they play on Sundays",
+  "answer": "Your main rival is the San Jose Tigers, who play their games on Sundays. Let me know if you need help preparing for the matchup! ⚽",
+  "episodes_retrieved": [
+   "The user's rival/opponent is San Jose Tigers",
+   "The San Jose Tigers play their games on Sundays",
+   "The user's team practices on Tuesdays and Thursdays at 5pm"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "rival_name",
+   "rival_day"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N30",
+  "repeat": 2,
+  "probe": "P5",
+  "planted_at_turn": 23,
+  "question": "How do I prefer to receive reminders?",
+  "expected": "By email, rather than text message",
+  "answer": "You prefer to receive reminders via email. I’ll make sure all updates and reminders for your team are sent to your email. Let me know if you need anything else! 🟢⚪️",
+  "episodes_retrieved": [
+   "The user prefers to receive reminders via email rather than text message",
+   "The user's team practices on Tuesdays and Thursdays at 5pm",
+   "The San Jose Tigers play their games on Sundays"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "channel"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N30",
+  "repeat": 3,
+  "probe": "P1",
+  "planted_at_turn": 1,
+  "question": "What is the name of the team I coach, and what age group is it?",
+  "expected": "Milpitas Lions, an under-12 (U12) soccer team",
+  "answer": "You coach the Milpitas Lions U12 soccer team, which has 14 players on the roster this season. Let me know if you need help with anything else! 🟢⚪️",
+  "episodes_retrieved": [
+   "The user coaches an under-12 (U12) soccer team",
+   "The user's team has 14 players on the roster this season",
+   "The user coaches the Milpitas Lions"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "team_name",
+   "age_group"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N30",
+  "repeat": 3,
+  "probe": "P2",
+  "planted_at_turn": 4,
+  "question": "Who is my assistant coach, and when is she unavailable?",
+  "expected": "Priya; she cannot make games in November",
+  "answer": "Your assistant coach is Priya, and she is unavailable for all games in November. Let me know if you need help adjusting the schedule!",
+  "episodes_retrieved": [
+   "The user's assistant coach is Priya",
+   "The user coaches the Milpitas Lions",
+   "The user coaches an under-12 (U12) soccer team"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "coach_name",
+   "unavailable_month"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N30",
+  "repeat": 3,
+  "probe": "P3",
+  "planted_at_turn": 8,
+  "question": "Is there any food I asked to keep out of team events?",
+  "expected": "Peanuts (the user is allergic)",
+  "answer": "Yes, you mentioned there are no peanut snacks at team events due to a user's allergy. Make sure to keep all peanut-containing foods out of team events! 🟢⚪️",
+  "episodes_retrieved": [
+   "The user's team practices on Tuesdays and Thursdays at 5pm",
+   "The user's team is in their community league",
+   "The user's team colors are green and white"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "food"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N30",
+  "repeat": 3,
+  "probe": "P4",
+  "planted_at_turn": 15,
+  "question": "Which team is our main rival, and which day do they play?",
+  "expected": "San Jose Tigers; they play on Sundays",
+  "answer": "Your main rival is the San Jose Tigers, and they play their games on Sundays. Make sure to plan your schedule around their games if needed!",
+  "episodes_retrieved": [
+   "The user's rival/opponent is San Jose Tigers",
+   "The San Jose Tigers play their games on Sundays",
+   "The user's team practices on Tuesdays and Thursdays at 5pm"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "rival_name",
+   "rival_day"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "N30",
+  "repeat": 3,
+  "probe": "P5",
+  "planted_at_turn": 23,
+  "question": "How do I prefer to receive reminders?",
+  "expected": "By email, rather than text message",
+  "answer": "You prefer to receive reminders via email, so I'll send you email updates for practices, games, and important dates. Let me know if you need anything else! 🟢⚪️",
+  "episodes_retrieved": [
+   "The user prefers to receive reminders via email rather than text message",
+   "The user's team practices on Tuesdays and Thursdays at 5pm",
+   "The San Jose Tigers play their games on Sundays"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "channel"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "COMPRESS",
+  "repeat": 1,
+  "probe": "P1",
+  "planted_at_turn": 1,
+  "question": "What is the name of the team I coach, and what age group is it?",
+  "expected": "Milpitas Lions, an under-12 (U12) soccer team",
+  "answer": "You coach the Milpitas Lions U12 soccer team, which has 14 players on the roster this season.",
+  "episodes_retrieved": [
+   "The user coaches an under-12 (U12) soccer team",
+   "The user's team has 14 players on the roster this season",
+   "The user coaches the Milpitas Lions"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "team_name",
+   "age_group"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "COMPRESS",
+  "repeat": 1,
+  "probe": "P2",
+  "planted_at_turn": 4,
+  "question": "Who is my assistant coach, and when is she unavailable?",
+  "expected": "Priya; she cannot make games in November",
+  "answer": "Your assistant coach is Priya. She is unavailable on Tuesdays and Thursdays during practice times, as those are the days you coach the Milpitas Lions U12 team.",
+  "episodes_retrieved": [
+   "The user's assistant coach is Priya",
+   "The user coaches the Milpitas Lions",
+   "The user coaches an under-12 (U12) soccer team"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "coach_name"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 3
+ },
+ {
+  "setting": "COMPRESS",
+  "repeat": 1,
+  "probe": "P3",
+  "planted_at_turn": 8,
+  "question": "Is there any food I asked to keep out of team events?",
+  "expected": "Peanuts (the user is allergic)",
+  "answer": "Yes, you mentioned having a peanut allergy, so please keep all peanut-containing foods out of team events. Make sure any snacks brought to practices or games are clearly labeled as safe for everyone.",
+  "episodes_retrieved": [
+   "The user's team practices on Tuesdays and Thursdays at 5pm",
+   "The user's team trains with cones and small-sided games most weeks",
+   "The user's team is in their community league"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "food"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "COMPRESS",
+  "repeat": 1,
+  "probe": "P4",
+  "planted_at_turn": 15,
+  "question": "Which team is our main rival, and which day do they play?",
+  "expected": "San Jose Tigers; they play on Sundays",
+  "answer": "Your main rival is the San Jose Tigers, who play on Sundays. Make sure to coordinate practices and games around their schedule!",
+  "episodes_retrieved": [
+   "The user's rival/opponent is San Jose Tigers",
+   "The San Jose Tigers play their games on Sundays",
+   "The user's team practices on Tuesdays and Thursdays at 5pm"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "rival_name",
+   "rival_day"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "COMPRESS",
+  "repeat": 1,
+  "probe": "P5",
+  "planted_at_turn": 23,
+  "question": "How do I prefer to receive reminders?",
+  "expected": "By email, rather than text message",
+  "answer": "I prefer to receive reminders via email. Let me know if you need help setting up email reminders for practices or games!",
+  "episodes_retrieved": [
+   "The user prefers to receive reminders via email rather than text message",
+   "The user's team practices on Tuesdays and Thursdays at 5pm",
+   "The user's team trains with cones and small-sided games most weeks"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "channel"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "COMPRESS",
+  "repeat": 2,
+  "probe": "P1",
+  "planted_at_turn": 1,
+  "question": "What is the name of the team I coach, and what age group is it?",
+  "expected": "Milpitas Lions, an under-12 (U12) soccer team",
+  "answer": "You coach the Milpitas Lions U12 soccer team. The team has 14 players on the roster this season.",
+  "episodes_retrieved": [
+   "The user coaches an under-12 (U12) soccer team",
+   "The user's team has 14 players on the roster this season",
+   "The user coaches the Milpitas Lions"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "team_name",
+   "age_group"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "COMPRESS",
+  "repeat": 2,
+  "probe": "P2",
+  "planted_at_turn": 4,
+  "question": "Who is my assistant coach, and when is she unavailable?",
+  "expected": "Priya; she cannot make games in November",
+  "answer": "Your assistant coach is Priya. She is unavailable on Mondays and Fridays due to her other commitments. Let me know if you need any adjustments!",
+  "episodes_retrieved": [
+   "The user's assistant coach is Priya",
+   "The user coaches the Milpitas Lions",
+   "The user coaches an under-12 (U12) soccer team"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "coach_name"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 3
+ },
+ {
+  "setting": "COMPRESS",
+  "repeat": 2,
+  "probe": "P3",
+  "planted_at_turn": 8,
+  "question": "Is there any food I asked to keep out of team events?",
+  "expected": "Peanuts (the user is allergic)",
+  "answer": "Yes, you asked to keep peanut-free snacks out of team events to ensure everyone's safety. Make sure to bring other snacks in green and white colors for the team! 🟢⚪",
+  "episodes_retrieved": [
+   "The user's team practices on Tuesdays and Thursdays at 5pm",
+   "The user's team is in their community league",
+   "The user's team colors are green and white"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "food"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "COMPRESS",
+  "repeat": 2,
+  "probe": "P4",
+  "planted_at_turn": 15,
+  "question": "Which team is our main rival, and which day do they play?",
+  "expected": "San Jose Tigers; they play on Sundays",
+  "answer": "Your main rival is the San Jose Tigers, and they play their games on Sundays. Make sure to keep the team focused and excited for the upcoming matches! 🟢⚪",
+  "episodes_retrieved": [
+   "The user's rival/opponent is San Jose Tigers",
+   "The San Jose Tigers play their games on Sundays",
+   "The user's team practices on Tuesdays and Thursdays at 5pm"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "rival_name",
+   "rival_day"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "COMPRESS",
+  "repeat": 2,
+  "probe": "P5",
+  "planted_at_turn": 23,
+  "question": "How do I prefer to receive reminders?",
+  "expected": "By email, rather than text message",
+  "answer": "You prefer to receive reminders via email. Let me know if you need any updates or reminders sent your way! Have a great season! 🟢⚪",
+  "episodes_retrieved": [
+   "The user prefers to receive reminders via email rather than text message",
+   "The user's team practices on Tuesdays and Thursdays at 5pm",
+   "The San Jose Tigers play their games on Sundays"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "channel"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "COMPRESS",
+  "repeat": 3,
+  "probe": "P1",
+  "planted_at_turn": 1,
+  "question": "What is the name of the team I coach, and what age group is it?",
+  "expected": "Milpitas Lions, an under-12 (U12) soccer team",
+  "answer": "You coach the Milpitas Lions U12 soccer team. The team has 14 players on the roster this season.",
+  "episodes_retrieved": [
+   "The user coaches an under-12 (U12) soccer team",
+   "The user's team has 14 players on the roster this season",
+   "The user coaches the Milpitas Lions"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "team_name",
+   "age_group"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "COMPRESS",
+  "repeat": 3,
+  "probe": "P2",
+  "planted_at_turn": 4,
+  "question": "Who is my assistant coach, and when is she unavailable?",
+  "expected": "Priya; she cannot make games in November",
+  "answer": "Your assistant coach is Priya. She is unavailable on Mondays and Fridays for other commitments. Let me know if you need help adjusting the schedule!",
+  "episodes_retrieved": [
+   "The user's assistant coach is Priya",
+   "The user coaches the Milpitas Lions",
+   "The user coaches an under-12 (U12) soccer team"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "coach_name"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 3
+ },
+ {
+  "setting": "COMPRESS",
+  "repeat": 3,
+  "probe": "P3",
+  "planted_at_turn": 8,
+  "question": "Is there any food I asked to keep out of team events?",
+  "expected": "Peanuts (the user is allergic)",
+  "answer": "No, there’s no specific food you asked to keep out of team events. Just make sure to follow any league guidelines or preferences for food at events. Let me know if you need help with anything else! 🟢⚪",
+  "episodes_retrieved": [
+   "The user's team practices on Tuesdays and Thursdays at 5pm",
+   "The user's team is in their community league",
+   "The user's team colors are green and white"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [],
+  "contradicted": [],
+  "hedged": false,
+  "score": 1
+ },
+ {
+  "setting": "COMPRESS",
+  "repeat": 3,
+  "probe": "P4",
+  "planted_at_turn": 15,
+  "question": "Which team is our main rival, and which day do they play?",
+  "expected": "San Jose Tigers; they play on Sundays",
+  "answer": "Your main rival is the San Jose Tigers, who play their games on Sundays. Let me know if you need help with scheduling or anything else! 🟢⚪",
+  "episodes_retrieved": [
+   "The user's rival/opponent is San Jose Tigers",
+   "The San Jose Tigers play their games on Sundays",
+   "The user's team practices on Tuesdays and Thursdays at 5pm"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "rival_name",
+   "rival_day"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ },
+ {
+  "setting": "COMPRESS",
+  "repeat": 3,
+  "probe": "P5",
+  "planted_at_turn": 23,
+  "question": "How do I prefer to receive reminders?",
+  "expected": "By email, rather than text message",
+  "answer": "You prefer email reminders, so I'll send you updates via email. Let me know if you need any adjustments!",
+  "episodes_retrieved": [
+   "The user prefers to receive reminders via email rather than text message",
+   "The user's team practices on Tuesdays and Thursdays at 5pm",
+   "The San Jose Tigers play their games on Sundays"
+  ],
+  "had_session_summary": true,
+  "had_lifetime_summary": true,
+  "matched": [
+   "channel"
+  ],
+  "contradicted": [],
+  "hedged": false,
+  "score": 5
+ }
+]
