@@ -1121,3 +1121,528 @@ Compression policy (keep last 6 + summary every 3)         $        438.66 $    
 
 Rule: worst = most expensive; best = cheapest with mean probe score >= top(5.00) - 0.5.
 Eligible for best: ['N4', 'N12', 'N30']  ->  BEST = N4 ($350.83),  WORST = N30 ($552.86)
+
+===== HW6 Part 4 - EXPLORATION OF CONSOLIDATION (scratch copies of the 55-line file; live MEMORY.md untouched) =====
+NOTE (first attempt, console output not saved to a file): one-shot prompt with all 53 facts to qwen3:8b -> before=54 entries, after=56
+(it copied almost every line, merged nothing, flagged 1 of 4 contradictions, and its line accounting could not detect this).
+
+--- attempt 2: topic-key clustering + free-form per-cluster JSON judging (22:59:58): 54 -> 42 entries (still >40);
+    treated s9871_db / s9871_rel as DUPLICATES (conflicting line merged away) and never flagged the 9am/10am conflict
+{'changed': True, 'method': 'llm', 'before': 54, 'after': 42, 'clusters_not_judged': 0, 'backup': '\\\\wsl.localhost\\Ubuntu\\tmp\\claude-1000\\-mnt-c-Users-patel-data260-9871\\134f45d4-d907-4cf0-a493-e4e30f55d38d\\scratchpad\\p4\\backups\\MEMORY-20261015-2259
+MERGE: [2026-10-07] We use the qwen3:8b model from Ollama locally. <- 4 lines
+MERGE: [2026-09-30] HW6 uses a MongoDB database called s9871_doc. <- 1 lines
+MERGE: [2026-10-10] The Mongo database is named s9871_doc. <- 1 lines
+MERGE: [2026-10-02] The HW5 relational database is named s9871_rel. <- 1 lines
+MERGE: [2026-10-08] The user runs all git commands; the assistant must not. <- 1 lines
+MERGE: [2026-10-12] Make sure the two collaborators Sbnikitha and supriyaselv <- 1 lines
+MERGE: [2026-10-15] The user's name must be clearly visible in any terminal s <- 1 lines
+MERGE: [2026-10-14] Do not reuse one terminal window for the long-running ser <- 1 lines
+CONFLICT: resolved ['[2026-10-07] We use the qwen3:8b model from Ollama locally.', '[2026-10-14] Considering switching the local model to llama3 (no decision made yet).'] reason: fact 6 is tentative and does not override established fact 1
+CONFLICT: resolved ['[2026-09-23] The coach prefers reminders by text message.', '[2026-10-01] The coach prefers reminders by email, not text message.'] reason: The newer fact overrides the older one.
+
+--- attempt 3: pairwise 5-way classification (23:02:22): 54 -> 49 entries; model labelled duplicates as conflicts
+    and called the same-day 9am/10am pair 'Fact B is the current truth'
+{'changed': True, 'method': 'llm', 'before': 54, 'after': 49, 'clusters_not_fully_judged': 0, 'guard_overrides': 0, 'backup': '\\\\wsl.localhost\\Ubuntu\\tmp\\claude-1000\\-mnt-c-Users-patel-data260-9871\\134f45d4-d907-4cf0-a493-e
+CONFLICT: resolved ['[2026-09-05] The local model is qwen3:8b served by Ollama.', '[2026-09-19] The local model is qwen3:8b served by Ollama.'] reason: Fact B is newer but does not contradict Fact A; both can coexist.
+CONFLICT: resolved ['[2026-09-05] The local model is qwen3:8b served by Ollama.', '[2026-10-14] Considering switching the local model to llama3 (no decision made yet).'] reason: Fact B is tentative and no decision has been made, s
+CONFLICT: resolved ['[2026-09-19] The local model is qwen3:8b served by Ollama.', '[2026-10-14] Considering switching the local model to llama3 (no decision made yet).'] reason: Fact B is tentative and no decision has been made, s
+CONFLICT: resolved ['[2026-09-29] The local model for agent work is qwen3:8b.', '[2026-10-14] Considering switching the local model to llama3 (no decision made yet).'] reason: Fact B is tentative and no decision has been made, so 
+CONFLICT: resolved ['[2026-10-02] Model: qwen3:8b via Ollama (local).', '[2026-10-14] Considering switching the local model to llama3 (no decision made yet).'] reason: Fact B is tentative and no decision has been made, so Fact A r
+CONFLICT: resolved ['[2026-10-07] We use the qwen3:8b model from Ollama locally.', '[2026-10-14] Considering switching the local model to llama3 (no decision made yet).'] reason: Fact B is tentative and no decision has been made, 
+CONFLICT: resolved ['[2026-09-25] The HW5 relational database is named s9871_db.', '[2026-10-02] The HW5 relational database is named s9871_rel.'] reason: Fact B contradicts Fact A and provides a new name for the database, indicat
+
+--- attempt 4 (FINAL DESIGN): model answers only same/contradict/neither (+ tentative yes/no); resolution rules applied in code (23:05:19): 54 -> 36
+{'changed': True, 'method': 'llm', 'before': 54, 'after': 36, 'clusters_not_fully_judged': 0, 'guard_overrides': 0, 'backup': '\\\\wsl.localhost\\Ubuntu\\tmp\\claude-1000\\-mnt-c-Users-patel-data260-9871\\134f45d4-d907-4cf0-a493-e4e30f55d38d\\scratchpad\\p4\\b
+MERGE: [2026-10-07] We use the qwen3:8b model from Ollama locally. <- 4 lines
+MERGE: [2026-10-10] The Mongo database is named s9871_doc. <- 3 lines
+MERGE: [2026-10-08] The user runs all git commands; the assistant must not. <- 2 lines
+MERGE: [2026-10-01] Do not invent or fabricate numbers in results. <- 1 lines
+MERGE: [2026-10-12] Make sure the two collaborators Sbnikitha and supriyaselv <- 2 lines
+MERGE: [2026-10-15] The user's name must be clearly visible in any terminal s <- 2 lines
+MERGE: [2026-10-14] Do not reuse one terminal window for the long-running ser <- 2 lines
+CONFLICT: resolved ['[2026-09-25] The HW5 relational database is named s9871_db.', '[2026-10-02] The HW5 relational database is named s9871_rel.'] reason: newer settled fact replaces the older one
+CONFLICT: resolved ['[2026-09-23] The coach prefers reminders by text message.', '[2026-10-01] The coach prefers reminders by email, not text message.'] reason: newer settled fact replaces the older one
+CONFLICT: unresolved ['[2026-10-03] Saturday league games start at 9am.', '[2026-10-03] Saturday league games start at 10am.'] reason: same date, nothing says which is right
+
+===== HW6 Part 4 - test_part4_units.py (deterministic helpers; no model) - 2026-10-15T23:19:37 =====
+[PASS] 40 entries + fresh timestamp -> NOT needed
+[PASS] 41 entries + fresh timestamp -> needed (line rule)
+[PASS] comments and blank lines are not counted
+[PASS] block comment spanning lines not counted
+[PASS] 3 entries but timestamp 25h old -> needed (age rule)
+[PASS] timestamp 23h old -> NOT needed
+[PASS] missing timestamp with entries -> needed
+[PASS] malformed timestamp with entries -> needed (treated as unknown)
+[PASS] empty memory -> NOT needed
+[PASS] timestamp without tz is read as UTC
+[PASS] read_last_consolidated(absent) is None
+[PASS] load_memory(missing file) == ''
+[PASS] load_agent(missing file) == ''
+[PASS] system prompt contains AGENT.md instructions
+[PASS] system prompt contains MEMORY.md facts
+[PASS] HTML comments stripped from the prompt
+[PASS] fallback prompt when both files empty
+[PASS] dedupe-only fallback groups near-identical lines (indexes 0 and 1) and leaves the distinct one
+[PASS] unusable model output parses to None (-> fallback)
+[PASS] parse_string_list: one JSON array
+[PASS] parse_string_list: several arrays on separate lines (qwen3 quirk) are all kept, duplicates dropped
+[PASS] parse_string_list: garbage -> []
+[PASS] conflict-section lines are NOT treated as facts
+[PASS] stamp with '| entries: N' parses (timestamp and count)
+[PASS] old stamp format (no entries) still parses
+[PASS] /dream inserts new facts above '## Conflicts'
+[PASS] /dream skips a fact that is already known
+
+27/27 checks passed
+
+===== HW6 Part 4 - test_part4.py RUN 1 (over real HTTP, real model) - 2026-10-15T23:10:07 =====
+NOTE: 24/28. Failures exposed 3 real bugs, fixed before run 2: (a) /dream parsed 0 facts because qwen3 returned several JSON arrays on separate lines;
+(b) '## Conflicts' lines were re-ingested as facts on a 2nd consolidation (nested conflict lines); (c) a >40-entry file of distinct facts would re-consolidate
+on EVERY chat turn. (The 4th failure was my own test: it did not accept lines merged-and-listed.) Also found: /dream would have appended below '## Conflicts'.
+Run at 2026-10-15T23:07:29
+original file: 55 lines, 53 fact lines
+GET /api/file-memory -> {'entries': 54, 'last_consolidated': '2026-10-15T09:00:00-07:00', 'consolidation_needed': True, 'reason': '54 entries > 40', 'agent_md_lines': 15}
+[PASS] 55-line file reports 54 entries and consolidation needed
+
+/help ->
+Commands:
+  /memory  - show the current file-based memory (AGENT.md + MEMORY.md, entry count, consolidation status)
+  /compact - consolidate MEMORY.md (merge duplicates, resolve contradictions explicitly) and report entry counts before and after
+  /dream   - mine the recent conversation for durable facts and add the new ones to MEMORY.md
+  /help    - show this message
+Anything else is sent to the model with AGENT.md + MEMORY.md in the system prompt.
+[PASS] /help lists /memory /compact /dream /help
+
+/memory ->
+=== AGENT.md (15 lines) ===
+# AGENT.md — durable project and agent instructions
+
+<!-- Loaded into every file-memory system prompt (HW6 Part 4). Expanded from the HW1 version. -->
+
+## Project description
+1. This project is a community sports league fixtures assistant (DATA-260, domain 7). Its entities are Fixture (a scheduled match between two teams) and Team; fixture categories are Soccer, Basketball, Volleyball and Cricket.
+
+## Technology stack
+2. Use Python 3.12 with FastAPI, Pydantic v2 and PyMongo; the local model is qwen3:8b called only through the adapter in src/model_client.py; MongoDB database name is s9871_doc.
+
+## Coding conventions
+3. Every Python function must have type hints on all parameters and on the return value, and a one-line docstring.
+4. Use snake_case for function and variable names, and keep every function under 25 lines.
+
+## Testing approach
+5. Verify code by runn
+  ...[truncated for log]
+[PASS] /memory shows AGENT.md and MEMORY.md with entry count
+
+/nope -> 200 Unknown command /nope.
+Commands:
+  /memory  - show the curre
+[PASS] unknown command is reported (not sent to the model)
+[PASS] empty message -> 422
+[PASS] extra field -> 422
+
+/compact ->
+MEMORY.md consolidated via llm: entries before = 54, after = 36
+Duplicate groups merged: 7; conflicts recorded: 3; clusters not fully judged: 0; guard overrides: 0; backup: C:\Users\patel\AppData\Local\Temp\hw6_p4\backups\MEMORY-20261015-230824.md
+  MERGED into: [2026-10-07] We use the qwen3:8b model from Ollama locally.
+      absorbed: [2026-09-05] The local model is qwen3:8b served by Ollama.
+      absorbed: [2026-09-19] The local model is qwen3:8b served by Ollama.
+      absorbed: [2026-09-29] The local model for agent work is qwen3:8b.
+      absorbed: [2026-10-02] Model: qwen3:8b via Ollama (local).
+  MERGED into: [2026-10-10] The Mongo database is named s9871_doc.
+      absorbed: [2026-09-10] The MongoDB database for HW6 is s9871_doc.
+      absorbed: [2026-09-30] HW6 uses a MongoDB database called s9871_doc.
+      absorbed: [2026-10-06] MongoDB database name: s9871_doc.
+  MERGED into: [2026-10-08] The user runs all git commands; the assistant must not.
+      absorbed: [2026-09-12] Never run git commit or git push on the user's behalf.
+      absorbed: [2026-09-27] Do not run git add, git commit or git push for the user.
+  MERGED into: [2026-10-01] Do not invent or fabricate numbers in results.
+      absorbed: [2026-09-14] Final answers must never contain fabricated numbers.
+  MERGED into: [2026-10-12] Make sure the two collaborators Sbnikitha and supriyaselvanganesan can open the repo.
+      absorbed: [2026-09-17] Collaborator access is needed for Sbnikitha and supriyaselvanganesan.
+      absorbed: [2026-10-03] Sbnikitha and supriyaselvanganesan must keep access to the repo.
+  MERGED into: [2026-10-15] The user's name must be clearly visible in any terminal screenshot.
+      absorbed: [2026-09-20] Terminal screenshots must show the user's name.
+      absorbed: [2026-10-05] Every terminal screenshot needs the user's name visible.
+  MERGED into: [2026-10-14] Do not reuse one terminal window for the long-running servers.
+      absorbed: [2026-09-22] Keep dedicated terminal windows open for long-running servers.
+      absorbed: [2026-10-13] Long-running servers need their own terminal window kept open.
+  conflict [resolved]: [2026-09-25] The HW5 relational database is named s9871_db. | [2026-10-02] The HW5 relational database is named s9871_rel. -> newer settled fact replaces the older one
+  conflict [resolved]: [2026-09-23] The coach prefers reminders by text message. | [2026-10-01] The coach prefers reminders by email, not text message. -> newer settled fact replaces the older one
+  conflict [unresolved]: [2026-10-03] Saturday league games start at 9am. | [2026-10-03] Saturday league games start at 10am. -> same date, nothing says which is right
+[PASS] /compact reports before and after counts
+after: 37 file lines, 36 entries (non-empty, non-comment)
+[PASS] consolidated file has fewer than 40 lines (wc -l)
+[PASS] consolidated entry count < 40 and equals the reported 'after'
+[PASS] a backup of the ORIGINAL 55-line file was written
+original lines NOT accounted for: []
+[PASS] no original fact line silently disappeared (kept / merged-and-listed / in a conflict line)
+
+Duplicate groups (ground truth) -> surviving plain lines:
+  4 lines -> 1 survive
+  4 lines -> 1 survive
+  3 lines -> 1 survive
+  3 lines -> 2 survive
+  3 lines -> 1 survive
+  3 lines -> 1 survive
+  3 lines -> 1 survive
+[PASS] at least 3 duplicate groups merged to a single line
+[PASS] every merged group's surviving line is its NEWEST-dated line
+[PASS] an explicit '## Conflicts' section exists
+
+Ground-truth contradictions vs result:
+  [newer-wins] -> recorded in Conflicts
+      expected: keep the newer line, record the older as superseded
+  [newer-wins] -> recorded in Conflicts
+      expected: keep the newer line, record the older as superseded
+  [trap-newer-is-tentative] -> see file
+      expected: KEEP qwen3:8b (the newer line is only a tentative consideration); note llama3 as under consideration
+  [ambiguous-same-day] -> recorded in Conflicts
+      expected: cannot be resolved from the file: keep BOTH and flag for the user
+[PASS] neither side of the 'newer-wins' contradiction is missing from the file
+[PASS] neither side of the 'newer-wins' contradiction is missing from the file
+[FAIL] neither side of the 'trap-newer-is-tentative' contradiction is missing from the file
+[PASS] neither side of the 'ambiguous-same-day' contradiction is missing from the file
+[PASS] both 'newer-wins' contradictions recorded as resolved, keeping the NEWER line
+[PASS] same-day contradiction flagged UNRESOLVED for the user (not silently picked)
+
+second /compact ->
+MEMORY.md consolidated via llm: entries before = 36, after = 35
+[PASS] second /compact keeps every fact line (idempotent, nothing lost)
+
+/dream ->
+/dream added 0 fact(s), skipped 0 already known.
+
+[FAIL] /dream added at least one durable fact from the conversation (Neovim / vegetarian)
+[PASS] /dream facts are date-stamped with today
+[PASS] /dream did not add small talk (weather)
+[PASS] running /dream again does not add duplicates
+
+auto trigger (line count) -> {'reason': '47 entries > 40', 'method': 'llm', 'before': 47, 'after': 47}
+[PASS] a normal turn auto-consolidates when MEMORY.md exceeds 40 entries
+auto trigger (age) -> {'reason': '47 entries > 40', 'method': 'llm', 'before': 47, 'after': 46}
+[FAIL] a normal turn auto-consolidates when the timestamp is >24h old
+[FAIL] no consolidation when memory is small and fresh
+
+24/28 checks passed
+FAILED: neither side of the 'trap-newer-is-tentative' contradiction is missing from the file
+FAILED: /dream added at least one durable fact from the conversation (Neovim / vegetarian)
+FAILED: a normal turn auto-consolidates when the timestamp is >24h old
+FAILED: no consolidation when memory is small and fresh
+EXIT=1
+
+===== HW6 Part 4 - test_part4.py RUN 2 (after fixes) - 2026-10-15T23:14:34 =====
+Run at 2026-10-15T23:13:02
+original file: 55 lines, 53 fact lines
+GET /api/file-memory -> {'entries': 54, 'last_consolidated': '2026-10-15T09:00:00-07:00', 'consolidation_needed': True, 'reason': '54 entries > 40', 'agent_md_lines': 15}
+[PASS] 55-line file reports 54 entries and consolidation needed
+
+/help ->
+Commands:
+  /memory  - show the current file-based memory (AGENT.md + MEMORY.md, entry count, consolidation status)
+  /compact - consolidate MEMORY.md (merge duplicates, resolve contradictions explicitly) and report entry counts before and after
+  /dream   - mine the recent conversation for durable facts and add the new ones to MEMORY.md
+  /help    - show this message
+Anything else is sent to the model with AGENT.md + MEMORY.md in the system prompt.
+[PASS] /help lists /memory /compact /dream /help
+
+/memory ->
+=== AGENT.md (15 lines) ===
+# AGENT.md — durable project and agent instructions
+
+<!-- Loaded into every file-memory system prompt (HW6 Part 4). Expanded from the HW1 version. -->
+
+## Project description
+1. This project is a community sports league fixtures assistant (DATA-260, domain 7). Its entities are Fixture (a scheduled match between two teams) and Team; fixture categories are Soccer, Basketball, Volleyball and Cricket.
+
+## Technology stack
+2. Use Python 3.12 with FastAPI, Pydantic v2 and PyMongo; the local model is qwen3:8b called only through the adapter in src/model_client.py; MongoDB database name is s9871_doc.
+
+## Coding conventions
+3. Every Python function must have type hints on all parameters and on the return value, and a one-line docstring.
+4. Use snake_case for function and variable names, and keep every function under 25 lines.
+
+## Testing approach
+5. Verify code by runn
+  ...[truncated for log]
+[PASS] /memory shows AGENT.md and MEMORY.md with entry count
+
+/nope -> 200 Unknown command /nope.
+Commands:
+  /memory  - show the curre
+[PASS] unknown command is reported (not sent to the model)
+[PASS] empty message -> 422
+[PASS] extra field -> 422
+
+/compact ->
+MEMORY.md consolidated via llm: entries before = 54, after = 36
+Duplicate groups merged: 7; conflicts recorded: 3; clusters not fully judged: 0; guard overrides: 0; backup: C:\Users\patel\AppData\Local\Temp\hw6_p4\backups\MEMORY-20261015-231359.md
+  MERGED into: [2026-10-07] We use the qwen3:8b model from Ollama locally.
+      absorbed: [2026-09-05] The local model is qwen3:8b served by Ollama.
+      absorbed: [2026-09-19] The local model is qwen3:8b served by Ollama.
+      absorbed: [2026-09-29] The local model for agent work is qwen3:8b.
+      absorbed: [2026-10-02] Model: qwen3:8b via Ollama (local).
+  MERGED into: [2026-10-10] The Mongo database is named s9871_doc.
+      absorbed: [2026-09-10] The MongoDB database for HW6 is s9871_doc.
+      absorbed: [2026-09-30] HW6 uses a MongoDB database called s9871_doc.
+      absorbed: [2026-10-06] MongoDB database name: s9871_doc.
+  MERGED into: [2026-10-08] The user runs all git commands; the assistant must not.
+      absorbed: [2026-09-12] Never run git commit or git push on the user's behalf.
+      absorbed: [2026-09-27] Do not run git add, git commit or git push for the user.
+  MERGED into: [2026-10-01] Do not invent or fabricate numbers in results.
+      absorbed: [2026-09-14] Final answers must never contain fabricated numbers.
+  MERGED into: [2026-10-12] Make sure the two collaborators Sbnikitha and supriyaselvanganesan can open the repo.
+      absorbed: [2026-09-17] Collaborator access is needed for Sbnikitha and supriyaselvanganesan.
+      absorbed: [2026-10-03] Sbnikitha and supriyaselvanganesan must keep access to the repo.
+  MERGED into: [2026-10-15] The user's name must be clearly visible in any terminal screenshot.
+      absorbed: [2026-09-20] Terminal screenshots must show the user's name.
+      absorbed: [2026-10-05] Every terminal screenshot needs the user's name visible.
+  MERGED into: [2026-10-14] Do not reuse one terminal window for the long-running servers.
+      absorbed: [2026-09-22] Keep dedicated terminal windows open for long-running servers.
+      absorbed: [2026-10-13] Long-running servers need their own terminal window kept open.
+  conflict [resolved]: [2026-09-25] The HW5 relational database is named s9871_db. | [2026-10-02] The HW5 relational database is named s9871_rel. -> newer settled fact replaces the older one
+  conflict [resolved]: [2026-09-23] The coach prefers reminders by text message. | [2026-10-01] The coach prefers reminders by email, not text message. -> newer settled fact replaces the older one
+  conflict [unresolved]: [2026-10-03] Saturday league games start at 9am. | [2026-10-03] Saturday league games start at 10am. -> same date, nothing says which is right
+[PASS] /compact reports before and after counts
+after: 37 file lines, 36 entries (non-empty, non-comment)
+[PASS] consolidated file has fewer than 40 lines (wc -l)
+[PASS] consolidated entry count < 40 and equals the reported 'after'
+[PASS] a backup of the ORIGINAL 55-line file was written
+original lines NOT accounted for: []
+[PASS] no original fact line silently disappeared (kept / merged-and-listed / in a conflict line)
+
+Duplicate groups (ground truth) -> surviving plain lines:
+  4 lines -> 1 survive
+  4 lines -> 1 survive
+  3 lines -> 1 survive
+  3 lines -> 2 survive
+  3 lines -> 1 survive
+  3 lines -> 1 survive
+  3 lines -> 1 survive
+[PASS] at least 3 duplicate groups merged to a single line
+[PASS] every merged group's surviving line is its NEWEST-dated line
+[PASS] an explicit '## Conflicts' section exists
+
+Ground-truth contradictions vs result:
+  [newer-wins] -> recorded in Conflicts
+      expected: keep the newer line, record the older as superseded
+  [newer-wins] -> recorded in Conflicts
+      expected: keep the newer line, record the older as superseded
+  [trap-newer-is-tentative] -> see file
+      expected: KEEP qwen3:8b (the newer line is only a tentative consideration); note llama3 as under consideration
+  [ambiguous-same-day] -> recorded in Conflicts
+      expected: cannot be resolved from the file: keep BOTH and flag for the user
+[PASS] neither side of the 'newer-wins' contradiction was lost (in the file, or merged-and-listed)
+[PASS] neither side of the 'newer-wins' contradiction was lost (in the file, or merged-and-listed)
+[PASS] neither side of the 'trap-newer-is-tentative' contradiction was lost (in the file, or merged-and-listed)
+[PASS] neither side of the 'ambiguous-same-day' contradiction was lost (in the file, or merged-and-listed)
+[PASS] both 'newer-wins' contradictions recorded as resolved, keeping the NEWER line
+[PASS] same-day contradiction flagged UNRESOLVED for the user (not silently picked)
+
+second /compact ->
+MEMORY.md consolidated via llm: entries before = 36, after = 36
+[PASS] second /compact keeps every fact line (idempotent, nothing lost)
+[PASS] second /compact carries all 3 conflict records forward verbatim, with no nesting
+
+/dream ->
+/dream added 3 fact(s), skipped 0 already known.
+  + [2026-10-15] The user prefers Neovim as their code editor.
+  + [2026-10-15] The user uses Linux as their operating system.
+  + [2026-10-15] The user is vegetarian and avoids meat dishes for team dinners.
+[PASS] /dream added at least one durable fact from the conversation (Neovim / vegetarian)
+[PASS] /dream facts are date-stamped with today
+[PASS] /dream did not add small talk (weather)
+[PASS] running /dream again does not add duplicates
+
+auto trigger (line count) -> {'reason': '51 entries > 40', 'method': 'llm', 'before': 51, 'after': 51} | warning: None
+[PASS] a normal turn auto-consolidates when MEMORY.md exceeds 40 entries (and still replies)
+[PASS] auto-consolidation kept all 12 distinct facts (nothing deleted)
+second turn, nothing new added -> None | warning: MEMORY.md still has 51 entries (limit 40) after its last consolidation and nothing new was added; prune facts by hand to get under the limit.
+[PASS] no re-consolidation loop: file still >40 but nothing new -> warning instead of another run
+auto trigger (age) -> {'reason': 'last consolidated 30.0h ago > 24h', 'method': 'llm', 'before': 39, 'after': 39}
+[PASS] a normal turn auto-consolidates when the timestamp is >24h old
+[PASS] no consolidation when memory is small and fresh
+
+31/31 checks passed
+EXIT=0
+
+===== HW6 Part 4 - analyze_part4.py (scores consolidated file against ground truth) =====
+original: {'file_lines': 55, 'entries': 54, 'fact_bullets': 53}
+consolidated: {'file_lines': 37, 'entries': 36, 'plain_fact_bullets': 31, 'conflict_records': 3}
+
+DUPLICATE GROUPS (ground truth) -> how many lines survive as plain facts (1 = fully merged)
+  4 lines -> 1 survive  newest-kept=True  (The local model is qwen3:8b served by Ollama....)
+  4 lines -> 1 survive  newest-kept=True  (The MongoDB database for HW6 is s9871_doc....)
+  3 lines -> 1 survive  newest-kept=True  (Never run git commit or git push on the user's behalf....)
+  3 lines -> 2 survive  newest-kept=None  (Final answers must never contain fabricated numbers....)
+  3 lines -> 1 survive  newest-kept=True  (Collaborator access is needed for Sbnikitha and supriyase...)
+  3 lines -> 1 survive  newest-kept=True  (Terminal screenshots must show the user's name....)
+  3 lines -> 1 survive  newest-kept=True  (Keep dedicated terminal windows open for long-running ser...)
+fully merged groups: 6/7; lines removed by merging: 15
+
+CONTRADICTIONS (ground truth) -> what the consolidation did
+  [newer-wins] CORRECT: resolved, newer line kept, older recorded
+  [newer-wins] CORRECT: resolved, newer line kept, older recorded
+  [trap-newer-is-tentative] NOT FLAGGED: both facts retained as plain lines (qwen3:8b kept, llama3 still marked tentative) - nothing wrong was decided and nothing was lost, but the contradiction was not recorded
+  [ambiguous-same-day] CORRECT: flagged unresolved for the user, both kept
+
+unique (non-duplicate, non-conflicting) facts missing from the consolidated plain list: 0 []
+
+===== HW6 Part 4 - verify_agent_md.py, check #1 (LENIENT docstring check; later found too weak) - 2026-10-15T23:16:14 =====
+NOTE: this said 5/5, but the generated docstring spanned 3 source lines; ast.get_docstring() strips whitespace, so it passed as 'one-line'.
+Run at 2026-10-15T23:15:24 | runs per condition: 5
+>>> with_AGENT_md: followed ALL rules in 5/5 runs; per-rule passes {'rule4_snake_case': 5, 'rule4_under_25_lines': 5, 'rule3_type_hints': 5, 'rule3_one_line_docstring': 5, 'rule6_no_eval_exec': 5, 'rule6_no_print': 5, 'rule6_no_bare_except': 5}; behaviour correct in 5/5
+>>> control_no_AGENT_md: followed ALL rules in 0/5 runs; per-rule passes {'rule4_snake_case': 5, 'rule4_under_25_lines': 5, 'rule3_type_hints': 0, 'rule3_one_line_docstring': 0, 'rule6_no_eval_exec': 5, 'rule6_no_print': 5, 'rule6_no_bare_except': 5}; behaviour correct in 5/5
+>>> only bullets: True; mentions eval: True
+
+===== HW6 Part 4 - verify_agent_md.py, check #2 (STRICT: docstring literal on one source line; original AGENT.md wording) - 2026-10-15T23:16:40 =====
+NOTE: AGENT.md-guided code failed ONLY the docstring rule in 5/5 runs -> the rule wording was ambiguous; AGENT.md rule 3 now spells it out with an example.
+Run at 2026-10-15T23:16:16 | runs per condition: 5
+>>> with_AGENT_md: followed ALL rules in 0/5 runs; per-rule passes {'rule4_snake_case': 5, 'rule4_under_25_lines': 5, 'rule3_type_hints': 5, 'rule3_one_line_docstring': 0, 'rule6_no_eval_exec': 5, 'rule6_no_print': 5, 'rule6_no_bare_except': 5}; behaviour correct in 5/5
+>>> control_no_AGENT_md: followed ALL rules in 0/5 runs; per-rule passes {'rule4_snake_case': 5, 'rule4_under_25_lines': 5, 'rule3_type_hints': 0, 'rule3_one_line_docstring': 0, 'rule6_no_eval_exec': 5, 'rule6_no_print': 5, 'rule6_no_bare_except': 5}; behaviour correct in 5/5
+>>> only bullets: True; mentions eval: True
+
+===== HW6 Part 4 - verify_agent_md.py, FINAL (strict check, clarified AGENT.md) - 2026-10-15T23:17:20 =====
+Run at 2026-10-15T23:16:58 | runs per condition: 5
+
+[with_AGENT_md seed=9871] all_rules=True failed=[] behaviour_correct=True
+from typing import List, Dict
+
+def filter_and_sort_fixtures(fixtures: List[Dict], category: str) -> List[Dict]:
+    """Return the fixtures in the specified category, sorted by match_date ascending."""
+    filtered = [fixture for fixture in fixtures if fixture['category'].lower() == category.lower()]
+    return sorted(filtered, key=lambda x: x['match_date'])
+
+[with_AGENT_md seed=9872] all_rules=True failed=[] behaviour_correct=True
+from typing import List, Dict
+
+def filter_and_sort_fixtures(fixtures: List[Dict], category: str) -> List[Dict]:
+    """Return the fixtures in the specified category, sorted by match_date ascending."""
+    filtered = [fixture for fixture in fixtures if fixture['category'].lower() == category.lower()]
+    return sorted(filtered, key=lambda x: x['match_date'])
+
+[with_AGENT_md seed=9873] all_rules=True failed=[] behaviour_correct=True
+from typing import List, Dict
+
+def filter_and_sort_fixtures(fixtures: List[Dict], category: str) -> List[Dict]:
+    """Return the fixtures in the specified category, sorted by match_date ascending."""
+    filtered = [fixture for fixture in fixtures if fixture['category'].lower() == category.lower()]
+    return sorted(filtered, key=lambda x: x['match_date'])
+
+[with_AGENT_md seed=9874] all_rules=True failed=[] behaviour_correct=True
+from typing import List, Dict
+
+def filter_and_sort_fixtures(fixtures: List[Dict], category: str) -> List[Dict]:
+    """Return the fixtures in the specified category, sorted by match_date ascending."""
+    filtered = [fixture for fixture in fixtures if fixture['category'].lower() == category.lower()]
+    return sorted(filtered, key=lambda x: x['match_date'])
+
+[with_AGENT_md seed=9875] all_rules=True failed=[] behaviour_correct=True
+from typing import List, Dict
+
+def filter_and_sort_fixtures(fixtures: List[Dict], category: str) -> List[Dict]:
+    """Return the fixtures in the specified category, sorted by match_date ascending."""
+    filtered = [fixture for fixture in fixtures if fixture['category'].lower() == category.lower()]
+    return sorted(filtered, key=lambda x: x['match_date'])
+
+>>> with_AGENT_md: followed ALL rules in 5/5 runs; per-rule passes {'rule4_snake_case': 5, 'rule4_under_25_lines': 5, 'rule3_type_hints': 5, 'rule3_one_line_docstring': 5, 'rule6_no_eval_exec': 5, 'rule6_no_print': 5, 'rule6_no_bare_except': 5}; behaviour correct in 5/5
+
+[control_no_AGENT_md seed=9871] all_rules=False failed=['rule3_type_hints', 'rule3_one_line_docstring'] behaviour_correct=True
+def filter_and_sort_fixtures(fixtures, category):
+    filtered = [f for f in fixtures if f['category'].lower() == category.lower()]
+    sorted_fixtures = sorted(filtered, key=lambda x: x['match_date'])
+    return sorted_fixtures
+
+[control_no_AGENT_md seed=9872] all_rules=False failed=['rule3_type_hints', 'rule3_one_line_docstring'] behaviour_correct=True
+def filter_and_sort_fixtures(fixtures, category):
+    filtered = [f for f in fixtures if f['category'].lower() == category.lower()]
+    sorted_fixtures = sorted(filtered, key=lambda x: x['match_date'])
+    return sorted_fixtures
+
+[control_no_AGENT_md seed=9873] all_rules=False failed=['rule3_type_hints', 'rule3_one_line_docstring'] behaviour_correct=True
+def filter_and_sort_fixtures(fixtures, category):
+    filtered = [f for f in fixtures if f['category'].lower() == category.lower()]
+    sorted_fixtures = sorted(filtered, key=lambda x: x['match_date'])
+    return sorted_fixtures
+
+[control_no_AGENT_md seed=9874] all_rules=False failed=['rule3_type_hints', 'rule3_one_line_docstring'] behaviour_correct=True
+def filter_and_sort_fixtures(fixtures, category):
+    return sorted(
+        [f for f in fixtures if f['category'].lower() == category.lower()],
+        key=lambda x: x['match_date']
+    )
+
+[control_no_AGENT_md seed=9875] all_rules=False failed=['rule3_type_hints', 'rule3_one_line_docstring'] behaviour_correct=True
+def filter_and_sort_fixtures(fixtures, category):
+    filtered = [f for f in fixtures if f['category'].lower() == category.lower()]
+    sorted_fixtures = sorted(filtered, key=lambda x: x['match_date'])
+    return sorted_fixtures
+
+>>> control_no_AGENT_md: followed ALL rules in 0/5 runs; per-rule passes {'rule4_snake_case': 5, 'rule4_under_25_lines': 5, 'rule3_type_hints': 0, 'rule3_one_line_docstring': 0, 'rule6_no_eval_exec': 5, 'rule6_no_print': 5, 'rule6_no_bare_except': 5}; behaviour correct in 5/5
+
+Review-mode answer:
+- Uses `eval()` which is prohibited.
+>>> only bullets: True; mentions eval: True
+
+===== HW6 Part 4 - measure_memory_compare.py =====
+(1) tokens injected into EVERY prompt
+ stored items   file memory (whole file)   Mongo top-3 episodes
+           10                        323                     93
+           40                       1285                     93
+          100                       3210                     93
+          400                      13415                     93
+         1000                      33865                     93
+
+(2) time to fetch memory for one turn (median of 5; Mongo = load user's episodes + cosine top-3)
+     100 items: Mongo      7.9 ms | file load+parse   0.50 ms
+    1000 items: Mongo     72.0 ms | file load+parse   1.02 ms
+   10000 items: Mongo    593.0 ms | file load+parse   9.45 ms
+
+===== HW6 Part 4 - persistence_probe.py (server restarted between 'before' and 'after') =====
+##### BEFORE restart (23:18:44)
+BEFORE restart: {
+ "file_memory_entries": 6,
+ "file_memory_last_consolidated": "2026-10-15T22:51:12-07:00",
+ "file_memory_text_hash": "a0eda52f4b5119e6",
+ "mongo_messages_returned": 16,
+ "mongo_episodes_returned": 10,
+ "mongo_lifetime_summary_hash": "910a34c79c84570a",
+ "mongo_daily_counts": [
+  {
+   "date": "2026-10-15",
+   "count": 24
+  }
+ ],
+ "mongo_state_hash": "0475e27682b74987"
+}
+##### restarting server (23:18:46)
+##### AFTER restart (23:19:01)
+AFTER restart: {
+ "file_memory_entries": 6,
+ "file_memory_last_consolidated": "2026-10-15T22:51:12-07:00",
+ "file_memory_text_hash": "a0eda52f4b5119e6",
+ "mongo_messages_returned": 16,
+ "mongo_episodes_returned": 10,
+ "mongo_lifetime_summary_hash": "910a34c79c84570a",
+ "mongo_daily_counts": [
+  {
+   "date": "2026-10-15",
+   "count": 24
+  }
+ ],
+ "mongo_state_hash": "0475e27682b74987"
+}
+identical after restart: {
+ "file_memory_entries": true,
+ "file_memory_last_consolidated": true,
+ "file_memory_text_hash": true,
+ "mongo_messages_returned": true,
+ "mongo_episodes_returned": true,
+ "mongo_lifetime_summary_hash": true,
+ "mongo_daily_counts": true,
+ "mongo_state_hash": true
+}
+/dream right after restart (needs the in-process conversation buffer): no recent conversation to learn from
+RESULT: file facts + Mongo memory persisted; un-saved conversation buffer was lost
+EXIT=0
+live MEMORY.md hash after: e58c81edad7a0dc0

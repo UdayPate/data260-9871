@@ -44,3 +44,12 @@ def effective_memory_params() -> tuple[int, int]:
     if settings["POLICY"] == "compress":
         return settings["COMPRESS_KEEP_LAST"], settings["COMPRESS_SUMMARY_EVERY"]
     return settings["SHORT_TERM_N"], settings["SUMMARIZE_EVERY_USER_MSGS"]
+
+# ---- HW6 Part 4: file-based memory (AGENT.md + MEMORY.md at the repo root)
+_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+AGENT_PATH = os.environ.get("AGENT_PATH", os.path.join(_REPO_ROOT, "AGENT.md"))
+MEMORY_PATH = os.environ.get("FILE_MEMORY_PATH", os.path.join(_REPO_ROOT, "MEMORY.md"))
+MEMORY_BACKUP_DIR = os.environ.get(
+    "FILE_MEMORY_BACKUP_DIR", os.path.join(os.path.dirname(os.path.abspath(__file__)), ".memory_backups"))
+MEMORY_MAX_LINES = 40      # consolidate when MEMORY.md has MORE than this many entries ...
+MEMORY_MAX_AGE_HOURS = 24  # ... or its last-consolidated time is older than this

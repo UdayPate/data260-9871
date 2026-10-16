@@ -1,0 +1,68 @@
+{
+ "duplicate_groups": [
+  [
+   "[2026-09-05] The local model is qwen3:8b served by Ollama.",
+   "[2026-09-19] The local model is qwen3:8b served by Ollama.",
+   "[2026-10-02] Model: qwen3:8b via Ollama (local).",
+   "[2026-10-07] We use the qwen3:8b model from Ollama locally."
+  ],
+  [
+   "[2026-09-10] The MongoDB database for HW6 is s9871_doc.",
+   "[2026-09-30] HW6 uses a MongoDB database called s9871_doc.",
+   "[2026-10-06] MongoDB database name: s9871_doc.",
+   "[2026-10-10] The Mongo database is named s9871_doc."
+  ],
+  [
+   "[2026-09-12] Never run git commit or git push on the user's behalf.",
+   "[2026-09-27] Do not run git add, git commit or git push for the user.",
+   "[2026-10-08] The user runs all git commands; the assistant must not."
+  ],
+  [
+   "[2026-09-14] Final answers must never contain fabricated numbers.",
+   "[2026-10-01] Do not invent or fabricate numbers in results.",
+   "[2026-10-11] Every figure in a report must come from a real run."
+  ],
+  [
+   "[2026-09-17] Collaborator access is needed for Sbnikitha and supriyaselvanganesan.",
+   "[2026-10-03] Sbnikitha and supriyaselvanganesan must keep access to the repo.",
+   "[2026-10-12] Make sure the two collaborators Sbnikitha and supriyaselvanganesan can open the repo."
+  ],
+  [
+   "[2026-09-20] Terminal screenshots must show the user's name.",
+   "[2026-10-05] Every terminal screenshot needs the user's name visible.",
+   "[2026-10-15] The user's name must be clearly visible in any terminal screenshot."
+  ],
+  [
+   "[2026-09-22] Keep dedicated terminal windows open for long-running servers.",
+   "[2026-10-13] Long-running servers need their own terminal window kept open.",
+   "[2026-10-14] Do not reuse one terminal window for the long-running servers."
+  ]
+ ],
+ "unique_count": 22,
+ "conflicts": [
+  {
+   "older": "[2026-09-23] The coach prefers reminders by text message.",
+   "newer": "[2026-10-01] The coach prefers reminders by email, not text message.",
+   "kind": "newer-wins",
+   "correct_resolution": "keep the newer line, record the older as superseded"
+  },
+  {
+   "older": "[2026-09-25] The HW5 relational database is named s9871_db.",
+   "newer": "[2026-10-02] The HW5 relational database is named s9871_rel.",
+   "kind": "newer-wins",
+   "correct_resolution": "keep the newer line, record the older as superseded"
+  },
+  {
+   "older": "[2026-09-29] The local model for agent work is qwen3:8b.",
+   "newer": "[2026-10-14] Considering switching the local model to llama3 (no decision made yet).",
+   "kind": "trap-newer-is-tentative",
+   "correct_resolution": "KEEP qwen3:8b (the newer line is only a tentative consideration); note llama3 as under consideration"
+  },
+  {
+   "older": "[2026-10-03] Saturday league games start at 9am.",
+   "newer": "[2026-10-03] Saturday league games start at 10am.",
+   "kind": "ambiguous-same-day",
+   "correct_resolution": "cannot be resolved from the file: keep BOTH and flag for the user"
+  }
+ ]
+}

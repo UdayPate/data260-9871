@@ -1,0 +1,55 @@
+<!-- last-consolidated: 2026-10-15T09:00:00-07:00 -->
+# Project memory
+- [2026-09-01] The user's name is Uday Patel and the course is DATA-260 at SJSU.
+- [2026-09-01] The assigned domain is DOMAIN_ID 7, community sports league fixtures.
+- [2026-09-02] SEED is 9871 and VERIFY_SEED is 269871.
+- [2026-09-02] MySQL 8 is the relational database engine used since HW4.
+- [2026-09-03] The frontend is React with Redux Toolkit and Vite on port 5173.
+- [2026-09-04] The user's laptop is a Lenovo Legion Slim 5 with an RTX 4060 8GB GPU.
+- [2026-09-04] Embeddings use sentence-transformers all-MiniLM-L6-v2.
+- [2026-09-05] The local model is qwen3:8b served by Ollama.
+- [2026-09-06] Reports are a single self-contained .tex file compiled with pdflatex.
+- [2026-09-07] The GitHub repository is UdayPate/data260-9871.
+- [2026-09-08] mysqldump on MySQL 8 needs --no-tablespaces.
+- [2026-09-09] Read files with encoding utf-8 on Windows to avoid UnicodeDecodeError.
+- [2026-09-10] The MongoDB database for HW6 is s9871_doc.
+- [2026-09-11] The Part 1 collection is named fixtures with Soccer, Basketball, Volleyball and Cricket categories.
+- [2026-09-12] Never run git commit or git push on the user's behalf.
+- [2026-09-13] SQLAlchemy Connection.info persists across pooled connection reuse.
+- [2026-09-14] Final answers must never contain fabricated numbers.
+- [2026-09-15] Playwright is used to drive a real headless browser for UI tests.
+- [2026-09-16] Postman screenshots must be real images, never typed text.
+- [2026-09-17] Collaborator access is needed for Sbnikitha and supriyaselvanganesan.
+- [2026-09-18] The FastAPI backend serves on PORT_BASE 8871.
+- [2026-09-19] The local model is qwen3:8b served by Ollama.
+- [2026-09-20] Terminal screenshots must show the user's name.
+- [2026-09-21] The Redis-free design stores sessions server-side in MySQL.
+- [2026-09-22] Keep dedicated terminal windows open for long-running servers.
+- [2026-09-23] The coach prefers reminders by text message.
+- [2026-09-24] Each homework report lives in its own reports/hwNN folder.
+- [2026-09-25] The HW5 relational database is named s9871_db.
+- [2026-09-26] The mcp dev command needs --with typer and forward slashes in the file path.
+- [2026-09-27] Do not run git add, git commit or git push for the user.
+- [2026-09-28] Ollama runs on the Windows side, not inside WSL.
+- [2026-09-29] The local model for agent work is qwen3:8b.
+- [2026-09-30] HW6 uses a MongoDB database called s9871_doc.
+- [2026-10-01] Do not invent or fabricate numbers in results.
+- [2026-10-01] The coach prefers reminders by email, not text message.
+- [2026-10-02] Model: qwen3:8b via Ollama (local).
+- [2026-10-02] The HW5 relational database is named s9871_rel.
+- [2026-10-03] Sbnikitha and supriyaselvanganesan must keep access to the repo.
+- [2026-10-03] Saturday league games start at 9am.
+- [2026-10-03] Saturday league games start at 10am.
+- [2026-10-04] Summaries are generated every 6 user messages in the MongoDB memory system.
+- [2026-10-05] Every terminal screenshot needs the user's name visible.
+- [2026-10-06] MongoDB database name: s9871_doc.
+- [2026-10-07] We use the qwen3:8b model from Ollama locally.
+- [2026-10-08] The user runs all git commands; the assistant must not.
+- [2026-10-09] Episodic memory keeps up to 3 facts per user message with an importance score.
+- [2026-10-10] The Mongo database is named s9871_doc.
+- [2026-10-11] Every figure in a report must come from a real run.
+- [2026-10-12] Make sure the two collaborators Sbnikitha and supriyaselvanganesan can open the repo.
+- [2026-10-13] Long-running servers need their own terminal window kept open.
+- [2026-10-14] Do not reuse one terminal window for the long-running servers.
+- [2026-10-14] Considering switching the local model to llama3 (no decision made yet).
+- [2026-10-15] The user's name must be clearly visible in any terminal screenshot.

@@ -1,0 +1,322 @@
+{
+ "generated": "2026-10-15T23:16:58",
+ "task": "Write a Python function that takes a list of fixture dictionaries (each has the keys 'fixture_name', 'category' and 'match_date') and a category string, and returns the fixtures in that category (ignoring upper/lower case), sorted by 'match_date' ascending. Reply with only the code in a single ```python block.",
+ "runs_per_condition": 5,
+ "conditions": {
+  "with_AGENT_md": {
+   "runs": [
+    {
+     "seed": 9871,
+     "code": "from typing import List, Dict\n\ndef filter_and_sort_fixtures(fixtures: List[Dict], category: str) -> List[Dict]:\n    \"\"\"Return the fixtures in the specified category, sorted by match_date ascending.\"\"\"\n    filtered = [fixture for fixture in fixtures if fixture['category'].lower() == category.lower()]\n    return sorted(filtered, key=lambda x: x['match_date'])",
+     "rules": {
+      "parses": true,
+      "n_functions": 1,
+      "names": [
+       "filter_and_sort_fixtures"
+      ],
+      "rule4_snake_case": true,
+      "rule4_under_25_lines": true,
+      "max_function_lines": 4,
+      "rule3_type_hints": true,
+      "rule3_one_line_docstring": true,
+      "rule6_no_eval_exec": true,
+      "rule6_no_print": true,
+      "rule6_no_bare_except": true,
+      "all_rules_followed": true
+     },
+     "behaviour": {
+      "executed": true,
+      "result_names": [
+       "C",
+       "A"
+      ],
+      "correct": true
+     }
+    },
+    {
+     "seed": 9872,
+     "code": "from typing import List, Dict\n\ndef filter_and_sort_fixtures(fixtures: List[Dict], category: str) -> List[Dict]:\n    \"\"\"Return the fixtures in the specified category, sorted by match_date ascending.\"\"\"\n    filtered = [fixture for fixture in fixtures if fixture['category'].lower() == category.lower()]\n    return sorted(filtered, key=lambda x: x['match_date'])",
+     "rules": {
+      "parses": true,
+      "n_functions": 1,
+      "names": [
+       "filter_and_sort_fixtures"
+      ],
+      "rule4_snake_case": true,
+      "rule4_under_25_lines": true,
+      "max_function_lines": 4,
+      "rule3_type_hints": true,
+      "rule3_one_line_docstring": true,
+      "rule6_no_eval_exec": true,
+      "rule6_no_print": true,
+      "rule6_no_bare_except": true,
+      "all_rules_followed": true
+     },
+     "behaviour": {
+      "executed": true,
+      "result_names": [
+       "C",
+       "A"
+      ],
+      "correct": true
+     }
+    },
+    {
+     "seed": 9873,
+     "code": "from typing import List, Dict\n\ndef filter_and_sort_fixtures(fixtures: List[Dict], category: str) -> List[Dict]:\n    \"\"\"Return the fixtures in the specified category, sorted by match_date ascending.\"\"\"\n    filtered = [fixture for fixture in fixtures if fixture['category'].lower() == category.lower()]\n    return sorted(filtered, key=lambda x: x['match_date'])",
+     "rules": {
+      "parses": true,
+      "n_functions": 1,
+      "names": [
+       "filter_and_sort_fixtures"
+      ],
+      "rule4_snake_case": true,
+      "rule4_under_25_lines": true,
+      "max_function_lines": 4,
+      "rule3_type_hints": true,
+      "rule3_one_line_docstring": true,
+      "rule6_no_eval_exec": true,
+      "rule6_no_print": true,
+      "rule6_no_bare_except": true,
+      "all_rules_followed": true
+     },
+     "behaviour": {
+      "executed": true,
+      "result_names": [
+       "C",
+       "A"
+      ],
+      "correct": true
+     }
+    },
+    {
+     "seed": 9874,
+     "code": "from typing import List, Dict\n\ndef filter_and_sort_fixtures(fixtures: List[Dict], category: str) -> List[Dict]:\n    \"\"\"Return the fixtures in the specified category, sorted by match_date ascending.\"\"\"\n    filtered = [fixture for fixture in fixtures if fixture['category'].lower() == category.lower()]\n    return sorted(filtered, key=lambda x: x['match_date'])",
+     "rules": {
+      "parses": true,
+      "n_functions": 1,
+      "names": [
+       "filter_and_sort_fixtures"
+      ],
+      "rule4_snake_case": true,
+      "rule4_under_25_lines": true,
+      "max_function_lines": 4,
+      "rule3_type_hints": true,
+      "rule3_one_line_docstring": true,
+      "rule6_no_eval_exec": true,
+      "rule6_no_print": true,
+      "rule6_no_bare_except": true,
+      "all_rules_followed": true
+     },
+     "behaviour": {
+      "executed": true,
+      "result_names": [
+       "C",
+       "A"
+      ],
+      "correct": true
+     }
+    },
+    {
+     "seed": 9875,
+     "code": "from typing import List, Dict\n\ndef filter_and_sort_fixtures(fixtures: List[Dict], category: str) -> List[Dict]:\n    \"\"\"Return the fixtures in the specified category, sorted by match_date ascending.\"\"\"\n    filtered = [fixture for fixture in fixtures if fixture['category'].lower() == category.lower()]\n    return sorted(filtered, key=lambda x: x['match_date'])",
+     "rules": {
+      "parses": true,
+      "n_functions": 1,
+      "names": [
+       "filter_and_sort_fixtures"
+      ],
+      "rule4_snake_case": true,
+      "rule4_under_25_lines": true,
+      "max_function_lines": 4,
+      "rule3_type_hints": true,
+      "rule3_one_line_docstring": true,
+      "rule6_no_eval_exec": true,
+      "rule6_no_print": true,
+      "rule6_no_bare_except": true,
+      "all_rules_followed": true
+     },
+     "behaviour": {
+      "executed": true,
+      "result_names": [
+       "C",
+       "A"
+      ],
+      "correct": true
+     }
+    }
+   ],
+   "followed_all_rules": 5,
+   "per_rule_pass_counts": {
+    "rule4_snake_case": 5,
+    "rule4_under_25_lines": 5,
+    "rule3_type_hints": 5,
+    "rule3_one_line_docstring": 5,
+    "rule6_no_eval_exec": 5,
+    "rule6_no_print": 5,
+    "rule6_no_bare_except": 5
+   },
+   "behaviour_correct": 5
+  },
+  "control_no_AGENT_md": {
+   "runs": [
+    {
+     "seed": 9871,
+     "code": "def filter_and_sort_fixtures(fixtures, category):\n    filtered = [f for f in fixtures if f['category'].lower() == category.lower()]\n    sorted_fixtures = sorted(filtered, key=lambda x: x['match_date'])\n    return sorted_fixtures",
+     "rules": {
+      "parses": true,
+      "n_functions": 1,
+      "names": [
+       "filter_and_sort_fixtures"
+      ],
+      "rule4_snake_case": true,
+      "rule4_under_25_lines": true,
+      "max_function_lines": 4,
+      "rule3_type_hints": false,
+      "rule3_one_line_docstring": false,
+      "rule6_no_eval_exec": true,
+      "rule6_no_print": true,
+      "rule6_no_bare_except": true,
+      "all_rules_followed": false
+     },
+     "behaviour": {
+      "executed": true,
+      "result_names": [
+       "C",
+       "A"
+      ],
+      "correct": true
+     }
+    },
+    {
+     "seed": 9872,
+     "code": "def filter_and_sort_fixtures(fixtures, category):\n    filtered = [f for f in fixtures if f['category'].lower() == category.lower()]\n    sorted_fixtures = sorted(filtered, key=lambda x: x['match_date'])\n    return sorted_fixtures",
+     "rules": {
+      "parses": true,
+      "n_functions": 1,
+      "names": [
+       "filter_and_sort_fixtures"
+      ],
+      "rule4_snake_case": true,
+      "rule4_under_25_lines": true,
+      "max_function_lines": 4,
+      "rule3_type_hints": false,
+      "rule3_one_line_docstring": false,
+      "rule6_no_eval_exec": true,
+      "rule6_no_print": true,
+      "rule6_no_bare_except": true,
+      "all_rules_followed": false
+     },
+     "behaviour": {
+      "executed": true,
+      "result_names": [
+       "C",
+       "A"
+      ],
+      "correct": true
+     }
+    },
+    {
+     "seed": 9873,
+     "code": "def filter_and_sort_fixtures(fixtures, category):\n    filtered = [f for f in fixtures if f['category'].lower() == category.lower()]\n    sorted_fixtures = sorted(filtered, key=lambda x: x['match_date'])\n    return sorted_fixtures",
+     "rules": {
+      "parses": true,
+      "n_functions": 1,
+      "names": [
+       "filter_and_sort_fixtures"
+      ],
+      "rule4_snake_case": true,
+      "rule4_under_25_lines": true,
+      "max_function_lines": 4,
+      "rule3_type_hints": false,
+      "rule3_one_line_docstring": false,
+      "rule6_no_eval_exec": true,
+      "rule6_no_print": true,
+      "rule6_no_bare_except": true,
+      "all_rules_followed": false
+     },
+     "behaviour": {
+      "executed": true,
+      "result_names": [
+       "C",
+       "A"
+      ],
+      "correct": true
+     }
+    },
+    {
+     "seed": 9874,
+     "code": "def filter_and_sort_fixtures(fixtures, category):\n    return sorted(\n        [f for f in fixtures if f['category'].lower() == category.lower()],\n        key=lambda x: x['match_date']\n    )",
+     "rules": {
+      "parses": true,
+      "n_functions": 1,
+      "names": [
+       "filter_and_sort_fixtures"
+      ],
+      "rule4_snake_case": true,
+      "rule4_under_25_lines": true,
+      "max_function_lines": 5,
+      "rule3_type_hints": false,
+      "rule3_one_line_docstring": false,
+      "rule6_no_eval_exec": true,
+      "rule6_no_print": true,
+      "rule6_no_bare_except": true,
+      "all_rules_followed": false
+     },
+     "behaviour": {
+      "executed": true,
+      "result_names": [
+       "C",
+       "A"
+      ],
+      "correct": true
+     }
+    },
+    {
+     "seed": 9875,
+     "code": "def filter_and_sort_fixtures(fixtures, category):\n    filtered = [f for f in fixtures if f['category'].lower() == category.lower()]\n    sorted_fixtures = sorted(filtered, key=lambda x: x['match_date'])\n    return sorted_fixtures",
+     "rules": {
+      "parses": true,
+      "n_functions": 1,
+      "names": [
+       "filter_and_sort_fixtures"
+      ],
+      "rule4_snake_case": true,
+      "rule4_under_25_lines": true,
+      "max_function_lines": 4,
+      "rule3_type_hints": false,
+      "rule3_one_line_docstring": false,
+      "rule6_no_eval_exec": true,
+      "rule6_no_print": true,
+      "rule6_no_bare_except": true,
+      "all_rules_followed": false
+     },
+     "behaviour": {
+      "executed": true,
+      "result_names": [
+       "C",
+       "A"
+      ],
+      "correct": true
+     }
+    }
+   ],
+   "followed_all_rules": 0,
+   "per_rule_pass_counts": {
+    "rule4_snake_case": 5,
+    "rule4_under_25_lines": 5,
+    "rule3_type_hints": 0,
+    "rule3_one_line_docstring": 0,
+    "rule6_no_eval_exec": 5,
+    "rule6_no_print": 5,
+    "rule6_no_bare_except": 5
+   },
+   "behaviour_correct": 5
+  }
+ },
+ "review_mode": {
+  "answer": "- Uses `eval()` which is prohibited.",
+  "only_bullets": true,
+  "mentions_eval": true
+ }
+}

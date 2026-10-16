@@ -17,6 +17,7 @@ from pymongo.errors import PyMongoError
 import config
 import db
 import chat_routes
+import file_routes
 import routes
 
 log = logging.getLogger("doc_api")
@@ -77,6 +78,7 @@ def chat_page():
 
 app.include_router(routes.router)
 app.include_router(chat_routes.router)
+app.include_router(file_routes.router)
 
 if __name__ == "__main__":
     import uvicorn

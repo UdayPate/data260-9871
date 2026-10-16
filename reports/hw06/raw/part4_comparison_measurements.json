@@ -1,0 +1,47 @@
+{
+ "generated": "2026-10-15T23:17:30",
+ "prompt_tokens": [
+  {
+   "stored_items": 10,
+   "file_memory_tokens_per_turn": 323,
+   "mongo_top3_episode_tokens_per_turn": 93
+  },
+  {
+   "stored_items": 40,
+   "file_memory_tokens_per_turn": 1285,
+   "mongo_top3_episode_tokens_per_turn": 93
+  },
+  {
+   "stored_items": 100,
+   "file_memory_tokens_per_turn": 3210,
+   "mongo_top3_episode_tokens_per_turn": 93
+  },
+  {
+   "stored_items": 400,
+   "file_memory_tokens_per_turn": 13415,
+   "mongo_top3_episode_tokens_per_turn": 93
+  },
+  {
+   "stored_items": 1000,
+   "file_memory_tokens_per_turn": 33865,
+   "mongo_top3_episode_tokens_per_turn": 93
+  }
+ ],
+ "retrieval_time": [
+  {
+   "stored_items": 100,
+   "mongo_retrieval_ms_median": 7.9,
+   "file_load_parse_ms_median": 0.5
+  },
+  {
+   "stored_items": 1000,
+   "mongo_retrieval_ms_median": 72.0,
+   "file_load_parse_ms_median": 1.02
+  },
+  {
+   "stored_items": 10000,
+   "mongo_retrieval_ms_median": 593.0,
+   "file_load_parse_ms_median": 9.45
+  }
+ ]
+}

@@ -1,0 +1,86 @@
+{
+ "original": {
+  "file_lines": 55,
+  "entries": 54,
+  "fact_bullets": 53
+ },
+ "consolidated": {
+  "file_lines": 37,
+  "entries": 36,
+  "plain_fact_bullets": 31,
+  "conflict_records": 3
+ },
+ "duplicate_groups": [
+  {
+   "lines_in_group": 4,
+   "survivors": 1,
+   "survivor_is_newest": true,
+   "example": "The local model is qwen3:8b served by Ollama."
+  },
+  {
+   "lines_in_group": 4,
+   "survivors": 1,
+   "survivor_is_newest": true,
+   "example": "The MongoDB database for HW6 is s9871_doc."
+  },
+  {
+   "lines_in_group": 3,
+   "survivors": 1,
+   "survivor_is_newest": true,
+   "example": "Never run git commit or git push on the user's behalf."
+  },
+  {
+   "lines_in_group": 3,
+   "survivors": 2,
+   "survivor_is_newest": null,
+   "example": "Final answers must never contain fabricated numbers."
+  },
+  {
+   "lines_in_group": 3,
+   "survivors": 1,
+   "survivor_is_newest": true,
+   "example": "Collaborator access is needed for Sbnikitha and supriyase"
+  },
+  {
+   "lines_in_group": 3,
+   "survivors": 1,
+   "survivor_is_newest": true,
+   "example": "Terminal screenshots must show the user's name."
+  },
+  {
+   "lines_in_group": 3,
+   "survivors": 1,
+   "survivor_is_newest": true,
+   "example": "Keep dedicated terminal windows open for long-running ser"
+  }
+ ],
+ "conflicts": [
+  {
+   "kind": "newer-wins",
+   "ok": true,
+   "verdict": "CORRECT: resolved, newer line kept, older recorded"
+  },
+  {
+   "kind": "newer-wins",
+   "ok": true,
+   "verdict": "CORRECT: resolved, newer line kept, older recorded"
+  },
+  {
+   "kind": "trap-newer-is-tentative",
+   "ok": false,
+   "verdict": "NOT FLAGGED: both facts retained as plain lines (qwen3:8b kept, llama3 still marked tentative) - nothing wrong was decided and nothing was lost, but the contradiction was not recorded"
+  },
+  {
+   "kind": "ambiguous-same-day",
+   "ok": true,
+   "verdict": "CORRECT: flagged unresolved for the user, both kept"
+  }
+ ],
+ "duplicate_groups_fully_merged": "6/7",
+ "contradictions_correctly_handled": "3/4",
+ "contradiction_resolved_incorrectly": [],
+ "contradiction_not_flagged": [
+  "trap-newer-is-tentative"
+ ],
+ "unique_facts_lost": []
+}
