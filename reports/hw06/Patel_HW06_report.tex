@@ -42,15 +42,18 @@ DOMAIN\_ID & 7 -- Community sports league fixtures \\\hline
 \textbf{Hardware:} Lenovo Legion Slim 5 16" (Ryzen 5 7640HS, 16GB RAM, RTX 4060 8GB, 512GB SSD). \\
 \textbf{Local model used:} qwen3:8b via Ollama (thinking disabled, temperature 0.3, sampling seed 9871) for chat replies, summaries, episode extraction and memory consolidation; sentence-transformers/all-MiniLM-L6-v2 for episode embeddings. \\
 \textbf{Repository:} \url{https://github.com/UdayPate/data260-9871} \\
-\textbf{Tagged commit:} PLACEHOLDER\_HASH (to be filled in after the final commit and hw6 tag) \\
-{\footnotesize\url{https://github.com/UdayPate/data260-9871/tree/PLACEHOLDER_HASH}} \\
+\textbf{Tagged commit:} 9878c4b00143c6853f6903365aa573f82280948d (tag: hw6) \\
+{\footnotesize\url{https://github.com/UdayPate/data260-9871/tree/9878c4b00143c6853f6903365aa573f82280948d}} \\
 \textbf{Collaborator access:} confirmed working for Sbnikitha and supriyaselvanganesan.
 
 \section*{Part 1 -- MongoDB Document API}
 Added a MongoDB-backed document view of the fixtures domain in the shared \verb|code/doc_api/| package (separate files: \verb|config.py|, \verb|db.py| PyMongo connection, \verb|schemas.py| Pydantic models, \verb|routes.py| handlers, \verb|main.py| server). Database \verb|s9871_doc|, collection \verb|fixtures|.
+
 \subsection*{I. Database}
 Required short text field (max 100), optional description, two constrained fields (\verb|status| with default \verb|scheduled|, \verb|category| with four sports), a required date/time, and automatic created/updated timestamps. Validation is enforced twice: by Pydantic in the API and by a MongoDB \verb|$jsonSchema| validator in the database itself.
+
 \textbf{Connection and settings.} \verb|config.py| holds the fixed values, \verb|db.py| creates one shared PyMongo client and installs the collection validator plus indexes at startup (\verb|init_db| is idempotent: it creates the collection with the validator, or updates it with \verb|collMod| if it already exists). \verb|tz_aware=True| makes dates round-trip as UTC.
+
 \begingroup\lstset{basicstyle=\ttfamily\scriptsize}
 \begin{lstlisting}
 SID4 = "9871"
@@ -99,6 +102,7 @@ def init_db() -> None:
 \end{lstlisting}
 \endgroup
 \textbf{Pydantic models} (the first line of defence: required fields, length limits, enums, date parsing, and \verb|extra=forbid| to reject unknown fields):
+
 \begingroup\lstset{basicstyle=\ttfamily\scriptsize}
 \begin{lstlisting}
 class Category(str, Enum):
@@ -142,6 +146,7 @@ class FixtureOut(BaseModel):
 \end{lstlisting}
 \endgroup
 \textbf{Database-level validator} (the backstop: MongoDB itself rejects a bad document even if something bypasses the API):
+
 \begingroup\lstset{basicstyle=\ttfamily\scriptsize}
 \begin{lstlisting}
 FIXTURE_VALIDATOR = {
@@ -172,7 +177,9 @@ FIXTURE_VALIDATOR = {
 \end{center}
 \subsection*{II. API implementation}
 Full CRUD with proper status codes (201, 200, 204, 404 unknown id, 400 malformed id, 422 invalid data, 503 database error, 500 unexpected). CORS middleware is added in \verb|main.py|; JSON request bodies are parsed by FastAPI/Pydantic.
+
 The handlers share three small helpers: \verb|_oid| turns a bad id into a 400, \verb|_out| maps a Mongo document to the response model, and \verb|_payload| builds the stored document. The five CRUD handlers:
+
 \begingroup\lstset{basicstyle=\ttfamily\scriptsize}
 \begin{lstlisting}
 def _oid(raw: str) -> ObjectId:
@@ -238,6 +245,7 @@ def delete_fixture(fixture_id: str):
 \end{lstlisting}
 \endgroup
 Server configuration (\verb|main.py|): startup creates the collections, CORS middleware, and the handlers that turn database failures into 503 and anything unexpected into a 500 instead of a stack trace.
+
 \begingroup\lstset{basicstyle=\ttfamily\scriptsize}
 \begin{lstlisting}
 async def lifespan(_app: FastAPI):
@@ -293,6 +301,7 @@ def health():
 \end{center}
 \subsection*{III. Data validation}
 Invalid data (missing field, 101-character name, bad enum, bad date, wrong type, unknown extra field, malformed JSON) returns 422 with a clear per-field message (\verb|main.py| flattens Pydantic's errors into \verb|[{field, message, type}]|).
+
 \begingroup\lstset{basicstyle=\ttfamily\footnotesize}
 \begin{lstlisting}
 async def validation_handler(request: Request, exc: RequestValidationError):
@@ -314,6 +323,7 @@ async def validation_handler(request: Request, exc: RequestValidationError):
 \small \textit{Figure 9: GET on the deleted id: 404 ``fixture not found''.}
 \end{center}
 The live test (\verb|test_part1.py|, real HTTP, then MongoDB checked directly) passed all 26 checks, including a direct insert of a 101-character name being rejected by the database validator itself:
+
 \begingroup\lstset{basicstyle=\ttfamily\scriptsize}
 \begin{lstlisting}
 [PASS] create returns 201
@@ -347,6 +357,7 @@ The live test (\verb|test_part1.py|, real HTTP, then MongoDB checked directly) p
 \endgroup
 \section*{Part 2 -- Short-, Long-, and Episodic Memory}
 Same database \verb|s9871_doc|, new collections \verb|messages|, \verb|summaries|, \verb|episodes| (Part 1's collection is unchanged). Short-term memory is a sliding window of the last \verb|SHORT_TERM_N| messages; long-term memory is a session summary every \verb|SUMMARIZE_EVERY_USER_MSGS| user messages plus a lifetime summary (\verb|scope='user'|, \verb|session_id=null|) condensed from session summaries; episodic memory stores up to 3 facts per user message with an importance score and a 384-float embedding, retrieved by cosine similarity. All model calls go through the HW1 adapter \verb|src/model_client.py|.
+
 \subsection*{Collections}
 \begingroup\lstset{basicstyle=\ttfamily\scriptsize}
 \begin{lstlisting}
@@ -398,6 +409,7 @@ def _init_memory_collections(d) -> None:
 \end{center}
 \subsection*{Short-term memory, summaries and the model adapter}
 Short-term memory is a query for the last N messages of the session (oldest first), excluding the message just saved because it is passed to the model separately. The newest summary of each scope is fetched the same way. All model calls go through \verb|llm.complete|, a thin wrapper over the HW1 adapter (\verb|ModelClient|) that adds a lock, token/latency measurement and a per-request call log; the only change to the HW1 adapter was two optional constructor arguments (\verb|reasoning|, \verb|seed|) whose defaults keep earlier homeworks unchanged.
+
 \begingroup\lstset{basicstyle=\ttfamily\scriptsize}
 \begin{lstlisting}
 def save_message(user_id: str, session_id: str, role: str, content: str) -> dict:
@@ -479,6 +491,7 @@ def __init__(self, model="qwen3:8b", temperature=0.7, reasoning=None, seed=None)
 \endgroup
 \subsection*{Endpoints}
 The request model rejects empty messages, bad user ids and unknown fields (all return 422):
+
 \begingroup\lstset{basicstyle=\ttfamily\scriptsize}
 \begin{lstlisting}
 USER_ID_PATTERN = r"^[A-Za-z0-9_.@-]{1,64}$"
@@ -494,6 +507,7 @@ class ChatRequest(BaseModel):
 \end{lstlisting}
 \endgroup
 \texttt{POST /api/chat} (the parts after the memory pipeline that only record Part 3's cost data are included too):
+
 \begingroup\lstset{basicstyle=\ttfamily\scriptsize}
 \begin{lstlisting}
 def chat(req: ChatRequest):
@@ -572,6 +586,7 @@ def chat(req: ChatRequest):
 \end{lstlisting}
 \endgroup
 \texttt{GET /api/memory/\{user\_id\}} and \texttt{GET /api/aggregate/\{user\_id\}}:
+
 \begingroup\lstset{basicstyle=\ttfamily\scriptsize}
 \begin{lstlisting}
 def get_memory(user_id: str):
@@ -609,6 +624,7 @@ def aggregate(user_id: str):
 \endgroup
 \subsection*{Memory logic}
 Episode extraction (the model returns facts, the code parses and embeds them), embedding and cosine retrieval, the summarisation trigger, and prompt assembly:
+
 \begingroup\lstset{basicstyle=\ttfamily\scriptsize}
 \begin{lstlisting}
 SYSTEM_PRIMER = (
@@ -693,6 +709,7 @@ def cosine_top_k(query_vec: list[float], candidates: list[dict], k: int) -> list
 \end{lstlisting}
 \endgroup
 Summaries: every M user messages a session summary is written (bullets only, updating the previous one), and every second session summary is condensed into the lifetime summary. \verb|clean_bullets| drops model commentary.
+
 \begingroup\lstset{basicstyle=\ttfamily\scriptsize}
 \begin{lstlisting}
 def clean_bullets(text: str) -> str:
@@ -751,6 +768,7 @@ def maybe_summarize(user_id: str, session_id: str, every: int | None = None) -> 
 \end{lstlisting}
 \endgroup
 Prompt assembly (system primer + long-term summaries, short-term window, current message, then episodic facts); each component is also returned separately so Part 3 can count its tokens:
+
 \begingroup\lstset{basicstyle=\ttfamily\scriptsize}
 \begin{lstlisting}
 def build_prompt(window: list[dict], session_summary: str | None,
@@ -788,6 +806,7 @@ def build_prompt(window: list[dict], session_summary: str | None,
 \small \textit{Figure 13: Mini chat page (\texttt{/chat}) driven by Playwright: 6 messages, replies, and the memory used for the last turn (10 short-term messages, 3 episodic facts with similarity scores).}
 \end{center}
 \texttt{GET /api/memory/uday\_demo} (trimmed for length; the full 16-message JSON is in \url{raw/part2_memory_uday_demo.json}):
+
 \begingroup\lstset{basicstyle=\ttfamily\scriptsize}
 \begin{lstlisting}
 {
@@ -840,6 +859,7 @@ def build_prompt(window: list[dict], session_summary: str | None,
 \small \textit{Figure 14: Postman: GET /api/memory/uday\_demo -- 200 OK (top of the JSON; full response in the raw file).}
 \end{center}
 \texttt{GET /api/aggregate/uday\_demo}:
+
 \begingroup\lstset{basicstyle=\ttfamily\footnotesize}
 \begin{lstlisting}
 {
@@ -859,10 +879,13 @@ def build_prompt(window: list[dict], session_summary: str | None,
 \small \textit{Figure 15: Postman: GET /api/aggregate/uday\_demo -- daily counts and the most recent summaries (dates are UTC).}
 \end{center}
 Two bugs were found by reading the transcripts of a run that had passed all 17 checks, and fixed: the extractor stored ``the user's team is the San Jose Tigers'' (they were the rival), and a leaked model comment ended the lifetime summary. After the prompt fixes the same conversation stored ``the user's rival/opponent is San Jose Tigers'' and the final recall was correct (\verb|RUN_LOG.txt|, runs 1--3).
+
 \section*{Part 3 -- What Memory Costs}
 \subsection*{1. Logging memory usage}
 Every \verb|/api/chat| request writes one row to a \verb|usage_log| collection (and returns it): prompt and completion tokens of the reply call and of all model calls in the request, tokens per prompt component (counted with the Qwen3 tokenizer; the remainder is reported as chat-template overhead), and latency. Raw results: \verb|raw/part3_turns.csv| (360 rows).
+
 Ollama only reports one prompt-token total per call, so each component's text is counted with the Qwen3 tokenizer and the remainder is the chat-template overhead:
+
 \begingroup\lstset{basicstyle=\ttfamily\scriptsize}
 \begin{lstlisting}
 def count(text: str) -> int:
@@ -914,6 +937,7 @@ turn,reply_prompt_tokens,reply_completion_tokens,total_prompt_tokens,tok_system_
 \endgroup
 \subsection*{2. Memory probes}
 \verb|memory_probes.yaml| was written before any sweep: five fixed questions, expected answers, deterministic keyword matching, and a 1--5 rubric. The 30-message conversation plants the five facts at turns 1, 4, 8, 15 and 23. (One edit was made after the smoke test: the P5 contradiction phrases were widened.)
+
 \begingroup\lstset{basicstyle=\ttfamily\tiny}
 \begin{lstlisting}
 # DATA-260 HW6 Part 3 - memory probes (SID4 9871, Domain 7: community sports league fixtures)
@@ -984,6 +1008,7 @@ probes:
 \end{lstlisting}
 \endgroup
 \textbf{How the probes are scored} (deterministic, so every score can be re-derived from the stored answer): an element counts if any of its keywords appears; the rubric maps matches, hedging and contradictions to 1--5. The scorer was checked against synthetic right and wrong answers before use.
+
 \begingroup\lstset{basicstyle=\ttfamily\scriptsize}
 \begin{lstlisting}
 def score_answer(answer: str, probe: dict, rubric: dict) -> dict:
@@ -1007,7 +1032,9 @@ def score_answer(answer: str, probe: dict, rubric: dict) -> dict:
 \endgroup
 \subsection*{3. Short-term memory sizes}
 The same 30-message conversation was run in fresh sessions for each setting, with 3 seeds each (9871, 9872, 9873; 90 measured turns per setting), then the five probes were asked with \verb|read_only=true|. N counts messages (user + assistant).
+
 \textbf{The sweep driver} (\verb|run_part3_sweep.py|): for each setting it applies the settings through \verb|PUT /api/settings|, makes one warm-up call so model-load time is never measured, replays the fixed conversation in a fresh user, then asks the probes read-only and scores them.
+
 \begingroup\lstset{basicstyle=\ttfamily\scriptsize}
 \begin{lstlisting}
 CONFIGS = {
@@ -1100,6 +1127,7 @@ Compression policy & 501.9 & 1,583 & 4.33 \\
 \end{tabular}
 \end{center}
 Prompt tokens and latency are for the reply call (the call that \verb|SHORT_TERM_N| changes). Counting every model call a turn makes (episode extraction and periodic summarisation too), the means are 705.9 / 952.8 / 1,338.8 / 878.1 prompt tokens and 3,329 / 4,064 / 4,200 / 4,190 ms whole-request latency.
+
 \begin{center}
 \small\setlength{\tabcolsep}{4pt}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.220\linewidth}>{\raggedleft\arraybackslash}p{0.097\linewidth}>{\raggedleft\arraybackslash}p{0.097\linewidth}>{\raggedleft\arraybackslash}p{0.097\linewidth}>{\raggedleft\arraybackslash}p{0.097\linewidth}>{\raggedleft\arraybackslash}p{0.097\linewidth}>{\raggedleft\arraybackslash}p{0.097\linewidth}}
@@ -1116,6 +1144,7 @@ Compression policy & 48.0 & 196.3 & 158.7 & 47.9 & 13.1 & 37.9 \\
 \small \textit{Figure 16: Mean prompt tokens per turn by component (reply call).}
 \subsection*{4. Memory-saving policy: compression}
 Policy: keep only the last 6 raw messages; older turns survive only through the session summary, which is regenerated every 3 user messages instead of 6.
+
 \begingroup\lstset{basicstyle=\ttfamily\footnotesize}
 \begin{lstlisting}
 def effective_memory_params() -> tuple[int, int]:
@@ -1138,8 +1167,10 @@ Saved & 52.2\% & 34.4\% & -0.67 \\
 \end{tabular}
 \end{center}
 Per-seed probe scores: N=4/12/30 were 5.0, 5.0, 5.0 in every run; compression was 4.6, 4.6, 3.8. The stored data explains the drop: the word ``November'' appeared in 0 of 15 summaries in every compression run (7 of 7 in every N run), so for the question about the assistant coach's unavailability the model invented other days (score 3 in all three runs), and in one run it said no food restriction had been mentioned. Plain N=4 was both cheaper and better than this policy.
+
 \subsection*{5. Cost estimate: 10,000 conversations of 30 turns}
 The estimate is computed from the measured per-turn token means (\verb|analyze_part3.py|, which reads only the raw result files); the best/worst rule is in the code:
+
 \begingroup\lstset{basicstyle=\ttfamily\scriptsize}
 \begin{lstlisting}
 # cost of 10,000 30-turn conversations, counting EVERY model call made
@@ -1160,6 +1191,7 @@ worst = max(ORDER, key=lambda s: summ[s]["cost_10k_convos_all_calls_usd"])
 \end{lstlisting}
 \endgroup
 Input \$1 per million tokens, output \$5 per million tokens, using the measured token counts. No hosted-model run was made. The ``all calls'' column counts every model call (reply, episode extraction, summaries) and is the honest cost.
+
 \begin{center}
 \small\setlength{\tabcolsep}{4pt}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.260\linewidth}>{\raggedleft\arraybackslash}p{0.145\linewidth}>{\raggedleft\arraybackslash}p{0.145\linewidth}>{\raggedleft\arraybackslash}p{0.145\linewidth}>{\raggedleft\arraybackslash}p{0.145\linewidth}}
@@ -1174,9 +1206,11 @@ Compression policy & 878.1 & 116.8 & \$438.66 & \$211.13 \\
 \end{tabular}
 \end{center}
 \textbf{How best and worst were selected} (rule fixed before the sweep): \emph{worst} = the most expensive setting; \emph{best} = the cheapest setting whose mean probe score is within 0.5 of the highest score ($\geq$ 4.50). Compression (4.33) was ineligible; among N=4/12/30 (all 5.00) the cheapest is N=4. \textbf{Best: N=4 at \$350.83. Worst: N=30 at \$552.86} (58\% more for no measured gain).
+
 \textbf{What the results show.} Window size drives cost, not recall: every probed fact also lived in a summary or an episode, so all three N settings scored a perfect 5.00, and these probes therefore cannot show what a larger raw window protects (limitation). With a small window the long-term summary (178 tokens at N=4) is larger than the window itself (106). Caveats: only 5 probes per run, 3 seeds per setting, temperature 0.3, and tokens counted with the local Qwen3 tokenizer rather than a hosted model's.
 \section*{Part 4 -- File-Based Memory and Consolidation}
 A second memory system built from two Markdown files at the repo root: \verb|AGENT.md| (durable instructions, expanded from HW1) and \verb|MEMORY.md| (durable dated facts; the last-consolidated time and entry count live in an HTML comment on its first line). Both are loaded into the system prompt on every turn. Code: \path{code/doc_api/file_memory.py}; chat endpoint \verb|POST /api/file-chat|; CLI \verb|file_chat_cli.py|.
+
 \subsection*{1. Memory files: final AGENT.md}
 \begingroup\lstset{basicstyle=\ttfamily\scriptsize}
 \begin{lstlisting}
@@ -1319,6 +1353,7 @@ HELP_TEXT = (
 \end{lstlisting}
 \endgroup
 \verb|chat_turn| runs a command or answers a normal turn with AGENT.md + MEMORY.md in the system prompt; before each turn it checks the two consolidation triggers and consolidates automatically (with a guard so an unshrinkable file does not re-run on every turn). The HTTP endpoint:
+
 \begingroup\lstset{basicstyle=\ttfamily\scriptsize}
 \begin{lstlisting}
 def chat_turn(message: str) -> dict:
@@ -1366,6 +1401,7 @@ def file_chat(req: FileChatRequest):
 \end{lstlisting}
 \endgroup
 \verb|/dream| (mine recent conversation for durable facts, skip known ones, insert above the Conflicts section); \verb|parse_string_list| tolerates the model answering with several JSON arrays:
+
 \begingroup\lstset{basicstyle=\ttfamily\scriptsize}
 \begin{lstlisting}
 _DREAM_PROMPT = (
@@ -1431,6 +1467,7 @@ def dream(path: str | None = None, messages: list[dict] | None = None) -> dict:
 \endgroup
 \subsection*{4. AGENT.md: one generated function checked against it}
 AGENT.md has 8 numbered instructions covering project description, technology stack, coding conventions, testing approach and prohibited actions (``Other rules'' = snake\_case names, functions under 25 lines, no eval/exec/print/bare except). The request (filter fixtures by category and sort by date) never mentions type hints, docstrings or naming, so any compliance comes from AGENT.md. Generated 5 times per condition, checked by AST analysis (rules 3, 4, 6) and by executing the function:
+
 \begin{center}
 \small\setlength{\tabcolsep}{4pt}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.220\linewidth}>{\raggedleft\arraybackslash}p{0.120\linewidth}>{\raggedleft\arraybackslash}p{0.120\linewidth}>{\raggedleft\arraybackslash}p{0.120\linewidth}>{\raggedleft\arraybackslash}p{0.120\linewidth}>{\raggedleft\arraybackslash}p{0.120\linewidth}}
@@ -1443,6 +1480,7 @@ Control (no AGENT.md) & 0/5 & 0/5 & 0/5 & 5/5 & 5/5 \\
 \end{tabular}
 \end{center}
 \textbf{The checker} (\verb|verify_agent_md.py|): the generated code is parsed with Python's \verb|ast| module and checked rule by rule; it is then executed on sample fixtures to confirm it also behaves correctly.
+
 \begingroup\lstset{basicstyle=\ttfamily\scriptsize}
 \begin{lstlisting}
 TASK = ("Write a Python function that takes a list of fixture dictionaries (each has the keys 'fixture_name', "
@@ -1503,6 +1541,7 @@ def run_behaviour(code: str) -> dict:
 \end{lstlisting}
 \endgroup
 Generated with AGENT.md (seed 9871):
+
 \begingroup\lstset{basicstyle=\ttfamily\footnotesize}
 \begin{lstlisting}
 from typing import List, Dict
@@ -1514,8 +1553,10 @@ def filter_and_sort_fixtures(fixtures: List[Dict], category: str) -> List[Dict]:
 \end{lstlisting}
 \endgroup
 The first version of this check scored 5/5, but the docstring spanned three lines (\texttt{ast.get\_docstring()} had stripped the whitespace). With the strict check the AGENT.md-guided code scored 0/5, which showed rule 3's wording was ambiguous; the rule now states ``opening and closing triple quotes on the same line'' with an example, and the final run passed 5/5. Review mode (rule 8) also holds: asked to review \texttt{def run(cmd): return eval(cmd)}, the answer was the single bullet ``Uses `eval()` which is prohibited.''.
+
 \subsection*{5. Consolidation test: 55 lines to under 40}
 The original has 55 lines (54 entries) with 7 duplicate groups (23 lines) and 4 planted contradictions whose correct handling was written down before running (\verb|part4/ground_truth.json|): two where the newer fact wins, one trap where the \emph{newer} line is only tentative (``considering llama3, no decision yet''), and one same-day pair that cannot be decided. Both versions are committed (\verb|reports/hw06/part4/|).
+
 \textbf{Original MEMORY.md (55 lines):}
 \begingroup\lstset{basicstyle=\ttfamily\tiny}
 \begin{lstlisting}
@@ -1619,6 +1660,7 @@ The original has 55 lines (54 entries) with 7 duplicate groups (23 lines) and 4 
 \end{lstlisting}
 \endgroup
 \textbf{How the consolidation works.} (1) One model call gives every fact a short topic key. (2) Facts are clustered when their keys or texts are similar (MiniLM embeddings, threshold 0.70), so only small groups are ever compared. (3) Inside each cluster the model answers one narrow question per pair -- same, contradict, or neither -- and, for contradictions, whether the newer fact is only tentative. (4) The code applies the resolution rules itself: the newer fact wins, unless it is tentative (the older one stays) or both carry the same date (unresolved, left for the user), and an identifier guard turns a ``same'' verdict into a conflict when each fact has an identifier the other lacks (\verb|s9871_db| vs \verb|s9871_rel|, 9am vs 10am). (5) Duplicates are merged deterministically into the newest-dated line; conflict members live only in an explicit \verb|## Conflicts| section; a backup is written before one atomic rewrite.
+
 \begingroup\lstset{basicstyle=\ttfamily\scriptsize}
 \begin{lstlisting}
 _TOPIC_PROMPT = (
@@ -1886,6 +1928,7 @@ Independent facts lost & 0 \\
 \end{tabular}
 \end{center}
 \textbf{Evidence that /compact reports before and after counts} (real output of \verb|POST /api/file-chat| with \verb|/compact| on the 55-line file; the original is also backed up automatically):
+
 \begingroup\lstset{basicstyle=\ttfamily\tiny}
 \begin{lstlisting}
 MEMORY.md consolidated via llm: entries before = 54, after = 36
@@ -1919,6 +1962,7 @@ Duplicate groups merged: 7; conflicts recorded: 3; clusters not fully judged: 0;
 \end{lstlisting}
 \endgroup
 Getting here took four designs (RUN\_LOG.txt): one prompt with all 53 facts \emph{grew} the file from 54 to 56 entries; free-form per-cluster judging reached 42 and merged a conflicting line away as a ``duplicate''; pairwise five-way classification reached 49 and mislabelled duplicates as conflicts; the final design reached 36. The 0.70 clustering thresholds were tuned after seeing this file's similarity scores. Tests: 27/27 unit checks and 31/31 live HTTP checks (the first live run was 24/28 and exposed three real bugs, all fixed).
+
 \subsection*{6. MongoDB memory vs file-based memory}
 \begin{center}
 \small\setlength{\tabcolsep}{4pt}
@@ -1952,8 +1996,10 @@ Facts that must not be forgotten & Weak guarantee: a fact survives only if extra
 \end{tabular}
 \end{center}
 \textbf{Reading.} File memory suits a small set of facts that must always apply (rules, names, preferences); MongoDB memory suits a large history that can only be searched per turn. They fail differently: Mongo forgets silently by ranking and summarising, the file fails loudly by running out of room.
+
 \section*{Verification}
 \verb|verify_hw06.py| starts the real system, runs 15 objective checks (behaviour, not wording) and writes \verb|reports/hw06/verification.json| (homework, SID4, commit hash, model/config, SEED/VERIFY\_SEED, each check). Result: \textbf{15/15 checks passed} on commit \texttt{cf7de93}. Tested against two deliberately broken states: with five files tampered it scored 9/15 and with MongoDB stopped 6/15 (both exit 1, \verb|RUN_LOG.txt|).
+
 \begin{center}
 \small\setlength{\tabcolsep}{4pt}
 \begin{tabular}{p{0.7\linewidth}r}
