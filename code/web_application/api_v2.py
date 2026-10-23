@@ -8,42 +8,34 @@ home_team_id), the relationship query
 `GET /api/teams/{team_id}/fixtures`, and explicit HTTP status codes for
 resource-not-found (404), validation errors (422) and constraint
 violations (409).
+
+HW7 (Part 1): the session-cookie auth is gone from this module. Every route
+now authenticates with a JWT bearer token (auth_jwt.py) and is protected by
+role: any authenticated role may read; writer or moderator may create and
+update; only a moderator may delete.
 """
 
-import secrets
-from datetime import datetime, timedelta, timezone
-from typing import Optional
-
-import bcrypt
 from fastapi import (
     APIRouter,
-    Cookie,
     Depends,
     HTTPException,
     Query,
     Request,
-    Response,
 )
 from pydantic import BaseModel, Field
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session as DBSession, selectinload
 
+from auth_jwt import get_current_user, require_roles, seed_demo_users
 from db import get_db
 from models import (
     Fixture,
     FixtureUpdate,
-    Session as SessionModel,
     Team,
     User,
 )
 
 router = APIRouter(prefix="/api")
-
-SESSION_COOKIE_NAME = "session_token"
-SESSION_LIFETIME_HOURS = 1
-
-DEMO_EMAIL = "league_admin@example.com"
-DEMO_PASSWORD = "GoLions2026!"
 
 # Unique-field formats, validated by Pydantic before anything reaches MySQL.
 TEAM_CODE_PATTERN = r"^TM-\d{4}$"
@@ -53,14 +45,10 @@ DEFAULT_SPOTS_AVAILABLE = 22
 
 
 def seed_demo_data(db: DBSession):
-    """Runs once at startup: creates the demo admin user (with a real
-    bcrypt hash) and, on a completely fresh database, two starter teams
-    and two starter fixtures. Safe to call on every restart - each block
-    is skipped if its rows already exist."""
-    if not db.query(User).filter(User.email == DEMO_EMAIL).first():
-        password_hash = bcrypt.hashpw(DEMO_PASSWORD.encode(), bcrypt.gensalt()).decode()
-        db.add(User(name="League Admin", email=DEMO_EMAIL, password_hash=password_hash))
-        db.commit()
+    """Runs once at startup: creates the demo users (reader / writer / moderator, with real
+    bcrypt hashes) and, on a completely fresh database, two starter teams and two starter
+    fixtures. Safe to call on every restart - each block is skipped if its rows already exist."""
+    seed_demo_users(db)
 
     # A fixture now requires a home team, so teams have to exist first.
     if db.query(Team).count() == 0:
@@ -86,80 +74,6 @@ def seed_demo_data(db: DBSession):
                     home_team_id=tigers.id),
         ])
         db.commit()
-
-
-# ---------------------------------------------------------------------
-# Auth
-# ---------------------------------------------------------------------
-
-class LoginRequest(BaseModel):
-    email: str
-    password: str
-
-
-def get_current_user(
-    session_token: Optional[str] = Cookie(default=None),
-    db: DBSession = Depends(get_db),
-):
-    if not session_token:
-        raise HTTPException(status_code=401, detail="Not authenticated")
-
-    session = db.query(SessionModel).filter(SessionModel.id == session_token).first()
-    if not session:
-        raise HTTPException(status_code=401, detail="Not authenticated")
-
-    if session.expires_at < datetime.now(timezone.utc).replace(tzinfo=None):
-        db.delete(session)
-        db.commit()
-        raise HTTPException(status_code=401, detail="Session expired")
-
-    user = db.query(User).filter(User.id == session.user_id).first()
-    if not user:
-        raise HTTPException(status_code=401, detail="Not authenticated")
-    return user
-
-
-@router.post("/auth/login")
-def login(payload: LoginRequest, response: Response, db: DBSession = Depends(get_db)):
-    user = db.query(User).filter(User.email == payload.email).first()
-    if not user or not bcrypt.checkpw(payload.password.encode(), user.password_hash.encode()):
-        raise HTTPException(status_code=401, detail="Invalid email or password")
-
-    token = secrets.token_hex(16)
-    expires_at = datetime.now(timezone.utc).replace(tzinfo=None) + timedelta(hours=SESSION_LIFETIME_HOURS)
-    db.add(SessionModel(id=token, user_id=user.id, expires_at=expires_at))
-    db.commit()
-
-    response.set_cookie(
-        key=SESSION_COOKIE_NAME,
-        value=token,
-        httponly=True,
-        samesite="lax",
-        secure=True,
-        max_age=3600,
-        path="/",
-    )
-    return {"id": user.id, "name": user.name, "email": user.email}
-
-
-@router.get("/auth/me")
-def me(user: User = Depends(get_current_user)):
-    return {"id": user.id, "name": user.name, "email": user.email}
-
-
-@router.post("/auth/logout")
-def logout(
-    response: Response,
-    session_token: Optional[str] = Cookie(default=None),
-    db: DBSession = Depends(get_db),
-):
-    if session_token:
-        session = db.query(SessionModel).filter(SessionModel.id == session_token).first()
-        if session:
-            db.delete(session)
-            db.commit()
-    response.delete_cookie(SESSION_COOKIE_NAME, path="/")
-    return {"success": True}
 
 
 # ---------------------------------------------------------------------
@@ -227,7 +141,7 @@ def fixture_to_dict(f: Fixture):
 @router.post("/teams", status_code=201)
 def create_team(
     payload: TeamCreate,
-    user: User = Depends(get_current_user),
+    user: User = Depends(require_roles("writer", "moderator")),
     db: DBSession = Depends(get_db),
 ):
     if db.query(Team).filter(Team.team_code == payload.team_code).first():
@@ -297,7 +211,7 @@ def get_team(
 def update_team(
     team_id: int,
     payload: TeamUpdateRequest,
-    user: User = Depends(get_current_user),
+    user: User = Depends(require_roles("writer", "moderator")),
     db: DBSession = Depends(get_db),
 ):
     team = db.query(Team).filter(Team.id == team_id).first()
@@ -333,7 +247,7 @@ def update_team(
 @router.delete("/teams/{team_id}")
 def delete_team(
     team_id: int,
-    user: User = Depends(get_current_user),
+    user: User = Depends(require_roles("moderator")),
     db: DBSession = Depends(get_db),
 ):
     """A team that is still the home team of at least one fixture cannot
@@ -419,7 +333,7 @@ def get_fixture(fixture_id: int, user: User = Depends(get_current_user), db: DBS
 
 
 @router.post("/fixtures", status_code=201)
-def create_fixture(payload: FixtureCreate, user: User = Depends(get_current_user), db: DBSession = Depends(get_db)):
+def create_fixture(payload: FixtureCreate, user: User = Depends(require_roles("writer", "moderator")), db: DBSession = Depends(get_db)):
     require_team(db, payload.home_team_id)
 
     if db.query(Fixture).filter(Fixture.fixture_code == payload.fixture_code).first():
@@ -449,7 +363,7 @@ def create_fixture(payload: FixtureCreate, user: User = Depends(get_current_user
 
 
 @router.put("/fixtures/{fixture_id}")
-def update_fixture(fixture_id: int, payload: FixtureUpdateRequest, user: User = Depends(get_current_user), db: DBSession = Depends(get_db)):
+def update_fixture(fixture_id: int, payload: FixtureUpdateRequest, user: User = Depends(require_roles("writer", "moderator")), db: DBSession = Depends(get_db)):
     fixture = db.query(Fixture).filter(Fixture.id == fixture_id).first()
     if not fixture:
         raise HTTPException(status_code=404, detail=f"Fixture {fixture_id} not found")
@@ -485,7 +399,7 @@ def update_fixture(fixture_id: int, payload: FixtureUpdateRequest, user: User = 
 
 
 @router.delete("/fixtures/{fixture_id}")
-def delete_fixture(fixture_id: int, user: User = Depends(get_current_user), db: DBSession = Depends(get_db)):
+def delete_fixture(fixture_id: int, user: User = Depends(require_roles("moderator")), db: DBSession = Depends(get_db)):
     fixture = db.query(Fixture).filter(Fixture.id == fixture_id).first()
     if not fixture:
         raise HTTPException(status_code=404, detail=f"Fixture {fixture_id} not found")

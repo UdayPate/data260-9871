@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Link, Navigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { api } from "./api";
+import { api, tokenStore } from "./api";
 import { fetchFixtures } from "./fixturesSlice";
 import { fetchTeams } from "./teamsSlice";
 import Login from "./Login";
@@ -19,13 +19,25 @@ export default function App() {
   const [authChecked, setAuthChecked] = useState(false);
   const dispatch = useDispatch();
 
+  // HW7: only ask the server who we are if a token was kept from earlier in this tab, and
+  // forget the user the moment any request is answered with 401 (expired / invalid token).
   useEffect(() => {
-    api
-      .me()
-      .then((u) => setUser(u))
-      .catch(() => setUser(null))
-      .finally(() => setAuthChecked(true));
+    if (tokenStore.get()) {
+      api
+        .me()
+        .then((u) => setUser(u))
+        .catch(() => setUser(null))
+        .finally(() => setAuthChecked(true));
+    } else {
+      setAuthChecked(true);
+    }
+    const onExpired = () => setUser(null);
+    window.addEventListener("auth:expired", onExpired);
+    return () => window.removeEventListener("auth:expired", onExpired);
   }, []);
+
+  // The server enforces the roles; the UI only hides what the role could not use anyway.
+  const canWrite = user && (user.role === "writer" || user.role === "moderator");
 
   // One fetch on login; after that the reducers keep the store in step with
   // every create / update / delete, so nothing re-fetches the list.
@@ -50,12 +62,12 @@ export default function App() {
       <div className="app-shell">
         <nav className="app-nav">
           <Link to="/">Home</Link>
-          {user && <Link to="/create">Add Record</Link>}
-          {user && <Link to="/update">Update Record</Link>}
+          {canWrite && <Link to="/create">Add Record</Link>}
+          {canWrite && <Link to="/update">Update Record</Link>}
           <span className="spacer"></span>
           {user ? (
             <>
-              <span className="user-tag">Logged in as {user.name}</span>
+              <span className="user-tag">Logged in as {user.username} ({user.role})</span>
               <button onClick={handleLogout}>Log out</button>
             </>
           ) : (
@@ -68,19 +80,19 @@ export default function App() {
           <Route path="/login" element={<Login onLoginSuccess={setUser} />} />
           <Route
             path="/create"
-            element={user ? <CreateRecord /> : <Navigate to="/login" />}
+            element={canWrite ? <CreateRecord /> : <Navigate to={user ? "/" : "/login"} />}
           />
           <Route
             path="/update"
-            element={user ? <UpdateRecord /> : <Navigate to="/login" />}
+            element={canWrite ? <UpdateRecord /> : <Navigate to={user ? "/" : "/login"} />}
           />
           <Route
             path="/update/:id"
-            element={user ? <UpdateRecord /> : <Navigate to="/login" />}
+            element={canWrite ? <UpdateRecord /> : <Navigate to={user ? "/" : "/login"} />}
           />
           <Route
             path="/delete/:id"
-            element={user ? <DeleteRecord /> : <Navigate to="/login" />}
+            element={user && user.role === "moderator" ? <DeleteRecord /> : <Navigate to={user ? "/" : "/login"} />}
           />
         </Routes>
       </div>

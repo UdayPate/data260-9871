@@ -20,7 +20,7 @@ import sys
 import time
 from pathlib import Path
 
-from playwright.sync_api import sync_playwright, expect
+from playwright.sync_api import sync_playwright
 from sqlalchemy import text
 
 from db import engine
@@ -33,7 +33,7 @@ API_PORT = 8871
 UI_PORT = 5173
 UI = f"http://localhost:{UI_PORT}"
 
-DEMO_EMAIL = "league_admin@example.com"
+DEMO_USERNAME = "league_admin"   # HW7: login is by username; league_admin is a moderator
 DEMO_PASSWORD = "GoLions2026!"
 
 TEST_CODE = "FX-9871-97001"
@@ -127,7 +127,7 @@ def run_browser_flow():
         #   page_errors   - uncaught JS/React exceptions. Must be zero.
         #   console_errors - anything logged at error level. Chromium logs a
         #     failed HTTP response here too, and this flow deliberately
-        #     provokes a 401 (/auth/me before login), a 409 (duplicate code)
+        #     provokes a 409 (duplicate code)
         #     and a 422 (bad code), so those are expected and filtered out.
         page_errors = []
         console_errors = []
@@ -138,7 +138,7 @@ def run_browser_flow():
         print("\n### Login")
         page.goto(UI, wait_until="networkidle")
         page.click("text=Login")
-        page.fill("#email", DEMO_EMAIL)
+        page.fill("#username", DEMO_USERNAME)
         page.fill("#password", DEMO_PASSWORD)
         page.click("button:has-text('Log In')")
         page.wait_for_selector("text=Logged in as", timeout=15000)

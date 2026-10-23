@@ -1,0 +1,8 @@
+# pre-commit hooks (HW7 Part 1.V). Install once with:  code\venv\Scripts\pre-commit.exe install
+# After that, every `git commit` first runs Ruff on the staged Python files and blocks the commit on any error.
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.17.2        # same version as the one installed in the venv
+    hooks:
+      - id: ruff-check  # no --fix on purpose: the hook reports problems, you fix them, then commit again
+        exclude: ^(code/venv|code/web_application/client/node_modules|reports)/

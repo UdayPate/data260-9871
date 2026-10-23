@@ -1,0 +1,13 @@
+# Ruff configuration (HW7 Part 1.V). Only Ruff is configured here; this repo is not a Python package.
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+extend-exclude = ["code/venv", "code/web_application/client/node_modules", "reports"]
+
+[tool.ruff.lint]
+# Real-bug rules only, so the hook stays useful instead of drowning legacy code in style noise:
+#   F    pyflakes (unused imports/variables, undefined names, f-strings without placeholders)
+#   E4   import errors, E9 syntax errors, E711/E712 comparisons to None/True, E722 bare `except:`
+select = ["F", "E4", "E9", "E711", "E712", "E722"]
+# Several scripts deliberately call sys.path.insert(...) before importing project modules.
+ignore = ["E402"]

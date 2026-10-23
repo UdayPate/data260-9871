@@ -1,0 +1,784 @@
+{
+  "info": {
+    "name": "Uday Patel - DATA-260 HW7 Part 1 (JWT + roles)",
+    "description": "Run requests 00-02 first (they save the three role tokens), then 03-14 in order. Each request has tests that assert the expected status.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:8871"
+    },
+    {
+      "key": "reader_token",
+      "value": ""
+    },
+    {
+      "key": "writer_token",
+      "value": ""
+    },
+    {
+      "key": "moderator_token",
+      "value": ""
+    },
+    {
+      "key": "invalid_token",
+      "value": "this.is.not-a-valid-jwt"
+    },
+    {
+      "key": "expired_token",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJ3cml0ZXJfdXNlciIsInJvbGUiOiJ3cml0ZXIiLCJpYXQiOjE3NjcyMjU2MDAsImV4cCI6MTc2NzIyNzQwMH0.sSNnG6Abyp2rKuRSu_pPsRe0fHizlgf-NOJfq9UxqZ4"
+    },
+    {
+      "key": "fixtureId",
+      "value": ""
+    },
+    {
+      "key": "fixtureId2",
+      "value": ""
+    },
+    {
+      "key": "fxCode",
+      "value": ""
+    },
+    {
+      "key": "homeTeamId",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "00 - Login as READER (expect 200 + JWT)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/auth/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "auth",
+            "login"
+          ]
+        },
+        "description": "Valid credentials for the reader demo user. The returned access_token is saved in {{reader_token}}.",
+        "auth": {
+          "type": "noauth"
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"reader_user\",\n  \"password\": \"Reader2026!\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"status is 200\", function () { pm.response.to.have.status(200); });",
+              "const j = pm.response.json();",
+              "pm.test(\"response has a bearer access_token\", function () { pm.expect(j.token_type).to.eql(\"bearer\"); pm.expect(j.access_token.split(\".\").length).to.eql(3); });",
+              "pm.collectionVariables.set(\"reader_token\", j.access_token);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "01 - Login as WRITER (expect 200 + JWT)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/auth/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "auth",
+            "login"
+          ]
+        },
+        "description": "Valid credentials for the writer demo user. The returned access_token is saved in {{writer_token}}.",
+        "auth": {
+          "type": "noauth"
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"writer_user\",\n  \"password\": \"Writer2026!\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"status is 200\", function () { pm.response.to.have.status(200); });",
+              "const j = pm.response.json();",
+              "pm.test(\"response has a bearer access_token\", function () { pm.expect(j.token_type).to.eql(\"bearer\"); pm.expect(j.access_token.split(\".\").length).to.eql(3); });",
+              "pm.collectionVariables.set(\"writer_token\", j.access_token);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "02 - Login as MODERATOR (expect 200 + JWT)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/auth/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "auth",
+            "login"
+          ]
+        },
+        "description": "Valid credentials for the moderator demo user. The returned access_token is saved in {{moderator_token}}.",
+        "auth": {
+          "type": "noauth"
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"moderator_user\",\n  \"password\": \"Moderator2026!\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"status is 200\", function () { pm.response.to.have.status(200); });",
+              "const j = pm.response.json();",
+              "pm.test(\"response has a bearer access_token\", function () { pm.expect(j.token_type).to.eql(\"bearer\"); pm.expect(j.access_token.split(\".\").length).to.eql(3); });",
+              "pm.collectionVariables.set(\"moderator_token\", j.access_token);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "03 - Login with a WRONG password (expect 401)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/auth/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "auth",
+            "login"
+          ]
+        },
+        "description": "Invalid credentials: 401 Unauthorized, and no token.",
+        "auth": {
+          "type": "noauth"
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"writer_user\",\n  \"password\": \"wrong-password\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"status is 401\", function () { pm.response.to.have.status(401); });",
+              "pm.test(\"no access_token in the body\", function () { pm.expect(pm.response.json().access_token).to.be.undefined; });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "04 - GET /auth/me with NO token (expect 401)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/auth/me",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "auth",
+            "me"
+          ]
+        },
+        "description": "No Authorization header at all.",
+        "auth": {
+          "type": "noauth"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"status is 401\", function () { pm.response.to.have.status(401); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "05 - GET /auth/me with an INVALID token (expect 401)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/auth/me",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "auth",
+            "me"
+          ]
+        },
+        "description": "A token that is not a JWT / not signed by this server.",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{invalid_token}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"status is 401\", function () { pm.response.to.have.status(401); });",
+              "pm.test(\"detail says Invalid token\", function () { pm.expect(pm.response.json().detail).to.eql(\"Invalid token\"); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "06 - GET /auth/me with an EXPIRED token (expect 401)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/auth/me",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "auth",
+            "me"
+          ]
+        },
+        "description": "A correctly signed token whose exp claim is in the past.",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{expired_token}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"status is 401\", function () { pm.response.to.have.status(401); });",
+              "pm.test(\"detail says Token expired\", function () { pm.expect(pm.response.json().detail).to.eql(\"Token expired\"); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "07 - GET /auth/me with a valid token (expect 200)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/auth/me",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "auth",
+            "me"
+          ]
+        },
+        "description": "Identity and role of the authenticated user.",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{moderator_token}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"status is 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"returns username and role\", function () { const j = pm.response.json(); pm.expect(j.username).to.eql(\"moderator_user\"); pm.expect(j.role).to.eql(\"moderator\"); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "08 - Create fixture as READER (expect 403)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/fixtures",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "fixtures"
+          ]
+        },
+        "description": "A valid token, but readers may not create.",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{reader_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fixture_name\": \"HW7 Postman demo fixture\",\n  \"teams_players\": \"Lions vs Tigers\",\n  \"fixture_code\": \"{{fxCode}}\",\n  \"spots_available\": 12,\n  \"home_team_id\": \"{{homeTeamId}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.collectionVariables.set(\"fxCode\", \"FX-9871-9\" + Math.floor(1000 + Math.random() * 8999));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"status is 403\", function () { pm.response.to.have.status(403); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "09 - Create fixture as WRITER (expect 201)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/fixtures",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "fixtures"
+          ]
+        },
+        "description": "Writers may create. The new id is saved in {{fixtureId}}.",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{writer_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fixture_name\": \"HW7 Postman demo fixture\",\n  \"teams_players\": \"Lions vs Tigers\",\n  \"fixture_code\": \"{{fxCode}}\",\n  \"spots_available\": 12,\n  \"home_team_id\": \"{{homeTeamId}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.collectionVariables.set(\"fxCode\", \"FX-9871-9\" + Math.floor(1000 + Math.random() * 8999));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"status is 201\", function () { pm.response.to.have.status(201); });",
+              "pm.collectionVariables.set(\"fixtureId\", pm.response.json().id);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "10 - Create fixture as MODERATOR (expect 201)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/fixtures",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "fixtures"
+          ]
+        },
+        "description": "Moderators may create. The new id is saved in {{fixtureId2}} (cleaned up by request 14).",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{moderator_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fixture_name\": \"HW7 Postman demo fixture\",\n  \"teams_players\": \"Lions vs Tigers\",\n  \"fixture_code\": \"{{fxCode}}\",\n  \"spots_available\": 12,\n  \"home_team_id\": \"{{homeTeamId}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.collectionVariables.set(\"fxCode\", \"FX-9871-9\" + Math.floor(1000 + Math.random() * 8999));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"status is 201\", function () { pm.response.to.have.status(201); });",
+              "pm.collectionVariables.set(\"fixtureId2\", pm.response.json().id);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "11 - Delete fixture as WRITER (expect 403)",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/fixtures/{{fixtureId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "fixtures",
+            "{{fixtureId}}"
+          ]
+        },
+        "description": "Only moderators may delete.",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{writer_token}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"status is 403\", function () { pm.response.to.have.status(403); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "12 - Delete fixture as MODERATOR (expect 200)",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/fixtures/{{fixtureId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "fixtures",
+            "{{fixtureId}}"
+          ]
+        },
+        "description": "A moderator deletes the fixture the writer created.",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{moderator_token}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "13 - List fixtures with a valid token (expect 200)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/fixtures",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "fixtures"
+          ]
+        },
+        "description": "Any authenticated role may list/read (here: reader).",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{reader_token}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "14 - Cleanup: moderator deletes the second demo fixture",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/fixtures/{{fixtureId2}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "fixtures",
+            "{{fixtureId2}}"
+          ]
+        },
+        "description": "Removes the fixture created in request 10.",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{moderator_token}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"status is 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

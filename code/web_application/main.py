@@ -24,9 +24,10 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from starlette.middleware.sessions import SessionMiddleware
 import auth
+import auth_jwt
 import api_v2
 from db import Base, engine, db_session_basede26
-import models
+import models  # noqa: F401  (importing registers the table models with Base.metadata for create_all)
 from query_counter import register_query_counter, query_count_middleware
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -53,6 +54,8 @@ app.middleware("http")(query_count_middleware)
 register_query_counter(engine)
 
 app.include_router(auth.router)
+app.include_router(auth_jwt.router)                    # /auth/login, /auth/me
+app.include_router(auth_jwt.api_router, prefix="/api")  # /api/auth/login, /api/auth/me (React client)
 app.include_router(api_v2.router)
 
 app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")

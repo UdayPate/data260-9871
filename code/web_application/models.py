@@ -5,6 +5,9 @@ HW4 (Part 2/3): fixtures, fixture_updates, users, sessions.
 HW5 (Part 1.I): adds the `teams` related-entity table and extends
 `fixtures` with a unique code, a defaulted numeric field, a foreign key
 to teams, and timestamps.
+HW7 (Part 1): `users` gains `username` (unique) and `role`
+(reader/writer/moderator) for JWT auth; the HW4 `sessions` table model is
+removed (the session scheme lives on only at the hw4 tag).
 """
 
 from datetime import datetime, timezone
@@ -12,6 +15,7 @@ from datetime import datetime, timezone
 from sqlalchemy import (
     Column,
     DateTime,
+    Enum,
     ForeignKey,
     Integer,
     String,
@@ -94,18 +98,10 @@ class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
+    username = Column(String(64), unique=True, nullable=False)
     name = Column(String(255), nullable=False)
     email = Column(String(255), unique=True, nullable=False)
     # bcrypt hash only - no plain-text password is ever stored.
     password_hash = Column(String(255), nullable=False)
-
-
-class Session(Base):
-    __tablename__ = "sessions"
-
-    id = Column(String(64), primary_key=True)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
-    expires_at = Column(DateTime, nullable=False)
-
-    user = relationship("User")
+    role = Column(Enum("reader", "writer", "moderator", name="user_role"),
+                  nullable=False, server_default="reader")

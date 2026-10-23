@@ -1,0 +1,437 @@
+HW7 RUN_LOG (SID4 9871). Real console output; each section carries the time of the run. Part 1 below; later parts are appended.
+
+===== HW7 Part 1 - migrate_hw07.py, FIRST run (adds username/role to the existing users table) - 2026-10-22 (console transcript, run before the idempotence re-run) =====
+[1/3] adding columns
+      username: added (NULL-able for now)
+      role: added
+[2/3] backfilling existing users
+      user 1 (league_admin@example.com) -> username=league_admin, role=moderator
+[3/3] constraints
+      username: now NOT NULL
+      uq_users_username: added
+users table after migration:
+      (1, 'league_admin', 'league_admin@example.com', 'moderator', '$2b$12$')
+
+===== HW7 Part 1 - migrate_hw07.py, re-run (must be idempotent) - 2026-10-22T22:26:53 =====
+[1/3] adding columns
+      username: already present
+      role: already present
+[2/3] backfilling existing users
+      nothing to backfill
+[3/3] constraints
+      username: already NOT NULL
+      uq_users_username: already present
+users table after migration:
+      (1, 'league_admin', 'league_admin@example.com', 'moderator', '$2b$12$')
+      (2, 'reader_user', 'reader@example.com', 'reader', '$2b$12$')
+      (3, 'writer_user', 'writer@example.com', 'writer', '$2b$12$')
+      (4, 'moderator_user', 'moderator@example.com', 'moderator', '$2b$12$')
+
+===== HW7 Part 1 - test_jwt_auth.py: JWT login, /auth/me, bad tokens, role matrix, MySQL checked directly - 2026-10-22T22:25:28 =====
+Run at 2026-10-22T22:25:25
+[PASS] users table has id, username, password_hash, role (enum reader/writer/moderator)   (columns=['email', 'id', 'name', 'password_hash', 'role', 'username'])
+[PASS] username is UNIQUE
+[PASS] every stored password is a bcrypt hash, never plain text   (4 users)
+[PASS] login as reader: valid credentials -> 200 + JWT   (HTTP 200)
+[PASS] login as writer: valid credentials -> 200 + JWT   (HTTP 200)
+[PASS] login as moderator: valid credentials -> 200 + JWT   (HTTP 200)
+[PASS] token is HS256 with sub/username/role/exp claims, ~30 minute lifetime   (claims={'sub': '3', 'username': 'writer_user', 'role': 'writer'})
+[PASS] login with a wrong password -> 401   ({"detail":"Invalid username or password"})
+[PASS] login with an unknown username -> 401, same message (no user enumeration)
+[PASS] login with a 200-byte password does not crash (401)
+[PASS] login missing a field -> 422
+[PASS] old HW4 email-based login body is rejected (422)
+[PASS] the same login also works under /api/auth/login (React client path)
+[PASS] GET /auth/me with a valid token -> 200 with identity and role   ({"id":4,"username":"moderator_user","name":"Maya Moderator","email":"moderator@example.com)
+[PASS] GET /auth/me without a token -> 401 (+ WWW-Authenticate: Bearer)   ({"detail":"Not authenticated"})
+[PASS] GET /auth/me with garbage string -> 401   ({"detail":"Invalid token"})
+[PASS] GET /auth/me with tampered signature -> 401   ({"detail":"Invalid token"})
+[PASS] GET /auth/me with signed with another secret -> 401   ({"detail":"Invalid token"})
+[PASS] GET /auth/me with unsigned alg=none token -> 401   ({"detail":"Invalid token"})
+[PASS] GET /auth/me with token for a user id that does not exist -> 401   ({"detail":"Invalid token"})
+[PASS] GET /auth/me with token with no exp claim -> 401   ({"detail":"Invalid token"})
+[PASS] GET /auth/me with an EXPIRED token -> 401 'Token expired'   ({"detail":"Token expired"})
+[PASS] a non-Bearer Authorization header -> 401
+[PASS] the old HW4 session cookie no longer authenticates -> 401
+[PASS] list + read fixtures as none -> 401   (list=401 read=401)
+[PASS] list + read fixtures as reader -> 200   (list=200 read=200)
+[PASS] list + read fixtures as writer -> 200   (list=200 read=200)
+[PASS] list + read fixtures as moderator -> 200   (list=200 read=200)
+[PASS] create fixture as none -> 401   (HTTP 401 {"detail":"Not authenticated"})
+[PASS] create fixture as reader -> 403   (HTTP 403 {"detail":"Forbidden: requires role writer or moderator (you)
+[PASS] create fixture as writer -> 201   (HTTP 201 )
+[PASS] create fixture as moderator -> 201   (HTTP 201 )
+[PASS] only the 2 permitted creates reached MySQL (reader/none were blocked before the database)   (2 rows)
+[PASS] update fixture as reader -> 403 and the row is unchanged   ({"detail":"Forbidden: requires role writer or moderator (you are 'read)
+[PASS] update fixture as writer -> 200 and persisted in MySQL   (HTTP 200)
+[PASS] update fixture as moderator -> 200 and persisted in MySQL   (HTTP 200)
+[PASS] delete fixture as none -> 401   (HTTP 401)
+[PASS] delete fixture as reader -> 403   (HTTP 403)
+[PASS] delete fixture as writer -> 403   (HTTP 403)
+[PASS] the blocked deletes left the row in MySQL
+[PASS] delete fixture as moderator -> 200/204 and the row is really gone from MySQL   (HTTP 200)
+[PASS] cleanup: moderator deletes the second test fixture
+[PASS] delete of a nonexistent fixture as moderator -> 404 (authorized, but not found)
+[PASS] create team as reader -> 403
+[PASS] create team as writer -> 201   (HTTP 201)
+[PASS] delete team as writer -> 403
+[PASS] delete team as moderator -> 204/200
+[PASS] demoting a user in MySQL takes effect on their EXISTING token (writer token -> 403)   (HTTP 403)
+[PASS] role restored in MySQL; the same writer token can create again (201)   (HTTP 201)
+[PASS] no test data left behind   (0 leftover rows)
+
+50/50 checks passed
+EXIT=0
+
+===== HW7 Part 1 - test_jwt_ui.py (Playwright): role-aware React UI, wrong password, expired/garbage token - 2026-10-22T22:25:41 =====
+Run at 2026-10-22T22:25:30
+
+### wrong password / unknown user
+PASS  wrong password shows the API's 401 message on the form
+PASS  no token was stored after a failed login
+
+### logged in as reader
+PASS  reader: nav shows username and role
+PASS  reader: JWT is kept in sessionStorage (3 dot-separated parts)
+PASS  reader: no cookie is used for auth
+PASS  reader: 'Add Record' link hidden
+PASS  reader: row 'Edit' links hidden
+PASS  reader: Delete buttons hidden
+PASS  reader typing /create in the URL is redirected away
+PASS  reader: logout forgets the token
+
+### logged in as writer
+PASS  writer: nav shows username and role
+PASS  writer: JWT is kept in sessionStorage (3 dot-separated parts)
+PASS  writer: no cookie is used for auth
+PASS  writer: 'Add Record' link visible
+PASS  writer: row 'Edit' links visible
+PASS  writer: Delete buttons hidden
+PASS  writer: logout forgets the token
+
+### logged in as moderator
+PASS  moderator: nav shows username and role
+PASS  moderator: JWT is kept in sessionStorage (3 dot-separated parts)
+PASS  moderator: no cookie is used for auth
+PASS  moderator: 'Add Record' link visible
+PASS  moderator: row 'Edit' links visible
+PASS  moderator: Delete buttons visible
+PASS  moderator: logout forgets the token
+
+### invalid and expired tokens
+PASS  an EXPIRED token in storage: page falls back to the logged-out shell (Login link shown)
+PASS  an EXPIRED token: the bad token was discarded
+PASS  a garbage token in storage: page falls back to the logged-out shell (Login link shown)
+PASS  a garbage token: the bad token was discarded
+PASS  no uncaught JS/React exceptions during the whole flow
+
+==== 29/29 browser checks passed ====
+EXIT=0
+
+===== HW7 Part 1 - test_redux_ui.py (the HW5 22-check browser flow, now running on JWT) - 2026-10-22T22:25:49 =====
+FastAPI already listening on 8871, reusing it
+Vite already listening on 5173, reusing it
+
+### Login
+PASS  login lands on an authenticated shell
+
+### Home screen (Part 1.III.3)
+2026-10-22 22:25:47,142 INFO sqlalchemy.engine.Engine SELECT DATABASE()
+2026-10-22 22:25:47,142 INFO sqlalchemy.engine.Engine [raw sql] {}
+2026-10-22 22:25:47,143 INFO sqlalchemy.engine.Engine SELECT @@sql_mode
+2026-10-22 22:25:47,143 INFO sqlalchemy.engine.Engine [raw sql] {}
+2026-10-22 22:25:47,143 INFO sqlalchemy.engine.Engine SELECT @@lower_case_table_names
+2026-10-22 22:25:47,143 INFO sqlalchemy.engine.Engine [raw sql] {}
+2026-10-22 22:25:47,145 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-10-22 22:25:47,145 INFO sqlalchemy.engine.Engine SELECT COUNT(*) AS n FROM fixtures
+2026-10-22 22:25:47,145 INFO sqlalchemy.engine.Engine [generated in 0.00027s] {}
+2026-10-22 22:25:47,145 INFO sqlalchemy.engine.Engine ROLLBACK
+PASS  Home reports the real row count (5000)
+PASS  Home renders one page of 25 rows
+PASS  Next advances the page
+
+### Create screen (Part 1.III.4)
+2026-10-22 22:25:47,411 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-10-22 22:25:47,411 INFO sqlalchemy.engine.Engine SELECT id, team_code FROM teams ORDER BY id LIMIT 1
+2026-10-22 22:25:47,411 INFO sqlalchemy.engine.Engine [generated in 0.00025s] {}
+2026-10-22 22:25:47,412 INFO sqlalchemy.engine.Engine ROLLBACK
+PASS  create returns to Home with the new fixture visible as a table row
+PASS  the new row is highlighted as the one just touched
+2026-10-22 22:25:47,682 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-10-22 22:25:47,682 INFO sqlalchemy.engine.Engine SELECT id, fixture_name, spots_available, home_team_id FROM fixtures WHERE fixture_code = %(c)s
+2026-10-22 22:25:47,682 INFO sqlalchemy.engine.Engine [generated in 0.00020s] {'c': 'FX-9871-97001'}
+2026-10-22 22:25:47,683 INFO sqlalchemy.engine.Engine ROLLBACK
+PASS  created fixture really persisted in MySQL
+PASS  Home count grew by one after create
+
+### Create screen error handling
+PASS  duplicate fixture_code shows the API's 409 message on the form
+PASS  malformed fixture_code shows the API's 422 message, field named
+
+### Update screen (Part 1.III.4)
+PASS  selecting by ID prefills the form from Redux state
+PASS  update returns to Home with the changed value visible as a table row
+PASS  updated row shows the new spots_available in the table
+2026-10-22 22:25:49,770 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-10-22 22:25:49,770 INFO sqlalchemy.engine.Engine SELECT fixture_name, spots_available, created_at, updated_at FROM fixtures WHERE id = %(i)s
+2026-10-22 22:25:49,770 INFO sqlalchemy.engine.Engine [generated in 0.00021s] {'i': 5021}
+2026-10-22 22:25:49,770 INFO sqlalchemy.engine.Engine ROLLBACK
+PASS  update really persisted in MySQL
+PASS  updated_at advanced past created_at
+PASS  unknown id is reported instead of showing an empty form
+
+### Delete from the list (Part 1.III.5)
+PASS  per-row delete button is present for the new fixture
+PASS  delete shows a confirmation on the Home screen
+PASS  deleted row is gone from the rendered table
+2026-10-22 22:25:50,052 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-10-22 22:25:50,052 INFO sqlalchemy.engine.Engine SELECT id FROM fixtures WHERE id = %(i)s
+2026-10-22 22:25:50,052 INFO sqlalchemy.engine.Engine [generated in 0.00021s] {'i': 5021}
+2026-10-22 22:25:50,052 INFO sqlalchemy.engine.Engine ROLLBACK
+PASS  delete really removed the row from MySQL
+
+### Browser console
+PASS  no uncaught JS or React exceptions during the whole flow
+PASS  no unexpected console errors (deliberate 401/409/422 network responses excluded)
+      for reference, 2 expected network-failure console lines were seen (the 401/409/422 this flow provokes)
+
+==== 22/22 browser checks passed ====
+EXIT=0
+
+===== HW7 Part 1 - Postman collection run with Newman (15 requests, 22 assertions) - 2026-10-22T22:26:32 =====
+newman
+
+Uday Patel - DATA-260 HW7 Part 1 (JWT + roles)
+
+→ 00 - Login as READER (expect 200 + JWT)
+  POST http://127.0.0.1:8871/auth/login [200 OK, 488B, 213ms]
+  √  status is 200
+  √  response has a bearer access_token
+
+→ 01 - Login as WRITER (expect 200 + JWT)
+  POST http://127.0.0.1:8871/auth/login [200 OK, 488B, 193ms]
+  √  status is 200
+  √  response has a bearer access_token
+
+→ 02 - Login as MODERATOR (expect 200 + JWT)
+  POST http://127.0.0.1:8871/auth/login [200 OK, 508B, 193ms]
+  √  status is 200
+  √  response has a bearer access_token
+
+→ 03 - Login with a WRONG password (expect 401)
+  POST http://127.0.0.1:8871/auth/login [401 Unauthorized, 202B, 196ms]
+  √  status is 401
+  √  no access_token in the body
+
+→ 04 - GET /auth/me with NO token (expect 401)
+  GET http://127.0.0.1:8871/auth/me [401 Unauthorized, 191B, 5ms]
+  √  status is 401
+
+→ 05 - GET /auth/me with an INVALID token (expect 401)
+  GET http://127.0.0.1:8871/auth/me [401 Unauthorized, 187B, 4ms]
+  √  status is 401
+  √  detail says Invalid token
+
+→ 06 - GET /auth/me with an EXPIRED token (expect 401)
+  GET http://127.0.0.1:8871/auth/me [401 Unauthorized, 187B, 4ms]
+  √  status is 401
+  √  detail says Token expired
+
+→ 07 - GET /auth/me with a valid token (expect 200)
+  GET http://127.0.0.1:8871/auth/me [200 OK, 237B, 7ms]
+  √  status is 200
+  √  returns username and role
+
+→ 08 - Create fixture as READER (expect 403)
+  POST http://127.0.0.1:8871/api/fixtures [403 Forbidden, 208B, 6ms]
+  √  status is 403
+
+→ 09 - Create fixture as WRITER (expect 201)
+  POST http://127.0.0.1:8871/api/fixtures [201 Created, 357B, 16ms]
+  √  status is 201
+
+→ 10 - Create fixture as MODERATOR (expect 201)
+  POST http://127.0.0.1:8871/api/fixtures [201 Created, 357B, 13ms]
+  √  status is 201
+
+→ 11 - Delete fixture as WRITER (expect 403)
+  DELETE http://127.0.0.1:8871/api/fixtures/5022 [403 Forbidden, 198B, 7ms]
+  √  status is 403
+
+→ 12 - Delete fixture as MODERATOR (expect 200)
+  DELETE http://127.0.0.1:8871/api/fixtures/5022 [200 OK, 159B, 13ms]
+  √  status is 200
+
+→ 13 - List fixtures with a valid token (expect 200)
+  GET http://127.0.0.1:8871/api/fixtures [200 OK, 1.29MB, 167ms]
+  √  status is 200
+
+→ 14 - Cleanup: moderator deletes the second demo fixture
+  DELETE http://127.0.0.1:8871/api/fixtures/5023 [200 OK, 159B, 64ms]
+  √  status is 200
+
+┌─────────────────────────┬───────────────────┬──────────────────┐
+│                         │          executed │           failed │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│              iterations │                 1 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│                requests │                15 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│            test-scripts │                15 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│      prerequest-scripts │                 3 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│              assertions │                22 │                0 │
+├─────────────────────────┴───────────────────┴──────────────────┤
+│ total run duration: 1810ms                                     │
+├────────────────────────────────────────────────────────────────┤
+│ total data received: 1.29MB (approx)                           │
+├────────────────────────────────────────────────────────────────┤
+│ average response time: 73ms [min: 4ms, max: 213ms, s.d.: 85ms] │
+└────────────────────────────────────────────────────────────────┘
+EXIT=0
+
+===== HW7 Part 1.V - Ruff configuration check - 2026-10-22T22:26:53 =====
+ruff version:
+ruff 0.17.2
+--- ruff check on every file touched or created for HW7 Part 1 (config: pyproject.toml)
+All checks passed!
+--- ruff check on the deliberate demo file
+code\web_application\lint_demo.py:6:8: F401 [*] `json` imported but unused
+code\web_application\lint_demo.py:7:8: F401 [*] `os` imported but unused
+code\web_application\lint_demo.py:11:5: F841 Local variable `unused_count` is assigned to but never used
+code\web_application\lint_demo.py:12:23: F821 Undefined name `roles`
+Found 4 errors.
+[*] 2 fixable with `--fix` (1 unsafe fix available with `--fix --unsafe-fixes`).
+--- repo-wide statistics (legacy files are only linted if a commit stages them)
+13	F401	[*] unused-import
+ 2	F541	[*] f-string-missing-placeholders
+ 1	F821	[ ] undefined-name
+ 1	F841	[ ] unused-variable
+Found 17 errors.
+[*] 15 fixable with `--fix` (1 unsafe fix available with `--fix --unsafe-fixes`).
+
+===== HW7 Part 1.V - pre-commit hook flow, TESTED IN A THROWAWAY REPO (not the real repo) - 2026-10-22T22:26:56 =====
+NOTE: 'NativeCommandError' lines are PowerShell wrapping git's progress output, not failures.
+=== pre-commit install
+pre-commit installed at .git\hooks\pre-commit
+
+=== 1. ruff check BEFORE commit
+code\web_application\lint_demo.py:6:8: F401 [*] `json` imported but unused
+code\web_application\lint_demo.py:7:8: F401 [*] `os` imported but unused
+code\web_application\lint_demo.py:11:5: F841 Local variable `unused_count` is assigned to but never used
+code\web_application\lint_demo.py:12:23: F821 Undefined name `roles`
+Found 4 errors.
+[*] 2 fixable with `--fix` (1 unsafe fix available with `--fix --unsafe-fixes`).
+warning: in the working copy of '.pre-commit-config.yaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'code/web_application/lint_demo.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'pyproject.toml', LF will be replaced by CRLF the next time Git touches it
+
+=== 2. git commit WITH errors (hook must block it)
+git : ruff check...............................................................Failed
+ 
+- hook id: ruff-check
+- exit code: 1
+F401 [*] `json` imported but unused
+ --> code\web_application\lint_demo.py:6:8
+  |
+4 | blocking the commit; the errors are then fixed and the commit goes through.
+5 | """
+6 | import json
+  |        ^^^^
+7 | import os
+  |
+help: Remove unused import: `json`
+  |
+5 | """
+  - import json
+6 | import os
+  |
+F401 [*] `os` imported but unused
+ --> code\web_application\lint_demo.py:7:8
+  |
+5 | """
+6 | import json
+7 | import os
+  |        ^^
+help: Remove unused import: `os`
+  |
+6 | import json
+  - import os
+7 |
+  |
+F841 Local variable `unused_count` is assigned to but never used
+  --> code\web_application\lint_demo.py:11:5
+   |
+10 | def describe_role(role):
+11 |     unused_count = len(role)
+   |     ^^^^^^^^^^^^
+12 |     return "role: " + roles
+   |
+help: Remove assignment to unused variable `unused_count`
+   |
+10 | def describe_role(role):
+   -     unused_count = len(role)
+11 +     len(role)
+12 |     return "role: " + roles
+   |
+note: This is an unsafe fix and may change runtime behavior
+F821 Undefined name `roles`
+  --> code\web_application\lint_demo.py:12:23
+   |
+10 | def describe_role(role):
+11 |     unused_count = len(role)
+12 |     return "role: " + roles
+   |                       ^^^^^
+Found 4 errors.
+[*] 2 fixable with `--fix` (1 unsafe fix available with `--fix --unsafe-fixes`).
+exit code of that commit: 1
+commits so far: fatal: ambiguous argument 'HEAD': unknown revision or path not in the working tree. Use '--' to separate paths from revisions, like this: 'git <command> [<revision>...] -- [<file>...]'
+
+=== 3. fix: ruff --fix removes the 2 unused imports; the rest is edited by hand
+F841 Local variable `unused_count` is assigned to but never used
+  --> code\web_application\lint_demo.py:9:5
+   |
+ 8 | def describe_role(role):
+ 9 |     unused_count = len(role)
+   |     ^^^^^^^^^^^^
+10 |     return "role: " + roles
+   |
+help: Remove assignment to unused variable `unused_count`
+   |
+8  | def describe_role(role):
+   -     unused_count = len(role)
+9  +     len(role)
+10 |     return "role: " + roles
+   |
+note: This is an unsafe fix and may change runtime behavior
+
+F821 Undefined name `roles`
+  --> code\web_application\lint_demo.py:10:23
+   |
+ 8 | def describe_role(role):
+ 9 |     unused_count = len(role)
+10 |     return "role: " + roles
+   |                       ^^^^^
+
+"""Ruff + pre-commit demo file (HW7 Part 1.V).
+
+This file is committed WITH deliberate lint errors on purpose, so the pre-commit hook can be seen
+blocking the commit; the errors are then fixed and the commit goes through.
+"""
+
+
+def describe_role(role):
+    return "role: " + role
+All checks passed!
+
+=== 4. git commit AFTER fixing (hook runs and passes)
+git : ruff check...............................................................Passed
+ 
+[master (root-commit) 9087140] demo: commit after fixing lint errors
+ 3 files changed, 30 insertions(+)
+ create mode 100644 .pre-commit-config.yaml
+ create mode 100644 code/web_application/lint_demo.py
+ create mode 100644 pyproject.toml
+exit code: 0
+9087140 demo: commit after fixing lint errors

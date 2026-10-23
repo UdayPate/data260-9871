@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { api, errorMessage } from "./api";
 
 export default function Login({ onLoginSuccess }) {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ export default function Login({ onLoginSuccess }) {
     e.preventDefault();
     setError(null);
     try {
-      const user = await api.login(email, password);
+      const user = await api.login(username, password);
       onLoginSuccess(user);
       navigate("/");
     } catch (err) {
@@ -24,12 +24,12 @@ export default function Login({ onLoginSuccess }) {
 
   return (
     <div className="page-card">
-      <h2>League Admin Login</h2>
+      <h2>League Login</h2>
       {error && <p className="error-text" data-testid="login-error">{error}</p>}
       <form onSubmit={handleSubmit}>
         <div className="field">
-          <label htmlFor="email">Email</label>
-          <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <label htmlFor="username">Username</label>
+          <input id="username" type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
         </div>
         <div className="field">
           <label htmlFor="password">Password</label>

@@ -110,14 +110,16 @@ export default function Home({ user }) {
                   <td>{f.spots_available}</td>
                   <td>{teamLabel(f.home_team_id)}</td>
                   <td>
-                    <Link to={`/update/${f.id}`}>Edit</Link>
-                    <button
-                      className="btn-danger"
-                      data-testid={`delete-${f.id}`}
-                      onClick={() => handleDelete(f)}
-                    >
-                      Delete
-                    </button>
+                    {user.role !== "reader" && <Link to={`/update/${f.id}`}>Edit</Link>}
+                    {user.role === "moderator" && (
+                      <button
+                        className="btn-danger"
+                        data-testid={`delete-${f.id}`}
+                        onClick={() => handleDelete(f)}
+                      >
+                        Delete
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))}
