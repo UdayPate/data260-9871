@@ -435,3 +435,512 @@ git : ruff check...............................................................P
  create mode 100644 pyproject.toml
 exit code: 0
 9087140 demo: commit after fixing lint errors
+
+===== HW7 Part 2 - test_agent_loop.py (offline: scripted fake model, no Ollama/MySQL) - 2026-10-23T08:06:09 =====
+### tool schemas
+[PASS] the model is offered exactly the three HW5 tools
+[PASS] validate_call: valid search -> ok
+[PASS] validate_call: valid search with limit -> ok
+[PASS] validate_call: valid details -> ok
+[PASS] validate_call: valid counts with no arguments -> ok
+[PASS] validate_call: unknown tool -> unknown_tool
+[PASS] validate_call: arguments are a string, not an object -> malformed_arguments
+[PASS] validate_call: arguments are a list -> malformed_arguments
+[PASS] validate_call: missing required argument -> schema_violation
+[PASS] validate_call: wrong type (id as text) -> schema_violation
+[PASS] validate_call: wrong type (float id) -> schema_violation
+[PASS] validate_call: id below the minimum -> schema_violation
+[PASS] validate_call: limit above the maximum -> schema_violation
+[PASS] validate_call: made-up extra argument -> schema_violation
+[PASS] validate_call: negative min_fixtures -> schema_violation
+[PASS] the problem text names the offending argument
+
+### happy path: two tool calls then a final answer
+[PASS] stops with final_answer after 3 model turns
+[PASS] both tools were executed in order
+[PASS] total tool calls reported = 2 (0 invalid)
+[PASS] transcript is system, user, assistant, TOOL, assistant, TOOL, assistant
+[PASS] each tool-role message carries the matching tool_call_id and tool name
+[PASS] the model saw the first tool result before choosing the second call
+[PASS] final answer is returned and tokens are summed (3 turns x 110)
+[PASS] every tool call is logged with its name and inputs
+[PASS] the log ends with a run summary that reports the total
+[PASS] verbose mode prints each call and 'total tool calls' at the end
+
+### a tool that answers ok=false (nonexistent id)
+[PASS] the loop continues and ends with a normal final answer
+[PASS] the model was shown the tool's own error message
+[PASS] a valid call that returns ok=false is NOT counted as an invalid call
+
+### repair path
+[PASS] unknown tool: the call is NOT executed the first time
+[PASS] the model is re-prompted with a tool-role message naming the specific problem
+[PASS] repaired on the next turn: 1 invalid, 1 rescued, 0 failed repairs, final answer
+[PASS] the trace marks the invalid call as repaired
+[PASS] malformed JSON arguments from the model are caught and repaired
+[PASS] schema violation: the repair message shows the schema and the offending argument
+[PASS] two failed repairs -> the run stops cleanly with stop_reason repair_failed
+[PASS] nothing invalid was ever executed
+[PASS] separate bad calls that are each repaired do NOT add up to a failure
+[PASS] several calls in one turn each get their own tool-role reply, in order
+
+### offered schema differs from the validating schema
+[PASS] the model is shown the DRIFTED schema (fixture_id)
+[PASS] the call made with the drifted name is rejected against the REAL schema and never executed
+[PASS] the repair message shows the real schema and the model recovers with `id`
+
+### hard limits
+[PASS] a model that never stops calling tools hits the iteration ceiling (max_steps)
+[PASS] max_tool_calls budget stops the run (budget_exhausted) after exactly 2 executed calls
+[PASS] max_total_tokens budget stops the run (budget_exhausted)
+
+### chain checker + failure classification (synthetic traces)
+[PASS] A: search then details of the FIRST result -> clean
+[PASS] A: searched but never looked up a detail -> lost_multistep_chain
+[PASS] A: details of the WRONG id -> lost_multistep_chain
+[PASS] no tool call at all, plain-text answer -> text_when_tool_required
+[PASS] a schema violation that the repair fixed: failure BEFORE repair, none AFTER
+[PASS] an unknown tool that was never repaired -> final failure unknown_tool
+[PASS] unrepaired malformed arguments -> final failure malformed_arguments
+[PASS] B: counts then a supporting example -> clean
+[PASS] B: counts but no supporting example -> lost_multistep_chain
+[PASS] B: never asked for the counts -> lost_multistep_chain
+[PASS] C: search plus BOTH detail lookups -> clean
+[PASS] C: only one of the two detail lookups -> lost_multistep_chain
+[PASS] hitting the iteration ceiling mid-chain counts as a lost chain
+
+58/58 checks passed
+EXIT=0
+
+===== HW7 Part 2 - MUTATION CHECK: validation deliberately disabled, the same tests must FAIL (proves they can fail) - 2026-10-23T08:06:28 =====
+NOTE: the traceback at the end is expected - with validation off, an unknown tool call is executed and a later test hits a missing field.
+### tool schemas
+[PASS] the model is offered exactly the three HW5 tools
+[PASS] validate_call: valid search -> ok
+[PASS] validate_call: valid search with limit -> ok
+[PASS] validate_call: valid details -> ok
+[PASS] validate_call: valid counts with no arguments -> ok
+[PASS] validate_call: unknown tool -> unknown_tool
+[PASS] validate_call: arguments are a string, not an object -> malformed_arguments
+[PASS] validate_call: arguments are a list -> malformed_arguments
+[PASS] validate_call: missing required argument -> schema_violation
+[PASS] validate_call: wrong type (id as text) -> schema_violation
+[PASS] validate_call: wrong type (float id) -> schema_violation
+[PASS] validate_call: id below the minimum -> schema_violation
+[PASS] validate_call: limit above the maximum -> schema_violation
+[PASS] validate_call: made-up extra argument -> schema_violation
+[PASS] validate_call: negative min_fixtures -> schema_violation
+[PASS] the problem text names the offending argument
+
+### happy path: two tool calls then a final answer
+[PASS] stops with final_answer after 3 model turns
+[PASS] both tools were executed in order
+[PASS] total tool calls reported = 2 (0 invalid)
+[PASS] transcript is system, user, assistant, TOOL, assistant, TOOL, assistant
+[PASS] each tool-role message carries the matching tool_call_id and tool name
+[PASS] the model saw the first tool result before choosing the second call
+[PASS] final answer is returned and tokens are summed (3 turns x 110)
+[PASS] every tool call is logged with its name and inputs
+[PASS] the log ends with a run summary that reports the total
+[PASS] verbose mode prints each call and 'total tool calls' at the end
+
+### a tool that answers ok=false (nonexistent id)
+[PASS] the loop continues and ends with a normal final answer
+[PASS] the model was shown the tool's own error message
+[PASS] a valid call that returns ok=false is NOT counted as an invalid call
+
+### repair path
+[FAIL] unknown tool: the call is NOT executed the first time
+[FAIL] the model is re-prompted with a tool-role message naming the specific problem
+[FAIL] repaired on the next turn: 1 invalid, 1 rescued, 0 failed repairs, final answer
+
+===== HW7 Part 2 - explore_invalid_prompts.py (exploratory: do natural bad-id prompts make the REAL model emit an invalid call?) - 2026-10-23T08:06:27 =====
+NOTE: they do not (qwen3:8b declines or searches instead). The 'many fixtures' prompt hit the hard iteration ceiling (max_steps) in a real run.
+PROMPT: Get the details for fixture abc.
+[step 1] FINAL ANSWER: The fixture ID "abc" is not a valid integer. Please provide a valid fixture ID from a previous search result.
+[done] stop_reason=final_answer steps=1 total tool calls=0 (executed 0, invalid 0, repaired 0) tokens=471
+PROMPT: Give me details of fixture 5.5
+[step 1] FINAL ANSWER: The fixture ID must be an integer, but you provided "5.5". Please provide a valid integer ID for the fixture.
+[done] stop_reason=final_answer steps=1 total tool calls=0 (executed 0, invalid 0, repaired 0) tokens=475
+PROMPT: Show fixture number zero.
+[step 1] FINAL ANSWER: The fixture number zero is not valid. Fixture IDs must be integers greater than zero. Please provide a valid fixture ID or check your request.
+[done] stop_reason=final_answer steps=1 total tool calls=0 (executed 0, invalid 0, repaired 0) tokens=473
+PROMPT: Look up fixture 'twelve'.
+[step 1] CALL  search_fixtures {"query": "twelve"}  -> ok
+[step 2] FINAL ANSWER: There are no fixtures found with the name "twelve". Please try a different query.
+[done] stop_reason=final_answer steps=2 total tool calls=1 (executed 1, invalid 0, repaired 0) tokens=980
+PROMPT: Show me the fixtures hosted by teams with at least 'many' fixtures.
+[step 1] CALL  team_fixture_counts {"min_fixtures": 2}  -> ok
+[step 2] CALL  search_fixtures {"query": "Milpitas Lions", "limit": 10}  -> ok
+[step 3] CALL  search_fixtures {"limit": 10, "query": "San Jose Tigers"}  -> ok
+[step 4] CALL  search_fixtures {"limit": 10, "query": "Fremont Warriors"}  -> ok
+[step 5] CALL  search_fixtures {"limit": 10, "query": "Santa Clara Strikers"}  -> ok
+[step 6] CALL  search_fixtures {"limit": 10, "query": "Sunnyvale Bears"}  -> ok
+[done] stop_reason=max_steps steps=6 total tool calls=6 (executed 6, invalid 0, repaired 0) tokens=13191
+PROMPT: Delete fixture 5 for me.
+[step 1] FINAL ANSWER: I cannot delete fixtures. You need to contact the league administrator or use the appropriate system tools to manage fixtures.
+[done] stop_reason=final_answer steps=1 total tool calls=0 (executed 0, invalid 0, repaired 0) tokens=469
+EXIT=0
+
+===== HW7 Part 2 - run_part2_demo.py (all modes): tasks A, B, C; error recovery; repair path with the real model - 2026-10-23T08:05:11 =====
+NOTE ON ANSWER QUALITY (checked afterwards against MySQL, not by the script): the chain checker passes B and C and fails A, but all three final answers contain a mistake:
+  A looked up fixture 6 instead of the first result, fixture 5.  B says fixture 6 is hosted by Santa Clara Strikers; its home team is Oakland Titans.
+  C swapped the home teams of fixtures 4 and 5 (truth: 4 = Santa Clara Strikers, 5 = Sunnyvale Falcons).
+Chain reliability is what Part 2 measures; answer correctness is what Part 3's verifiers measure.
+Run at 2026-10-23T08:04:50 | model qwen3:8b, temperature 0.0, seed 9871 | mode: all
+ground truth from MySQL: first 'Lions' result = fixture 5; team hosting the most fixtures = Santa Clara Strikers (417); first two 'Basketball' fixtures = [4, 5]
+
+====================================================================================================
+TASK A: search, then detail lookup of the first result
+user> Search for fixtures matching 'Lions' and give me the full details of the first search result.
+====================================================================================================
+[step 1] CALL  search_fixtures {"query": "Lions"}  -> ok
+[step 2] CALL  fixture_details {"id": 6}  -> ok
+[step 3] FINAL ANSWER: The full details of the first search result are:
+
+- **Fixture Name:** Lions vs Strikers (Soccer #4)
+- **Teams Players:** Milpitas Lions vs Santa Clara Strikers
+- **Fixture Code:** FX-9871-00006
+- *...
+[done] stop_reason=final_answer steps=3 total tool calls=2 (executed 2, invalid 0, repaired 0) tokens=3163
+
+agent> The full details of the first search result are:
+
+- **Fixture Name:** Lions vs Strikers (Soccer #4)
+- **Teams Players:** Milpitas Lions vs Santa Clara Strikers
+- **Fixture Code:** FX-9871-00006
+- **Spots Available:** 22
+- **Home Team:** Oakland Titans (Team Code: TM-0006)
+
+[chain check] FAIL: searched but never called fixture_details on the first result (id 5)
+
+====================================================================================================
+TASK B: aggregate question, then one supporting example
+user> Which team hosts the most fixtures? Then find one fixture hosted by that team as a supporting example.
+====================================================================================================
+[step 1] CALL  team_fixture_counts {"min_fixtures": 1}  -> ok
+[step 2] CALL  search_fixtures {"query": "Santa Clara Strikers", "limit": 1}  -> ok
+[step 3] FINAL ANSWER: The team that hosts the most fixtures is **Santa Clara Strikers** with 417 fixtures. Here is one fixture hosted by them as an example: **Lions vs Strikers (Soccer #4)** with fixture code **FX-9871-...
+[done] stop_reason=final_answer steps=3 total tool calls=2 (executed 2, invalid 0, repaired 0) tokens=2618
+
+agent> The team that hosts the most fixtures is **Santa Clara Strikers** with 417 fixtures. Here is one fixture hosted by them as an example: **Lions vs Strikers (Soccer #4)** with fixture code **FX-9871-00006**.
+
+[chain check] PASS: got the counts, then looked for a supporting example
+
+====================================================================================================
+TASK C: compare two entities: search plus two detail lookups
+user> Compare the first two fixtures matching 'Basketball': give each one's fixture code and its home team.
+====================================================================================================
+[step 1] CALL  search_fixtures {"query": "Basketball", "limit": 2}  -> ok
+[step 2] CALL  fixture_details {"id": 4}  -> ok
+[step 3] CALL  fixture_details {"id": 5}  -> ok
+[step 4] FINAL ANSWER: Here are the details for the first two fixtures matching 'Basketball':
+
+1. **Fixture Code:** FX-9871-00004  
+   **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)
+
+2. **Fixture Code:** FX-9871-0...
+[done] stop_reason=final_answer steps=4 total tool calls=3 (executed 3, invalid 0, repaired 0) tokens=2997
+
+agent> Here are the details for the first two fixtures matching 'Basketball':
+
+1. **Fixture Code:** FX-9871-00004  
+   **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)
+
+2. **Fixture Code:** FX-9871-00005  
+   **Home Team:** Santa Clara Strikers (Team Code: TM-0004)
+
+[chain check] PASS: looked up both fixtures
+
+====================================================================================================
+ERROR RECOVERY (a): what execute_tool itself says for bad input (no model involved)
+====================================================================================================
+execute_tool('fixture_details', {'id': 99999999}) ->
+    {"ok": false, "data": null, "error": "fixture 99999999 not found"}
+execute_tool('fixture_details', {'id': -5}) ->
+    {"ok": false, "data": null, "error": "id must be a positive integer, got -5"}
+execute_tool('search_fixtures', {'query': 'ab'}) ->
+    {"ok": false, "data": null, "error": "query too broad: must be at least 3 characters"}
+
+====================================================================================================
+ERROR RECOVERY (b): the agent asked about a fixture that does not exist
+user> Show me the details of fixture 99999999.
+====================================================================================================
+[step 1] CALL  fixture_details {"id": 99999999}  -> ERROR: fixture 99999999 not found
+[step 2] FINAL ANSWER: The fixture with ID 99999999 was not found in the database. Please check the ID and try again.
+[done] stop_reason=final_answer steps=2 total tool calls=1 (executed 1, invalid 0, repaired 0) tokens=1031
+
+agent> The fixture with ID 99999999 was not found in the database. Please check the ID and try again.
+[recovery check] crashed: no | stop_reason=final_answer | the tool's ok=false message was returned to the model: True
+
+====================================================================================================
+ERROR RECOVERY (c): an impossible id (negative)
+user> Show me the details of fixture -5.
+====================================================================================================
+[step 1] FINAL ANSWER: The fixture ID "-5" is not a valid integer. Please provide a valid fixture ID.
+[done] stop_reason=final_answer steps=1 total tool calls=0 (executed 0, invalid 0, repaired 0) tokens=468
+
+agent> The fixture ID "-5" is not a valid integer. Please provide a valid fixture ID.
+[recovery check] stop_reason=final_answer | invalid calls=0 repaired=0 failed repairs=0
+
+====================================================================================================
+REPAIR PATH WITH THE REAL MODEL (stress: the model is shown DRIFTED tool schemas, the validator holds the real ones)
+user> Search for fixtures matching 'Lions' and give me the full details of the first search result.
+====================================================================================================
+[step 1] CALL  search_fixtures {"text": "Lions"}  -> INVALID (schema_violation): 'query' is a required property; Additional properties are not allowed ('text'...
+[step 2] CALL  search_fixtures {"query": "Lions"}  -> ok
+[step 3] CALL  fixture_details {"fixture_id": 5}  -> INVALID (schema_violation): 'id' is a required property; Additional properties are not allowed ('fixture_...
+[step 4] CALL  fixture_details {"id": 5}  -> ok
+[step 5] FINAL ANSWER: The full details of the first search result are as follows:
+
+- **Fixture Name:** Wolves vs Lions (Basketball #3)
+- **Teams/Players:** San Jose Wolves vs Sunnyvale Lions
+- **Fixture Code:** FX-9871-...
+[done] stop_reason=final_answer steps=5 total tool calls=4 (executed 2, invalid 2, repaired 2) tokens=5872
+
+agent> The full details of the first search result are as follows:
+
+- **Fixture Name:** Wolves vs Lions (Basketball #3)
+- **Teams/Players:** San Jose Wolves vs Sunnyvale Lions
+- **Fixture Code:** FX-9871-00005
+- **Spots Available:** 22
+- **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)
+[repair check] stop_reason=final_answer | invalid calls=2 | repaired=2 | failed repairs=0
+
+====================================================================================================
+SUMMARY
+====================================================================================================
+case     needs>=  tool calls  stop_reason      ok
+A              2           2  final_answer     NO
+B              2           2  final_answer     yes
+C              3           3  final_answer     yes
+ERR-1          1           1  final_answer     yes
+ERR-2          0           0  final_answer     yes
+STRESS         2           4  final_answer     yes
+
+full tool-invocation log: C:\Users\patel\data260-9871\reports\hw07\raw\agent_runs.jsonl
+EXIT=1
+
+===== HW7 Part 2 - measure_tool_reliability.py SMOKE TEST on a small dataset first (1 attempt per case) - 2026-10-22T23:22:42 =====
+Run at 2026-10-22T23:22:06 | qwen3:8b thinking off, temperature 0.7, seeds 9871+attempt
+ground truth: {'A_first_id': 5, 'C_ids': [4, 5]} top team: Santa Clara Strikers
+[natural  1/3] case A seed 9871: calls=2 invalid=0 rescued=0 stop=final_answer first-try failures=- final=clean
+[natural  2/3] case B seed 9872: calls=2 invalid=0 rescued=0 stop=final_answer first-try failures=- final=clean
+[natural  3/3] case C seed 9873: calls=3 invalid=0 rescued=0 stop=final_answer first-try failures=- final=clean
+[stress  1/3] case A seed 9871: calls=4 invalid=2 rescued=2 stop=final_answer first-try failures=['malformed_arguments'] final=clean
+[stress  2/3] case B seed 9872: calls=4 invalid=2 rescued=2 stop=final_answer first-try failures=['malformed_arguments'] final=clean
+[stress  3/3] case C seed 9873: calls=2 invalid=1 rescued=1 stop=final_answer first-try failures=['malformed_arguments'] final=lost_multistep_chain
+
+=== NATURAL (real schemas) (3 attempts: {'A': 1, 'B': 1, 'C': 1}) ===
+first-try tool calls: 7  (invalid: 0, rescued by repair: 0)
+well-formed call rate   BEFORE repair 100.0%   AFTER repair 100.0%
+clean attempts          BEFORE repair 3/3   AFTER repair 3/3
+failure category              before repair  after repair
+malformed_arguments                       0             0
+unknown_tool                              0             0
+text_when_tool_required                   0             0
+lost_multistep_chain                      0             0
+mean steps 3.33 | tool calls 2.33 | tokens 2925.0 | latency 4595.1 ms | stops {'final_answer': 3}
+
+=== STRESS (drifted schemas shown to the model: deliberate fault injection) (3 attempts: {'A': 1, 'B': 1, 'C': 1}) ===
+first-try tool calls: 5  (invalid: 5, rescued by repair: 5)
+well-formed call rate   BEFORE repair 0.0%   AFTER repair 100.0%
+clean attempts          BEFORE repair 0/3   AFTER repair 2/3
+failure category              before repair  after repair
+malformed_arguments                       3             0
+unknown_tool                              0             0
+text_when_tool_required                   0             0
+lost_multistep_chain                      0             1
+mean steps 4.33 | tool calls 3.33 | tokens 4320.0 | latency 6855.6 ms | stops {'final_answer': 3}
+
+wrote raw/part2_reliability_attempts.json / .csv, part2_reliability_summary.json
+EXIT=0
+
+===== HW7 Part 2 - measure_tool_reliability.py FULL RUN: 24 natural + 12 stress attempts - 2026-10-22T23:27:16 =====
+Run at 2026-10-22T23:24:04 | qwen3:8b thinking off, temperature 0.7, seeds 9871+attempt
+ground truth: {'A_first_id': 5, 'C_ids': [4, 5]} top team: Santa Clara Strikers
+[natural  1/24] case A seed 9871: calls=2 invalid=0 rescued=0 stop=final_answer first-try failures=- final=clean
+[natural  2/24] case B seed 9872: calls=2 invalid=0 rescued=0 stop=final_answer first-try failures=- final=clean
+[natural  3/24] case C seed 9873: calls=3 invalid=0 rescued=0 stop=final_answer first-try failures=- final=clean
+[natural  4/24] case A seed 9874: calls=2 invalid=0 rescued=0 stop=final_answer first-try failures=- final=clean
+[natural  5/24] case B seed 9875: calls=2 invalid=0 rescued=0 stop=final_answer first-try failures=- final=clean
+[natural  6/24] case C seed 9876: calls=3 invalid=0 rescued=0 stop=final_answer first-try failures=- final=clean
+[natural  7/24] case A seed 9877: calls=2 invalid=0 rescued=0 stop=final_answer first-try failures=- final=clean
+[natural  8/24] case B seed 9878: calls=2 invalid=0 rescued=0 stop=final_answer first-try failures=- final=clean
+[natural  9/24] case C seed 9879: calls=3 invalid=0 rescued=0 stop=final_answer first-try failures=- final=clean
+[natural 10/24] case A seed 9880: calls=2 invalid=0 rescued=0 stop=final_answer first-try failures=- final=clean
+[natural 11/24] case B seed 9881: calls=2 invalid=0 rescued=0 stop=final_answer first-try failures=- final=clean
+[natural 12/24] case C seed 9882: calls=3 invalid=0 rescued=0 stop=final_answer first-try failures=- final=clean
+[natural 13/24] case A seed 9883: calls=2 invalid=0 rescued=0 stop=final_answer first-try failures=- final=clean
+[natural 14/24] case B seed 9884: calls=2 invalid=0 rescued=0 stop=final_answer first-try failures=- final=clean
+[natural 15/24] case C seed 9885: calls=3 invalid=0 rescued=0 stop=final_answer first-try failures=- final=clean
+[natural 16/24] case A seed 9886: calls=2 invalid=0 rescued=0 stop=final_answer first-try failures=- final=clean
+[natural 17/24] case B seed 9887: calls=2 invalid=0 rescued=0 stop=final_answer first-try failures=- final=clean
+[natural 18/24] case C seed 9888: calls=3 invalid=0 rescued=0 stop=final_answer first-try failures=- final=clean
+[natural 19/24] case A seed 9889: calls=2 invalid=0 rescued=0 stop=final_answer first-try failures=- final=clean
+[natural 20/24] case B seed 9890: calls=2 invalid=0 rescued=0 stop=final_answer first-try failures=- final=clean
+[natural 21/24] case C seed 9891: calls=3 invalid=0 rescued=0 stop=final_answer first-try failures=- final=clean
+[natural 22/24] case A seed 9892: calls=2 invalid=0 rescued=0 stop=final_answer first-try failures=- final=clean
+[natural 23/24] case B seed 9893: calls=2 invalid=0 rescued=0 stop=final_answer first-try failures=- final=clean
+[natural 24/24] case C seed 9894: calls=3 invalid=0 rescued=0 stop=final_answer first-try failures=- final=clean
+[stress  1/12] case A seed 9871: calls=4 invalid=2 rescued=2 stop=final_answer first-try failures=['malformed_arguments'] final=clean
+[stress  2/12] case B seed 9872: calls=4 invalid=2 rescued=2 stop=final_answer first-try failures=['malformed_arguments'] final=clean
+[stress  3/12] case C seed 9873: calls=2 invalid=1 rescued=1 stop=final_answer first-try failures=['malformed_arguments'] final=lost_multistep_chain
+[stress  4/12] case A seed 9874: calls=4 invalid=2 rescued=2 stop=final_answer first-try failures=['malformed_arguments'] final=clean
+[stress  5/12] case B seed 9875: calls=4 invalid=2 rescued=2 stop=final_answer first-try failures=['malformed_arguments'] final=clean
+[stress  6/12] case C seed 9876: calls=5 invalid=2 rescued=2 stop=final_answer first-try failures=['malformed_arguments'] final=clean
+[stress  7/12] case A seed 9877: calls=4 invalid=2 rescued=2 stop=final_answer first-try failures=['malformed_arguments'] final=clean
+[stress  8/12] case B seed 9878: calls=4 invalid=2 rescued=2 stop=final_answer first-try failures=['malformed_arguments'] final=clean
+[stress  9/12] case C seed 9879: calls=2 invalid=1 rescued=1 stop=final_answer first-try failures=['malformed_arguments'] final=lost_multistep_chain
+[stress 10/12] case A seed 9880: calls=1 invalid=1 rescued=0 stop=final_answer first-try failures=['malformed_arguments'] final=malformed_arguments
+[stress 11/12] case B seed 9881: calls=4 invalid=2 rescued=2 stop=final_answer first-try failures=['malformed_arguments'] final=clean
+[stress 12/12] case C seed 9882: calls=2 invalid=1 rescued=1 stop=final_answer first-try failures=['malformed_arguments'] final=lost_multistep_chain
+
+=== NATURAL (real schemas) (24 attempts: {'A': 8, 'B': 8, 'C': 8}) ===
+first-try tool calls: 56  (invalid: 0, rescued by repair: 0)
+well-formed call rate   BEFORE repair 100.0%   AFTER repair 100.0%
+clean attempts          BEFORE repair 24/24   AFTER repair 24/24
+failure category              before repair  after repair
+malformed_arguments                       0             0
+unknown_tool                              0             0
+text_when_tool_required                   0             0
+lost_multistep_chain                      0             0
+mean steps 3.33 | tool calls 2.33 | tokens 2926.7 | latency 4657.1 ms | stops {'final_answer': 24}
+
+=== STRESS (drifted schemas shown to the model: deliberate fault injection) (12 attempts: {'A': 4, 'B': 4, 'C': 4}) ===
+first-try tool calls: 21  (invalid: 20, rescued by repair: 19)
+well-formed call rate   BEFORE repair 4.8%   AFTER repair 95.2%
+clean attempts          BEFORE repair 0/12   AFTER repair 8/12
+failure category              before repair  after repair
+malformed_arguments                      12             1
+unknown_tool                              0             0
+text_when_tool_required                   0             0
+lost_multistep_chain                      0             3
+mean steps 4.33 | tool calls 3.33 | tokens 4229.4 | latency 5548.4 ms | stops {'final_answer': 12}
+
+wrote raw/part2_reliability_attempts.json / .csv, part2_reliability_summary.json
+EXIT=0
+
+===== HW7 Part 2 - REAL PowerShell output run by the student on their own machine (pasted verbatim; used as the terminal evidence in the report) - 2026-10-24T22:36:05 =====
+NOTE: identical to the run logged above except that the model's trailing double-spaces (markdown line breaks) were dropped by copy-paste.
+PS C:\Users\patel\data260-9871> code\venv\Scripts\python.exe code\run_part2_demo.py tasks
+Run at 2026-10-24T22:36:05 | model qwen3:8b, temperature 0.0, seed 9871 | mode: tasks
+ground truth from MySQL: first 'Lions' result = fixture 5; team hosting the most fixtures = Santa Clara Strikers (417); first two 'Basketball' fixtures = [4, 5]
+
+====================================================================================================
+TASK A: search, then detail lookup of the first result
+user> Search for fixtures matching 'Lions' and give me the full details of the first search result.
+====================================================================================================
+[step 1] CALL  search_fixtures {"query": "Lions"}  -> ok
+[step 2] CALL  fixture_details {"id": 6}  -> ok
+[step 3] FINAL ANSWER: The full details of the first search result are:
+
+- **Fixture Name:** Lions vs Strikers (Soccer #4)
+- **Teams Players:** Milpitas Lions vs Santa Clara Strikers
+- **Fixture Code:** FX-9871-00006
+- *...
+[done] stop_reason=final_answer steps=3 total tool calls=2 (executed 2, invalid 0, repaired 0) tokens=3163
+
+agent> The full details of the first search result are:
+
+- **Fixture Name:** Lions vs Strikers (Soccer #4)
+- **Teams Players:** Milpitas Lions vs Santa Clara Strikers
+- **Fixture Code:** FX-9871-00006
+- **Spots Available:** 22
+- **Home Team:** Oakland Titans (Team Code: TM-0006)
+
+[chain check] FAIL: searched but never called fixture_details on the first result (id 5)
+
+====================================================================================================
+TASK B: aggregate question, then one supporting example
+user> Which team hosts the most fixtures? Then find one fixture hosted by that team as a supporting example.
+====================================================================================================
+[step 1] CALL  team_fixture_counts {"min_fixtures": 1}  -> ok
+[step 2] CALL  search_fixtures {"query": "Santa Clara Strikers", "limit": 1}  -> ok
+[step 3] FINAL ANSWER: The team that hosts the most fixtures is **Santa Clara Strikers** with 417 fixtures. Here is one fixture hosted by them as an example: **Lions vs Strikers (Soccer #4)** with fixture code **FX-9871-...
+[done] stop_reason=final_answer steps=3 total tool calls=2 (executed 2, invalid 0, repaired 0) tokens=2618
+
+agent> The team that hosts the most fixtures is **Santa Clara Strikers** with 417 fixtures. Here is one fixture hosted by them as an example: **Lions vs Strikers (Soccer #4)** with fixture code **FX-9871-00006**.
+
+[chain check] PASS: got the counts, then looked for a supporting example
+
+====================================================================================================
+TASK C: compare two entities: search plus two detail lookups
+user> Compare the first two fixtures matching 'Basketball': give each one's fixture code and its home team.
+====================================================================================================
+[step 1] CALL  search_fixtures {"query": "Basketball", "limit": 2}  -> ok
+[step 2] CALL  fixture_details {"id": 4}  -> ok
+[step 3] CALL  fixture_details {"id": 5}  -> ok
+[step 4] FINAL ANSWER: Here are the details for the first two fixtures matching 'Basketball':
+
+1. **Fixture Code:** FX-9871-00004
+   **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)
+
+2. **Fixture Code:** FX-9871-0...
+[done] stop_reason=final_answer steps=4 total tool calls=3 (executed 3, invalid 0, repaired 0) tokens=2997
+
+agent> Here are the details for the first two fixtures matching 'Basketball':
+
+1. **Fixture Code:** FX-9871-00004
+   **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)
+
+2. **Fixture Code:** FX-9871-00005
+   **Home Team:** Santa Clara Strikers (Team Code: TM-0004)
+
+[chain check] PASS: looked up both fixtures
+
+====================================================================================================
+SUMMARY
+====================================================================================================
+case     needs>=  tool calls  stop_reason      ok
+A              2           2  final_answer     NO
+B              2           2  final_answer     yes
+C              3           3  final_answer     yes
+
+full tool-invocation log: C:\Users\patel\data260-9871\reports\hw07\raw\agent_runs.jsonl
+PS C:\Users\patel\data260-9871>
+
+===== HW7 Part 2 - REAL PowerShell output, error-recovery mode (pasted verbatim) - 2026-10-24T22:41:02 =====
+PS C:\Users\patel\data260-9871> code\venv\Scripts\python.exe code\run_part2_demo.py errors
+Run at 2026-10-24T22:41:02 | model qwen3:8b, temperature 0.0, seed 9871 | mode: errors
+
+====================================================================================================
+ERROR RECOVERY (a): what execute_tool itself says for bad input (no model involved)
+====================================================================================================
+execute_tool('fixture_details', {'id': 99999999}) ->
+    {"ok": false, "data": null, "error": "fixture 99999999 not found"}
+execute_tool('fixture_details', {'id': -5}) ->
+    {"ok": false, "data": null, "error": "id must be a positive integer, got -5"}
+execute_tool('search_fixtures', {'query': 'ab'}) ->
+    {"ok": false, "data": null, "error": "query too broad: must be at least 3 characters"}
+
+====================================================================================================
+ERROR RECOVERY (b): the agent asked about a fixture that does not exist
+user> Show me the details of fixture 99999999.
+====================================================================================================
+[step 1] CALL  fixture_details {"id": 99999999}  -> ERROR: fixture 99999999 not found
+[step 2] FINAL ANSWER: The fixture with ID 99999999 was not found in the database. Please check the ID and try again.
+[done] stop_reason=final_answer steps=2 total tool calls=1 (executed 1, invalid 0, repaired 0) tokens=1031
+
+agent> The fixture with ID 99999999 was not found in the database. Please check the ID and try again.
+[recovery check] crashed: no | stop_reason=final_answer | the tool's ok=false message was returned to the model: True
+
+====================================================================================================
+ERROR RECOVERY (c): an impossible id (negative)
+user> Show me the details of fixture -5.
+====================================================================================================
+[step 1] FINAL ANSWER: The fixture ID "-5" is not a valid integer. Please provide a valid fixture ID.
+[done] stop_reason=final_answer steps=1 total tool calls=0 (executed 0, invalid 0, repaired 0) tokens=468
+
+agent> The fixture ID "-5" is not a valid integer. Please provide a valid fixture ID.
+[recovery check] stop_reason=final_answer | invalid calls=0 repaired=0 failed repairs=0
+
+====================================================================================================
+SUMMARY
+====================================================================================================
+case     needs>=  tool calls  stop_reason      ok
+ERR-1          1           1  final_answer     yes
+ERR-2          0           0  final_answer     yes
+
+full tool-invocation log: C:\Users\patel\data260-9871\reports\hw07\raw\agent_runs.jsonl
+PS C:\Users\patel\data260-9871>

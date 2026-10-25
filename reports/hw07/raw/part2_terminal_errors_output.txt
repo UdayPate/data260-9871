@@ -1,0 +1,43 @@
+PS C:\Users\patel\data260-9871> code\venv\Scripts\python.exe code\run_part2_demo.py errors
+Run at 2026-10-24T22:41:02 | model qwen3:8b, temperature 0.0, seed 9871 | mode: errors
+
+====================================================================================================
+ERROR RECOVERY (a): what execute_tool itself says for bad input (no model involved)
+====================================================================================================
+execute_tool('fixture_details', {'id': 99999999}) ->
+    {"ok": false, "data": null, "error": "fixture 99999999 not found"}
+execute_tool('fixture_details', {'id': -5}) ->
+    {"ok": false, "data": null, "error": "id must be a positive integer, got -5"}
+execute_tool('search_fixtures', {'query': 'ab'}) ->
+    {"ok": false, "data": null, "error": "query too broad: must be at least 3 characters"}
+
+====================================================================================================
+ERROR RECOVERY (b): the agent asked about a fixture that does not exist
+user> Show me the details of fixture 99999999.
+====================================================================================================
+[step 1] CALL  fixture_details {"id": 99999999}  -> ERROR: fixture 99999999 not found
+[step 2] FINAL ANSWER: The fixture with ID 99999999 was not found in the database. Please check the ID and try again.
+[done] stop_reason=final_answer steps=2 total tool calls=1 (executed 1, invalid 0, repaired 0) tokens=1031
+
+agent> The fixture with ID 99999999 was not found in the database. Please check the ID and try again.
+[recovery check] crashed: no | stop_reason=final_answer | the tool's ok=false message was returned to the model: True
+
+====================================================================================================
+ERROR RECOVERY (c): an impossible id (negative)
+user> Show me the details of fixture -5.
+====================================================================================================
+[step 1] FINAL ANSWER: The fixture ID "-5" is not a valid integer. Please provide a valid fixture ID.
+[done] stop_reason=final_answer steps=1 total tool calls=0 (executed 0, invalid 0, repaired 0) tokens=468
+
+agent> The fixture ID "-5" is not a valid integer. Please provide a valid fixture ID.
+[recovery check] stop_reason=final_answer | invalid calls=0 repaired=0 failed repairs=0
+
+====================================================================================================
+SUMMARY
+====================================================================================================
+case     needs>=  tool calls  stop_reason      ok
+ERR-1          1           1  final_answer     yes
+ERR-2          0           0  final_answer     yes
+
+full tool-invocation log: C:\Users\patel\data260-9871\reports\hw07\raw\agent_runs.jsonl
+PS C:\Users\patel\data260-9871>

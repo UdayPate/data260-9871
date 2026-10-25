@@ -1,0 +1,197 @@
+experiment,attempt,case,seed,temperature,stop_reason,steps,tool_calls_total,tool_calls_executed,tool_calls_invalid,invalid_repaired,failed_repairs,first_try_calls,first_try_invalid,first_try_invalid_rescued,first_try_failures,final_failure,chain_complete,chain_note,prompt_tokens,completion_tokens,latency_ms,final_answer
+natural,1,A,9871,0.7,final_answer,3,2,2,0,0,0,2,0,0,,,True,"searched 'Lions', then looked up the first result",3032,128,4902.7,"The full details of the first search result are:
+
+- **Fixture Name:** Wolves vs Lions (Basketball #3)
+- **Teams/Players:** San Jose Wolves vs Sunnyvale Lions
+- **Fixture Code:** FX-9871-00005
+- **Spots Available:** 22
+- **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)"
+natural,2,B,9872,0.7,final_answer,3,2,2,0,0,0,2,0,0,,,True,"got the counts, then looked for a supporting example",2502,116,4043.3,"The team that hosts the most fixtures is **Santa Clara Strikers** with 417 fixtures. A supporting example is the fixture **""Lions vs Strikers (Soccer #4)""** with the code **FX-9871-00006**, which they host."
+natural,3,C,9873,0.7,final_answer,4,3,3,0,0,0,3,0,0,,,True,looked up both fixtures,2838,159,5181.7,"Here are the details for the first two fixtures matching 'Basketball':
+
+1. **Fixture Code:** FX-9871-00004  
+   **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)
+
+2. **Fixture Code:** FX-9871-00005  
+   **Home Team:** Santa Clara Strikers (Team Code: TM-0004)"
+natural,4,A,9874,0.7,final_answer,3,2,2,0,0,0,2,0,0,,,True,"searched 'Lions', then looked up the first result",3032,128,4696.2,"The full details of the first search result are:
+
+- **Fixture Name**: Wolves vs Lions (Basketball #3)
+- **Teams/Players**: San Jose Wolves vs Sunnyvale Lions
+- **Fixture Code**: FX-9871-00005
+- **Spots Available**: 22
+- **Home Team**: Sunnyvale Falcons (Team Code: TM-0005)"
+natural,5,B,9875,0.7,final_answer,3,2,2,0,0,0,2,0,0,,,True,"got the counts, then looked for a supporting example",2502,136,4549.5,"The team that hosts the most fixtures is **Santa Clara Strikers** with 417 fixtures. Here is one fixture hosted by them as an example:  
+**Fixture Name:** Lions vs Strikers (Soccer #4)  
+**Fixture Code:** FX-9871-00006  
+**Spots Available:** 22  
+**Home Team:** Santa Clara Strikers"
+natural,6,C,9876,0.7,final_answer,4,3,3,0,0,0,3,0,0,,,True,looked up both fixtures,2838,159,5158.0,"Here are the details for the first two fixtures matching ""Basketball"":
+
+1. **Fixture Code:** FX-9871-00004  
+   **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)
+
+2. **Fixture Code:** FX-9871-00005  
+   **Home Team:** Santa Clara Strikers (Team Code: TM-0004)"
+natural,7,A,9877,0.7,final_answer,3,2,2,0,0,0,2,0,0,,,True,"searched 'Lions', then looked up the first result",3032,128,4585.3,"The full details of the first search result are:
+
+- **Fixture Name:** Wolves vs Lions (Basketball #3)
+- **Teams/Players:** San Jose Wolves vs Sunnyvale Lions
+- **Fixture Code:** FX-9871-00005
+- **Spots Available:** 22
+- **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)"
+natural,8,B,9878,0.7,final_answer,3,2,2,0,0,0,2,0,0,,,True,"got the counts, then looked for a supporting example",2502,118,4122.3,"The team that hosts the most fixtures is **Santa Clara Strikers** with 417 fixtures. Here is one fixture hosted by them as an example: **Lions vs Strikers (Soccer #4)**, with the fixture code **FX-9871-00006**."
+natural,9,C,9879,0.7,final_answer,4,3,3,0,0,0,3,0,0,,,True,looked up both fixtures,2838,159,5199.7,"Here are the details for the first two fixtures matching 'Basketball':
+
+1. **Fixture Code:** FX-9871-00004  
+   **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)
+
+2. **Fixture Code:** FX-9871-00005  
+   **Home Team:** Santa Clara Strikers (Team Code: TM-0004)"
+natural,10,A,9880,0.7,final_answer,3,2,2,0,0,0,2,0,0,,,True,"searched 'Lions', then looked up the first result",3032,128,4645.0,"The full details of the first search result are:
+
+- **Fixture Name**: Wolves vs Lions (Basketball #3)
+- **Teams/Players**: San Jose Wolves vs Sunnyvale Lions
+- **Fixture Code**: FX-9871-00005
+- **Spots Available**: 22
+- **Home Team**: Sunnyvale Falcons (Team Code: TM-0005)"
+natural,11,B,9881,0.7,final_answer,3,2,2,0,0,0,2,0,0,,,True,"got the counts, then looked for a supporting example",2502,116,4008.9,"The team that hosts the most fixtures is **Santa Clara Strikers** with 417 fixtures. A supporting example is the fixture **""Lions vs Strikers (Soccer #4)""** with the code **FX-9871-00006**, which they host."
+natural,12,C,9882,0.7,final_answer,4,3,3,0,0,0,3,0,0,,,True,looked up both fixtures,2838,164,5231.7,"Here are the first two fixtures matching 'Basketball' with their fixture codes and home teams:
+
+1. **Fixture Code:** FX-9871-00004  
+   **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)
+
+2. **Fixture Code:** FX-9871-00005  
+   **Home Team:** Santa Clara Strikers (Team Code: TM-0004)"
+natural,13,A,9883,0.7,final_answer,3,2,2,0,0,0,2,0,0,,,True,"searched 'Lions', then looked up the first result",3032,128,4649.9,"The full details of the first search result are:
+
+- **Fixture Name:** Wolves vs Lions (Basketball #3)
+- **Teams/Players:** San Jose Wolves vs Sunnyvale Lions
+- **Fixture Code:** FX-9871-00005
+- **Spots Available:** 22
+- **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)"
+natural,14,B,9884,0.7,final_answer,3,2,2,0,0,0,2,0,0,,,True,"got the counts, then looked for a supporting example",2502,118,4055.3,"The team that hosts the most fixtures is **Santa Clara Strikers** with 417 fixtures. Here's an example of one fixture they host: **""Lions vs Strikers (Soccer #4)""** with the fixture code **FX-9871-00006**."
+natural,15,C,9885,0.7,final_answer,4,3,3,0,0,0,3,0,0,,,True,looked up both fixtures,2838,159,5099.9,"Here are the details for the first two fixtures matching 'Basketball':
+
+1. **Fixture Code**: FX-9871-00004  
+   **Home Team**: Sunnyvale Falcons (Team Code: TM-0005)
+
+2. **Fixture Code**: FX-9871-00005  
+   **Home Team**: Santa Clara Strikers (Team Code: TM-0004)"
+natural,16,A,9886,0.7,final_answer,3,2,2,0,0,0,2,0,0,,,True,"searched 'Lions', then looked up the first result",3032,128,4603.8,"The full details of the first search result are:
+
+- **Fixture Name**: Wolves vs Lions (Basketball #3)
+- **Teams/Players**: San Jose Wolves vs Sunnyvale Lions
+- **Fixture Code**: FX-9871-00005
+- **Spots Available**: 22
+- **Home Team**: Sunnyvale Falcons (Team Code: TM-0005)"
+natural,17,B,9887,0.7,final_answer,3,2,2,0,0,0,2,0,0,,,True,"got the counts, then looked for a supporting example",2502,118,4080.7,The team that hosts the most fixtures is **Santa Clara Strikers** with 417 fixtures. Here's one fixture hosted by them as an example: **Lions vs Strikers (Soccer #4)** with a fixture code of **FX-9871-00006**.
+natural,18,C,9888,0.7,final_answer,4,3,3,0,0,0,3,0,0,,,True,looked up both fixtures,2838,159,5148.7,"Here are the details for the first two fixtures matching 'Basketball':
+
+1. **Fixture Code:** FX-9871-00004  
+   **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)
+
+2. **Fixture Code:** FX-9871-00005  
+   **Home Team:** Santa Clara Strikers (Team Code: TM-0004)"
+natural,19,A,9889,0.7,final_answer,3,2,2,0,0,0,2,0,0,,,True,"searched 'Lions', then looked up the first result",3032,128,4613.4,"The full details of the first search result are:
+
+- **Fixture Name:** Wolves vs Lions (Basketball #3)
+- **Teams/Players:** San Jose Wolves vs Sunnyvale Lions
+- **Fixture Code:** FX-9871-00005
+- **Spots Available:** 22
+- **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)"
+natural,20,B,9890,0.7,final_answer,3,2,2,0,0,0,2,0,0,,,True,"got the counts, then looked for a supporting example",2502,118,4044.2,"The team that hosts the most fixtures is **Santa Clara Strikers** with 417 fixtures. Here is one fixture hosted by them as an example: **Lions vs Strikers (Soccer #4)**, with the fixture code **FX-9871-00006**."
+natural,21,C,9891,0.7,final_answer,4,3,3,0,0,0,3,0,0,,,True,looked up both fixtures,2838,159,5124.0,"Here are the details for the first two fixtures matching 'Basketball':
+
+1. **Fixture Code:** FX-9871-00004  
+   **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)
+
+2. **Fixture Code:** FX-9871-00005  
+   **Home Team:** Santa Clara Strikers (Team Code: TM-0004)"
+natural,22,A,9892,0.7,final_answer,3,2,2,0,0,0,2,0,0,,,True,"searched 'Lions', then looked up the first result",3032,128,4689.6,"The full details of the first search result are:
+
+- **Fixture Name:** Wolves vs Lions (Basketball #3)
+- **Teams/Players:** San Jose Wolves vs Sunnyvale Lions
+- **Fixture Code:** FX-9871-00005
+- **Spots Available:** 22
+- **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)"
+natural,23,B,9893,0.7,final_answer,3,2,2,0,0,0,2,0,0,,,True,"got the counts, then looked for a supporting example",2502,124,4194.2,"The team that hosts the most fixtures is **Santa Clara Strikers** with 417 fixtures. Here is one example of a fixture hosted by them: **Lions vs Strikers (Soccer #4)**, with a fixture code **FX-9871-00006** and 22 spots available."
+natural,24,C,9894,0.7,final_answer,4,3,3,0,0,0,3,0,0,,,True,looked up both fixtures,2838,159,5141.8,"Here are the details for the first two fixtures matching 'Basketball':
+
+1. **Fixture Code:** FX-9871-00004  
+   **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)
+
+2. **Fixture Code:** FX-9871-00005  
+   **Home Team:** Santa Clara Strikers (Team Code: TM-0004)"
+stress,1,A,9871,0.7,final_answer,5,4,2,2,2,0,2,2,2,malformed_arguments,,True,"searched 'Lions', then looked up the first result",5700,172,6139.9,"The full details of the first search result are as follows:
+
+- **Fixture Name:** Wolves vs Lions (Basketball #3)
+- **Teams/Players:** San Jose Wolves vs Sunnyvale Lions
+- **Fixture Code:** FX-9871-00005
+- **Spots Available:** 22
+- **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)"
+stress,2,B,9872,0.7,final_answer,5,4,2,2,2,0,2,2,2,malformed_arguments,,True,"got the counts, then looked for a supporting example",4852,173,5978.4,"The team that hosts the most fixtures is **Milpitas Lions** with **416 fixtures**.
+
+As a supporting example, one fixture hosted by the Milpitas Lions is:  
+**Lions vs Strikers (Soccer #4)** with the fixture code **FX-9871-00006**."
+stress,3,C,9873,0.7,final_answer,3,2,1,1,1,0,1,1,1,malformed_arguments,lost_multistep_chain,False,"never looked up fixture id(s) [4, 5]",1936,127,4016.1,"Here are the details for the first two fixtures matching 'Basketball':
+
+1. **Fixture Code:** FX-9871-00004  
+   **Home Team:** San Jose Strikers
+
+2. **Fixture Code:** FX-9871-00005  
+   **Home Team:** San Jose Wolves"
+stress,4,A,9874,0.7,final_answer,5,4,2,2,2,0,2,2,2,malformed_arguments,,True,"searched 'Lions', then looked up the first result",5700,172,6103.2,"The full details of the first search result are as follows:
+
+- **Fixture Name**: Wolves vs Lions (Basketball #3)
+- **Teams/Players**: San Jose Wolves vs Sunnyvale Lions
+- **Fixture Code**: FX-9871-00005
+- **Spots Available**: 22
+- **Home Team**: Sunnyvale Falcons (Team Code: TM-0005)"
+stress,5,B,9875,0.7,final_answer,5,4,2,2,2,0,2,2,2,malformed_arguments,,True,"got the counts, then looked for a supporting example",4870,210,6814.0,"The team **Santa Clara Strikers** hosts the most fixtures with **417** fixtures. 
+
+As a supporting example, one of their fixtures is:  
+**Lions vs Strikers (Soccer #4)** with fixture code **FX-9871-00006** and **22 spots available**."
+stress,6,C,9876,0.7,final_answer,6,5,3,2,2,0,3,2,2,malformed_arguments,,True,looked up both fixtures,5277,207,6646.2,"Here are the details for the first two fixtures matching ""Basketball"":
+
+1. **Fixture Code:** FX-9871-00004  
+   **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)
+
+2. **Fixture Code:** FX-9871-00005  
+   **Home Team:** Santa Clara Strikers (Team Code: TM-0004)"
+stress,7,A,9877,0.7,final_answer,5,4,2,2,2,0,2,2,2,malformed_arguments,,True,"searched 'Lions', then looked up the first result",5700,176,6227.7,"The full details of the first search result are:
+
+- **Fixture Name:** Wolves vs Lions (Basketball #3)
+- **Teams/Players:** San Jose Wolves vs Sunnyvale Lions
+- **Fixture Code:** FX-9871-00005
+- **Spots Available:** 22
+- **Home Team:** Sunnyvale Falcons (Team Code: TM-0005, Team ID: 5)"
+stress,8,B,9878,0.7,final_answer,5,4,2,2,2,0,2,2,2,malformed_arguments,,True,"got the counts, then looked for a supporting example",4874,230,7264.8,"The team **Santa Clara Strikers** hosts the most fixtures with **417** fixtures.
+
+As a supporting example, one fixture hosted by the Santa Clara Strikers is:
+- **Fixture Name:** Lions vs Strikers (Soccer #4)
+- **Fixture Code:** FX-9871-00006
+- **Home Team:** Santa Clara Strikers
+- **Spots Available:** 22"
+stress,9,C,9879,0.7,final_answer,3,2,1,1,1,0,1,1,1,malformed_arguments,lost_multistep_chain,False,"never looked up fixture id(s) [4, 5]",1936,127,4105.8,"Here are the details for the first two fixtures matching 'Basketball':
+
+1. **Fixture Code:** FX-9871-00004  
+   **Home Team:** San Jose Strikers
+
+2. **Fixture Code:** FX-9871-00005  
+   **Home Team:** San Jose Wolves"
+stress,10,A,9880,0.7,final_answer,2,1,0,1,0,0,1,1,0,malformed_arguments,malformed_arguments,False,never searched for 'Lions',1099,53,1883.7,"The function call had an error. The correct parameter for the search is ""query"" instead of ""text"". Let me fix that and try again."
+stress,11,B,9881,0.7,final_answer,5,4,2,2,2,0,2,2,2,malformed_arguments,,True,"got the counts, then looked for a supporting example",4874,228,7368.1,"The team that hosts the most fixtures is **Santa Clara Strikers** with **417** fixtures.
+
+Here is one fixture hosted by the Santa Clara Strikers:
+- **Fixture Name**: Lions vs Strikers (Soccer #4)
+- **Fixture Code**: FX-9871-00006
+- **Home Team**: Santa Clara Strikers
+- **Spots Available**: 22"
+stress,12,C,9882,0.7,final_answer,3,2,1,1,1,0,1,1,1,malformed_arguments,lost_multistep_chain,False,"never looked up fixture id(s) [4, 5]",1936,124,4032.7,"The first two fixtures matching 'Basketball' are:
+
+1. **Fixture Code:** FX-9871-00004  
+   **Home Team:** San Jose Strikers  
+
+2. **Fixture Code:** FX-9871-00005  
+   **Home Team:** San Jose Wolves"

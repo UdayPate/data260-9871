@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "domain": "community sports league fixtures (DOMAIN_ID 7), database s9871_rel",
+  "note": "The three fixed verification cases for HW7 Parts 2-3 (and reused by Part 5). Each needs at least two tool calls with no follow-up prompting. The expected outcomes are NOT stored here: they are recomputed from the live database by code/agent_cases.py, so they cannot drift from the data.",
+  "cases": [
+    {
+      "id": "A",
+      "name": "search, then detail lookup of the first result",
+      "prompt": "Search for fixtures matching 'Lions' and give me the full details of the first search result.",
+      "min_tool_calls": 2,
+      "expected_chain": "search_fixtures(query contains 'lions') then fixture_details(id = id of the FIRST search result)"
+    },
+    {
+      "id": "B",
+      "name": "aggregate question, then one supporting example",
+      "prompt": "Which team hosts the most fixtures? Then find one fixture hosted by that team as a supporting example.",
+      "min_tool_calls": 2,
+      "expected_chain": "team_fixture_counts then a follow-up search_fixtures or fixture_details that finds an example fixture"
+    },
+    {
+      "id": "C",
+      "name": "compare two entities: search plus two detail lookups",
+      "prompt": "Compare the first two fixtures matching 'Basketball': give each one's fixture code and its home team.",
+      "min_tool_calls": 3,
+      "expected_chain": "search_fixtures(query contains 'basketball') then fixture_details for BOTH of the first two result ids"
+    }
+  ]
+}
