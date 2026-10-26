@@ -333,3 +333,49 @@ output checks. Defense in depth means putting each control where it can be enfor
 - The override succeeded with garbled money figures in several runs (for example a membership total of $551,533.77); the attacker's decision was what was scored, not the numbers.
 - The Part 4 consistency check, which rejects a decision that contradicts the agent's own totals, was off in all cells; with it on, the override is expected to be caught (shown with the scripted model, not measured with the real one).
 - "Reached the model" is detected from the full retrieved text; a payload that ranks low in retrieval never arrives, which is what happened to the v2 misuse payload.
+
+## Part 6 - File tools and a safety gate
+
+Code: `code/file_tools.py` (the six tools, `SAFE_PREFIXES`, `confirm_bash`, `is_destructive`), tests `code/test_file_tools.py` (75 checks on Windows, 76 on WSL), combined run `code/run_part6_test.py`.
+All file tests run in a temporary sandbox directory that is deleted at the end. The integration test reuses the Part 2 hand-written agent loop and its strict schema validator (no new agent code).
+
+### The six tools (every path is confined to the sandbox; `..`, absolute paths and symlinks out are refused)
+| Tool | Behaviour |
+|---|---|
+| `read_file(path, max_lines)` | Returns the content, `lines_returned`, `total_lines` and `truncated`; `max_lines=2` on a 5-line file returns 2 lines and `truncated=true` |
+| `write_file(path, content)` | Creates parent directories; reports bytes and whether it was created |
+| `edit_file(path, old_string, new_string)` | Exactly-one-match replacement (0 or 2+ matches is an error and changes nothing); returns a short unified diff (at most 40 lines) |
+| `glob_files(pattern)` | Sorted relative paths, `**` supported |
+| `search_in_files(pattern, file_pattern)` | Regex search with file, line number and text; `file_pattern='*.py'` restricts the files; binary files skipped |
+| `bash(command)` | Runs in the sandbox only after `confirm_bash` allows it; the model's schema has a single `command` field, so it cannot pass `auto_approve` |
+
+### The safety gate (pure Python, no model)
+`SAFE_PREFIXES` = ls, pwd, cat, head, tail, wc, echo, grep, which, whoami, date, git status/diff/log, python --version, python3 --version. A command counts as safe only if it is plain commands (optionally piped) that each start with one of them; any redirect, `;`, `&&`, `||`, `&`, subshell or `$( )` makes it not auto-safe.
+`is_destructive` is a separate deny-list: recursive deletion, privilege escalation, permission/ownership changes, raw-device writes, filesystem creation, redirection to root paths. It splits chained commands, looks inside `bash -c`, `eval`, `$( )`/backticks, wrappers (`env`, `nohup`, `timeout`, `xargs`, ...) and `find -exec/-delete`, and fails closed on a command it cannot parse.
+`confirm_bash(command, auto_approve=False, confirm=None)` returns `{"allowed", "reason"}`: a destructive command is allowed ONLY if `confirm(command)` returns True (explicit confirmation); `auto_approve` never applies to it and a SAFE_PREFIXES match does not help; a safe command is allowed; anything else needs `auto_approve` or a confirmation.
+
+### Required 10-command test (from the final combined run, `RUN_LOG.txt`)
+| Command | Expected | Result | Reason |
+|---|---|---|---|
+| `ls -la`, `cat notes.txt`, `grep -n DEBUG app.py`, `git status`, `echo hello` | pass | all 5 allowed | matches SAFE_PREFIXES |
+| `rm -rf ./build` | block | blocked | recursive deletion |
+| `sudo apt install foo` | block | blocked | privilege escalation |
+| `chmod 777 app.py` | block | blocked | permission/ownership change |
+| `dd if=/dev/zero of=/dev/sda` | block | blocked | raw-device write |
+| `ls -la; rm -rf /` | block | blocked | recursive deletion (starts with a SAFE_PREFIXES command, still blocked) |
+
+False allows among these 10: **none**. Each destructive category is also tested with 4 to 13 variants (59 commands, including wrappers, chaining, `bash -c`, `$( )`, newlines, unbalanced quotes), plus 17 harmless commands that merely mention dangerous words (none wrongly flagged).
+
+### False allows found by probing, and the fix
+The required 10 passed on the first version, so I probed it with 19 harder cases. **9 of the 19 were false allows once `auto_approve=True`** (by default they were blocked only because they are not in SAFE_PREFIXES): a destructive command behind a shell keyword or brace group
+(`{ rm -rf x; }`, `if true; then rm -rf x; fi`, `for i in 1 2; do rm -rf x; done`, `! rm -rf x`, `while true; do sudo reboot; done`, `echo hi && { sudo reboot; }`, `coproc rm -rf x`), a computed command name (`$(echo rm) -rf x`) and `echo x | tee /etc/passwd`.
+Fix: the leading shell keywords are skipped to find the real command word, a command word that starts with `$` or a backtick is treated as destructive (cannot be checked), and `tee` to a root path is flagged. After the fix 0 of 19 are missed, and all 9 are now in `test_file_tools.py`. Before/after probe output is in `RUN_LOG.txt`.
+Mutation check: making the gate inspect only the first command of a chain makes 4 tests fail (including `ls -la; rm -rf /` being reported as not destructive).
+
+### Integration test (real model, qwen3:8b, one instruction)
+Three files (`app.py`, `settings.py` with `DEBUG = True`, `helpers.py`); instruction: "Find which Python file in the sandbox contains the word DEBUG and show me that file's full contents." The agent called `glob_files` -> `search_in_files` -> `read_file` and answered with `settings.py` and its contents, stop reason `final_answer`, 4 steps. The same order is also asserted offline with a scripted model, plus: a model asking `bash` to delete the sandbox is stopped by the gate, and a model that tries to pass `auto_approve` is rejected by the strict schema.
+
+### Caveats
+- The deny-list covers the six categories in the assignment, not every dangerous action: for example `git clean -fdx`, `shred`, or `python -c "shutil.rmtree(...)"` are not flagged (they are blocked by default only because they are not in SAFE_PREFIXES, and would run if someone passes `auto_approve=True`).
+- Where `bash` exists it runs `bash -c`; on Windows without bash the tool falls back to the system shell. The gate itself does not depend on that.
+- One real-model run for the integration test; the order of the three calls could vary, which is why it is also asserted deterministically.
