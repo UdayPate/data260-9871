@@ -2739,3 +2739,117 @@ ls -la; rm -rf /                   block    blocked  True            blocked: de
 false allows (a command that should be blocked but was allowed): none
 
 RESULT: ALL PASSED
+
+===== HW7 verify_hw07.py - FULL run on the committed code (16 checks, includes two real-model runs) - 2026-10-26T12:10:02 =====
+verify_hw07 run at 2026-10-26T12:10:02
+... required files and screenshots exist
+    [PASS] All 45 required files and 9 key screenshots present.
+... Part 1: login 401 on a wrong password, JWT on success, /auth/me needs a valid token (no token / tampered token -> 401)
+    [PASS] wrong password 401; login 200 (JWT with 3 parts: True); /auth/me with token 200 role=reader; no token 401; tampered token 401
+... Part 1: role-based access (reader/writer 403, anonymous 401, moderator allowed) and MySQL unchanged, bcrypt hashes only
+    [PASS] DELETE by reader 403, writer 403, anonymous 401, moderator 404 (404 = allowed through, row absent); reader GET /api/teams 200; fixtures in MySQL before/after 5000/5000; users with a non-bcrypt hash: 0
+... Part 2: tool-schema and agent-loop test-suite (offline)
+    [PASS] code/test_agent_loop.py: exit 0, 58/58 checks passed
+... Part 2: the hand-written agent loop answers a question with the real model and real tools
+    [PASS] stop_reason=final_answer, tool calls executed=1, invalid=0, steps=2
+... Part 3: Reflexion verifier and bounded-loop test-suite (offline)
+    [PASS] code/test_reflexion.py: exit 0, 47/47 checks passed
+... Part 3: the saved 36-run comparison is complete and reports false rejections
+    [PASS] 36 paired runs recorded; stop reasons {'budget_exhausted': 1, 'human_review': 15, 'success': 20}; verifier vs database oracle: 0 false rejections, 0 false acceptances
+... Part 4: tool and agent test-suite (offline)
+    [PASS] code/bikeshare/test_bikeshare.py: exit 0, 92/92 checks passed
+... Part 4: csv_sql refuses writes and the calculator is safe, on the real scenario file
+    [PASS] scenario rows=528; 4/4 write attempts refused=True; rows after=528; calculator ok=True
+... Part 4: the UI and API paths (real server + headless browser, no model)
+    [PASS] test_ui.py --skip-run: exit 0, 13/13 checks passed
+... Part 4: the agent answers the pay-per-use scenario with the real model on the live pricing page
+
+
+
+
+    [PASS] stop_reason=final_answer, steps=11, 90.55 s, tools used=['calculator', 'csv_sql', 'policy_retriever'], snapshot sha256 matches its saved text=True, decision='Pay Per Ride/Minute' (reference 'Pay Per Ride/Minute'), all numbers match the independent recomputation=True
+... Part 5: injection defenses and attack-scoring test-suite (offline, scripted obedient model)
+    [PASS] code/bikeshare/test_security.py: exit 0, 33/33 checks passed
+... Part 5: saved attack results and the hostile fixture are complete
+    [PASS] 9 cells x 5 runs recorded; override/before succeeded 5/5; fixture + 3 attack cases saved
+... Part 6: file-tool and safety-gate test-suite
+    [PASS] code/test_file_tools.py: exit 0, 75/75 checks passed
+... Part 6: the 5-pass / 5-block safety-gate contract, directly
+    [PASS] 5/5 allowed, 5/5 blocked; destructive allowed only with explicit confirmation (auto_approve does not apply): True
+... Ruff passes on the HW7 code
+    [PASS] All checks passed!
+
+16/16 checks passed -> C:\Users\patel\data260-9871\reports\hw07\verification.json
+
+===== HW7 verify_hw07.py --fast - DELIBERATELY BROKEN STATE 1 (code/file_tools.py removed): the script must fail; exit code 1 - 2026-10-26T12:13:22 =====
+### BROKEN STATE 1: code/file_tools.py removed
+verify_hw07 run at 2026-10-26T12:12:47
+... required files and screenshots exist
+    [FAIL] Missing files ['code/file_tools.py']; missing screenshots []
+... Part 1: login 401 on a wrong password, JWT on success, /auth/me needs a valid token (no token / tampered token -> 401)
+    [PASS] wrong password 401; login 200 (JWT with 3 parts: True); /auth/me with token 200 role=reader; no token 401; tampered token 401
+... Part 1: role-based access (reader/writer 403, anonymous 401, moderator allowed) and MySQL unchanged, bcrypt hashes only
+    [PASS] DELETE by reader 403, writer 403, anonymous 401, moderator 404 (404 = allowed through, row absent); reader GET /api/teams 200; fixtures in MySQL before/after 5000/5000; users with a non-bcrypt hash: 0
+... Part 2: tool-schema and agent-loop test-suite (offline)
+    [PASS] code/test_agent_loop.py: exit 0, 58/58 checks passed
+... Part 3: Reflexion verifier and bounded-loop test-suite (offline)
+    [PASS] code/test_reflexion.py: exit 0, 47/47 checks passed
+... Part 3: the saved 36-run comparison is complete and reports false rejections
+    [PASS] 36 paired runs recorded; stop reasons {'budget_exhausted': 1, 'human_review': 15, 'success': 20}; verifier vs database oracle: 0 false rejections, 0 false acceptances
+... Part 4: tool and agent test-suite (offline)
+    [PASS] code/bikeshare/test_bikeshare.py: exit 0, 92/92 checks passed
+... Part 4: csv_sql refuses writes and the calculator is safe, on the real scenario file
+    [PASS] scenario rows=528; 4/4 write attempts refused=True; rows after=528; calculator ok=True
+... Part 4: the UI and API paths (real server + headless browser, no model)
+    [PASS] test_ui.py --skip-run: exit 0, 13/13 checks passed
+... Part 5: injection defenses and attack-scoring test-suite (offline, scripted obedient model)
+    [PASS] code/bikeshare/test_security.py: exit 0, 33/33 checks passed
+... Part 5: saved attack results and the hostile fixture are complete
+    [PASS] 9 cells x 5 runs recorded; override/before succeeded 5/5; fixture + 3 attack cases saved
+... Part 6: file-tool and safety-gate test-suite
+    [FAIL] code/test_file_tools.py: exit 1; no summary line.  <module>
+    from file_tools import (SAFE_PREFIXES, TOOL_SPECS, FileTools, ToolError, confirm_bash, destructive_reason, is_destructive,  # noqa: E402
+ModuleNotFoundError: No module named 'file_tools'
+
+... Part 6: the 5-pass / 5-block safety-gate contract, directly
+    [FAIL] Exception: ModuleNotFoundError: No module named 'file_tools'
+... Ruff passes on the HW7 code
+    [FAIL] Found 1 error.
+
+10/14 checks passed -> C:\Users\patel\data260-9871\reports\hw07\verification.json
+exit=1
+
+===== HW7 verify_hw07.py --fast - DELIBERATELY BROKEN STATE 2 (csv_sql's SQLite authorizer removed): the script must fail; exit code 1 - 2026-10-26T12:13:56 =====
+### BROKEN STATE 2: csv_sql's SQLite authorizer removed
+verify_hw07 run at 2026-10-26T12:13:23
+... required files and screenshots exist
+    [PASS] All 45 required files and 9 key screenshots present.
+... Part 1: login 401 on a wrong password, JWT on success, /auth/me needs a valid token (no token / tampered token -> 401)
+    [PASS] wrong password 401; login 200 (JWT with 3 parts: True); /auth/me with token 200 role=reader; no token 401; tampered token 401
+... Part 1: role-based access (reader/writer 403, anonymous 401, moderator allowed) and MySQL unchanged, bcrypt hashes only
+    [PASS] DELETE by reader 403, writer 403, anonymous 401, moderator 404 (404 = allowed through, row absent); reader GET /api/teams 200; fixtures in MySQL before/after 5000/5000; users with a non-bcrypt hash: 0
+... Part 2: tool-schema and agent-loop test-suite (offline)
+    [PASS] code/test_agent_loop.py: exit 0, 58/58 checks passed
+... Part 3: Reflexion verifier and bounded-loop test-suite (offline)
+    [PASS] code/test_reflexion.py: exit 0, 47/47 checks passed
+... Part 3: the saved 36-run comparison is complete and reports false rejections
+    [PASS] 36 paired runs recorded; stop reasons {'budget_exhausted': 1, 'human_review': 15, 'success': 20}; verifier vs database oracle: 0 false rejections, 0 false acceptances
+... Part 4: tool and agent test-suite (offline)
+    [FAIL] code/bikeshare/test_bikeshare.py: exit 1, 90/92 checks passed
+... Part 4: csv_sql refuses writes and the calculator is safe, on the real scenario file
+    [FAIL] scenario rows=528; 4/4 write attempts refused=False; rows after=0; calculator ok=True
+... Part 4: the UI and API paths (real server + headless browser, no model)
+    [PASS] test_ui.py --skip-run: exit 0, 13/13 checks passed
+... Part 5: injection defenses and attack-scoring test-suite (offline, scripted obedient model)
+    [FAIL] code/bikeshare/test_security.py: exit 1, 30/33 checks passed
+... Part 5: saved attack results and the hostile fixture are complete
+    [PASS] 9 cells x 5 runs recorded; override/before succeeded 5/5; fixture + 3 attack cases saved
+... Part 6: file-tool and safety-gate test-suite
+    [PASS] code/test_file_tools.py: exit 0, 75/75 checks passed
+... Part 6: the 5-pass / 5-block safety-gate contract, directly
+    [PASS] 5/5 allowed, 5/5 blocked; destructive allowed only with explicit confirmation (auto_approve does not apply): True
+... Ruff passes on the HW7 code
+    [PASS] All checks passed!
+
+11/14 checks passed -> C:\Users\patel\data260-9871\reports\hw07\verification.json
+exit=1

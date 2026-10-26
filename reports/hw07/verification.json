@@ -1,0 +1,112 @@
+{
+  "homework": 7,
+  "sid4": "9871",
+  "commit_hash": "d8f553b48e6be0dec5db3898bd45deea0a1781bc",
+  "tracked_files_modified_since_commit": [],
+  "model_config": "qwen3:8b via Ollama (thinking off, temperature 0, sampling seed = VERIFY_SEED during this run); sentence-transformers/all-MiniLM-L6-v2 (policy retrieval); FastAPI + MySQL (s9871_rel) with JWT bearer auth; LangChain create_agent (Part 4); hand-written loop (Parts 2, 3, 6)",
+  "SEED": "9871",
+  "VERIFY_SEED": "269871",
+  "port_base": 8871,
+  "run_at": "2026-10-26T12:10:02",
+  "checks": [
+    {
+      "check": "required files and screenshots exist",
+      "passed": true,
+      "detail": "All 45 required files and 9 key screenshots present.",
+      "seconds": 0.0
+    },
+    {
+      "check": "Part 1: login 401 on a wrong password, JWT on success, /auth/me needs a valid token (no token / tampered token -> 401)",
+      "passed": true,
+      "detail": "wrong password 401; login 200 (JWT with 3 parts: True); /auth/me with token 200 role=reader; no token 401; tampered token 401",
+      "seconds": 0.4
+    },
+    {
+      "check": "Part 1: role-based access (reader/writer 403, anonymous 401, moderator allowed) and MySQL unchanged, bcrypt hashes only",
+      "passed": true,
+      "detail": "DELETE by reader 403, writer 403, anonymous 401, moderator 404 (404 = allowed through, row absent); reader GET /api/teams 200; fixtures in MySQL before/after 5000/5000; users with a non-bcrypt hash: 0",
+      "seconds": 0.8
+    },
+    {
+      "check": "Part 2: tool-schema and agent-loop test-suite (offline)",
+      "passed": true,
+      "detail": "code/test_agent_loop.py: exit 0, 58/58 checks passed",
+      "seconds": 0.7
+    },
+    {
+      "check": "Part 2: the hand-written agent loop answers a question with the real model and real tools",
+      "passed": true,
+      "detail": "stop_reason=final_answer, tool calls executed=1, invalid=0, steps=2",
+      "seconds": 13.0
+    },
+    {
+      "check": "Part 3: Reflexion verifier and bounded-loop test-suite (offline)",
+      "passed": true,
+      "detail": "code/test_reflexion.py: exit 0, 47/47 checks passed",
+      "seconds": 1.6
+    },
+    {
+      "check": "Part 3: the saved 36-run comparison is complete and reports false rejections",
+      "passed": true,
+      "detail": "36 paired runs recorded; stop reasons {'budget_exhausted': 1, 'human_review': 15, 'success': 20}; verifier vs database oracle: 0 false rejections, 0 false acceptances",
+      "seconds": 0.0
+    },
+    {
+      "check": "Part 4: tool and agent test-suite (offline)",
+      "passed": true,
+      "detail": "code/bikeshare/test_bikeshare.py: exit 0, 92/92 checks passed",
+      "seconds": 6.6
+    },
+    {
+      "check": "Part 4: csv_sql refuses writes and the calculator is safe, on the real scenario file",
+      "passed": true,
+      "detail": "scenario rows=528; 4/4 write attempts refused=True; rows after=528; calculator ok=True",
+      "seconds": 0.0
+    },
+    {
+      "check": "Part 4: the UI and API paths (real server + headless browser, no model)",
+      "passed": true,
+      "detail": "test_ui.py --skip-run: exit 0, 13/13 checks passed",
+      "seconds": 23.3
+    },
+    {
+      "check": "Part 4: the agent answers the pay-per-use scenario with the real model on the live pricing page",
+      "passed": true,
+      "detail": "stop_reason=final_answer, steps=11, 90.55 s, tools used=['calculator', 'csv_sql', 'policy_retriever'], snapshot sha256 matches its saved text=True, decision='Pay Per Ride/Minute' (reference 'Pay Per Ride/Minute'), all numbers match the independent recomputation=True",
+      "seconds": 91.1
+    },
+    {
+      "check": "Part 5: injection defenses and attack-scoring test-suite (offline, scripted obedient model)",
+      "passed": true,
+      "detail": "code/bikeshare/test_security.py: exit 0, 33/33 checks passed",
+      "seconds": 1.9
+    },
+    {
+      "check": "Part 5: saved attack results and the hostile fixture are complete",
+      "passed": true,
+      "detail": "9 cells x 5 runs recorded; override/before succeeded 5/5; fixture + 3 attack cases saved",
+      "seconds": 0.0
+    },
+    {
+      "check": "Part 6: file-tool and safety-gate test-suite",
+      "passed": true,
+      "detail": "code/test_file_tools.py: exit 0, 75/75 checks passed",
+      "seconds": 0.4
+    },
+    {
+      "check": "Part 6: the 5-pass / 5-block safety-gate contract, directly",
+      "passed": true,
+      "detail": "5/5 allowed, 5/5 blocked; destructive allowed only with explicit confirmation (auto_approve does not apply): True",
+      "seconds": 0.0
+    },
+    {
+      "check": "Ruff passes on the HW7 code",
+      "passed": true,
+      "detail": "All checks passed!",
+      "seconds": 0.7
+    }
+  ],
+  "passed": 16,
+  "total": 16,
+  "all_passed": true
+}
