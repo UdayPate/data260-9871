@@ -148,3 +148,67 @@ Raw per-attempt data: `raw/part2_reliability_attempts.csv` / `.json` (with full 
 - The reliability numbers measure tool-call well-formedness and chain completion, not answer correctness (see the note under the verification tasks).
 - Natural runs used temperature 0.7 with a different seed per attempt; the three demonstration tasks used temperature 0, seed 9871.
 - The repair policy is a design choice: each invalid call gets a reprompt, and a run stops after 2 failed repairs.
+
+## Part 3 - Bounded Reflexion
+
+Code: `code/agent_verifiers.py` (deterministic grounded verifiers for the three cases + a database-truth oracle), `code/reflexion.py` (`run_with_reflexion`,
+`ReflectionStore`), `code/test_reflexion.py` (47/47 offline checks, plus a mutation check: removing the 2-retry cap makes the run crash, so the suite does catch it),
+`code/run_part3_demo.py` (live demo), `code/measure_reflexion.py` (paired experiment). Model: qwen3:8b via Ollama, thinking off.
+
+### How it works
+- Attempt 0 is the ordinary Part 2 loop. A deterministic verifier checks the final answer against what the tools actually returned in that run (for example, "the home team
+  stated for this fixture matches the `fixture_details` result"). It never calls a model and never reads the database.
+- If it fails, the model writes ONE short reflection (at most two sentences: what went wrong, naming the tool call or observation, and a strategy). It is stored with the
+  evidence (failed claims, tool calls, key observations, no transcript and no reasoning) under `(user_id, run_id)`, and the task is retried with the reflection in the
+  USER message, fenced as untrusted notes.
+- Bounds: at most 2 reflexion retries, 10 tool calls and 15,000 tokens across all attempts and reflections. Stop reasons: `success`, `budget_exhausted`, `human_review`.
+- Reflections are sanitised, can only be read back by the exact `(user_id, run_id)` pair, and cannot widen permissions: unknown tools are rejected by the validator and
+  the HW5 query-length rule still blocks bad searches (tested with a malicious stored reflection).
+
+### Original vs Reflexion: 36 paired runs (12 per case), temperature 0.7, seeds 9871 to 9882
+The original arm IS attempt 0 of the Reflexion arm (same run), so the comparison is paired. Task success = the answer is true according to the MySQL oracle (the verifier
+agreed with the oracle on every attempt, see below). Retries were decided by the verifier only; the oracle was used for scoring.
+
+| | Original | With Reflexion |
+|---|---:|---:|
+| Task success (oracle) | 9/36 = 25.0% | 20/36 = 55.6% |
+| Unsupported claims in the final answer (total) | 41 | 20 |
+| Retry rate (runs that needed >= 1 retry) | n/a | 27/36 = 75% |
+| Mean tool calls per run | 2.33 | 6.00 |
+| Mean tokens per run | 2,928 | 8,529 |
+| Mean latency per run | 4.8 s | 13.3 s |
+| Verifier false rejections / false acceptances (82 attempts) | 0 / 0 | 0 / 0 |
+
+| Case | Success original -> Reflexion | Unsupported claims original -> Reflexion | Retry rate | Tokens per run original -> Reflexion |
+|---|---:|---:|---:|---:|
+| A: first 'Lions' fixture and its home team | 9/12 -> 12/12 | 6 -> 0 | 3/12 | 3,162 -> 4,031 |
+| B: team with most fixtures + a supporting example | 0/12 -> 0/12 | 12 -> 12 | 12/12 | 2,626 -> 12,398 |
+| C: first two 'Basketball' fixtures and home teams | 0/12 -> 8/12 | 23 -> 8 | 12/12 | 2,995 -> 9,157 |
+
+Stop reasons over the 36 Reflexion runs: `success` 20, `human_review` 15, `budget_exhausted` 1 (Case B item 8 hit the 15,000-token budget during its second retry).
+
+**What this shows.** Reflexion more than doubled the number of correct answers (9 to 20 of 36) and halved the unsupported claims, but it cost about 2.9x the tokens and 2.8x the
+latency. Spread over the 11 extra successes, that is roughly 18,300 extra tokens per additional correct answer. It helps when the failure is a checkable mistake the model can fix
+by looking something up (Case A: guessed home team; Case C: swapped home teams, fixed by verifying each fixture with `fixture_details`). Where attempt 0 already passed (9 runs) it
+costs nothing: no reflection is written.
+
+**Case B never improved (0/12 before and after).** This is a real failure, not a verifier artifact. Checked directly in MySQL: Santa Clara Strikers host the most fixtures (417), so the
+task is solvable. The model usually names the right team but then cites FX-9871-00006 ("Lions vs Strikers") as one of its hosted fixtures; the database says that fixture is hosted by
+Oakland Titans. `search_fixtures` matches on text, so searching a team name also returns fixtures where that team is the away side, and the retries repeated the same mistake instead
+of verifying the host with `fixture_details`. Verifier claim B3 failed in 35 of the 36 Case B attempts (the other attempt ended with no answer), and B1 (wrong top team) in 11 of them. Reflection alone could not change a tool
+limitation the model did not work around.
+
+### Verifier false rejections and false acceptances
+**None observed** in 82 judged attempts (36 original runs plus 46 retries), comparing the verifier with the database oracle. That means none were seen in this sample, not that
+none are possible. Two limits: the verifier and the oracle share the same answer-text parsing, so a parsing blind spot would show up in both and cancel out; and the verifier is
+deliberately stricter than the oracle (a correct fact the agent never confirmed with a tool would be rejected for lack of grounding, a false rejection by definition), but no such
+answer happened here.
+
+### Caveats
+- 12 runs per case on one model is a small sample; success rates are indicative, not precise.
+- A fixed seed did not reproduce a run exactly in Ollama. The first demo run of Task A (temperature 0) failed on attempt 0, a later re-run passed. The demo therefore uses Task C,
+  which failed attempt 0 in all 12 experiment runs. The experiment's own numbers come from one recorded run (`raw/part3_*`).
+- A run that ends with no final answer (budget stop) counts as a failure but contributes 0 unsupported claims, because there is no answer to contain claims.
+- Budgets are checked between model calls, so a run can overshoot slightly (15,539 tokens against a 15,000 budget in one run).
+- Raw data: `raw/part3_attempts.json` (every attempt with verifier and oracle result), `raw/part3_items.csv`, `raw/part3_summary.json`, `raw/part3_reflections.jsonl`
+  (every stored reflection with its evidence), `raw/part3_agent_runs.jsonl`, `raw/part3_demo_reflections.jsonl` (the live demo).

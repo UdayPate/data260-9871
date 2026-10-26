@@ -1,0 +1,113 @@
+{
+  "started": "2026-10-24T23:26:28",
+  "model": "qwen3:8b",
+  "temperature": 0.7,
+  "seed_base": 9871,
+  "items_per_case": 12,
+  "budgets": {
+    "max_tool_calls": 10,
+    "max_total_tokens": 15000,
+    "max_retries": 2
+  },
+  "overall": {
+    "original": {
+      "runs": 36,
+      "task_success_oracle": 9,
+      "task_success_verifier": 9,
+      "unsupported_claims_total": 41,
+      "retry_rate": 0.0,
+      "mean_tool_calls": 2.33,
+      "mean_tokens": 2927.64,
+      "mean_latency_ms": 4784.31
+    },
+    "reflexion": {
+      "runs": 36,
+      "task_success_oracle": 20,
+      "task_success_verifier": 20,
+      "unsupported_claims_total": 20,
+      "retry_rate": 0.75,
+      "mean_tool_calls": 6.0,
+      "mean_tokens": 8528.72,
+      "mean_latency_ms": 13313.49
+    }
+  },
+  "per_case": {
+    "A": {
+      "original": {
+        "runs": 12,
+        "task_success_oracle": 9,
+        "task_success_verifier": 9,
+        "unsupported_claims_total": 6,
+        "retry_rate": 0.0,
+        "mean_tool_calls": 2.0,
+        "mean_tokens": 3161.83,
+        "mean_latency_ms": 5096.19
+      },
+      "reflexion": {
+        "runs": 12,
+        "task_success_oracle": 12,
+        "task_success_verifier": 12,
+        "unsupported_claims_total": 0,
+        "retry_rate": 0.25,
+        "mean_tool_calls": 2.5,
+        "mean_tokens": 4030.75,
+        "mean_latency_ms": 6587.23
+      }
+    },
+    "B": {
+      "original": {
+        "runs": 12,
+        "task_success_oracle": 0,
+        "task_success_verifier": 0,
+        "unsupported_claims_total": 12,
+        "retry_rate": 0.0,
+        "mean_tool_calls": 2.0,
+        "mean_tokens": 2626.0,
+        "mean_latency_ms": 4151.05
+      },
+      "reflexion": {
+        "runs": 12,
+        "task_success_oracle": 0,
+        "task_success_verifier": 0,
+        "unsupported_claims_total": 12,
+        "retry_rate": 1.0,
+        "mean_tool_calls": 7.75,
+        "mean_tokens": 12398.08,
+        "mean_latency_ms": 18160.85
+      }
+    },
+    "C": {
+      "original": {
+        "runs": 12,
+        "task_success_oracle": 0,
+        "task_success_verifier": 0,
+        "unsupported_claims_total": 23,
+        "retry_rate": 0.0,
+        "mean_tool_calls": 3.0,
+        "mean_tokens": 2995.08,
+        "mean_latency_ms": 5105.69
+      },
+      "reflexion": {
+        "runs": 12,
+        "task_success_oracle": 8,
+        "task_success_verifier": 8,
+        "unsupported_claims_total": 8,
+        "retry_rate": 1.0,
+        "mean_tool_calls": 7.75,
+        "mean_tokens": 9157.33,
+        "mean_latency_ms": 15192.4
+      }
+    }
+  },
+  "stop_reasons": {
+    "budget_exhausted": 1,
+    "human_review": 15,
+    "success": 20
+  },
+  "verifier_vs_oracle_all_attempts": {
+    "attempts_judged": 82,
+    "false_rejections": 0,
+    "false_acceptances": 0
+  },
+  "disagreements": []
+}

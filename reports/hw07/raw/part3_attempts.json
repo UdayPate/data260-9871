@@ -1,0 +1,1308 @@
+[
+  {
+    "case": "A",
+    "item": 0,
+    "attempt": 0,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "A1",
+      "A2"
+    ],
+    "tool_calls": 2,
+    "tokens": 3163,
+    "latency_ms": 11414.1,
+    "final_answer": "The full details of the first search result are:\n\n- **Fixture Name:** Lions vs Strikers (Soccer #4)\n- **Teams Players:** Milpitas Lions vs Santa Clara Strikers\n- **Fixture Code:** FX-9871-00006\n- **Spots Available:** 22\n- **Home Team:** Oakland Titans (Team Code: TM-0006)"
+  },
+  {
+    "case": "A",
+    "item": 0,
+    "attempt": 1,
+    "verifier_pass": true,
+    "oracle_correct": true,
+    "disagreement": null,
+    "unsupported_claims": 0,
+    "failed_claims": [],
+    "tool_calls": 2,
+    "tokens": 3414,
+    "latency_ms": 4700.2,
+    "final_answer": "The full details of the first search result are as follows:\n\n- **Fixture Name**: Wolves vs Lions (Basketball #3)\n- **Teams/Players**: San Jose Wolves vs Sunnyvale Lions\n- **Fixture Code**: FX-9871-00005\n- **Spots Available**: 22\n- **Home Team**: Sunnyvale Falcons (Team Code: TM-0005)"
+  },
+  {
+    "case": "A",
+    "item": 1,
+    "attempt": 0,
+    "verifier_pass": true,
+    "oracle_correct": true,
+    "disagreement": null,
+    "unsupported_claims": 0,
+    "failed_claims": [],
+    "tool_calls": 2,
+    "tokens": 3161,
+    "latency_ms": 4640.1,
+    "final_answer": "The full details of the first search result are as follows:\n\n- **Fixture Name:** Wolves vs Lions (Basketball #3)\n- **Teams Players:** San Jose Wolves vs Sunnyvale Lions\n- **Fixture Code:** FX-9871-00005\n- **Spots Available:** 22\n- **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)"
+  },
+  {
+    "case": "A",
+    "item": 2,
+    "attempt": 0,
+    "verifier_pass": true,
+    "oracle_correct": true,
+    "disagreement": null,
+    "unsupported_claims": 0,
+    "failed_claims": [],
+    "tool_calls": 2,
+    "tokens": 3162,
+    "latency_ms": 4524.1,
+    "final_answer": "The full details of the first search result are as follows:\n\n- **Fixture Name:** Wolves vs Lions (Basketball #3)\n- **Teams/Players:** San Jose Wolves vs Sunnyvale Lions\n- **Fixture Code:** FX-9871-00005\n- **Spots Available:** 22\n- **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)"
+  },
+  {
+    "case": "A",
+    "item": 3,
+    "attempt": 0,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "A1",
+      "A2"
+    ],
+    "tool_calls": 2,
+    "tokens": 3166,
+    "latency_ms": 4698.4,
+    "final_answer": "The full details of the first search result are as follows:\n\n- **Fixture Name**: Lions vs Strikers (Soccer #4)\n- **Teams/Players**: Milpitas Lions vs Santa Clara Strikers\n- **Fixture Code**: FX-9871-00006\n- **Spots Available**: 22\n- **Home Team**: Oakland Titans (Team Code: TM-0006)"
+  },
+  {
+    "case": "A",
+    "item": 3,
+    "attempt": 1,
+    "verifier_pass": true,
+    "oracle_correct": true,
+    "disagreement": null,
+    "unsupported_claims": 0,
+    "failed_claims": [],
+    "tool_calls": 2,
+    "tokens": 3397,
+    "latency_ms": 4459.9,
+    "final_answer": "The full details of the first search result are:\n\n- **Fixture Name:** Wolves vs Lions (Basketball #3)\n- **Teams/Players:** San Jose Wolves vs Sunnyvale Lions\n- **Fixture Code:** FX-9871-00005\n- **Spots Available:** 22\n- **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)"
+  },
+  {
+    "case": "A",
+    "item": 4,
+    "attempt": 0,
+    "verifier_pass": true,
+    "oracle_correct": true,
+    "disagreement": null,
+    "unsupported_claims": 0,
+    "failed_claims": [],
+    "tool_calls": 2,
+    "tokens": 3160,
+    "latency_ms": 4508.7,
+    "final_answer": "The full details of the first search result are:\n\n- **Fixture Name:** Wolves vs Lions (Basketball #3)\n- **Teams/Players:** San Jose Wolves vs Sunnyvale Lions\n- **Fixture Code:** FX-9871-00005\n- **Spots Available:** 22\n- **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)"
+  },
+  {
+    "case": "A",
+    "item": 5,
+    "attempt": 0,
+    "verifier_pass": true,
+    "oracle_correct": true,
+    "disagreement": null,
+    "unsupported_claims": 0,
+    "failed_claims": [],
+    "tool_calls": 2,
+    "tokens": 3160,
+    "latency_ms": 4573.5,
+    "final_answer": "The full details of the first search result are:\n\n- **Fixture Name**: Wolves vs Lions (Basketball #3)\n- **Teams/Players**: San Jose Wolves vs Sunnyvale Lions\n- **Fixture Code**: FX-9871-00005\n- **Spots Available**: 22\n- **Home Team**: Sunnyvale Falcons (Team Code: TM-0005)"
+  },
+  {
+    "case": "A",
+    "item": 6,
+    "attempt": 0,
+    "verifier_pass": true,
+    "oracle_correct": true,
+    "disagreement": null,
+    "unsupported_claims": 0,
+    "failed_claims": [],
+    "tool_calls": 2,
+    "tokens": 3160,
+    "latency_ms": 4443.6,
+    "final_answer": "The full details of the first search result are:\n\n- **Fixture Name:** Wolves vs Lions (Basketball #3)\n- **Teams/Players:** San Jose Wolves vs Sunnyvale Lions\n- **Fixture Code:** FX-9871-00005\n- **Spots Available:** 22\n- **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)"
+  },
+  {
+    "case": "A",
+    "item": 7,
+    "attempt": 0,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "A1",
+      "A2"
+    ],
+    "tool_calls": 2,
+    "tokens": 3170,
+    "latency_ms": 4586.7,
+    "final_answer": "The full details of the first search result for fixtures matching 'Lions' are:\n\n- **Fixture Name:** Lions vs Strikers (Soccer #4)\n- **Teams Players:** Milpitas Lions vs Santa Clara Strikers\n- **Fixture Code:** FX-9871-00006\n- **Spots Available:** 22\n- **Home Team:** Oakland Titans (Team Code: TM-0006)"
+  },
+  {
+    "case": "A",
+    "item": 7,
+    "attempt": 1,
+    "verifier_pass": true,
+    "oracle_correct": true,
+    "disagreement": null,
+    "unsupported_claims": 0,
+    "failed_claims": [],
+    "tool_calls": 2,
+    "tokens": 2158,
+    "latency_ms": 4455.7,
+    "final_answer": "The full details of the first search result for fixtures matching 'Lions' are as follows:\n\n- **Fixture Name:** Wolves vs Lions (Basketball #3)\n- **Teams Players:** San Jose Wolves vs Sunnyvale Lions\n- **Fixture Code:** FX-9871-00005\n- **Spots Available:** 22\n- **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)"
+  },
+  {
+    "case": "A",
+    "item": 8,
+    "attempt": 0,
+    "verifier_pass": true,
+    "oracle_correct": true,
+    "disagreement": null,
+    "unsupported_claims": 0,
+    "failed_claims": [],
+    "tool_calls": 2,
+    "tokens": 3160,
+    "latency_ms": 4566.3,
+    "final_answer": "The full details of the first search result are:\n\n- **Fixture Name:** Wolves vs Lions (Basketball #3)\n- **Teams/Players:** San Jose Wolves vs Sunnyvale Lions\n- **Fixture Code:** FX-9871-00005\n- **Spots Available:** 22\n- **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)"
+  },
+  {
+    "case": "A",
+    "item": 9,
+    "attempt": 0,
+    "verifier_pass": true,
+    "oracle_correct": true,
+    "disagreement": null,
+    "unsupported_claims": 0,
+    "failed_claims": [],
+    "tool_calls": 2,
+    "tokens": 3160,
+    "latency_ms": 4403.8,
+    "final_answer": "The full details of the first search result are:\n\n- **Fixture Name**: Wolves vs Lions (Basketball #3)\n- **Teams/Players**: San Jose Wolves vs Sunnyvale Lions\n- **Fixture Code**: FX-9871-00005\n- **Spots Available**: 22\n- **Home Team**: Sunnyvale Falcons (Team Code: TM-0005)"
+  },
+  {
+    "case": "A",
+    "item": 10,
+    "attempt": 0,
+    "verifier_pass": true,
+    "oracle_correct": true,
+    "disagreement": null,
+    "unsupported_claims": 0,
+    "failed_claims": [],
+    "tool_calls": 2,
+    "tokens": 3160,
+    "latency_ms": 4424.5,
+    "final_answer": "The full details of the first search result are:\n\n- **Fixture Name:** Wolves vs Lions (Basketball #3)\n- **Teams/Players:** San Jose Wolves vs Sunnyvale Lions\n- **Fixture Code:** FX-9871-00005\n- **Spots Available:** 22\n- **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)"
+  },
+  {
+    "case": "A",
+    "item": 11,
+    "attempt": 0,
+    "verifier_pass": true,
+    "oracle_correct": true,
+    "disagreement": null,
+    "unsupported_claims": 0,
+    "failed_claims": [],
+    "tool_calls": 2,
+    "tokens": 3160,
+    "latency_ms": 4370.5,
+    "final_answer": "The full details of the first search result are:\n\n- **Fixture Name:** Wolves vs Lions (Basketball #3)\n- **Teams/Players:** San Jose Wolves vs Sunnyvale Lions\n- **Fixture Code:** FX-9871-00005\n- **Spots Available:** 22\n- **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)"
+  },
+  {
+    "case": "B",
+    "item": 0,
+    "attempt": 0,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 1,
+    "failed_claims": [
+      "B3"
+    ],
+    "tool_calls": 2,
+    "tokens": 2618,
+    "latency_ms": 3844.8,
+    "final_answer": "The team that hosts the most fixtures is **Santa Clara Strikers** with 417 fixtures. Here's one fixture hosted by them as an example: **Lions vs Strikers (Soccer #4)** with fixture code **FX-9871-00006**."
+  },
+  {
+    "case": "B",
+    "item": 0,
+    "attempt": 1,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "B1",
+      "B3"
+    ],
+    "tool_calls": 3,
+    "tokens": 4285,
+    "latency_ms": 5365.2,
+    "final_answer": "The team that hosts the most fixtures is **Oakland Titans** with 417 fixtures. \n\nAs a supporting example, one fixture hosted by Oakland Titans is:\n- **Fixture Name:** Tigers vs Titans (Cricket #55)\n- **Fixture Code:** FX-9871-00057\n- **Home Team:** Fremont Wolves (Team Code: TM-0009)"
+  },
+  {
+    "case": "B",
+    "item": 0,
+    "attempt": 2,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 1,
+    "failed_claims": [
+      "B3"
+    ],
+    "tool_calls": 3,
+    "tokens": 4490,
+    "latency_ms": 4780.0,
+    "final_answer": "The team that hosts the most fixtures is **Santa Clara Strikers** with 417 fixtures. A supporting example of a fixture hosted by them is **\"Lions vs Strikers (Soccer #4)\"** with the fixture code **FX-9871-00006**."
+  },
+  {
+    "case": "B",
+    "item": 1,
+    "attempt": 0,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 1,
+    "failed_claims": [
+      "B3"
+    ],
+    "tool_calls": 2,
+    "tokens": 2626,
+    "latency_ms": 4096.0,
+    "final_answer": "The team that hosts the most fixtures is **Santa Clara Strikers** with 417 fixtures. \n\nAs a supporting example, one fixture hosted by them is: **Lions vs Strikers (Soccer #4)** with fixture code **FX-9871-00006** and 22 spots available."
+  },
+  {
+    "case": "B",
+    "item": 1,
+    "attempt": 1,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "B1",
+      "B3"
+    ],
+    "tool_calls": 3,
+    "tokens": 4267,
+    "latency_ms": 4753.1,
+    "final_answer": "The team that hosts the most fixtures is **Oakland Titans** with 417 fixtures.\n\nAs a supporting example, one fixture hosted by Oakland Titans is:  \n**Tigers vs Titans (Cricket #55)**, with the home team being **Fremont Wolves** (team code TM-0009)."
+  },
+  {
+    "case": "B",
+    "item": 1,
+    "attempt": 2,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 1,
+    "failed_claims": [
+      "B3"
+    ],
+    "tool_calls": 3,
+    "tokens": 4556,
+    "latency_ms": 6023.7,
+    "final_answer": "The team that hosts the most fixtures is **Santa Clara Strikers**, **Sunnyvale Falcons**, and **Oakland Titans**, as they are all tied with 417 fixtures each. \n\nAs a supporting example, one fixture hosted by **Oakland Titans** is:  \n**Fixture Name:** Tigers vs Titans (Cricket #55)  \n**Fixture Code:** FX-9871-00057  \n**Home Team:** Fremont Wolves  \n**Spots Available:** 22"
+  },
+  {
+    "case": "B",
+    "item": 2,
+    "attempt": 0,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 1,
+    "failed_claims": [
+      "B3"
+    ],
+    "tool_calls": 2,
+    "tokens": 2615,
+    "latency_ms": 3782.9,
+    "final_answer": "The team that hosts the most fixtures is **Santa Clara Strikers** with **417 fixtures**. \n\nAs a supporting example, one fixture hosted by Santa Clara Strikers is:  \n**Lions vs Strikers (Soccer #4)** with **22 spots available**."
+  },
+  {
+    "case": "B",
+    "item": 2,
+    "attempt": 1,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 1,
+    "failed_claims": [
+      "B3"
+    ],
+    "tool_calls": 3,
+    "tokens": 3951,
+    "latency_ms": 4718.9,
+    "final_answer": "The team that hosts the most fixtures is **Santa Clara Strikers** (team code: TM-0004) with 417 fixtures. However, no fixtures were found for this team in the search. Please ensure the data is accurate or provide additional details if needed."
+  },
+  {
+    "case": "B",
+    "item": 2,
+    "attempt": 2,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "B1",
+      "B3"
+    ],
+    "tool_calls": 3,
+    "tokens": 4229,
+    "latency_ms": 5641.4,
+    "final_answer": "The team that hosts the most fixtures is **Fremont Wolves (TM-0009)** with **417 fixtures**.\n\nAs a supporting example, one of the fixtures hosted by Fremont Wolves is:\n- **Fixture Name:** Wolves vs Falcons (Volleyball #415)\n- **Fixture Code:** FX-9871-00417\n- **Home Team:** Fremont Wolves (TM-0009)"
+  },
+  {
+    "case": "B",
+    "item": 3,
+    "attempt": 0,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 1,
+    "failed_claims": [
+      "B3"
+    ],
+    "tool_calls": 2,
+    "tokens": 2621,
+    "latency_ms": 4126.6,
+    "final_answer": "The team that hosts the most fixtures is **Santa Clara Strikers** with 417 fixtures. Here's one fixture hosted by them as an example: **\"Lions vs Strikers (Soccer #4)\"** with the fixture code **FX-9871-00006**."
+  },
+  {
+    "case": "B",
+    "item": 3,
+    "attempt": 1,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "B1",
+      "B3"
+    ],
+    "tool_calls": 3,
+    "tokens": 4268,
+    "latency_ms": 5363.1,
+    "final_answer": "The team that hosts the most fixtures is **Oakland Titans** with 417 fixtures. \n\nAs a supporting example, one fixture hosted by Oakland Titans is:\n- **Fixture Name:** Tigers vs Titans (Cricket #55)\n- **Fixture Code:** FX-9871-00057\n- **Home Team:** Fremont Wolves\n- **Spots Available:** 22"
+  },
+  {
+    "case": "B",
+    "item": 3,
+    "attempt": 2,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 1,
+    "failed_claims": [
+      "B3"
+    ],
+    "tool_calls": 3,
+    "tokens": 4442,
+    "latency_ms": 4899.7,
+    "final_answer": "The team that hosts the most fixtures is **Santa Clara Strikers** with 417 fixtures. A supporting example of a fixture hosted by them is **\"Lions vs Strikers (Soccer #4)\"** with the fixture code **FX-9871-00006**."
+  },
+  {
+    "case": "B",
+    "item": 4,
+    "attempt": 0,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 1,
+    "failed_claims": [
+      "B3"
+    ],
+    "tool_calls": 2,
+    "tokens": 2619,
+    "latency_ms": 3905.2,
+    "final_answer": "The team that hosts the most fixtures is **Santa Clara Strikers** with 417 fixtures. Here is one fixture hosted by them as an example: **Lions vs Strikers (Soccer #4)** with the fixture code **FX-9871-00006**."
+  },
+  {
+    "case": "B",
+    "item": 4,
+    "attempt": 1,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "B1",
+      "B3"
+    ],
+    "tool_calls": 3,
+    "tokens": 4274,
+    "latency_ms": 5182.5,
+    "final_answer": "The team that hosts the most fixtures is **Oakland Titans** with 417 fixtures. \n\nAs a supporting example, one fixture hosted by Oakland Titans is:  \n**Tigers vs Titans (Cricket #55)** with the fixture code **FX-9871-00057**, and it has **22 spots available**."
+  },
+  {
+    "case": "B",
+    "item": 4,
+    "attempt": 2,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 1,
+    "failed_claims": [
+      "B3"
+    ],
+    "tool_calls": 2,
+    "tokens": 2920,
+    "latency_ms": 6993.9,
+    "final_answer": "The team that hosts the most fixtures is Santa Clara Strikers, Sunnyvale Falcons, Oakland Titans, Milpitas Eagles, San Jose Sharks, Fremont Wolves, Santa Clara Bears, and Oakland Panthers, all with 417 fixtures. \n\nA supporting example of a fixture hosted by Santa Clara Strikers is: **\"Lions vs Strikers (Soccer #4)\"** with the fixture code **FX-9871-00006**."
+  },
+  {
+    "case": "B",
+    "item": 5,
+    "attempt": 0,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 1,
+    "failed_claims": [
+      "B3"
+    ],
+    "tool_calls": 2,
+    "tokens": 2639,
+    "latency_ms": 4496.4,
+    "final_answer": "The team that hosts the most fixtures is **Santa Clara Strikers** with **417** fixtures. Here's one fixture hosted by them as an example:  \n**Fixture Name:** Lions vs Strikers (Soccer #4)  \n**Fixture Code:** FX-9871-00006  \n**Spots Available:** 22  \n**Home Team:** Santa Clara Strikers"
+  },
+  {
+    "case": "B",
+    "item": 5,
+    "attempt": 1,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "B1",
+      "B3"
+    ],
+    "tool_calls": 3,
+    "tokens": 5631,
+    "latency_ms": 5584.3,
+    "final_answer": "The team that hosts the most fixtures is **Oakland Titans** with **417 fixtures**.\n\nAs a supporting example, one fixture hosted by the Oakland Titans is:\n- **Fixture Name:** Lions vs Strikers (Soccer #4)\n- **Fixture Code:** FX-9871-00006\n- **Home Team:** Oakland Titans\n- **Spots Available:** 22"
+  },
+  {
+    "case": "B",
+    "item": 5,
+    "attempt": 2,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 1,
+    "failed_claims": [
+      "B3"
+    ],
+    "tool_calls": 3,
+    "tokens": 4511,
+    "latency_ms": 5034.6,
+    "final_answer": "The team that hosts the most fixtures is **Santa Clara Strikers** with 417 fixtures. \n\nAs a supporting example, one fixture hosted by Santa Clara Strikers is **\"Lions vs Strikers (Soccer #4)\"** with the fixture code **FX-9871-00006**."
+  },
+  {
+    "case": "B",
+    "item": 6,
+    "attempt": 0,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 1,
+    "failed_claims": [
+      "B3"
+    ],
+    "tool_calls": 2,
+    "tokens": 2637,
+    "latency_ms": 4458.4,
+    "final_answer": "The team that hosts the most fixtures is **Santa Clara Strikers** with 417 fixtures. Here's an example of one fixture they host:  \n**Fixture Name:** Lions vs Strikers (Soccer #4)  \n**Fixture Code:** FX-9871-00006  \n**Spots Available:** 22  \n**Home Team:** Santa Clara Strikers"
+  },
+  {
+    "case": "B",
+    "item": 6,
+    "attempt": 1,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "B1",
+      "B3"
+    ],
+    "tool_calls": 3,
+    "tokens": 5613,
+    "latency_ms": 5218.4,
+    "final_answer": "The team that hosts the most fixtures is **Oakland Titans** with 417 fixtures. \n\nAs a supporting example, one fixture hosted by the Oakland Titans is **\"Lions vs Strikers (Soccer #4)\"**, with the fixture code **FX-9871-00006**."
+  },
+  {
+    "case": "B",
+    "item": 6,
+    "attempt": 2,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 1,
+    "failed_claims": [
+      "B3"
+    ],
+    "tool_calls": 2,
+    "tokens": 3107,
+    "latency_ms": 4135.3,
+    "final_answer": "The team that hosts the most fixtures is **Santa Clara Strikers** with 417 fixtures. A supporting example is the fixture **\"Lions vs Strikers (Soccer #4)\"** with the code **FX-9871-00006**, hosted by the **Santa Clara Strikers**."
+  },
+  {
+    "case": "B",
+    "item": 7,
+    "attempt": 0,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 1,
+    "failed_claims": [
+      "B3"
+    ],
+    "tool_calls": 2,
+    "tokens": 2625,
+    "latency_ms": 4250.9,
+    "final_answer": "The team that hosts the most fixtures is **Santa Clara Strikers** with 417 fixtures. Here's one fixture hosted by them as an example: **Lions vs Strikers (Soccer #4)**, with fixture code **FX-9871-00006** and 22 spots available."
+  },
+  {
+    "case": "B",
+    "item": 7,
+    "attempt": 1,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "B1",
+      "B3"
+    ],
+    "tool_calls": 3,
+    "tokens": 4285,
+    "latency_ms": 4766.0,
+    "final_answer": "The team that hosts the most fixtures is **Oakland Titans** with 417 fixtures. A supporting example is the fixture **\"Tigers vs Titans (Cricket #55)\"** with the code **FX-9871-00057**, hosted by **Fremont Wolves**."
+  },
+  {
+    "case": "B",
+    "item": 7,
+    "attempt": 2,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 1,
+    "failed_claims": [
+      "B3"
+    ],
+    "tool_calls": 1,
+    "tokens": 1696,
+    "latency_ms": 3465.1,
+    "final_answer": "The team(s) that host the most fixtures are Santa Clara Strikers, Sunnyvale Falcons, Oakland Titans, Milpitas Eagles, San Jose Sharks, Fremont Wolves, Santa Clara Bears, and Oakland Panthers, each hosting 417 fixtures. \n\nTo provide a supporting example, let's select one fixture hosted by the Oakland Titans. I'll look up a fixture hosted by them."
+  },
+  {
+    "case": "B",
+    "item": 8,
+    "attempt": 0,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 1,
+    "failed_claims": [
+      "B3"
+    ],
+    "tool_calls": 2,
+    "tokens": 2620,
+    "latency_ms": 3927.6,
+    "final_answer": "The team that hosts the most fixtures is **Santa Clara Strikers** with 417 fixtures. Here's one fixture hosted by them as an example: **Lions vs Strikers (Soccer #4)**, with the fixture code **FX-9871-00006**."
+  },
+  {
+    "case": "B",
+    "item": 8,
+    "attempt": 1,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 1,
+    "failed_claims": [
+      "B3"
+    ],
+    "tool_calls": 2,
+    "tokens": 3673,
+    "latency_ms": 6431.9,
+    "final_answer": "The team that hosts the most fixtures is **Santa Clara Strikers** with 417 fixtures. Here is one fixture hosted by them:\n\n- **Fixture Name**: \"Lions vs Strikers (Soccer #4)\"\n- **Teams**: Milpitas Lions vs Santa Clara Strikers\n- **Fixture Code**: FX-9871-00006\n- **Spots Available**: 22\n- **Home Team**: Santa Clara Strikers (Team ID: 6)"
+  },
+  {
+    "case": "B",
+    "item": 8,
+    "attempt": 2,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 0,
+    "failed_claims": [],
+    "tool_calls": 6,
+    "tokens": 8334,
+    "latency_ms": 5842.7,
+    "final_answer": null
+  },
+  {
+    "case": "B",
+    "item": 9,
+    "attempt": 0,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 1,
+    "failed_claims": [
+      "B3"
+    ],
+    "tool_calls": 2,
+    "tokens": 2625,
+    "latency_ms": 4308.5,
+    "final_answer": "The team that hosts the most fixtures is **Santa Clara Strikers** with 417 fixtures. Here is one fixture hosted by them as an example: **Lions vs Strikers (Soccer #4)**, with fixture code **FX-9871-00006** and 22 spots available."
+  },
+  {
+    "case": "B",
+    "item": 9,
+    "attempt": 1,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "B1",
+      "B3"
+    ],
+    "tool_calls": 3,
+    "tokens": 5622,
+    "latency_ms": 5093.3,
+    "final_answer": "The team that hosts the most fixtures is **Oakland Titans** with 417 fixtures. \n\nAs a supporting example, one fixture hosted by Oakland Titans is **FX-9871-00006** (Lions vs Strikers (Soccer #4))."
+  },
+  {
+    "case": "B",
+    "item": 9,
+    "attempt": 2,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 1,
+    "failed_claims": [
+      "B3"
+    ],
+    "tool_calls": 3,
+    "tokens": 4521,
+    "latency_ms": 4932.9,
+    "final_answer": "The team that hosts the most fixtures is **Santa Clara Strikers** with 417 fixtures. \n\nAs a supporting example, one fixture hosted by Santa Clara Strikers is **FX-9871-00006**, where they are the home team against the Milpitas Lions."
+  },
+  {
+    "case": "B",
+    "item": 10,
+    "attempt": 0,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 1,
+    "failed_claims": [
+      "B3"
+    ],
+    "tool_calls": 2,
+    "tokens": 2647,
+    "latency_ms": 4714.5,
+    "final_answer": "The team that hosts the most fixtures is **Santa Clara Strikers** with **417** fixtures. \n\nAs a supporting example, one fixture hosted by the Santa Clara Strikers is:\n- **Fixture Name**: Lions vs Strikers (Soccer #4)\n- **Fixture Code**: FX-9871-00006\n- **Spots Available**: 22\n- **Home Team**: Santa Clara Strikers"
+  },
+  {
+    "case": "B",
+    "item": 10,
+    "attempt": 1,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "B1",
+      "B3"
+    ],
+    "tool_calls": 3,
+    "tokens": 5613,
+    "latency_ms": 5174.9,
+    "final_answer": "The team that hosts the most fixtures is **Oakland Titans** with 417 fixtures. \n\nAs a supporting example, one fixture hosted by Oakland Titans is: **\"Lions vs Strikers (Soccer #4)\"** with the fixture code **FX-9871-00006**."
+  },
+  {
+    "case": "B",
+    "item": 10,
+    "attempt": 2,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 1,
+    "failed_claims": [
+      "B3"
+    ],
+    "tool_calls": 2,
+    "tokens": 3105,
+    "latency_ms": 4322.4,
+    "final_answer": "The team that hosts the most fixtures is **Santa Clara Strikers** with 417 fixtures. \n\nAs a supporting example, one of their hosted fixtures is **\"Lions vs Strikers (Soccer #4)\"** with the fixture code **FX-9871-00006**."
+  },
+  {
+    "case": "B",
+    "item": 11,
+    "attempt": 0,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 1,
+    "failed_claims": [
+      "B3"
+    ],
+    "tool_calls": 2,
+    "tokens": 2620,
+    "latency_ms": 3900.8,
+    "final_answer": "The team that hosts the most fixtures is **Santa Clara Strikers** with 417 fixtures. Here is one fixture hosted by them as an example: **Lions vs Strikers (Soccer #4)**, with the fixture code **FX-9871-00006**."
+  },
+  {
+    "case": "B",
+    "item": 11,
+    "attempt": 1,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "B1",
+      "B3"
+    ],
+    "tool_calls": 3,
+    "tokens": 4268,
+    "latency_ms": 4814.9,
+    "final_answer": "The team that hosts the most fixtures is **Oakland Titans** with 417 fixtures. \n\nAs a supporting example, one fixture hosted by Oakland Titans is:  \n**Tigers vs Titans (Cricket #55)**, with the home team being **Fremont Wolves** (team code TM-0009)."
+  },
+  {
+    "case": "B",
+    "item": 11,
+    "attempt": 2,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 1,
+    "failed_claims": [
+      "B3"
+    ],
+    "tool_calls": 3,
+    "tokens": 4522,
+    "latency_ms": 4790.5,
+    "final_answer": "The team that hosts the most fixtures is **Santa Clara Strikers** with 417 fixtures. A supporting example of a fixture hosted by them is **\"Lions vs Strikers (Soccer #4)\"** with the fixture code **FX-9871-00006**."
+  },
+  {
+    "case": "C",
+    "item": 0,
+    "attempt": 0,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "C2",
+      "C3"
+    ],
+    "tool_calls": 3,
+    "tokens": 3002,
+    "latency_ms": 5296.6,
+    "final_answer": "Here are the first two fixtures matching 'Basketball' with their fixture codes and home teams:\n\n1. **Fixture Code:** FX-9871-00004  \n   **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)\n\n2. **Fixture Code:** FX-9871-00005  \n   **Home Team:** Santa Clara Strikers (Team Code: TM-0004)"
+  },
+  {
+    "case": "C",
+    "item": 0,
+    "attempt": 1,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "C2",
+      "C3"
+    ],
+    "tool_calls": 3,
+    "tokens": 3354,
+    "latency_ms": 5004.9,
+    "final_answer": "The first two fixtures matching 'Basketball' are:\n\n1. **Fixture Code**: FX-9871-00004  \n   **Home Team**: Sunnyvale Falcons (Team Code: TM-0005)\n\n2. **Fixture Code**: FX-9871-00005  \n   **Home Team**: Santa Clara Strikers (Team Code: TM-0004)"
+  },
+  {
+    "case": "C",
+    "item": 0,
+    "attempt": 2,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "C2",
+      "C3"
+    ],
+    "tool_calls": 3,
+    "tokens": 3502,
+    "latency_ms": 5258.4,
+    "final_answer": "Here are the first two fixtures matching 'Basketball' with their fixture codes and home teams:\n\n1. **Fixture Code:** FX-9871-00004  \n   **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)\n\n2. **Fixture Code:** FX-9871-00005  \n   **Home Team:** Santa Clara Strikers (Team Code: TM-0004)"
+  },
+  {
+    "case": "C",
+    "item": 1,
+    "attempt": 0,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "C2",
+      "C3"
+    ],
+    "tool_calls": 3,
+    "tokens": 2997,
+    "latency_ms": 5253.3,
+    "final_answer": "Here are the details for the first two fixtures matching 'Basketball':\n\n1. **Fixture Code:** FX-9871-00004  \n   **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)\n\n2. **Fixture Code:** FX-9871-00005  \n   **Home Team:** Santa Clara Strikers (Team Code: TM-0004)"
+  },
+  {
+    "case": "C",
+    "item": 1,
+    "attempt": 1,
+    "verifier_pass": true,
+    "oracle_correct": true,
+    "disagreement": null,
+    "unsupported_claims": 0,
+    "failed_claims": [],
+    "tool_calls": 3,
+    "tokens": 3425,
+    "latency_ms": 4675.6,
+    "final_answer": "Here are the first two fixtures matching 'Basketball' with their fixture codes and home teams:\n\n1. **Fixture Code:** FX-9871-00004  \n   **Home Team:** Santa Clara Strikers  \n\n2. **Fixture Code:** FX-9871-00005  \n   **Home Team:** Sunnyvale Falcons"
+  },
+  {
+    "case": "C",
+    "item": 2,
+    "attempt": 0,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "C2",
+      "C3"
+    ],
+    "tool_calls": 3,
+    "tokens": 2997,
+    "latency_ms": 5063.0,
+    "final_answer": "Here are the details for the first two fixtures matching 'Basketball':\n\n1. **Fixture Code:** FX-9871-00004  \n   **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)\n\n2. **Fixture Code:** FX-9871-00005  \n   **Home Team:** Santa Clara Strikers (Team Code: TM-0004)"
+  },
+  {
+    "case": "C",
+    "item": 2,
+    "attempt": 1,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "C2",
+      "C3"
+    ],
+    "tool_calls": 3,
+    "tokens": 3269,
+    "latency_ms": 4510.9,
+    "final_answer": "Here are the first two fixtures matching 'Basketball':\n\n1. **Fixture Code:** FX-9871-00004  \n   **Home Team:** Sunnyvale Falcons\n\n2. **Fixture Code:** FX-9871-00005  \n   **Home Team:** Santa Clara Strikers"
+  },
+  {
+    "case": "C",
+    "item": 2,
+    "attempt": 2,
+    "verifier_pass": true,
+    "oracle_correct": true,
+    "disagreement": null,
+    "unsupported_claims": 0,
+    "failed_claims": [],
+    "tool_calls": 3,
+    "tokens": 3545,
+    "latency_ms": 4641.7,
+    "final_answer": "The first two fixtures matching 'Basketball' are:\n\n1. **Fixture Code:** FX-9871-00004  \n   **Home Team:** Santa Clara Strikers\n\n2. **Fixture Code:** FX-9871-00005  \n   **Home Team:** Sunnyvale Falcons"
+  },
+  {
+    "case": "C",
+    "item": 3,
+    "attempt": 0,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "C2",
+      "C3"
+    ],
+    "tool_calls": 3,
+    "tokens": 2997,
+    "latency_ms": 5100.4,
+    "final_answer": "Here are the details for the first two fixtures matching 'Basketball':\n\n1. **Fixture Code:** FX-9871-00004  \n   **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)\n\n2. **Fixture Code:** FX-9871-00005  \n   **Home Team:** Santa Clara Strikers (Team Code: TM-0004)"
+  },
+  {
+    "case": "C",
+    "item": 3,
+    "attempt": 1,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "C2",
+      "C3"
+    ],
+    "tool_calls": 3,
+    "tokens": 3257,
+    "latency_ms": 4406.6,
+    "final_answer": "Here are the first two fixtures matching 'Basketball':\n\n1. **Fixture Code:** FX-9871-00004  \n   **Home Team:** Sunnyvale Falcons  \n\n2. **Fixture Code:** FX-9871-00005  \n   **Home Team:** Santa Clara Strikers"
+  },
+  {
+    "case": "C",
+    "item": 3,
+    "attempt": 2,
+    "verifier_pass": true,
+    "oracle_correct": true,
+    "disagreement": null,
+    "unsupported_claims": 0,
+    "failed_claims": [],
+    "tool_calls": 3,
+    "tokens": 3533,
+    "latency_ms": 4448.9,
+    "final_answer": "The first two fixtures matching 'Basketball' are:\n\n1. **Fixture Code:** FX-9871-00004  \n   **Home Team:** Santa Clara Strikers\n\n2. **Fixture Code:** FX-9871-00005  \n   **Home Team:** Sunnyvale Falcons"
+  },
+  {
+    "case": "C",
+    "item": 4,
+    "attempt": 0,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "C2",
+      "C3"
+    ],
+    "tool_calls": 3,
+    "tokens": 2997,
+    "latency_ms": 5051.3,
+    "final_answer": "Here are the details for the first two fixtures matching 'Basketball':\n\n1. **Fixture Code:** FX-9871-00004  \n   **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)\n\n2. **Fixture Code:** FX-9871-00005  \n   **Home Team:** Santa Clara Strikers (Team Code: TM-0004)"
+  },
+  {
+    "case": "C",
+    "item": 4,
+    "attempt": 1,
+    "verifier_pass": true,
+    "oracle_correct": true,
+    "disagreement": null,
+    "unsupported_claims": 0,
+    "failed_claims": [],
+    "tool_calls": 3,
+    "tokens": 3389,
+    "latency_ms": 4434.8,
+    "final_answer": "Here are the first two fixtures matching 'Basketball':\n\n1. **Fixture Code:** FX-9871-00004  \n   **Home Team:** Santa Clara Strikers  \n\n2. **Fixture Code:** FX-9871-00005  \n   **Home Team:** Sunnyvale Falcons"
+  },
+  {
+    "case": "C",
+    "item": 5,
+    "attempt": 0,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "C2",
+      "C3"
+    ],
+    "tool_calls": 3,
+    "tokens": 2997,
+    "latency_ms": 5153.3,
+    "final_answer": "Here are the details for the first two fixtures matching \"Basketball\":\n\n1. **Fixture Code:** FX-9871-00004  \n   **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)\n\n2. **Fixture Code:** FX-9871-00005  \n   **Home Team:** Santa Clara Strikers (Team Code: TM-0004)"
+  },
+  {
+    "case": "C",
+    "item": 5,
+    "attempt": 1,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "C2",
+      "C3"
+    ],
+    "tool_calls": 3,
+    "tokens": 3269,
+    "latency_ms": 4575.1,
+    "final_answer": "Here are the first two fixtures matching 'Basketball':\n\n1. **Fixture Code**: FX-9871-00004  \n   **Home Team**: Sunnyvale Falcons\n\n2. **Fixture Code**: FX-9871-00005  \n   **Home Team**: Santa Clara Strikers"
+  },
+  {
+    "case": "C",
+    "item": 5,
+    "attempt": 2,
+    "verifier_pass": true,
+    "oracle_correct": true,
+    "disagreement": null,
+    "unsupported_claims": 0,
+    "failed_claims": [],
+    "tool_calls": 3,
+    "tokens": 3553,
+    "latency_ms": 4672.0,
+    "final_answer": "Here are the first two fixtures matching 'Basketball' with their fixture codes and home teams:\n\n1. **Fixture Code:** FX-9871-00004  \n   **Home Team:** Santa Clara Strikers\n\n2. **Fixture Code:** FX-9871-00005  \n   **Home Team:** Sunnyvale Falcons"
+  },
+  {
+    "case": "C",
+    "item": 6,
+    "attempt": 0,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "C2",
+      "C3"
+    ],
+    "tool_calls": 3,
+    "tokens": 2981,
+    "latency_ms": 4587.3,
+    "final_answer": "Here are the first two fixtures matching 'Basketball' with their fixture codes and home teams:\n\n1. **Fixture Code:** FX-9871-00004  \n   **Home Team:** Sunnyvale Falcons\n\n2. **Fixture Code:** FX-9871-00005  \n   **Home Team:** Santa Clara Strikers"
+  },
+  {
+    "case": "C",
+    "item": 6,
+    "attempt": 1,
+    "verifier_pass": true,
+    "oracle_correct": true,
+    "disagreement": null,
+    "unsupported_claims": 0,
+    "failed_claims": [],
+    "tool_calls": 3,
+    "tokens": 3429,
+    "latency_ms": 4535.3,
+    "final_answer": "Here are the first two fixtures matching 'Basketball':\n\n1. **Fixture Code:** FX-9871-00004  \n   **Home Team:** Santa Clara Strikers  \n\n2. **Fixture Code:** FX-9871-00005  \n   **Home Team:** Sunnyvale Falcons"
+  },
+  {
+    "case": "C",
+    "item": 7,
+    "attempt": 0,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "C2",
+      "C3"
+    ],
+    "tool_calls": 3,
+    "tokens": 3002,
+    "latency_ms": 5279.8,
+    "final_answer": "Here are the first two fixtures matching 'Basketball' with their fixture codes and home teams:\n\n1. **Fixture Code:** FX-9871-00004  \n   **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)\n\n2. **Fixture Code:** FX-9871-00005  \n   **Home Team:** Santa Clara Strikers (Team Code: TM-0004)"
+  },
+  {
+    "case": "C",
+    "item": 7,
+    "attempt": 1,
+    "verifier_pass": true,
+    "oracle_correct": true,
+    "disagreement": null,
+    "unsupported_claims": 0,
+    "failed_claims": [],
+    "tool_calls": 3,
+    "tokens": 3417,
+    "latency_ms": 4406.8,
+    "final_answer": "Here are the first two fixtures matching 'Basketball':\n\n1. **Fixture Code:** FX-9871-00004  \n   **Home Team:** Santa Clara Strikers  \n\n2. **Fixture Code:** FX-9871-00005  \n   **Home Team:** Sunnyvale Falcons"
+  },
+  {
+    "case": "C",
+    "item": 8,
+    "attempt": 0,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "C2",
+      "C3"
+    ],
+    "tool_calls": 3,
+    "tokens": 2997,
+    "latency_ms": 5223.3,
+    "final_answer": "Here are the details for the first two fixtures matching 'Basketball':\n\n1. **Fixture Code:** FX-9871-00004  \n   **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)\n\n2. **Fixture Code:** FX-9871-00005  \n   **Home Team:** Santa Clara Strikers (Team Code: TM-0004)"
+  },
+  {
+    "case": "C",
+    "item": 8,
+    "attempt": 1,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "C2",
+      "C3"
+    ],
+    "tool_calls": 3,
+    "tokens": 3288,
+    "latency_ms": 5205.4,
+    "final_answer": "Here are the first two fixtures matching 'Basketball':\n\n1. **Fixture Code:** FX-9871-00004  \n   **Home Team:** Sunnyvale Falcons (team code TM-0005)\n\n2. **Fixture Code:** FX-9871-00005  \n   **Home Team:** Santa Clara Strikers (team code TM-0004)"
+  },
+  {
+    "case": "C",
+    "item": 8,
+    "attempt": 2,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "C2",
+      "C3"
+    ],
+    "tool_calls": 3,
+    "tokens": 3397,
+    "latency_ms": 4623.3,
+    "final_answer": "Here are the first two fixtures matching 'Basketball' with their fixture codes and home teams:\n\n1. **Fixture Code**: FX-9871-00004  \n   **Home Team**: Sunnyvale Falcons\n\n2. **Fixture Code**: FX-9871-00005  \n   **Home Team**: Santa Clara Strikers"
+  },
+  {
+    "case": "C",
+    "item": 9,
+    "attempt": 0,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 1,
+    "failed_claims": [
+      "C2"
+    ],
+    "tool_calls": 3,
+    "tokens": 2975,
+    "latency_ms": 4530.5,
+    "final_answer": "Here are the details for the first two fixtures matching \"Basketball\":\n\n1. **Fixture Code:** FX-9871-00004  \n   **Home Team:** Sunnyvale Falcons\n\n2. **Fixture Code:** FX-9871-00005  \n   **Home Team:** Sunnyvale Falcons"
+  },
+  {
+    "case": "C",
+    "item": 9,
+    "attempt": 1,
+    "verifier_pass": true,
+    "oracle_correct": true,
+    "disagreement": null,
+    "unsupported_claims": 0,
+    "failed_claims": [],
+    "tool_calls": 3,
+    "tokens": 3345,
+    "latency_ms": 4391.5,
+    "final_answer": "Here are the first two fixtures matching 'Basketball':\n\n1. **Fixture Code:** FX-9871-00004  \n   **Home Team:** Santa Clara Strikers\n\n2. **Fixture Code:** FX-9871-00005  \n   **Home Team:** Sunnyvale Falcons"
+  },
+  {
+    "case": "C",
+    "item": 10,
+    "attempt": 0,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "C2",
+      "C3"
+    ],
+    "tool_calls": 3,
+    "tokens": 2997,
+    "latency_ms": 5260.9,
+    "final_answer": "Here are the details for the first two fixtures matching 'Basketball':\n\n1. **Fixture Code:** FX-9871-00004  \n   **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)\n\n2. **Fixture Code:** FX-9871-00005  \n   **Home Team:** Santa Clara Strikers (Team Code: TM-0004)"
+  },
+  {
+    "case": "C",
+    "item": 10,
+    "attempt": 1,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "C2",
+      "C3"
+    ],
+    "tool_calls": 3,
+    "tokens": 3277,
+    "latency_ms": 4579.7,
+    "final_answer": "Here are the first two fixtures matching 'Basketball' with their fixture codes and home teams:\n\n1. **Fixture Code:** FX-9871-00004  \n   **Home Team:** Sunnyvale Falcons\n\n2. **Fixture Code:** FX-9871-00005  \n   **Home Team:** Santa Clara Strikers"
+  },
+  {
+    "case": "C",
+    "item": 10,
+    "attempt": 2,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "C2",
+      "C3"
+    ],
+    "tool_calls": 3,
+    "tokens": 3565,
+    "latency_ms": 4701.7,
+    "final_answer": "Here are the first two fixtures matching 'Basketball' with their fixture codes and home teams:\n\n1. **Fixture Code:** FX-9871-00004  \n   **Home Team:** Sunnyvale Falcons  \n\n2. **Fixture Code:** FX-9871-00005  \n   **Home Team:** Santa Clara Strikers"
+  },
+  {
+    "case": "C",
+    "item": 11,
+    "attempt": 0,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "C2",
+      "C3"
+    ],
+    "tool_calls": 3,
+    "tokens": 3002,
+    "latency_ms": 5468.6,
+    "final_answer": "Here are the first two fixtures matching 'Basketball' with their fixture codes and home teams:\n\n1. **Fixture Code:** FX-9871-00004  \n   **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)\n\n2. **Fixture Code:** FX-9871-00005  \n   **Home Team:** Santa Clara Strikers (Team Code: TM-0004)"
+  },
+  {
+    "case": "C",
+    "item": 11,
+    "attempt": 1,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "C2",
+      "C3"
+    ],
+    "tool_calls": 3,
+    "tokens": 3366,
+    "latency_ms": 5350.0,
+    "final_answer": "Here are the first two fixtures matching 'Basketball' with their fixture codes and home teams:\n\n1. **Fixture Code:** FX-9871-00004  \n   **Home Team:** Sunnyvale Falcons (Team Code: TM-0005)\n\n2. **Fixture Code:** FX-9871-00005  \n   **Home Team:** Santa Clara Strikers (Team Code: TM-0004)"
+  },
+  {
+    "case": "C",
+    "item": 11,
+    "attempt": 2,
+    "verifier_pass": false,
+    "oracle_correct": false,
+    "disagreement": null,
+    "unsupported_claims": 2,
+    "failed_claims": [
+      "C2",
+      "C3"
+    ],
+    "tool_calls": 3,
+    "tokens": 3542,
+    "latency_ms": 4713.4,
+    "final_answer": "Here are the first two fixtures matching 'Basketball' along with their fixture codes and home teams:\n\n1. **Fixture Code:** FX-9871-00004  \n   **Home Team:** Sunnyvale Falcons  \n\n2. **Fixture Code:** FX-9871-00005  \n   **Home Team:** Santa Clara Strikers"
+  }
+]
