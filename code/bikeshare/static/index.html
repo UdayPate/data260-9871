@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bay Wheels Membership Agent</title>
+<style>
+  :root { --bg:#f6f7f9; --card:#fff; --ink:#1b1f24; --muted:#5b6570; --line:#d9dee4; --accent:#0b6bcb; --good:#12703a; --bad:#b3261e; --warn:#8a5a00; --code:#f1f3f5; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  header { padding:14px 24px; background:var(--card); border-bottom:1px solid var(--line); }
+  header h1 { margin:0; font-size:18px; }
+  header p { margin:2px 0 0; color:var(--muted); font-size:13px; }
+  main { max-width:1200px; margin:0 auto; padding:16px 24px 40px; }
+  form { display:grid; grid-template-columns: 1fr 1.4fr auto; gap:12px; align-items:end; background:var(--card); border:1px solid var(--line); border-radius:8px; padding:14px; }
+  label { display:block; font-size:12px; font-weight:600; color:var(--muted); margin-bottom:4px; }
+  input[type=file], input[type=url] { width:100%; padding:7px 8px; border:1px solid var(--line); border-radius:6px; background:#fff; font:inherit; }
+  button { padding:9px 22px; border:0; border-radius:6px; background:var(--accent); color:#fff; font:600 14px system-ui; cursor:pointer; }
+  button:disabled { opacity:.55; cursor:default; }
+  #msg { margin:10px 2px 0; min-height:20px; font-size:13px; color:var(--muted); }
+  #msg.err { color:var(--bad); font-weight:600; }
+  .grid { display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1.25fr); gap:16px; margin-top:14px; align-items:start; }
+  section.panel { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:14px; min-width:0; }
+  section.panel h2 { margin:0 0 10px; font-size:14px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  #timeline { max-height:640px; overflow:auto; }
+  .ev { border-left:3px solid var(--line); padding:4px 0 4px 10px; margin:0 0 8px; }
+  .ev.tool_call { border-color:var(--accent); } .ev.observation { border-color:var(--good); } .ev.observation.bad { border-color:var(--bad); }
+  .ev.final { border-color:#6b3fa0; } .ev.repair { border-color:var(--warn); }
+  .ev .head { font-size:12px; color:var(--muted); display:flex; gap:8px; }
+  .ev .head b { color:var(--ink); }
+  pre { margin:3px 0 0; padding:6px 8px; background:var(--code); border-radius:5px; font:12px/1.4 ui-monospace, Consolas, monospace; white-space:pre-wrap; word-break:break-word; max-height:160px; overflow:auto; }
+  .banner { padding:12px 14px; border-radius:8px; font-size:18px; font-weight:700; margin-bottom:12px; background:#e8f1fb; color:#0a4d93; }
+  .banner small { display:block; font-size:12px; font-weight:500; color:var(--muted); }
+  .metrics { display:grid; grid-template-columns:repeat(5, 1fr); gap:8px; margin-bottom:12px; }
+  .metric { background:var(--code); border-radius:6px; padding:7px 9px; } .metric span { display:block; font-size:11px; color:var(--muted); } .metric b { font-size:15px; }
+  table { border-collapse:collapse; width:100%; font-size:13px; margin:4px 0 12px; }
+  th, td { text-align:right; padding:5px 8px; border-bottom:1px solid var(--line); } th:first-child, td:first-child { text-align:left; } th { color:var(--muted); font-weight:600; }
+  h3 { margin:14px 0 4px; font-size:13px; }
+  ul { margin:4px 0 8px; padding-left:20px; } li { margin:2px 0; }
+  .just { margin:0 0 6px; }
+  .ok { color:var(--good); font-weight:600; } .no { color:var(--bad); font-weight:600; }
+  .cite { font-size:13px; } .cite q { quotes:"\201C" "\201D"; }
+  .meta { font:12px/1.5 ui-monospace, Consolas, monospace; word-break:break-all; background:var(--code); padding:6px 8px; border-radius:5px; }
+  .empty { color:var(--muted); font-size:13px; }
+  @media (max-width:860px) { form { grid-template-columns:1fr; } .grid { grid-template-columns:1fr; } .metrics { grid-template-columns:repeat(2,1fr); } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Bay Wheels: monthly membership or pay per ride?</h1>
+  <p>A ReAct agent (LangChain/LangGraph, qwen3:8b via Ollama) with three tools: csv_sql, policy_retriever, calculator.</p>
+</header>
+<main>
+  <form id="form">
+    <div><label for="csv">Trips CSV</label><input id="csv" type="file" accept=".csv,text/csv" required></div>
+    <div><label for="url">Pricing page URL</label><input id="url" type="url" required value="https://www.lyft.com/bikes/bay-wheels/pricing"></div>
+    <button id="run" type="submit">Run</button>
+  </form>
+  <div id="msg" role="status"></div>
+  <div class="grid">
+    <section class="panel"><h2>Timeline: tool calls and observations</h2><div id="timeline"><p class="empty">Nothing yet. Upload a CSV and press Run.</p></div></section>
+    <section class="panel"><h2>Results</h2><div id="results"><p class="empty">The decision, cost comparison and citations appear here when the run finishes.</p></div></section>
+  </div>
+</main>
+<script>
+const $ = (id) => document.getElementById(id);
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; };
+const money = (v) => (typeof v === "number" ? "$" + v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : "n/a");
+const num = (v) => (typeof v === "number" ? (Math.round(v * 100) / 100).toLocaleString() : "n/a");
+let shown = 0;
+
+function addEvent(ev) {
+  const box = $("timeline");
+  if (shown === 0) box.textContent = "";
+  shown++;
+  const bad = ev.kind === "observation" && ev.success === false;
+  const d = el("div", "ev " + ev.kind + (bad ? " bad" : ""));
+  const head = el("div", "head");
+  head.append(el("b", "", "step " + ev.step), el("span", "", ev.kind === "tool_call" ? "CALL " + ev.tool : ev.kind === "observation" ? "OBSERVATION from " + ev.tool + (bad ? " (error)" : "") : ev.kind.toUpperCase()), el("span", "", (ev.t_ms / 1000).toFixed(1) + " s"));
+  d.append(head);
+  if (ev.kind === "tool_call") d.append(el("pre", "", JSON.stringify(ev.input, null, 1)));
+  else if (ev.kind === "observation") d.append(el("pre", "", ev.output));
+  else d.append(el("pre", "", ev.text));
+  box.append(d);
+  box.scrollTop = box.scrollHeight;
+}
+
+function row(cells, tag) { const r = el("tr"); cells.forEach((c) => r.append(el(tag || "td", "", c))); return r; }
+
+function renderResults(run) {
+  const box = $("results"); box.textContent = "";
+  const m = el("div", "metrics");
+  [["Steps", run.steps ?? "n/a"], ["Total time", run.total_time_s != null ? run.total_time_s + " s" : "n/a"], ["Stop reason", run.stop_reason],
+   ["Tool calls", run.tool_calls ? run.tool_calls.calls + " (" + run.tool_calls.failed + " failed)" : "n/a"], ["Tokens", run.tokens ? run.tokens.input + run.tokens.output : "n/a"]]
+    .forEach(([k, v]) => { const c = el("div", "metric"); c.append(el("span", "", k), el("b", "", String(v))); m.append(c); });
+  box.append(m);
+  const r = run.result;
+  if (!r) { box.append(el("p", "no", "No usable decision. " + (run.error || run.problem || "")));  return; }
+  const b = el("div", "banner", r.decision); b.append(el("small", "", "Decision over the whole period in the file"));
+  box.append(b);
+  box.append(el("h3", "", "Justification")); box.append(el("p", "just", r.justification));
+  box.append(el("h3", "", "Cost comparison"));
+  const c = r.costs, t = el("table"), th = el("thead"), tb = el("tbody");
+  th.append(row(["", "Pay per ride/minute", "Monthly membership"], "th"));
+  tb.append(row(["Fees", money(c.pay_per_use_total), money(c.membership_fee_total) + " (" + c.months + " mo.)"]));
+  tb.append(row(["Residual charges", "included", money(c.membership_residual_charges)]));
+  const tot = row(["Total", money(c.pay_per_use_total), money(c.membership_total)]); tot.style.fontWeight = "700"; tb.append(tot);
+  t.append(th, tb); box.append(t);
+  box.append(el("p", "", "Break-even: " + num(r.break_even.rides_per_month) + " rides/month; actual: " + num(r.break_even.actual_rides_per_month) + " rides/month."));
+  box.append(el("h3", "", "By week (" + r.weekly.length + " rows shown)"));
+  const wt = el("table"), wh = el("thead"), wb = el("tbody");
+  wh.append(row(["Week", "Rides", "Avg duration (min)", "Pay-per-use spend"], "th"));
+  r.weekly.forEach((w) => wb.append(row([w.week, w.rides, num(w.avg_duration_min), money(w.spend)])));
+  wt.append(wh, wb); box.append(wt);
+  box.append(el("h3", "", "Citations"));
+  const s = run.snapshot;
+  if (s) { const meta = el("div", "meta"); meta.textContent = "Source: " + s.url + "\nCaptured: " + s.accessed_at + "\nSHA-256 of saved text snapshot: " + s.sha256; box.append(meta); }
+  const ul = el("ul"); (run.citations || []).forEach((q) => { const li = el("li", "cite"); li.append(el("q", "", q.quote), document.createTextNode(" "), el("span", q.found_in_snapshot ? "ok" : "no", q.found_in_snapshot ? "(found in snapshot)" : "(NOT found in snapshot)")); ul.append(li); });
+  box.append(ul);
+  box.append(el("h3", "", "Assumptions and caveats")); const al = el("ul"); r.assumptions.forEach((a) => al.append(el("li", "", a))); box.append(al);
+  const v = run.verification;
+  if (v && v.checked) {
+    box.append(el("h3", "", "Independent check (recomputed from the CSV, never shown to the agent)"));
+    const p = el("p", v.all_ok ? "ok" : "no", v.all_ok ? "The agent's decision and totals match the recomputation." : "MISMATCH: " + Object.entries(v.checks).filter(([, ok]) => !ok).map(([k]) => k).join(", "));
+    box.append(p);
+    box.append(el("p", "empty", "Reference: " + v.reference.decision + "; pay per use " + money(v.reference.pay_per_use_total) + "; membership " + money(v.reference.membership_total) + " over " + v.reference.months + " month(s)."));
+  }
+}
+
+$("form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const file = $("csv").files[0]; if (!file) return;
+  $("run").disabled = true; $("msg").className = ""; $("msg").textContent = "Uploading..."; shown = 0;
+  $("timeline").textContent = ""; $("results").textContent = "";
+  const fd = new FormData(); fd.append("csv", file); fd.append("pricing_url", $("url").value);
+  let res;
+  try { res = await fetch("/api/run", { method: "POST", body: fd }); }
+  catch (err) { $("msg").className = "err"; $("msg").textContent = "Could not reach the server (" + err.message + ")."; $("run").disabled = false; return; }
+  if (!res.ok) { const j = await res.json().catch(() => ({})); $("msg").className = "err"; $("msg").textContent = j.detail || ("Request failed (" + res.status + ")"); $("run").disabled = false; return; }
+  const { run_id, rows } = await res.json();
+  $("msg").textContent = "Running on " + rows + " trip rows...";
+  let failures = 0;
+  const poll = async () => {
+    let r;
+    try {
+      const resp = await fetch("/api/runs/" + run_id);
+      if (!resp.ok) throw new Error("HTTP " + resp.status);
+      r = await resp.json(); failures = 0;
+    } catch (err) {                       // one failed poll must not freeze the page: retry, and say so if the server stays unreachable
+      if (++failures >= 8) { $("msg").className = "err"; $("msg").textContent = "Lost contact with the server (" + err.message + "). The run may still be going; its result is at /api/runs/" + run_id; $("run").disabled = false; return; }
+      setTimeout(poll, 1500); return;
+    }
+    r.events.slice(shown).forEach(addEvent);
+    if (r.status === "done") { $("msg").textContent = "Finished (" + r.result.stop_reason + ")."; renderResults(r.result); $("run").disabled = false; return; }
+    setTimeout(poll, 1000);
+  };
+  poll();
+});
+</script>
+</body>
+</html>

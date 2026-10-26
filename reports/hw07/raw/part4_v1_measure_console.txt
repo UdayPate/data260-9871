@@ -1,0 +1,63 @@
+Run at 2026-10-25T22:07:39 | qwen3:8b thinking off, temperature 0, seed 9871 | 8 runs per scenario | https://www.lyft.com/bikes/bay-wheels/pricing
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|##########| 103/103 [00:00<00:00, 1961.00it/s]
+membership_wins  run 1: stop=final_answer steps=13 79.73s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=1
+payperuse_wins   run 1: stop=final_answer steps=12 41.65s decision_correct=True all_numbers_correct=False failed_checks=[break_even_rides_per_month] repairs=1
+membership_wins  run 2: stop=final_answer steps=11 36.43s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+payperuse_wins   run 2: stop=final_answer steps=13 71.96s decision_correct=True all_numbers_correct=False failed_checks=[break_even_rides_per_month] repairs=1
+membership_wins  run 3: stop=final_answer steps=12 40.63s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+payperuse_wins   run 3: stop=final_answer steps=12 39.87s decision_correct=True all_numbers_correct=False failed_checks=[break_even_rides_per_month] repairs=1
+membership_wins  run 4: stop=final_answer steps=11 35.22s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+payperuse_wins   run 4: stop=final_answer steps=12 44.12s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+membership_wins  run 5: stop=final_answer steps=11 38.13s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+payperuse_wins   run 5: stop=final_answer steps=13 69.6s decision_correct=True all_numbers_correct=False failed_checks=[break_even_rides_per_month] repairs=1
+membership_wins  run 6: stop=final_answer steps=11 35.22s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+payperuse_wins   run 6: stop=final_answer steps=13 67.66s decision_correct=True all_numbers_correct=False failed_checks=[break_even_rides_per_month] repairs=1
+membership_wins  run 7: stop=final_answer steps=13 66.04s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=1
+payperuse_wins   run 7: stop=final_answer steps=12 44.94s decision_correct=True all_numbers_correct=False failed_checks=[break_even_rides_per_month] repairs=1
+membership_wins  run 8: stop=final_answer steps=12 37.62s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+payperuse_wins   run 8: stop=final_answer steps=13 68.37s decision_correct=True all_numbers_correct=False failed_checks=[break_even_rides_per_month] repairs=1
+
+=== SUMMARY ===
+{
+  "url": "https://www.lyft.com/bikes/bay-wheels/pricing",
+  "runs_per_scenario": 8,
+  "per_scenario": {
+    "membership_wins": {
+      "runs": 8,
+      "final_answer": 8,
+      "decision_correct": 8,
+      "all_numbers_correct": 8,
+      "runs_needing_repair": 2,
+      "mean_steps": 11.8,
+      "mean_time_s": 46.1,
+      "mean_failed_tool_calls": 1.0,
+      "failed_check_counts": {
+        "decision": 0,
+        "pay_per_use_total": 0,
+        "membership_total": 0,
+        "months": 0,
+        "break_even_rides_per_month": 0
+      }
+    },
+    "payperuse_wins": {
+      "runs": 8,
+      "final_answer": 8,
+      "decision_correct": 8,
+      "all_numbers_correct": 1,
+      "runs_needing_repair": 7,
+      "mean_steps": 12.5,
+      "mean_time_s": 56.0,
+      "mean_failed_tool_calls": 1.0,
+      "failed_check_counts": {
+        "decision": 0,
+        "pay_per_use_total": 0,
+        "membership_total": 0,
+        "months": 0,
+        "break_even_rides_per_month": 7
+      }
+    }
+  },
+  "snapshot_hashes": [
+    "6c1f6af90eab9bb7374b8041b4289164c9e25ade9933104bf99b2ac133a37e90"
+  ]
+}

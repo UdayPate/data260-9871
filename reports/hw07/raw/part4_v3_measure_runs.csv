@@ -1,0 +1,17 @@
+scenario,run,stop_reason,steps,time_s,tool_calls,failed_tool_calls,repairs,decision,reference_decision,decision_correct,all_numbers_correct,failed_checks,citations,citations_found,snapshot_sha256
+membership_wins,1,final_answer,12,105.38,10,1,1,Buy Monthly Membership,Buy Monthly Membership,True,True,,1,1,6c1f6af90eab9bb7374b8041b4289164c9e25ade9933104bf99b2ac133a37e90
+payperuse_wins,1,final_answer,11,47.99,10,1,0,Pay Per Ride/Minute,Pay Per Ride/Minute,True,True,,1,1,6c1f6af90eab9bb7374b8041b4289164c9e25ade9933104bf99b2ac133a37e90
+membership_wins,2,final_answer,12,81.95,10,1,1,Buy Monthly Membership,Buy Monthly Membership,True,True,,1,1,6c1f6af90eab9bb7374b8041b4289164c9e25ade9933104bf99b2ac133a37e90
+payperuse_wins,2,timeout,10,1221.95,10,1,0,,Pay Per Ride/Minute,False,False,,0,0,6c1f6af90eab9bb7374b8041b4289164c9e25ade9933104bf99b2ac133a37e90
+membership_wins,3,final_answer,12,78.36,10,1,1,Buy Monthly Membership,Buy Monthly Membership,True,True,,1,1,6c1f6af90eab9bb7374b8041b4289164c9e25ade9933104bf99b2ac133a37e90
+payperuse_wins,3,final_answer,11,54.17,10,1,0,Pay Per Ride/Minute,Pay Per Ride/Minute,True,True,,1,1,6c1f6af90eab9bb7374b8041b4289164c9e25ade9933104bf99b2ac133a37e90
+membership_wins,4,final_answer,12,83.51,10,1,1,Buy Monthly Membership,Buy Monthly Membership,True,True,,1,1,6c1f6af90eab9bb7374b8041b4289164c9e25ade9933104bf99b2ac133a37e90
+payperuse_wins,4,final_answer,11,49.86,10,1,0,Pay Per Ride/Minute,Pay Per Ride/Minute,True,False,membership_total,1,1,6c1f6af90eab9bb7374b8041b4289164c9e25ade9933104bf99b2ac133a37e90
+membership_wins,5,final_answer,12,79.59,10,1,1,Buy Monthly Membership,Buy Monthly Membership,True,True,,1,1,6c1f6af90eab9bb7374b8041b4289164c9e25ade9933104bf99b2ac133a37e90
+payperuse_wins,5,final_answer,11,48.48,10,1,0,Pay Per Ride/Minute,Pay Per Ride/Minute,True,True,,1,1,6c1f6af90eab9bb7374b8041b4289164c9e25ade9933104bf99b2ac133a37e90
+membership_wins,6,step_limit,15,32.53,14,1,0,,Buy Monthly Membership,False,False,,0,0,6c1f6af90eab9bb7374b8041b4289164c9e25ade9933104bf99b2ac133a37e90
+payperuse_wins,6,final_answer,11,53.26,10,1,0,Pay Per Ride/Minute,Pay Per Ride/Minute,True,True,,1,1,6c1f6af90eab9bb7374b8041b4289164c9e25ade9933104bf99b2ac133a37e90
+membership_wins,7,step_limit,15,31.56,14,1,0,,Buy Monthly Membership,False,False,,0,0,6c1f6af90eab9bb7374b8041b4289164c9e25ade9933104bf99b2ac133a37e90
+payperuse_wins,7,final_answer,11,51.6,10,1,0,Pay Per Ride/Minute,Pay Per Ride/Minute,True,True,,1,1,6c1f6af90eab9bb7374b8041b4289164c9e25ade9933104bf99b2ac133a37e90
+membership_wins,8,step_limit,15,32.06,14,1,0,,Buy Monthly Membership,False,False,,0,0,6c1f6af90eab9bb7374b8041b4289164c9e25ade9933104bf99b2ac133a37e90
+payperuse_wins,8,final_answer,11,46.92,10,1,0,Pay Per Ride/Minute,Pay Per Ride/Minute,True,True,,1,1,6c1f6af90eab9bb7374b8041b4289164c9e25ade9933104bf99b2ac133a37e90

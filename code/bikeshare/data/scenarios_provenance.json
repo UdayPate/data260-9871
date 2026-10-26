@@ -1,0 +1,378 @@
+{
+  "built_at": "2026-10-25T21:19:33",
+  "seed": 9871,
+  "sources": [
+    {
+      "month": "202406",
+      "url": "https://s3.amazonaws.com/baywheels-data/202406-baywheels-tripdata.csv.zip",
+      "zip_sha256": "948909486ac09e7c91d56dcd73e0705632344674267d2375c828b322124c3c7e",
+      "zip_bytes": 13317517,
+      "csv_rows": 303100
+    },
+    {
+      "month": "202101",
+      "url": "https://s3.amazonaws.com/baywheels-data/202101-baywheels-tripdata.csv.zip",
+      "zip_sha256": "fd6d68b054ca44c805019db158aee37ead659a7f22f963e2db6abfae2cd2e0a4",
+      "zip_bytes": 4031182,
+      "csv_rows": 102363
+    },
+    {
+      "month": "202102",
+      "url": "https://s3.amazonaws.com/baywheels-data/202102-baywheels-tripdata.csv.zip",
+      "zip_sha256": "4eaaadc0b92c119842d3dc036558c996aa88af295b9049d5437caee6f6cce3b1",
+      "zip_bytes": 4380266,
+      "csv_rows": 111073
+    },
+    {
+      "month": "202103",
+      "url": "https://s3.amazonaws.com/baywheels-data/202103-baywheels-tripdata.csv.zip",
+      "zip_sha256": "e49dd12578b318cab5d064ff005832e6a3b8fa7d4934df96644a7c0878453d48",
+      "zip_bytes": 5238134,
+      "csv_rows": 131960
+    },
+    {
+      "month": "202104",
+      "url": "https://s3.amazonaws.com/baywheels-data/202104-baywheels-tripdata.csv.zip",
+      "zip_sha256": "51a420bcbf5920b5fa1cb2055dc06084d9bd6a9187dee2cb0c175951fd0d0a74",
+      "zip_bytes": 5826592,
+      "csv_rows": 146002
+    },
+    {
+      "month": "202105",
+      "url": "https://s3.amazonaws.com/baywheels-data/202105-baywheels-tripdata.csv.zip",
+      "zip_sha256": "c3e23617beba396e799be642d93661d39cd30cf4c5ce7ac45a60e2b5960db7fa",
+      "zip_bytes": 6505705,
+      "csv_rows": 169642
+    },
+    {
+      "month": "202106",
+      "url": "https://s3.amazonaws.com/baywheels-data/202106-baywheels-tripdata.csv.zip",
+      "zip_sha256": "fc8ac07aa952799d011a61cf1abca5c87bf1b7f5b1ac22ae61f919b983bc9b71",
+      "zip_bytes": 7976646,
+      "csv_rows": 198493
+    },
+    {
+      "month": "202107",
+      "url": "https://s3.amazonaws.com/baywheels-data/202107-baywheels-tripdata.csv.zip",
+      "zip_sha256": "42a1ec2ec6a47b4eb5fc929d8a225be70d69666602de66fc944d1cf7c4b0ffc8",
+      "zip_bytes": 8268603,
+      "csv_rows": 213922
+    },
+    {
+      "month": "202108",
+      "url": "https://s3.amazonaws.com/baywheels-data/202108-baywheels-tripdata.csv.zip",
+      "zip_sha256": "eb8933fc9e81bd30b07f90667abef5bd7af60453a935e8838c46df2b176aa8a9",
+      "zip_bytes": 8345625,
+      "csv_rows": 207023
+    },
+    {
+      "month": "202109",
+      "url": "https://s3.amazonaws.com/baywheels-data/202109-baywheels-tripdata.csv.zip",
+      "zip_sha256": "7b71b92e885fccfcc7f6240067059c79074420be81a2ecad27abadf9e2484148",
+      "zip_bytes": 8433879,
+      "csv_rows": 212512
+    },
+    {
+      "month": "202110",
+      "url": "https://s3.amazonaws.com/baywheels-data/202110-baywheels-tripdata.csv.zip",
+      "zip_sha256": "102534058a558aa80908f68cd63f32818302a8a649a48cbf23e44e63cc0b74fc",
+      "zip_bytes": 8977824,
+      "csv_rows": 222570
+    },
+    {
+      "month": "202111",
+      "url": "https://s3.amazonaws.com/baywheels-data/202111-baywheels-tripdata.csv.zip",
+      "zip_sha256": "54015bbe4a98b299512d5f0a5c6c90b2ec0d208eeb9d08a964deef0d9b36268d",
+      "zip_bytes": 7601537,
+      "csv_rows": 183765
+    },
+    {
+      "month": "202112",
+      "url": "https://s3.amazonaws.com/baywheels-data/202112-baywheels-tripdata.csv.zip",
+      "zip_sha256": "f1c48a64aa1a9a985847d36dff4713d5aab035618711634294e71e3d6c4c2013",
+      "zip_bytes": 5350036,
+      "csv_rows": 135838
+    },
+    {
+      "month": "202201",
+      "url": "https://s3.amazonaws.com/baywheels-data/202201-baywheels-tripdata.csv.zip",
+      "zip_sha256": "edb2d20a13351346a1eec0c4ef563e67a37cd9ccda4869a93901e28343bbde0b",
+      "zip_bytes": 5734907,
+      "csv_rows": 151226
+    },
+    {
+      "month": "202202",
+      "url": "https://s3.amazonaws.com/baywheels-data/202202-baywheels-tripdata.csv.zip",
+      "zip_sha256": "9be4c75af2084bf79c92b5a84a638145ff1983f2c7c1f8e601bf85c47152c88e",
+      "zip_bytes": 6524261,
+      "csv_rows": 172851
+    },
+    {
+      "month": "202203",
+      "url": "https://s3.amazonaws.com/baywheels-data/202203-baywheels-tripdata.csv.zip",
+      "zip_sha256": "b8e137dd3cf4b5b1b96ecb2c44937649a87ecf44199f758cc97f7630c80c2ece",
+      "zip_bytes": 7726793,
+      "csv_rows": 205009
+    },
+    {
+      "month": "202204",
+      "url": "https://s3.amazonaws.com/baywheels-data/202204-baywheels-tripdata.csv.zip",
+      "zip_sha256": "116dc30e632c6438c32cc4958d82601e835c4f41ec4e71275992b2a88b74b340",
+      "zip_bytes": 8221129,
+      "csv_rows": 218230
+    },
+    {
+      "month": "202205",
+      "url": "https://s3.amazonaws.com/baywheels-data/202205-baywheels-tripdata.csv.zip",
+      "zip_sha256": "774d241a24396dd55238a77ae3a770db02a40349d4a585e5ad03aaca7f2942dd",
+      "zip_bytes": 8826467,
+      "csv_rows": 232953
+    },
+    {
+      "month": "202206",
+      "url": "https://s3.amazonaws.com/baywheels-data/202206-baywheels-tripdata.csv.zip",
+      "zip_sha256": "7af539267d1b845a84a58a69440c62934d7b122737a29da4a9e0e1db3608fddf",
+      "zip_bytes": 9449378,
+      "csv_rows": 255956
+    },
+    {
+      "month": "202207",
+      "url": "https://s3.amazonaws.com/baywheels-data/202207-baywheels-tripdata.csv.zip",
+      "zip_sha256": "f5f6823e2b500a0cf4647775b5450a7fffe01be989f01b28fc94e0da05906885",
+      "zip_bytes": 8800929,
+      "csv_rows": 242102
+    },
+    {
+      "month": "202208",
+      "url": "https://s3.amazonaws.com/baywheels-data/202208-baywheels-tripdata.csv.zip",
+      "zip_sha256": "77bf72f5e57e43d6e5d60751514b672dbf148d3e5b9a1e9f33188adcba973d4d",
+      "zip_bytes": 10242319,
+      "csv_rows": 266555
+    },
+    {
+      "month": "202209",
+      "url": "https://s3.amazonaws.com/baywheels-data/202209-baywheels-tripdata.csv.zip",
+      "zip_sha256": "cae1c18a2941924c9f6a78db2b1a8c3424813db8150ce5f41cad9f7f069973b3",
+      "zip_bytes": 10235863,
+      "csv_rows": 273479
+    },
+    {
+      "month": "202210",
+      "url": "https://s3.amazonaws.com/baywheels-data/202210-baywheels-tripdata.csv.zip",
+      "zip_sha256": "512912b41417b62dbe81b42a9daa7aead435e8f903e499ca3de86d481b87e1fe",
+      "zip_bytes": 10312949,
+      "csv_rows": 265763
+    },
+    {
+      "month": "202211",
+      "url": "https://s3.amazonaws.com/baywheels-data/202211-baywheeels-tripdata.csv.zip",
+      "zip_sha256": "f0ddcd96531e720d79ca0124f97eb818bd4dbb44122e2ed54a84b091cfe28a6c",
+      "zip_bytes": 7665226,
+      "csv_rows": 193912
+    },
+    {
+      "month": "202212",
+      "url": "https://s3.amazonaws.com/baywheels-data/202212-baywheels-tripdata.csv.zip",
+      "zip_sha256": "f4e80b2aa70558c2300196cd9c2dc52e3469bd176e25bcc7e6e6d250d61aff96",
+      "zip_bytes": 5578012,
+      "csv_rows": 136764
+    },
+    {
+      "month": "202301",
+      "url": "https://s3.amazonaws.com/baywheels-data/202301-baywheels-tripdata.csv.zip",
+      "zip_sha256": "17b64aceeb0144fe9660191260bfec2e0b09919c63b7a4f71d9a6d332aa19d38",
+      "zip_bytes": 5833569,
+      "csv_rows": 154561
+    },
+    {
+      "month": "202302",
+      "url": "https://s3.amazonaws.com/baywheels-data/202302-baywheels-tripdata.csv.zip",
+      "zip_sha256": "2ebbf09d8ba60178efc8c893990446fe6acbd9f5d158e33f7bb08762777a1090",
+      "zip_bytes": 6265152,
+      "csv_rows": 157715
+    },
+    {
+      "month": "202303",
+      "url": "https://s3.amazonaws.com/baywheels-data/202303-baywheels-tripdata.csv.zip",
+      "zip_sha256": "29221be3176877716c5ea4bd452ae374a767db65dce579bf778ebfb36821bde9",
+      "zip_bytes": 6971624,
+      "csv_rows": 172807
+    },
+    {
+      "month": "202304",
+      "url": "https://s3.amazonaws.com/baywheels-data/202304-baywheels-tripdata.csv.zip",
+      "zip_sha256": "94badbaacbc111cb678bff6e5bbc83634955856e141a7317a3a30cdb93be8400",
+      "zip_bytes": 8439358,
+      "csv_rows": 214478
+    },
+    {
+      "month": "202305",
+      "url": "https://s3.amazonaws.com/baywheels-data/202305-baywheels-tripdata.csv.zip",
+      "zip_sha256": "8e46f1f182fa94f3c222f8a37f7bae8d0a699dc636d1746eba05e232323fed94",
+      "zip_bytes": 8842405,
+      "csv_rows": 218021
+    },
+    {
+      "month": "202306",
+      "url": "https://s3.amazonaws.com/baywheels-data/202306-baywheels-tripdata.csv.zip",
+      "zip_sha256": "c37f29b0440c46009a2a8071f069ef5cf4d247a7270a668cc81ba74401893ffc",
+      "zip_bytes": 9004833,
+      "csv_rows": 226052
+    },
+    {
+      "month": "202307",
+      "url": "https://s3.amazonaws.com/baywheels-data/202307-baywheels-tripdata.csv.zip",
+      "zip_sha256": "6cf5e77d53250c3d258fd1224de11c4f71771044edf3baec21c77fbf27944cb3",
+      "zip_bytes": 8661135,
+      "csv_rows": 233971
+    },
+    {
+      "month": "202308",
+      "url": "https://s3.amazonaws.com/baywheels-data/202308-baywheels-tripdata.csv.zip",
+      "zip_sha256": "d441cbd897860896bb6fdca1e3799752b51e02368d7620fdb3526e61d3cd6156",
+      "zip_bytes": 10407062,
+      "csv_rows": 260089
+    },
+    {
+      "month": "202309",
+      "url": "https://s3.amazonaws.com/baywheels-data/202309-baywheels-tripdata.csv.zip",
+      "zip_sha256": "0c64f3adca7deb88a02e6901cddaba0b8d0a3cedab7ee7333500216cb9eb5102",
+      "zip_bytes": 10005426,
+      "csv_rows": 251180
+    },
+    {
+      "month": "202310",
+      "url": "https://s3.amazonaws.com/baywheels-data/202310-baywheels-tripdata.csv.zip",
+      "zip_sha256": "c0ea603e839123f9da54904d678e0fe8c2d6a7190407b5ee5698b6031ace3a41",
+      "zip_bytes": 9917847,
+      "csv_rows": 270840
+    },
+    {
+      "month": "202311",
+      "url": "https://s3.amazonaws.com/baywheels-data/202311-baywheels-tripdata.csv.zip",
+      "zip_sha256": "f23f1da8f76f0f969e994c5d11d114b1b003bd01a22c98c58e21a9b721266a22",
+      "zip_bytes": 9186394,
+      "csv_rows": 221443
+    },
+    {
+      "month": "202312",
+      "url": "https://s3.amazonaws.com/baywheels-data/202312-baywheels-tripdata.csv.zip",
+      "zip_sha256": "f63d49b2ed51bbf4dc7380e382e9cde8c238f9832b7fcfa31f184fa660daf4c2",
+      "zip_bytes": 8135469,
+      "csv_rows": 171790
+    },
+    {
+      "month": "202401",
+      "url": "https://s3.amazonaws.com/baywheels-data/202401-baywheels-tripdata.csv.zip",
+      "zip_sha256": "06731689311c4b200731f1d79d8adb01f3f86919bc22b228c2c3b1a3468cc793",
+      "zip_bytes": 7550662,
+      "csv_rows": 191662
+    },
+    {
+      "month": "202402",
+      "url": "https://s3.amazonaws.com/baywheels-data/202402-baywheels-tripdata.csv.zip",
+      "zip_sha256": "73c7de024974500134babc7d78ad8d5ac9a06466813bcfbe77e9898291d09b81",
+      "zip_bytes": 8721681,
+      "csv_rows": 207172
+    },
+    {
+      "month": "202403",
+      "url": "https://s3.amazonaws.com/baywheels-data/202403-baywheels-tripdata.csv.zip",
+      "zip_sha256": "369c24a402f7c57e1ee5279c103677a6d0bd0a64ee60a9afdab61365011be791",
+      "zip_bytes": 10615697,
+      "csv_rows": 251470
+    },
+    {
+      "month": "202404",
+      "url": "https://s3.amazonaws.com/baywheels-data/202404-baywheels-tripdata.csv.zip",
+      "zip_sha256": "4e8bcd896a1b55e483d84c0edcc0822e4a5e3062b74062c1fe18e70969190d5d",
+      "zip_bytes": 10754947,
+      "csv_rows": 269900
+    },
+    {
+      "month": "202405",
+      "url": "https://s3.amazonaws.com/baywheels-data/202405-baywheels-tripdata.csv.zip",
+      "zip_sha256": "d36678763e1d890f4d7c2c34c2b4dba3e83eeaf3281a899dfa6e63c4b1df1bc1",
+      "zip_bytes": 11368092,
+      "csv_rows": 296466
+    },
+    {
+      "month": "202406",
+      "url": "https://s3.amazonaws.com/baywheels-data/202406-baywheels-tripdata.csv.zip",
+      "zip_sha256": "948909486ac09e7c91d56dcd73e0705632344674267d2375c828b322124c3c7e",
+      "zip_bytes": 13317517,
+      "csv_rows": 303100
+    },
+    {
+      "month": "202407",
+      "url": "https://s3.amazonaws.com/baywheels-data/202407-baywheels-tripdata.csv.zip",
+      "zip_sha256": "7972b204e6b49450d76fdf698e894496004aad666740dfdf2815c4d5abadaad8",
+      "zip_bytes": 13786513,
+      "csv_rows": 311850
+    },
+    {
+      "month": "202408",
+      "url": "https://s3.amazonaws.com/baywheels-data/202408-baywheels-tripdata.csv.zip",
+      "zip_sha256": "233f346d6db265a296b4f2ba91013c95dc21fc7b11f2d54bb429f5a25f93416e",
+      "zip_bytes": 12778668,
+      "csv_rows": 328606
+    },
+    {
+      "month": "202409",
+      "url": "https://s3.amazonaws.com/baywheels-data/202409-baywheels-tripdata.csv.zip",
+      "zip_sha256": "3c553b6364eaff24be72de8910af883e7175d9367b90c83b3e0f62708bb3b1f0",
+      "zip_bytes": 13018359,
+      "csv_rows": 334732
+    },
+    {
+      "month": "202410",
+      "url": "https://s3.amazonaws.com/baywheels-data/202410-baywheels-tripdata.csv.zip",
+      "zip_sha256": "f9deaf4100fa40c77410ea4753218349e5dd88e607b29ab7ab027370f7667e8d",
+      "zip_bytes": 14834386,
+      "csv_rows": 378317
+    },
+    {
+      "month": "202411",
+      "url": "https://s3.amazonaws.com/baywheels-data/202411-baywheels-tripdata.csv.zip",
+      "zip_sha256": "56b4263ff21e6b227067e5771fadfbad98fea0b7fe05e622e89899e5b5037e3a",
+      "zip_bytes": 11140231,
+      "csv_rows": 261311
+    },
+    {
+      "month": "202412",
+      "url": "https://s3.amazonaws.com/baywheels-data/202412-baywheels-tripdata.csv.zip",
+      "zip_sha256": "eedda38d1637bf723ab8627b06a9bf821b3b0a7d8e46882cc2fbb155e8dc8359",
+      "zip_bytes": 9463519,
+      "csv_rows": 218683
+    }
+  ],
+  "scenarios": {
+    "membership_wins": {
+      "file": "scenario_membership_wins.csv",
+      "rows": 600,
+      "pool_rows": 23803,
+      "filter": "2024-06, member_casual=casual, 20 <= duration <= 180 min, random sample of 600 (seed 9871)",
+      "bike_mix": {
+        "electric_bike": 456,
+        "classic_bike": 144
+      },
+      "mean_duration_min": 39.62,
+      "first_trip": "2024-06-01 02:23:02.429",
+      "last_trip": "2024-06-30 20:49:29.829",
+      "csv_sha256": "31446ac4430d9de59b212e29f0abb41d51f57e7436db68caa107a5d6fd958678"
+    },
+    "payperuse_wins": {
+      "file": "scenario_payperuse_wins.csv",
+      "rows": 528,
+      "months": 48,
+      "filter": "each month 2021-01..2024-12: member_casual=casual, rideable_type=classic_bike, 2 <= duration <= 8 min, 11 random trips (seed 9871)",
+      "bike_mix": {
+        "classic_bike": 528
+      },
+      "mean_duration_min": 5.5,
+      "first_trip": "2021-01-01 13:12:36",
+      "last_trip": "2024-12-29 19:03:18.888",
+      "csv_sha256": "f493def6bec9929b2a692970e2a6834d3d1b1c25329c663eb1a00908ac491a06"
+    }
+  }
+}

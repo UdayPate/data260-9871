@@ -1238,3 +1238,867 @@ case C    runs= 12 | success(oracle)   0 ->   8 | unsupported  23 ->   8 | retry
 verifier vs oracle over 82 attempts: false rejections=0, false acceptances=0
 stop reasons: {'budget_exhausted': 1, 'human_review': 15, 'success': 20}
 wrote C:\Users\patel\data260-9871\reports\hw07\raw\part3_summary.json
+
+===== HW7 Part 4 - prepare_scenarios.py: build the two acceptance datasets from REAL Bay Wheels trip files (49 monthly zips downloaded, sampled with seed 9871) - 2026-10-25T21:24:18 =====
+202101 csv rows 102363 pool 2778
+202102 csv rows 111073 pool 2887
+202103 csv rows 131960 pool 3584
+202104 csv rows 146002 pool 4329
+202105 csv rows 169642 pool 5243
+202106 csv rows 198493 pool 6933
+202107 csv rows 213922 pool 8556
+202108 csv rows 207023 pool 8746
+202109 csv rows 212512 pool 9540
+202110 csv rows 222570 pool 7410
+202111 csv rows 183765 pool 4959
+202112 csv rows 135838 pool 3932
+202201 csv rows 151226 pool 4123
+202202 csv rows 172851 pool 5175
+202203 csv rows 205009 pool 6632
+202204 csv rows 218230 pool 6840
+202205 csv rows 232953 pool 7132
+202206 csv rows 255956 pool 7725
+202207 csv rows 242102 pool 6596
+202208 csv rows 266555 pool 7289
+202209 csv rows 273479 pool 7917
+202210 csv rows 265763 pool 7474
+202211 csv rows 193912 pool 5336
+202212 csv rows 136764 pool 3275
+202301 csv rows 154561 pool 3938
+202302 csv rows 157715 pool 3756
+202303 csv rows 172807 pool 4107
+202304 csv rows 214478 pool 4818
+202305 csv rows 218021 pool 4473
+202306 csv rows 226052 pool 4316
+202307 csv rows 233971 pool 4230
+202308 csv rows 260089 pool 4774
+202309 csv rows 251180 pool 4454
+202310 csv rows 270840 pool 4808
+202311 csv rows 221443 pool 5391
+202312 csv rows 171790 pool 2583
+202401 csv rows 191662 pool 2393
+202402 csv rows 207172 pool 2767
+202403 csv rows 251470 pool 3540
+202404 csv rows 269900 pool 3167
+202405 csv rows 296466 pool 3097
+202406 csv rows 303100 pool 3615
+202407 csv rows 311850 pool 3415
+202408 csv rows 328606 pool 3705
+202409 csv rows 334732 pool 3785
+202410 csv rows 378317 pool 4508
+202411 csv rows 261311 pool 2452
+202412 csv rows 218683 pool 1982
+membership_wins 600 rows, mean 39.62 min, 2024-06-01 02:23:02.429 -> 2024-06-30 20:49:29.829
+payperuse_wins 528 rows, mean 5.5 min, 2021-01-01 13:12:36 -> 2024-12-29 19:03:18.888
+wrote C:\Users\patel\data260-9871\code\bikeshare\data\scenarios_provenance.json
+
+===== HW7 Part 4 - FIRST live agent run, before any fix (membership scenario, thinking off). The independent check showed it wrong: the model read the Day-pass column, invented '4 months' for a one-month file - 2026-10-25T21:25:27 =====
+[  21.2s step 1] TOOL_CALL   csv_sql {"sql": "SELECT rideable_type, COUNT(*) AS ride_count, MIN(started_at), MAX(started_at) FROM trips GROUP BY rideable_type;"}
+[  21.3s step 1] OBSERVATION csv_sql "{\"success\": true, \"data\": {\"rows\": [{\"rideable_type\": \"classic_bike\", \"ride_count\": 144, \"MIN(started_at)\": \"2024-06-01 02:23:02.429\", \"MAX(started_at)\": \"2024-06-30 19:13:55.403\"}, {\"rideable_type\": \"elect
+[  22.6s step 2] TOOL_CALL   policy_retriever {"k": 4, "query": "monthly membership price and included minutes", "url": "https://www.lyft.com/bikes/bay-wheels/pricing"}
+
+[  97.8s step 2] OBSERVATION policy_retriever "{\"success\": true, \"data\": {\"passages\": [{\"text\": \"Get a month pass | Classic bike prices | $1.00 to unlock, then $0.19/min | 30 min free, then $0.19/min | 45 min free, then $0.17/min\", \"source\": \"https://www.lyft.com
+[ 101.8s step 3] TOOL_CALL   csv_sql {"sql": "SELECT rideable_type, SUM(CASE WHEN rideable_type = 'classic_bike' THEN (MAX(0, duration_min - 30) * 0.19) ELSE (duration_min * 0.17) END) AS residual_charges, SUM(CASE WHEN rideable_type = 'classic_bike' THEN (1.00 + (MA
+[ 101.8s step 3] OBSERVATION csv_sql "{\"success\": true, \"data\": {\"rows\": [{\"rideable_type\": \"classic_bike\", \"residual_charges\": 322.39276361000003, \"pay_per_use_cost\": 466.39276361000003}, {\"rideable_type\": \"electric_bike\", \"residual_charges\": 307
+[ 106.1s step 4] TOOL_CALL   csv_sql {"sql": "SELECT strftime('%Y-%W', started_at) AS week, COUNT(*) AS rides, AVG(duration_min), SUM(pay_per_use_cost) AS spend FROM (SELECT *, CASE WHEN rideable_type = 'classic_bike' THEN (MAX(0, duration_min - 30) * 0.19) ELSE (dur
+[ 106.1s step 4] OBSERVATION csv_sql "{\"success\": true, \"data\": {\"rows\": [{\"week\": \"2024-26\", \"rides\": 148, \"AVG(duration_min)\": 36.736192783783785, \"spend\": 922.49203922}, {\"week\": \"2024-24\", \"rides\": 142, \"AVG(duration_min)\": 39.564891450704
+[ 108.1s step 5] TOOL_CALL   calculator {"expression": "(29 * 4) + 322.39276361000003 + 3073.8904988900003", "units": "USD"}
+[ 108.1s step 5] OBSERVATION calculator "{\"success\": true, \"data\": {\"value\": 3512.2832625000005, \"units\": \"USD\"}, \"ts\": \"2026-10-25T21:25:06\"}"
+[ 128.6s step 6] FINAL        "{\"decision\": \"Pay Per Ride/Minute\", \"justification\": \"The total cost for the monthly membership is $3512.28, while the total pay-per-use cost is $3512.28. However, the pay-per-use cost is calculated based on the residual c
+
+stop_reason=final_answer steps=6 time=128.69s tool_calls={'calls': 5, 'failed': 0, 'invalid': 0} tokens={'input': 12310, 'output': 1320}
+decision: Pay Per Ride/Minute | costs: {'pay_per_use_total': 3512.2832625000005, 'membership_fee_total': 116, 'membership_residual_charges': 3396.28, 'membership_total': 3512.2832625000005, 'months': 4} | break_even: {'rides_per_month': 0.00485, 'actual_rides_per_month': 150}
+justification: The total cost for the monthly membership is $3512.28, while the total pay-per-use cost is $3512.28. However, the pay-per-use cost is calculated based on the residual charges and the per-minute rates for classic and electric bikes. The membership fee total includes the monthly price and residual charges, which are $29/month for 4 months, totaling $116, plus residual charges of $322.39 for classic bikes and $3073.89 for electric bikes, totaling $3396.28. The break-even rides per month is calculated as $29 divided by the total pay-per-use cost per ride, which is $3512.28 divided by 600 rides, resulting in 0.00485 rides per month. The actual rides per month are 600 rides divided by 4 months, resulting in 150 rides per month. The weekly data shows that the rider spent $922.49 in the week with the most rides, which is $922.49 per week.
+citations: [{'quote': 'Month pass | $29/month | Get a month pass | Classic bike prices | $1.00 to unlock, then $0.19/min', 'found_in_snapshot': True}]
+verification: {"checked": true, "checks": {"decision": false, "pay_per_use_total": false, "membership_total": false, "months": false}, "all_ok": false, "reference": {"decision": "Buy Monthly Membership", "pay_per_use_total": 10540.7, "membership_total": 3261.96, "membership_fee_total": 29.0, "membership_residual": 3232.96, "months": 1}}
+snapshot: {"url": "https://www.lyft.com/bikes/bay-wheels/pricing", "accessed_at": "2026-10-25T21:23:42", "sha256": "6c1f6af90eab9bb7374b8041b4289164c9e25ade9933104bf99b2ac133a37e90", "html_sha256": "f07e22bbd70f3f2070c31c69137f62392982e17013a756942e4e14815eca0fc2", "text_bytes": 4781, "text_lines": 183, "path": "C:\\Users\\patel\\data260-9871\\reports\\hw07\\part4\\snapshots\\da11047873_pricing.txt"}
+
+===== HW7 Part 4 - live agent run with qwen3 thinking mode ON (tried as a fix): slower, and in a later run it spent ~10 minutes in one generation; not adopted - 2026-10-25T21:30:11 =====
+[  15.0s step 1] TOOL_CALL   csv_sql {"sql": "SELECT rideable_type, COUNT(*) AS ride_count, SUM(duration_min) AS total_minutes, MIN(strftime('%Y-%m', started_at)) AS first_month, MAX(strftime('%Y-%m', started_at)) AS last_month FROM trips GROUP BY rideable_type;"}
+[  15.0s step 1] OBSERVATION csv_sql "{\"success\": true, \"data\": {\"rows\": [{\"rideable_type\": \"classic_bike\", \"ride_count\": 144, \"total_minutes\": 5687.686386, \"first_month\": \"2024-06\", \"last_month\": \"2024-06\"}, {\"rideable_type\": \"electric_bike\
+[  29.0s step 2] TOOL_CALL   policy_retriever {"k": 4, "query": "monthly membership price and included minutes", "url": "https://www.lyft.com/bikes/bay-wheels/pricing"}
+
+[  58.3s step 2] OBSERVATION policy_retriever "{\"success\": true, \"data\": {\"passages\": [{\"text\": \"Get a month pass | Classic bike prices | $1.00 to unlock, then $0.19/min | 30 min free, then $0.19/min | 45 min free, then $0.17/min\", \"source\": \"https://www.lyft.com
+[ 119.0s step 3] TOOL_CALL   csv_sql {"sql": "SELECT SUM(CASE WHEN rideable_type = 'classic_bike' THEN (1.00 + GREATEST(0, duration_min - 30) * 0.19) WHEN rideable_type = 'electric_bike' THEN GREATEST(0, duration_min - 45) * 0.17 END) AS pay_per_use_total, SUM(CASE W
+[ 119.0s step 3] OBSERVATION csv_sql "{\"success\": false, \"error\": \"SQL error: no such function: GREATEST\", \"ts\": \"2026-10-25T21:29:01\", \"source\": \"uploaded.csv\"}"
+[ 130.1s step 4] TOOL_CALL   csv_sql {"sql": "SELECT SUM(CASE WHEN rideable_type = 'classic_bike' THEN (1.00 + MAX(0, duration_min - 30) * 0.19) WHEN rideable_type = 'electric_bike' THEN MAX(0, duration_min - 45) * 0.17 END) AS pay_per_use_total, SUM(CASE WHEN rideab
+[ 130.1s step 4] OBSERVATION csv_sql "{\"success\": true, \"data\": {\"rows\": [{\"pay_per_use_total\": 982.88240311, \"membership_residual_charges\": 838.88240311}], \"row_count\": 1, \"source\": \"uploaded.csv\"}, \"ts\": \"2026-10-25T21:29:12\", \"source\": \"uplo
+[ 174.8s step 5] TOOL_CALL   calculator {"expression": "29 + 838.88240311", "units": "USD"}
+[ 174.8s step 5] OBSERVATION calculator "{\"success\": true, \"data\": {\"value\": 867.88240311, \"units\": \"USD\"}, \"ts\": \"2026-10-25T21:29:57\"}"
+[ 189.6s step 6] FINAL        "{\"decision\": \"Buy Monthly Membership\", \"justification\": \"The total pay-per-use cost for 600 rides in June 2024 is $982.88, while the monthly membership fee ($29) plus residual charges ($838.88) totals $867.88. The membersh
+
+stop_reason=final_answer steps=6 time=189.64s tool_calls={'calls': 5, 'failed': 1, 'invalid': 0} tokens={'input': 24557, 'output': 5978}
+decision: Buy Monthly Membership | costs: {'pay_per_use_total': 982.88, 'membership_fee_total': 29.0, 'membership_residual_charges': 838.88, 'membership_total': 867.88, 'months': 1} | break_even: {'rides_per_month': 17.7, 'actual_rides_per_month': 600.0}
+justification: The total pay-per-use cost for 600 rides in June 2024 is $982.88, while the monthly membership fee ($29) plus residual charges ($838.88) totals $867.88. The membership is cheaper by $115.00. Break-even rides per month would be 17.7, but actual rides were 600/month.
+citations: [{'quote': 'Month pass | $29/month | Get a month pass | Classic bike prices | $1.00 to unlock, then $0.19/min', 'found_in_snapshot': True}]
+verification: {"checked": true, "checks": {"decision": true, "pay_per_use_total": false, "membership_total": false, "months": true}, "all_ok": false, "reference": {"decision": "Buy Monthly Membership", "pay_per_use_total": 10540.7, "membership_total": 3261.96, "membership_fee_total": 29.0, "membership_residual": 3232.96, "months": 1}}
+snapshot: {"url": "https://www.lyft.com/bikes/bay-wheels/pricing", "accessed_at": "2026-10-25T21:27:32", "sha256": "6c1f6af90eab9bb7374b8041b4289164c9e25ade9933104bf99b2ac133a37e90", "html_sha256": "07d61dade97799f54d0660febd636b73a21c5da715d31b98601962278cbd0646", "text_bytes": 4781, "text_lines": 183, "path": "C:\\Users\\patel\\data260-9871\\reports\\hw07\\part4\\snapshots\\32beca640e_pricing.txt"}
+
+===== HW7 Part 4 - test_bikeshare.py (offline: scripted fake model, fake fetcher, hand-computed CSV; no Ollama, no network) - 2026-10-25T23:53:15 =====
+
+### csv_sql
+[PASS] a SELECT returns the rows in the documented shape
+[PASS] the envelope carries source and ts
+[PASS] duration_min is computed from the timestamps (10, 60 and 20 minutes)
+[PASS] WITH ... SELECT is allowed
+[PASS] all 12 write/DDL/multi-statement attempts are rejected
+[PASS] and the table is unchanged afterwards
+[PASS] a write hidden inside a SELECT-looking statement is denied by the SQLite authorizer, not just by the prefix check
+[PASS] a runaway recursive query is aborted instead of hanging
+[PASS] bad SQL gives success=false with a readable error
+[PASS] an empty query is an error
+[PASS] a 300-row result is cut at 200 rows with a truncated note
+[PASS] rows with missing timestamps get a NULL duration and are counted
+
+### calculator
+[PASS] arithmetic with precedence and parentheses
+[PASS] units are echoed back
+[PASS] decimals and unary minus
+[PASS] rejected: "__import__('os').system('x')"
+[PASS] rejected: '2 ** 10'
+[PASS] rejected: 'abs(-1)'
+[PASS] rejected: '1; 2'
+[PASS] rejected: '1e5'
+[PASS] rejected: 'a + 1'
+[PASS] rejected: ''
+[PASS] rejected: '2 // 3'
+[PASS] rejected: '5 % 2'
+[PASS] division by zero is an error, not a crash
+[PASS] a very long expression is refused
+[PASS] a 500-level nested expression returns an error envelope instead of crashing the tool
+
+### policy_retriever
+[PASS] extract_text drops scripts, decodes entities and keeps visible text in order
+[PASS] make_passages drops duplicate windows: all passages are distinct and fewer than the raw windows
+[PASS] returns passages with text, source and score
+[PASS] the best passage for 'month price' mentions the month pass
+[PASS] the exact text snapshot was saved and its SHA-256 matches
+[PASS] the metadata file records url, access time and hash
+[PASS] the page is fetched once per run (later calls use the frozen snapshot)
+[PASS] a different URL in the same run is refused
+[PASS] empty query is an error
+[PASS] k is capped at 8 and floored at 1
+[PASS] http:// is refused
+[PASS] localhost / private addresses are refused (no SSRF into the local machine)
+[PASS] a fetch failure is reported as success=false
+[PASS] rates are confirmed against the snapshot text
+[PASS] a snapshot without the rates is NOT confirmed
+
+### reference cost model (hand-computed)
+[PASS] pay-per-use total = 2.90 + 12.40 + 10.80 = 26.10
+[PASS] membership residual = 0 + 2.55 + 3.40 = 5.95
+[PASS] Jan 15 to Mar 2 spans 3 calendar months, fee 87.00, membership total 92.95
+[PASS] so pay-per-use wins for three short rides
+[PASS] thirty 40-minute e-bike rides in one month: membership wins
+[PASS] weekly rows add up to the ride count
+[PASS] break-even = 29 / (26.10 / 3 rides) = 3.33 rides per month
+[PASS] check_result accepts the right numbers
+[PASS] check_result flags a wrong decision
+[PASS] check_result flags a wrong total
+[PASS] check_result flags a wrong break-even
+[PASS] check_result with no result is not ok
+
+### final-answer parsing
+[PASS] plain JSON parses
+[PASS] JSON inside a markdown fence with prose before it parses
+[PASS] a decision outside the two allowed strings is rejected
+[PASS] a missing key is rejected
+[PASS] a nested missing key is rejected and the message names where (costs: 'months' ...)
+[PASS] text with no JSON is rejected
+[PASS] a decision that contradicts the answer's own totals is rejected, and the message says what it should be
+[PASS] a membership_total that is not fee + residual is rejected
+[PASS] a tie goes to pay-per-use (the rule says: membership only if strictly lower)
+[PASS] braces inside a string do not confuse the parser
+
+### agent wrapper (scripted fake model)
+[PASS] happy path: stop_reason final_answer in 4 steps
+[PASS] the timeline shows each tool call followed by its observation, then the final answer
+[PASS] tool call counts and token totals are tracked
+[PASS] the snapshot (url, time, sha256) is attached to the result
+[PASS] a real quote is marked found_in_snapshot, an invented quote is marked NOT found
+[PASS] independent verification compares the agent's numbers with the reference
+[PASS] the evidence rates are confirmed in the snapshot
+[PASS] a confidently wrong answer is flagged by verification (decision and total)
+[PASS] a non-JSON final answer gets exactly one repair re-prompt and then succeeds
+[PASS] a self-contradictory answer is sent back once and the corrected answer is accepted
+[PASS] two bad answers in a row -> stop_reason invalid_output, no result, no crash
+[PASS] a model that never stops is cut off: stop_reason step_limit
+[PASS] an identical tool call repeated in one run is refused (first runs, the next two are told not to repeat) and the run still finishes
+[PASS] different arguments are NOT treated as a repeat
+[PASS] a model call that hangs is abandoned at the deadline: stop_reason timeout, returned in seconds, not after the call
+[PASS] a timed-out run still reports its snapshot-less state and a verification (not checked) instead of crashing
+[PASS] a model failure is reported as stop_reason error with the message, not raised
+[PASS] invalid arguments and a bad expression come back as success=false observations and the run continues
+[PASS] a DROP TABLE attempt by the model is refused and the data is intact afterwards
+[PASS] the system prompt tells the model to pick the pricing column by its tag ($1.00 pay-per-use, $29/month membership)
+
+### column tagging
+[PASS] each classic-row value is tagged with its column's headline price
+[PASS] the ebike row is tagged the same way
+[PASS] lines that are not price-row values are left alone
+[PASS] a page with no headline price run is returned unchanged
+[PASS] a price row with the wrong number of values is not tagged
+[PASS] passages returned to the model carry the column tags
+[PASS] but the saved snapshot is the exact page text with no tags
+[PASS] a quote copied from a tagged passage still matches the snapshot (tags ignored), an altered quote does not
+
+92/92 checks passed
+
+===== HW7 Part 4 - MUTATION CHECK: the hard model-call deadline removed (t.join() without timeout); the hang test must FAIL - 2026-10-25T23:03:43 =====
+
+### csv_sql
+[PASS] a SELECT returns the rows in the documented shape
+[PASS] the envelope carries source and ts
+[PASS] duration_min is computed from the timestamps (10, 60 and 20 minutes)
+[PASS] WITH ... SELECT is allowed
+[PASS] all 12 write/DDL/multi-statement attempts are rejected
+[PASS] and the table is unchanged afterwards
+[PASS] a write hidden inside a SELECT-looking statement is denied by the SQLite authorizer, not just by the prefix check
+[PASS] a runaway recursive query is aborted instead of hanging
+[PASS] bad SQL gives success=false with a readable error
+[PASS] an empty query is an error
+[PASS] a 300-row result is cut at 200 rows with a truncated note
+[PASS] rows with missing timestamps get a NULL duration and are counted
+
+### calculator
+[PASS] arithmetic with precedence and parentheses
+[PASS] units are echoed back
+[PASS] decimals and unary minus
+[PASS] rejected: "__import__('os').system('x')"
+[PASS] rejected: '2 ** 10'
+[PASS] rejected: 'abs(-1)'
+[PASS] rejected: '1; 2'
+[PASS] rejected: '1e5'
+[PASS] rejected: 'a + 1'
+[PASS] rejected: ''
+[PASS] rejected: '2 // 3'
+[PASS] rejected: '5 % 2'
+[PASS] division by zero is an error, not a crash
+[PASS] a very long expression is refused
+[PASS] a 500-level nested expression returns an error envelope instead of crashing the tool
+
+### policy_retriever
+[PASS] extract_text drops scripts, decodes entities and keeps visible text in order
+[PASS] make_passages drops duplicate windows: all passages are distinct and fewer than the raw windows
+[PASS] returns passages with text, source and score
+[PASS] the best passage for 'month price' mentions the month pass
+[PASS] the exact text snapshot was saved and its SHA-256 matches
+[PASS] the metadata file records url, access time and hash
+[PASS] the page is fetched once per run (later calls use the frozen snapshot)
+[PASS] a different URL in the same run is refused
+[PASS] empty query is an error
+[PASS] k is capped at 8 and floored at 1
+[PASS] http:// is refused
+[PASS] localhost / private addresses are refused (no SSRF into the local machine)
+[PASS] a fetch failure is reported as success=false
+[PASS] rates are confirmed against the snapshot text
+[PASS] a snapshot without the rates is NOT confirmed
+
+### reference cost model (hand-computed)
+[PASS] pay-per-use total = 2.90 + 12.40 + 10.80 = 26.10
+[PASS] membership residual = 0 + 2.55 + 3.40 = 5.95
+[PASS] Jan 15 to Mar 2 spans 3 calendar months, fee 87.00, membership total 92.95
+[PASS] so pay-per-use wins for three short rides
+[PASS] thirty 40-minute e-bike rides in one month: membership wins
+[PASS] weekly rows add up to the ride count
+[PASS] break-even = 29 / (26.10 / 3 rides) = 3.33 rides per month
+[PASS] check_result accepts the right numbers
+[PASS] check_result flags a wrong decision
+[PASS] check_result flags a wrong total
+[PASS] check_result flags a wrong break-even
+[PASS] check_result with no result is not ok
+
+### final-answer parsing
+[PASS] plain JSON parses
+[PASS] JSON inside a markdown fence with prose before it parses
+[PASS] a decision outside the two allowed strings is rejected
+[PASS] a missing key is rejected
+[PASS] a nested missing key is rejected and the message names where (costs: 'months' ...)
+[PASS] text with no JSON is rejected
+[PASS] a decision that contradicts the answer's own totals is rejected, and the message says what it should be
+[PASS] a membership_total that is not fee + residual is rejected
+[PASS] a tie goes to pay-per-use (the rule says: membership only if strictly lower)
+[PASS] braces inside a string do not confuse the parser
+
+### agent wrapper (scripted fake model)
+[PASS] happy path: stop_reason final_answer in 4 steps
+[PASS] the timeline shows each tool call followed by its observation, then the final answer
+[PASS] tool call counts and token totals are tracked
+[PASS] the snapshot (url, time, sha256) is attached to the result
+[PASS] a real quote is marked found_in_snapshot, an invented quote is marked NOT found
+[PASS] independent verification compares the agent's numbers with the reference
+[PASS] the evidence rates are confirmed in the snapshot
+[PASS] a confidently wrong answer is flagged by verification (decision and total)
+[PASS] a non-JSON final answer gets exactly one repair re-prompt and then succeeds
+[PASS] a self-contradictory answer is sent back once and the corrected answer is accepted
+[PASS] two bad answers in a row -> stop_reason invalid_output, no result, no crash
+[PASS] a model that never stops is cut off: stop_reason step_limit
+[FAIL] a model call that hangs is abandoned at the deadline: stop_reason timeout, returned in seconds, not after the call   (timeout 25.0s)
+[PASS] a timed-out run still reports its snapshot-less state and a verification (not checked) instead of crashing
+[PASS] a model failure is reported as stop_reason error with the message, not raised
+[PASS] invalid arguments and a bad expression come back as success=false observations and the run continues
+[PASS] a DROP TABLE attempt by the model is refused and the data is intact afterwards
+[PASS] the system prompt tells the model to pick the pricing column by its tag ($1.00 pay-per-use, $29/month membership)
+
+### column tagging
+[PASS] each classic-row value is tagged with its column's headline price
+[PASS] the ebike row is tagged the same way
+[PASS] lines that are not price-row values are left alone
+[PASS] a page with no headline price run is returned unchanged
+[PASS] a price row with the wrong number of values is not tagged
+[PASS] passages returned to the model carry the column tags
+[PASS] but the saved snapshot is the exact page text with no tags
+[PASS] a quote copied from a tagged passage still matches the snapshot (tags ignored), an altered quote does not
+
+89/90 checks passed
+FAILED: a model call that hangs is abandoned at the deadline: stop_reason timeout, returned in seconds, not after the call
+
+===== HW7 Part 4 - test_ui.py --skip-run: upload failure paths, no-HTML-injection check, polling survives failed requests (real server + headless Chromium) - 2026-10-25T23:53:36 =====
+
+### upload validation (no model involved)
+[PASS] a non-.csv file is refused with 400
+[PASS] a CSV without the required columns is refused and the message names them
+[PASS] a CSV with a header but no rows is refused
+[PASS] a binary file named .csv is refused as unreadable, not a 500
+[PASS] an http:// pricing URL is refused
+[PASS] an empty pricing URL is refused
+[PASS] no file at all is refused (422)
+[PASS] a file over 5 MB is refused with 413
+[PASS] an unknown run id is a 404
+[PASS] the page itself is served
+
+### the page renders model output as text, never as HTML
+[PASS] HTML in the justification, weekly table, assumptions, citations and observations is shown as text, not executed
+
+### polling survives failed requests (mocked network)
+[PASS] [3 failed polls then success] the page recovers and shows the result
+[PASS] [server unreachable for good] the page says it lost contact and re-enables Run
+
+13/13 checks passed
+
+===== HW7 Part 4 - MUTATION CHECK: the page's poll retry removed; the resilience test must FAIL (it ends in a TimeoutError because the banner never appears, the same symptom as the first failed UI run below) - 2026-10-25T23:48:22 =====
+
+### upload validation (no model involved)
+[PASS] a non-.csv file is refused with 400
+[PASS] a CSV without the required columns is refused and the message names them
+[PASS] a CSV with a header but no rows is refused
+[PASS] a binary file named .csv is refused as unreadable, not a 500
+[PASS] an http:// pricing URL is refused
+[PASS] an empty pricing URL is refused
+[PASS] no file at all is refused (422)
+[PASS] a file over 5 MB is refused with 413
+[PASS] an unknown run id is a 404
+[PASS] the page itself is served
+
+### the page renders model output as text, never as HTML
+[PASS] HTML in the justification, weekly table, assumptions, citations and observations is shown as text, not executed
+
+### polling survives failed requests (mocked network)
+
+===== HW7 Part 4 - Ruff on code/bikeshare - 2026-10-25T23:53:36 =====
+$ ruff check code/bikeshare
+All checks passed!
+
+===== HW7 Part 4 - measure_agent.py SMOKE TEST (1 run per scenario) - 2026-10-25T22:05:51 =====
+Run at 2026-10-25T22:05:51 | qwen3:8b thinking off, temperature 0, seed 9871 | 1 runs per scenario | https://www.lyft.com/bikes/bay-wheels/pricing
+
+membership_wins  run 1: stop=final_answer steps=12 51.02s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+payperuse_wins   run 1: stop=final_answer steps=12 43.94s decision_correct=True all_numbers_correct=False failed_checks=[break_even_rides_per_month] repairs=0
+
+=== SUMMARY ===
+{
+  "url": "https://www.lyft.com/bikes/bay-wheels/pricing",
+  "runs_per_scenario": 1,
+  "per_scenario": {
+    "membership_wins": {
+      "runs": 1,
+      "final_answer": 1,
+      "decision_correct": 1,
+      "all_numbers_correct": 1,
+      "runs_needing_repair": 0,
+      "mean_steps": 12.0,
+      "mean_time_s": 51.0,
+      "mean_failed_tool_calls": 1.0,
+      "failed_check_counts": {
+        "decision": 0,
+        "pay_per_use_total": 0,
+        "membership_total": 0,
+        "months": 0,
+        "break_even_rides_per_month": 0
+      }
+    },
+    "payperuse_wins": {
+      "runs": 1,
+      "final_answer": 1,
+      "decision_correct": 1,
+      "all_numbers_correct": 0,
+      "runs_needing_repair": 0,
+      "mean_steps": 12.0,
+      "mean_time_s": 43.9,
+      "mean_failed_tool_calls": 1.0,
+      "failed_check_counts": {
+        "decision": 0,
+        "pay_per_use_total": 0,
+        "membership_total": 0,
+        "months": 0,
+        "break_even_rides_per_month": 1
+      }
+    }
+  },
+  "snapshot_hashes": [
+    "6c1f6af90eab9bb7374b8041b4289164c9e25ade9933104bf99b2ac133a37e90"
+  ]
+}
+
+===== HW7 Part 4 - measure_agent.py v1 (8 runs per scenario, live pricing page) - 2026-10-25T22:07:39 =====
+Run at 2026-10-25T22:07:39 | qwen3:8b thinking off, temperature 0, seed 9871 | 8 runs per scenario | https://www.lyft.com/bikes/bay-wheels/pricing
+
+membership_wins  run 1: stop=final_answer steps=13 79.73s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=1
+payperuse_wins   run 1: stop=final_answer steps=12 41.65s decision_correct=True all_numbers_correct=False failed_checks=[break_even_rides_per_month] repairs=1
+membership_wins  run 2: stop=final_answer steps=11 36.43s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+payperuse_wins   run 2: stop=final_answer steps=13 71.96s decision_correct=True all_numbers_correct=False failed_checks=[break_even_rides_per_month] repairs=1
+membership_wins  run 3: stop=final_answer steps=12 40.63s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+payperuse_wins   run 3: stop=final_answer steps=12 39.87s decision_correct=True all_numbers_correct=False failed_checks=[break_even_rides_per_month] repairs=1
+membership_wins  run 4: stop=final_answer steps=11 35.22s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+payperuse_wins   run 4: stop=final_answer steps=12 44.12s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+membership_wins  run 5: stop=final_answer steps=11 38.13s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+payperuse_wins   run 5: stop=final_answer steps=13 69.6s decision_correct=True all_numbers_correct=False failed_checks=[break_even_rides_per_month] repairs=1
+membership_wins  run 6: stop=final_answer steps=11 35.22s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+payperuse_wins   run 6: stop=final_answer steps=13 67.66s decision_correct=True all_numbers_correct=False failed_checks=[break_even_rides_per_month] repairs=1
+membership_wins  run 7: stop=final_answer steps=13 66.04s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=1
+payperuse_wins   run 7: stop=final_answer steps=12 44.94s decision_correct=True all_numbers_correct=False failed_checks=[break_even_rides_per_month] repairs=1
+membership_wins  run 8: stop=final_answer steps=12 37.62s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+payperuse_wins   run 8: stop=final_answer steps=13 68.37s decision_correct=True all_numbers_correct=False failed_checks=[break_even_rides_per_month] repairs=1
+
+=== SUMMARY ===
+{
+  "url": "https://www.lyft.com/bikes/bay-wheels/pricing",
+  "runs_per_scenario": 8,
+  "per_scenario": {
+    "membership_wins": {
+      "runs": 8,
+      "final_answer": 8,
+      "decision_correct": 8,
+      "all_numbers_correct": 8,
+      "runs_needing_repair": 2,
+      "mean_steps": 11.8,
+      "mean_time_s": 46.1,
+      "mean_failed_tool_calls": 1.0,
+      "failed_check_counts": {
+        "decision": 0,
+        "pay_per_use_total": 0,
+        "membership_total": 0,
+        "months": 0,
+        "break_even_rides_per_month": 0
+      }
+    },
+    "payperuse_wins": {
+      "runs": 8,
+      "final_answer": 8,
+      "decision_correct": 8,
+      "all_numbers_correct": 1,
+      "runs_needing_repair": 7,
+      "mean_steps": 12.5,
+      "mean_time_s": 56.0,
+      "mean_failed_tool_calls": 1.0,
+      "failed_check_counts": {
+        "decision": 0,
+        "pay_per_use_total": 0,
+        "membership_total": 0,
+        "months": 0,
+        "break_even_rides_per_month": 7
+      }
+    }
+  },
+  "snapshot_hashes": [
+    "6c1f6af90eab9bb7374b8041b4289164c9e25ade9933104bf99b2ac133a37e90"
+  ]
+}
+
+===== HW7 Part 4 - measure_agent.py v2 (after adding 'e.g. 29' to the break-even note and a decision hint to the JSON template): scenario 1 REGRESSED - 2026-10-25T22:22:01 =====
+Run at 2026-10-25T22:22:01 | qwen3:8b thinking off, temperature 0, seed 9871 | 8 runs per scenario | https://www.lyft.com/bikes/bay-wheels/pricing
+
+membership_wins  run 1: stop=final_answer steps=12 82.09s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=1
+payperuse_wins   run 1: stop=final_answer steps=11 45.41s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+membership_wins  run 2: stop=final_answer steps=11 47.64s decision_correct=False all_numbers_correct=False failed_checks=[decision,membership_total] repairs=0
+payperuse_wins   run 2: stop=final_answer steps=11 51.39s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+membership_wins  run 3: stop=final_answer steps=11 49.39s decision_correct=False all_numbers_correct=False failed_checks=[decision,membership_total] repairs=0
+payperuse_wins   run 3: stop=final_answer steps=11 52.94s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+membership_wins  run 4: stop=final_answer steps=11 47.47s decision_correct=False all_numbers_correct=False failed_checks=[decision,membership_total] repairs=0
+payperuse_wins   run 4: stop=final_answer steps=11 51.58s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+membership_wins  run 5: stop=final_answer steps=11 47.12s decision_correct=False all_numbers_correct=False failed_checks=[decision,membership_total] repairs=0
+payperuse_wins   run 5: stop=final_answer steps=11 51.29s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+membership_wins  run 6: stop=final_answer steps=11 47.37s decision_correct=False all_numbers_correct=False failed_checks=[decision,membership_total] repairs=0
+payperuse_wins   run 6: stop=final_answer steps=11 51.7s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+membership_wins  run 7: stop=final_answer steps=11 46.51s decision_correct=False all_numbers_correct=False failed_checks=[decision,membership_total] repairs=0
+payperuse_wins   run 7: stop=final_answer steps=11 54.11s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+membership_wins  run 8: stop=final_answer steps=12 80.03s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=1
+payperuse_wins   run 8: stop=final_answer steps=11 52.35s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+
+=== SUMMARY ===
+{
+  "url": "https://www.lyft.com/bikes/bay-wheels/pricing",
+  "runs_per_scenario": 8,
+  "per_scenario": {
+    "membership_wins": {
+      "runs": 8,
+      "final_answer": 8,
+      "decision_correct": 2,
+      "all_numbers_correct": 2,
+      "runs_needing_repair": 2,
+      "mean_steps": 11.2,
+      "mean_time_s": 56.0,
+      "mean_failed_tool_calls": 1.0,
+      "failed_check_counts": {
+        "decision": 6,
+        "pay_per_use_total": 0,
+        "membership_total": 6,
+        "months": 0,
+        "break_even_rides_per_month": 0
+      }
+    },
+    "payperuse_wins": {
+      "runs": 8,
+      "final_answer": 8,
+      "decision_correct": 8,
+      "all_numbers_correct": 8,
+      "runs_needing_repair": 0,
+      "mean_steps": 11.0,
+      "mean_time_s": 51.3,
+      "mean_failed_tool_calls": 1.0,
+      "failed_check_counts": {
+        "decision": 0,
+        "pay_per_use_total": 0,
+        "membership_total": 0,
+        "months": 0,
+        "break_even_rides_per_month": 0
+      }
+    }
+  },
+  "snapshot_hashes": [
+    "6c1f6af90eab9bb7374b8041b4289164c9e25ade9933104bf99b2ac133a37e90"
+  ]
+}
+
+===== HW7 Part 4 - measure_agent.py v3 (example number removed): note the timeout run and the three step_limit loops - 2026-10-25T22:36:55 =====
+Run at 2026-10-25T22:36:55 | qwen3:8b thinking off, temperature 0, seed 9871 | 8 runs per scenario | https://www.lyft.com/bikes/bay-wheels/pricing
+
+membership_wins  run 1: stop=final_answer steps=12 105.38s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=1
+payperuse_wins   run 1: stop=final_answer steps=11 47.99s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+membership_wins  run 2: stop=final_answer steps=12 81.95s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=1
+payperuse_wins   run 2: stop=timeout steps=10 1221.95s decision_correct=False all_numbers_correct=False failed_checks=[] repairs=0
+membership_wins  run 3: stop=final_answer steps=12 78.36s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=1
+payperuse_wins   run 3: stop=final_answer steps=11 54.17s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+membership_wins  run 4: stop=final_answer steps=12 83.51s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=1
+payperuse_wins   run 4: stop=final_answer steps=11 49.86s decision_correct=True all_numbers_correct=False failed_checks=[membership_total] repairs=0
+membership_wins  run 5: stop=final_answer steps=12 79.59s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=1
+payperuse_wins   run 5: stop=final_answer steps=11 48.48s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+membership_wins  run 6: stop=step_limit steps=15 32.53s decision_correct=False all_numbers_correct=False failed_checks=[] repairs=0
+payperuse_wins   run 6: stop=final_answer steps=11 53.26s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+membership_wins  run 7: stop=step_limit steps=15 31.56s decision_correct=False all_numbers_correct=False failed_checks=[] repairs=0
+payperuse_wins   run 7: stop=final_answer steps=11 51.6s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+membership_wins  run 8: stop=step_limit steps=15 32.06s decision_correct=False all_numbers_correct=False failed_checks=[] repairs=0
+payperuse_wins   run 8: stop=final_answer steps=11 46.92s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+
+=== SUMMARY ===
+{
+  "url": "https://www.lyft.com/bikes/bay-wheels/pricing",
+  "runs_per_scenario": 8,
+  "per_scenario": {
+    "membership_wins": {
+      "runs": 8,
+      "final_answer": 5,
+      "decision_correct": 5,
+      "all_numbers_correct": 5,
+      "runs_needing_repair": 5,
+      "mean_steps": 13.1,
+      "mean_time_s": 65.6,
+      "mean_failed_tool_calls": 1.0,
+      "failed_check_counts": {
+        "decision": 0,
+        "pay_per_use_total": 0,
+        "membership_total": 0,
+        "months": 0,
+        "break_even_rides_per_month": 0
+      }
+    },
+    "payperuse_wins": {
+      "runs": 8,
+      "final_answer": 7,
+      "decision_correct": 7,
+      "all_numbers_correct": 6,
+      "runs_needing_repair": 0,
+      "mean_steps": 10.9,
+      "mean_time_s": 196.8,
+      "mean_failed_tool_calls": 1.0,
+      "failed_check_counts": {
+        "decision": 0,
+        "pay_per_use_total": 0,
+        "membership_total": 1,
+        "months": 0,
+        "break_even_rides_per_month": 0
+      }
+    }
+  },
+  "snapshot_hashes": [
+    "6c1f6af90eab9bb7374b8041b4289164c9e25ade9933104bf99b2ac133a37e90"
+  ]
+}
+
+===== HW7 Part 4 - measure_agent.py v4 = FINAL code (hard deadline + repeat-call guard added) - 2026-10-25T23:11:56 =====
+Run at 2026-10-25T23:12:51 | qwen3:8b thinking off, temperature 0, seed 9871 | 8 runs per scenario | https://www.lyft.com/bikes/bay-wheels/pricing
+
+membership_wins  run 1: stop=final_answer steps=11 68.05s decision_correct=False all_numbers_correct=False failed_checks=[decision,membership_total,break_even_rides_per_month] repairs=0
+payperuse_wins   run 1: stop=final_answer steps=11 52.6s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+membership_wins  run 2: stop=invalid_output steps=15 60.63s decision_correct=False all_numbers_correct=False failed_checks=[] repairs=1
+payperuse_wins   run 2: stop=final_answer steps=11 49.43s decision_correct=True all_numbers_correct=False failed_checks=[membership_total] repairs=0
+membership_wins  run 3: stop=final_answer steps=12 82.34s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=1
+payperuse_wins   run 3: stop=final_answer steps=11 50.95s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+membership_wins  run 4: stop=final_answer steps=12 79.29s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=1
+payperuse_wins   run 4: stop=final_answer steps=11 56.49s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+membership_wins  run 5: stop=final_answer steps=12 86.8s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=1
+payperuse_wins   run 5: stop=final_answer steps=11 48.67s decision_correct=True all_numbers_correct=False failed_checks=[membership_total] repairs=0
+membership_wins  run 6: stop=final_answer steps=12 80.1s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=1
+payperuse_wins   run 6: stop=final_answer steps=11 52.38s decision_correct=True all_numbers_correct=False failed_checks=[membership_total] repairs=0
+membership_wins  run 7: stop=final_answer steps=12 83.56s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=1
+payperuse_wins   run 7: stop=final_answer steps=11 53.84s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+membership_wins  run 8: stop=final_answer steps=12 79.09s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=1
+payperuse_wins   run 8: stop=final_answer steps=11 56.25s decision_correct=True all_numbers_correct=True failed_checks=[] repairs=0
+
+=== SUMMARY ===
+{
+  "url": "https://www.lyft.com/bikes/bay-wheels/pricing",
+  "runs_per_scenario": 8,
+  "per_scenario": {
+    "membership_wins": {
+      "runs": 8,
+      "final_answer": 7,
+      "decision_correct": 6,
+      "all_numbers_correct": 6,
+      "runs_needing_repair": 7,
+      "mean_steps": 12.2,
+      "mean_time_s": 77.5,
+      "mean_failed_tool_calls": 1.75,
+      "failed_check_counts": {
+        "decision": 1,
+        "pay_per_use_total": 0,
+        "membership_total": 1,
+        "months": 0,
+        "break_even_rides_per_month": 1
+      }
+    },
+    "payperuse_wins": {
+      "runs": 8,
+      "final_answer": 8,
+      "decision_correct": 8,
+      "all_numbers_correct": 5,
+      "runs_needing_repair": 0,
+      "mean_steps": 11.0,
+      "mean_time_s": 52.6,
+      "mean_failed_tool_calls": 1.0,
+      "failed_check_counts": {
+        "decision": 0,
+        "pay_per_use_total": 0,
+        "membership_total": 3,
+        "months": 0,
+        "break_even_rides_per_month": 0
+      }
+    }
+  },
+  "snapshot_hashes": [
+    "6c1f6af90eab9bb7374b8041b4289164c9e25ade9933104bf99b2ac133a37e90"
+  ]
+}
+
+===== HW7 Part 4 - test_ui.py --both, UI run 1: FAILED. The real run finished fine (final_answer, correct) but the page never showed the banner within 420 s (cause not proven; the page's polling had no error handling, so one failed poll would freeze it) - 2026-10-25T23:31:06 =====
+
+### upload validation (no model involved)
+[PASS] a non-.csv file is refused with 400
+[PASS] a CSV without the required columns is refused and the message names them
+[PASS] a CSV with a header but no rows is refused
+[PASS] a binary file named .csv is refused as unreadable, not a 500
+[PASS] an http:// pricing URL is refused
+[PASS] an empty pricing URL is refused
+[PASS] no file at all is refused (422)
+[PASS] a file over 5 MB is refused with 413
+[PASS] an unknown run id is a 404
+[PASS] the page itself is served
+
+### the page renders model output as text, never as HTML
+[PASS] HTML in the justification, weekly table, assumptions, citations and observations is shown as text, not executed
+
+### full UI run(s) with the real model
+[PASS] [membership_wins] the page shows one CSV field, one URL field and a Run button
+[PASS] [membership_wins] the URL field is pre-filled with the Bay Wheels pricing page
+[PASS] [membership_wins] a tool call appears in the timeline while the run is still going
+[PASS] [membership_wins] a second run while one is active is refused with 409
+
+===== HW7 Part 4 - test_ui.py, UI run 2 (membership scenario only; passed, so the failure above did not reproduce; polling logging added) - 2026-10-25T23:44:04 =====
+
+### upload validation (no model involved)
+[PASS] a non-.csv file is refused with 400
+[PASS] a CSV without the required columns is refused and the message names them
+[PASS] a CSV with a header but no rows is refused
+[PASS] a binary file named .csv is refused as unreadable, not a 500
+[PASS] an http:// pricing URL is refused
+[PASS] an empty pricing URL is refused
+[PASS] no file at all is refused (422)
+[PASS] a file over 5 MB is refused with 413
+[PASS] an unknown run id is a 404
+[PASS] the page itself is served
+
+### the page renders model output as text, never as HTML
+[PASS] HTML in the justification, weekly table, assumptions, citations and observations is shown as text, not executed
+
+### full UI run(s) with the real model
+[PASS] [membership_wins] the page shows one CSV field, one URL field and a Run button
+[PASS] [membership_wins] the URL field is pre-filled with the Bay Wheels pricing page
+[PASS] [membership_wins] a tool call appears in the timeline while the run is still going
+[PASS] [membership_wins] a second run while one is active is refused with 409
+[PASS] [membership_wins] the timeline shows tool calls and observations
+[PASS] [membership_wins] the timeline names all three tools
+[PASS] [membership_wins] the results panel shows the decision banner
+[PASS] [membership_wins] the metrics strip shows steps, total time and stop reason
+[PASS] [membership_wins] the cost comparison table is shown
+[PASS] [membership_wins] the weekly table is shown
+[PASS] [membership_wins] citations show the pricing URL, a capture time and a 64-hex SHA-256
+[PASS] [membership_wins] the independent check is displayed
+    [membership_wins] decision='Buy Monthly Membership'; independent check: MATCHES
+
+23/23 checks passed
+
+===== HW7 Part 4 - test_ui.py --both, UI run 3 (passed both scenarios; this was before the polling retry and the expanded-timeline capture) - 2026-10-25T23:46:02 =====
+
+### upload validation (no model involved)
+[PASS] a non-.csv file is refused with 400
+[PASS] a CSV without the required columns is refused and the message names them
+[PASS] a CSV with a header but no rows is refused
+[PASS] a binary file named .csv is refused as unreadable, not a 500
+[PASS] an http:// pricing URL is refused
+[PASS] an empty pricing URL is refused
+[PASS] no file at all is refused (422)
+[PASS] a file over 5 MB is refused with 413
+[PASS] an unknown run id is a 404
+[PASS] the page itself is served
+
+### the page renders model output as text, never as HTML
+[PASS] HTML in the justification, weekly table, assumptions, citations and observations is shown as text, not executed
+
+### full UI run(s) with the real model
+[PASS] [membership_wins] the page shows one CSV field, one URL field and a Run button
+[PASS] [membership_wins] the URL field is pre-filled with the Bay Wheels pricing page
+[PASS] [membership_wins] a tool call appears in the timeline while the run is still going
+[PASS] [membership_wins] a second run while one is active is refused with 409
+[PASS] [membership_wins] the timeline shows tool calls and observations
+[PASS] [membership_wins] the timeline names all three tools
+[PASS] [membership_wins] the results panel shows the decision banner
+[PASS] [membership_wins] the metrics strip shows steps, total time and stop reason
+[PASS] [membership_wins] the cost comparison table is shown
+[PASS] [membership_wins] the weekly table is shown
+[PASS] [membership_wins] citations show the pricing URL, a capture time and a 64-hex SHA-256
+[PASS] [membership_wins] the independent check is displayed
+    [membership_wins] decision='Buy Monthly Membership'; independent check: MATCHES
+[PASS] [payperuse_wins] the page shows one CSV field, one URL field and a Run button
+[PASS] [payperuse_wins] the URL field is pre-filled with the Bay Wheels pricing page
+[PASS] [payperuse_wins] a tool call appears in the timeline while the run is still going
+[PASS] [payperuse_wins] the timeline shows tool calls and observations
+[PASS] [payperuse_wins] the timeline names all three tools
+[PASS] [payperuse_wins] the results panel shows the decision banner
+[PASS] [payperuse_wins] the metrics strip shows steps, total time and stop reason
+[PASS] [payperuse_wins] the cost comparison table is shown
+[PASS] [payperuse_wins] the weekly table is shown
+[PASS] [payperuse_wins] citations show the pricing URL, a capture time and a 64-hex SHA-256
+[PASS] [payperuse_wins] the independent check is displayed
+    [payperuse_wins] decision='Pay Per Ride/Minute'; independent check: MATCHES
+
+34/34 checks passed
+
+===== HW7 Part 4 - test_ui.py --both, UI run 4 (final page code; screenshots with expanded timeline). Scenario 2 was FLAGGED by the independent check (break-even wrong); kept as part4_ui_payperuse_wins_flagged_run.png - 2026-10-25T23:51:20 =====
+All checks passed!
+
+### upload validation (no model involved)
+[PASS] a non-.csv file is refused with 400
+[PASS] a CSV without the required columns is refused and the message names them
+[PASS] a CSV with a header but no rows is refused
+[PASS] a binary file named .csv is refused as unreadable, not a 500
+[PASS] an http:// pricing URL is refused
+[PASS] an empty pricing URL is refused
+[PASS] no file at all is refused (422)
+[PASS] a file over 5 MB is refused with 413
+[PASS] an unknown run id is a 404
+[PASS] the page itself is served
+
+### the page renders model output as text, never as HTML
+[PASS] HTML in the justification, weekly table, assumptions, citations and observations is shown as text, not executed
+
+### polling survives failed requests (mocked network)
+[PASS] [3 failed polls then success] the page recovers and shows the result
+[PASS] [server unreachable for good] the page says it lost contact and re-enables Run
+
+### full UI run(s) with the real model
+[PASS] [membership_wins] the page shows one CSV field, one URL field and a Run button
+[PASS] [membership_wins] the URL field is pre-filled with the Bay Wheels pricing page
+[PASS] [membership_wins] a tool call appears in the timeline while the run is still going
+[PASS] [membership_wins] a second run while one is active is refused with 409
+[PASS] [membership_wins] the timeline shows tool calls and observations
+[PASS] [membership_wins] the timeline names all three tools
+[PASS] [membership_wins] the results panel shows the decision banner
+[PASS] [membership_wins] the metrics strip shows steps, total time and stop reason
+[PASS] [membership_wins] the cost comparison table is shown
+[PASS] [membership_wins] the weekly table is shown
+[PASS] [membership_wins] citations show the pricing URL, a capture time and a 64-hex SHA-256
+[PASS] [membership_wins] the independent check is displayed
+    [membership_wins] decision='Buy Monthly Membership'; independent check: MATCHES
+[PASS] [payperuse_wins] the page shows one CSV field, one URL field and a Run button
+[PASS] [payperuse_wins] the URL field is pre-filled with the Bay Wheels pricing page
+[PASS] [payperuse_wins] a tool call appears in the timeline while the run is still going
+[PASS] [payperuse_wins] the timeline shows tool calls and observations
+[PASS] [payperuse_wins] the timeline names all three tools
+[PASS] [payperuse_wins] the results panel shows the decision banner
+[PASS] [payperuse_wins] the metrics strip shows steps, total time and stop reason
+[PASS] [payperuse_wins] the cost comparison table is shown
+[PASS] [payperuse_wins] the weekly table is shown
+[PASS] [payperuse_wins] citations show the pricing URL, a capture time and a 64-hex SHA-256
+[PASS] [payperuse_wins] the independent check is displayed
+    [payperuse_wins] decision='Pay Per Ride/Minute'; independent check: MISMATCH
+
+36/36 checks passed
+
+===== HW7 Part 4 - test_ui.py --only payperuse_wins, UI run 5 (the scenario-2 run used for the main screenshot; independent check MATCHES) - 2026-10-25T23:52:52 =====
+All checks passed!
+
+### upload validation (no model involved)
+[PASS] a non-.csv file is refused with 400
+[PASS] a CSV without the required columns is refused and the message names them
+[PASS] a CSV with a header but no rows is refused
+[PASS] a binary file named .csv is refused as unreadable, not a 500
+[PASS] an http:// pricing URL is refused
+[PASS] an empty pricing URL is refused
+[PASS] no file at all is refused (422)
+[PASS] a file over 5 MB is refused with 413
+[PASS] an unknown run id is a 404
+[PASS] the page itself is served
+
+### the page renders model output as text, never as HTML
+[PASS] HTML in the justification, weekly table, assumptions, citations and observations is shown as text, not executed
+
+### polling survives failed requests (mocked network)
+[PASS] [3 failed polls then success] the page recovers and shows the result
+[PASS] [server unreachable for good] the page says it lost contact and re-enables Run
+
+### full UI run(s) with the real model
+[PASS] [payperuse_wins] the page shows one CSV field, one URL field and a Run button
+[PASS] [payperuse_wins] the URL field is pre-filled with the Bay Wheels pricing page
+[PASS] [payperuse_wins] a tool call appears in the timeline while the run is still going
+[PASS] [payperuse_wins] a second run while one is active is refused with 409
+[PASS] [payperuse_wins] the timeline shows tool calls and observations
+[PASS] [payperuse_wins] the timeline names all three tools
+[PASS] [payperuse_wins] the results panel shows the decision banner
+[PASS] [payperuse_wins] the metrics strip shows steps, total time and stop reason
+[PASS] [payperuse_wins] the cost comparison table is shown
+[PASS] [payperuse_wins] the weekly table is shown
+[PASS] [payperuse_wins] citations show the pricing URL, a capture time and a 64-hex SHA-256
+[PASS] [payperuse_wins] the independent check is displayed
+    [payperuse_wins] decision='Pay Per Ride/Minute'; independent check: MATCHES
+
+25/25 checks passed

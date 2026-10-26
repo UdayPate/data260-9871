@@ -212,3 +212,77 @@ answer happened here.
 - Budgets are checked between model calls, so a run can overshoot slightly (15,539 tokens against a 15,000 budget in one run).
 - Raw data: `raw/part3_attempts.json` (every attempt with verifier and oracle result), `raw/part3_items.csv`, `raw/part3_summary.json`, `raw/part3_reflections.jsonl`
   (every stored reflection with its evidence), `raw/part3_agent_runs.jsonl`, `raw/part3_demo_reflections.jsonl` (the live demo).
+
+## Part 4 - Framework ReAct/MRKL agent: Bay Wheels monthly membership vs pay per ride
+
+Code (all in `code/bikeshare/`): `tools.py` (the three tools and their JSON schemas), `agent.py` (LangChain `create_agent`, a LangGraph ReAct loop, qwen3:8b via Ollama, thinking off, temperature 0, seed 9871),
+`costs.py` (an independent reference cost model used only to check the agent), `server.py` + `static/index.html` (the UI, port 8872), `prepare_scenarios.py`, `measure_agent.py`, `run_one.py`,
+`make_evidence_index.py`, tests `test_bikeshare.py` (92 offline checks) and `test_ui.py` (real server + headless Chromium + real model). Reused from earlier homeworks: LangGraph (HW5), the all-MiniLM-L6-v2 embedding model
+(HW4/HW6; the retriever loads it directly, `doc_api/embeddings.py` depends on that package's config). The agent builds its own `ChatOllama` because the framework needs a LangChain chat model; `src/model_client.py` is not used for it.
+
+### The tools (pure functions, JSON schema, common envelope `{success, data, error, source, ts}`)
+| Tool | Input schema | What it does and its safety rules |
+|---|---|---|
+| `csv_sql` | `{sql: string}` | Loads the uploaded CSV into in-memory SQLite (table `trips`, plus a computed `duration_min`). One SELECT/WITH only; SQLite's authorizer allows only read operations, so INSERT/UPDATE/DELETE/DROP/ATTACH/PRAGMA are refused by the engine, not just by a prefix check; a runaway recursive query is aborted; results are capped at 200 rows. |
+| `policy_retriever` | `{url: string, query: string, k?: 1..8}` | https only, public hosts only (no localhost or private ranges). Fetches the page once per run, saves the extracted text and its SHA-256, and returns the `k` best snippets `{text, source, score}` by cosine similarity (all-MiniLM-L6-v2). Later calls in the run use the frozen text; another URL is refused. |
+| `calculator` | `{expression: string (^[0-9+\-*/().\s]+$), units?: string}` | The whitelist is checked, then the expression is evaluated by walking the AST (+ - * / and unary minus only); no `eval`. `**`, names, calls, `//`, `%` and over-long or deeply nested input are refused as errors. |
+
+### The two acceptance scenarios (real Bay Wheels trips, rows only selected, seed 9871; `code/bikeshare/data/`)
+The public trip files are anonymous, so each scenario treats its sample as one hypothetical rider. Source zips and their SHA-256 are in `scenarios_provenance.json`.
+| | Membership wins | Pay-per-use wins |
+|---|---|---|
+| Rows | 600 | 528 |
+| Selection | 2024-06, casual riders, 20-180 min rides | 11 per month for each of 48 months (2021-01 to 2024-12), casual riders, classic bike, 2-8 min rides |
+| Mix / mean ride | 456 e-bike, 144 classic / 39.6 min | 528 classic / 5.5 min |
+| Months covered | 1 | 48 |
+| Reference: pay per use | $10,540.70 | $1,079.92 |
+| Reference: monthly membership | $29.00 + $3,232.96 residual = $3,261.96 | $1,392.00 (48 x $29) + $0 residual |
+| Reference decision / break-even | Buy Monthly Membership / 1.65 rides per month vs 600 actual | Pay Per Ride/Minute / 14.18 rides per month vs 11.0 actual |
+
+Pay-per-use can only win with 500+ rows if they are spread thin: even a 2-minute ride costs more than $1, so 500 rides beat $29 a month only over about 3.5 years or more. That is why the second scenario spans four years.
+Reference prices (from the saved snapshot): pay per use $1.00 unlock + $0.19/min classic or $0.49/min e-bike; Month pass $29/month, classic 45 min free then $0.17/min, e-bike free unlock + $0.17/min.
+
+### Acceptance runs through the real UI (screenshots: `screenshots/part4_ui_membership_wins.png`, `part4_ui_payperuse_wins.png`)
+| | Membership wins (run c7c432ff74) | Pay-per-use wins (run c31a74735b) |
+|---|---|---|
+| Decision | Buy Monthly Membership | Pay Per Ride/Minute |
+| Agent's totals | pay per use $10,540.70; membership $3,261.96 | pay per use $1,079.92; membership $1,392.00 |
+| Break-even / actual | 1.65 / 600 rides per month | 14.18 / 11.0 rides per month |
+| Steps / total time / stop reason | 11 steps / 45.1 s / final_answer | 11 steps / 47.9 s / final_answer |
+| Tool calls | 10 (1 failed, then corrected) | 10 (1 failed, then corrected) |
+| Tokens | 37,430 | 37,595 |
+| Independent check | matches | matches |
+
+**Membership wins.** The agent counted 600 rides over 1 month and found, in the retrieved Bay Wheels rows tagged `[column: $1.00]` and `[column: $29/month]`, the single-ride and member prices. Pay-per-use would cost $10,540.70, while the membership costs $29 plus $3,232.96 of per-minute charges on long e-bike and over-45-minute classic rides, $3,261.96 in total, so it recommends the membership. It states a break-even of 1.65 rides per month against 600 actual rides. It finished in 11 steps (45.1 s) with stop reason final_answer.
+**Pay-per-use wins.** The 528 short classic rides span 48 months (2021-01 to 2024-12), 11 rides a month. Pay-per-use costs $1,079.92; 48 months of membership costs $1,392.00 with no residual charges because every ride is under 45 minutes, so it recommends paying per ride. Break-even is 14.18 rides a month against 11.0 actual. It finished in 11 steps (47.9 s) with stop reason final_answer.
+The one failed tool call in each run is the first SQL, where the model pasted the prompt's template with literal `<unlock>` placeholders; the error came back as an observation and the next call fixed it.
+The pricing snapshots (source URL, access time, SHA-256, saved text) are in `part4/EVIDENCE.md` and `part4/snapshots/`; both hashes are `6c1f6af9...a37e90`.
+
+### How reliable is it? 8 runs per scenario per version, same settings, live pricing page
+Every run is scored by `costs.py`, an independent recomputation from the CSV that the agent never sees. "All numbers correct" = decision, both totals, month count and break-even each match (money within 3% or 25 cents).
+| Version (what changed) | Membership: final answer / all correct | Pay-per-use: final answer / all correct | What the failures were |
+|---|---|---|---|
+| Baseline, live run before any fix | wrong | not run | Read the Day-pass column (30 min free), invented "4 months" for a one-month file, decision muddled |
+| v1: column tags in the retriever, two retrievals, month/ride count in one SQL, split cost queries, explicit decision rule, self-consistency check | 8 / 8 | 8 / 1 | Break-even wrong in 7 of 8 pay-per-use runs (used the membership total as the monthly price). 7 of 8 pay-per-use runs first picked the wrong side and were corrected only by the consistency check |
+| v2: added "e.g. 29" to the break-even note | 8 / 2 | 8 / 8 | **My regression:** the example number leaked into the SQL (29.00 used as a per-minute rate, residual $551,504) |
+| v3: example number removed | 5 / 5 | 7 / 6 | 3 runs repeated one calculator call until the 15-step limit; 1 run hung 1,222 s on one model call; 1 wrong membership total |
+| **v4 = final code**: + hard model-call deadline, + repeat-call guard | **7 / 6** | **8 / 5** | Membership: 1 run ended invalid_output (decision contradicted its own wrong totals twice), 1 gave a confident wrong answer. Pay-per-use: 3 wrong membership totals (decisions still right) |
+
+v4 detail: decisions correct 6/8 (membership) and 8/8 (pay-per-use); mean 12.2 steps / 77.5 s (membership) and 11.0 steps / 52.6 s (pay-per-use); runs needing a repair re-prompt 7/8 and 0/8; all 16 runs recorded the same pricing-text hash.
+Across all four versions (64 runs) the final decision was right in 52 and every number was right in 41 (membership 21/32, pay-per-use 20/32); see `raw/part4_v*_measure_summary.json`.
+Also tried and dropped: qwen3 thinking mode (slower, ~190 s a run, and one run spent about ten minutes in a single generation, another returned no JSON).
+One UI acceptance run was flagged by the independent check (`part4_ui_payperuse_wins_flagged_run.png`, run record `raw/part4_flagged_ui_run_payperuse_13a51af737.json`): decision and both totals right, break-even wrong (2.05 reported; the model reported the average cost per ride as rides per month). The run used for the main screenshot was the next one.
+
+### What the safeguards caught
+- A decision that contradicts the answer's own totals, or a membership total that is not fee + residual, is rejected and sent back once (this fixed 7 of 8 pay-per-use first answers in v1; without it only 1 of 8 would have been right on the first pass).
+- Quotes are checked against the saved snapshot (substring, ignoring the retriever's column tags): every quote in the 2 acceptance runs was found.
+- An identical repeated tool call is refused; a hung model call is abandoned at 300 s (`stop_reason timeout`); the step limit is 14 model turns.
+
+### Caveats
+- 8 runs per version is a small sample and runs differ even at temperature 0 with a fixed seed (Ollama is not bit-for-bit reproducible), so the rates are indicative, not precise. The headline: the decision is usually right, but individual numbers are not always, which is why the page shows the independent check.
+- The reference model is my reading of the pricing page: the table's values flatten to text with the plan names lost, so I (and the retriever's `[column: ...]` tags) take the Month pass to be the column headed `$29/month`. Minutes are billed fractionally and membership is bought for every calendar month from the first to the last trip; the page states neither. If those readings are wrong, the agent and the check are wrong together.
+- The check never reads the model's free text. In the scenario-2 acceptance run the model's assumptions say residual charges used "no free minutes for classic bikes" (the rule is 45 free minutes); the numbers are unaffected only because every ride is under 8 minutes.
+- The annual plan ($165/year) is outside the assignment's monthly-vs-pay-per-use question but would beat pay-per-use in scenario 2 ($660 over four years vs $1,080).
+- The scenario trips are real but anonymous; treating a sample as one rider's history is a modelling choice. The 2022-11 source file name has a typo on the public server (`baywheeels`), handled as an explicit exception.
+- The first full UI run failed: the agent finished correctly but the page never showed the result within 420 s. I could not reproduce it in three later runs. The page's polling had no error handling, a single failed poll would freeze it with exactly that symptom (a test with the retry removed fails that way), so I added retries and a visible error and a test. That is a plausible cause, not a proven one.
+- The retriever tags values in the text it returns, but the saved snapshot is the exact page text with no tags.
