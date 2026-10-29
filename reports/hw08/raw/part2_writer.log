@@ -1,0 +1,7 @@
+2026-10-29 11:54:49.102 [writer] Assigned partitions: [0, 1]
+2026-10-29 11:54:49.103 [writer] Consumer is ready and listening... topic=s9871_tasks group=s9871_writers
+2026-10-29 11:56:09.023 [writer] RECEIVED topic=s9871_tasks partition=0 offset=0 corr=494d5989-7211-4b44-af22-7a551d84d896
+[turn 1] input_tokens=123 output_tokens=70 total_tokens=193
+2026-10-29 11:56:13.545 [writer] PROCESSED corr=494d5989-7211-4b44-af22-7a551d84d896
+2026-10-29 11:56:13.595 [writer] SENT topic=s9871_drafts partition=0 offset=0 corr=494d5989-7211-4b44-af22-7a551d84d896 body={"question": "What should a league office check before scheduling a Soccer fixture on a shared field?", "plan": ["Check the field's availability and booking status for the scheduled time.", "Verify that the field meets safety and maintenance standards.", "Confirm there are no conflicting events or reservations for the field on that date."], "draft": "Before scheduling a soccer fixture on a shared field, the league office should check the field's availability and booking status for the scheduled time. They should also verify that the field meets safety and maintenance standards to ensure a safe playing environment. Lastly, they must confirm there are no conflicting events or reservations for the field on that date to avoid scheduling overlaps.", "correlation_id": "494d5989-7211-4b44-af22-7a551d84d896"}
+2026-10-29 11:56:13.597 [writer] COMMITTED input offset=1

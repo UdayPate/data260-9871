@@ -1,0 +1,8 @@
+2026-10-29 11:55:56.583 [you] SENT topic=s9871_inbox partition=0 offset=0 corr=494d5989-7211-4b44-af22-7a551d84d896 body={"correlation_id": "494d5989-7211-4b44-af22-7a551d84d896", "question": "What should a league office check before scheduling a Soccer fixture on a shared field?"}
+2026-10-29 11:56:16.429 [you] RECEIVED topic=s9871_final partition=0 offset=0 corr=494d5989-7211-4b44-af22-7a551d84d896
+{
+  "status": "approved",
+  "answer": "Before scheduling a soccer fixture on a shared field, the league office should check the field's availability and booking status for the scheduled time. They should also verify that the field meets safety and maintenance standards to ensure a safe playing environment. Lastly, they must confirm there are no conflicting events or reservations for the field on that date to avoid scheduling overlaps.",
+  "review": "Draft follows the plan and is clear.",
+  "correlation_id": "494d5989-7211-4b44-af22-7a551d84d896"
+}

@@ -1,0 +1,8 @@
+GROUP                TOPIC                 PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                  HOST            CLIENT-ID
+GROUP           TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                  HOST            CLIENT-ID
+s9871_planners  s9871_inbox     0          1               1               0               rdkafka-fdc27f95-ff6c-41bc-9ae8-da8b41af4d9c /172.21.0.1     rdkafka
+GROUP           TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                  HOST            CLIENT-ID
+s9871_reviewers s9871_drafts    0          1               1               0               rdkafka-002df2ad-d978-49f3-b310-212b1968f4fe /172.21.0.1     rdkafka
+GROUP           TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                  HOST            CLIENT-ID
+s9871_writers   s9871_tasks     0          1               1               0               rdkafka-a5116411-45b0-4ea3-b250-9bafb5c08046 /172.21.0.1     rdkafka
+s9871_writers   s9871_tasks     1          -               0               -               rdkafka-a5116411-45b0-4ea3-b250-9bafb5c08046 /172.21.0.1     rdkafka

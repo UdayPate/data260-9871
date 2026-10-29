@@ -1,0 +1,7 @@
+2026-10-29 11:54:49.165 [reviewer] Assigned partitions: [0]
+2026-10-29 11:54:49.167 [reviewer] Consumer is ready and listening... topic=s9871_drafts group=s9871_reviewers
+2026-10-29 11:56:13.595 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=0 corr=494d5989-7211-4b44-af22-7a551d84d896
+[turn 1] input_tokens=202 output_tokens=19 total_tokens=221
+2026-10-29 11:56:16.423 [reviewer] PROCESSED corr=494d5989-7211-4b44-af22-7a551d84d896
+2026-10-29 11:56:16.429 [reviewer] SENT topic=s9871_final partition=0 offset=0 corr=494d5989-7211-4b44-af22-7a551d84d896 body={"status": "approved", "answer": "Before scheduling a soccer fixture on a shared field, the league office should check the field's availability and booking status for the scheduled time. They should also verify that the field meets safety and maintenance standards to ensure a safe playing environment. Lastly, they must confirm there are no conflicting events or reservations for the field on that date to avoid scheduling overlaps.", "review": "Draft follows the plan and is clear.", "correlation_id": "494d5989-7211-4b44-af22-7a551d84d896"}
+2026-10-29 11:56:16.431 [reviewer] COMMITTED input offset=1

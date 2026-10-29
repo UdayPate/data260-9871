@@ -27,7 +27,7 @@ services:
       timeout: 10s
       retries: 20
 
-  # One-shot: creates the two Part 1 topics (1 partition each), then exits.
+  # One-shot: creates the Part 1 and Part 2 topics on a fresh broker, then exits.
   kafka-init:
     image: apache/kafka:3.9.0
     container_name: s9871-kafka-init
@@ -38,9 +38,11 @@ services:
     entrypoint: ["/bin/bash", "-c"]
     command:
       - |
-        for t in s9871_entity_requests s9871_entity_responses; do
+        for t in s9871_entity_requests s9871_entity_responses s9871_inbox s9871_drafts s9871_final; do
           /opt/kafka/bin/kafka-topics.sh --create --if-not-exists --topic $$t --partitions 1 --replication-factor 1 --bootstrap-server kafka:19092
         done
+        # Part 2/3: two partitions so two Writer instances can share the work.
+        /opt/kafka/bin/kafka-topics.sh --create --if-not-exists --topic s9871_tasks --partitions 2 --replication-factor 1 --bootstrap-server kafka:19092
 
   worker:
     build:
