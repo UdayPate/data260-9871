@@ -1,0 +1,4 @@
+CONTAINER ID   IMAGE                COMMAND                  CREATED          STATUS                    PORTS                    NAMES
+505286e883b1   s9871-worker         "python -u worker.py"    16 seconds ago   Up 5 seconds                                       s9871-worker
+eb3b8976ac37   s9871-api            "python -u -m uvicor…"   16 seconds ago   Up 5 seconds              0.0.0.0:8871->8871/tcp   s9871-api
+9eecbe233db4   apache/kafka:3.9.0   "/__cacert_entrypoin…"   16 seconds ago   Up 15 seconds (healthy)   0.0.0.0:9092->9092/tcp   s9871-kafka

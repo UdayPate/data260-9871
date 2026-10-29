@@ -1,0 +1,32 @@
+2026-10-29 11:10:59.845 [worker] Assigned partitions: [0]
+2026-10-29 11:10:59.845 [worker] Consumer is ready and listening... topic=s9871_entity_requests group=s9871_entity_workers
+2026-10-29 11:11:02.608 [worker] RECEIVED topic=s9871_entity_requests partition=0 offset=0 corr=05a2be9d-a396-45c6-a5d5-150f0120df1b op=CREATE_ENTITY
+2026-10-29 11:11:02.608 [worker] PROCESSED corr=05a2be9d-a396-45c6-a5d5-150f0120df1b op=CREATE_ENTITY success=True Entity created
+2026-10-29 11:11:02.612 [worker] REPLIED topic=s9871_entity_responses partition=0 offset=0 corr=05a2be9d-a396-45c6-a5d5-150f0120df1b success=True
+2026-10-29 11:11:03.162 [worker] RECEIVED topic=s9871_entity_requests partition=0 offset=1 corr=2298384e-4747-4ff5-8d6f-6e65f08402c2 op=GET_ENTITY
+2026-10-29 11:11:03.162 [worker] PROCESSED corr=2298384e-4747-4ff5-8d6f-6e65f08402c2 op=GET_ENTITY success=True entity returned
+2026-10-29 11:11:03.164 [worker] REPLIED topic=s9871_entity_responses partition=0 offset=1 corr=2298384e-4747-4ff5-8d6f-6e65f08402c2 success=True
+2026-10-29 11:11:05.216 [worker] RECEIVED topic=s9871_entity_requests partition=0 offset=2 corr=57c59c9c-3ea5-4e7f-90b7-d3b7620bde0b op=CREATE_ENTITY
+2026-10-29 11:11:05.217 [worker] PROCESSED corr=57c59c9c-3ea5-4e7f-90b7-d3b7620bde0b op=CREATE_ENTITY success=True Entity created
+2026-10-29 11:11:05.218 [worker] REPLIED topic=s9871_entity_responses partition=0 offset=2 corr=57c59c9c-3ea5-4e7f-90b7-d3b7620bde0b success=True
+2026-10-29 11:11:05.418 [worker] RECEIVED topic=s9871_entity_requests partition=0 offset=3 corr=dbab4e8b-6f8a-44b6-9c1d-cbc2095ae2f3 op=GET_ENTITY
+2026-10-29 11:11:05.418 [worker] PROCESSED corr=dbab4e8b-6f8a-44b6-9c1d-cbc2095ae2f3 op=GET_ENTITY success=True entity returned
+2026-10-29 11:11:05.420 [worker] REPLIED topic=s9871_entity_responses partition=0 offset=3 corr=dbab4e8b-6f8a-44b6-9c1d-cbc2095ae2f3 success=True
+2026-10-29 11:11:05.452 [worker] RECEIVED topic=s9871_entity_requests partition=0 offset=4 corr=ba928f15-43c6-4457-afd0-765ae86d6a7d op=GET_ENTITY
+2026-10-29 11:11:05.452 [worker] PROCESSED corr=ba928f15-43c6-4457-afd0-765ae86d6a7d op=GET_ENTITY success=False Entity not found
+2026-10-29 11:11:05.454 [worker] REPLIED topic=s9871_entity_responses partition=0 offset=4 corr=ba928f15-43c6-4457-afd0-765ae86d6a7d success=False
+2026-10-29 11:11:05.485 [worker] RECEIVED topic=s9871_entity_requests partition=0 offset=5 corr=cdff8db4-c433-4415-b34c-980ff94dbb5b op=DELETE_ENTITY
+2026-10-29 11:11:05.485 [worker] PROCESSED corr=cdff8db4-c433-4415-b34c-980ff94dbb5b op=DELETE_ENTITY success=False Unknown operation
+2026-10-29 11:11:05.486 [worker] REPLIED topic=s9871_entity_responses partition=0 offset=5 corr=cdff8db4-c433-4415-b34c-980ff94dbb5b success=False
+2026-10-29 11:11:05.507 [worker] RECEIVED topic=s9871_entity_requests partition=0 offset=6 corr=cf69b742-7e7e-4e15-99e0-00a235c83122 op=CREATE_ENTITY
+2026-10-29 11:11:05.507 [worker] PROCESSED corr=cf69b742-7e7e-4e15-99e0-00a235c83122 op=CREATE_ENTITY success=False fixture_name is required and must be a non-empty string
+2026-10-29 11:11:05.509 [worker] REPLIED topic=s9871_entity_responses partition=0 offset=6 corr=cf69b742-7e7e-4e15-99e0-00a235c83122 success=False
+2026-10-29 11:11:05.528 [worker] RECEIVED topic=s9871_entity_requests partition=0 offset=7 corr=df70ffc7-1793-4c13-b2ec-0eca57778181 op=CREATE_ENTITY
+2026-10-29 11:11:05.528 [worker] PROCESSED corr=df70ffc7-1793-4c13-b2ec-0eca57778181 op=CREATE_ENTITY success=False Unknown field(s): hax
+2026-10-29 11:11:05.529 [worker] REPLIED topic=s9871_entity_responses partition=0 offset=7 corr=df70ffc7-1793-4c13-b2ec-0eca57778181 success=False
+2026-10-29 11:11:05.549 [worker] RECEIVED topic=s9871_entity_requests partition=0 offset=8 corr=5c0e17e5-15ef-4fc5-b35a-b2152e544487 op=CREATE_ENTITY
+2026-10-29 11:11:05.549 [worker] PROCESSED corr=5c0e17e5-15ef-4fc5-b35a-b2152e544487 op=CREATE_ENTITY success=False agree_terms must be true
+2026-10-29 11:11:05.551 [worker] REPLIED topic=s9871_entity_responses partition=0 offset=8 corr=5c0e17e5-15ef-4fc5-b35a-b2152e544487 success=False
+2026-10-29 11:11:05.583 [worker] RECEIVED topic=s9871_entity_requests partition=0 offset=9 corr=my-fixed-id-1 op=NOPE
+2026-10-29 11:11:05.583 [worker] PROCESSED corr=my-fixed-id-1 op=NOPE success=False Unknown operation
+2026-10-29 11:11:05.584 [worker] REPLIED topic=s9871_entity_responses partition=0 offset=9 corr=my-fixed-id-1 success=False

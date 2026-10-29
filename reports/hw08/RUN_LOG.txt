@@ -1,0 +1,179 @@
+DATA-260 HW8 RUN_LOG  (local time, America/Los_Angeles; raw files in raw/)
+
+################ Part 1: raw/part1_docker_ps.txt  (file written 2026-10-29 11:11:02)
+CONTAINER ID   IMAGE                COMMAND                  CREATED          STATUS                    PORTS                    NAMES
+505286e883b1   s9871-worker         "python -u worker.py"    16 seconds ago   Up 5 seconds                                       s9871-worker
+eb3b8976ac37   s9871-api            "python -u -m uvicor…"   16 seconds ago   Up 5 seconds              0.0.0.0:8871->8871/tcp   s9871-api
+9eecbe233db4   apache/kafka:3.9.0   "/__cacert_entrypoin…"   16 seconds ago   Up 15 seconds (healthy)   0.0.0.0:9092->9092/tcp   s9871-kafka
+
+################ Part 1: raw/part1_demo_output.txt  (file written 2026-10-29 11:11:04)
+Lines are printed in causal order (send -> worker -> client receive). The worker's clock runs in the
+Docker VM and can differ from this host's clock by a few hundred ms, so compare offsets, not timestamps.
+
+=== Step 1: create one correlation_id ===
+correlation_id = 05a2be9d-a396-45c6-a5d5-150f0120df1b
+
+=== Steps 2-6: CREATE_ENTITY (correlation_id=05a2be9d-a396-45c6-a5d5-150f0120df1b) ===
+2026-10-29 11:11:02.857 [client] Sending CREATE_ENTITY to s9871_entity_requests
+2026-10-29 11:11:02.895 [client] SENT request topic=s9871_entity_requests partition=0 offset=0 corr=05a2be9d-a396-45c6-a5d5-150f0120df1b op=CREATE_ENTITY body={"correlation_id": "05a2be9d-a396-45c6-a5d5-150f0120df1b", "reply_to": "s9871_entity_responses", "operation": "CREATE_ENTITY", "data": {"fixture_name": "Milpitas Lions vs San Jose Tigers", "teams_players": "Milpitas Lions (A. Singh, R. Gomez); San Jose Tigers (L. Chen, M. Okafor)", "submitter_email": "league-office@leaguemail.com", "description": "Rivalry match, gates open 9am, toss at 9:30am.", "category": "Soccer", "agree_terms": true}}
+  [from docker logs s9871-worker] 2026-10-29 11:11:02.608 [worker] RECEIVED topic=s9871_entity_requests partition=0 offset=0 corr=05a2be9d-a396-45c6-a5d5-150f0120df1b op=CREATE_ENTITY
+  [from docker logs s9871-worker] 2026-10-29 11:11:02.608 [worker] PROCESSED corr=05a2be9d-a396-45c6-a5d5-150f0120df1b op=CREATE_ENTITY success=True Entity created
+  [from docker logs s9871-worker] 2026-10-29 11:11:02.612 [worker] REPLIED topic=s9871_entity_responses partition=0 offset=0 corr=05a2be9d-a396-45c6-a5d5-150f0120df1b success=True
+2026-10-29 11:11:02.909 [client] RECEIVED response topic=s9871_entity_responses partition=0 offset=0 corr=05a2be9d-a396-45c6-a5d5-150f0120df1b success=True body={"correlation_id": "05a2be9d-a396-45c6-a5d5-150f0120df1b", "success": true, "entity_id": "338bce0e-6c21-4cef-b569-34deab9da5cd", "message": "Entity created"}
+2026-10-29 11:11:02.909 [client] Response returned to caller: {"correlation_id": "05a2be9d-a396-45c6-a5d5-150f0120df1b", "success": true, "entity_id": "338bce0e-6c21-4cef-b569-34deab9da5cd", "message": "Entity created"}
+
+=== Step 7: extract the generated entity_id ===
+entity_id = 338bce0e-6c21-4cef-b569-34deab9da5cd
+
+=== Steps 8-9: GET_ENTITY (correlation_id=2298384e-4747-4ff5-8d6f-6e65f08402c2) ===
+2026-10-29 11:11:03.469 [client] Sending GET_ENTITY to s9871_entity_requests
+2026-10-29 11:11:03.472 [client] SENT request topic=s9871_entity_requests partition=0 offset=1 corr=2298384e-4747-4ff5-8d6f-6e65f08402c2 op=GET_ENTITY body={"correlation_id": "2298384e-4747-4ff5-8d6f-6e65f08402c2", "reply_to": "s9871_entity_responses", "operation": "GET_ENTITY", "data": {"entity_id": "338bce0e-6c21-4cef-b569-34deab9da5cd"}}
+  [from docker logs s9871-worker] 2026-10-29 11:11:03.162 [worker] RECEIVED topic=s9871_entity_requests partition=0 offset=1 corr=2298384e-4747-4ff5-8d6f-6e65f08402c2 op=GET_ENTITY
+  [from docker logs s9871-worker] 2026-10-29 11:11:03.162 [worker] PROCESSED corr=2298384e-4747-4ff5-8d6f-6e65f08402c2 op=GET_ENTITY success=True entity returned
+  [from docker logs s9871-worker] 2026-10-29 11:11:03.164 [worker] REPLIED topic=s9871_entity_responses partition=0 offset=1 corr=2298384e-4747-4ff5-8d6f-6e65f08402c2 success=True
+2026-10-29 11:11:03.476 [client] RECEIVED response topic=s9871_entity_responses partition=0 offset=1 corr=2298384e-4747-4ff5-8d6f-6e65f08402c2 success=True body={"correlation_id": "2298384e-4747-4ff5-8d6f-6e65f08402c2", "success": true, "entity": {"entity_id": "338bce0e-6c21-4cef-b569-34deab9da5cd", "fixture_name": "Milpitas Lions vs San Jose Tigers", "teams_players": "Milpitas Lions (A. Singh, R. Gomez); San Jose Tigers (L. Chen, M. Okafor)", "submitter_email": "league-office@leaguemail.com", "description": "Rivalry match, gates open 9am, toss at 9:30am.", "category": "Soccer", "agree_terms": true}}
+2026-10-29 11:11:03.476 [client] Response returned to caller: {"correlation_id": "2298384e-4747-4ff5-8d6f-6e65f08402c2", "success": true, "entity": {"entity_id": "338bce0e-6c21-4cef-b569-34deab9da5cd", "fixture_name": "Milpitas Lions vs San Jose Tigers", "teams_players": "Milpitas Lions (A. Singh, R. Gomez); San Jose Tigers (L. Chen, M. Okafor)", "submitter_email": "league-office@leaguemail.com", "description": "Rivalry match, gates open 9am, toss at 9:30am.", "category": "Soccer", "agree_terms": true}}
+
+=== Step 10: retrieved entity and correlation_id check ===
+{
+  "correlation_id": "2298384e-4747-4ff5-8d6f-6e65f08402c2",
+  "success": true,
+  "entity": {
+    "entity_id": "338bce0e-6c21-4cef-b569-34deab9da5cd",
+    "fixture_name": "Milpitas Lions vs San Jose Tigers",
+    "teams_players": "Milpitas Lions (A. Singh, R. Gomez); San Jose Tigers (L. Chen, M. Okafor)",
+    "submitter_email": "league-office@leaguemail.com",
+    "description": "Rivalry match, gates open 9am, toss at 9:30am.",
+    "category": "Soccer",
+    "agree_terms": true
+  }
+}
+PASS  CREATE response echoes the CREATE correlation_id
+PASS  GET response echoes the GET correlation_id
+PASS  GET returned success=true
+PASS  retrieved entity_id equals the created entity_id
+PASS  retrieved fields equal the submitted fields
+topics: requests=s9871_entity_requests responses=s9871_entity_responses
+exit=0
+
+################ Part 1: raw/part1_http_tests.txt  (file written 2026-10-29 11:11:05)
+--- create
+{"correlation_id":"57c59c9c-3ea5-4e7f-90b7-d3b7620bde0b","success":true,"entity_id":"fc1a5851-b853-4cf7-bbc6-520c95c95a48","message":"Entity created"}
+
+--- get existing
+HTTP/1.1 200 OK
+date: Thu, 29 Oct 2026 18:11:05 GMT
+server: uvicorn
+x-correlation-id: dbab4e8b-6f8a-44b6-9c1d-cbc2095ae2f3
+content-length: 288
+content-type: application/json
+
+{"correlation_id":"dbab4e8b-6f8a-44b6-9c1d-cbc2095ae2f3","success":true,"entity":{"entity_id":"fc1a5851-b853-4cf7-bbc6-520c95c95a48","fixture_name":"Lions vs Tigers","teams_players":"Lions; Tigers","submitter_email":"a@b.com","description":"d","category":"Volleyball","agree_terms":true}}
+--- get unknown
+HTTP/1.1 404 Not Found
+date: Thu, 29 Oct 2026 18:11:05 GMT
+server: uvicorn
+x-correlation-id: ba928f15-43c6-4457-afd0-765ae86d6a7d
+content-length: 100
+content-type: application/json
+
+{"correlation_id":"ba928f15-43c6-4457-afd0-765ae86d6a7d","success":false,"error":"Entity not found"}
+--- unknown op
+{"correlation_id":"cdff8db4-c433-4415-b34c-980ff94dbb5b","success":false,"error":"Unknown operation"}
+--- empty name
+{"correlation_id":"cf69b742-7e7e-4e15-99e0-00a235c83122","success":false,"error":"fixture_name is required and must be a non-empty string"}
+--- extra field
+{"correlation_id":"df70ffc7-1793-4c13-b2ec-0eca57778181","success":false,"error":"Unknown field(s): hax"}
+--- agree false
+{"correlation_id":"5c0e17e5-15ef-4fc5-b35a-b2152e544487","success":false,"error":"agree_terms must be true"}
+--- caller corr id
+HTTP/1.1 400 Bad Request
+date: Thu, 29 Oct 2026 18:11:05 GMT
+server: uvicorn
+x-correlation-id: my-fixed-id-1
+content-length: 78
+content-type: application/json
+
+{"correlation_id":"my-fixed-id-1","success":false,"error":"Unknown operation"}
+
+################ Part 1: raw/part1_worker_log.txt  (file written 2026-10-29 11:11:05)
+2026-10-29 11:10:59.845 [worker] Assigned partitions: [0]
+2026-10-29 11:10:59.845 [worker] Consumer is ready and listening... topic=s9871_entity_requests group=s9871_entity_workers
+2026-10-29 11:11:02.608 [worker] RECEIVED topic=s9871_entity_requests partition=0 offset=0 corr=05a2be9d-a396-45c6-a5d5-150f0120df1b op=CREATE_ENTITY
+2026-10-29 11:11:02.608 [worker] PROCESSED corr=05a2be9d-a396-45c6-a5d5-150f0120df1b op=CREATE_ENTITY success=True Entity created
+2026-10-29 11:11:02.612 [worker] REPLIED topic=s9871_entity_responses partition=0 offset=0 corr=05a2be9d-a396-45c6-a5d5-150f0120df1b success=True
+2026-10-29 11:11:03.162 [worker] RECEIVED topic=s9871_entity_requests partition=0 offset=1 corr=2298384e-4747-4ff5-8d6f-6e65f08402c2 op=GET_ENTITY
+2026-10-29 11:11:03.162 [worker] PROCESSED corr=2298384e-4747-4ff5-8d6f-6e65f08402c2 op=GET_ENTITY success=True entity returned
+2026-10-29 11:11:03.164 [worker] REPLIED topic=s9871_entity_responses partition=0 offset=1 corr=2298384e-4747-4ff5-8d6f-6e65f08402c2 success=True
+2026-10-29 11:11:05.216 [worker] RECEIVED topic=s9871_entity_requests partition=0 offset=2 corr=57c59c9c-3ea5-4e7f-90b7-d3b7620bde0b op=CREATE_ENTITY
+2026-10-29 11:11:05.217 [worker] PROCESSED corr=57c59c9c-3ea5-4e7f-90b7-d3b7620bde0b op=CREATE_ENTITY success=True Entity created
+2026-10-29 11:11:05.218 [worker] REPLIED topic=s9871_entity_responses partition=0 offset=2 corr=57c59c9c-3ea5-4e7f-90b7-d3b7620bde0b success=True
+2026-10-29 11:11:05.418 [worker] RECEIVED topic=s9871_entity_requests partition=0 offset=3 corr=dbab4e8b-6f8a-44b6-9c1d-cbc2095ae2f3 op=GET_ENTITY
+2026-10-29 11:11:05.418 [worker] PROCESSED corr=dbab4e8b-6f8a-44b6-9c1d-cbc2095ae2f3 op=GET_ENTITY success=True entity returned
+2026-10-29 11:11:05.420 [worker] REPLIED topic=s9871_entity_responses partition=0 offset=3 corr=dbab4e8b-6f8a-44b6-9c1d-cbc2095ae2f3 success=True
+2026-10-29 11:11:05.452 [worker] RECEIVED topic=s9871_entity_requests partition=0 offset=4 corr=ba928f15-43c6-4457-afd0-765ae86d6a7d op=GET_ENTITY
+2026-10-29 11:11:05.452 [worker] PROCESSED corr=ba928f15-43c6-4457-afd0-765ae86d6a7d op=GET_ENTITY success=False Entity not found
+2026-10-29 11:11:05.454 [worker] REPLIED topic=s9871_entity_responses partition=0 offset=4 corr=ba928f15-43c6-4457-afd0-765ae86d6a7d success=False
+2026-10-29 11:11:05.485 [worker] RECEIVED topic=s9871_entity_requests partition=0 offset=5 corr=cdff8db4-c433-4415-b34c-980ff94dbb5b op=DELETE_ENTITY
+2026-10-29 11:11:05.485 [worker] PROCESSED corr=cdff8db4-c433-4415-b34c-980ff94dbb5b op=DELETE_ENTITY success=False Unknown operation
+2026-10-29 11:11:05.486 [worker] REPLIED topic=s9871_entity_responses partition=0 offset=5 corr=cdff8db4-c433-4415-b34c-980ff94dbb5b success=False
+2026-10-29 11:11:05.507 [worker] RECEIVED topic=s9871_entity_requests partition=0 offset=6 corr=cf69b742-7e7e-4e15-99e0-00a235c83122 op=CREATE_ENTITY
+2026-10-29 11:11:05.507 [worker] PROCESSED corr=cf69b742-7e7e-4e15-99e0-00a235c83122 op=CREATE_ENTITY success=False fixture_name is required and must be a non-empty string
+2026-10-29 11:11:05.509 [worker] REPLIED topic=s9871_entity_responses partition=0 offset=6 corr=cf69b742-7e7e-4e15-99e0-00a235c83122 success=False
+2026-10-29 11:11:05.528 [worker] RECEIVED topic=s9871_entity_requests partition=0 offset=7 corr=df70ffc7-1793-4c13-b2ec-0eca57778181 op=CREATE_ENTITY
+2026-10-29 11:11:05.528 [worker] PROCESSED corr=df70ffc7-1793-4c13-b2ec-0eca57778181 op=CREATE_ENTITY success=False Unknown field(s): hax
+2026-10-29 11:11:05.529 [worker] REPLIED topic=s9871_entity_responses partition=0 offset=7 corr=df70ffc7-1793-4c13-b2ec-0eca57778181 success=False
+2026-10-29 11:11:05.549 [worker] RECEIVED topic=s9871_entity_requests partition=0 offset=8 corr=5c0e17e5-15ef-4fc5-b35a-b2152e544487 op=CREATE_ENTITY
+2026-10-29 11:11:05.549 [worker] PROCESSED corr=5c0e17e5-15ef-4fc5-b35a-b2152e544487 op=CREATE_ENTITY success=False agree_terms must be true
+2026-10-29 11:11:05.551 [worker] REPLIED topic=s9871_entity_responses partition=0 offset=8 corr=5c0e17e5-15ef-4fc5-b35a-b2152e544487 success=False
+2026-10-29 11:11:05.583 [worker] RECEIVED topic=s9871_entity_requests partition=0 offset=9 corr=my-fixed-id-1 op=NOPE
+2026-10-29 11:11:05.583 [worker] PROCESSED corr=my-fixed-id-1 op=NOPE success=False Unknown operation
+2026-10-29 11:11:05.584 [worker] REPLIED topic=s9871_entity_responses partition=0 offset=9 corr=my-fixed-id-1 success=False
+
+################ Part 1: raw/part1_api_log.txt  (file written 2026-10-29 11:11:05)
+2026-10-29 11:10:57.244 [api] Kafka client ready. FastAPI server started at http://127.0.0.1:8871
+INFO:     Started server process [1]
+2026-10-29 11:11:05.211 [api] HTTP -> Kafka op=CREATE_ENTITY
+2026-10-29 11:11:05.216 [api] SENT request topic=s9871_entity_requests partition=0 offset=2 corr=57c59c9c-3ea5-4e7f-90b7-d3b7620bde0b op=CREATE_ENTITY body={"correlation_id": "57c59c9c-3ea5-4e7f-90b7-d3b7620bde0b", "reply_to": "s9871_entity_responses", "operation": "CREATE_ENTITY", "data": {"fixture_name": "Lions vs Tigers", "teams_players": "Lions; Tigers", "submitter_email": "a@b.com", "description": "d", "category": "volleyball", "agree_terms": true}}
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8871 (Press CTRL+C to quit)
+2026-10-29 11:11:05.219 [api] RECEIVED response topic=s9871_entity_responses partition=0 offset=2 corr=57c59c9c-3ea5-4e7f-90b7-d3b7620bde0b success=True body={"correlation_id": "57c59c9c-3ea5-4e7f-90b7-d3b7620bde0b", "success": true, "entity_id": "fc1a5851-b853-4cf7-bbc6-520c95c95a48", "message": "Entity created"}
+2026-10-29 11:11:05.219 [api] Kafka -> HTTP corr=57c59c9c-3ea5-4e7f-90b7-d3b7620bde0b success=True
+INFO:     172.21.0.1:35470 - "POST /fixtures HTTP/1.1" 200 OK
+2026-10-29 11:11:05.414 [api] HTTP -> Kafka op=GET_ENTITY
+2026-10-29 11:11:05.417 [api] SENT request topic=s9871_entity_requests partition=0 offset=3 corr=dbab4e8b-6f8a-44b6-9c1d-cbc2095ae2f3 op=GET_ENTITY body={"correlation_id": "dbab4e8b-6f8a-44b6-9c1d-cbc2095ae2f3", "reply_to": "s9871_entity_responses", "operation": "GET_ENTITY", "data": {"entity_id": "fc1a5851-b853-4cf7-bbc6-520c95c95a48"}}
+2026-10-29 11:11:05.421 [api] RECEIVED response topic=s9871_entity_responses partition=0 offset=3 corr=dbab4e8b-6f8a-44b6-9c1d-cbc2095ae2f3 success=True body={"correlation_id": "dbab4e8b-6f8a-44b6-9c1d-cbc2095ae2f3", "success": true, "entity": {"entity_id": "fc1a5851-b853-4cf7-bbc6-520c95c95a48", "fixture_name": "Lions vs Tigers", "teams_players": "Lions; Tigers", "submitter_email": "a@b.com", "description": "d", "category": "Volleyball", "agree_terms": true}}
+2026-10-29 11:11:05.422 [api] Kafka -> HTTP corr=dbab4e8b-6f8a-44b6-9c1d-cbc2095ae2f3 success=True
+INFO:     172.21.0.1:35482 - "GET /fixtures/fc1a5851-b853-4cf7-bbc6-520c95c95a48 HTTP/1.1" 200 OK
+2026-10-29 11:11:05.449 [api] HTTP -> Kafka op=GET_ENTITY
+2026-10-29 11:11:05.451 [api] SENT request topic=s9871_entity_requests partition=0 offset=4 corr=ba928f15-43c6-4457-afd0-765ae86d6a7d op=GET_ENTITY body={"correlation_id": "ba928f15-43c6-4457-afd0-765ae86d6a7d", "reply_to": "s9871_entity_responses", "operation": "GET_ENTITY", "data": {"entity_id": "nope"}}
+2026-10-29 11:11:05.454 [api] RECEIVED response topic=s9871_entity_responses partition=0 offset=4 corr=ba928f15-43c6-4457-afd0-765ae86d6a7d success=False body={"correlation_id": "ba928f15-43c6-4457-afd0-765ae86d6a7d", "success": false, "error": "Entity not found"}
+2026-10-29 11:11:05.455 [api] Kafka -> HTTP corr=ba928f15-43c6-4457-afd0-765ae86d6a7d success=False
+INFO:     172.21.0.1:35484 - "GET /fixtures/nope HTTP/1.1" 404 Not Found
+2026-10-29 11:11:05.482 [api] HTTP -> Kafka op=DELETE_ENTITY
+2026-10-29 11:11:05.484 [api] SENT request topic=s9871_entity_requests partition=0 offset=5 corr=cdff8db4-c433-4415-b34c-980ff94dbb5b op=DELETE_ENTITY body={"correlation_id": "cdff8db4-c433-4415-b34c-980ff94dbb5b", "reply_to": "s9871_entity_responses", "operation": "DELETE_ENTITY", "data": {}}
+2026-10-29 11:11:05.487 [api] RECEIVED response topic=s9871_entity_responses partition=0 offset=5 corr=cdff8db4-c433-4415-b34c-980ff94dbb5b success=False body={"correlation_id": "cdff8db4-c433-4415-b34c-980ff94dbb5b", "success": false, "error": "Unknown operation"}
+2026-10-29 11:11:05.487 [api] Kafka -> HTTP corr=cdff8db4-c433-4415-b34c-980ff94dbb5b success=False
+INFO:     172.21.0.1:35492 - "POST /kafka/request HTTP/1.1" 400 Bad Request
+2026-10-29 11:11:05.504 [api] HTTP -> Kafka op=CREATE_ENTITY
+2026-10-29 11:11:05.506 [api] SENT request topic=s9871_entity_requests partition=0 offset=6 corr=cf69b742-7e7e-4e15-99e0-00a235c83122 op=CREATE_ENTITY body={"correlation_id": "cf69b742-7e7e-4e15-99e0-00a235c83122", "reply_to": "s9871_entity_responses", "operation": "CREATE_ENTITY", "data": {"fixture_name": "   ", "teams_players": "y", "submitter_email": "a@b.com", "description": "d", "category": "soccer", "agree_terms": true}}
+2026-10-29 11:11:05.509 [api] RECEIVED response topic=s9871_entity_responses partition=0 offset=6 corr=cf69b742-7e7e-4e15-99e0-00a235c83122 success=False body={"correlation_id": "cf69b742-7e7e-4e15-99e0-00a235c83122", "success": false, "error": "fixture_name is required and must be a non-empty string"}
+2026-10-29 11:11:05.510 [api] Kafka -> HTTP corr=cf69b742-7e7e-4e15-99e0-00a235c83122 success=False
+INFO:     172.21.0.1:35496 - "POST /fixtures HTTP/1.1" 400 Bad Request
+2026-10-29 11:11:05.525 [api] HTTP -> Kafka op=CREATE_ENTITY
+2026-10-29 11:11:05.527 [api] SENT request topic=s9871_entity_requests partition=0 offset=7 corr=df70ffc7-1793-4c13-b2ec-0eca57778181 op=CREATE_ENTITY body={"correlation_id": "df70ffc7-1793-4c13-b2ec-0eca57778181", "reply_to": "s9871_entity_responses", "operation": "CREATE_ENTITY", "data": {"fixture_name": "x", "teams_players": "y", "submitter_email": "a@b.com", "description": "d", "category": "soccer", "agree_terms": true, "hax": 1}}
+2026-10-29 11:11:05.530 [api] RECEIVED response topic=s9871_entity_responses partition=0 offset=7 corr=df70ffc7-1793-4c13-b2ec-0eca57778181 success=False body={"correlation_id": "df70ffc7-1793-4c13-b2ec-0eca57778181", "success": false, "error": "Unknown field(s): hax"}
+2026-10-29 11:11:05.531 [api] Kafka -> HTTP corr=df70ffc7-1793-4c13-b2ec-0eca57778181 success=False
+INFO:     172.21.0.1:35504 - "POST /fixtures HTTP/1.1" 400 Bad Request
+2026-10-29 11:11:05.546 [api] HTTP -> Kafka op=CREATE_ENTITY
+2026-10-29 11:11:05.548 [api] SENT request topic=s9871_entity_requests partition=0 offset=8 corr=5c0e17e5-15ef-4fc5-b35a-b2152e544487 op=CREATE_ENTITY body={"correlation_id": "5c0e17e5-15ef-4fc5-b35a-b2152e544487", "reply_to": "s9871_entity_responses", "operation": "CREATE_ENTITY", "data": {"fixture_name": "x", "teams_players": "y", "submitter_email": "a@b.com", "description": "d", "category": "soccer", "agree_terms": "yes"}}
+2026-10-29 11:11:05.552 [api] RECEIVED response topic=s9871_entity_responses partition=0 offset=8 corr=5c0e17e5-15ef-4fc5-b35a-b2152e544487 success=False body={"correlation_id": "5c0e17e5-15ef-4fc5-b35a-b2152e544487", "success": false, "error": "agree_terms must be true"}
+2026-10-29 11:11:05.552 [api] Kafka -> HTTP corr=5c0e17e5-15ef-4fc5-b35a-b2152e544487 success=False
+INFO:     172.21.0.1:35516 - "POST /fixtures HTTP/1.1" 400 Bad Request
+2026-10-29 11:11:05.580 [api] HTTP -> Kafka op=NOPE
+2026-10-29 11:11:05.583 [api] SENT request topic=s9871_entity_requests partition=0 offset=9 corr=my-fixed-id-1 op=NOPE body={"correlation_id": "my-fixed-id-1", "reply_to": "s9871_entity_responses", "operation": "NOPE", "data": {}}
+2026-10-29 11:11:05.585 [api] RECEIVED response topic=s9871_entity_responses partition=0 offset=9 corr=my-fixed-id-1 success=False body={"correlation_id": "my-fixed-id-1", "success": false, "error": "Unknown operation"}
+2026-10-29 11:11:05.586 [api] Kafka -> HTTP corr=my-fixed-id-1 success=False
+INFO:     172.21.0.1:35528 - "POST /kafka/request HTTP/1.1" 400 Bad Request
+

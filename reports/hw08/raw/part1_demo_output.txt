@@ -1,0 +1,48 @@
+Lines are printed in causal order (send -> worker -> client receive). The worker's clock runs in the
+Docker VM and can differ from this host's clock by a few hundred ms, so compare offsets, not timestamps.
+
+=== Step 1: create one correlation_id ===
+correlation_id = 05a2be9d-a396-45c6-a5d5-150f0120df1b
+
+=== Steps 2-6: CREATE_ENTITY (correlation_id=05a2be9d-a396-45c6-a5d5-150f0120df1b) ===
+2026-10-29 11:11:02.857 [client] Sending CREATE_ENTITY to s9871_entity_requests
+2026-10-29 11:11:02.895 [client] SENT request topic=s9871_entity_requests partition=0 offset=0 corr=05a2be9d-a396-45c6-a5d5-150f0120df1b op=CREATE_ENTITY body={"correlation_id": "05a2be9d-a396-45c6-a5d5-150f0120df1b", "reply_to": "s9871_entity_responses", "operation": "CREATE_ENTITY", "data": {"fixture_name": "Milpitas Lions vs San Jose Tigers", "teams_players": "Milpitas Lions (A. Singh, R. Gomez); San Jose Tigers (L. Chen, M. Okafor)", "submitter_email": "league-office@leaguemail.com", "description": "Rivalry match, gates open 9am, toss at 9:30am.", "category": "Soccer", "agree_terms": true}}
+  [from docker logs s9871-worker] 2026-10-29 11:11:02.608 [worker] RECEIVED topic=s9871_entity_requests partition=0 offset=0 corr=05a2be9d-a396-45c6-a5d5-150f0120df1b op=CREATE_ENTITY
+  [from docker logs s9871-worker] 2026-10-29 11:11:02.608 [worker] PROCESSED corr=05a2be9d-a396-45c6-a5d5-150f0120df1b op=CREATE_ENTITY success=True Entity created
+  [from docker logs s9871-worker] 2026-10-29 11:11:02.612 [worker] REPLIED topic=s9871_entity_responses partition=0 offset=0 corr=05a2be9d-a396-45c6-a5d5-150f0120df1b success=True
+2026-10-29 11:11:02.909 [client] RECEIVED response topic=s9871_entity_responses partition=0 offset=0 corr=05a2be9d-a396-45c6-a5d5-150f0120df1b success=True body={"correlation_id": "05a2be9d-a396-45c6-a5d5-150f0120df1b", "success": true, "entity_id": "338bce0e-6c21-4cef-b569-34deab9da5cd", "message": "Entity created"}
+2026-10-29 11:11:02.909 [client] Response returned to caller: {"correlation_id": "05a2be9d-a396-45c6-a5d5-150f0120df1b", "success": true, "entity_id": "338bce0e-6c21-4cef-b569-34deab9da5cd", "message": "Entity created"}
+
+=== Step 7: extract the generated entity_id ===
+entity_id = 338bce0e-6c21-4cef-b569-34deab9da5cd
+
+=== Steps 8-9: GET_ENTITY (correlation_id=2298384e-4747-4ff5-8d6f-6e65f08402c2) ===
+2026-10-29 11:11:03.469 [client] Sending GET_ENTITY to s9871_entity_requests
+2026-10-29 11:11:03.472 [client] SENT request topic=s9871_entity_requests partition=0 offset=1 corr=2298384e-4747-4ff5-8d6f-6e65f08402c2 op=GET_ENTITY body={"correlation_id": "2298384e-4747-4ff5-8d6f-6e65f08402c2", "reply_to": "s9871_entity_responses", "operation": "GET_ENTITY", "data": {"entity_id": "338bce0e-6c21-4cef-b569-34deab9da5cd"}}
+  [from docker logs s9871-worker] 2026-10-29 11:11:03.162 [worker] RECEIVED topic=s9871_entity_requests partition=0 offset=1 corr=2298384e-4747-4ff5-8d6f-6e65f08402c2 op=GET_ENTITY
+  [from docker logs s9871-worker] 2026-10-29 11:11:03.162 [worker] PROCESSED corr=2298384e-4747-4ff5-8d6f-6e65f08402c2 op=GET_ENTITY success=True entity returned
+  [from docker logs s9871-worker] 2026-10-29 11:11:03.164 [worker] REPLIED topic=s9871_entity_responses partition=0 offset=1 corr=2298384e-4747-4ff5-8d6f-6e65f08402c2 success=True
+2026-10-29 11:11:03.476 [client] RECEIVED response topic=s9871_entity_responses partition=0 offset=1 corr=2298384e-4747-4ff5-8d6f-6e65f08402c2 success=True body={"correlation_id": "2298384e-4747-4ff5-8d6f-6e65f08402c2", "success": true, "entity": {"entity_id": "338bce0e-6c21-4cef-b569-34deab9da5cd", "fixture_name": "Milpitas Lions vs San Jose Tigers", "teams_players": "Milpitas Lions (A. Singh, R. Gomez); San Jose Tigers (L. Chen, M. Okafor)", "submitter_email": "league-office@leaguemail.com", "description": "Rivalry match, gates open 9am, toss at 9:30am.", "category": "Soccer", "agree_terms": true}}
+2026-10-29 11:11:03.476 [client] Response returned to caller: {"correlation_id": "2298384e-4747-4ff5-8d6f-6e65f08402c2", "success": true, "entity": {"entity_id": "338bce0e-6c21-4cef-b569-34deab9da5cd", "fixture_name": "Milpitas Lions vs San Jose Tigers", "teams_players": "Milpitas Lions (A. Singh, R. Gomez); San Jose Tigers (L. Chen, M. Okafor)", "submitter_email": "league-office@leaguemail.com", "description": "Rivalry match, gates open 9am, toss at 9:30am.", "category": "Soccer", "agree_terms": true}}
+
+=== Step 10: retrieved entity and correlation_id check ===
+{
+  "correlation_id": "2298384e-4747-4ff5-8d6f-6e65f08402c2",
+  "success": true,
+  "entity": {
+    "entity_id": "338bce0e-6c21-4cef-b569-34deab9da5cd",
+    "fixture_name": "Milpitas Lions vs San Jose Tigers",
+    "teams_players": "Milpitas Lions (A. Singh, R. Gomez); San Jose Tigers (L. Chen, M. Okafor)",
+    "submitter_email": "league-office@leaguemail.com",
+    "description": "Rivalry match, gates open 9am, toss at 9:30am.",
+    "category": "Soccer",
+    "agree_terms": true
+  }
+}
+PASS  CREATE response echoes the CREATE correlation_id
+PASS  GET response echoes the GET correlation_id
+PASS  GET returned success=true
+PASS  retrieved entity_id equals the created entity_id
+PASS  retrieved fields equal the submitted fields
+topics: requests=s9871_entity_requests responses=s9871_entity_responses
+exit=0

@@ -1,0 +1,38 @@
+--- create
+{"correlation_id":"57c59c9c-3ea5-4e7f-90b7-d3b7620bde0b","success":true,"entity_id":"fc1a5851-b853-4cf7-bbc6-520c95c95a48","message":"Entity created"}
+
+--- get existing
+HTTP/1.1 200 OK
+date: Thu, 29 Oct 2026 18:11:05 GMT
+server: uvicorn
+x-correlation-id: dbab4e8b-6f8a-44b6-9c1d-cbc2095ae2f3
+content-length: 288
+content-type: application/json
+
+{"correlation_id":"dbab4e8b-6f8a-44b6-9c1d-cbc2095ae2f3","success":true,"entity":{"entity_id":"fc1a5851-b853-4cf7-bbc6-520c95c95a48","fixture_name":"Lions vs Tigers","teams_players":"Lions; Tigers","submitter_email":"a@b.com","description":"d","category":"Volleyball","agree_terms":true}}
+--- get unknown
+HTTP/1.1 404 Not Found
+date: Thu, 29 Oct 2026 18:11:05 GMT
+server: uvicorn
+x-correlation-id: ba928f15-43c6-4457-afd0-765ae86d6a7d
+content-length: 100
+content-type: application/json
+
+{"correlation_id":"ba928f15-43c6-4457-afd0-765ae86d6a7d","success":false,"error":"Entity not found"}
+--- unknown op
+{"correlation_id":"cdff8db4-c433-4415-b34c-980ff94dbb5b","success":false,"error":"Unknown operation"}
+--- empty name
+{"correlation_id":"cf69b742-7e7e-4e15-99e0-00a235c83122","success":false,"error":"fixture_name is required and must be a non-empty string"}
+--- extra field
+{"correlation_id":"df70ffc7-1793-4c13-b2ec-0eca57778181","success":false,"error":"Unknown field(s): hax"}
+--- agree false
+{"correlation_id":"5c0e17e5-15ef-4fc5-b35a-b2152e544487","success":false,"error":"agree_terms must be true"}
+--- caller corr id
+HTTP/1.1 400 Bad Request
+date: Thu, 29 Oct 2026 18:11:05 GMT
+server: uvicorn
+x-correlation-id: my-fixed-id-1
+content-length: 78
+content-type: application/json
+
+{"correlation_id":"my-fixed-id-1","success":false,"error":"Unknown operation"}
