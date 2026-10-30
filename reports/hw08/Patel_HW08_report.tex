@@ -837,7 +837,7 @@ processing_order  processed_at  writer  corr  partition  offset  entity_id  enti
 One honest difference: HW2's Reviewer could send work back to the Planner (feedback loop). The Part 2 pipeline is one-way (Reviewer only approves or rejects), so that self-correction loop is not reproduced here.
 
 \section*{Self-check (verification.json)}
-\texttt{verify\_\allowbreak{}hw08.py} starts the real stack and runs 11 objective checks (commit \texttt{c8c7d1c}, SEED 9871, VERIFY\_SEED 269871): 11/11 passed. It was also run against two deliberately broken states and failed where it should (\texttt{raw/\allowbreak{}verify\_\allowbreak{}broken\_\allowbreak{}*.txt}: worker stopped and a file missing -> 4/9 passed; the three fixes switched off -> 8/11 passed, with the duplicate, kill and poison checks failing).
+\texttt{verify\_\allowbreak{}hw08.py} starts the real stack and runs 11 objective checks (commit \texttt{7cdb88d}, SEED 9871, VERIFY\_SEED 269871): 11/11 passed. It was also run against two deliberately broken states and failed where it should (\texttt{raw/\allowbreak{}verify\_\allowbreak{}broken\_\allowbreak{}*.txt}: worker stopped and a file missing -> 4/9 passed; the three fixes switched off -> 8/11 passed, with the duplicate, kill and poison checks failing).
 
 \begin{center}
 {\footnotesize\setlength{\tabcolsep}{3pt}

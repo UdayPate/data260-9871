@@ -1,0 +1,28 @@
+verify_hw08 run at 2026-10-29T21:51:15
+... required files exist
+    [PASS] All 21 required files present.
+... Stack: Kafka + worker + FastAPI running, all topics exist, tasks has 2 partitions
+    [PASS] containers running ['s9871-kafka', 's9871-worker', 's9871-api']; topics missing []; s9871_tasks partitions=2; API health True
+... Part 1: CREATE_ENTITY then GET_ENTITY round-trip through Kafka via the API (uuid, same fields, correlation_id preserved)
+    [PASS] CREATE 200 success=True uuid=True; GET 200 success=True fields equal=True
+... Part 1: clean errors (unknown id, unknown operation, invalid fields) each carry a correlation_id
+    [PASS] 8/8 error paths clean (404 not found, unknown operation, 6 invalid creates); failed: []
+... Part 1: direct Kafka client - request has correlation_id/reply_to/operation/data, response echoes the correlation_id
+2026-10-29 21:51:15.823 [verify] SENT request topic=s9871_entity_requests partition=0 offset=54 corr=verify-corr-b3c1fd76 op=CREATE_ENTITY body={"correlation_id": "verify-corr-b3c1fd76", "reply_to": "s9871_entity_responses", "operation": "CREATE_ENTITY", "data": {"fixture_name": "Verify Lions vs Verify Tigers", "teams_players": "Lions; Tigers", "submitter_email": "v@example.com", "description": "v
+2026-10-29 21:51:15.825 [verify] RECEIVED response topic=s9871_entity_responses partition=0 offset=54 corr=verify-corr-b3c1fd76 success=True body={"correlation_id": "verify-corr-b3c1fd76", "success": true, "entity_id": "59150210-7da6-4987-aa5d-f17cbbfad434", "message": "Entity created"}
+    [PASS] response corr preserved=True; request on topic has 4 required fields, reply_to=s9871_entity_responses: True; responses on topic: 1
+... Part 2: Planner, Writer, Reviewer as separate processes (real model) - one question reaches final with the same correlation_id in all four topics
+2026-10-29 21:51:16.667 [harness] topics reset: s9871_inbox(1 partition), s9871_tasks(2 partitions), s9871_drafts(1 partition), s9871_final(1 partition), s9871_dead_letter(1 partition)
+    [PASS] final status='approved', answer words=64, same correlation_id in topics {'s9871_inbox': 1, 's9871_tasks': 1, 's9871_drafts': 1, 's9871_final': 1}
+... Part 3: duplicate replay - 2 drafts without idempotency, 1 with it
+    [PASS] naive replay -> 2 drafts; with idempotency -> 1 draft, 1 work run, lag 0
+... Part 3: Writer killed mid-work - offset uncommitted, message redelivered after restart, committed only after success
+    [PASS] offset uncommitted at kill: True; redelivered after restart: True; drafts 1; committed after success: 1
+... Part 3: poison message - 3 attempts, then dead-letter topic, next message still processed
+    [PASS] attempts 3, dead-letter messages 1, good message processed True, lag 0
+... Part 3: 20 messages (VERIFY_SEED) keyed by entity stay in one partition and in order
+    [PASS] 20 messages processed, entities out of order 0, entities split across partitions 0
+... Ruff passes on the HW8 code
+    [PASS] All checks passed!
+11/11 checks passed -> C:\Users\patel\data260-9871\reports\hw08\verification.json
+exit=0
