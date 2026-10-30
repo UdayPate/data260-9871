@@ -1,0 +1,7 @@
+2026-10-29 19:04:54.504 [planner] Assigned partitions: [0]
+2026-10-29 19:04:54.505 [planner] Consumer is ready and listening... topic=s9871_inbox group=s9871_planners mode=fixed idempotent=True commit=after poison=dlq
+2026-10-29 19:05:08.061 [planner] RECEIVED topic=s9871_inbox partition=0 offset=1 corr=902edac1-a129-4aab-a517-22498d34e3d7
+[turn 1] input_tokens=90 output_tokens=54 total_tokens=144
+2026-10-29 19:05:15.326 [planner] PROCESSED corr=902edac1-a129-4aab-a517-22498d34e3d7 partition=0 offset=1
+2026-10-29 19:05:15.334 [planner] SENT topic=s9871_tasks partition=1 offset=13 corr=902edac1-a129-4aab-a517-22498d34e3d7 body={"question": "Which documents should a team captain bring to a league fixture?", "plan": ["Identify the required documents by checking the league's official guidelines.", "List the essential documents such as team registration, player rosters, and insurance forms.", "Ensure all documents are up to date and bring physical or digital copies as needed."], "correlation_id": "902edac1-a129-4aab-a517-22498d34e3d7"}
+2026-10-29 19:05:15.343 [planner] COMMITTED AFTER successful processing offset=1 (next to read = 2)

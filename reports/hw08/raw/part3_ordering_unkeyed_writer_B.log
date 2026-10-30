@@ -1,0 +1,74 @@
+2026-10-29 19:03:32.721 [writer-B] Assigned partitions: [1]
+2026-10-29 19:03:32.722 [writer-B] Consumer is ready and listening... topic=s9871_tasks group=s9871_writers_ordering_unkeyed_78f43a mode=fixed idempotent=True commit=after poison=dlq
+2026-10-29 19:03:32.856 [writer-B] RECEIVED topic=s9871_tasks partition=1 offset=0 corr=ord-01 entity=FX-9871-104 seq=1
+2026-10-29 19:03:32.856 [writer-B] WORK start corr=ord-01
+2026-10-29 19:03:33.347 [writer-B] WORK done corr=ord-01
+2026-10-29 19:03:33.347 [writer-B] PROCESSED corr=ord-01 partition=1 offset=0 entity=FX-9871-104 seq=1
+2026-10-29 19:03:33.393 [writer-B] SENT topic=s9871_drafts partition=0 offset=0 corr=ord-01 body={"question": "Fixture task ord-01", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "[stub draft] check the field check the referees confirm the teams", "entity_id": "FX-9871-104", "entity_seq": 1, "correlation_id": "ord-01"}
+2026-10-29 19:03:33.399 [writer-B] COMMITTED AFTER successful processing offset=0 (next to read = 1)
+2026-10-29 19:03:33.406 [writer-B] RECEIVED topic=s9871_tasks partition=1 offset=1 corr=ord-03 entity=FX-9871-104 seq=2
+2026-10-29 19:03:33.406 [writer-B] WORK start corr=ord-03
+2026-10-29 19:03:34.167 [writer-B] WORK done corr=ord-03
+2026-10-29 19:03:34.167 [writer-B] PROCESSED corr=ord-03 partition=1 offset=1 entity=FX-9871-104 seq=2
+2026-10-29 19:03:34.214 [writer-B] SENT topic=s9871_drafts partition=0 offset=3 corr=ord-03 body={"question": "Fixture task ord-03", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "[stub draft] check the field check the referees confirm the teams", "entity_id": "FX-9871-104", "entity_seq": 2, "correlation_id": "ord-03"}
+2026-10-29 19:03:34.222 [writer-B] COMMITTED AFTER successful processing offset=1 (next to read = 2)
+2026-10-29 19:03:34.222 [writer-B] RECEIVED topic=s9871_tasks partition=1 offset=2 corr=ord-04 entity=FX-9871-103 seq=1
+2026-10-29 19:03:34.222 [writer-B] WORK start corr=ord-04
+2026-10-29 19:03:34.993 [writer-B] WORK done corr=ord-04
+2026-10-29 19:03:34.993 [writer-B] PROCESSED corr=ord-04 partition=1 offset=2 entity=FX-9871-103 seq=1
+2026-10-29 19:03:35.041 [writer-B] SENT topic=s9871_drafts partition=0 offset=6 corr=ord-04 body={"question": "Fixture task ord-04", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "[stub draft] check the field check the referees confirm the teams", "entity_id": "FX-9871-103", "entity_seq": 1, "correlation_id": "ord-04"}
+2026-10-29 19:03:35.041 [writer-B] COMMITTED AFTER successful processing offset=2 (next to read = 3)
+2026-10-29 19:03:35.041 [writer-B] RECEIVED topic=s9871_tasks partition=1 offset=3 corr=ord-05 entity=FX-9871-101 seq=1
+2026-10-29 19:03:35.041 [writer-B] WORK start corr=ord-05
+2026-10-29 19:03:35.659 [writer-B] WORK done corr=ord-05
+2026-10-29 19:03:35.659 [writer-B] PROCESSED corr=ord-05 partition=1 offset=3 entity=FX-9871-101 seq=1
+2026-10-29 19:03:35.710 [writer-B] SENT topic=s9871_drafts partition=0 offset=8 corr=ord-05 body={"question": "Fixture task ord-05", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "[stub draft] check the field check the referees confirm the teams", "entity_id": "FX-9871-101", "entity_seq": 1, "correlation_id": "ord-05"}
+2026-10-29 19:03:35.718 [writer-B] COMMITTED AFTER successful processing offset=3 (next to read = 4)
+2026-10-29 19:03:35.718 [writer-B] RECEIVED topic=s9871_tasks partition=1 offset=4 corr=ord-07 entity=FX-9871-102 seq=2
+2026-10-29 19:03:35.718 [writer-B] WORK start corr=ord-07
+2026-10-29 19:03:36.081 [writer-B] WORK done corr=ord-07
+2026-10-29 19:03:36.081 [writer-B] PROCESSED corr=ord-07 partition=1 offset=4 entity=FX-9871-102 seq=2
+2026-10-29 19:03:36.141 [writer-B] SENT topic=s9871_drafts partition=0 offset=11 corr=ord-07 body={"question": "Fixture task ord-07", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "[stub draft] check the field check the referees confirm the teams", "entity_id": "FX-9871-102", "entity_seq": 2, "correlation_id": "ord-07"}
+2026-10-29 19:03:36.148 [writer-B] COMMITTED AFTER successful processing offset=4 (next to read = 5)
+2026-10-29 19:03:36.148 [writer-B] RECEIVED topic=s9871_tasks partition=1 offset=5 corr=ord-09 entity=FX-9871-104 seq=4
+2026-10-29 19:03:36.149 [writer-B] WORK start corr=ord-09
+2026-10-29 19:03:36.559 [writer-B] WORK done corr=ord-09
+2026-10-29 19:03:36.559 [writer-B] PROCESSED corr=ord-09 partition=1 offset=5 entity=FX-9871-104 seq=4
+2026-10-29 19:03:36.603 [writer-B] SENT topic=s9871_drafts partition=0 offset=12 corr=ord-09 body={"question": "Fixture task ord-09", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "[stub draft] check the field check the referees confirm the teams", "entity_id": "FX-9871-104", "entity_seq": 4, "correlation_id": "ord-09"}
+2026-10-29 19:03:36.611 [writer-B] COMMITTED AFTER successful processing offset=5 (next to read = 6)
+2026-10-29 19:03:36.611 [writer-B] RECEIVED topic=s9871_tasks partition=1 offset=6 corr=ord-11 entity=FX-9871-102 seq=4
+2026-10-29 19:03:36.611 [writer-B] WORK start corr=ord-11
+2026-10-29 19:03:37.112 [writer-B] WORK done corr=ord-11
+2026-10-29 19:03:37.112 [writer-B] PROCESSED corr=ord-11 partition=1 offset=6 entity=FX-9871-102 seq=4
+2026-10-29 19:03:37.158 [writer-B] SENT topic=s9871_drafts partition=0 offset=14 corr=ord-11 body={"question": "Fixture task ord-11", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "[stub draft] check the field check the referees confirm the teams", "entity_id": "FX-9871-102", "entity_seq": 4, "correlation_id": "ord-11"}
+2026-10-29 19:03:37.171 [writer-B] COMMITTED AFTER successful processing offset=6 (next to read = 7)
+2026-10-29 19:03:37.171 [writer-B] RECEIVED topic=s9871_tasks partition=1 offset=7 corr=ord-12 entity=FX-9871-103 seq=3
+2026-10-29 19:03:37.171 [writer-B] WORK start corr=ord-12
+2026-10-29 19:03:37.443 [writer-B] WORK done corr=ord-12
+2026-10-29 19:03:37.443 [writer-B] PROCESSED corr=ord-12 partition=1 offset=7 entity=FX-9871-103 seq=3
+2026-10-29 19:03:37.488 [writer-B] SENT topic=s9871_drafts partition=0 offset=15 corr=ord-12 body={"question": "Fixture task ord-12", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "[stub draft] check the field check the referees confirm the teams", "entity_id": "FX-9871-103", "entity_seq": 3, "correlation_id": "ord-12"}
+2026-10-29 19:03:37.495 [writer-B] COMMITTED AFTER successful processing offset=7 (next to read = 8)
+2026-10-29 19:03:37.495 [writer-B] RECEIVED topic=s9871_tasks partition=1 offset=8 corr=ord-13 entity=FX-9871-103 seq=4
+2026-10-29 19:03:37.495 [writer-B] WORK start corr=ord-13
+2026-10-29 19:03:37.917 [writer-B] WORK done corr=ord-13
+2026-10-29 19:03:37.917 [writer-B] PROCESSED corr=ord-13 partition=1 offset=8 entity=FX-9871-103 seq=4
+2026-10-29 19:03:37.978 [writer-B] SENT topic=s9871_drafts partition=0 offset=16 corr=ord-13 body={"question": "Fixture task ord-13", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "[stub draft] check the field check the referees confirm the teams", "entity_id": "FX-9871-103", "entity_seq": 4, "correlation_id": "ord-13"}
+2026-10-29 19:03:37.995 [writer-B] COMMITTED AFTER successful processing offset=8 (next to read = 9)
+2026-10-29 19:03:37.995 [writer-B] RECEIVED topic=s9871_tasks partition=1 offset=9 corr=ord-14 entity=FX-9871-103 seq=5
+2026-10-29 19:03:37.995 [writer-B] WORK start corr=ord-14
+2026-10-29 19:03:38.777 [writer-B] WORK done corr=ord-14
+2026-10-29 19:03:38.777 [writer-B] PROCESSED corr=ord-14 partition=1 offset=9 entity=FX-9871-103 seq=5
+2026-10-29 19:03:38.819 [writer-B] SENT topic=s9871_drafts partition=0 offset=17 corr=ord-14 body={"question": "Fixture task ord-14", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "[stub draft] check the field check the referees confirm the teams", "entity_id": "FX-9871-103", "entity_seq": 5, "correlation_id": "ord-14"}
+2026-10-29 19:03:38.821 [writer-B] COMMITTED AFTER successful processing offset=9 (next to read = 10)
+2026-10-29 19:03:38.821 [writer-B] RECEIVED topic=s9871_tasks partition=1 offset=10 corr=ord-16 entity=FX-9871-104 seq=5
+2026-10-29 19:03:38.827 [writer-B] WORK start corr=ord-16
+2026-10-29 19:03:39.397 [writer-B] WORK done corr=ord-16
+2026-10-29 19:03:39.397 [writer-B] PROCESSED corr=ord-16 partition=1 offset=10 entity=FX-9871-104 seq=5
+2026-10-29 19:03:39.443 [writer-B] SENT topic=s9871_drafts partition=0 offset=18 corr=ord-16 body={"question": "Fixture task ord-16", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "[stub draft] check the field check the referees confirm the teams", "entity_id": "FX-9871-104", "entity_seq": 5, "correlation_id": "ord-16"}
+2026-10-29 19:03:39.450 [writer-B] COMMITTED AFTER successful processing offset=10 (next to read = 11)
+2026-10-29 19:03:39.450 [writer-B] RECEIVED topic=s9871_tasks partition=1 offset=11 corr=ord-20 entity=FX-9871-103 seq=8
+2026-10-29 19:03:39.450 [writer-B] WORK start corr=ord-20
+2026-10-29 19:03:39.622 [writer-B] WORK done corr=ord-20
+2026-10-29 19:03:39.622 [writer-B] PROCESSED corr=ord-20 partition=1 offset=11 entity=FX-9871-103 seq=8
+2026-10-29 19:03:39.682 [writer-B] SENT topic=s9871_drafts partition=0 offset=19 corr=ord-20 body={"question": "Fixture task ord-20", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "[stub draft] check the field check the referees confirm the teams", "entity_id": "FX-9871-103", "entity_seq": 8, "correlation_id": "ord-20"}
+2026-10-29 19:03:39.684 [writer-B] COMMITTED AFTER successful processing offset=11 (next to read = 12)

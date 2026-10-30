@@ -1,0 +1,6 @@
+2026-10-29 13:05:42.419 [harness] scenario=duplicate mode=fixed SEED=9871 VERIFY_SEED=269871 consumer-group suffix=_duplicate_fixed_159ace
+2026-10-29 13:05:42.543 [harness] topics reset: s9871_tasks(2 partitions), s9871_drafts(1 partition), s9871_dead_letter(1 partition)
+2026-10-29 13:05:42.552 [harness] started Writer A pid=56792 env={'HW8_MODE': 'fixed'}
+2026-10-29 13:05:42.953 [harness] sending the original message corr=dup-fixed-d22441
+2026-10-29 13:05:43.622 [harness] REPLAYING the identical message (same correlation_id, same bytes)
+2026-10-29 13:05:46.006 [harness] RESULT {"scenario": "duplicate", "mode": "fixed", "SEED": 9871, "VERIFY_SEED": 269871, "writer_mode": "stub (model-free)", "finished_at": "2026-10-29 13:05:46", "correlation_id": "dup-fixed-d22441", "deliveries_received": 2, "writer_work_executions": 1, "duplicate_skips_logged": 1, "drafts_in_output_topic": 1, "lag": {"0": {"committed": 2, "log_end": 2, "lag": 0}, "1": {"committed": null, "log_end": 0, "lag": 0}}}

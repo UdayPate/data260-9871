@@ -1,0 +1,149 @@
+2026-10-29 19:04:54.519 [writer] Assigned partitions: [0, 1]
+2026-10-29 19:04:54.520 [writer] Consumer is ready and listening... topic=s9871_tasks group=s9871_writers mode=fixed idempotent=True commit=after poison=dlq
+2026-10-29 19:04:54.637 [writer] RECEIVED topic=s9871_tasks partition=1 offset=0 corr=ord-02 entity=FX-9871-102 seq=1
+2026-10-29 19:04:54.637 [writer] WORK start corr=ord-02
+[turn 1] input_tokens=87 output_tokens=77 total_tokens=164
+2026-10-29 19:05:13.095 [writer] WORK done corr=ord-02
+2026-10-29 19:05:13.096 [writer] PROCESSED corr=ord-02 partition=1 offset=0 entity=FX-9871-102 seq=1
+2026-10-29 19:05:13.142 [writer] SENT topic=s9871_drafts partition=0 offset=20 corr=ord-02 body={"question": "Fixture task ord-02", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "To process fixture task ord-02, first check the field for availability and condition. Next, verify the referees are assigned and ready for the match. Finally, confirm the teams are registered and have no scheduling conflicts. Ensure all details align before finalizing the fixture. Communicate any issues immediately to the relevant parties. Keep the process clear and efficient to maintain smooth league operations.", "entity_id": "FX-9871-102", "entity_seq": 1, "correlation_id": "ord-02"}
+2026-10-29 19:05:13.152 [writer] COMMITTED AFTER successful processing offset=0 (next to read = 1)
+2026-10-29 19:05:13.152 [writer] RECEIVED topic=s9871_tasks partition=1 offset=1 corr=ord-04 entity=FX-9871-103 seq=1
+2026-10-29 19:05:13.153 [writer] WORK start corr=ord-04
+[turn 1] input_tokens=87 output_tokens=63 total_tokens=150
+2026-10-29 19:05:17.195 [writer] WORK done corr=ord-04
+2026-10-29 19:05:17.195 [writer] PROCESSED corr=ord-04 partition=1 offset=1 entity=FX-9871-103 seq=1
+2026-10-29 19:05:17.236 [writer] SENT topic=s9871_drafts partition=0 offset=21 corr=ord-04 body={"question": "Fixture task ord-04", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "To complete fixture task ord-04, first check the field to ensure it is ready and safe for play. Next, verify that the referees are available and briefed for the match. Finally, confirm the teams have registered and are prepared to participate. Make sure all details are accurate before finalizing the fixture.", "entity_id": "FX-9871-103", "entity_seq": 1, "correlation_id": "ord-04"}
+2026-10-29 19:05:17.249 [writer] COMMITTED AFTER successful processing offset=1 (next to read = 2)
+2026-10-29 19:05:17.249 [writer] RECEIVED topic=s9871_tasks partition=1 offset=2 corr=ord-05 entity=FX-9871-101 seq=1
+2026-10-29 19:05:17.249 [writer] WORK start corr=ord-05
+[turn 1] input_tokens=87 output_tokens=63 total_tokens=150
+2026-10-29 19:05:19.958 [writer] WORK done corr=ord-05
+2026-10-29 19:05:19.958 [writer] PROCESSED corr=ord-05 partition=1 offset=2 entity=FX-9871-101 seq=1
+2026-10-29 19:05:20.005 [writer] SENT topic=s9871_drafts partition=0 offset=22 corr=ord-05 body={"question": "Fixture task ord-05", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "To complete fixture task ord-05, first check the field to ensure it is ready and safe for play. Next, verify that the referees are available and briefed for the match. Finally, confirm the teams have registered and are prepared to participate. Make sure all details are accurate before finalizing the fixture.", "entity_id": "FX-9871-101", "entity_seq": 1, "correlation_id": "ord-05"}
+2026-10-29 19:05:20.018 [writer] COMMITTED AFTER successful processing offset=2 (next to read = 3)
+2026-10-29 19:05:20.019 [writer] RECEIVED topic=s9871_tasks partition=1 offset=3 corr=ord-06 entity=FX-9871-103 seq=2
+2026-10-29 19:05:20.019 [writer] WORK start corr=ord-06
+[turn 1] input_tokens=87 output_tokens=63 total_tokens=150
+2026-10-29 19:05:22.926 [writer] WORK done corr=ord-06
+2026-10-29 19:05:22.927 [writer] PROCESSED corr=ord-06 partition=1 offset=3 entity=FX-9871-103 seq=2
+2026-10-29 19:05:22.982 [writer] SENT topic=s9871_drafts partition=0 offset=23 corr=ord-06 body={"question": "Fixture task ord-06", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "To complete fixture task ord-06, first check the field to ensure it is ready and safe for play. Next, verify that the referees are available and briefed for the match. Finally, confirm the teams have registered and are prepared to participate. Make sure all details are accurate before finalizing the fixture.", "entity_id": "FX-9871-103", "entity_seq": 2, "correlation_id": "ord-06"}
+2026-10-29 19:05:22.995 [writer] COMMITTED AFTER successful processing offset=3 (next to read = 4)
+2026-10-29 19:05:22.995 [writer] RECEIVED topic=s9871_tasks partition=1 offset=4 corr=ord-07 entity=FX-9871-102 seq=2
+2026-10-29 19:05:22.995 [writer] WORK start corr=ord-07
+[turn 1] input_tokens=87 output_tokens=65 total_tokens=152
+2026-10-29 19:05:25.763 [writer] WORK done corr=ord-07
+2026-10-29 19:05:25.763 [writer] PROCESSED corr=ord-07 partition=1 offset=4 entity=FX-9871-102 seq=2
+2026-10-29 19:05:25.813 [writer] SENT topic=s9871_drafts partition=0 offset=24 corr=ord-07 body={"question": "Fixture task ord-07", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "To complete fixture task ord-07, first check the field for availability and condition. Next, verify the referees are assigned and available for the match. Finally, confirm the teams are registered and ready to play. Ensure all details match the schedule and communicate any changes promptly. This ensures a smooth and organized game setup.", "entity_id": "FX-9871-102", "entity_seq": 2, "correlation_id": "ord-07"}
+2026-10-29 19:05:25.822 [writer] COMMITTED AFTER successful processing offset=4 (next to read = 5)
+2026-10-29 19:05:25.822 [writer] RECEIVED topic=s9871_tasks partition=1 offset=5 corr=ord-10 entity=FX-9871-102 seq=3
+2026-10-29 19:05:25.823 [writer] WORK start corr=ord-10
+[turn 1] input_tokens=87 output_tokens=64 total_tokens=151
+2026-10-29 19:05:28.528 [writer] WORK done corr=ord-10
+2026-10-29 19:05:28.529 [writer] PROCESSED corr=ord-10 partition=1 offset=5 entity=FX-9871-102 seq=3
+2026-10-29 19:05:28.586 [writer] SENT topic=s9871_drafts partition=0 offset=25 corr=ord-10 body={"question": "Fixture task ord-10", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "To process fixture task ord-10, first check the field to ensure it is ready and safe for play. Next, verify that the referees are available and briefed for the match. Finally, confirm the teams participating to ensure all details are accurate. This step-by-step approach guarantees a smooth and organized game setup.", "entity_id": "FX-9871-102", "entity_seq": 3, "correlation_id": "ord-10"}
+2026-10-29 19:05:28.599 [writer] COMMITTED AFTER successful processing offset=5 (next to read = 6)
+2026-10-29 19:05:28.600 [writer] RECEIVED topic=s9871_tasks partition=1 offset=6 corr=ord-11 entity=FX-9871-102 seq=4
+2026-10-29 19:05:28.600 [writer] WORK start corr=ord-11
+[turn 1] input_tokens=87 output_tokens=71 total_tokens=158
+2026-10-29 19:05:31.573 [writer] WORK done corr=ord-11
+2026-10-29 19:05:31.574 [writer] PROCESSED corr=ord-11 partition=1 offset=6 entity=FX-9871-102 seq=4
+2026-10-29 19:05:31.619 [writer] SENT topic=s9871_drafts partition=0 offset=26 corr=ord-11 body={"question": "Fixture task ord-11", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "To handle fixture task ord-11, first check the field to ensure it is ready and safe for play. Next, verify that the referees are available and briefed for the match. Finally, confirm the teams participating, making sure all details like names and player lists are accurate. Once these steps are completed, the fixture can be scheduled with confidence.", "entity_id": "FX-9871-102", "entity_seq": 4, "correlation_id": "ord-11"}
+2026-10-29 19:05:31.628 [writer] COMMITTED AFTER successful processing offset=6 (next to read = 7)
+2026-10-29 19:05:31.628 [writer] RECEIVED topic=s9871_tasks partition=1 offset=7 corr=ord-12 entity=FX-9871-103 seq=3
+2026-10-29 19:05:31.629 [writer] WORK start corr=ord-12
+[turn 1] input_tokens=87 output_tokens=78 total_tokens=165
+2026-10-29 19:05:34.643 [writer] WORK done corr=ord-12
+2026-10-29 19:05:34.644 [writer] PROCESSED corr=ord-12 partition=1 offset=7 entity=FX-9871-103 seq=3
+2026-10-29 19:05:34.691 [writer] SENT topic=s9871_drafts partition=0 offset=27 corr=ord-12 body={"question": "Fixture task ord-12", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "To complete fixture task ord-12, first check the field to ensure it is ready and safe for play. Next, verify that the referees are available and briefed for the match. Finally, confirm the teams have registered and are prepared to participate. All details should be double-checked to avoid any last-minute issues. Once everything is in order, the fixture can be scheduled without complications.", "entity_id": "FX-9871-103", "entity_seq": 3, "correlation_id": "ord-12"}
+2026-10-29 19:05:34.721 [writer] COMMITTED AFTER successful processing offset=7 (next to read = 8)
+2026-10-29 19:05:34.721 [writer] RECEIVED topic=s9871_tasks partition=1 offset=8 corr=ord-13 entity=FX-9871-103 seq=4
+2026-10-29 19:05:34.724 [writer] WORK start corr=ord-13
+[turn 1] input_tokens=87 output_tokens=63 total_tokens=150
+2026-10-29 19:05:37.395 [writer] WORK done corr=ord-13
+2026-10-29 19:05:37.396 [writer] PROCESSED corr=ord-13 partition=1 offset=8 entity=FX-9871-103 seq=4
+2026-10-29 19:05:37.452 [writer] SENT topic=s9871_drafts partition=0 offset=28 corr=ord-13 body={"question": "Fixture task ord-13", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "To complete fixture task ord-13, first check the field to ensure it is ready and safe for play. Next, verify that the referees are available and briefed for the match. Finally, confirm the teams have registered and are prepared to participate. Make sure all details are accurate before finalizing the fixture.", "entity_id": "FX-9871-103", "entity_seq": 4, "correlation_id": "ord-13"}
+2026-10-29 19:05:37.461 [writer] COMMITTED AFTER successful processing offset=8 (next to read = 9)
+2026-10-29 19:05:37.462 [writer] RECEIVED topic=s9871_tasks partition=1 offset=9 corr=ord-14 entity=FX-9871-103 seq=5
+2026-10-29 19:05:37.463 [writer] WORK start corr=ord-14
+[turn 1] input_tokens=87 output_tokens=67 total_tokens=154
+2026-10-29 19:05:40.285 [writer] WORK done corr=ord-14
+2026-10-29 19:05:40.286 [writer] PROCESSED corr=ord-14 partition=1 offset=9 entity=FX-9871-103 seq=5
+2026-10-29 19:05:40.333 [writer] SENT topic=s9871_drafts partition=0 offset=29 corr=ord-14 body={"question": "Fixture task ord-14", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "To handle fixture task ord-14, first check the field to ensure it is ready and suitable for the match. Next, verify that the referees are available and assigned correctly. Finally, confirm the teams participating in the fixture to ensure all details are accurate. Once these steps are completed, the fixture can be scheduled with confidence.", "entity_id": "FX-9871-103", "entity_seq": 5, "correlation_id": "ord-14"}
+2026-10-29 19:05:40.342 [writer] COMMITTED AFTER successful processing offset=9 (next to read = 10)
+2026-10-29 19:05:40.343 [writer] RECEIVED topic=s9871_tasks partition=1 offset=10 corr=ord-15 entity=FX-9871-103 seq=6
+2026-10-29 19:05:40.344 [writer] WORK start corr=ord-15
+[turn 1] input_tokens=87 output_tokens=83 total_tokens=170
+2026-10-29 19:05:43.610 [writer] WORK done corr=ord-15
+2026-10-29 19:05:43.611 [writer] PROCESSED corr=ord-15 partition=1 offset=10 entity=FX-9871-103 seq=6
+2026-10-29 19:05:43.669 [writer] SENT topic=s9871_drafts partition=0 offset=30 corr=ord-15 body={"question": "Fixture task ord-15", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "To complete fixture task ord-15, first check the field for availability and condition. Next, verify the referees are assigned and available for the match. Finally, confirm the teams are registered and ready to play. Ensure all details match the schedule and that there are no conflicts. Once all steps are confirmed, the fixture can be finalized. Keep communication clear with all parties involved to avoid any last-minute issues.", "entity_id": "FX-9871-103", "entity_seq": 6, "correlation_id": "ord-15"}
+2026-10-29 19:05:43.692 [writer] COMMITTED AFTER successful processing offset=10 (next to read = 11)
+2026-10-29 19:05:43.692 [writer] RECEIVED topic=s9871_tasks partition=1 offset=11 corr=ord-19 entity=FX-9871-103 seq=7
+2026-10-29 19:05:43.692 [writer] WORK start corr=ord-19
+[turn 1] input_tokens=87 output_tokens=77 total_tokens=164
+2026-10-29 19:05:46.738 [writer] WORK done corr=ord-19
+2026-10-29 19:05:46.738 [writer] PROCESSED corr=ord-19 partition=1 offset=11 entity=FX-9871-103 seq=7
+2026-10-29 19:05:46.783 [writer] SENT topic=s9871_drafts partition=0 offset=31 corr=ord-19 body={"question": "Fixture task ord-19", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "To complete fixture task ord-19, first check the field to ensure it is ready and safe for play. Next, verify that the referees are available and briefed for the match. Finally, confirm the teams have registered and are prepared to participate. Make sure all details match the schedule and that any last-minute changes are communicated promptly. This ensures a smooth and organized game setup.", "entity_id": "FX-9871-103", "entity_seq": 7, "correlation_id": "ord-19"}
+2026-10-29 19:05:46.792 [writer] COMMITTED AFTER successful processing offset=11 (next to read = 12)
+2026-10-29 19:05:46.792 [writer] RECEIVED topic=s9871_tasks partition=1 offset=12 corr=ord-20 entity=FX-9871-103 seq=8
+2026-10-29 19:05:46.793 [writer] WORK start corr=ord-20
+[turn 1] input_tokens=87 output_tokens=56 total_tokens=143
+2026-10-29 19:05:49.260 [writer] WORK done corr=ord-20
+2026-10-29 19:05:49.261 [writer] PROCESSED corr=ord-20 partition=1 offset=12 entity=FX-9871-103 seq=8
+2026-10-29 19:05:49.314 [writer] SENT topic=s9871_drafts partition=0 offset=32 corr=ord-20 body={"question": "Fixture task ord-20", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "To complete fixture task ord-20, first check the field for availability and readiness. Next, verify the referees are assigned and confirmed for the match. Finally, ensure both teams have registered and are prepared to play. All details must be confirmed before finalizing the fixture.", "entity_id": "FX-9871-103", "entity_seq": 8, "correlation_id": "ord-20"}
+2026-10-29 19:05:49.321 [writer] COMMITTED AFTER successful processing offset=12 (next to read = 13)
+2026-10-29 19:05:49.321 [writer] RECEIVED topic=s9871_tasks partition=0 offset=0 corr=ord-01 entity=FX-9871-104 seq=1
+2026-10-29 19:05:49.322 [writer] WORK start corr=ord-01
+[turn 1] input_tokens=87 output_tokens=59 total_tokens=146
+2026-10-29 19:05:51.924 [writer] WORK done corr=ord-01
+2026-10-29 19:05:51.924 [writer] PROCESSED corr=ord-01 partition=0 offset=0 entity=FX-9871-104 seq=1
+2026-10-29 19:05:51.988 [writer] SENT topic=s9871_drafts partition=0 offset=33 corr=ord-01 body={"question": "Fixture task ord-01", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "To process fixture task ord-01, first check the field to ensure it is ready for use. Next, verify the referees are available and briefed. Finally, confirm the teams have registered and are prepared for the match. This ensures all necessary preparations are in place for a smooth game.", "entity_id": "FX-9871-104", "entity_seq": 1, "correlation_id": "ord-01"}
+2026-10-29 19:05:51.995 [writer] COMMITTED AFTER successful processing offset=0 (next to read = 1)
+2026-10-29 19:05:51.998 [writer] RECEIVED topic=s9871_tasks partition=0 offset=1 corr=ord-03 entity=FX-9871-104 seq=2
+2026-10-29 19:05:51.998 [writer] WORK start corr=ord-03
+[turn 1] input_tokens=87 output_tokens=63 total_tokens=150
+2026-10-29 19:05:54.683 [writer] WORK done corr=ord-03
+2026-10-29 19:05:54.684 [writer] PROCESSED corr=ord-03 partition=0 offset=1 entity=FX-9871-104 seq=2
+2026-10-29 19:05:54.727 [writer] SENT topic=s9871_drafts partition=0 offset=34 corr=ord-03 body={"question": "Fixture task ord-03", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "To complete fixture task ord-03, first check the field to ensure it is ready and safe for play. Next, verify that the referees are available and briefed for the match. Finally, confirm the teams have registered and are prepared to participate. Make sure all details are accurate before finalizing the fixture.", "entity_id": "FX-9871-104", "entity_seq": 2, "correlation_id": "ord-03"}
+2026-10-29 19:05:54.742 [writer] COMMITTED AFTER successful processing offset=1 (next to read = 2)
+2026-10-29 19:05:54.742 [writer] RECEIVED topic=s9871_tasks partition=0 offset=2 corr=ord-08 entity=FX-9871-104 seq=3
+2026-10-29 19:05:54.743 [writer] WORK start corr=ord-08
+[turn 1] input_tokens=87 output_tokens=65 total_tokens=152
+2026-10-29 19:05:57.576 [writer] WORK done corr=ord-08
+2026-10-29 19:05:57.576 [writer] PROCESSED corr=ord-08 partition=0 offset=2 entity=FX-9871-104 seq=3
+2026-10-29 19:05:57.621 [writer] SENT topic=s9871_drafts partition=0 offset=35 corr=ord-08 body={"question": "Fixture task ord-08", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "To complete fixture task ord-08, first check the field for availability and readiness. Next, verify the referees are assigned and confirmed for the match. Finally, confirm the participating teams are registered and ready to play. Ensure all details are accurate before finalizing the fixture. This process guarantees a smooth and organized game.", "entity_id": "FX-9871-104", "entity_seq": 3, "correlation_id": "ord-08"}
+2026-10-29 19:05:57.632 [writer] COMMITTED AFTER successful processing offset=2 (next to read = 3)
+2026-10-29 19:05:57.633 [writer] RECEIVED topic=s9871_tasks partition=0 offset=3 corr=ord-09 entity=FX-9871-104 seq=4
+2026-10-29 19:05:57.633 [writer] WORK start corr=ord-09
+[turn 1] input_tokens=87 output_tokens=72 total_tokens=159
+2026-10-29 19:06:00.661 [writer] WORK done corr=ord-09
+2026-10-29 19:06:00.662 [writer] PROCESSED corr=ord-09 partition=0 offset=3 entity=FX-9871-104 seq=4
+2026-10-29 19:06:00.709 [writer] SENT topic=s9871_drafts partition=0 offset=36 corr=ord-09 body={"question": "Fixture task ord-09", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "To complete fixture task ord-09, first check the field to ensure it is ready and safe for play. Next, verify that the referees are available and briefed for the match. Finally, confirm the teams have registered and are prepared to participate. Make sure all details are accurate before finalizing the fixture. This ensures a smooth and organized game day.", "entity_id": "FX-9871-104", "entity_seq": 4, "correlation_id": "ord-09"}
+2026-10-29 19:06:00.718 [writer] COMMITTED AFTER successful processing offset=3 (next to read = 4)
+2026-10-29 19:06:00.719 [writer] RECEIVED topic=s9871_tasks partition=0 offset=4 corr=ord-16 entity=FX-9871-104 seq=5
+2026-10-29 19:06:00.719 [writer] WORK start corr=ord-16
+[turn 1] input_tokens=87 output_tokens=72 total_tokens=159
+2026-10-29 19:06:03.645 [writer] WORK done corr=ord-16
+2026-10-29 19:06:03.646 [writer] PROCESSED corr=ord-16 partition=0 offset=4 entity=FX-9871-104 seq=5
+2026-10-29 19:06:03.690 [writer] SENT topic=s9871_drafts partition=0 offset=37 corr=ord-16 body={"question": "Fixture task ord-16", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "To complete fixture task ord-16, first check the field to ensure it is ready and safe for play. Next, verify that the referees are available and briefed for the match. Finally, confirm the teams have registered and are prepared to participate. Make sure all details are accurate before finalizing the schedule. This ensures a smooth and organized game day.", "entity_id": "FX-9871-104", "entity_seq": 5, "correlation_id": "ord-16"}
+2026-10-29 19:06:03.693 [writer] COMMITTED AFTER successful processing offset=4 (next to read = 5)
+2026-10-29 19:06:03.693 [writer] RECEIVED topic=s9871_tasks partition=0 offset=5 corr=ord-17 entity=FX-9871-104 seq=6
+2026-10-29 19:06:03.693 [writer] WORK start corr=ord-17
+[turn 1] input_tokens=87 output_tokens=71 total_tokens=158
+2026-10-29 19:06:06.711 [writer] WORK done corr=ord-17
+2026-10-29 19:06:06.712 [writer] PROCESSED corr=ord-17 partition=0 offset=5 entity=FX-9871-104 seq=6
+2026-10-29 19:06:06.759 [writer] SENT topic=s9871_drafts partition=0 offset=38 corr=ord-17 body={"question": "Fixture task ord-17", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "To handle fixture task ord-17, first check the field to ensure it is ready and safe for use. Next, verify that the referees are available and briefed for the match. Finally, confirm the teams participating, making sure all details like names and player numbers are correct. Once these steps are completed, the fixture can be scheduled with confidence.", "entity_id": "FX-9871-104", "entity_seq": 6, "correlation_id": "ord-17"}
+2026-10-29 19:06:06.767 [writer] COMMITTED AFTER successful processing offset=5 (next to read = 6)
+2026-10-29 19:06:06.768 [writer] RECEIVED topic=s9871_tasks partition=0 offset=6 corr=ord-18 entity=FX-9871-104 seq=7
+2026-10-29 19:06:06.769 [writer] WORK start corr=ord-18
+[turn 1] input_tokens=87 output_tokens=65 total_tokens=152
+2026-10-29 19:06:09.589 [writer] WORK done corr=ord-18
+2026-10-29 19:06:09.589 [writer] PROCESSED corr=ord-18 partition=0 offset=6 entity=FX-9871-104 seq=7
+2026-10-29 19:06:09.635 [writer] SENT topic=s9871_drafts partition=0 offset=39 corr=ord-18 body={"question": "Fixture task ord-18", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "To complete fixture task ord-18, first check the field to ensure it is ready and safe for play. Next, verify that the referees are available and briefed for the match. Finally, confirm the teams have registered and are prepared to participate. Once these steps are completed, the fixture can be scheduled with confidence.", "entity_id": "FX-9871-104", "entity_seq": 7, "correlation_id": "ord-18"}
+2026-10-29 19:06:09.643 [writer] COMMITTED AFTER successful processing offset=6 (next to read = 7)
+2026-10-29 19:06:09.644 [writer] RECEIVED topic=s9871_tasks partition=1 offset=13 corr=902edac1-a129-4aab-a517-22498d34e3d7
+2026-10-29 19:06:09.645 [writer] WORK start corr=902edac1-a129-4aab-a517-22498d34e3d7
+[turn 1] input_tokens=126 output_tokens=89 total_tokens=215
+2026-10-29 19:06:13.193 [writer] WORK done corr=902edac1-a129-4aab-a517-22498d34e3d7
+2026-10-29 19:06:13.193 [writer] PROCESSED corr=902edac1-a129-4aab-a517-22498d34e3d7 partition=1 offset=13
+2026-10-29 19:06:13.235 [writer] SENT topic=s9871_drafts partition=0 offset=40 corr=902edac1-a129-4aab-a517-22498d34e3d7 body={"question": "Which documents should a team captain bring to a league fixture?", "plan": ["Identify the required documents by checking the league's official guidelines.", "List the essential documents such as team registration, player rosters, and insurance forms.", "Ensure all documents are up to date and bring physical or digital copies as needed."], "draft": "A team captain should bring the team registration form, updated player roster, and proof of insurance. These documents are typically required by the league to ensure proper registration and liability coverage. It's important to check the league's official guidelines to confirm any additional forms or requirements. All documents should be current, and physical copies are preferred unless digital submission is specified. The captain should also be prepared to provide contact information for team officials in case of emergencies.", "correlation_id": "902edac1-a129-4aab-a517-22498d34e3d7"}
+2026-10-29 19:06:13.247 [writer] COMMITTED AFTER successful processing offset=13 (next to read = 14)

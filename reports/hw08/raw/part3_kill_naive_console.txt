@@ -1,0 +1,9 @@
+2026-10-29 19:01:42.787 [harness] scenario=kill mode=naive SEED=9871 VERIFY_SEED=269871 consumer-group suffix=_kill_naive_b91704
+2026-10-29 19:01:43.014 [harness] topics reset: s9871_tasks(2 partitions), s9871_drafts(1 partition), s9871_dead_letter(1 partition)
+2026-10-29 19:01:43.024 [harness] started Writer A pid=64036 env={'HW8_MODE': 'naive'}
+2026-10-29 19:01:43.636 [harness] sending corr=kill-naive-d5b1ef (work_s=8, so the Writer is busy for 8 s)
+2026-10-29 19:01:45.954 [harness] HARD-KILLED Writer A pid=64036
+2026-10-29 19:01:46.107 [harness] right after the kill: committed offsets={0: 1, 1: None} drafts_for_corr=0
+2026-10-29 19:01:46.112 [harness] started Writer A pid=63972 env={'HW8_MODE': 'naive'}
+2026-10-29 19:02:46.448 [harness] timed out after 20s waiting for: a draft after restart
+2026-10-29 19:02:47.925 [harness] RESULT {"scenario": "kill", "mode": "naive", "SEED": 9871, "VERIFY_SEED": 269871, "writer_mode": "stub (model-free)", "finished_at": "2026-10-29 19:02:47", "correlation_id": "kill-naive-d5b1ef", "after_kill": {"committed": {"0": 1, "1": null}, "drafts": 0}, "redelivered_after_restart": false, "draft_produced_after_restart": false, "drafts_in_output_topic": 0, "final_lag": {"0": {"committed": 1, "log_end": 1, "lag": 0}, "1": {"committed": null, "log_end": 0, "lag": 0}}}

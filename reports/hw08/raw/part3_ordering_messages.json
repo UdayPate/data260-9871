@@ -1,0 +1,265 @@
+{
+  "VERIFY_SEED": 269871,
+  "messages": [
+    {
+      "correlation_id": "ord-01",
+      "question": "Fixture task ord-01",
+      "plan": [
+        "check the field",
+        "check the referees",
+        "confirm the teams"
+      ],
+      "entity_id": "FX-9871-104",
+      "entity_seq": 1,
+      "send_index": 1,
+      "work_s": 0.49
+    },
+    {
+      "correlation_id": "ord-02",
+      "question": "Fixture task ord-02",
+      "plan": [
+        "check the field",
+        "check the referees",
+        "confirm the teams"
+      ],
+      "entity_id": "FX-9871-102",
+      "entity_seq": 1,
+      "send_index": 2,
+      "work_s": 0.71
+    },
+    {
+      "correlation_id": "ord-03",
+      "question": "Fixture task ord-03",
+      "plan": [
+        "check the field",
+        "check the referees",
+        "confirm the teams"
+      ],
+      "entity_id": "FX-9871-104",
+      "entity_seq": 2,
+      "send_index": 3,
+      "work_s": 0.76
+    },
+    {
+      "correlation_id": "ord-04",
+      "question": "Fixture task ord-04",
+      "plan": [
+        "check the field",
+        "check the referees",
+        "confirm the teams"
+      ],
+      "entity_id": "FX-9871-103",
+      "entity_seq": 1,
+      "send_index": 4,
+      "work_s": 0.77
+    },
+    {
+      "correlation_id": "ord-05",
+      "question": "Fixture task ord-05",
+      "plan": [
+        "check the field",
+        "check the referees",
+        "confirm the teams"
+      ],
+      "entity_id": "FX-9871-101",
+      "entity_seq": 1,
+      "send_index": 5,
+      "work_s": 0.61
+    },
+    {
+      "correlation_id": "ord-06",
+      "question": "Fixture task ord-06",
+      "plan": [
+        "check the field",
+        "check the referees",
+        "confirm the teams"
+      ],
+      "entity_id": "FX-9871-103",
+      "entity_seq": 2,
+      "send_index": 6,
+      "work_s": 0.45
+    },
+    {
+      "correlation_id": "ord-07",
+      "question": "Fixture task ord-07",
+      "plan": [
+        "check the field",
+        "check the referees",
+        "confirm the teams"
+      ],
+      "entity_id": "FX-9871-102",
+      "entity_seq": 2,
+      "send_index": 7,
+      "work_s": 0.36
+    },
+    {
+      "correlation_id": "ord-08",
+      "question": "Fixture task ord-08",
+      "plan": [
+        "check the field",
+        "check the referees",
+        "confirm the teams"
+      ],
+      "entity_id": "FX-9871-104",
+      "entity_seq": 3,
+      "send_index": 8,
+      "work_s": 0.35
+    },
+    {
+      "correlation_id": "ord-09",
+      "question": "Fixture task ord-09",
+      "plan": [
+        "check the field",
+        "check the referees",
+        "confirm the teams"
+      ],
+      "entity_id": "FX-9871-104",
+      "entity_seq": 4,
+      "send_index": 9,
+      "work_s": 0.41
+    },
+    {
+      "correlation_id": "ord-10",
+      "question": "Fixture task ord-10",
+      "plan": [
+        "check the field",
+        "check the referees",
+        "confirm the teams"
+      ],
+      "entity_id": "FX-9871-102",
+      "entity_seq": 3,
+      "send_index": 10,
+      "work_s": 0.31
+    },
+    {
+      "correlation_id": "ord-11",
+      "question": "Fixture task ord-11",
+      "plan": [
+        "check the field",
+        "check the referees",
+        "confirm the teams"
+      ],
+      "entity_id": "FX-9871-102",
+      "entity_seq": 4,
+      "send_index": 11,
+      "work_s": 0.5
+    },
+    {
+      "correlation_id": "ord-12",
+      "question": "Fixture task ord-12",
+      "plan": [
+        "check the field",
+        "check the referees",
+        "confirm the teams"
+      ],
+      "entity_id": "FX-9871-103",
+      "entity_seq": 3,
+      "send_index": 12,
+      "work_s": 0.27
+    },
+    {
+      "correlation_id": "ord-13",
+      "question": "Fixture task ord-13",
+      "plan": [
+        "check the field",
+        "check the referees",
+        "confirm the teams"
+      ],
+      "entity_id": "FX-9871-103",
+      "entity_seq": 4,
+      "send_index": 13,
+      "work_s": 0.42
+    },
+    {
+      "correlation_id": "ord-14",
+      "question": "Fixture task ord-14",
+      "plan": [
+        "check the field",
+        "check the referees",
+        "confirm the teams"
+      ],
+      "entity_id": "FX-9871-103",
+      "entity_seq": 5,
+      "send_index": 14,
+      "work_s": 0.78
+    },
+    {
+      "correlation_id": "ord-15",
+      "question": "Fixture task ord-15",
+      "plan": [
+        "check the field",
+        "check the referees",
+        "confirm the teams"
+      ],
+      "entity_id": "FX-9871-103",
+      "entity_seq": 6,
+      "send_index": 15,
+      "work_s": 0.33
+    },
+    {
+      "correlation_id": "ord-16",
+      "question": "Fixture task ord-16",
+      "plan": [
+        "check the field",
+        "check the referees",
+        "confirm the teams"
+      ],
+      "entity_id": "FX-9871-104",
+      "entity_seq": 5,
+      "send_index": 16,
+      "work_s": 0.57
+    },
+    {
+      "correlation_id": "ord-17",
+      "question": "Fixture task ord-17",
+      "plan": [
+        "check the field",
+        "check the referees",
+        "confirm the teams"
+      ],
+      "entity_id": "FX-9871-104",
+      "entity_seq": 6,
+      "send_index": 17,
+      "work_s": 0.42
+    },
+    {
+      "correlation_id": "ord-18",
+      "question": "Fixture task ord-18",
+      "plan": [
+        "check the field",
+        "check the referees",
+        "confirm the teams"
+      ],
+      "entity_id": "FX-9871-104",
+      "entity_seq": 7,
+      "send_index": 18,
+      "work_s": 0.15
+    },
+    {
+      "correlation_id": "ord-19",
+      "question": "Fixture task ord-19",
+      "plan": [
+        "check the field",
+        "check the referees",
+        "confirm the teams"
+      ],
+      "entity_id": "FX-9871-103",
+      "entity_seq": 7,
+      "send_index": 19,
+      "work_s": 0.68
+    },
+    {
+      "correlation_id": "ord-20",
+      "question": "Fixture task ord-20",
+      "plan": [
+        "check the field",
+        "check the referees",
+        "confirm the teams"
+      ],
+      "entity_id": "FX-9871-103",
+      "entity_seq": 8,
+      "send_index": 20,
+      "work_s": 0.17
+    }
+  ]
+}

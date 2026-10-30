@@ -217,3 +217,242 @@ s9871_writers   s9871_tasks     1          -               0               -    
 
 ################ Part 2: raw/part2_reviewer.err  (file written 2026-10-29 11:54:48)
 
+
+################ Part 3 (Writer in WRITER_MODE=stub, model-free; regression journey uses the real model). Files below are the raw/part3_* files, each with its write time.
+
+---------------- raw/part3_duplicate_naive_console.txt  (file written 2026-10-29 13:05:33)
+2026-10-29 13:05:25.076 [harness] scenario=duplicate mode=naive SEED=9871 VERIFY_SEED=269871 consumer-group suffix=_duplicate_naive_a7565d
+2026-10-29 13:05:28.277 [harness] topics reset: s9871_tasks(2 partitions), s9871_drafts(1 partition), s9871_dead_letter(1 partition)
+2026-10-29 13:05:28.285 [harness] started Writer A pid=70260 env={'HW8_MODE': 'naive'}
+2026-10-29 13:05:28.693 [harness] sending the original message corr=dup-naive-1d2538
+2026-10-29 13:05:29.326 [harness] REPLAYING the identical message (same correlation_id, same bytes)
+2026-10-29 13:05:33.833 [harness] RESULT {"scenario": "duplicate", "mode": "naive", "SEED": 9871, "VERIFY_SEED": 269871, "writer_mode": "stub (model-free)", "finished_at": "2026-10-29 13:05:33", "correlation_id": "dup-naive-1d2538", "deliveries_received": 2, "writer_work_executions": 2, "duplicate_skips_logged": 0, "drafts_in_output_topic": 2, "lag": {"0": {"committed": 2, "log_end": 2, "lag": 0}, "1": {"committed": 
+
+---------------- raw/part3_duplicate_naive_writer.log  (file written 2026-10-29 13:05:29)
+2026-10-29 13:05:28.613 [writer-A] Assigned partitions: [0, 1]
+2026-10-29 13:05:28.614 [writer-A] Consumer is ready and listening... topic=s9871_tasks group=s9871_writers_duplicate_naive_a7565d mode=naive idempotent=False commit=before poison=retry-forever
+2026-10-29 13:05:29.226 [writer-A] RECEIVED topic=s9871_tasks partition=0 offset=0 corr=dup-naive-1d2538
+2026-10-29 13:05:29.229 [writer-A] COMMITTED BEFORE processing offset=0 (next to read = 1)
+2026-10-29 13:05:29.230 [writer-A] WORK start corr=dup-naive-1d2538
+2026-10-29 13:05:29.230 [writer-A] WORK done corr=dup-naive-1d2538
+2026-10-29 13:05:29.230 [writer-A] PROCESSED corr=dup-naive-1d2538 partition=0 offset=0
+2026-10-29 13:05:29.234 [writer-A] SENT topic=s9871_drafts partition=0 offset=0 corr=dup-naive-1d2538 body={"question": "Fixture task dup-naive-1d2538", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "[stub draft] check the field check the referees confirm the teams", "correlation_id": "dup-naive-1d2538"}
+2026-10-29 13:05:29.377 [writer-A] RECEIVED topic=s9871_tasks partition=0 offset=1 corr=dup-naive-1d2538
+2026-10-29 13:05:29.378 [writer-A] COMMITTED BEFORE processing offset=1 (next to read = 2)
+2026-10-29 13:05:29.378 [writer-A] WORK start corr=dup-naive-1d2538
+2026-10-29 13:05:29.378 [writer-A] WORK done corr=dup-naive-1d2538
+2026-10-29 13:05:29.378 [writer-A] PROCESSED corr=dup-naive-1d2538 partition=0 offset=1
+2026-10-29 13:05:29.380 [writer-A] SENT topic=s9871_drafts partition=0 offset=1 corr=dup-naive-1d2538 body={"question": "Fixture task dup-naive-1d2538", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "[stub draft] check the field check the referees confirm the teams", "correlation_id": "dup-naive-1d2538"}
+
+---------------- raw/part3_duplicate_fixed_console.txt  (file written 2026-10-29 13:05:46)
+2026-10-29 13:05:42.419 [harness] scenario=duplicate mode=fixed SEED=9871 VERIFY_SEED=269871 consumer-group suffix=_duplicate_fixed_159ace
+2026-10-29 13:05:42.543 [harness] topics reset: s9871_tasks(2 partitions), s9871_drafts(1 partition), s9871_dead_letter(1 partition)
+2026-10-29 13:05:42.552 [harness] started Writer A pid=56792 env={'HW8_MODE': 'fixed'}
+2026-10-29 13:05:42.953 [harness] sending the original message corr=dup-fixed-d22441
+2026-10-29 13:05:43.622 [harness] REPLAYING the identical message (same correlation_id, same bytes)
+2026-10-29 13:05:46.006 [harness] RESULT {"scenario": "duplicate", "mode": "fixed", "SEED": 9871, "VERIFY_SEED": 269871, "writer_mode": "stub (model-free)", "finished_at": "2026-10-29 13:05:46", "correlation_id": "dup-fixed-d22441", "deliveries_received": 2, "writer_work_executions": 1, "duplicate_skips_logged": 1, "drafts_in_output_topic": 1, "lag": {"0": {"committed": 2, "log_end": 2, "lag": 0}, "1": {"committed": 
+
+---------------- raw/part3_duplicate_fixed_writer.log  (file written 2026-10-29 13:05:43)
+2026-10-29 13:05:42.814 [writer-A] Assigned partitions: [0, 1]
+2026-10-29 13:05:42.814 [writer-A] Consumer is ready and listening... topic=s9871_tasks group=s9871_writers_duplicate_fixed_159ace mode=fixed idempotent=True commit=after poison=dlq
+2026-10-29 13:05:43.425 [writer-A] RECEIVED topic=s9871_tasks partition=0 offset=0 corr=dup-fixed-d22441
+2026-10-29 13:05:43.426 [writer-A] WORK start corr=dup-fixed-d22441
+2026-10-29 13:05:43.426 [writer-A] WORK done corr=dup-fixed-d22441
+2026-10-29 13:05:43.426 [writer-A] PROCESSED corr=dup-fixed-d22441 partition=0 offset=0
+2026-10-29 13:05:43.472 [writer-A] SENT topic=s9871_drafts partition=0 offset=0 corr=dup-fixed-d22441 body={"question": "Fixture task dup-fixed-d22441", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "[stub draft] check the field check the referees confirm the teams", "correlation_id": "dup-fixed-d22441"}
+2026-10-29 13:05:43.481 [writer-A] COMMITTED AFTER successful processing offset=0 (next to read = 1)
+2026-10-29 13:05:43.676 [writer-A] RECEIVED topic=s9871_tasks partition=0 offset=1 corr=dup-fixed-d22441
+2026-10-29 13:05:43.676 [writer-A] DUPLICATE corr=dup-fixed-d22441 already processed, skipped (no output, no side effect)
+2026-10-29 13:05:43.678 [writer-A] COMMITTED duplicate offset=1 (next to read = 2)
+
+---------------- raw/part3_kill_naive_console.txt  (file written 2026-10-29 19:02:47)
+2026-10-29 19:01:42.787 [harness] scenario=kill mode=naive SEED=9871 VERIFY_SEED=269871 consumer-group suffix=_kill_naive_b91704
+2026-10-29 19:01:43.014 [harness] topics reset: s9871_tasks(2 partitions), s9871_drafts(1 partition), s9871_dead_letter(1 partition)
+2026-10-29 19:01:43.024 [harness] started Writer A pid=64036 env={'HW8_MODE': 'naive'}
+2026-10-29 19:01:43.636 [harness] sending corr=kill-naive-d5b1ef (work_s=8, so the Writer is busy for 8 s)
+2026-10-29 19:01:45.954 [harness] HARD-KILLED Writer A pid=64036
+2026-10-29 19:01:46.107 [harness] right after the kill: committed offsets={0: 1, 1: None} drafts_for_corr=0
+2026-10-29 19:01:46.112 [harness] started Writer A pid=63972 env={'HW8_MODE': 'naive'}
+2026-10-29 19:02:46.448 [harness] timed out after 20s waiting for: a draft after restart
+2026-10-29 19:02:47.925 [harness] RESULT {"scenario": "kill", "mode": "naive", "SEED": 9871, "VERIFY_SEED": 269871, "writer_mode": "stub (model-free)", "finished_at": "2026-10-29 19:02:47", "correlation_id": "kill-naive-d5b1ef", "after_kill": {"committed": {"0": 1, "1": null}, "drafts": 0}, "redelivered_after_restart": false, "draft_produced_after_restart": false, "drafts_in_output_topic": 0, "final_lag": {"0": {"com
+
+---------------- raw/part3_kill_naive_writer_1_killed.log  (file written 2026-10-29 19:01:44)
+2026-10-29 19:01:43.458 [writer-A] Assigned partitions: [0, 1]
+2026-10-29 19:01:43.458 [writer-A] Consumer is ready and listening... topic=s9871_tasks group=s9871_writers_kill_naive_b91704 mode=naive idempotent=False commit=before poison=retry-forever
+2026-10-29 19:01:44.077 [writer-A] RECEIVED topic=s9871_tasks partition=0 offset=0 corr=kill-naive-d5b1ef
+2026-10-29 19:01:44.099 [writer-A] COMMITTED BEFORE processing offset=0 (next to read = 1)
+2026-10-29 19:01:44.100 [writer-A] WORK start corr=kill-naive-d5b1ef
+
+---------------- raw/part3_kill_naive_writer_2_restarted.log  (file written 2026-10-29 19:01:53)
+2026-10-29 19:01:53.972 [writer-A] Assigned partitions: [0, 1]
+2026-10-29 19:01:53.973 [writer-A] Consumer is ready and listening... topic=s9871_tasks group=s9871_writers_kill_naive_b91704 mode=naive idempotent=False commit=before poison=retry-forever
+
+---------------- raw/part3_kill_fixed_console.txt  (file written 2026-10-29 19:03:09)
+2026-10-29 19:02:48.372 [harness] scenario=kill mode=fixed SEED=9871 VERIFY_SEED=269871 consumer-group suffix=_kill_fixed_8c9fb0
+2026-10-29 19:02:48.518 [harness] topics reset: s9871_tasks(2 partitions), s9871_drafts(1 partition), s9871_dead_letter(1 partition)
+2026-10-29 19:02:48.533 [harness] started Writer A pid=61956 env={'HW8_MODE': 'fixed'}
+2026-10-29 19:02:49.145 [harness] sending corr=kill-fixed-012ba0 (work_s=8, so the Writer is busy for 8 s)
+2026-10-29 19:02:51.364 [harness] HARD-KILLED Writer A pid=61956
+2026-10-29 19:02:51.508 [harness] right after the kill: committed offsets={0: None, 1: None} drafts_for_corr=0
+2026-10-29 19:02:51.513 [harness] started Writer A pid=65124 env={'HW8_MODE': 'fixed'}
+2026-10-29 19:03:09.187 [harness] RESULT {"scenario": "kill", "mode": "fixed", "SEED": 9871, "VERIFY_SEED": 269871, "writer_mode": "stub (model-free)", "finished_at": "2026-10-29 19:03:09", "correlation_id": "kill-fixed-012ba0", "after_kill": {"committed": {"0": null, "1": null}, "drafts": 0}, "redelivered_after_restart": true, "draft_produced_after_restart": true, "drafts_in_output_topic": 1, "final_lag": {"0": {"co
+
+---------------- raw/part3_kill_fixed_writer_1_killed.log  (file written 2026-10-29 19:02:49)
+2026-10-29 19:02:48.954 [writer-A] Assigned partitions: [0, 1]
+2026-10-29 19:02:48.954 [writer-A] Consumer is ready and listening... topic=s9871_tasks group=s9871_writers_kill_fixed_8c9fb0 mode=fixed idempotent=True commit=after poison=dlq
+2026-10-29 19:02:49.590 [writer-A] RECEIVED topic=s9871_tasks partition=0 offset=0 corr=kill-fixed-012ba0
+2026-10-29 19:02:49.594 [writer-A] WORK start corr=kill-fixed-012ba0
+
+---------------- raw/part3_kill_fixed_writer_2_restarted.log  (file written 2026-10-29 19:03:07)
+2026-10-29 19:02:59.106 [writer-A] Assigned partitions: [0, 1]
+2026-10-29 19:02:59.106 [writer-A] Consumer is ready and listening... topic=s9871_tasks group=s9871_writers_kill_fixed_8c9fb0 mode=fixed idempotent=True commit=after poison=dlq
+2026-10-29 19:02:59.748 [writer-A] RECEIVED topic=s9871_tasks partition=0 offset=0 corr=kill-fixed-012ba0
+2026-10-29 19:02:59.749 [writer-A] WORK start corr=kill-fixed-012ba0
+2026-10-29 19:03:07.748 [writer-A] WORK done corr=kill-fixed-012ba0
+2026-10-29 19:03:07.748 [writer-A] PROCESSED corr=kill-fixed-012ba0 partition=0 offset=0
+2026-10-29 19:03:07.757 [writer-A] SENT topic=s9871_drafts partition=0 offset=0 corr=kill-fixed-012ba0 body={"question": "Fixture task kill-fixed-012ba0", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "[stub draft] check the field check the referees confirm the teams", "correlation_id": "kill-fixed-012ba0"}
+2026-10-29 19:03:07.772 [writer-A] COMMITTED AFTER successful processing offset=0 (next to read = 1)
+
+---------------- raw/part3_poison_naive_console.txt  (file written 2026-10-29 19:03:25)
+2026-10-29 19:03:09.536 [harness] scenario=poison mode=naive SEED=9871 VERIFY_SEED=269871 consumer-group suffix=_poison_naive_1b3689
+2026-10-29 19:03:09.704 [harness] topics reset: s9871_tasks(2 partitions), s9871_drafts(1 partition), s9871_dead_letter(1 partition)
+2026-10-29 19:03:09.717 [harness] started Writer A pid=62876 env={'HW8_MODE': 'naive', 'HW8_COMMIT': 'after'}
+2026-10-29 19:03:10.127 [harness] sending poison corr=poison-naive-2cb6b8 then good corr=good-naive-d5fdaa, both to partition 0
+2026-10-29 19:03:25.603 [harness] RESULT {"scenario": "poison", "mode": "naive", "SEED": 9871, "VERIFY_SEED": 269871, "writer_mode": "stub (model-free)", "finished_at": "2026-10-29 19:03:25", "poison_corr": "poison-naive-2cb6b8", "good_corr": "good-naive-d5fdaa", "poison_attempts_logged": 29, "dead_letter_messages_for_poison": 0, "dead_letter_attempts_field": [], "good_message_processed": false, "lag": {"0": {"commit
+
+---------------- raw/part3_poison_naive_writer.log  (file written 2026-10-29 19:03:25)
+2026-10-29 19:03:10.070 [writer-A] Assigned partitions: [0, 1]
+2026-10-29 19:03:10.071 [writer-A] Consumer is ready and listening... topic=s9871_tasks group=s9871_writers_poison_naive_1b3689 mode=naive idempotent=False commit=after poison=retry-forever
+2026-10-29 19:03:10.693 [writer-A] RECEIVED topic=s9871_tasks partition=0 offset=0 corr=poison-naive-2cb6b8
+2026-10-29 19:03:10.693 [writer-A] ATTEMPT 1/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:11.193 [writer-A] ATTEMPT 2/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:11.694 [writer-A] ATTEMPT 3/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:12.194 [writer-A] ATTEMPT 4/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:12.695 [writer-A] ATTEMPT 5/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:13.196 [writer-A] ATTEMPT 6/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:13.696 [writer-A] ATTEMPT 7/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:14.197 [writer-A] ATTEMPT 8/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:14.698 [writer-A] ATTEMPT 9/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:15.199 [writer-A] ATTEMPT 10/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:15.699 [writer-A] ATTEMPT 11/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:16.200 [writer-A] ATTEMPT 12/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:16.702 [writer-A] ATTEMPT 13/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:17.203 [writer-A] ATTEMPT 14/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:17.704 [writer-A] ATTEMPT 15/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:18.206 [writer-A] ATTEMPT 16/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:18.744 [writer-A] ATTEMPT 17/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:19.245 [writer-A] ATTEMPT 18/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:19.745 [writer-A] ATTEMPT 19/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:20.245 [writer-A] ATTEMPT 20/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:20.746 [writer-A] ATTEMPT 21/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:21.246 [writer-A] ATTEMPT 22/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:21.747 [writer-A] ATTEMPT 23/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:22.247 [writer-A] ATTEMPT 24/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:22.748 [writer-A] ATTEMPT 25/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:23.249 [writer-A] ATTEMPT 26/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:23.749 [writer-A] ATTEMPT 27/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:24.251 [writer-A] ATTEMPT 28/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:24.752 [writer-A] ATTEMPT 29/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:25.253 [writer-A] ATTEMPT 30/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+
+---------------- raw/part3_poison_fixed_console.txt  (file written 2026-10-29 19:03:31)
+2026-10-29 19:03:25.938 [harness] scenario=poison mode=fixed SEED=9871 VERIFY_SEED=269871 consumer-group suffix=_poison_fixed_596bd9
+2026-10-29 19:03:29.107 [harness] topics reset: s9871_tasks(2 partitions), s9871_drafts(1 partition), s9871_dead_letter(1 partition)
+2026-10-29 19:03:29.120 [harness] started Writer A pid=64456 env={'HW8_MODE': 'fixed'}
+2026-10-29 19:03:29.531 [harness] sending poison corr=poison-fixed-8a8fed then good corr=good-fixed-eed3c7, both to partition 0
+2026-10-29 19:03:31.836 [harness] RESULT {"scenario": "poison", "mode": "fixed", "SEED": 9871, "VERIFY_SEED": 269871, "writer_mode": "stub (model-free)", "finished_at": "2026-10-29 19:03:31", "poison_corr": "poison-fixed-8a8fed", "good_corr": "good-fixed-eed3c7", "poison_attempts_logged": 3, "dead_letter_messages_for_poison": 1, "dead_letter_attempts_field": [3], "good_message_processed": true, "lag": {"0": {"committ
+
+---------------- raw/part3_poison_fixed_writer.log  (file written 2026-10-29 19:03:31)
+2026-10-29 19:03:29.478 [writer-A] Assigned partitions: [0, 1]
+2026-10-29 19:03:29.479 [writer-A] Consumer is ready and listening... topic=s9871_tasks group=s9871_writers_poison_fixed_596bd9 mode=fixed idempotent=True commit=after poison=dlq
+2026-10-29 19:03:30.096 [writer-A] RECEIVED topic=s9871_tasks partition=0 offset=0 corr=poison-fixed-8a8fed
+2026-10-29 19:03:30.096 [writer-A] ATTEMPT 1/3 failed corr=poison-fixed-8a8fed: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:30.597 [writer-A] ATTEMPT 2/3 failed corr=poison-fixed-8a8fed: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:31.100 [writer-A] ATTEMPT 3/3 failed corr=poison-fixed-8a8fed: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:31.104 [writer-A] DEAD-LETTERED corr=poison-fixed-8a8fed after 3 attempts -> topic=s9871_dead_letter partition=0 offset=0 error=ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:31.107 [writer-A] COMMITTED after dead-lettering offset=0 (next to read = 1)
+2026-10-29 19:03:31.107 [writer-A] RECEIVED topic=s9871_tasks partition=0 offset=1 corr=good-fixed-eed3c7
+2026-10-29 19:03:31.107 [writer-A] WORK start corr=good-fixed-eed3c7
+2026-10-29 19:03:31.107 [writer-A] WORK done corr=good-fixed-eed3c7
+2026-10-29 19:03:31.107 [writer-A] PROCESSED corr=good-fixed-eed3c7 partition=0 offset=1
+2026-10-29 19:03:31.112 [writer-A] SENT topic=s9871_drafts partition=0 offset=0 corr=good-fixed-eed3c7 body={"question": "Fixture task good-fixed-eed3c7", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "[stub draft] check the field check the referees confirm the teams", "correlation_id": "good-fixed-eed3c7"}
+2026-10-29 19:03:31.121 [writer-A] COMMITTED AFTER successful processing offset=1 (next to read = 2)
+
+---------------- raw/part3_ordering_unkeyed_console.txt  (file written 2026-10-29 19:03:41)
+2026-10-29 19:03:32.157 [harness] scenario=ordering mode=unkeyed SEED=9871 VERIFY_SEED=269871 consumer-group suffix=_ordering_unkeyed_78f43a
+2026-10-29 19:03:32.294 [harness] topics reset: s9871_tasks(2 partitions), s9871_drafts(1 partition), s9871_dead_letter(1 partition)
+2026-10-29 19:03:32.312 [harness] started Writer A pid=5444 env={'HW8_MODE': 'fixed'}
+2026-10-29 19:03:32.316 [harness] started Writer B pid=63796 env={'HW8_MODE': 'fixed'}
+2026-10-29 19:03:32.842 [harness] assignments: A=[0]; B=[1]
+2026-10-29 19:03:32.842 [harness] sending 20 messages, key=none (null key)
+2026-10-29 19:03:41.293 [harness] RESULT {"scenario": "ordering", "mode": "unkeyed", "SEED": 9871, "VERIFY_SEED": 269871, "writer_mode": "stub (model-free)", "finished_at": "2026-10-29 19:03:41", "messages_processed": 20, "partition_of_each_send": [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], "entities_out_of_order": 3, "total_inversions": 12, "entities_split_across_partitions": 3}
+
+---------------- raw/part3_ordering_unkeyed.csv  (file written 2026-10-29 19:03:40)
+processing_order,processed_at,writer,corr,partition,offset,entity_id,entity_seq
+1,2026-10-29 19:03:33.347,B,ord-01,1,0,FX-9871-104,1
+2,2026-10-29 19:03:33.566,A,ord-02,0,0,FX-9871-102,1
+3,2026-10-29 19:03:34.084,A,ord-06,0,1,FX-9871-103,2
+4,2026-10-29 19:03:34.167,B,ord-03,1,1,FX-9871-104,2
+5,2026-10-29 19:03:34.505,A,ord-08,0,2,FX-9871-104,3
+6,2026-10-29 19:03:34.869,A,ord-10,0,3,FX-9871-102,3
+7,2026-10-29 19:03:34.993,B,ord-04,1,2,FX-9871-103,1
+8,2026-10-29 19:03:35.252,A,ord-15,0,4,FX-9871-103,6
+9,2026-10-29 19:03:35.659,B,ord-05,1,3,FX-9871-101,1
+10,2026-10-29 19:03:35.725,A,ord-17,0,5,FX-9871-104,6
+11,2026-10-29 19:03:35.926,A,ord-18,0,6,FX-9871-104,7
+12,2026-10-29 19:03:36.081,B,ord-07,1,4,FX-9871-102,2
+13,2026-10-29 19:03:36.559,B,ord-09,1,5,FX-9871-104,4
+14,2026-10-29 19:03:36.667,A,ord-19,0,7,FX-9871-103,7
+15,2026-10-29 19:03:37.112,B,ord-11,1,6,FX-9871-102,4
+16,2026-10-29 19:03:37.443,B,ord-12,1,7,FX-9871-103,3
+17,2026-10-29 19:03:37.917,B,ord-13,1,8,FX-9871-103,4
+18,2026-10-29 19:03:38.777,B,ord-14,1,9,FX-9871-103,5
+19,2026-10-29 19:03:39.397,B,ord-16,1,10,FX-9871-104,5
+20,2026-10-29 19:03:39.622,B,ord-20,1,11,FX-9871-103,8
+
+---------------- raw/part3_ordering_keyed_console.txt  (file written 2026-10-29 19:03:53)
+2026-10-29 19:03:41.712 [harness] scenario=ordering mode=keyed SEED=9871 VERIFY_SEED=269871 consumer-group suffix=_ordering_keyed_a2b6c9
+2026-10-29 19:03:41.863 [harness] topics reset: s9871_tasks(2 partitions), s9871_drafts(1 partition), s9871_dead_letter(1 partition)
+2026-10-29 19:03:41.876 [harness] started Writer A pid=65244 env={'HW8_MODE': 'fixed'}
+2026-10-29 19:03:41.882 [harness] started Writer B pid=60344 env={'HW8_MODE': 'fixed'}
+2026-10-29 19:03:45.455 [harness] assignments: A=[0]; B=[1]
+2026-10-29 19:03:45.455 [harness] sending 20 messages, key=entity_id
+2026-10-29 19:03:53.909 [harness] RESULT {"scenario": "ordering", "mode": "keyed", "SEED": 9871, "VERIFY_SEED": 269871, "writer_mode": "stub (model-free)", "finished_at": "2026-10-29 19:03:53", "messages_processed": 20, "partition_of_each_send": [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], "entities_out_of_order": 0, "total_inversions": 0, "entities_split_across_partitions": 0}
+
+---------------- raw/part3_ordering_keyed.csv  (file written 2026-10-29 19:03:53)
+processing_order,processed_at,writer,corr,partition,offset,entity_id,entity_seq
+1,2026-10-29 19:03:46.013,A,ord-01,0,0,FX-9871-104,1
+2,2026-10-29 19:03:46.235,B,ord-02,1,0,FX-9871-102,1
+3,2026-10-29 19:03:46.787,A,ord-03,0,1,FX-9871-104,2
+4,2026-10-29 19:03:47.017,B,ord-04,1,1,FX-9871-103,1
+5,2026-10-29 19:03:47.147,A,ord-08,0,2,FX-9871-104,3
+6,2026-10-29 19:03:47.568,A,ord-09,0,3,FX-9871-104,4
+7,2026-10-29 19:03:47.665,B,ord-05,1,2,FX-9871-101,1
+8,2026-10-29 19:03:48.125,B,ord-06,1,3,FX-9871-103,2
+9,2026-10-29 19:03:48.149,A,ord-16,0,4,FX-9871-104,5
+10,2026-10-29 19:03:48.495,B,ord-07,1,4,FX-9871-102,2
+11,2026-10-29 19:03:48.579,A,ord-17,0,5,FX-9871-104,6
+12,2026-10-29 19:03:48.740,A,ord-18,0,6,FX-9871-104,7
+13,2026-10-29 19:03:48.816,B,ord-10,1,5,FX-9871-102,3
+14,2026-10-29 19:03:49.327,B,ord-11,1,6,FX-9871-102,4
+15,2026-10-29 19:03:49.616,B,ord-12,1,7,FX-9871-103,3
+16,2026-10-29 19:03:50.046,B,ord-13,1,8,FX-9871-103,4
+17,2026-10-29 19:03:50.836,B,ord-14,1,9,FX-9871-103,5
+18,2026-10-29 19:03:51.187,B,ord-15,1,10,FX-9871-103,6
+19,2026-10-29 19:03:51.886,B,ord-19,1,11,FX-9871-103,7
+20,2026-10-29 19:03:52.068,B,ord-20,1,12,FX-9871-103,8
+
+---------------- raw/part3_regression_journey.txt  (file written 2026-10-29 19:06:35)
+2026-10-29 19:05:08.061 [you] SENT topic=s9871_inbox partition=0 offset=1 corr=902edac1-a129-4aab-a517-22498d34e3d7 body={"correlation_id": "902edac1-a129-4aab-a517-22498d34e3d7", "question": "Which documents should a team captain bring to a league fixture?"}
+2026-10-29 19:05:08.061 [planner] RECEIVED topic=s9871_inbox partition=0 offset=1 corr=902edac1-a129-4aab-a517-22498d34e3d7
+2026-10-29 19:05:15.326 [planner] PROCESSED corr=902edac1-a129-4aab-a517-22498d34e3d7 partition=0 offset=1
+2026-10-29 19:05:15.334 [planner] SENT topic=s9871_tasks partition=1 offset=13 corr=902edac1-a129-4aab-a517-22498d34e3d7 body={"question": "Which documents should a team captain bring to a league fixture?", "plan": ["Identify the required documents by checking the league's official guidelines.", "List the essential documents such as team registration, player rosters, and insurance forms.", "Ensure all documents are u
+2026-10-29 19:06:09.644 [writer] RECEIVED topic=s9871_tasks partition=1 offset=13 corr=902edac1-a129-4aab-a517-22498d34e3d7
+2026-10-29 19:06:09.645 [writer] WORK start corr=902edac1-a129-4aab-a517-22498d34e3d7
+2026-10-29 19:06:13.193 [writer] WORK done corr=902edac1-a129-4aab-a517-22498d34e3d7
+2026-10-29 19:06:13.193 [writer] PROCESSED corr=902edac1-a129-4aab-a517-22498d34e3d7 partition=1 offset=13
+2026-10-29 19:06:13.235 [writer] SENT topic=s9871_drafts partition=0 offset=40 corr=902edac1-a129-4aab-a517-22498d34e3d7 body={"question": "Which documents should a team captain bring to a league fixture?", "plan": ["Identify the required documents by checking the league's official guidelines.", "List the essential documents such as team registration, player rosters, and insurance forms.", "Ensure all documents are u
+2026-10-29 19:06:13.238 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=40 corr=902edac1-a129-4aab-a517-22498d34e3d7
+2026-10-29 19:06:14.810 [reviewer] PROCESSED corr=902edac1-a129-4aab-a517-22498d34e3d7 partition=0 offset=40
+2026-10-29 19:06:14.813 [reviewer] SENT topic=s9871_final partition=0 offset=21 corr=902edac1-a129-4aab-a517-22498d34e3d7 body={"status": "approved", "answer": "A team captain should bring the team registration form, updated player roster, and proof of insurance. These documents are typically required by the league to ensure proper registration and liability coverage. It's important to check the league's official gui
+2026-10-29 19:06:14.814 [you] RECEIVED topic=s9871_final partition=0 offset=21 corr=902edac1-a129-4aab-a517-22498d34e3d7

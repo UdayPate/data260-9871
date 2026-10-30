@@ -1,0 +1,14 @@
+2026-10-29 19:03:29.478 [writer-A] Assigned partitions: [0, 1]
+2026-10-29 19:03:29.479 [writer-A] Consumer is ready and listening... topic=s9871_tasks group=s9871_writers_poison_fixed_596bd9 mode=fixed idempotent=True commit=after poison=dlq
+2026-10-29 19:03:30.096 [writer-A] RECEIVED topic=s9871_tasks partition=0 offset=0 corr=poison-fixed-8a8fed
+2026-10-29 19:03:30.096 [writer-A] ATTEMPT 1/3 failed corr=poison-fixed-8a8fed: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:30.597 [writer-A] ATTEMPT 2/3 failed corr=poison-fixed-8a8fed: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:31.100 [writer-A] ATTEMPT 3/3 failed corr=poison-fixed-8a8fed: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:31.104 [writer-A] DEAD-LETTERED corr=poison-fixed-8a8fed after 3 attempts -> topic=s9871_dead_letter partition=0 offset=0 error=ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:31.107 [writer-A] COMMITTED after dead-lettering offset=0 (next to read = 1)
+2026-10-29 19:03:31.107 [writer-A] RECEIVED topic=s9871_tasks partition=0 offset=1 corr=good-fixed-eed3c7
+2026-10-29 19:03:31.107 [writer-A] WORK start corr=good-fixed-eed3c7
+2026-10-29 19:03:31.107 [writer-A] WORK done corr=good-fixed-eed3c7
+2026-10-29 19:03:31.107 [writer-A] PROCESSED corr=good-fixed-eed3c7 partition=0 offset=1
+2026-10-29 19:03:31.112 [writer-A] SENT topic=s9871_drafts partition=0 offset=0 corr=good-fixed-eed3c7 body={"question": "Fixture task good-fixed-eed3c7", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "[stub draft] check the field check the referees confirm the teams", "correlation_id": "good-fixed-eed3c7"}
+2026-10-29 19:03:31.121 [writer-A] COMMITTED AFTER successful processing offset=1 (next to read = 2)

@@ -1,0 +1,110 @@
+{
+  "scenario": "ordering",
+  "mode": "unkeyed",
+  "SEED": 9871,
+  "VERIFY_SEED": 269871,
+  "writer_mode": "stub (model-free)",
+  "finished_at": "2026-10-29 19:03:41",
+  "messages_processed": 20,
+  "partition_of_each_send": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "per_entity": {
+    "FX-9871-101": {
+      "messages": 1,
+      "processed_in_seq_order": [
+        1
+      ],
+      "inversions": 0,
+      "partitions": [
+        1
+      ],
+      "writers": [
+        "B"
+      ]
+    },
+    "FX-9871-102": {
+      "messages": 4,
+      "processed_in_seq_order": [
+        1,
+        3,
+        2,
+        4
+      ],
+      "inversions": 1,
+      "partitions": [
+        0,
+        1
+      ],
+      "writers": [
+        "A",
+        "B"
+      ]
+    },
+    "FX-9871-103": {
+      "messages": 8,
+      "processed_in_seq_order": [
+        2,
+        1,
+        6,
+        7,
+        3,
+        4,
+        5,
+        8
+      ],
+      "inversions": 7,
+      "partitions": [
+        0,
+        1
+      ],
+      "writers": [
+        "A",
+        "B"
+      ]
+    },
+    "FX-9871-104": {
+      "messages": 7,
+      "processed_in_seq_order": [
+        1,
+        2,
+        3,
+        6,
+        7,
+        4,
+        5
+      ],
+      "inversions": 4,
+      "partitions": [
+        0,
+        1
+      ],
+      "writers": [
+        "A",
+        "B"
+      ]
+    }
+  },
+  "entities_out_of_order": 3,
+  "total_inversions": 12,
+  "entities_split_across_partitions": 3
+}

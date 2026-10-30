@@ -1,0 +1,11 @@
+2026-10-29 13:05:42.814 [writer-A] Assigned partitions: [0, 1]
+2026-10-29 13:05:42.814 [writer-A] Consumer is ready and listening... topic=s9871_tasks group=s9871_writers_duplicate_fixed_159ace mode=fixed idempotent=True commit=after poison=dlq
+2026-10-29 13:05:43.425 [writer-A] RECEIVED topic=s9871_tasks partition=0 offset=0 corr=dup-fixed-d22441
+2026-10-29 13:05:43.426 [writer-A] WORK start corr=dup-fixed-d22441
+2026-10-29 13:05:43.426 [writer-A] WORK done corr=dup-fixed-d22441
+2026-10-29 13:05:43.426 [writer-A] PROCESSED corr=dup-fixed-d22441 partition=0 offset=0
+2026-10-29 13:05:43.472 [writer-A] SENT topic=s9871_drafts partition=0 offset=0 corr=dup-fixed-d22441 body={"question": "Fixture task dup-fixed-d22441", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "[stub draft] check the field check the referees confirm the teams", "correlation_id": "dup-fixed-d22441"}
+2026-10-29 13:05:43.481 [writer-A] COMMITTED AFTER successful processing offset=0 (next to read = 1)
+2026-10-29 13:05:43.676 [writer-A] RECEIVED topic=s9871_tasks partition=0 offset=1 corr=dup-fixed-d22441
+2026-10-29 13:05:43.676 [writer-A] DUPLICATE corr=dup-fixed-d22441 already processed, skipped (no output, no side effect)
+2026-10-29 13:05:43.678 [writer-A] COMMITTED duplicate offset=1 (next to read = 2)

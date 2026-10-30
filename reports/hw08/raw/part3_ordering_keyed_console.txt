@@ -1,0 +1,7 @@
+2026-10-29 19:03:41.712 [harness] scenario=ordering mode=keyed SEED=9871 VERIFY_SEED=269871 consumer-group suffix=_ordering_keyed_a2b6c9
+2026-10-29 19:03:41.863 [harness] topics reset: s9871_tasks(2 partitions), s9871_drafts(1 partition), s9871_dead_letter(1 partition)
+2026-10-29 19:03:41.876 [harness] started Writer A pid=65244 env={'HW8_MODE': 'fixed'}
+2026-10-29 19:03:41.882 [harness] started Writer B pid=60344 env={'HW8_MODE': 'fixed'}
+2026-10-29 19:03:45.455 [harness] assignments: A=[0]; B=[1]
+2026-10-29 19:03:45.455 [harness] sending 20 messages, key=entity_id
+2026-10-29 19:03:53.909 [harness] RESULT {"scenario": "ordering", "mode": "keyed", "SEED": 9871, "VERIFY_SEED": 269871, "writer_mode": "stub (model-free)", "finished_at": "2026-10-29 19:03:53", "messages_processed": 20, "partition_of_each_send": [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], "entities_out_of_order": 0, "total_inversions": 0, "entities_split_across_partitions": 0}

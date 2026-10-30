@@ -38,7 +38,7 @@ services:
     entrypoint: ["/bin/bash", "-c"]
     command:
       - |
-        for t in s9871_entity_requests s9871_entity_responses s9871_inbox s9871_drafts s9871_final; do
+        for t in s9871_entity_requests s9871_entity_responses s9871_inbox s9871_drafts s9871_final s9871_dead_letter; do
           /opt/kafka/bin/kafka-topics.sh --create --if-not-exists --topic $$t --partitions 1 --replication-factor 1 --bootstrap-server kafka:19092
         done
         # Part 2/3: two partitions so two Writer instances can share the work.

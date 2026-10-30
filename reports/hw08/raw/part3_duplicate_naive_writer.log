@@ -1,0 +1,14 @@
+2026-10-29 13:05:28.613 [writer-A] Assigned partitions: [0, 1]
+2026-10-29 13:05:28.614 [writer-A] Consumer is ready and listening... topic=s9871_tasks group=s9871_writers_duplicate_naive_a7565d mode=naive idempotent=False commit=before poison=retry-forever
+2026-10-29 13:05:29.226 [writer-A] RECEIVED topic=s9871_tasks partition=0 offset=0 corr=dup-naive-1d2538
+2026-10-29 13:05:29.229 [writer-A] COMMITTED BEFORE processing offset=0 (next to read = 1)
+2026-10-29 13:05:29.230 [writer-A] WORK start corr=dup-naive-1d2538
+2026-10-29 13:05:29.230 [writer-A] WORK done corr=dup-naive-1d2538
+2026-10-29 13:05:29.230 [writer-A] PROCESSED corr=dup-naive-1d2538 partition=0 offset=0
+2026-10-29 13:05:29.234 [writer-A] SENT topic=s9871_drafts partition=0 offset=0 corr=dup-naive-1d2538 body={"question": "Fixture task dup-naive-1d2538", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "[stub draft] check the field check the referees confirm the teams", "correlation_id": "dup-naive-1d2538"}
+2026-10-29 13:05:29.377 [writer-A] RECEIVED topic=s9871_tasks partition=0 offset=1 corr=dup-naive-1d2538
+2026-10-29 13:05:29.378 [writer-A] COMMITTED BEFORE processing offset=1 (next to read = 2)
+2026-10-29 13:05:29.378 [writer-A] WORK start corr=dup-naive-1d2538
+2026-10-29 13:05:29.378 [writer-A] WORK done corr=dup-naive-1d2538
+2026-10-29 13:05:29.378 [writer-A] PROCESSED corr=dup-naive-1d2538 partition=0 offset=1
+2026-10-29 13:05:29.380 [writer-A] SENT topic=s9871_drafts partition=0 offset=1 corr=dup-naive-1d2538 body={"question": "Fixture task dup-naive-1d2538", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "[stub draft] check the field check the referees confirm the teams", "correlation_id": "dup-naive-1d2538"}

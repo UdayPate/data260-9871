@@ -1,0 +1,8 @@
+2026-10-29 19:02:59.106 [writer-A] Assigned partitions: [0, 1]
+2026-10-29 19:02:59.106 [writer-A] Consumer is ready and listening... topic=s9871_tasks group=s9871_writers_kill_fixed_8c9fb0 mode=fixed idempotent=True commit=after poison=dlq
+2026-10-29 19:02:59.748 [writer-A] RECEIVED topic=s9871_tasks partition=0 offset=0 corr=kill-fixed-012ba0
+2026-10-29 19:02:59.749 [writer-A] WORK start corr=kill-fixed-012ba0
+2026-10-29 19:03:07.748 [writer-A] WORK done corr=kill-fixed-012ba0
+2026-10-29 19:03:07.748 [writer-A] PROCESSED corr=kill-fixed-012ba0 partition=0 offset=0
+2026-10-29 19:03:07.757 [writer-A] SENT topic=s9871_drafts partition=0 offset=0 corr=kill-fixed-012ba0 body={"question": "Fixture task kill-fixed-012ba0", "plan": ["check the field", "check the referees", "confirm the teams"], "draft": "[stub draft] check the field check the referees confirm the teams", "correlation_id": "kill-fixed-012ba0"}
+2026-10-29 19:03:07.772 [writer-A] COMMITTED AFTER successful processing offset=0 (next to read = 1)

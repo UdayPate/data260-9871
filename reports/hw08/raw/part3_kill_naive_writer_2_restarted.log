@@ -1,0 +1,2 @@
+2026-10-29 19:01:53.972 [writer-A] Assigned partitions: [0, 1]
+2026-10-29 19:01:53.973 [writer-A] Consumer is ready and listening... topic=s9871_tasks group=s9871_writers_kill_naive_b91704 mode=naive idempotent=False commit=before poison=retry-forever

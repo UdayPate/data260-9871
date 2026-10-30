@@ -1,0 +1,26 @@
+{
+  "scenario": "poison",
+  "mode": "naive",
+  "SEED": 9871,
+  "VERIFY_SEED": 269871,
+  "writer_mode": "stub (model-free)",
+  "finished_at": "2026-10-29 19:03:25",
+  "poison_corr": "poison-naive-2cb6b8",
+  "good_corr": "good-naive-d5fdaa",
+  "poison_attempts_logged": 29,
+  "dead_letter_messages_for_poison": 0,
+  "dead_letter_attempts_field": [],
+  "good_message_processed": false,
+  "lag": {
+    "0": {
+      "committed": null,
+      "log_end": 2,
+      "lag": 2
+    },
+    "1": {
+      "committed": null,
+      "log_end": 0,
+      "lag": 0
+    }
+  }
+}

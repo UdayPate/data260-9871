@@ -1,0 +1,33 @@
+2026-10-29 19:03:10.070 [writer-A] Assigned partitions: [0, 1]
+2026-10-29 19:03:10.071 [writer-A] Consumer is ready and listening... topic=s9871_tasks group=s9871_writers_poison_naive_1b3689 mode=naive idempotent=False commit=after poison=retry-forever
+2026-10-29 19:03:10.693 [writer-A] RECEIVED topic=s9871_tasks partition=0 offset=0 corr=poison-naive-2cb6b8
+2026-10-29 19:03:10.693 [writer-A] ATTEMPT 1/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:11.193 [writer-A] ATTEMPT 2/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:11.694 [writer-A] ATTEMPT 3/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:12.194 [writer-A] ATTEMPT 4/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:12.695 [writer-A] ATTEMPT 5/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:13.196 [writer-A] ATTEMPT 6/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:13.696 [writer-A] ATTEMPT 7/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:14.197 [writer-A] ATTEMPT 8/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:14.698 [writer-A] ATTEMPT 9/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:15.199 [writer-A] ATTEMPT 10/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:15.699 [writer-A] ATTEMPT 11/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:16.200 [writer-A] ATTEMPT 12/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:16.702 [writer-A] ATTEMPT 13/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:17.203 [writer-A] ATTEMPT 14/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:17.704 [writer-A] ATTEMPT 15/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:18.206 [writer-A] ATTEMPT 16/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:18.744 [writer-A] ATTEMPT 17/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:19.245 [writer-A] ATTEMPT 18/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:19.745 [writer-A] ATTEMPT 19/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:20.245 [writer-A] ATTEMPT 20/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:20.746 [writer-A] ATTEMPT 21/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:21.246 [writer-A] ATTEMPT 22/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:21.747 [writer-A] ATTEMPT 23/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:22.247 [writer-A] ATTEMPT 24/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:22.748 [writer-A] ATTEMPT 25/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:23.249 [writer-A] ATTEMPT 26/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:23.749 [writer-A] ATTEMPT 27/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:24.251 [writer-A] ATTEMPT 28/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:24.752 [writer-A] ATTEMPT 29/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings
+2026-10-29 19:03:25.253 [writer-A] ATTEMPT 30/unbounded failed corr=poison-naive-2cb6b8: ValueError: plan must be a non-empty list of non-empty strings

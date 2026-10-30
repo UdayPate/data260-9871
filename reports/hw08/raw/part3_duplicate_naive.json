@@ -1,0 +1,25 @@
+{
+  "scenario": "duplicate",
+  "mode": "naive",
+  "SEED": 9871,
+  "VERIFY_SEED": 269871,
+  "writer_mode": "stub (model-free)",
+  "finished_at": "2026-10-29 13:05:33",
+  "correlation_id": "dup-naive-1d2538",
+  "deliveries_received": 2,
+  "writer_work_executions": 2,
+  "duplicate_skips_logged": 0,
+  "drafts_in_output_topic": 2,
+  "lag": {
+    "0": {
+      "committed": 2,
+      "log_end": 2,
+      "lag": 0
+    },
+    "1": {
+      "committed": null,
+      "log_end": 0,
+      "lag": 0
+    }
+  }
+}

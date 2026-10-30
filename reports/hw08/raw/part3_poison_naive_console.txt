@@ -1,0 +1,5 @@
+2026-10-29 19:03:09.536 [harness] scenario=poison mode=naive SEED=9871 VERIFY_SEED=269871 consumer-group suffix=_poison_naive_1b3689
+2026-10-29 19:03:09.704 [harness] topics reset: s9871_tasks(2 partitions), s9871_drafts(1 partition), s9871_dead_letter(1 partition)
+2026-10-29 19:03:09.717 [harness] started Writer A pid=62876 env={'HW8_MODE': 'naive', 'HW8_COMMIT': 'after'}
+2026-10-29 19:03:10.127 [harness] sending poison corr=poison-naive-2cb6b8 then good corr=good-naive-d5fdaa, both to partition 0
+2026-10-29 19:03:25.603 [harness] RESULT {"scenario": "poison", "mode": "naive", "SEED": 9871, "VERIFY_SEED": 269871, "writer_mode": "stub (model-free)", "finished_at": "2026-10-29 19:03:25", "poison_corr": "poison-naive-2cb6b8", "good_corr": "good-naive-d5fdaa", "poison_attempts_logged": 29, "dead_letter_messages_for_poison": 0, "dead_letter_attempts_field": [], "good_message_processed": false, "lag": {"0": {"committed": null, "log_end": 2, "lag": 2}, "1": {"committed": null, "log_end": 0, "lag": 0}}}

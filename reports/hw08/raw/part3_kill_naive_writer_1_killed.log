@@ -1,0 +1,5 @@
+2026-10-29 19:01:43.458 [writer-A] Assigned partitions: [0, 1]
+2026-10-29 19:01:43.458 [writer-A] Consumer is ready and listening... topic=s9871_tasks group=s9871_writers_kill_naive_b91704 mode=naive idempotent=False commit=before poison=retry-forever
+2026-10-29 19:01:44.077 [writer-A] RECEIVED topic=s9871_tasks partition=0 offset=0 corr=kill-naive-d5b1ef
+2026-10-29 19:01:44.099 [writer-A] COMMITTED BEFORE processing offset=0 (next to read = 1)
+2026-10-29 19:01:44.100 [writer-A] WORK start corr=kill-naive-d5b1ef
