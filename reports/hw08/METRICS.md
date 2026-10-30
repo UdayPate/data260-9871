@@ -4,12 +4,27 @@ Part 3 failure tests: every number below is read from `raw/part3_*.json`; each "
 same Writer code (`HW8_MODE=naive` vs `HW8_MODE=fixed`). The Writer ran in its model-free `WRITER_MODE=stub` so the
 tests are fast; the Part 2 journey used the real qwen3:8b. SEED = 9871, VERIFY_SEED = 269871.
 
+## Part 1 - notes
+
+- **Kafka client: `confluent-kafka` 2.16.1.** It is Confluent's own, actively released client over librdkafka, ships prebuilt wheels for both Windows (where the demo and agents run) and the Linux `python:3.12-slim` image (worker and API), and gives the manual offset commits, explicit partitions/keys and clean consumer-group leave that Part 3 needs. `kafka-python` is rarely updated and `aiokafka` would have made the synchronous worker harder to control.
+- **Entity and storage.** The primary entity is Fixture (domain 7) with the six fields of `DOMAIN_SCHEMA.md`. The worker keeps entities in a plain Python dict, so they are lost when the worker restarts (a GET after a restart answers `Entity not found`); that is what the assignment asks for.
+- **Timestamps.** The worker runs in the Docker VM and the client on Windows, and their clocks disagree (by tens of milliseconds in some runs and about 0.3 s in others), so the client's "response received" line can carry an earlier time than the worker's "request received" line. `homework_demo.py` therefore prints each request's lines in causal order and the Kafka offsets in every line show the order.
+
+## Part 2 - how Kafka helped the agents coordinate
+
+Planner, Writer and Reviewer are three separate processes that never call each other; each only reads one topic and writes the next one (`s9871_inbox` -> `s9871_tasks` -> `s9871_drafts` -> `s9871_final`). One real question took 19.8 s end to end with qwen3:8b (Planner 12.4 s, Writer 4.6 s, Reviewer 2.8 s), and the same correlation_id is on every message from the question to the final answer.
+
+- **Decoupling.** An agent only needs the topic names, not the address or API of the next agent. A stage that is down does not lose work: its input waits in the topic and is read when it comes back (shown for the Writer in Part 3).
+- **Scaling.** `s9871_tasks` has two partitions, so two Writers in one consumer group split the work with no change to the Writer's code (Part 3, ordering).
+- **Durable hand-offs and offsets.** Every hand-off is a persisted, replayable message, and each agent commits its input offset only after its output is delivered, so a crash causes a re-read, not a lost message.
+- **Correlation.** The correlation_id lets the final answer be matched to the question without any shared state between the agents.
+
 ## Part 3 - failure table
 
 | Failure scenario | Before fix (naive) | After fix |
 |---|---|---|
 | Duplicate delivery | one correlation_id replayed -> 2 deliveries, 2 work executions, **2 drafts** in `s9871_drafts` | same replay -> 2 deliveries, 1 work execution, 1 `DUPLICATE ... skipped`, **1 draft** |
-| Consumer killed mid-work | offset committed *before* processing: after the kill committed offset = 1, lag 0; after restart redelivered = False, drafts = **0** (message silently lost) | offset committed *after* success: after the kill committed offset = None; after restart redelivered = True, drafts = **1**, then committed offset = 1 (lag 0) |
+| Consumer killed mid-work | offset committed *before* processing: after the kill committed offset = 1, lag 0; after restart redelivered = False, drafts = **0** (message silently lost) | offset committed *after* success: after the kill committed offset = none; after restart redelivered = True, drafts = **1**, then committed offset = 1 (lag 0) |
 | Poison message | retried **29+ times without limit**; good message behind it processed = False; consumer-group lag = 2 | **3 attempts**, then 1 message in `s9871_dead_letter` (attempts field = 3); good message processed = True; lag 0 |
 | Two partitions / two consumers | no key: 3 of 4 entities processed out of order (12 inversions); 3 entities split across both partitions | key = entity_id: 0 entities out of order (0 inversions); 0 entities split across partitions |
 
@@ -33,7 +48,7 @@ Per entity, `processed order` is the entity_seq values in the order the Writers 
 - **Consumer death.** Committing the offset *before* the work is at-most-once: the Writer was killed 1.5 s into an 8 s job,
   the broker already believed the message was handled (committed offset 1, lag 0), and after the restart nothing
   arrived - the message was lost with no error anywhere. Committing *after* the draft is delivered leaves the offset uncommitted
-  at the kill (None), so the restarted Writer received the same offset again, finished it and only then committed.
+  at the kill (none), so the restarted Writer received the same offset again, finished it and only then committed.
   The price of at-least-once is that work can run twice (the kill happened mid-job), which is exactly why the
   idempotency store is needed alongside it. One small window remains: a crash between delivering the draft and recording
   the correlation_id can still produce one duplicate draft; closing it fully needs Kafka transactions, which this exercise does not use.

@@ -1,4 +1,4 @@
-"""Writes the Part 3 section of reports/hw08/METRICS.md from the saved raw/part3_*.json (no numbers typed by hand)."""
+"""Writes reports/hw08/METRICS.md (Part 1 and 2 notes, Part 3 tables) from the saved raw/part3_*.json (no numbers typed by hand)."""
 
 import json
 from pathlib import Path
@@ -8,13 +8,36 @@ load = lambda n: json.loads((HW / "raw" / f"part3_{n}.json").read_text(encoding=
 dn, df, kn, kf, pn, pf, ou, ok = (load(n) for n in (
     "duplicate_naive", "duplicate_fixed", "kill_naive", "kill_fixed", "poison_naive", "poison_fixed",
     "ordering_unkeyed", "ordering_keyed"))
-c = lambda d: d["after_kill"]["committed"]["0"]  # noqa: E731
+c = lambda d: "none" if d["after_kill"]["committed"]["0"] is None else d["after_kill"]["committed"]["0"]  # noqa: E731
+
+# Part 2 timings come from the saved journey (all stages ran on the Windows host, so one clock)
+from datetime import datetime  # noqa: E402
+
+journey = [ln for ln in (HW / "raw" / "part2_journey.txt").read_text(encoding="utf-8").splitlines() if ln.strip()]
+at = lambda i: datetime.strptime(journey[i][:23], "%Y-%m-%d %H:%M:%S.%f")  # noqa: E731
+stage = {n: (at(i + 2) - at(i)).total_seconds() for n, i in (("Planner", 1), ("Writer", 4), ("Reviewer", 7))}  # RECEIVED -> SENT
+total = (at(-1) - at(0)).total_seconds()
 
 text = f"""# HW8 METRICS
 
 Part 3 failure tests: every number below is read from `raw/part3_*.json`; each "before" and "after" is a real run of the
 same Writer code (`HW8_MODE=naive` vs `HW8_MODE=fixed`). The Writer ran in its model-free `WRITER_MODE=stub` so the
 tests are fast; the Part 2 journey used the real qwen3:8b. SEED = {dn['SEED']}, VERIFY_SEED = {dn['VERIFY_SEED']}.
+
+## Part 1 - notes
+
+- **Kafka client: `confluent-kafka` 2.16.1.** It is Confluent's own, actively released client over librdkafka, ships prebuilt wheels for both Windows (where the demo and agents run) and the Linux `python:3.12-slim` image (worker and API), and gives the manual offset commits, explicit partitions/keys and clean consumer-group leave that Part 3 needs. `kafka-python` is rarely updated and `aiokafka` would have made the synchronous worker harder to control.
+- **Entity and storage.** The primary entity is Fixture (domain 7) with the six fields of `DOMAIN_SCHEMA.md`. The worker keeps entities in a plain Python dict, so they are lost when the worker restarts (a GET after a restart answers `Entity not found`); that is what the assignment asks for.
+- **Timestamps.** The worker runs in the Docker VM and the client on Windows, and their clocks disagree (by tens of milliseconds in some runs and about 0.3 s in others), so the client's "response received" line can carry an earlier time than the worker's "request received" line. `homework_demo.py` therefore prints each request's lines in causal order and the Kafka offsets in every line show the order.
+
+## Part 2 - how Kafka helped the agents coordinate
+
+Planner, Writer and Reviewer are three separate processes that never call each other; each only reads one topic and writes the next one (`s9871_inbox` -> `s9871_tasks` -> `s9871_drafts` -> `s9871_final`). One real question took {total:.1f} s end to end with qwen3:8b (Planner {stage['Planner']:.1f} s, Writer {stage['Writer']:.1f} s, Reviewer {stage['Reviewer']:.1f} s), and the same correlation_id is on every message from the question to the final answer.
+
+- **Decoupling.** An agent only needs the topic names, not the address or API of the next agent. A stage that is down does not lose work: its input waits in the topic and is read when it comes back (shown for the Writer in Part 3).
+- **Scaling.** `s9871_tasks` has two partitions, so two Writers in one consumer group split the work with no change to the Writer's code (Part 3, ordering).
+- **Durable hand-offs and offsets.** Every hand-off is a persisted, replayable message, and each agent commits its input offset only after its output is delivered, so a crash causes a re-read, not a lost message.
+- **Correlation.** The correlation_id lets the final answer be matched to the question without any shared state between the agents.
 
 ## Part 3 - failure table
 
