@@ -1,0 +1,22 @@
+verify_hw08 run at 2026-10-29T21:02:55
+... required files exist
+    [FAIL] MISSING: ['reports/hw08/METRICS.md']
+... Stack: Kafka + worker + FastAPI running, all topics exist, tasks has 2 partitions
+    [FAIL] containers running ['s9871-kafka', 's9871-api']; topics missing []; s9871_tasks partitions=2; API health True
+... Part 1: CREATE_ENTITY then GET_ENTITY round-trip through Kafka via the API (uuid, same fields, correlation_id preserved)
+    [FAIL] CREATE 504 success=False uuid=False; GET 405 success=None fields equal=False
+... Part 1: clean errors (unknown id, unknown operation, invalid fields) each carry a correlation_id
+    [FAIL] 0/8 error paths clean (404 not found, unknown operation, 6 invalid creates); failed: ['unknown id', 'unknown operation', 'email', 'empty name', 'missing field', 'unknown field', 'bad category', 'terms false']
+... Part 1: direct Kafka client - request has correlation_id/reply_to/operation/data, response echoes the correlation_id
+2026-10-29 21:04:26.460 [verify] SENT request topic=s9871_entity_requests partition=0 offset=32 corr=verify-corr-568f5775 op=CREATE_ENTITY body={"correlation_id": "verify-corr-568f5775", "reply_to": "s9871_entity_responses", "operation": "CREATE_ENTITY", "data": {"fixture_name": "Verify Lions vs Verify Tigers", "teams_players": "Lions; Tigers", "submitter_email": "v@example.com", "description": "v
+    [FAIL] response corr preserved=True; request on topic has 4 required fields, reply_to=s9871_entity_responses: True; responses on topic: 0
+... Part 3: duplicate replay - 2 drafts without idempotency, 1 with it
+    [PASS] naive replay -> 2 drafts; with idempotency -> 1 draft, 1 work run, lag 0
+... Part 3: poison message - 3 attempts, then dead-letter topic, next message still processed
+    [PASS] attempts 3, dead-letter messages 1, good message processed True, lag 0
+... Part 3: 20 messages (VERIFY_SEED) keyed by entity stay in one partition and in order
+    [PASS] 20 messages processed, entities out of order 0, entities split across partitions 0
+... Ruff passes on the HW8 code
+    [PASS] All checks passed!
+4/9 checks passed -> C:\Users\patel\data260-9871\reports\hw08\verification.json
+exit=1

@@ -29,7 +29,7 @@ from agent_common import DEAD_LETTER, DRAFTS, TASKS
 from common import BOOTSTRAP, PREFIX
 
 HERE = Path(__file__).resolve().parent
-RAW = HERE.parents[1] / "reports" / "hw08" / "raw"
+RAW = Path(os.environ.get("HW8_RAW_DIR", HERE.parents[1] / "reports" / "hw08" / "raw"))  # verify_hw08.py redirects this
 SEED, VERIFY_SEED = 9871, 269871
 TOPIC_PARTITIONS = {TASKS: 2, DRAFTS: 1, DEAD_LETTER: 1}
 

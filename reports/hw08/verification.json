@@ -1,0 +1,85 @@
+{
+  "homework": 8,
+  "sid4": "9871",
+  "commit_hash": "c8c7d1c09d801731595b9e6914b139cb4afcbd8e",
+  "tracked_files_modified_since_commit": [
+    " M .gitignore",
+    " M code/kafka_hw8/failure_tests.py"
+  ],
+  "model_config": "Part 1/3: no model (Writer in WRITER_MODE=stub for the failure tests); Part 2: qwen3:8b via Ollama (thinking off, temperature 0.3/0.5, sampling seed = SEED 9871); Kafka: apache/kafka:3.9.0 single node (KRaft); client: confluent-kafka; FastAPI on port 8871",
+  "SEED": "9871",
+  "VERIFY_SEED": "269871",
+  "port_base": 8871,
+  "run_at": "2026-10-29T21:00:57",
+  "checks": [
+    {
+      "check": "required files exist",
+      "passed": true,
+      "detail": "All 21 required files present.",
+      "seconds": 0.0
+    },
+    {
+      "check": "Stack: Kafka + worker + FastAPI running, all topics exist, tasks has 2 partitions",
+      "passed": true,
+      "detail": "containers running ['s9871-kafka', 's9871-worker', 's9871-api']; topics missing []; s9871_tasks partitions=2; API health True",
+      "seconds": 0.2
+    },
+    {
+      "check": "Part 1: CREATE_ENTITY then GET_ENTITY round-trip through Kafka via the API (uuid, same fields, correlation_id preserved)",
+      "passed": true,
+      "detail": "CREATE 200 success=True uuid=True; GET 200 success=True fields equal=True",
+      "seconds": 0.2
+    },
+    {
+      "check": "Part 1: clean errors (unknown id, unknown operation, invalid fields) each carry a correlation_id",
+      "passed": true,
+      "detail": "8/8 error paths clean (404 not found, unknown operation, 6 invalid creates); failed: []",
+      "seconds": 0.1
+    },
+    {
+      "check": "Part 1: direct Kafka client - request has correlation_id/reply_to/operation/data, response echoes the correlation_id",
+      "passed": true,
+      "detail": "response corr preserved=True; request on topic has 4 required fields, reply_to=s9871_entity_responses: True; responses on topic: 1",
+      "seconds": 0.7
+    },
+    {
+      "check": "Part 2: Planner, Writer, Reviewer as separate processes (real model) - one question reaches final with the same correlation_id in all four topics",
+      "passed": true,
+      "detail": "final status='approved', answer words=64, same correlation_id in topics {'s9871_inbox': 1, 's9871_tasks': 1, 's9871_drafts': 1, 's9871_final': 1}",
+      "seconds": 36.4
+    },
+    {
+      "check": "Part 3: duplicate replay - 2 drafts without idempotency, 1 with it",
+      "passed": true,
+      "detail": "naive replay -> 2 drafts; with idempotency -> 1 draft, 1 work run, lag 0",
+      "seconds": 13.1
+    },
+    {
+      "check": "Part 3: Writer killed mid-work - offset uncommitted, message redelivered after restart, committed only after success",
+      "passed": true,
+      "detail": "offset uncommitted at kill: True; redelivered after restart: True; drafts 1; committed after success: 1",
+      "seconds": 21.0
+    },
+    {
+      "check": "Part 3: poison message - 3 attempts, then dead-letter topic, next message still processed",
+      "passed": true,
+      "detail": "attempts 3, dead-letter messages 1, good message processed True, lag 0",
+      "seconds": 3.3
+    },
+    {
+      "check": "Part 3: 20 messages (VERIFY_SEED) keyed by entity stay in one partition and in order",
+      "passed": true,
+      "detail": "20 messages processed, entities out of order 0, entities split across partitions 0",
+      "seconds": 12.9
+    },
+    {
+      "check": "Ruff passes on the HW8 code",
+      "passed": true,
+      "detail": "All checks passed!",
+      "seconds": 0.2
+    }
+  ],
+  "passed": 11,
+  "total": 11,
+  "all_passed": true
+}

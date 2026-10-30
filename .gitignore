@@ -2,3 +2,4 @@ code/venv/
 __pycache__/
 *.pyc
 code/web_application/.env
+code/kafka_hw8/state/
