@@ -18,7 +18,7 @@ REPO = HW.parent.parent
 RAW = HW / "raw"
 OUT = HW / "Patel_HW08_report.tex"
 # Leave as PLACEHOLDER_HASH until the final commit is tagged; then set the full 40-character hash of the tag (git rev-parse hwN) and rebuild.
-HASH = "PLACEHOLDER_HASH"
+HASH = "aafc816c90688790e28f2d500cc91fcde647c9f4"
 
 # lstlisting / pdflatex choke on non-ASCII, so every piece of text is folded to ASCII first
 ASCII = {"\u2014": "-", "\u2013": "-", "\u2019": "'", "\u2018": "'", "\u201c": '"', "\u201d": '"', "\u2026": "...", "\u2192": "->", "\u2190": "<-", "\u2265": ">=",
@@ -223,7 +223,7 @@ T += para("The Fixture service (domain 7) is split into a client side (FastAPI w
 T += "\\subsection*{Topics and docker compose}\n"
 T += table(["Topic", "Written by", "Read by", "Partitions"], [["`s9871_entity_requests`", "client / FastAPI", "worker", "1"], ["`s9871_entity_responses`", "worker", "client / FastAPI", "1"]], "llll")
 T += para("`docker compose up` starts the official `apache/kafka:3.9.0` image in single-node mode, a one-shot `kafka-init` job that creates the topics, the worker and the FastAPI service. Excerpt (broker service):")
-T += "\\begin{samepage}\n" + lst(between("docker-compose.yml", "  kafka:", "  # One-shot"), "tiny") + "\\end{samepage}\n"
+T += "\\begin{minipage}{\\linewidth}\n" + lst(between("docker-compose.yml", "  kafka:", "  # One-shot"), "tiny") + "\\end{minipage}\n"
 T += "\\subsection*{Message schemas}\n"
 T += para("Request (every request carries `correlation_id`, `reply_to`, `operation` and `data`) -- real message from `homework_demo.py`:")
 T += lst(body_of("SENT request"), "scriptsize")

@@ -44,8 +44,8 @@ DOMAIN\_ID & 7 -- Community sports league fixtures \\\hline
 \textbf{Local model used:} qwen3:8b via Ollama (thinking off, sampling seed 9871) in Part 2 only. Part 1 uses no model. The Part 3 failure tests run the Writer in a model-free stub mode (disclosed in Part 3). \\
 \textbf{Kafka:} official apache/kafka:3.9.0 image, single node (KRaft), docker compose; Python client confluent-kafka 2.16.1; FastAPI on port 8871. \\
 \textbf{Repository:} \url{https://github.com/UdayPate/data260-9871} \\
-\textbf{Tagged commit:} PLACEHOLDER\_HASH (to be filled in after the final commit and hw8 tag) \\
-{\footnotesize\url{https://github.com/UdayPate/data260-9871/tree/PLACEHOLDER_HASH}} \\
+\textbf{Tagged commit:} aafc816c90688790e28f2d500cc91fcde647c9f4 (tag: hw8) \\
+{\footnotesize\url{https://github.com/UdayPate/data260-9871/tree/aafc816c90688790e28f2d500cc91fcde647c9f4}} \\
 \textbf{Collaborator access:} confirmed working for Sbnikitha and supriyaselvanganesan.
 
 \section*{Part 1 -- Backend Service Request/Response over Kafka}
@@ -65,7 +65,7 @@ The Fixture service (domain 7) is split into a client side (FastAPI wrapper \tex
 \end{center}
 \texttt{docker compose up} starts the official \texttt{apache/\allowbreak{}kafka:3.9.0} image in single-node mode, a one-shot \texttt{kafka-init} job that creates the topics, the worker and the FastAPI service. Excerpt (broker service):
 
-\begin{samepage}
+\begin{minipage}{\linewidth}
 \begingroup\lstset{basicstyle=\ttfamily\tiny}
 \begin{lstlisting}
   kafka:
@@ -94,7 +94,7 @@ The Fixture service (domain 7) is split into a client side (FastAPI wrapper \tex
       retries: 20
 \end{lstlisting}
 \endgroup
-\end{samepage}
+\end{minipage}
 \subsection*{Message schemas}
 Request (every request carries \texttt{correlation\_\allowbreak{}id}, \texttt{reply\_\allowbreak{}to}, \texttt{operation} and \texttt{data}) -- real message from \texttt{homework\_\allowbreak{}demo.py}:
 
