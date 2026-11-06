@@ -1,0 +1,32 @@
+2026-11-06 15:18:50.827 [planner] Assigned partitions: [0]
+2026-11-06 15:18:50.828 [planner] Consumer is ready and listening... topic=s9871_inbox group=s9871_planners_hw9_10d0ba mode=fixed idempotent=True commit=after poison=dlq
+2026-11-06 15:18:52.178 [planner] RECEIVED topic=s9871_inbox partition=0 offset=0 corr=42a63503-f555-4c0a-99f3-d31202098189
+[turn 1] input_tokens=87 output_tokens=21 total_tokens=108
+2026-11-06 15:19:08.396 [planner] PROCESSED corr=42a63503-f555-4c0a-99f3-d31202098189 partition=0 offset=0
+2026-11-06 15:19:08.401 [planner] SENT topic=s9871_tasks partition=1 offset=0 corr=42a63503-f555-4c0a-99f3-d31202098189 body={"question": "Warm-up question: name one team sport.", "plan": ["Identify a team sport", "Name the sport", "Provide the answer"], "correlation_id": "42a63503-f555-4c0a-99f3-d31202098189"}
+2026-11-06 15:19:08.417 [planner] COMMITTED AFTER successful processing offset=0 (next to read = 1)
+2026-11-06 15:20:12.606 [planner] RECEIVED topic=s9871_inbox partition=0 offset=1 corr=114b385f-7c4c-4fa9-82bd-bb4ddda6d82c
+[turn 1] input_tokens=178 output_tokens=53 total_tokens=231
+2026-11-06 15:20:14.697 [planner] PROCESSED corr=114b385f-7c4c-4fa9-82bd-bb4ddda6d82c partition=0 offset=1
+2026-11-06 15:20:14.700 [planner] SENT topic=s9871_tasks partition=0 offset=0 corr=114b385f-7c4c-4fa9-82bd-bb4ddda6d82c body={"question": "League database facts (authoritative; use them, do not invent other values):\n- FX-9871-00005: \"Wolves vs Lions (Basketball #3)\"; teams: San Jose Wolves vs Sunnyvale Lions; home team: Sunnyvale Falcons (home ground: Fair Oaks Park, Sunnyvale); player spots available: 22.\n\nQuestion: Which team is the home team for fixture FX-9871-00005?", "plan": ["Identify the fixture ID FX-9871-00005 in the league database.", "Locate the home team information associated with that fixture.", "Extract and confirm the home team name from the database entry."], "correlation_id": "114b385f-7c4c-4fa9-82bd-bb4ddda6d82c"}
+2026-11-06 15:20:14.705 [planner] COMMITTED AFTER successful processing offset=1 (next to read = 2)
+2026-11-06 15:20:17.629 [planner] RECEIVED topic=s9871_inbox partition=0 offset=2 corr=7cb2b78a-57b5-43ce-b2e4-ce311eeedbaf
+[turn 1] input_tokens=176 output_tokens=61 total_tokens=237
+2026-11-06 15:20:19.660 [planner] PROCESSED corr=7cb2b78a-57b5-43ce-b2e4-ce311eeedbaf partition=0 offset=2
+2026-11-06 15:20:19.662 [planner] SENT topic=s9871_tasks partition=1 offset=1 corr=7cb2b78a-57b5-43ce-b2e4-ce311eeedbaf body={"question": "League database facts (authoritative; use them, do not invent other values):\n- FX-9871-00006: \"Lions vs Strikers (Soccer #4)\"; teams: Milpitas Lions vs Santa Clara Strikers; home team: Oakland Titans (home ground: Mosswood Park, Oakland); player spots available: 22.\n\nQuestion: Who is playing in fixture FX-9871-00006?", "plan": ["Identify the fixture ID FX-9871-00006 from the database.", "Extract the teams listed for the fixture: Milpitas Lions vs Santa Clara Strikers.", "Confirm the home team and home ground as provided in the database entry."], "correlation_id": "7cb2b78a-57b5-43ce-b2e4-ce311eeedbaf"}
+2026-11-06 15:20:19.667 [planner] COMMITTED AFTER successful processing offset=2 (next to read = 3)
+2026-11-06 15:20:22.951 [planner] RECEIVED topic=s9871_inbox partition=0 offset=3 corr=6aab2aaa-6418-4f03-b272-9bc46f48fd6b
+[turn 1] input_tokens=89 output_tokens=39 total_tokens=128
+2026-11-06 15:20:24.384 [planner] PROCESSED corr=6aab2aaa-6418-4f03-b272-9bc46f48fd6b partition=0 offset=3
+2026-11-06 15:20:24.386 [planner] SENT topic=s9871_tasks partition=0 offset=1 corr=6aab2aaa-6418-4f03-b272-9bc46f48fd6b body={"question": "Question: What are the basic rules of volleyball scoring?", "plan": ["Identify the standard scoring system used in volleyball.", "Explain how points are awarded to teams during play.", "Outline the conditions for winning a game or match."], "correlation_id": "6aab2aaa-6418-4f03-b272-9bc46f48fd6b"}
+2026-11-06 15:20:24.391 [planner] COMMITTED AFTER successful processing offset=3 (next to read = 4)
+2026-11-06 15:20:29.777 [planner] RECEIVED topic=s9871_inbox partition=0 offset=4 corr=f36474e7-f106-46c4-8a31-39a1119e65f8
+[turn 1] input_tokens=181 output_tokens=68 total_tokens=249
+2026-11-06 15:20:31.967 [planner] PROCESSED corr=f36474e7-f106-46c4-8a31-39a1119e65f8 partition=0 offset=4
+2026-11-06 15:20:31.969 [planner] SENT topic=s9871_tasks partition=0 offset=2 corr=f36474e7-f106-46c4-8a31-39a1119e65f8 body={"question": "League database facts (authoritative; use them, do not invent other values):\n- FX-9871-00007: \"Bears vs Sharks (Soccer #5)\"; teams: Sunnyvale Bears vs Oakland Sharks; home team: Milpitas Eagles (home ground: Cardoza Park, Milpitas); player spots available: 22.\n\nQuestion: How many player spots are still available for fixture FX-9871-00007?", "plan": ["Identify the fixture ID from the question (FX-9871-00007).", "Locate the corresponding entry in the league database for FX-9871-00007.", "Extract the number of player spots available, which is 22."], "correlation_id": "f36474e7-f106-46c4-8a31-39a1119e65f8"}
+2026-11-06 15:20:31.973 [planner] COMMITTED AFTER successful processing offset=4 (next to read = 5)
+2026-11-06 15:20:34.391 [planner] RECEIVED topic=s9871_inbox partition=0 offset=5 corr=42c24687-bd3e-4d21-bbde-1cd33cc7c7e5
+[turn 1] input_tokens=181 output_tokens=68 total_tokens=249
+2026-11-06 15:20:36.523 [planner] PROCESSED corr=42c24687-bd3e-4d21-bbde-1cd33cc7c7e5 partition=0 offset=5
+2026-11-06 15:20:36.525 [planner] SENT topic=s9871_tasks partition=0 offset=3 corr=42c24687-bd3e-4d21-bbde-1cd33cc7c7e5 body={"question": "League database facts (authoritative; use them, do not invent other values):\n- FX-9871-00007: \"Bears vs Sharks (Soccer #5)\"; teams: Sunnyvale Bears vs Oakland Sharks; home team: Milpitas Eagles (home ground: Cardoza Park, Milpitas); player spots available: 22.\n\nQuestion: How many open player slots are left on fixture FX-9871-00007?", "plan": ["Identify the fixture ID from the question (FX-9871-00007).", "Locate the corresponding entry in the league database for FX-9871-00007.", "Extract the number of player spots available, which is 22."], "correlation_id": "42c24687-bd3e-4d21-bbde-1cd33cc7c7e5"}
+2026-11-06 15:20:36.531 [planner] COMMITTED AFTER successful processing offset=5 (next to read = 6)

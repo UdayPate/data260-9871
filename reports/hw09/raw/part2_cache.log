@@ -1,0 +1,13 @@
+2026-11-06 15:20:12.369 [qa] CACHE MISS best_similarity=n/a (empty cache) threshold=0.85 query='Which team is the home team for fixture FX-9871-00005?' - running the HW8 agent pipeline
+2026-11-06 15:20:17.558 [qa] CACHE HIT  similarity=1.0000 threshold=0.85 query='Which team is the home team for fixture FX-9871-00005?' matched='Which team is the home team for fixture FX-9871-00005?'
+2026-11-06 15:20:17.570 [qa] CACHE MISS best_similarity=0.8051 threshold=0.85 query='Who is playing in fixture FX-9871-00006?' - running the HW8 agent pipeline
+2026-11-06 15:20:22.887 [qa] CACHE HIT  similarity=0.8824 threshold=0.85 query='Tell me which team hosts fixture FX-9871-00005 at home.' matched='Which team is the home team for fixture FX-9871-00005?'
+2026-11-06 15:20:22.897 [qa] CACHE MISS best_similarity=0.1825 threshold=0.85 query='What are the basic rules of volleyball scoring?' - running the HW8 agent pipeline
+2026-11-06 15:20:29.702 [qa] CACHE HIT  similarity=1.0000 threshold=0.85 query='Who is playing in fixture FX-9871-00006?' matched='Who is playing in fixture FX-9871-00006?'
+2026-11-06 15:20:29.714 [qa] CACHE HIT  similarity=0.8872 threshold=0.85 query='Which two teams are playing in fixture FX-9871-00006?' matched='Which team is the home team for fixture FX-9871-00005?'
+2026-11-06 15:20:29.727 [qa] CACHE MISS best_similarity=0.6700 threshold=0.85 query='How many player spots are still available for fixture FX-9871-00007?' - running the HW8 agent pipeline
+2026-11-06 15:20:34.304 [qa] CACHE HIT  similarity=1.0000 threshold=0.85 query='What are the basic rules of volleyball scoring?' matched='What are the basic rules of volleyball scoring?'
+2026-11-06 15:20:34.315 [qa] CACHE HIT  similarity=0.8714 threshold=0.85 query='How does scoring work in volleyball?' matched='What are the basic rules of volleyball scoring?'
+2026-11-06 15:20:34.328 [qa] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are still available for fixture FX-9871-00007?' matched='How many player spots are still available for fixture FX-9871-00007?'
+2026-11-06 15:20:34.340 [qa] CACHE MISS best_similarity=0.7812 threshold=0.85 query='How many open player slots are left on fixture FX-9871-00007?' - running the HW8 agent pipeline
+2026-11-06 15:20:38.901 [qa] CACHE HIT  similarity=0.8708 threshold=0.85 query='What is the home ground of the home team for fixture FX-9871-00008?' matched='Which team is the home team for fixture FX-9871-00005?'

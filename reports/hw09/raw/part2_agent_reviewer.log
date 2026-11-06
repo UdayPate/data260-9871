@@ -1,0 +1,32 @@
+2026-11-06 15:18:50.827 [reviewer] Assigned partitions: [0]
+2026-11-06 15:18:50.827 [reviewer] Consumer is ready and listening... topic=s9871_drafts group=s9871_reviewers_hw9_10d0ba mode=fixed idempotent=True commit=after poison=dlq
+2026-11-06 15:19:13.402 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=0 corr=42a63503-f555-4c0a-99f3-d31202098189
+[turn 1] input_tokens=178 output_tokens=22 total_tokens=200
+2026-11-06 15:19:16.491 [reviewer] PROCESSED corr=42a63503-f555-4c0a-99f3-d31202098189 partition=0 offset=0
+2026-11-06 15:19:16.539 [reviewer] SENT topic=s9871_final partition=0 offset=0 corr=42a63503-f555-4c0a-99f3-d31202098189 body={"status": "approved", "answer": "A team sport is basketball. In basketball, two teams of five players compete on a court, aiming to score points by shooting the ball into the opponent's hoop. The game is played with a combination of dribbling, passing, and shooting, and it requires teamwork, strategy, and physical fitness. It is popular worldwide and often played in community leagues to promote fitness and social interaction.", "review": "Answer clearly identifies and describes a team sport as planned.", "correlation_id": "42a63503-f555-4c0a-99f3-d31202098189"}
+2026-11-06 15:19:16.545 [reviewer] COMMITTED AFTER successful processing offset=0 (next to read = 1)
+2026-11-06 15:20:16.406 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=1 corr=114b385f-7c4c-4fa9-82bd-bb4ddda6d82c
+[turn 1] input_tokens=268 output_tokens=22 total_tokens=290
+2026-11-06 15:20:17.487 [reviewer] PROCESSED corr=114b385f-7c4c-4fa9-82bd-bb4ddda6d82c partition=0 offset=1
+2026-11-06 15:20:17.529 [reviewer] SENT topic=s9871_final partition=0 offset=1 corr=114b385f-7c4c-4fa9-82bd-bb4ddda6d82c body={"status": "approved", "answer": "The home team for fixture FX-9871-00005 is the Sunnyvale Falcons. This is confirmed by the database entry, which specifies the home ground as Fair Oaks Park in Sunnyvale.", "review": "Answer correctly identifies the home team using provided database facts.", "correlation_id": "114b385f-7c4c-4fa9-82bd-bb4ddda6d82c"}
+2026-11-06 15:20:17.535 [reviewer] COMMITTED AFTER successful processing offset=1 (next to read = 2)
+2026-11-06 15:20:21.598 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=2 corr=7cb2b78a-57b5-43ce-b2e4-ce311eeedbaf
+[turn 1] input_tokens=286 output_tokens=27 total_tokens=313
+2026-11-06 15:20:22.821 [reviewer] PROCESSED corr=7cb2b78a-57b5-43ce-b2e4-ce311eeedbaf partition=0 offset=2
+2026-11-06 15:20:22.870 [reviewer] SENT topic=s9871_final partition=0 offset=2 corr=7cb2b78a-57b5-43ce-b2e4-ce311eeedbaf body={"status": "approved", "answer": "Fixture FX-9871-00006 features Milpitas Lions vs Santa Clara Strikers. The home team is Oakland Titans, playing at Mosswood Park in Oakland. The match is part of Soccer #4. Player spots available are 22.", "review": "Answer correctly identifies the teams, home team, and relevant details from the database.", "correlation_id": "7cb2b78a-57b5-43ce-b2e4-ce311eeedbaf"}
+2026-11-06 15:20:22.879 [reviewer] COMMITTED AFTER successful processing offset=2 (next to read = 3)
+2026-11-06 15:20:28.577 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=3 corr=6aab2aaa-6418-4f03-b272-9bc46f48fd6b
+[turn 1] input_tokens=269 output_tokens=21 total_tokens=290
+2026-11-06 15:20:29.638 [reviewer] PROCESSED corr=6aab2aaa-6418-4f03-b272-9bc46f48fd6b partition=0 offset=3
+2026-11-06 15:20:29.687 [reviewer] SENT topic=s9871_final partition=0 offset=3 corr=6aab2aaa-6418-4f03-b272-9bc46f48fd6b body={"status": "approved", "answer": "Volleyball uses a rally-point system, where a point is awarded to the team that wins each rally, regardless of which team served. A team must score at least 25 points and lead by two points to win a game. If the score reaches 24-24, play continues until one team leads by two points. A match is typically the first to win two games, though formats may vary. Teams must serve from the right side of the court and rotate positions after each successful serve. The ball must be hit over the net, and a team can touch the ball up to three times before sending it over. Faults like touching the net or stepping on the line result in the opposing team winning the point.", "review": "Draft answers the question clearly and follows the plan.", "correlation_id": "6aab2aaa-6418-4f03-b272-9bc46f48fd6b"}
+2026-11-06 15:20:29.694 [reviewer] COMMITTED AFTER successful processing offset=3 (next to read = 4)
+2026-11-06 15:20:33.134 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=4 corr=f36474e7-f106-46c4-8a31-39a1119e65f8
+[turn 1] input_tokens=265 output_tokens=21 total_tokens=286
+2026-11-06 15:20:34.248 [reviewer] PROCESSED corr=f36474e7-f106-46c4-8a31-39a1119e65f8 partition=0 offset=4
+2026-11-06 15:20:34.291 [reviewer] SENT topic=s9871_final partition=0 offset=4 corr=f36474e7-f106-46c4-8a31-39a1119e65f8 body={"status": "approved", "answer": "The fixture FX-9871-00007 has 22 player spots still available.", "review": "Answer correctly identifies the number of player spots available.", "correlation_id": "f36474e7-f106-46c4-8a31-39a1119e65f8"}
+2026-11-06 15:20:34.297 [reviewer] COMMITTED AFTER successful processing offset=4 (next to read = 5)
+2026-11-06 15:20:37.660 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=5 corr=42c24687-bd3e-4d21-bbde-1cd33cc7c7e5
+[turn 1] input_tokens=265 output_tokens=25 total_tokens=290
+2026-11-06 15:20:38.836 [reviewer] PROCESSED corr=42c24687-bd3e-4d21-bbde-1cd33cc7c7e5 partition=0 offset=5
+2026-11-06 15:20:38.885 [reviewer] SENT topic=s9871_final partition=0 offset=5 corr=42c24687-bd3e-4d21-bbde-1cd33cc7c7e5 body={"status": "approved", "answer": "The fixture FX-9871-00007 has 22 open player slots available.", "review": "Answer correctly identifies the number of open player slots from the provided data.", "correlation_id": "42c24687-bd3e-4d21-bbde-1cd33cc7c7e5"}
+2026-11-06 15:20:38.892 [reviewer] COMMITTED AFTER successful processing offset=5 (next to read = 6)

@@ -1,0 +1,89 @@
+PS C:\Users\patel\data260-9871\code\cache_hw9> ..\venv\Scripts\python.exe run_part2.py
+2026-11-06 15:18:50.511 [harness] topics reset: s9871_inbox(1 partition), s9871_tasks(2 partitions), s9871_drafts(1 partition), s9871_final(1 partition), s9871_dead_letter(1 partition)
+warm-up (not counted): loading qwen3 through the pipeline ...
+warm-up finished, pipeline status=approved
+
+Loading weights: 100%|█████████████████████████████████████████████████████████████| 103/103 [00:00<00:00, 1841.55it/s]
+=== HW9 Part 2: semantic cache, threshold 0.85, 13 queries ===
+
+2026-11-06 15:20:12.369 [qa] CACHE MISS best_similarity=n/a (empty cache) threshold=0.85 query='Which team is the home team for fixture FX-9871-00005?' - running the HW8 agent pipeline
+#01 [new       ] is_cached=False similarity=n/a     latency=   5192.0 ms  status=approved
+     Which team is the home team for fixture FX-9871-00005?
+
+2026-11-06 15:20:17.558 [qa] CACHE HIT  similarity=1.0000 threshold=0.85 query='Which team is the home team for fixture FX-9871-00005?' matched='Which team is the home team for fixture FX-9871-00005?'
+#02 [duplicate ] is_cached=True  similarity=1.0000  latency=     18.2 ms  status=approved
+     Which team is the home team for fixture FX-9871-00005?
+
+2026-11-06 15:20:17.570 [qa] CACHE MISS best_similarity=0.8051 threshold=0.85 query='Who is playing in fixture FX-9871-00006?' - running the HW8 agent pipeline
+#03 [new       ] is_cached=False similarity=0.8051  latency=   5314.4 ms  status=approved
+     Who is playing in fixture FX-9871-00006?
+
+2026-11-06 15:20:22.887 [qa] CACHE HIT  similarity=0.8824 threshold=0.85 query='Tell me which team hosts fixture FX-9871-00005 at home.' matched='Which team is the home team for fixture FX-9871-00005?'
+#04 [paraphrase] is_cached=True  similarity=0.8824  latency=     14.8 ms  status=approved
+     Tell me which team hosts fixture FX-9871-00005 at home.
+
+2026-11-06 15:20:22.897 [qa] CACHE MISS best_similarity=0.1825 threshold=0.85 query='What are the basic rules of volleyball scoring?' - running the HW8 agent pipeline
+#05 [new       ] is_cached=False similarity=0.1825  latency=   6800.9 ms  status=approved
+     What are the basic rules of volleyball scoring?
+
+2026-11-06 15:20:29.702 [qa] CACHE HIT  similarity=1.0000 threshold=0.85 query='Who is playing in fixture FX-9871-00006?' matched='Who is playing in fixture FX-9871-00006?'
+#06 [duplicate ] is_cached=True  similarity=1.0000  latency=     13.8 ms  status=approved
+     Who is playing in fixture FX-9871-00006?
+
+2026-11-06 15:20:29.714 [qa] CACHE HIT  similarity=0.8872 threshold=0.85 query='Which two teams are playing in fixture FX-9871-00006?' matched='Which team is the home team for fixture FX-9871-00005?'
+#07 [paraphrase] is_cached=True  similarity=0.8872  latency=     11.7 ms  status=approved  ** FALSE HIT: matched 'Which team is the home team for fixture FX-9871-00005?'
+     Which two teams are playing in fixture FX-9871-00006?
+
+2026-11-06 15:20:29.727 [qa] CACHE MISS best_similarity=0.6700 threshold=0.85 query='How many player spots are still available for fixture FX-9871-00007?' - running the HW8 agent pipeline
+#08 [new       ] is_cached=False similarity=0.6700  latency=   4577.2 ms  status=approved
+     How many player spots are still available for fixture FX-9871-00007?
+
+2026-11-06 15:20:34.304 [qa] CACHE HIT  similarity=1.0000 threshold=0.85 query='What are the basic rules of volleyball scoring?' matched='What are the basic rules of volleyball scoring?'
+#09 [duplicate ] is_cached=True  similarity=1.0000  latency=     13.3 ms  status=approved
+     What are the basic rules of volleyball scoring?
+
+2026-11-06 15:20:34.315 [qa] CACHE HIT  similarity=0.8714 threshold=0.85 query='How does scoring work in volleyball?' matched='What are the basic rules of volleyball scoring?'
+#10 [paraphrase] is_cached=True  similarity=0.8714  latency=     10.5 ms  status=approved
+     How does scoring work in volleyball?
+
+2026-11-06 15:20:34.328 [qa] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are still available for fixture FX-9871-00007?' matched='How many player spots are still available for fixture FX-9871-00007?'
+#11 [duplicate ] is_cached=True  similarity=1.0000  latency=     11.9 ms  status=approved
+     How many player spots are still available for fixture FX-9871-00007?
+
+2026-11-06 15:20:34.340 [qa] CACHE MISS best_similarity=0.7812 threshold=0.85 query='How many open player slots are left on fixture FX-9871-00007?' - running the HW8 agent pipeline
+#12 [paraphrase] is_cached=False similarity=0.7812  latency=   4558.4 ms  status=approved
+     How many open player slots are left on fixture FX-9871-00007?
+
+2026-11-06 15:20:38.901 [qa] CACHE HIT  similarity=0.8708 threshold=0.85 query='What is the home ground of the home team for fixture FX-9871-00008?' matched='Which team is the home team for fixture FX-9871-00005?'
+#13 [new       ] is_cached=True  similarity=0.8708  latency=     14.8 ms  status=approved  ** FALSE HIT: matched 'Which team is the home team for fixture FX-9871-00005?'
+     What is the home ground of the home team for fixture FX-9871-00008?
+
+=== Summary ===
+{
+  "queries": 13,
+  "hits": 8,
+  "misses": 5,
+  "hit_rate_pct": 61.5,
+  "mean_latency_cached_ms": 13.6,
+  "mean_latency_not_cached_ms": 5288.6,
+  "false_hits": 2,
+  "false_hit_indexes": [
+    7,
+    13
+  ],
+  "by_kind": {
+    "new": {
+      "asked": 5,
+      "hits": 1
+    },
+    "duplicate": {
+      "asked": 4,
+      "hits": 4
+    },
+    "paraphrase": {
+      "asked": 4,
+      "hits": 3
+    }
+  }
+}
+PS C:\Users\patel\data260-9871\code\cache_hw9>

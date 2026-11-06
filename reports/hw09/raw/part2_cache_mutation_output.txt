@@ -1,0 +1,20 @@
+[PASS] empty cache: miss, similarity None, the agent ran once, answer returned
+[PASS] the miss stored one entry
+[PASS] the agent got the fixture facts in front of the question  (- FX-9871-00005: "Wolves vs Lions (Basketball #3)"; teams: S)
+[FAIL] exact duplicate: HIT, similarity ~1.0, the agent did not run again, stored answer returned  (sim=0.0)
+[FAIL] a hit reports the matched cached query
+[FAIL] a paraphrase scores higher than an unrelated question  (paraphrase=0.1176 unrelated=0.8049)
+[FAIL] unrelated question: miss, the agent ran
+[FAIL] threshold above any possible score: even the exact duplicate misses
+[PASS] threshold 0.0: everything hits
+[PASS] a rejected pipeline answer is returned but NOT cached
+[PASS] a pipeline timeout is not cached
+[PASS] stored data-version marker = fingerprint of the facts used; refs stored  (version=7fffdb4827b33cfb)
+[PASS] a question without a fixture code has the 'static' marker
+[PASS] unknown fixture code: facts block says it does not exist, marker differs
+[PASS] the marker changes when a fact changes
+[FAIL] a miss reports every operation's latency; a hit only embed+search
+[PASS] every cache key starts with the PREFIX
+[PASS] ensure_index is idempotent and clear() empties the cache
+
+12/18 checks passed
