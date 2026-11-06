@@ -1,0 +1,11 @@
+[PASS] 1. first ask is a miss and the answer is cached  22 player spots are available.
+[PASS] 2. repeat is a hit with the same answer  similarity=1.0
+[PASS] 3a. control: a view-counter sync (updated_at changes) does NOT invalidate  updated_at 2026-11-06 15:40:51 -> 2026-11-06 15:41:16, still a hit
+[PASS] 3b. control: editing a different fixture does NOT invalidate  
+[PASS] 4. database now says the new value (read directly)  17 player spots are available.
+[PASS] 5. STALE HIT without a version check: cache still returns the old answer  cache says '22 player spots are available.'; database says '17 player spots are available.'
+[FAIL] 6. with the version check: stale entry detected, pipeline re-run, fresh answer  new answer '22 player spots are available.', version 3878640e93bca289 -> 3878640e93bca289
+[FAIL] 7. repeat is a hit with the fresh answer; exactly one entry (stale one deleted)  entries=1
+[PASS] 8. cost of the check measured (30 hits each)  mean hit latency 12.94 ms without, 12.69 ms with
+restored: FX-9871-00013 spots_available=22, views=0; cache cleared
+7/9 checks passed

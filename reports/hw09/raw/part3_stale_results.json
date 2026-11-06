@@ -1,0 +1,203 @@
+{
+  "part": "3.5",
+  "run_at": "2026-11-06T15:52:00",
+  "query": "How many player spots are available for fixture FX-9871-00013?",
+  "fixture": "FX-9871-00013",
+  "threshold": 0.85,
+  "old_spots": 22,
+  "new_spots": 17,
+  "checks": [
+    {
+      "check": "1. first ask is a miss and the answer is cached",
+      "pass": true,
+      "detail": "22 player spots are available."
+    },
+    {
+      "check": "2. repeat is a hit with the same answer",
+      "pass": true,
+      "detail": "similarity=1.0"
+    },
+    {
+      "check": "3a. control: a view-counter sync (updated_at changes) does NOT invalidate",
+      "pass": true,
+      "detail": "updated_at 2026-11-06 15:43:10 -> 2026-11-06 15:52:00, still a hit"
+    },
+    {
+      "check": "3b. control: editing a different fixture does NOT invalidate",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "4. database now says the new value (read directly)",
+      "pass": true,
+      "detail": "17 player spots are available."
+    },
+    {
+      "check": "5. STALE HIT without a version check: cache still returns the old answer",
+      "pass": true,
+      "detail": "cache says '22 player spots are available.'; database says '17 player spots are available.'"
+    },
+    {
+      "check": "6. with the version check: stale entry detected, pipeline re-run, fresh answer",
+      "pass": true,
+      "detail": "new answer '17 player spots are available.', version 3878640e93bca289 -> 79ba45dd2a83ffc2"
+    },
+    {
+      "check": "7. repeat is a hit with the fresh answer; exactly one entry (stale one deleted)",
+      "pass": true,
+      "detail": "entries=1"
+    },
+    {
+      "check": "8. cost of the check measured (30 hits each)",
+      "pass": true,
+      "detail": "mean hit latency 8.32 ms without, 9.02 ms with"
+    }
+  ],
+  "steps": {
+    "1_miss": {
+      "query": "How many player spots are available for fixture FX-9871-00013?",
+      "answer": "22 player spots are available.",
+      "is_cached": false,
+      "status": "approved",
+      "matched_query": null,
+      "data_version": "3878640e93bca289",
+      "stored_in_cache": true,
+      "invalidated_stale_entry": false,
+      "similarity": null,
+      "threshold": 0.85,
+      "latency_ms": 8171.7,
+      "timings_ms": {
+        "embed_ms": 8167.2,
+        "search_ms": 1.0,
+        "facts_ms": 2.3,
+        "agent_ms": 0.2,
+        "store_ms": 1.1
+      },
+      "started_at": "2026-11-06T15:51:51.803",
+      "finished_at": "2026-11-06T15:51:59.983"
+    },
+    "2_hit": {
+      "query": "How many player spots are available for fixture FX-9871-00013?",
+      "answer": "22 player spots are available.",
+      "is_cached": true,
+      "status": "approved",
+      "matched_query": "How many player spots are available for fixture FX-9871-00013?",
+      "data_version": "3878640e93bca289",
+      "similarity": 1.0,
+      "threshold": 0.85,
+      "latency_ms": 14.9,
+      "timings_ms": {
+        "embed_ms": 12.1,
+        "search_ms": 1.5,
+        "version_check_ms": 1.1
+      },
+      "started_at": "2026-11-06T15:51:59.985",
+      "finished_at": "2026-11-06T15:51:59.999"
+    },
+    "3a_views_sync": {
+      "query": "How many player spots are available for fixture FX-9871-00013?",
+      "answer": "22 player spots are available.",
+      "is_cached": true,
+      "status": "approved",
+      "matched_query": "How many player spots are available for fixture FX-9871-00013?",
+      "data_version": "3878640e93bca289",
+      "similarity": 1.0,
+      "threshold": 0.85,
+      "latency_ms": 12.4,
+      "timings_ms": {
+        "embed_ms": 9.5,
+        "search_ms": 1.2,
+        "version_check_ms": 1.2
+      },
+      "started_at": "2026-11-06T15:52:00.005",
+      "finished_at": "2026-11-06T15:52:00.018"
+    },
+    "3b_other_fixture": {
+      "query": "How many player spots are available for fixture FX-9871-00013?",
+      "answer": "22 player spots are available.",
+      "is_cached": true,
+      "status": "approved",
+      "matched_query": "How many player spots are available for fixture FX-9871-00013?",
+      "data_version": "3878640e93bca289",
+      "similarity": 1.0,
+      "threshold": 0.85,
+      "latency_ms": 11.6,
+      "timings_ms": {
+        "embed_ms": 8.9,
+        "search_ms": 1.3,
+        "version_check_ms": 1.1
+      },
+      "started_at": "2026-11-06T15:52:00.020",
+      "finished_at": "2026-11-06T15:52:00.032"
+    },
+    "5_stale_hit": {
+      "query": "How many player spots are available for fixture FX-9871-00013?",
+      "answer": "22 player spots are available.",
+      "is_cached": true,
+      "status": "approved",
+      "matched_query": "How many player spots are available for fixture FX-9871-00013?",
+      "data_version": "3878640e93bca289",
+      "similarity": 1.0,
+      "threshold": 0.85,
+      "latency_ms": 10.1,
+      "timings_ms": {
+        "embed_ms": 8.7,
+        "search_ms": 1.2
+      },
+      "started_at": "2026-11-06T15:52:00.036",
+      "finished_at": "2026-11-06T15:52:00.046"
+    },
+    "6_invalidated": {
+      "query": "How many player spots are available for fixture FX-9871-00013?",
+      "answer": "17 player spots are available.",
+      "is_cached": false,
+      "status": "approved",
+      "matched_query": null,
+      "data_version": "79ba45dd2a83ffc2",
+      "stored_in_cache": true,
+      "invalidated_stale_entry": true,
+      "similarity": 1.0,
+      "threshold": 0.85,
+      "latency_ms": 11.0,
+      "timings_ms": {
+        "embed_ms": 7.5,
+        "search_ms": 0.9,
+        "version_check_ms": 0.8,
+        "facts_ms": 2.1,
+        "agent_ms": 0.0,
+        "store_ms": 0.5
+      },
+      "started_at": "2026-11-06T15:52:00.046",
+      "finished_at": "2026-11-06T15:52:00.059"
+    },
+    "7_fresh_hit": {
+      "query": "How many player spots are available for fixture FX-9871-00013?",
+      "answer": "17 player spots are available.",
+      "is_cached": true,
+      "status": "approved",
+      "matched_query": "How many player spots are available for fixture FX-9871-00013?",
+      "data_version": "79ba45dd2a83ffc2",
+      "similarity": 1.0,
+      "threshold": 0.85,
+      "latency_ms": 9.9,
+      "timings_ms": {
+        "embed_ms": 7.6,
+        "search_ms": 1.3,
+        "version_check_ms": 0.9
+      },
+      "started_at": "2026-11-06T15:52:00.059",
+      "finished_at": "2026-11-06T15:52:00.068"
+    },
+    "8_hit_latency_ms": {
+      "without_check": {
+        "mean": 8.32,
+        "n": 30
+      },
+      "with_check": {
+        "mean": 9.02,
+        "n": 30
+      }
+    }
+  },
+  "restored_spots": 22
+}

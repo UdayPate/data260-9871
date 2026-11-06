@@ -1,0 +1,38 @@
+{
+  "C_MISS_usd": 0.01,
+  "C_FALSE_usd": 2.5,
+  "formula": "misses*C_MISS + false_hits*C_FALSE over the 40 cases",
+  "per_threshold": [
+    {
+      "threshold": 0.75,
+      "misses": 10,
+      "false_hits": 15,
+      "total_cost_usd": 37.6
+    },
+    {
+      "threshold": 0.8,
+      "misses": 12,
+      "false_hits": 14,
+      "total_cost_usd": 35.12
+    },
+    {
+      "threshold": 0.85,
+      "misses": 14,
+      "false_hits": 12,
+      "total_cost_usd": 30.14
+    },
+    {
+      "threshold": 0.9,
+      "misses": 16,
+      "false_hits": 11,
+      "total_cost_usd": 27.66
+    },
+    {
+      "threshold": 0.95,
+      "misses": 18,
+      "false_hits": 10,
+      "total_cost_usd": 25.18
+    }
+  ],
+  "cheapest_threshold": 0.95
+}

@@ -270,3 +270,207 @@ PS C:\Users\patel\data260-9871\code\cache_hw9>
 2026-11-06 15:20:34.328 [qa] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are still available for fixture FX-9871-00007?' matched='How many player spots are still available for fixture FX-9871-00007?'
 2026-11-06 15:20:34.340 [qa] CACHE MISS best_similarity=0.7812 threshold=0.85 query='How many open player slots are left on fixture FX-9871-00007?' - running the HW8 agent pipeline
 2026-11-06 15:20:38.901 [qa] CACHE HIT  similarity=0.8708 threshold=0.85 query='What is the home ground of the home team for fixture FX-9871-00008?' matched='Which team is the home team for fixture FX-9871-00005?'
+
+################ Part 3: raw/part3_label_validation_output.txt  (file written 2026-11-06 15:35:25)
+[PASS] 40 cases, 10 per category  {'exact_duplicate': 10, 'paraphrase': 10, 'different_answer': 10, 'unrelated': 10}
+[PASS] case ids unique  
+[PASS] 10 seeds  
+[PASS] every fixture code exists in s9871_rel  13 codes
+[PASS] expected label matches category  
+[PASS] exact duplicates are word-for-word their seed  
+[PASS] paraphrases are not word-for-word their seed  
+[PASS] every paraphrase names the same fixture as its seed  []
+      C21: correct = 'The home team is Fremont Warriors.'  |  cached seed S01 says 'The home team is Sunnyvale Falcons.'
+      C22: correct = 'Milpitas Titans vs Santa Clara Hawks are playing.'  |  cached seed S02 says 'Milpitas Lions vs Santa Clara Strikers are playing.'
+      C23: correct = 'The home ground is Backesto Park, San Jose.'  |  cached seed S03 says 'The home ground is Cardoza Park, Milpitas.'
+      C24: correct = 'The fixture is named "Bears vs Panthers (Volleyball #8)".'  |  cached seed S04 says 'The fixture is named "Falcons vs Titans (Volleyball #6)".'
+      C25: correct = 'The home team is Sunnyvale Hawks.'  |  cached seed S05 says 'The home team is Fremont Wolves.'
+      C26: correct = 'The home ground is Bushrod Park, Oakland.'  |  cached seed S06 says 'The home ground is Westwood Oaks Park, Santa Clara.'
+      C27: correct = 'San Jose Wolves vs Sunnyvale Lions are playing.'  |  cached seed S07 says 'Milpitas Bears vs Sunnyvale Wolves are playing.'
+      C28: correct = 'The fixture is named "Eagles vs Wolves (Soccer #12)".'  |  cached seed S08 says 'The fixture is named "Strikers vs Bears (Volleyball #10)".'
+      C29: correct = 'The home ground is Milpitas Sports Complex, Field 1.'  |  cached seed S09 says '22 player spots are available.'
+      C30: correct = 'The home team is Oakland Titans.'  |  cached seed S10 says 'The home team is San Jose Tigers.'
+[PASS] every different_answer case has a different correct answer than the seed it resembles  []
+[PASS] ...and differs from EVERY seed's answer (so any hit on it is wrong)  []
+
+10/10 checks passed
+
+################ Part 3: raw/part3_stale_mutation_output.txt  (file written 2026-11-06 15:42:11)
+[PASS] 1. first ask is a miss and the answer is cached  22 player spots are available.
+[PASS] 2. repeat is a hit with the same answer  similarity=1.0
+[PASS] 3a. control: a view-counter sync (updated_at changes) does NOT invalidate  updated_at 2026-11-06 15:40:51 -> 2026-11-06 15:41:16, still a hit
+[PASS] 3b. control: editing a different fixture does NOT invalidate  
+[PASS] 4. database now says the new value (read directly)  17 player spots are available.
+[PASS] 5. STALE HIT without a version check: cache still returns the old answer  cache says '22 player spots are available.'; database says '17 player spots are available.'
+[FAIL] 6. with the version check: stale entry detected, pipeline re-run, fresh answer  new answer '22 player spots are available.', version 3878640e93bca289 -> 3878640e93bca289
+[FAIL] 7. repeat is a hit with the fresh answer; exactly one entry (stale one deleted)  entries=1
+[PASS] 8. cost of the check measured (30 hits each)  mean hit latency 12.94 ms without, 12.69 ms with
+restored: FX-9871-00013 spots_available=22, views=0; cache cleared
+7/9 checks passed
+
+################ Part 3: raw/part3_terminal_output.txt  (file written 2026-11-06 15:52:22)
+PS C:\Users\patel\data260-9871>   cd C:\Users\patel\data260-9871\code\cache_hw9
+PS C:\Users\patel\data260-9871\code\cache_hw9>  ..\venv\Scripts\python.exe sweep_part3.py
+Loading weights: 100%|█████████████████████████████████████████████████████████████| 103/103 [00:00<00:00, 2052.02it/s]
+threshold 0.75: hits=30/40 false_hits=15 missed_true_hits=0 mean_latency=1326.9 ms
+threshold 0.80: hits=28/40 false_hits=14 missed_true_hits=2 mean_latency=1592.4 ms
+threshold 0.85: hits=26/40 false_hits=12 missed_true_hits=4 mean_latency=1854.2 ms
+threshold 0.90: hits=24/40 false_hits=11 missed_true_hits=6 mean_latency=2117.8 ms
+threshold 0.95: hits=22/40 false_hits=10 missed_true_hits=8 mean_latency=2382.4 ms
+wrote C:\Users\patel\data260-9871\reports\hw09\raw\part3_sweep.json
+PS C:\Users\patel\data260-9871\code\cache_hw9> ..\venv\Scripts\python.exe false_hit_detail.py
+Loading weights: 100%|█████████████████████████████████████████████████████████████| 103/103 [00:00<00:00, 3188.15it/s]
+{
+  "case_id": "C23",
+  "incoming_query": "What is the home ground for fixture FX-9871-00008?",
+  "cached_query": "What is the home ground for fixture FX-9871-00007?",
+  "similarity": 0.999,
+  "threshold": 0.85,
+  "cached_answer_returned": "The home ground is Cardoza Park, Milpitas.",
+  "correct_answer": "The home ground is Backesto Park, San Jose.",
+  "answers_differ": true,
+  "tokens_cached": [
+    "what",
+    "is",
+    "the",
+    "home",
+    "ground",
+    "for",
+    "fixture",
+    "fx",
+    "-",
+    "98",
+    "##7",
+    "##1",
+    "-",
+    "000",
+    "##0",
+    "##7",
+    "?"
+  ],
+  "tokens_incoming": [
+    "what",
+    "is",
+    "the",
+    "home",
+    "ground",
+    "for",
+    "fixture",
+    "fx",
+    "-",
+    "98",
+    "##7",
+    "##1",
+    "-",
+    "000",
+    "##0",
+    "##8",
+    "?"
+  ],
+  "differing_token_pairs": [
+    [
+      "##7",
+      "##8"
+    ]
+  ],
+  "n_tokens": 17,
+  "true_paraphrase_for_scale": {
+    "case": "C14",
+    "query": "What is fixture FX-9871-00008 called?",
+    "vs": "What is the name of fixture FX-9871-00008?",
+    "similarity": 0.9626
+  }
+}
+PS C:\Users\patel\data260-9871\code\cache_hw9> ..\venv\Scripts\python.exe stale_demo.py
+Loading weights: 100%|█████████████████████████████████████████████████████████████| 103/103 [00:00<00:00, 3316.19it/s]
+CACHE MISS best_similarity=n/a (empty cache) threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' - running the HW8 agent pipeline
+[PASS] 1. first ask is a miss and the answer is cached  22 player spots are available.
+CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+[PASS] 2. repeat is a hit with the same answer  similarity=1.0
+CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+[PASS] 3a. control: a view-counter sync (updated_at changes) does NOT invalidate  updated_at 2026-11-06 15:43:10 -> 2026-11-06 15:52:00, still a hit
+CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+[PASS] 3b. control: editing a different fixture does NOT invalidate
+[PASS] 4. database now says the new value (read directly)  17 player spots are available.
+CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+[PASS] 5. STALE HIT without a version check: cache still returns the old answer  cache says '22 player spots are available.'; database says '17 player spots are available.'
+CACHE STALE similarity=1.0000 stored_version=3878640e93bca289 current_version=79ba45dd2a83ffc2 refs=['FX-9871-00013'] - entry 'How many player spots are available for fixture FX-9871-00013?' invalidated
+CACHE MISS best_similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' - running the HW8 agent pipeline
+[PASS] 6. with the version check: stale entry detected, pipeline re-run, fresh answer  new answer '17 player spots are available.', version 3878640e93bca289 -> 79ba45dd2a83ffc2
+CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+[PASS] 7. repeat is a hit with the fresh answer; exactly one entry (stale one deleted)  entries=1
+[PASS] 8. cost of the check measured (30 hits each)  mean hit latency 8.32 ms without, 9.02 ms with
+restored: FX-9871-00013 spots_available=22, views=0; cache cleared
+
+9/9 checks passed
+PS C:\Users\patel\data260-9871\code\cache_hw9>
+
+################ Part 3: raw/part3_stale.log  (file written 2026-11-06 15:52:00)
+2026-11-06 15:51:59.978 [qa_service] CACHE MISS best_similarity=n/a (empty cache) threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' - running the HW8 agent pipeline
+2026-11-06 15:51:59.999 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.018 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.032 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.046 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.057 [qa_service] CACHE STALE similarity=1.0000 stored_version=3878640e93bca289 current_version=79ba45dd2a83ffc2 refs=['FX-9871-00013'] - entry 'How many player spots are available for fixture FX-9871-00013?' invalidated
+2026-11-06 15:52:00.057 [qa_service] CACHE MISS best_similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' - running the HW8 agent pipeline
+2026-11-06 15:52:00.068 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.078 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.078 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.097 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.107 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.115 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.123 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.130 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.138 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.147 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.155 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.161 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.169 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.178 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.178 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.188 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.202 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.210 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.218 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.226 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.236 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.244 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.251 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.259 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.267 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.267 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.283 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.292 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.303 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.310 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.320 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.328 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.331 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.347 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.356 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.365 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.373 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.384 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.392 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.401 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.410 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.411 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.429 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.437 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.446 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.456 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.465 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.473 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.481 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.490 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.498 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.508 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.517 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.523 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.536 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.538 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.554 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.563 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.569 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.569 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+2026-11-06 15:52:00.589 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'

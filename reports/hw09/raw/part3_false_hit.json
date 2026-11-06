@@ -1,0 +1,61 @@
+{
+  "case_id": "C23",
+  "incoming_query": "What is the home ground for fixture FX-9871-00008?",
+  "cached_query": "What is the home ground for fixture FX-9871-00007?",
+  "similarity": 0.999,
+  "threshold": 0.85,
+  "cached_answer_returned": "The home ground is Cardoza Park, Milpitas.",
+  "correct_answer": "The home ground is Backesto Park, San Jose.",
+  "answers_differ": true,
+  "tokens_cached": [
+    "what",
+    "is",
+    "the",
+    "home",
+    "ground",
+    "for",
+    "fixture",
+    "fx",
+    "-",
+    "98",
+    "##7",
+    "##1",
+    "-",
+    "000",
+    "##0",
+    "##7",
+    "?"
+  ],
+  "tokens_incoming": [
+    "what",
+    "is",
+    "the",
+    "home",
+    "ground",
+    "for",
+    "fixture",
+    "fx",
+    "-",
+    "98",
+    "##7",
+    "##1",
+    "-",
+    "000",
+    "##0",
+    "##8",
+    "?"
+  ],
+  "differing_token_pairs": [
+    [
+      "##7",
+      "##8"
+    ]
+  ],
+  "n_tokens": 17,
+  "true_paraphrase_for_scale": {
+    "case": "C14",
+    "query": "What is fixture FX-9871-00008 called?",
+    "vs": "What is the name of fixture FX-9871-00008?",
+    "similarity": 0.9626
+  }
+}
