@@ -1,0 +1,9 @@
+$ docker exec s9871-redis redis-cli GET s9871:views:fixture:5
+25
+$ docker exec s9871-redis redis-cli --scan --pattern 's9871:*'
+s9871:views:fixture:5
+s9871:views:fixture:1
+$ SELECT id, fixture_name, views FROM fixtures WHERE id IN (5, 6)   (MySQL s9871_rel, separate connection)
+(5, 'Wolves vs Lions (Basketball #3)', 20)
+(6, 'Lions vs Strikers (Soccer #4)', 0)
+rows with views > 0: 1

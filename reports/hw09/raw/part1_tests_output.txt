@@ -1,0 +1,15 @@
+[PASS] returns the running total 1..25  (last=25)
+[PASS] Redis holds the live count (GET key == 25)
+[PASS] key starts with the PREFIX  (s9871:views:fixture:5)
+[PASS] MySQL changes only at 10 and 20 (read after every access)  (after 9=0, 10=10, 11=10, 20=20, 25=20)
+[PASS] 'Synced views to database' logged exactly twice (at 10 and 20)  (2 lines)
+[PASS] another fixture counts separately
+[PASS] every s9871:views key starts with the PREFIX
+[PASS] 0, -5, '1', None, True, 1.5 raise ValueError  ([True, True, True, True, True, True])
+[PASS] rejected ids created no Redis key
+[PASS] unknown fixture id: counter still returns 1..10
+[PASS] unknown fixture id: sync logs a warning, no 'Synced' line, no row created
+[PASS] MySQL down at the 10th access: returns 10 and logs an error
+[PASS] Redis down: the error reaches the caller  (TimeoutError)
+
+13/13 checks passed

@@ -71,3 +71,15 @@ services:
     depends_on:
       kafka-init:
         condition: service_completed_successfully
+
+  # HW9: Redis Stack (Redis + the RediSearch module, which Part 2's vector index needs). Keys all start with s9871.
+  redis:
+    image: redis/redis-stack-server:7.4.0-v3
+    container_name: s9871-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10

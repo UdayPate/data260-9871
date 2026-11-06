@@ -71,6 +71,9 @@ class Fixture(Base):
     home_team_id = Column(
         Integer, ForeignKey("teams.id", ondelete="RESTRICT"), nullable=False
     )
+    # --- HW9 Part 1: persisted view counter. Redis holds the live count; it is copied here every 10 views
+    # (code/cache_hw9/fixture_cache.py). Add the column to an existing database with migrate_hw09.py.
+    views = Column(Integer, nullable=False, server_default="0", default=0)
     created_at = Column(DateTime, nullable=False, server_default=func.now())
     updated_at = Column(
         DateTime, nullable=False, server_default=func.now(), onupdate=func.now()

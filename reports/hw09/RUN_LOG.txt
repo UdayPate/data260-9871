@@ -1,0 +1,122 @@
+DATA-260 HW9 RUN_LOG  (local time; raw files in raw/)
+
+################ Part 1: raw/part1_demo_output.txt  (file written 2026-11-06 10:33:54)
+=== Testing Counter ===
+
+Access #1: Total = 1
+Access #2: Total = 2
+Access #3: Total = 3
+Access #4: Total = 4
+Access #5: Total = 5
+Access #6: Total = 6
+Access #7: Total = 7
+Access #8: Total = 8
+Access #9: Total = 9
+Access #10: Total = 10
+✓ Synced views to database
+Access #11: Total = 11
+Access #12: Total = 12
+Access #13: Total = 13
+Access #14: Total = 14
+Access #15: Total = 15
+Access #16: Total = 16
+Access #17: Total = 17
+Access #18: Total = 18
+Access #19: Total = 19
+Access #20: Total = 20
+✓ Synced views to database
+Access #21: Total = 21
+Access #22: Total = 22
+Access #23: Total = 23
+Access #24: Total = 24
+Access #25: Total = 25
+
+Redis s9871:views:fixture:5 = 25
+MySQL fixtures.views (fixture 5) = 20  (last sync was at 20; views 21-25 are only in Redis until the next multiple of 10)
+
+################ Part 1: raw/part1_cache_log.txt  (file written 2026-11-06 10:33:54)
+2026-11-06 10:33:54,097 [fixture_cache] Synced views to database
+2026-11-06 10:33:54,106 [fixture_cache] Synced views to database
+
+################ Part 1: raw/part1_direct_check.txt  (file written 2026-11-06 10:33:55)
+$ docker exec s9871-redis redis-cli GET s9871:views:fixture:5
+25
+$ docker exec s9871-redis redis-cli --scan --pattern 's9871:*'
+s9871:views:fixture:5
+s9871:views:fixture:1
+$ SELECT id, fixture_name, views FROM fixtures WHERE id IN (5, 6)   (MySQL s9871_rel, separate connection)
+(5, 'Wolves vs Lions (Basketball #3)', 20)
+(6, 'Lions vs Strikers (Soccer #4)', 0)
+rows with views > 0: 1
+
+################ Part 1: raw/part1_tests_output.txt  (file written 2026-11-06 10:34:24)
+[PASS] returns the running total 1..25  (last=25)
+[PASS] Redis holds the live count (GET key == 25)
+[PASS] key starts with the PREFIX  (s9871:views:fixture:5)
+[PASS] MySQL changes only at 10 and 20 (read after every access)  (after 9=0, 10=10, 11=10, 20=20, 25=20)
+[PASS] 'Synced views to database' logged exactly twice (at 10 and 20)  (2 lines)
+[PASS] another fixture counts separately
+[PASS] every s9871:views key starts with the PREFIX
+[PASS] 0, -5, '1', None, True, 1.5 raise ValueError  ([True, True, True, True, True, True])
+[PASS] rejected ids created no Redis key
+[PASS] unknown fixture id: counter still returns 1..10
+[PASS] unknown fixture id: sync logs a warning, no 'Synced' line, no row created
+[PASS] MySQL down at the 10th access: returns 10 and logs an error
+[PASS] Redis down: the error reaches the caller  (TimeoutError)
+
+13/13 checks passed
+
+################ Part 1: raw/part1_mutation_check_output.txt  (file written 2026-11-06 10:34:53)
+[PASS] returns the running total 1..25  (last=25)
+[PASS] Redis holds the live count (GET key == 25)
+[PASS] key starts with the PREFIX  (s9871:views:fixture:5)
+[FAIL] MySQL changes only at 10 and 20 (read after every access)  (after 9=0, 10=0, 11=11, 20=11, 25=22)
+[PASS] 'Synced views to database' logged exactly twice (at 10 and 20)  (2 lines)
+[PASS] another fixture counts separately
+[PASS] every s9871:views key starts with the PREFIX
+[PASS] 0, -5, '1', None, True, 1.5 raise ValueError  ([True, True, True, True, True, True])
+[PASS] rejected ids created no Redis key
+[FAIL] unknown fixture id: counter still returns 1..10
+[PASS] unknown fixture id: sync logs a warning, no 'Synced' line, no row created
+[FAIL] MySQL down at the 10th access: returns 10 and logs an error
+[PASS] Redis down: the error reaches the caller  (TimeoutError)
+
+10/13 checks passed
+
+################ Part 1: raw/part1_terminal_demo_output.txt  (the user's own PowerShell run, pasted verbatim; file written 2026-11-06 13:17:30)
+PS C:\Users\patel\data260-9871>  cd C:\Users\patel\data260-9871\code\cache_hw9
+PS C:\Users\patel\data260-9871\code\cache_hw9> ..\venv\Scripts\python.exe counter_demo.py
+=== Testing Counter ===
+
+Access #1: Total = 1
+Access #2: Total = 2
+Access #3: Total = 3
+Access #4: Total = 4
+Access #5: Total = 5
+Access #6: Total = 6
+Access #7: Total = 7
+Access #8: Total = 8
+Access #9: Total = 9
+Access #10: Total = 10
+✓ Synced views to database
+Access #11: Total = 11
+Access #12: Total = 12
+Access #13: Total = 13
+Access #14: Total = 14
+Access #15: Total = 15
+Access #16: Total = 16
+Access #17: Total = 17
+Access #18: Total = 18
+Access #19: Total = 19
+Access #20: Total = 20
+✓ Synced views to database
+Access #21: Total = 21
+Access #22: Total = 22
+Access #23: Total = 23
+Access #24: Total = 24
+Access #25: Total = 25
+
+Redis s9871:views:fixture:5 = 25
+MySQL fixtures.views (fixture 5) = 20  (last sync was at 20; views 21-25 are only in Redis until the next multiple of 10)
+PS C:\Users\patel\data260-9871\code\cache_hw9>
+

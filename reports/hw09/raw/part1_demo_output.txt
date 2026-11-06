@@ -1,0 +1,32 @@
+=== Testing Counter ===
+
+Access #1: Total = 1
+Access #2: Total = 2
+Access #3: Total = 3
+Access #4: Total = 4
+Access #5: Total = 5
+Access #6: Total = 6
+Access #7: Total = 7
+Access #8: Total = 8
+Access #9: Total = 9
+Access #10: Total = 10
+✓ Synced views to database
+Access #11: Total = 11
+Access #12: Total = 12
+Access #13: Total = 13
+Access #14: Total = 14
+Access #15: Total = 15
+Access #16: Total = 16
+Access #17: Total = 17
+Access #18: Total = 18
+Access #19: Total = 19
+Access #20: Total = 20
+✓ Synced views to database
+Access #21: Total = 21
+Access #22: Total = 22
+Access #23: Total = 23
+Access #24: Total = 24
+Access #25: Total = 25
+
+Redis s9871:views:fixture:5 = 25
+MySQL fixtures.views (fixture 5) = 20  (last sync was at 20; views 21-25 are only in Redis until the next multiple of 10)
