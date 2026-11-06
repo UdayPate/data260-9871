@@ -1,0 +1,22 @@
+[PASS] 40 cases, 10 per category  {'exact_duplicate': 10, 'paraphrase': 10, 'different_answer': 10, 'unrelated': 10}
+[PASS] case ids unique  
+[PASS] 10 seeds  
+[PASS] every fixture code exists in s9871_rel  13 codes
+[PASS] expected label matches category  
+[PASS] exact duplicates are word-for-word their seed  
+[PASS] paraphrases are not word-for-word their seed  
+[PASS] every paraphrase names the same fixture as its seed  []
+      C21: correct = 'The home team is Fremont Warriors.'  |  cached seed S01 says 'The home team is Sunnyvale Falcons.'
+      C22: correct = 'Milpitas Titans vs Santa Clara Hawks are playing.'  |  cached seed S02 says 'Milpitas Lions vs Santa Clara Strikers are playing.'
+      C23: correct = 'The home ground is Backesto Park, San Jose.'  |  cached seed S03 says 'The home ground is Cardoza Park, Milpitas.'
+      C24: correct = 'The fixture is named "Bears vs Panthers (Volleyball #8)".'  |  cached seed S04 says 'The fixture is named "Falcons vs Titans (Volleyball #6)".'
+      C25: correct = 'The home team is Sunnyvale Hawks.'  |  cached seed S05 says 'The home team is Fremont Wolves.'
+      C26: correct = 'The home ground is Bushrod Park, Oakland.'  |  cached seed S06 says 'The home ground is Westwood Oaks Park, Santa Clara.'
+      C27: correct = 'San Jose Wolves vs Sunnyvale Lions are playing.'  |  cached seed S07 says 'Milpitas Bears vs Sunnyvale Wolves are playing.'
+      C28: correct = 'The fixture is named "Eagles vs Wolves (Soccer #12)".'  |  cached seed S08 says 'The fixture is named "Strikers vs Bears (Volleyball #10)".'
+      C29: correct = 'The home ground is Milpitas Sports Complex, Field 1.'  |  cached seed S09 says '22 player spots are available.'
+      C30: correct = 'The home team is Oakland Titans.'  |  cached seed S10 says 'The home team is San Jose Tigers.'
+[PASS] every different_answer case has a different correct answer than the seed it resembles  []
+[PASS] ...and differs from EVERY seed's answer (so any hit on it is wrong)  []
+
+10/10 checks passed

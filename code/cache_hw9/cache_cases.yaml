@@ -1,0 +1,74 @@
+# DATA-260 HW9 Part 3.1 - labeled cache test set (SID4 9871, domain: community sports league fixtures)
+# Written and committed BEFORE any threshold sweep. Labels are never edited after results; a labeling mistake
+# would be documented separately (reports/hw09/LABEL_NOTES.md), not fixed here.
+#
+# How it is used: the 10 `seeds` are the queries already in the cache (each stored with its correct answer).
+# Each of the 40 `cases` is then looked up against that cache:
+#   expected: hit   -> the case should be served by the cache entry named in `matches` (and no other entry)
+#   expected: miss  -> the case must NOT be served from the cache, because the correct answer differs / is unrelated
+# A false hit = a case labeled `miss` that was served from the cache, or a `hit` case served by the wrong entry.
+# For `different_answer` cases `differs_from` is the seed whose cached answer would be wrong; the correct answers
+# differ in s9871_rel (checked by validate_cases.py, which uses no embeddings and no similarity).
+# attribute: home_team | teams | home_ground | fixture_name | spots (what the question asks about the fixture)
+
+seeds:
+  - {id: S01, fixture: FX-9871-00005, attribute: home_team,    query: "Which team is the home team for fixture FX-9871-00005?"}
+  - {id: S02, fixture: FX-9871-00006, attribute: teams,        query: "Who is playing in fixture FX-9871-00006?"}
+  - {id: S03, fixture: FX-9871-00007, attribute: home_ground,  query: "What is the home ground for fixture FX-9871-00007?"}
+  - {id: S04, fixture: FX-9871-00008, attribute: fixture_name, query: "What is the name of fixture FX-9871-00008?"}
+  - {id: S05, fixture: FX-9871-00009, attribute: home_team,    query: "Which team is the home team for fixture FX-9871-00009?"}
+  - {id: S06, fixture: FX-9871-00010, attribute: home_ground,  query: "What is the home ground for fixture FX-9871-00010?"}
+  - {id: S07, fixture: FX-9871-00011, attribute: teams,        query: "Who is playing in fixture FX-9871-00011?"}
+  - {id: S08, fixture: FX-9871-00012, attribute: fixture_name, query: "What is the name of fixture FX-9871-00012?"}
+  - {id: S09, fixture: FX-9871-00013, attribute: spots,        query: "How many player spots are available for fixture FX-9871-00013?"}
+  - {id: S10, fixture: FX-9871-00014, attribute: home_team,    query: "Which team is the home team for fixture FX-9871-00014?"}
+
+cases:
+  # ---- 10 exact duplicates (should hit their own seed) ----
+  - {id: C01, category: exact_duplicate, expected: hit, matches: S01, query: "Which team is the home team for fixture FX-9871-00005?"}
+  - {id: C02, category: exact_duplicate, expected: hit, matches: S02, query: "Who is playing in fixture FX-9871-00006?"}
+  - {id: C03, category: exact_duplicate, expected: hit, matches: S03, query: "What is the home ground for fixture FX-9871-00007?"}
+  - {id: C04, category: exact_duplicate, expected: hit, matches: S04, query: "What is the name of fixture FX-9871-00008?"}
+  - {id: C05, category: exact_duplicate, expected: hit, matches: S05, query: "Which team is the home team for fixture FX-9871-00009?"}
+  - {id: C06, category: exact_duplicate, expected: hit, matches: S06, query: "What is the home ground for fixture FX-9871-00010?"}
+  - {id: C07, category: exact_duplicate, expected: hit, matches: S07, query: "Who is playing in fixture FX-9871-00011?"}
+  - {id: C08, category: exact_duplicate, expected: hit, matches: S08, query: "What is the name of fixture FX-9871-00012?"}
+  - {id: C09, category: exact_duplicate, expected: hit, matches: S09, query: "How many player spots are available for fixture FX-9871-00013?"}
+  - {id: C10, category: exact_duplicate, expected: hit, matches: S10, query: "Which team is the home team for fixture FX-9871-00014?"}
+
+  # ---- 10 paraphrases that should hit (same fixture, same question, different words) ----
+  - {id: C11, category: paraphrase, expected: hit, matches: S01, query: "Tell me which team hosts fixture FX-9871-00005 at home."}
+  - {id: C12, category: paraphrase, expected: hit, matches: S02, query: "Which two teams are facing each other in fixture FX-9871-00006?"}
+  - {id: C13, category: paraphrase, expected: hit, matches: S03, query: "Where is the home venue of fixture FX-9871-00007?"}
+  - {id: C14, category: paraphrase, expected: hit, matches: S04, query: "What is fixture FX-9871-00008 called?"}
+  - {id: C15, category: paraphrase, expected: hit, matches: S05, query: "Name the home side for fixture FX-9871-00009."}
+  - {id: C16, category: paraphrase, expected: hit, matches: S06, query: "At which ground does fixture FX-9871-00010 take place at home?"}
+  - {id: C17, category: paraphrase, expected: hit, matches: S07, query: "Which teams are playing against each other in fixture FX-9871-00011?"}
+  - {id: C18, category: paraphrase, expected: hit, matches: S08, query: "What title does fixture FX-9871-00012 have?"}
+  - {id: C19, category: paraphrase, expected: hit, matches: S09, query: "How many open spots remain on fixture FX-9871-00013?"}
+  - {id: C20, category: paraphrase, expected: hit, matches: S10, query: "Who is the home team of fixture FX-9871-00014?"}
+
+  # ---- 10 superficially similar, different correct answer (should miss) ----
+  # Same wording as a seed but a different fixture, or the same fixture but a different attribute.
+  - {id: C21, category: different_answer, expected: miss, differs_from: S01, fixture: FX-9871-00015, attribute: home_team,    query: "Which team is the home team for fixture FX-9871-00015?"}
+  - {id: C22, category: different_answer, expected: miss, differs_from: S02, fixture: FX-9871-00016, attribute: teams,        query: "Who is playing in fixture FX-9871-00016?"}
+  - {id: C23, category: different_answer, expected: miss, differs_from: S03, fixture: FX-9871-00008, attribute: home_ground,  query: "What is the home ground for fixture FX-9871-00008?"}
+  - {id: C24, category: different_answer, expected: miss, differs_from: S04, fixture: FX-9871-00010, attribute: fixture_name, query: "What is the name of fixture FX-9871-00010?"}
+  - {id: C25, category: different_answer, expected: miss, differs_from: S05, fixture: FX-9871-00011, attribute: home_team,    query: "Which team is the home team for fixture FX-9871-00011?"}
+  - {id: C26, category: different_answer, expected: miss, differs_from: S06, fixture: FX-9871-00012, attribute: home_ground,  query: "What is the home ground for fixture FX-9871-00012?"}
+  - {id: C27, category: different_answer, expected: miss, differs_from: S07, fixture: FX-9871-00005, attribute: teams,        query: "Who is playing in fixture FX-9871-00005?"}
+  - {id: C28, category: different_answer, expected: miss, differs_from: S08, fixture: FX-9871-00014, attribute: fixture_name, query: "What is the name of fixture FX-9871-00014?"}
+  - {id: C29, category: different_answer, expected: miss, differs_from: S09, fixture: FX-9871-00013, attribute: home_ground,  query: "What is the home ground for fixture FX-9871-00013?"}
+  - {id: C30, category: different_answer, expected: miss, differs_from: S10, fixture: FX-9871-00018, attribute: home_team,    query: "Which team is the home team for fixture FX-9871-00018?"}
+
+  # ---- 10 unrelated questions (should miss) ----
+  - {id: C31, category: unrelated, expected: miss, query: "What are the basic rules of volleyball scoring?"}
+  - {id: C32, category: unrelated, expected: miss, query: "How do I register my own team for next season?"}
+  - {id: C33, category: unrelated, expected: miss, query: "What should I eat before an early morning match?"}
+  - {id: C34, category: unrelated, expected: miss, query: "How long is a standard soccer game?"}
+  - {id: C35, category: unrelated, expected: miss, query: "What is the weather forecast for Sunnyvale this weekend?"}
+  - {id: C36, category: unrelated, expected: miss, query: "Can you recommend a good pair of running shoes?"}
+  - {id: C37, category: unrelated, expected: miss, query: "How do I stretch my hamstrings to avoid injury?"}
+  - {id: C38, category: unrelated, expected: miss, query: "Explain what a referee does in cricket."}
+  - {id: C39, category: unrelated, expected: miss, query: "What is the capital of France?"}
+  - {id: C40, category: unrelated, expected: miss, query: "Write a short poem about autumn."}
