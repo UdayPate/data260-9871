@@ -1,0 +1,89 @@
+################ Broken state 1: code/cache_hw9/cache_cases.yaml moved away
+verify_hw09 run at 2026-11-06T19:42:15
+... required files exist
+    [FAIL] MISSING: ['code/cache_hw9/cache_cases.yaml']
+... Services: Redis Stack (RediSearch) and MySQL s9871_rel are up
+    [PASS] Redis PING=True, modules=['ReJSON', 'search', 'timeseries', 'redisgears_2', 'bf', 'RedisCompat']; MySQL fixtures rows=5000
+... Part 1: Redis counts every access, MySQL syncs only at the 10th (read directly), s9871 key prefix
+    [PASS] returned 1..10; MySQL after 9 = 0 (was 0), after 10 = 10; Redis = 10; views restored to 0
+... Part 2: semantic cache - miss, duplicate hit, paraphrase hit, unrelated miss, rejected answer not cached, hit/miss logged
+    [PASS] miss/dup/paraphrase/unrelated -> is_cached [False, True, True, False], paraphrase similarity 0.8824, stub agent ran 3x, rejected answer cached: False
+... Part 3: the 40 labels in cache_cases.yaml agree with the database
+    [FAIL] Exception: FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\patel\\data260-9871\\code\\cache_hw9\\cache_cases.yaml'
+... Part 3: the threshold sweep reproduces the committed hit and false-hit counts
+    [FAIL] Exception: FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\patel\\data260-9871\\code\\cache_hw9\\cache_cases.yaml'
+... Part 3: stale cached answer served without the version check, invalidated with it
+CACHE STALE similarity=1.0000 stored_version=3878640e93bca289 current_version=79ba45dd2a83ffc2 refs=['FX-9871-00013'] - entry 'How many player spots are available for fixture FX-9871-00013?' invalidated
+    [PASS] db 22->17; plain cache still said '22 player spots are available.'; versioned: invalidated=True, new answer '17 player spots are available.'; row restored
+... Part 4: offline agent/evaluator/controller/lesson tests
+    [PASS] 31/31 checks passed
+... Part 4: dataset files unchanged since commit; inputs hold only id + question
+    [PASS] changed since commit: none; input files hold only id+question: True; sizes [14, 14, 18]
+... Part 4: lesson validation decisions follow the four rules; lessons.json holds only the kept lessons
+    [PASS] decisions [('lesson_001', True), ('lesson_002', False)] follow the rules: True; lessons.json = ['lesson_001']
+... Part 4: results table matches the saved per-question results
+    [PASS] table recomputed from the per-question results for ['baseline', 'evaluator_repair', 'lesson_memory', 'validated']; mismatches none; no question used more than 2 attempts
+... Ruff passes on the HW9 code
+    [PASS] All checks passed!
+
+9/12 checks passed -> C:\Users\patel\data260-9871\reports\hw09\verification.json
+
+################ Broken state 2: Redis container stopped (docker stop s9871-redis)
+verify_hw09 run at 2026-11-06T19:42:57
+... required files exist
+    [PASS] All 35 required files present.
+... Services: Redis Stack (RediSearch) and MySQL s9871_rel are up
+    [FAIL] Exception: ConnectionError: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.
+... Part 1: Redis counts every access, MySQL syncs only at the 10th (read directly), s9871 key prefix
+    [FAIL] Exception: ConnectionError: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.
+... Part 2: semantic cache - miss, duplicate hit, paraphrase hit, unrelated miss, rejected answer not cached, hit/miss logged
+    [FAIL] Exception: ConnectionError: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.
+... Part 3: the 40 labels in cache_cases.yaml agree with the database
+    [PASS] 10/10 checks passed
+... Part 3: the threshold sweep reproduces the committed hit and false-hit counts
+    [FAIL] Exception: ConnectionError: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.
+... Part 3: stale cached answer served without the version check, invalidated with it
+    [FAIL] Exception: ConnectionError: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.
+... Part 4: offline agent/evaluator/controller/lesson tests
+    [PASS] 31/31 checks passed
+... Part 4: dataset files unchanged since commit; inputs hold only id + question
+    [PASS] changed since commit: none; input files hold only id+question: True; sizes [14, 14, 18]
+... Part 4: lesson validation decisions follow the four rules; lessons.json holds only the kept lessons
+    [PASS] decisions [('lesson_001', True), ('lesson_002', False)] follow the rules: True; lessons.json = ['lesson_001']
+... Part 4: results table matches the saved per-question results
+    [PASS] table recomputed from the per-question results for ['baseline', 'evaluator_repair', 'lesson_memory', 'validated']; mismatches none; no question used more than 2 attempts
+... Ruff passes on the HW9 code
+    [PASS] All checks passed!
+
+7/12 checks passed -> C:\Users\patel\data260-9871\reports\hw09\verification.json
+
+################ Broken state 3: test_data.json edited after commit (one extra blank line appended)
+verify_hw09 run at 2026-11-06T19:47:14
+... required files exist
+    [PASS] All 35 required files present.
+... Services: Redis Stack (RediSearch) and MySQL s9871_rel are up
+    [PASS] Redis PING=True, modules=['RedisCompat', 'redisgears_2', 'search', 'timeseries', 'ReJSON', 'bf']; MySQL fixtures rows=5000
+... Part 1: Redis counts every access, MySQL syncs only at the 10th (read directly), s9871 key prefix
+    [PASS] returned 1..10; MySQL after 9 = 0 (was 0), after 10 = 10; Redis = 10; views restored to 0
+... Part 2: semantic cache - miss, duplicate hit, paraphrase hit, unrelated miss, rejected answer not cached, hit/miss logged
+    [PASS] miss/dup/paraphrase/unrelated -> is_cached [False, True, True, False], paraphrase similarity 0.8824, stub agent ran 3x, rejected answer cached: False
+... Part 3: the 40 labels in cache_cases.yaml agree with the database
+    [PASS] 10/10 checks passed
+... Part 3: the threshold sweep reproduces the committed hit and false-hit counts
+    [PASS] (threshold, hits, false hits) reproduced: [(0.75, 30, 15), (0.8, 28, 14), (0.85, 26, 12), (0.9, 24, 11), (0.95, 22, 10)]; different-answer cases still hit at 0.95: 10/10
+... Part 3: stale cached answer served without the version check, invalidated with it
+CACHE STALE similarity=1.0000 stored_version=3878640e93bca289 current_version=79ba45dd2a83ffc2 refs=['FX-9871-00013'] - entry 'How many player spots are available for fixture FX-9871-00013?' invalidated
+    [PASS] db 22->17; plain cache still said '22 player spots are available.'; versioned: invalidated=True, new answer '17 player spots are available.'; row restored
+... Part 4: offline agent/evaluator/controller/lesson tests
+    [PASS] 31/31 checks passed
+... Part 4: dataset files unchanged since commit; inputs hold only id + question
+    [FAIL] changed since commit: ['test_data']; input files hold only id+question: True; sizes [14, 14, 18]
+... Part 4: lesson validation decisions follow the four rules; lessons.json holds only the kept lessons
+    [PASS] decisions [('lesson_001', True), ('lesson_002', False)] follow the rules: True; lessons.json = ['lesson_001']
+... Part 4: results table matches the saved per-question results
+    [PASS] table recomputed from the per-question results for ['baseline', 'evaluator_repair', 'lesson_memory', 'validated']; mismatches none; no question used more than 2 attempts
+... Ruff passes on the HW9 code
+    [PASS] All checks passed!
+
+11/12 checks passed -> C:\Users\patel\data260-9871\reports\hw09\verification.json
+ALLDONE

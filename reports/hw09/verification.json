@@ -1,0 +1,94 @@
+{
+  "homework": 9,
+  "sid4": "9871",
+  "commit_hash": "6c2ef7705279a81410c8a9de5e25a6e1450a7a27",
+  "tracked_files_modified_since_commit": [],
+  "model_config": "qwen3:8b via Ollama (thinking off, temperature 0, seed 9871) for the Part 4 agents; Part 2/3 caches: sentence-transformers/all-MiniLM-L6-v2 + Redis Stack 7.4 (RediSearch FLAT, COSINE); facts from MySQL s9871_rel",
+  "SEED": "9871",
+  "VERIFY_SEED": "269871",
+  "port_base": 8871,
+  "run_at": "2026-11-06T19:47:57",
+  "checks": [
+    {
+      "check": "required files exist",
+      "passed": true,
+      "detail": "All 35 required files present.",
+      "seconds": 0.0
+    },
+    {
+      "check": "Services: Redis Stack (RediSearch) and MySQL s9871_rel are up",
+      "passed": true,
+      "detail": "Redis PING=True, modules=['RedisCompat', 'redisgears_2', 'search', 'timeseries', 'ReJSON', 'bf']; MySQL fixtures rows=5000",
+      "seconds": 0.9
+    },
+    {
+      "check": "Part 1: Redis counts every access, MySQL syncs only at the 10th (read directly), s9871 key prefix",
+      "passed": true,
+      "detail": "returned 1..10; MySQL after 9 = 0 (was 0), after 10 = 10; Redis = 10; views restored to 0",
+      "seconds": 0.1
+    },
+    {
+      "check": "Part 2: semantic cache - miss, duplicate hit, paraphrase hit, unrelated miss, rejected answer not cached, hit/miss logged",
+      "passed": true,
+      "detail": "miss/dup/paraphrase/unrelated -> is_cached [False, True, True, False], paraphrase similarity 0.8824, stub agent ran 3x, rejected answer cached: False",
+      "seconds": 13.4
+    },
+    {
+      "check": "Part 3: the 40 labels in cache_cases.yaml agree with the database",
+      "passed": true,
+      "detail": "10/10 checks passed",
+      "seconds": 0.0
+    },
+    {
+      "check": "Part 3: the threshold sweep reproduces the committed hit and false-hit counts",
+      "passed": true,
+      "detail": "(threshold, hits, false hits) reproduced: [(0.75, 30, 15), (0.8, 28, 14), (0.85, 26, 12), (0.9, 24, 11), (0.95, 22, 10)]; different-answer cases still hit at 0.95: 10/10",
+      "seconds": 2.6
+    },
+    {
+      "check": "Part 3: stale cached answer served without the version check, invalidated with it",
+      "passed": true,
+      "detail": "db 22->17; plain cache still said '22 player spots are available.'; versioned: invalidated=True, new answer '17 player spots are available.'; row restored",
+      "seconds": 0.1
+    },
+    {
+      "check": "Part 4: offline agent/evaluator/controller/lesson tests",
+      "passed": true,
+      "detail": "31/31 checks passed",
+      "seconds": 4.6
+    },
+    {
+      "check": "Part 4: dataset files unchanged since commit; inputs hold only id + question",
+      "passed": true,
+      "detail": "changed since commit: none; input files hold only id+question: True; sizes [14, 14, 18]",
+      "seconds": 0.5
+    },
+    {
+      "check": "Part 4: lesson validation decisions follow the four rules; lessons.json holds only the kept lessons",
+      "passed": true,
+      "detail": "decisions [('lesson_001', True), ('lesson_002', False)] follow the rules: True; lessons.json = ['lesson_001']",
+      "seconds": 0.0
+    },
+    {
+      "check": "Part 4: results table matches the saved per-question results",
+      "passed": true,
+      "detail": "table recomputed from the per-question results for ['baseline', 'evaluator_repair', 'lesson_memory', 'validated']; mismatches none; no question used more than 2 attempts",
+      "seconds": 0.0
+    },
+    {
+      "check": "Part 4: REAL model - forced incomplete answer is repaired in 2 attempts; off-topic question declined with the kept lesson",
+      "passed": true,
+      "detail": "forced incomplete answer -> OMITTED_FACT -> revised -> PASS in 2 attempts; off-topic question with lessons ['lesson_001']: PASS ('I do not have that information.')",
+      "seconds": 11.5
+    },
+    {
+      "check": "Ruff passes on the HW9 code",
+      "passed": true,
+      "detail": "All checks passed!",
+      "seconds": 0.2
+    }
+  ],
+  "passed": 13,
+  "total": 13,
+  "all_passed": true
+}
