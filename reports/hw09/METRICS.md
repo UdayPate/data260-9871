@@ -131,3 +131,96 @@ because `updated_at` also changes on every Part 1 view-counter sync (control 3a:
 Trade-off: it never serves a stale answer for the fields it fingerprints, and it does not invalidate on unrelated edits, but every hit now pays a database read and the
 cache depends on MySQL being reachable: mean hit latency was 8.32 ms without the check and 9.02 ms with it (30 hits each),
 and a hit still cannot be served from Redis alone. A TTL would be cheaper per hit but would leave a window in which stale answers are served.
+
+## Part 4 - Self-improving multi-agent system
+
+Model: qwen3:8b (Ollama, thinking off, temperature 0, seed 9871). Run at 2026-11-06T19:29:07 (local time). Input files: 18 test, 14 validation and
+14 training questions (`code/agents_hw9/data/`, questions only; the reference dataset holds all fixtures of `s9871_rel`).
+The Evaluator is rule-based and reads only the reference dataset; the Answering Agent reads the same facts from MySQL and never sees the reference file.
+
+### 4.4 Final test (test_data.json, each variant run once on the same 18 questions)
+
+| Variant | Correct answers | Incorrect answers | Average attempts | Average latency (ms) |
+|---|---|---|---|---|
+| Baseline | 15 / 18 | 3 | 1 | 998.5 |
+| Evaluator Repair | 18 / 18 | 0 | 1.17 | 1011.7 |
+| Lesson Memory | 18 / 18 | 0 | 1.11 | 1049.2 |
+| Validated Improvement | 18 / 18 | 0 | 1 | 839.4 |
+
+A question counts as correct when the Evaluator's final verdict is PASS. First-answer failures per variant:
+
+| Variant | Questions whose FIRST answer failed | Failure type |
+|---|---|---|
+| Baseline | tes_04, tes_05, tes_15 | UNSUPPORTED_ANSWER |
+| Evaluator Repair | tes_04, tes_05, tes_15 | UNSUPPORTED_ANSWER |
+| Lesson Memory | tes_06, tes_08 | OMITTED_FACT |
+| Validated Improvement | none | - |
+
+What this shows: without feedback the baseline gets 15 of 18 right; its 3 errors are all the same kind: off-topic questions ("Translate 'good morning' into Spanish."; "Explain how photosynthesis works."; "What is the tallest mountain in the world?")
+answered from general knowledge instead of saying the data is not available. The Evaluator's feedback repaired all of them on the second attempt
+(Evaluator Repair 18/18), at the cost of 1.17 attempts per question on average. The validated lesson lets the first answer be right
+(Validated Improvement 18/18, average attempts 1). Lesson Memory, which loads every proposed lesson without validation, also ends with
+18/18 correct but needed 1.11 attempts, because it also loaded the harmful controlled lesson (lesson_002, which was loaded on tes_06, tes_08; those needed a second attempt:
+the Evaluator caught the omitted part and the repair loop fixed it, so the damage shows up as extra attempts and latency, not as a wrong final answer).
+Average latency is nearly the same for Baseline and Evaluator Repair (998.5 and 1011.7 ms); the lower figure for Validated Improvement (839.4 ms) is mostly because the
+refusals it now gives are very short answers, not a speed-up of the model. With 18 questions, a one-question difference is not strong evidence; qwen3 is not bit-reproducible, so another run can differ slightly.
+
+### 4.1 Complete revision sequence (controlled test: the first answer is deliberately incomplete)
+
+- Question: For fixture FX-9871-00005, which team is the home team and what is its home ground?
+- Attempt 1 (forced for the test): The home team is Sunnyvale Falcons.
+- Evaluator: REVISE - The answer leaves out requested information: home ground.
+- Feedback: Your answer is missing: FX-9871-00005 home ground ('Fair Oaks Park'). Answer every part of the question using the facts provided.
+- Attempt 2 (revised by the Answering Agent): The home team for fixture FX-9871-00005 is Sunnyvale Falcons, and its home ground is Fair Oaks Park.
+- Evaluator: PASS - Every requested fact matches the reference data.
+- Attempts: 2 (maximum 2). Final answer / result: The home team for fixture FX-9871-00005 is Sunnyvale Falcons, and its home ground is Fair Oaks Park. / PASS
+
+### 4.2 Lessons and reuse
+
+Training (12/14 correct on the first attempt) failed on tra_07, tra_12 - the same pattern (UNSUPPORTED_ANSWER) twice, so the Evaluator
+proposed one lesson from it. A second candidate was added on purpose as a controlled test of the validation gate.
+
+Kept lesson store (`code/agents_hw9/lessons.json`, use_count after the demonstration):
+
+```json
+[
+  {
+    "lesson_id": "lesson_001",
+    "failure_pattern": "The answer states something the league facts do not support (unknown fixture, data the league does not record, or a question that is not about the league).",
+    "correction": "If the provided facts do not contain what is asked, reply that you do not have that information; do not answer from general knowledge and do not guess.",
+    "created_at": "2026-11-06",
+    "use_count": 1,
+    "failure_type": "UNSUPPORTED_ANSWER",
+    "applies_when": [
+      "no_data"
+    ],
+    "source": "training failures: tra_07, tra_12"
+  }
+]
+```
+
+Reuse demonstration, later question "Who painted the Mona Lisa?": without lessons the answer was "The Mona Lisa was painted by Leonardo da Vinci." (REVISE, UNSUPPORTED_ANSWER); with the store loaded
+(lessons used: lesson_001) it was "I do not have that information." (PASS). use_count went {"lesson_001": 0} -> {"lesson_001": 1}
+and the new value is in the file ({"lesson_001": 1}).
+
+### 4.3 Validation (validation_data.json, one attempt per question so the lesson's own effect is measured)
+
+Keep a lesson only if: no previously correct answer becomes wrong; at least one failing case is fixed; total failures do not increase; unsupported answers do not increase.
+
+| Candidate lesson | Source | Fixed | Regressions | Failures before -> after | Unsupported before -> after | Decision |
+|---|---|---|---|---|---|---|
+| lesson_001 (UNSUPPORTED_ANSWER) | training failures: tra_07, tra_12 | val_04, val_12 | none | 2 -> 0 | 2 -> 0 | **KEEP** |
+| lesson_002 (CONTROLLED_OVERBROAD) | controlled: deliberately harmful, to demonstrate the validation gate | none | val_02 | 0 -> 1 | 0 -> 0 | **REJECT** |
+
+The rejected lesson ("controlled: deliberately harmful, to demonstrate the validation gate") told the agent to answer only the first part of a multi-part question. On val_02 it changed a previously correct answer into
+a WRONG_FACT ('The fixture FX-9871-00910 is between Oakland Lions and Santa Clara Bears, and there are 22 spots left.'), so it was removed, as the assignment requires. Candidates: 2; kept: 1. test_data.json was not used to create or choose any lesson.
+
+### Short explanations
+
+- Agent communication: the controller passes plain JSON messages. To the Answering Agent: question, attempt number, and (on attempt 2) the Evaluator's feedback and its previous answer. From it: the answer and the lessons it used.
+  To the Evaluator Agent: question and answer. From it: PASS or REVISE, an explanation, feedback and a failure type. The agents never share state other than these messages.
+- Lesson reuse: before each answer the Answering Agent computes tags for the question (multi-part, no recorded data, names a fixture), loads the lessons whose `applies_when` matches, adds their corrections to its prompt and increments `use_count`.
+- Stopping condition: at most two attempts. A PASS stops immediately; a REVISE after attempt 1 triggers one revision; after attempt 2 the system stops and reports the result whatever it is.
+- Validation process: each candidate is added to the kept set, the validation questions are run before and after, and the four rules above decide. The test set is run only afterwards, once per variant.
+- Limitation: the Evaluator recognises what a question asks with keyword patterns and checks the answer by string matching, so an unusual phrasing or a differently worded correct answer can be mis-scored; only 18 test questions were used, and
+  the failures are concentrated in one pattern (answering off-topic questions), so the results do not show how the lessons would behave on other kinds of failure.

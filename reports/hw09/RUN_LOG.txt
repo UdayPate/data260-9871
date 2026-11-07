@@ -474,3 +474,341 @@ PS C:\Users\patel\data260-9871\code\cache_hw9>
 2026-11-06 15:52:00.569 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
 2026-11-06 15:52:00.569 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
 2026-11-06 15:52:00.589 [qa_service] CACHE HIT  similarity=1.0000 threshold=0.85 query='How many player spots are available for fixture FX-9871-00013?' matched='How many player spots are available for fixture FX-9871-00013?'
+
+################ Part 4: raw/part4_tests_output.txt  (file written 2026-11-06 19:04:57)
+[PASS] correct simple answer -> PASS  Every requested fact matches the reference data.
+[PASS] compound answer missing the ground -> REVISE / OMITTED_FACT, feedback quotes the reference ground  Your answer is missing: FX-9871-00004 home ground ('Central Park Softball Field'). Answer every part of the question using the facts provided.
+[PASS] compound answer with both facts -> PASS  
+[PASS] ground without the city is accepted  
+[PASS] another fixture's team -> REVISE / WRONG_FACT  Wrong value(s): home team: 'oakland titans' is not the value for the fixture asked about. Reference: FX-9871-00004: home team = Santa Clara Strikers
+[PASS] spots: right number -> PASS  
+[PASS] spots: wrong number -> REVISE  The answer contains a value that does not match the reference data.
+[PASS] spots: digits of the fixture code are not mistaken for the answer  
+[PASS] two fixtures: both grounds -> PASS (the second fixture's ground is not 'foreign')  
+[PASS] two fixtures: only one ground -> OMITTED_FACT  Your answer is missing: FX-9871-00005 home ground ('Fair Oaks Park'). Answer every part of the question using the facts provided.
+[PASS] unrelated question answered -> REVISE / UNSUPPORTED_ANSWER  
+[PASS] unrelated question politely declined -> PASS  
+[PASS] unknown fixture with an invented team -> REVISE  
+[PASS] unknown fixture reported as not found -> PASS  
+[PASS] unrecorded attribute invented -> REVISE  
+[PASS] unrecorded attribute declined -> PASS  
+[PASS] a refusal that still leaks a team name -> REVISE  
+[PASS] repair: fails then passes -> 2 attempts, final PASS  2 attempts
+[PASS] repair: the second prompt carries the evaluator feedback and the previous answer  
+[PASS] stops after the second attempt even if still wrong  
+[PASS] baseline: one attempt only, no repair  
+[PASS] a first-attempt PASS stops at 1 attempt  
+[PASS] controlled test: forced incomplete first answer is marked and repaired  
+[PASS] a relevant lesson is loaded into the prompt and counted; an irrelevant one is not  [1, 0]
+[PASS] lesson fields  
+[PASS] lessons_only variant (validation gate): lessons loaded, a single attempt  
+[PASS] reference holds the whole fixtures table (FX-9871-00005 exists, FX-9871-09999 does not)  5000
+[PASS] baseline and repair variants load no lessons  
+[PASS] lesson variants use a private copy (the store file is never mutated by a run)  
+[PASS] input files contain only id + question (no expected answers)  
+[PASS] no question appears in two input files  
+
+31/31 checks passed
+
+################ Part 4: raw/part4_tests_mutation_output.txt  (file written 2026-11-06 19:05:07)
+[PASS] correct simple answer -> PASS  Every requested fact matches the reference data.
+[FAIL] compound answer missing the ground -> REVISE / OMITTED_FACT, feedback quotes the reference ground  None
+[PASS] compound answer with both facts -> PASS  
+[PASS] ground without the city is accepted  
+[PASS] another fixture's team -> REVISE / WRONG_FACT  Wrong value(s): home team: 'oakland titans' is not the value for the fixture asked about. Reference: FX-9871-00004: home team = Santa Clara Strikers
+[PASS] spots: right number -> PASS  
+[PASS] spots: wrong number -> REVISE  The answer contains a value that does not match the reference data.
+[FAIL] spots: digits of the fixture code are not mistaken for the answer  
+[PASS] two fixtures: both grounds -> PASS (the second fixture's ground is not 'foreign')  
+[FAIL] two fixtures: only one ground -> OMITTED_FACT  None
+[PASS] unrelated question answered -> REVISE / UNSUPPORTED_ANSWER  
+[PASS] unrelated question politely declined -> PASS  
+[PASS] unknown fixture with an invented team -> REVISE  
+[PASS] unknown fixture reported as not found -> PASS  
+[PASS] unrecorded attribute invented -> REVISE  
+[PASS] unrecorded attribute declined -> PASS  
+[PASS] a refusal that still leaks a team name -> REVISE  
+[PASS] repair: fails then passes -> 2 attempts, final PASS  2 attempts
+[PASS] repair: the second prompt carries the evaluator feedback and the previous answer  
+[PASS] stops after the second attempt even if still wrong  
+[PASS] baseline: one attempt only, no repair  
+[PASS] a first-attempt PASS stops at 1 attempt  
+[FAIL] controlled test: forced incomplete first answer is marked and repaired  
+[PASS] a relevant lesson is loaded into the prompt and counted; an irrelevant one is not  [1, 0]
+[PASS] lesson fields  
+[PASS] lessons_only variant (validation gate): lessons loaded, a single attempt  
+[PASS] reference holds the whole fixtures table (FX-9871-00005 exists, FX-9871-09999 does not)  5000
+[PASS] baseline and repair variants load no lessons  
+[PASS] lesson variants use a private copy (the store file is never mutated by a run)  
+[PASS] input files contain only id + question (no expected answers)  
+[PASS] no question appears in two input files  
+
+27/31 checks passed
+
+################ Part 4: raw/part4_terminal_output.txt  (file written 2026-11-06 19:30:35)
+PS C:\Users\patel\data260-9871>   cd C:\Users\patel\data260-9871\code\agents_hw9
+PS C:\Users\patel\data260-9871\code\agents_hw9>   ..\venv\Scripts\python.exe run_part4.py
+== training run (baseline, no lessons) ==
+  [train] tra_01 attempts=1 final=PASS     2725.8 ms
+  [train] tra_02 attempts=1 final=PASS      736.4 ms
+  [train] tra_03 attempts=1 final=PASS     1396.5 ms
+  [train] tra_04 attempts=1 final=PASS      864.3 ms
+  [train] tra_05 attempts=1 final=PASS     1181.5 ms
+  [train] tra_06 attempts=1 final=PASS     1550.8 ms
+  [train] tra_07 attempts=1 final=REVISE    487.3 ms  UNSUPPORTED_ANSWER
+  [train] tra_08 attempts=1 final=PASS      886.4 ms
+  [train] tra_09 attempts=1 final=PASS     1064.2 ms
+  [train] tra_10 attempts=1 final=PASS      825.3 ms
+  [train] tra_11 attempts=1 final=PASS      790.5 ms
+  [train] tra_12 attempts=1 final=REVISE    622.3 ms  UNSUPPORTED_ANSWER
+  [train] tra_13 attempts=1 final=PASS     1143.6 ms
+  [train] tra_14 attempts=1 final=PASS      848.6 ms
+training: 12/14 correct, failures=[('tra_07', 'UNSUPPORTED_ANSWER'), ('tra_12', 'UNSUPPORTED_ANSWER')]
+candidate lessons: [('lesson_001', 'UNSUPPORTED_ANSWER'), ('lesson_002', 'CONTROLLED_OVERBROAD')]
+== validation (single attempt, so a lesson's effect is not hidden by the repair loop): system without any lesson ==
+  [val-before] val_01 attempts=1 final=PASS     1760.8 ms
+  [val-before] val_02 attempts=1 final=PASS     1044.7 ms
+  [val-before] val_03 attempts=1 final=PASS      800.6 ms
+  [val-before] val_04 attempts=1 final=REVISE    479.2 ms  UNSUPPORTED_ANSWER
+  [val-before] val_05 attempts=1 final=PASS     1136.1 ms
+  [val-before] val_06 attempts=1 final=PASS     1080.8 ms
+  [val-before] val_07 attempts=1 final=PASS     1168.9 ms
+  [val-before] val_08 attempts=1 final=PASS     1480.1 ms
+  [val-before] val_09 attempts=1 final=PASS      901.4 ms
+  [val-before] val_10 attempts=1 final=PASS      891.5 ms
+  [val-before] val_11 attempts=1 final=PASS      798.1 ms
+  [val-before] val_12 attempts=1 final=REVISE    886.9 ms  UNSUPPORTED_ANSWER
+  [val-before] val_13 attempts=1 final=PASS      886.5 ms
+  [val-before] val_14 attempts=1 final=PASS      871.3 ms
+== validation: add lesson_001 (UNSUPPORTED_ANSWER) ==
+  [val-after] val_01 attempts=1 final=PASS     1669.5 ms
+  [val-after] val_02 attempts=1 final=PASS     1054.3 ms
+  [val-after] val_03 attempts=1 final=PASS      831.1 ms
+  [val-after] val_04 attempts=1 final=PASS      309.1 ms
+  [val-after] val_05 attempts=1 final=PASS      842.5 ms
+  [val-after] val_06 attempts=1 final=PASS     1045.6 ms
+  [val-after] val_07 attempts=1 final=PASS      974.4 ms
+  [val-after] val_08 attempts=1 final=PASS     1374.6 ms
+  [val-after] val_09 attempts=1 final=PASS      345.2 ms
+  [val-after] val_10 attempts=1 final=PASS      293.2 ms
+  [val-after] val_11 attempts=1 final=PASS      799.5 ms
+  [val-after] val_12 attempts=1 final=PASS      288.9 ms
+  [val-after] val_13 attempts=1 final=PASS      982.2 ms
+  [val-after] val_14 attempts=1 final=PASS      889.4 ms
+   KEEP lesson_001: fixed=['val_04', 'val_12'] regressions=[] failures 2->0 unsupported 2->0
+== validation: add lesson_002 (CONTROLLED_OVERBROAD) ==
+  [val-after] val_01 attempts=1 final=PASS     1894.3 ms
+  [val-after] val_02 attempts=1 final=REVISE   1085.1 ms  WRONG_FACT
+  [val-after] val_03 attempts=1 final=PASS      797.3 ms
+  [val-after] val_04 attempts=1 final=PASS      297.9 ms
+  [val-after] val_05 attempts=1 final=PASS      788.3 ms
+  [val-after] val_06 attempts=1 final=PASS     1126.2 ms
+  [val-after] val_07 attempts=1 final=PASS     1084.7 ms
+  [val-after] val_08 attempts=1 final=PASS     1421.4 ms
+  [val-after] val_09 attempts=1 final=PASS      408.1 ms
+  [val-after] val_10 attempts=1 final=PASS      292.4 ms
+  [val-after] val_11 attempts=1 final=PASS      768.3 ms
+  [val-after] val_12 attempts=1 final=PASS      292.8 ms
+  [val-after] val_13 attempts=1 final=PASS      932.0 ms
+  [val-after] val_14 attempts=1 final=PASS     1071.1 ms
+   REJECT lesson_002: fixed=[] regressions=['val_02'] failures 0->1 unsupported 0->0
+kept lessons: ['lesson_001']
+== final test: baseline (18 questions) ==
+  [baseli] tes_01 attempts=1 final=PASS      996.1 ms
+  [baseli] tes_02 attempts=1 final=PASS      798.8 ms
+  [baseli] tes_03 attempts=1 final=PASS     1064.4 ms
+  [baseli] tes_04 attempts=1 final=REVISE    246.9 ms  UNSUPPORTED_ANSWER
+  [baseli] tes_05 attempts=1 final=REVISE    761.4 ms  UNSUPPORTED_ANSWER
+  [baseli] tes_06 attempts=1 final=PASS     1813.0 ms
+  [baseli] tes_07 attempts=1 final=PASS     1082.5 ms
+  [baseli] tes_08 attempts=1 final=PASS     1631.9 ms
+  [baseli] tes_09 attempts=1 final=PASS     1026.6 ms
+  [baseli] tes_10 attempts=1 final=PASS     1036.4 ms
+  [baseli] tes_11 attempts=1 final=PASS      950.5 ms
+  [baseli] tes_12 attempts=1 final=PASS     1045.7 ms
+  [baseli] tes_13 attempts=1 final=PASS     1546.4 ms
+  [baseli] tes_14 attempts=1 final=PASS      771.0 ms
+  [baseli] tes_15 attempts=1 final=REVISE    377.1 ms  UNSUPPORTED_ANSWER
+  [baseli] tes_16 attempts=1 final=PASS     1086.2 ms
+  [baseli] tes_17 attempts=1 final=PASS      791.5 ms
+  [baseli] tes_18 attempts=1 final=PASS      947.0 ms
+   {'questions': 18, 'correct': 15, 'incorrect': 3, 'avg_attempts': 1, 'avg_latency_ms': 998.5}
+== final test: evaluator_repair (18 questions) ==
+  [evalua] tes_01 attempts=1 final=PASS      802.4 ms
+  [evalua] tes_02 attempts=1 final=PASS      786.3 ms
+  [evalua] tes_03 attempts=1 final=PASS     1044.6 ms
+  [evalua] tes_04 attempts=2 final=PASS      513.9 ms
+  [evalua] tes_05 attempts=2 final=PASS     1006.3 ms
+  [evalua] tes_06 attempts=1 final=PASS     1673.6 ms
+  [evalua] tes_07 attempts=1 final=PASS     1137.6 ms
+  [evalua] tes_08 attempts=1 final=PASS     1573.1 ms
+  [evalua] tes_09 attempts=1 final=PASS      922.7 ms
+  [evalua] tes_10 attempts=1 final=PASS      907.6 ms
+  [evalua] tes_11 attempts=1 final=PASS     1003.2 ms
+  [evalua] tes_12 attempts=1 final=PASS     1043.2 ms
+  [evalua] tes_13 attempts=1 final=PASS     1552.8 ms
+  [evalua] tes_14 attempts=1 final=PASS      753.5 ms
+  [evalua] tes_15 attempts=2 final=PASS      703.4 ms
+  [evalua] tes_16 attempts=1 final=PASS     1059.9 ms
+  [evalua] tes_17 attempts=1 final=PASS      787.0 ms
+  [evalua] tes_18 attempts=1 final=PASS      939.5 ms
+   {'questions': 18, 'correct': 18, 'incorrect': 0, 'avg_attempts': 1.17, 'avg_latency_ms': 1011.7}
+== final test: lesson_memory (18 questions) ==
+  [lesson] tes_01 attempts=1 final=PASS      785.9 ms
+  [lesson] tes_02 attempts=1 final=PASS      812.2 ms
+  [lesson] tes_03 attempts=1 final=PASS     1078.0 ms
+  [lesson] tes_04 attempts=1 final=PASS      285.4 ms
+  [lesson] tes_05 attempts=1 final=PASS      268.2 ms
+  [lesson] tes_06 attempts=2 final=PASS     3495.2 ms
+  [lesson] tes_07 attempts=1 final=PASS     1202.8 ms
+  [lesson] tes_08 attempts=2 final=PASS     3130.1 ms
+  [lesson] tes_09 attempts=1 final=PASS     1003.1 ms
+  [lesson] tes_10 attempts=1 final=PASS      871.5 ms
+  [lesson] tes_11 attempts=1 final=PASS      328.2 ms
+  [lesson] tes_12 attempts=1 final=PASS     1184.4 ms
+  [lesson] tes_13 attempts=1 final=PASS     1499.2 ms
+  [lesson] tes_14 attempts=1 final=PASS      783.6 ms
+  [lesson] tes_15 attempts=1 final=PASS      299.6 ms
+  [lesson] tes_16 attempts=1 final=PASS      747.0 ms
+  [lesson] tes_17 attempts=1 final=PASS      786.1 ms
+  [lesson] tes_18 attempts=1 final=PASS      324.8 ms
+   {'questions': 18, 'correct': 18, 'incorrect': 0, 'avg_attempts': 1.11, 'avg_latency_ms': 1049.2}
+== final test: validated (18 questions) ==
+  [valida] tes_01 attempts=1 final=PASS      778.3 ms
+  [valida] tes_02 attempts=1 final=PASS      767.2 ms
+  [valida] tes_03 attempts=1 final=PASS     1040.0 ms
+  [valida] tes_04 attempts=1 final=PASS      296.6 ms
+  [valida] tes_05 attempts=1 final=PASS      270.7 ms
+  [valida] tes_06 attempts=1 final=PASS     1680.6 ms
+  [valida] tes_07 attempts=1 final=PASS     1051.4 ms
+  [valida] tes_08 attempts=1 final=PASS     1563.4 ms
+  [valida] tes_09 attempts=1 final=PASS      902.8 ms
+  [valida] tes_10 attempts=1 final=PASS      912.1 ms
+  [valida] tes_11 attempts=1 final=PASS      326.2 ms
+  [valida] tes_12 attempts=1 final=PASS     1001.0 ms
+  [valida] tes_13 attempts=1 final=PASS     1464.1 ms
+  [valida] tes_14 attempts=1 final=PASS      743.5 ms
+  [valida] tes_15 attempts=1 final=PASS      293.0 ms
+  [valida] tes_16 attempts=1 final=PASS      906.1 ms
+  [valida] tes_17 attempts=1 final=PASS      798.8 ms
+  [valida] tes_18 attempts=1 final=PASS      312.8 ms
+   {'questions': 18, 'correct': 18, 'incorrect': 0, 'avg_attempts': 1, 'avg_latency_ms': 839.4}
+== demo 1: revision sequence ==
+{
+  "question": "For fixture FX-9871-00005, which team is the home team and what is its home ground?",
+  "attempts": [
+    {
+      "attempt": 1,
+      "answer": "The home team is Sunnyvale Falcons.",
+      "forced_for_test": true,
+      "lessons_used": [],
+      "answer_latency_ms": 1.3,
+      "evaluation": {
+        "result": "REVISE",
+        "explanation": "The answer leaves out requested information: home ground.",
+        "feedback": "Your answer is missing: FX-9871-00005 home ground ('Fair Oaks Park'). Answer every part of the question using the facts provided.",
+        "failure_type": "OMITTED_FACT",
+        "missing_or_wrong": [
+          [
+            "FX-9871-00005",
+            "home_ground",
+            "Fair Oaks Park"
+          ]
+        ]
+      }
+    },
+    {
+      "attempt": 2,
+      "answer": "The home team for fixture FX-9871-00005 is Sunnyvale Falcons, and its home ground is Fair Oaks Park.",
+      "forced_for_test": false,
+      "lessons_used": [],
+      "answer_latency_ms": 1225.5,
+      "evaluation": {
+        "result": "PASS",
+        "explanation": "Every requested fact matches the reference data.",
+        "feedback": null,
+        "failure_type": null,
+        "missing_or_wrong": []
+      }
+    }
+  ],
+  "n_attempts": 2,
+  "final_answer": "The home team for fixture FX-9871-00005 is Sunnyvale Falcons, and its home ground is Fair Oaks Park.",
+  "final_result": "PASS",
+  "failure_type": null,
+  "latency_ms": 1227.1
+}
+== demo 2: lesson reuse ==
+{
+  "question": "Who painted the Mona Lisa?",
+  "lessons_in_store": [
+    {
+      "lesson_id": "lesson_001",
+      "failure_type": "UNSUPPORTED_ANSWER",
+      "created_at": "2026-11-06",
+      "use_count": 0,
+      "source": "training failures: tra_07, tra_12"
+    }
+  ],
+  "without_lessons": {
+    "question": "Who painted the Mona Lisa?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "answer": "The Mona Lisa was painted by Leonardo da Vinci.",
+        "forced_for_test": false,
+        "lessons_used": [],
+        "answer_latency_ms": 413.1,
+        "evaluation": {
+          "result": "REVISE",
+          "explanation": "The question is not about league fixtures, but the answer gives an unsupported answer.",
+          "feedback": "The reference data has no answer to this question. Say that you do not have that information; do not answer from general knowledge and do not state any team or ground.",
+          "failure_type": "UNSUPPORTED_ANSWER",
+          "missing_or_wrong": []
+        }
+      }
+    ],
+    "n_attempts": 1,
+    "final_answer": "The Mona Lisa was painted by Leonardo da Vinci.",
+    "final_result": "REVISE",
+    "failure_type": "UNSUPPORTED_ANSWER",
+    "latency_ms": 413.2
+  },
+  "with_lessons": {
+    "question": "Who painted the Mona Lisa?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "answer": "I do not have that information.",
+        "forced_for_test": false,
+        "lessons_used": [
+          "lesson_001"
+        ],
+        "answer_latency_ms": 318.9,
+        "evaluation": {
+          "result": "PASS",
+          "explanation": "The question is not about league fixtures, and the answer correctly says the information is not available.",
+          "feedback": null,
+          "failure_type": null,
+          "missing_or_wrong": []
+        }
+      }
+    ],
+    "n_attempts": 1,
+    "final_answer": "I do not have that information.",
+    "final_result": "PASS",
+    "failure_type": null,
+    "latency_ms": 318.9
+  },
+  "use_count_before": {
+    "lesson_001": 0
+  },
+  "use_count_after": {
+    "lesson_001": 1
+  },
+  "persisted_in_file": {
+    "lesson_001": 1
+  }
+}
+done in 149 s
+PS C:\Users\patel\data260-9871\code\agents_hw9>

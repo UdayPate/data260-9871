@@ -1,0 +1,26 @@
+[
+  {
+    "lesson_id": "lesson_001",
+    "failure_pattern": "The answer states something the league facts do not support (unknown fixture, data the league does not record, or a question that is not about the league).",
+    "correction": "If the provided facts do not contain what is asked, reply that you do not have that information; do not answer from general knowledge and do not guess.",
+    "created_at": "2026-11-06",
+    "use_count": 0,
+    "failure_type": "UNSUPPORTED_ANSWER",
+    "applies_when": [
+      "no_data"
+    ],
+    "source": "training failures: tra_07, tra_12"
+  },
+  {
+    "lesson_id": "lesson_002",
+    "failure_pattern": "(controlled test) Multi-part questions produce long answers.",
+    "correction": "If the question asks about more than one thing, answer only the first item and say the rest cannot be confirmed.",
+    "created_at": "2026-11-06",
+    "use_count": 0,
+    "failure_type": "CONTROLLED_OVERBROAD",
+    "applies_when": [
+      "multi_part"
+    ],
+    "source": "controlled: deliberately harmful, to demonstrate the validation gate"
+  }
+]

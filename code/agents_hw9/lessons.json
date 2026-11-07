@@ -1,0 +1,14 @@
+[
+  {
+    "lesson_id": "lesson_001",
+    "failure_pattern": "The answer states something the league facts do not support (unknown fixture, data the league does not record, or a question that is not about the league).",
+    "correction": "If the provided facts do not contain what is asked, reply that you do not have that information; do not answer from general knowledge and do not guess.",
+    "created_at": "2026-11-06",
+    "use_count": 1,
+    "failure_type": "UNSUPPORTED_ANSWER",
+    "applies_when": [
+      "no_data"
+    ],
+    "source": "training failures: tra_07, tra_12"
+  }
+]

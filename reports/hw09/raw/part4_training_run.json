@@ -1,0 +1,376 @@
+{
+  "run_at": "2026-11-06T19:27:14",
+  "summary": {
+    "questions": 14,
+    "correct": 12,
+    "incorrect": 2,
+    "avg_attempts": 1,
+    "avg_latency_ms": 1080.2
+  },
+  "failures": [
+    {
+      "id": "tra_07",
+      "failure_type": "UNSUPPORTED_ANSWER"
+    },
+    {
+      "id": "tra_12",
+      "failure_type": "UNSUPPORTED_ANSWER"
+    }
+  ],
+  "lessons_proposed": [
+    "lesson_001"
+  ],
+  "controlled_lesson": "lesson_002",
+  "results": [
+    {
+      "question": "For fixture FX-9871-04418, which team is the home team and what is its home ground?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "The home team for fixture FX-9871-04418 is the San Jose Tigers, and their home ground is Watson Park in San Jose.",
+          "forced_for_test": false,
+          "lessons_used": [],
+          "answer_latency_ms": 2725.5,
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "Every requested fact matches the reference data.",
+            "feedback": null,
+            "failure_type": null,
+            "missing_or_wrong": []
+          }
+        }
+      ],
+      "n_attempts": 1,
+      "final_answer": "The home team for fixture FX-9871-04418 is the San Jose Tigers, and their home ground is Watson Park in San Jose.",
+      "final_result": "PASS",
+      "failure_type": null,
+      "latency_ms": 2725.8,
+      "id": "tra_01"
+    },
+    {
+      "question": "Who is the referee for fixture FX-9871-01546?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "The referee for fixture FX-9871-01546 is not specified in the provided league database facts.",
+          "forced_for_test": false,
+          "lessons_used": [],
+          "answer_latency_ms": 736.3,
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "The question asks for something the league data does not record, and the answer correctly says the information is not available.",
+            "feedback": null,
+            "failure_type": null,
+            "missing_or_wrong": []
+          }
+        }
+      ],
+      "n_attempts": 1,
+      "final_answer": "The referee for fixture FX-9871-01546 is not specified in the provided league database facts.",
+      "final_result": "PASS",
+      "failure_type": null,
+      "latency_ms": 736.4,
+      "id": "tra_02"
+    },
+    {
+      "question": "What is the name of fixture FX-9871-01574 and where is it played?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "The fixture FX-9871-01574 is \"Panthers vs Bears (Volleyball #1572)\" and is played at Watson Park in San Jose.",
+          "forced_for_test": false,
+          "lessons_used": [],
+          "answer_latency_ms": 1396.1,
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "Every requested fact matches the reference data.",
+            "feedback": null,
+            "failure_type": null,
+            "missing_or_wrong": []
+          }
+        }
+      ],
+      "n_attempts": 1,
+      "final_answer": "The fixture FX-9871-01574 is \"Panthers vs Bears (Volleyball #1572)\" and is played at Watson Park in San Jose.",
+      "final_result": "PASS",
+      "failure_type": null,
+      "latency_ms": 1396.5,
+      "id": "tra_03"
+    },
+    {
+      "question": "How many player spots are available for fixture FX-9871-02996?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "There are 22 player spots available for fixture FX-9871-02996.",
+          "forced_for_test": false,
+          "lessons_used": [],
+          "answer_latency_ms": 864.2,
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "Every requested fact matches the reference data.",
+            "feedback": null,
+            "failure_type": null,
+            "missing_or_wrong": []
+          }
+        }
+      ],
+      "n_attempts": 1,
+      "final_answer": "There are 22 player spots available for fixture FX-9871-02996.",
+      "final_result": "PASS",
+      "failure_type": null,
+      "latency_ms": 864.3,
+      "id": "tra_04"
+    },
+    {
+      "question": "Who is playing in fixture FX-9871-01988 and how many spots are left?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "The fixture FX-9871-01988 features the Fremont Bears vs San Jose Panthers with 22 player spots available.",
+          "forced_for_test": false,
+          "lessons_used": [],
+          "answer_latency_ms": 1181.2,
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "Every requested fact matches the reference data.",
+            "feedback": null,
+            "failure_type": null,
+            "missing_or_wrong": []
+          }
+        }
+      ],
+      "n_attempts": 1,
+      "final_answer": "The fixture FX-9871-01988 features the Fremont Bears vs San Jose Panthers with 22 player spots available.",
+      "final_result": "PASS",
+      "failure_type": null,
+      "latency_ms": 1181.5,
+      "id": "tra_05"
+    },
+    {
+      "question": "What is the home ground of fixture FX-9871-01147 and of fixture FX-9871-03139?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "The home ground for both fixtures FX-9871-01147 and FX-9871-03139 is Cardoza Park, Milpitas.",
+          "forced_for_test": false,
+          "lessons_used": [],
+          "answer_latency_ms": 1550.6,
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "Every requested fact matches the reference data.",
+            "feedback": null,
+            "failure_type": null,
+            "missing_or_wrong": []
+          }
+        }
+      ],
+      "n_attempts": 1,
+      "final_answer": "The home ground for both fixtures FX-9871-01147 and FX-9871-03139 is Cardoza Park, Milpitas.",
+      "final_result": "PASS",
+      "failure_type": null,
+      "latency_ms": 1550.8,
+      "id": "tra_06"
+    },
+    {
+      "question": "What is the capital of France?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "The capital of France is Paris.",
+          "forced_for_test": false,
+          "lessons_used": [],
+          "answer_latency_ms": 487.3,
+          "evaluation": {
+            "result": "REVISE",
+            "explanation": "The question is not about league fixtures, but the answer gives an unsupported answer.",
+            "feedback": "The reference data has no answer to this question. Say that you do not have that information; do not answer from general knowledge and do not state any team or ground.",
+            "failure_type": "UNSUPPORTED_ANSWER",
+            "missing_or_wrong": []
+          }
+        }
+      ],
+      "n_attempts": 1,
+      "final_answer": "The capital of France is Paris.",
+      "final_result": "REVISE",
+      "failure_type": "UNSUPPORTED_ANSWER",
+      "latency_ms": 487.3,
+      "id": "tra_07"
+    },
+    {
+      "question": "What time does fixture FX-9871-04498 kick off?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "The kick-off time for fixture FX-9871-04498 is not provided in the given facts.",
+          "forced_for_test": false,
+          "lessons_used": [],
+          "answer_latency_ms": 886.3,
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "The question asks for something the league data does not record, and the answer correctly says the information is not available.",
+            "feedback": null,
+            "failure_type": null,
+            "missing_or_wrong": []
+          }
+        }
+      ],
+      "n_attempts": 1,
+      "final_answer": "The kick-off time for fixture FX-9871-04498 is not provided in the given facts.",
+      "final_result": "PASS",
+      "failure_type": null,
+      "latency_ms": 886.4,
+      "id": "tra_08"
+    },
+    {
+      "question": "Which team is the home team for fixture FX-9871-09101?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "The home team for fixture FX-9871-09101 cannot be determined because no such fixture exists in the league database.",
+          "forced_for_test": false,
+          "lessons_used": [],
+          "answer_latency_ms": 1064.1,
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "The question names fixture(s) FX-9871-09101 that are not in the reference data, and the answer correctly says the information is not available.",
+            "feedback": null,
+            "failure_type": null,
+            "missing_or_wrong": []
+          }
+        }
+      ],
+      "n_attempts": 1,
+      "final_answer": "The home team for fixture FX-9871-09101 cannot be determined because no such fixture exists in the league database.",
+      "final_result": "PASS",
+      "failure_type": null,
+      "latency_ms": 1064.2,
+      "id": "tra_09"
+    },
+    {
+      "question": "At which venue is fixture FX-9871-00173 played?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "The fixture FX-9871-00173 is played at Fair Oaks Park in Sunnyvale.",
+          "forced_for_test": false,
+          "lessons_used": [],
+          "answer_latency_ms": 825.2,
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "Every requested fact matches the reference data.",
+            "feedback": null,
+            "failure_type": null,
+            "missing_or_wrong": []
+          }
+        }
+      ],
+      "n_attempts": 1,
+      "final_answer": "The fixture FX-9871-00173 is played at Fair Oaks Park in Sunnyvale.",
+      "final_result": "PASS",
+      "failure_type": null,
+      "latency_ms": 825.3,
+      "id": "tra_10"
+    },
+    {
+      "question": "Who hosts fixture FX-9871-03205?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "The host for fixture FX-9871-03205 is the Milpitas Lions.",
+          "forced_for_test": false,
+          "lessons_used": [],
+          "answer_latency_ms": 790.3,
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "Every requested fact matches the reference data.",
+            "feedback": null,
+            "failure_type": null,
+            "missing_or_wrong": []
+          }
+        }
+      ],
+      "n_attempts": 1,
+      "final_answer": "The host for fixture FX-9871-03205 is the Milpitas Lions.",
+      "final_result": "PASS",
+      "failure_type": null,
+      "latency_ms": 790.5,
+      "id": "tra_11"
+    },
+    {
+      "question": "Write a short poem about autumn.",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "Autumn leaves dance on the breeze,  \nA golden hush, a fleeting peace.",
+          "forced_for_test": false,
+          "lessons_used": [],
+          "answer_latency_ms": 622.2,
+          "evaluation": {
+            "result": "REVISE",
+            "explanation": "The question is not about league fixtures, but the answer gives an unsupported answer.",
+            "feedback": "The reference data has no answer to this question. Say that you do not have that information; do not answer from general knowledge and do not state any team or ground.",
+            "failure_type": "UNSUPPORTED_ANSWER",
+            "missing_or_wrong": []
+          }
+        }
+      ],
+      "n_attempts": 1,
+      "final_answer": "Autumn leaves dance on the breeze,  \nA golden hush, a fleeting peace.",
+      "final_result": "REVISE",
+      "failure_type": "UNSUPPORTED_ANSWER",
+      "latency_ms": 622.3,
+      "id": "tra_12"
+    },
+    {
+      "question": "What is the name of fixture FX-9871-04728?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "The name of fixture FX-9871-04728 is \"Eagles vs Panthers (Basketball #4726)\".",
+          "forced_for_test": false,
+          "lessons_used": [],
+          "answer_latency_ms": 1143.0,
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "Every requested fact matches the reference data.",
+            "feedback": null,
+            "failure_type": null,
+            "missing_or_wrong": []
+          }
+        }
+      ],
+      "n_attempts": 1,
+      "final_answer": "The name of fixture FX-9871-04728 is \"Eagles vs Panthers (Basketball #4726)\".",
+      "final_result": "PASS",
+      "failure_type": null,
+      "latency_ms": 1143.6,
+      "id": "tra_13"
+    },
+    {
+      "question": "Who is playing in fixture FX-9871-01579?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "The fixture FX-9871-01579 features the Sunnyvale Lions vs Oakland Strikers.",
+          "forced_for_test": false,
+          "lessons_used": [],
+          "answer_latency_ms": 848.4,
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "Every requested fact matches the reference data.",
+            "feedback": null,
+            "failure_type": null,
+            "missing_or_wrong": []
+          }
+        }
+      ],
+      "n_attempts": 1,
+      "final_answer": "The fixture FX-9871-01579 features the Sunnyvale Lions vs Oakland Strikers.",
+      "final_result": "PASS",
+      "failure_type": null,
+      "latency_ms": 848.6,
+      "id": "tra_14"
+    }
+  ]
+}

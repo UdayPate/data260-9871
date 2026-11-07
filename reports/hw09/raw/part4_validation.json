@@ -1,0 +1,1152 @@
+{
+  "run_at": "2026-11-06T19:27:54",
+  "validation_questions": 14,
+  "baseline_summary": {
+    "questions": 14,
+    "correct": 12,
+    "incorrect": 2,
+    "avg_attempts": 1,
+    "avg_latency_ms": 1013.4
+  },
+  "results_without_lessons": [
+    {
+      "question": "What is the home ground of fixture FX-9871-04194 and of fixture FX-9871-00980?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "The home ground of fixture FX-9871-04194 is Mosswood Park, Oakland, and the home ground of fixture FX-9871-00980 is Backesto Park, San Jose.",
+          "forced_for_test": false,
+          "lessons_used": [],
+          "answer_latency_ms": 1760.7,
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "Every requested fact matches the reference data.",
+            "feedback": null,
+            "failure_type": null,
+            "missing_or_wrong": []
+          }
+        }
+      ],
+      "n_attempts": 1,
+      "final_answer": "The home ground of fixture FX-9871-04194 is Mosswood Park, Oakland, and the home ground of fixture FX-9871-00980 is Backesto Park, San Jose.",
+      "final_result": "PASS",
+      "failure_type": null,
+      "latency_ms": 1760.8,
+      "id": "val_01"
+    },
+    {
+      "question": "Who is playing in fixture FX-9871-00910 and how many spots are left?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "The fixture FX-9871-00910 features Oakland Lions vs San Jose Bears with 22 player spots available.",
+          "forced_for_test": false,
+          "lessons_used": [],
+          "answer_latency_ms": 1044.5,
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "Every requested fact matches the reference data.",
+            "feedback": null,
+            "failure_type": null,
+            "missing_or_wrong": []
+          }
+        }
+      ],
+      "n_attempts": 1,
+      "final_answer": "The fixture FX-9871-00910 features Oakland Lions vs San Jose Bears with 22 player spots available.",
+      "final_result": "PASS",
+      "failure_type": null,
+      "latency_ms": 1044.7,
+      "id": "val_02"
+    },
+    {
+      "question": "Who hosts fixture FX-9871-00345?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "The host for fixture FX-9871-00345 is the Fremont Wolves.",
+          "forced_for_test": false,
+          "lessons_used": [],
+          "answer_latency_ms": 800.5,
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "Every requested fact matches the reference data.",
+            "feedback": null,
+            "failure_type": null,
+            "missing_or_wrong": []
+          }
+        }
+      ],
+      "n_attempts": 1,
+      "final_answer": "The host for fixture FX-9871-00345 is the Fremont Wolves.",
+      "final_result": "PASS",
+      "failure_type": null,
+      "latency_ms": 800.6,
+      "id": "val_03"
+    },
+    {
+      "question": "What is 15 times 12?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "15 times 12 is 180.",
+          "forced_for_test": false,
+          "lessons_used": [],
+          "answer_latency_ms": 479.2,
+          "evaluation": {
+            "result": "REVISE",
+            "explanation": "The question is not about league fixtures, but the answer gives an unsupported answer.",
+            "feedback": "The reference data has no answer to this question. Say that you do not have that information; do not answer from general knowledge and do not state any team or ground.",
+            "failure_type": "UNSUPPORTED_ANSWER",
+            "missing_or_wrong": []
+          }
+        }
+      ],
+      "n_attempts": 1,
+      "final_answer": "15 times 12 is 180.",
+      "final_result": "REVISE",
+      "failure_type": "UNSUPPORTED_ANSWER",
+      "latency_ms": 479.2,
+      "id": "val_04"
+    },
+    {
+      "question": "Which team is the home team for fixture FX-9871-09102?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "The home team for fixture FX-9871-09102 cannot be determined because no such fixture exists in the league database.",
+          "forced_for_test": false,
+          "lessons_used": [],
+          "answer_latency_ms": 1136.0,
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "The question names fixture(s) FX-9871-09102 that are not in the reference data, and the answer correctly says the information is not available.",
+            "feedback": null,
+            "failure_type": null,
+            "missing_or_wrong": []
+          }
+        }
+      ],
+      "n_attempts": 1,
+      "final_answer": "The home team for fixture FX-9871-09102 cannot be determined because no such fixture exists in the league database.",
+      "final_result": "PASS",
+      "failure_type": null,
+      "latency_ms": 1136.1,
+      "id": "val_05"
+    },
+    {
+      "question": "For fixture FX-9871-01997, which team is the home team and what is its home ground?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "The home team for fixture FX-9871-01997 is the Sunnyvale Falcons, and their home ground is Fair Oaks Park.",
+          "forced_for_test": false,
+          "lessons_used": [],
+          "answer_latency_ms": 1080.6,
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "Every requested fact matches the reference data.",
+            "feedback": null,
+            "failure_type": null,
+            "missing_or_wrong": []
+          }
+        }
+      ],
+      "n_attempts": 1,
+      "final_answer": "The home team for fixture FX-9871-01997 is the Sunnyvale Falcons, and their home ground is Fair Oaks Park.",
+      "final_result": "PASS",
+      "failure_type": null,
+      "latency_ms": 1080.8,
+      "id": "val_06"
+    },
+    {
+      "question": "What is the name of fixture FX-9871-00165?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "The name of fixture FX-9871-00165 is \"Tigers vs Eagles (Basketball #163)\".",
+          "forced_for_test": false,
+          "lessons_used": [],
+          "answer_latency_ms": 1168.6,
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "Every requested fact matches the reference data.",
+            "feedback": null,
+            "failure_type": null,
+            "missing_or_wrong": []
+          }
+        }
+      ],
+      "n_attempts": 1,
+      "final_answer": "The name of fixture FX-9871-00165 is \"Tigers vs Eagles (Basketball #163)\".",
+      "final_result": "PASS",
+      "failure_type": null,
+      "latency_ms": 1168.9,
+      "id": "val_07"
+    },
+    {
+      "question": "What is the name of fixture FX-9871-03367 and where is it played?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "The fixture FX-9871-03367 is \"Falcons vs Warriors (Basketball #3365)\" and it is played at Cardoza Park in Milpitas.",
+          "forced_for_test": false,
+          "lessons_used": [],
+          "answer_latency_ms": 1479.9,
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "Every requested fact matches the reference data.",
+            "feedback": null,
+            "failure_type": null,
+            "missing_or_wrong": []
+          }
+        }
+      ],
+      "n_attempts": 1,
+      "final_answer": "The fixture FX-9871-03367 is \"Falcons vs Warriors (Basketball #3365)\" and it is played at Cardoza Park in Milpitas.",
+      "final_result": "PASS",
+      "failure_type": null,
+      "latency_ms": 1480.1,
+      "id": "val_08"
+    },
+    {
+      "question": "What time does fixture FX-9871-03969 kick off?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "The kick-off time for fixture FX-9871-03969 is not provided in the given facts.",
+          "forced_for_test": false,
+          "lessons_used": [],
+          "answer_latency_ms": 901.3,
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "The question asks for something the league data does not record, and the answer correctly says the information is not available.",
+            "feedback": null,
+            "failure_type": null,
+            "missing_or_wrong": []
+          }
+        }
+      ],
+      "n_attempts": 1,
+      "final_answer": "The kick-off time for fixture FX-9871-03969 is not provided in the given facts.",
+      "final_result": "PASS",
+      "failure_type": null,
+      "latency_ms": 901.4,
+      "id": "val_09"
+    },
+    {
+      "question": "What is the ticket price for fixture FX-9871-04515?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "The ticket price for fixture FX-9871-04515 is not provided in the league database facts.",
+          "forced_for_test": false,
+          "lessons_used": [],
+          "answer_latency_ms": 891.5,
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "The question asks for something the league data does not record, and the answer correctly says the information is not available.",
+            "feedback": null,
+            "failure_type": null,
+            "missing_or_wrong": []
+          }
+        }
+      ],
+      "n_attempts": 1,
+      "final_answer": "The ticket price for fixture FX-9871-04515 is not provided in the league database facts.",
+      "final_result": "PASS",
+      "failure_type": null,
+      "latency_ms": 891.5,
+      "id": "val_10"
+    },
+    {
+      "question": "How many open slots are left on fixture FX-9871-02034?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "There are 22 open slots left on fixture FX-9871-02034.",
+          "forced_for_test": false,
+          "lessons_used": [],
+          "answer_latency_ms": 798.0,
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "Every requested fact matches the reference data.",
+            "feedback": null,
+            "failure_type": null,
+            "missing_or_wrong": []
+          }
+        }
+      ],
+      "n_attempts": 1,
+      "final_answer": "There are 22 open slots left on fixture FX-9871-02034.",
+      "final_result": "PASS",
+      "failure_type": null,
+      "latency_ms": 798.1,
+      "id": "val_11"
+    },
+    {
+      "question": "Recommend a good pasta recipe.",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "I recommend trying a classic tomato and basil pasta dish with garlic, olive oil, and fresh mozzarella for a simple yet delicious meal.",
+          "forced_for_test": false,
+          "lessons_used": [],
+          "answer_latency_ms": 886.9,
+          "evaluation": {
+            "result": "REVISE",
+            "explanation": "The question is not about league fixtures, but the answer gives an unsupported answer.",
+            "feedback": "The reference data has no answer to this question. Say that you do not have that information; do not answer from general knowledge and do not state any team or ground.",
+            "failure_type": "UNSUPPORTED_ANSWER",
+            "missing_or_wrong": []
+          }
+        }
+      ],
+      "n_attempts": 1,
+      "final_answer": "I recommend trying a classic tomato and basil pasta dish with garlic, olive oil, and fresh mozzarella for a simple yet delicious meal.",
+      "final_result": "REVISE",
+      "failure_type": "UNSUPPORTED_ANSWER",
+      "latency_ms": 886.9,
+      "id": "val_12"
+    },
+    {
+      "question": "Who is playing in fixture FX-9871-04381?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "The teams playing in fixture FX-9871-04381 are the Oakland Sharks vs San Jose Tigers.",
+          "forced_for_test": false,
+          "lessons_used": [],
+          "answer_latency_ms": 886.4,
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "Every requested fact matches the reference data.",
+            "feedback": null,
+            "failure_type": null,
+            "missing_or_wrong": []
+          }
+        }
+      ],
+      "n_attempts": 1,
+      "final_answer": "The teams playing in fixture FX-9871-04381 are the Oakland Sharks vs San Jose Tigers.",
+      "final_result": "PASS",
+      "failure_type": null,
+      "latency_ms": 886.5,
+      "id": "val_13"
+    },
+    {
+      "question": "What is the home ground for fixture FX-9871-01488?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "The home ground for fixture FX-9871-01488 is Bushrod Park in Oakland.",
+          "forced_for_test": false,
+          "lessons_used": [],
+          "answer_latency_ms": 871.2,
+          "evaluation": {
+            "result": "PASS",
+            "explanation": "Every requested fact matches the reference data.",
+            "feedback": null,
+            "failure_type": null,
+            "missing_or_wrong": []
+          }
+        }
+      ],
+      "n_attempts": 1,
+      "final_answer": "The home ground for fixture FX-9871-01488 is Bushrod Park in Oakland.",
+      "final_result": "PASS",
+      "failure_type": null,
+      "latency_ms": 871.3,
+      "id": "val_14"
+    }
+  ],
+  "rule": "keep a lesson only if all four checks hold",
+  "decisions": [
+    {
+      "lesson_id": "lesson_001",
+      "failure_type": "UNSUPPORTED_ANSWER",
+      "source": "training failures: tra_07, tra_12",
+      "kept": true,
+      "checks": {
+        "no previously correct answer became wrong": true,
+        "at least one failing case fixed": true,
+        "failures did not increase": true,
+        "unsupported answers did not increase": true
+      },
+      "fixed": [
+        "val_04",
+        "val_12"
+      ],
+      "regressions": [],
+      "failures_before": 2,
+      "failures_after": 0,
+      "unsupported_before": 2,
+      "unsupported_after": 0,
+      "correct_before": 12,
+      "correct_after": 14,
+      "results_after": [
+        {
+          "question": "What is the home ground of fixture FX-9871-04194 and of fixture FX-9871-00980?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The home ground of fixture FX-9871-04194 is Mosswood Park, Oakland, and the home ground of fixture FX-9871-00980 is Backesto Park, San Jose.",
+              "forced_for_test": false,
+              "lessons_used": [],
+              "answer_latency_ms": 1669.5,
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "Every requested fact matches the reference data.",
+                "feedback": null,
+                "failure_type": null,
+                "missing_or_wrong": []
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The home ground of fixture FX-9871-04194 is Mosswood Park, Oakland, and the home ground of fixture FX-9871-00980 is Backesto Park, San Jose.",
+          "final_result": "PASS",
+          "failure_type": null,
+          "latency_ms": 1669.5,
+          "id": "val_01"
+        },
+        {
+          "question": "Who is playing in fixture FX-9871-00910 and how many spots are left?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The fixture FX-9871-00910 features Oakland Lions vs San Jose Bears with 22 player spots available.",
+              "forced_for_test": false,
+              "lessons_used": [],
+              "answer_latency_ms": 1054.0,
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "Every requested fact matches the reference data.",
+                "feedback": null,
+                "failure_type": null,
+                "missing_or_wrong": []
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The fixture FX-9871-00910 features Oakland Lions vs San Jose Bears with 22 player spots available.",
+          "final_result": "PASS",
+          "failure_type": null,
+          "latency_ms": 1054.3,
+          "id": "val_02"
+        },
+        {
+          "question": "Who hosts fixture FX-9871-00345?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The host for fixture FX-9871-00345 is the Fremont Wolves.",
+              "forced_for_test": false,
+              "lessons_used": [],
+              "answer_latency_ms": 830.9,
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "Every requested fact matches the reference data.",
+                "feedback": null,
+                "failure_type": null,
+                "missing_or_wrong": []
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The host for fixture FX-9871-00345 is the Fremont Wolves.",
+          "final_result": "PASS",
+          "failure_type": null,
+          "latency_ms": 831.1,
+          "id": "val_03"
+        },
+        {
+          "question": "What is 15 times 12?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "I do not have that information.",
+              "forced_for_test": false,
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "answer_latency_ms": 309.0,
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "The question is not about league fixtures, and the answer correctly says the information is not available.",
+                "feedback": null,
+                "failure_type": null,
+                "missing_or_wrong": []
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "I do not have that information.",
+          "final_result": "PASS",
+          "failure_type": null,
+          "latency_ms": 309.1,
+          "id": "val_04"
+        },
+        {
+          "question": "Which team is the home team for fixture FX-9871-09102?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The fixture FX-9871-09102 does not exist in the league database.",
+              "forced_for_test": false,
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "answer_latency_ms": 842.4,
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "The question names fixture(s) FX-9871-09102 that are not in the reference data, and the answer correctly says the information is not available.",
+                "feedback": null,
+                "failure_type": null,
+                "missing_or_wrong": []
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The fixture FX-9871-09102 does not exist in the league database.",
+          "final_result": "PASS",
+          "failure_type": null,
+          "latency_ms": 842.5,
+          "id": "val_05"
+        },
+        {
+          "question": "For fixture FX-9871-01997, which team is the home team and what is its home ground?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The home team for fixture FX-9871-01997 is the Sunnyvale Falcons, and their home ground is Fair Oaks Park.",
+              "forced_for_test": false,
+              "lessons_used": [],
+              "answer_latency_ms": 1045.4,
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "Every requested fact matches the reference data.",
+                "feedback": null,
+                "failure_type": null,
+                "missing_or_wrong": []
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The home team for fixture FX-9871-01997 is the Sunnyvale Falcons, and their home ground is Fair Oaks Park.",
+          "final_result": "PASS",
+          "failure_type": null,
+          "latency_ms": 1045.6,
+          "id": "val_06"
+        },
+        {
+          "question": "What is the name of fixture FX-9871-00165?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The name of fixture FX-9871-00165 is \"Tigers vs Eagles (Basketball #163)\".",
+              "forced_for_test": false,
+              "lessons_used": [],
+              "answer_latency_ms": 974.2,
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "Every requested fact matches the reference data.",
+                "feedback": null,
+                "failure_type": null,
+                "missing_or_wrong": []
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The name of fixture FX-9871-00165 is \"Tigers vs Eagles (Basketball #163)\".",
+          "final_result": "PASS",
+          "failure_type": null,
+          "latency_ms": 974.4,
+          "id": "val_07"
+        },
+        {
+          "question": "What is the name of fixture FX-9871-03367 and where is it played?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The fixture FX-9871-03367 is \"Falcons vs Warriors (Basketball #3365)\" and it is played at Cardoza Park in Milpitas.",
+              "forced_for_test": false,
+              "lessons_used": [],
+              "answer_latency_ms": 1374.4,
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "Every requested fact matches the reference data.",
+                "feedback": null,
+                "failure_type": null,
+                "missing_or_wrong": []
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The fixture FX-9871-03367 is \"Falcons vs Warriors (Basketball #3365)\" and it is played at Cardoza Park in Milpitas.",
+          "final_result": "PASS",
+          "failure_type": null,
+          "latency_ms": 1374.6,
+          "id": "val_08"
+        },
+        {
+          "question": "What time does fixture FX-9871-03969 kick off?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "I do not have that information.",
+              "forced_for_test": false,
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "answer_latency_ms": 345.1,
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "The question asks for something the league data does not record, and the answer correctly says the information is not available.",
+                "feedback": null,
+                "failure_type": null,
+                "missing_or_wrong": []
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "I do not have that information.",
+          "final_result": "PASS",
+          "failure_type": null,
+          "latency_ms": 345.2,
+          "id": "val_09"
+        },
+        {
+          "question": "What is the ticket price for fixture FX-9871-04515?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "I do not have that information.",
+              "forced_for_test": false,
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "answer_latency_ms": 293.1,
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "The question asks for something the league data does not record, and the answer correctly says the information is not available.",
+                "feedback": null,
+                "failure_type": null,
+                "missing_or_wrong": []
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "I do not have that information.",
+          "final_result": "PASS",
+          "failure_type": null,
+          "latency_ms": 293.2,
+          "id": "val_10"
+        },
+        {
+          "question": "How many open slots are left on fixture FX-9871-02034?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "There are 22 open slots left on fixture FX-9871-02034.",
+              "forced_for_test": false,
+              "lessons_used": [],
+              "answer_latency_ms": 799.4,
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "Every requested fact matches the reference data.",
+                "feedback": null,
+                "failure_type": null,
+                "missing_or_wrong": []
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "There are 22 open slots left on fixture FX-9871-02034.",
+          "final_result": "PASS",
+          "failure_type": null,
+          "latency_ms": 799.5,
+          "id": "val_11"
+        },
+        {
+          "question": "Recommend a good pasta recipe.",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "I do not have that information.",
+              "forced_for_test": false,
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "answer_latency_ms": 288.8,
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "The question is not about league fixtures, and the answer correctly says the information is not available.",
+                "feedback": null,
+                "failure_type": null,
+                "missing_or_wrong": []
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "I do not have that information.",
+          "final_result": "PASS",
+          "failure_type": null,
+          "latency_ms": 288.9,
+          "id": "val_12"
+        },
+        {
+          "question": "Who is playing in fixture FX-9871-04381?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The teams playing in fixture FX-9871-04381 are the Oakland Sharks vs San Jose Tigers.",
+              "forced_for_test": false,
+              "lessons_used": [],
+              "answer_latency_ms": 981.9,
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "Every requested fact matches the reference data.",
+                "feedback": null,
+                "failure_type": null,
+                "missing_or_wrong": []
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The teams playing in fixture FX-9871-04381 are the Oakland Sharks vs San Jose Tigers.",
+          "final_result": "PASS",
+          "failure_type": null,
+          "latency_ms": 982.2,
+          "id": "val_13"
+        },
+        {
+          "question": "What is the home ground for fixture FX-9871-01488?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The home ground for fixture FX-9871-01488 is Bushrod Park in Oakland.",
+              "forced_for_test": false,
+              "lessons_used": [],
+              "answer_latency_ms": 889.2,
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "Every requested fact matches the reference data.",
+                "feedback": null,
+                "failure_type": null,
+                "missing_or_wrong": []
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The home ground for fixture FX-9871-01488 is Bushrod Park in Oakland.",
+          "final_result": "PASS",
+          "failure_type": null,
+          "latency_ms": 889.4,
+          "id": "val_14"
+        }
+      ]
+    },
+    {
+      "lesson_id": "lesson_002",
+      "failure_type": "CONTROLLED_OVERBROAD",
+      "source": "controlled: deliberately harmful, to demonstrate the validation gate",
+      "kept": false,
+      "checks": {
+        "no previously correct answer became wrong": false,
+        "at least one failing case fixed": false,
+        "failures did not increase": false,
+        "unsupported answers did not increase": true
+      },
+      "fixed": [],
+      "regressions": [
+        "val_02"
+      ],
+      "failures_before": 0,
+      "failures_after": 1,
+      "unsupported_before": 0,
+      "unsupported_after": 0,
+      "correct_before": 14,
+      "correct_after": 13,
+      "results_after": [
+        {
+          "question": "What is the home ground of fixture FX-9871-04194 and of fixture FX-9871-00980?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The home ground of fixture FX-9871-04194 is Mosswood Park, Oakland, and the home ground of fixture FX-9871-00980 is Backesto Park, San Jose.",
+              "forced_for_test": false,
+              "lessons_used": [
+                "lesson_002"
+              ],
+              "answer_latency_ms": 1894.2,
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "Every requested fact matches the reference data.",
+                "feedback": null,
+                "failure_type": null,
+                "missing_or_wrong": []
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The home ground of fixture FX-9871-04194 is Mosswood Park, Oakland, and the home ground of fixture FX-9871-00980 is Backesto Park, San Jose.",
+          "final_result": "PASS",
+          "failure_type": null,
+          "latency_ms": 1894.3,
+          "id": "val_01"
+        },
+        {
+          "question": "Who is playing in fixture FX-9871-00910 and how many spots are left?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The fixture FX-9871-00910 is between Oakland Lions and Santa Clara Bears, and there are 22 spots left.",
+              "forced_for_test": false,
+              "lessons_used": [
+                "lesson_002"
+              ],
+              "answer_latency_ms": 1084.8,
+              "evaluation": {
+                "result": "REVISE",
+                "explanation": "The answer contains a value that does not match the reference data.",
+                "feedback": "Wrong value(s): teams: 'santa clara bears' is not the value for the fixture asked about. Reference: FX-9871-00910: teams = Oakland Lions / San Jose Bears, spots = 22",
+                "failure_type": "WRONG_FACT",
+                "missing_or_wrong": [
+                  [
+                    "FX-9871-00910",
+                    "teams",
+                    "santa clara bears"
+                  ]
+                ]
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The fixture FX-9871-00910 is between Oakland Lions and Santa Clara Bears, and there are 22 spots left.",
+          "final_result": "REVISE",
+          "failure_type": "WRONG_FACT",
+          "latency_ms": 1085.1,
+          "id": "val_02"
+        },
+        {
+          "question": "Who hosts fixture FX-9871-00345?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The host for fixture FX-9871-00345 is the Fremont Wolves.",
+              "forced_for_test": false,
+              "lessons_used": [],
+              "answer_latency_ms": 797.2,
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "Every requested fact matches the reference data.",
+                "feedback": null,
+                "failure_type": null,
+                "missing_or_wrong": []
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The host for fixture FX-9871-00345 is the Fremont Wolves.",
+          "final_result": "PASS",
+          "failure_type": null,
+          "latency_ms": 797.3,
+          "id": "val_03"
+        },
+        {
+          "question": "What is 15 times 12?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "I do not have that information.",
+              "forced_for_test": false,
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "answer_latency_ms": 297.9,
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "The question is not about league fixtures, and the answer correctly says the information is not available.",
+                "feedback": null,
+                "failure_type": null,
+                "missing_or_wrong": []
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "I do not have that information.",
+          "final_result": "PASS",
+          "failure_type": null,
+          "latency_ms": 297.9,
+          "id": "val_04"
+        },
+        {
+          "question": "Which team is the home team for fixture FX-9871-09102?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The fixture FX-9871-09102 does not exist in the league database.",
+              "forced_for_test": false,
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "answer_latency_ms": 788.3,
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "The question names fixture(s) FX-9871-09102 that are not in the reference data, and the answer correctly says the information is not available.",
+                "feedback": null,
+                "failure_type": null,
+                "missing_or_wrong": []
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The fixture FX-9871-09102 does not exist in the league database.",
+          "final_result": "PASS",
+          "failure_type": null,
+          "latency_ms": 788.3,
+          "id": "val_05"
+        },
+        {
+          "question": "For fixture FX-9871-01997, which team is the home team and what is its home ground?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The home team for fixture FX-9871-01997 is the Sunnyvale Falcons, and its home ground is Fair Oaks Park.",
+              "forced_for_test": false,
+              "lessons_used": [
+                "lesson_002"
+              ],
+              "answer_latency_ms": 1126.0,
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "Every requested fact matches the reference data.",
+                "feedback": null,
+                "failure_type": null,
+                "missing_or_wrong": []
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The home team for fixture FX-9871-01997 is the Sunnyvale Falcons, and its home ground is Fair Oaks Park.",
+          "final_result": "PASS",
+          "failure_type": null,
+          "latency_ms": 1126.2,
+          "id": "val_06"
+        },
+        {
+          "question": "What is the name of fixture FX-9871-00165?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The name of fixture FX-9871-00165 is \"Tigers vs Eagles (Basketball #163)\".",
+              "forced_for_test": false,
+              "lessons_used": [],
+              "answer_latency_ms": 1084.4,
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "Every requested fact matches the reference data.",
+                "feedback": null,
+                "failure_type": null,
+                "missing_or_wrong": []
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The name of fixture FX-9871-00165 is \"Tigers vs Eagles (Basketball #163)\".",
+          "final_result": "PASS",
+          "failure_type": null,
+          "latency_ms": 1084.7,
+          "id": "val_07"
+        },
+        {
+          "question": "What is the name of fixture FX-9871-03367 and where is it played?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The fixture FX-9871-03367 is \"Falcons vs Warriors (Basketball #3365)\" and it is played at Cardoza Park in Milpitas.",
+              "forced_for_test": false,
+              "lessons_used": [
+                "lesson_002"
+              ],
+              "answer_latency_ms": 1421.2,
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "Every requested fact matches the reference data.",
+                "feedback": null,
+                "failure_type": null,
+                "missing_or_wrong": []
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The fixture FX-9871-03367 is \"Falcons vs Warriors (Basketball #3365)\" and it is played at Cardoza Park in Milpitas.",
+          "final_result": "PASS",
+          "failure_type": null,
+          "latency_ms": 1421.4,
+          "id": "val_08"
+        },
+        {
+          "question": "What time does fixture FX-9871-03969 kick off?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "I do not have that information.",
+              "forced_for_test": false,
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "answer_latency_ms": 408.1,
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "The question asks for something the league data does not record, and the answer correctly says the information is not available.",
+                "feedback": null,
+                "failure_type": null,
+                "missing_or_wrong": []
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "I do not have that information.",
+          "final_result": "PASS",
+          "failure_type": null,
+          "latency_ms": 408.1,
+          "id": "val_09"
+        },
+        {
+          "question": "What is the ticket price for fixture FX-9871-04515?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "I do not have that information.",
+              "forced_for_test": false,
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "answer_latency_ms": 292.3,
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "The question asks for something the league data does not record, and the answer correctly says the information is not available.",
+                "feedback": null,
+                "failure_type": null,
+                "missing_or_wrong": []
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "I do not have that information.",
+          "final_result": "PASS",
+          "failure_type": null,
+          "latency_ms": 292.4,
+          "id": "val_10"
+        },
+        {
+          "question": "How many open slots are left on fixture FX-9871-02034?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "There are 22 open slots left on fixture FX-9871-02034.",
+              "forced_for_test": false,
+              "lessons_used": [],
+              "answer_latency_ms": 768.2,
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "Every requested fact matches the reference data.",
+                "feedback": null,
+                "failure_type": null,
+                "missing_or_wrong": []
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "There are 22 open slots left on fixture FX-9871-02034.",
+          "final_result": "PASS",
+          "failure_type": null,
+          "latency_ms": 768.3,
+          "id": "val_11"
+        },
+        {
+          "question": "Recommend a good pasta recipe.",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "I do not have that information.",
+              "forced_for_test": false,
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "answer_latency_ms": 292.7,
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "The question is not about league fixtures, and the answer correctly says the information is not available.",
+                "feedback": null,
+                "failure_type": null,
+                "missing_or_wrong": []
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "I do not have that information.",
+          "final_result": "PASS",
+          "failure_type": null,
+          "latency_ms": 292.8,
+          "id": "val_12"
+        },
+        {
+          "question": "Who is playing in fixture FX-9871-04381?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The teams playing in fixture FX-9871-04381 are the Oakland Sharks vs San Jose Tigers.",
+              "forced_for_test": false,
+              "lessons_used": [],
+              "answer_latency_ms": 931.7,
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "Every requested fact matches the reference data.",
+                "feedback": null,
+                "failure_type": null,
+                "missing_or_wrong": []
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The teams playing in fixture FX-9871-04381 are the Oakland Sharks vs San Jose Tigers.",
+          "final_result": "PASS",
+          "failure_type": null,
+          "latency_ms": 932.0,
+          "id": "val_13"
+        },
+        {
+          "question": "What is the home ground for fixture FX-9871-01488?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The home ground for fixture FX-9871-01488 is Bushrod Park in Oakland.",
+              "forced_for_test": false,
+              "lessons_used": [],
+              "answer_latency_ms": 1070.9,
+              "evaluation": {
+                "result": "PASS",
+                "explanation": "Every requested fact matches the reference data.",
+                "feedback": null,
+                "failure_type": null,
+                "missing_or_wrong": []
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The home ground for fixture FX-9871-01488 is Bushrod Park in Oakland.",
+          "final_result": "PASS",
+          "failure_type": null,
+          "latency_ms": 1071.1,
+          "id": "val_14"
+        }
+      ]
+    }
+  ],
+  "kept": [
+    "lesson_001"
+  ]
+}
