@@ -1,0 +1,33 @@
+[PASS] correct simple answer -> PASS  Every requested fact matches the reference data.
+[PASS] compound answer missing the ground -> REVISE / OMITTED_FACT, feedback quotes the reference ground  Your answer is missing: FX-9871-00004 home ground ('Central Park Softball Field'). Answer every part of the question using the facts provided.
+[PASS] compound answer with both facts -> PASS  
+[PASS] ground without the city is accepted  
+[PASS] another fixture's team -> REVISE / WRONG_FACT  Wrong value(s): home team: 'oakland titans' is not the value for the fixture asked about. Reference: FX-9871-00004: home team = Santa Clara Strikers
+[PASS] spots: right number -> PASS  
+[PASS] spots: wrong number -> REVISE  The answer contains a value that does not match the reference data.
+[PASS] spots: digits of the fixture code are not mistaken for the answer  
+[PASS] two fixtures: both grounds -> PASS (the second fixture's ground is not 'foreign')  
+[PASS] two fixtures: only one ground -> OMITTED_FACT  Your answer is missing: FX-9871-00005 home ground ('Fair Oaks Park'). Answer every part of the question using the facts provided.
+[PASS] unrelated question answered -> REVISE / UNSUPPORTED_ANSWER  
+[PASS] unrelated question politely declined -> PASS  
+[PASS] unknown fixture with an invented team -> REVISE  
+[PASS] unknown fixture reported as not found -> PASS  
+[PASS] unrecorded attribute invented -> REVISE  
+[PASS] unrecorded attribute declined -> PASS  
+[PASS] a refusal that still leaks a team name -> REVISE  
+[PASS] repair: fails then passes -> 2 attempts, final PASS  2 attempts
+[PASS] repair: the second prompt carries the evaluator feedback and the previous answer  
+[PASS] stops after the second attempt even if still wrong  
+[PASS] baseline: one attempt only, no repair  
+[PASS] a first-attempt PASS stops at 1 attempt  
+[PASS] controlled test: forced incomplete first answer is marked and repaired  
+[PASS] a relevant lesson is loaded into the prompt and counted; an irrelevant one is not  [1, 0]
+[PASS] lesson fields  
+[PASS] lessons_only variant (validation gate): lessons loaded, a single attempt  
+[PASS] reference holds the whole fixtures table (FX-9871-00005 exists, FX-9871-09999 does not)  5000
+[PASS] baseline and repair variants load no lessons  
+[PASS] lesson variants use a private copy (the store file is never mutated by a run)  
+[PASS] input files contain only id + question (no expected answers)  
+[PASS] no question appears in two input files  
+
+31/31 checks passed
