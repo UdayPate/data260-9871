@@ -44,8 +44,8 @@ DOMAIN\_ID & 7 -- Community sports league fixtures \\\hline
 \textbf{Local model used:} qwen3:8b via Ollama (thinking off; sampling seed 9871 and temperature 0 in Part 4) for the HW8 agent pipeline (Part 2) and the Part 4 Answering Agent; sentence-transformers/all-MiniLM-L6-v2 for the embeddings. \\
 \textbf{Cache:} Redis Stack 7.4.0 (\texttt{redis/redis-stack-server}, RediSearch vector index, FLAT, cosine) in docker compose; MySQL \texttt{s9871\_rel}; every Redis key starts with \texttt{s9871:}. \\
 \textbf{Repository:} \url{https://github.com/UdayPate/data260-9871} \\
-\textbf{Tagged commit:} PLACEHOLDER\_HASH (to be filled in after the final commit and hw9 tag) \\
-{\footnotesize\url{https://github.com/UdayPate/data260-9871/tree/PLACEHOLDER_HASH}} \\
+\textbf{Tagged commit:} 210badc829ee0e14ce73ed89de7a09f44e06cb30 (tag: hw9) \\
+{\footnotesize\url{https://github.com/UdayPate/data260-9871/tree/210badc829ee0e14ce73ed89de7a09f44e06cb30}} \\
 \textbf{Collaborator access:} confirmed working for Sbnikitha and supriyaselvanganesan.
 
 \section*{Part 1 -- Redis View Counter}
@@ -859,7 +859,7 @@ kept lessons: ['lesson_001']
 \item Limitation: the Evaluator recognises what a question asks with keyword patterns and checks the answer by string matching, so an unusual phrasing or a differently worded correct answer can be mis-scored; only 18 test questions were used, and the failures are concentrated in one pattern (answering off-topic questions), so the results do not show how the lessons would behave on other kinds of failure.
 \end{itemize}
 \section*{Self-check (verification.json)}
-\texttt{verify\_\allowbreak{}hw09.py} runs the real system and 13 objective checks (commit \texttt{6c2ef77}, SEED 9871, VERIFY\_\allowbreak{}SEED 269871): 13/13 passed. It was also run against three deliberately broken states and failed where it should (\texttt{raw/\allowbreak{}verify\_\allowbreak{}broken\_\allowbreak{}states.txt}: a missing file -> 9/12, Redis stopped -> 7/12, test\_\allowbreak{}data.json edited after commit -> 11/12).
+\texttt{verify\_\allowbreak{}hw09.py} runs the real system and 13 objective checks (commit \texttt{210badc}, SEED 9871, VERIFY\_\allowbreak{}SEED 269871): 13/13 passed. It was also run against three deliberately broken states and failed where it should (\texttt{raw/\allowbreak{}verify\_\allowbreak{}broken\_\allowbreak{}states.txt}: a missing file -> 9/12, Redis stopped -> 7/12, test\_\allowbreak{}data.json edited after commit -> 11/12).
 
 \begin{center}
 {\footnotesize\setlength{\tabcolsep}{3pt}

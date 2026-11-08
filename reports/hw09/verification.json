@@ -1,13 +1,15 @@
 {
   "homework": 9,
   "sid4": "9871",
-  "commit_hash": "6c2ef7705279a81410c8a9de5e25a6e1450a7a27",
-  "tracked_files_modified_since_commit": [],
+  "commit_hash": "210badc829ee0e14ce73ed89de7a09f44e06cb30",
+  "tracked_files_modified_since_commit": [
+    " M reports/hw09/verification.json"
+  ],
   "model_config": "qwen3:8b via Ollama (thinking off, temperature 0, seed 9871) for the Part 4 agents; Part 2/3 caches: sentence-transformers/all-MiniLM-L6-v2 + Redis Stack 7.4 (RediSearch FLAT, COSINE); facts from MySQL s9871_rel",
   "SEED": "9871",
   "VERIFY_SEED": "269871",
   "port_base": 8871,
-  "run_at": "2026-11-06T19:47:57",
+  "run_at": "2026-11-07T16:27:31",
   "checks": [
     {
       "check": "required files exist",
@@ -18,7 +20,7 @@
     {
       "check": "Services: Redis Stack (RediSearch) and MySQL s9871_rel are up",
       "passed": true,
-      "detail": "Redis PING=True, modules=['RedisCompat', 'redisgears_2', 'search', 'timeseries', 'ReJSON', 'bf']; MySQL fixtures rows=5000",
+      "detail": "Redis PING=True, modules=['bf', 'RedisCompat', 'redisgears_2', 'search', 'ReJSON', 'timeseries']; MySQL fixtures rows=5000",
       "seconds": 0.9
     },
     {
@@ -31,13 +33,13 @@
       "check": "Part 2: semantic cache - miss, duplicate hit, paraphrase hit, unrelated miss, rejected answer not cached, hit/miss logged",
       "passed": true,
       "detail": "miss/dup/paraphrase/unrelated -> is_cached [False, True, True, False], paraphrase similarity 0.8824, stub agent ran 3x, rejected answer cached: False",
-      "seconds": 13.4
+      "seconds": 88.3
     },
     {
       "check": "Part 3: the 40 labels in cache_cases.yaml agree with the database",
       "passed": true,
       "detail": "10/10 checks passed",
-      "seconds": 0.0
+      "seconds": 0.1
     },
     {
       "check": "Part 3: the threshold sweep reproduces the committed hit and false-hit counts",
@@ -55,13 +57,13 @@
       "check": "Part 4: offline agent/evaluator/controller/lesson tests",
       "passed": true,
       "detail": "31/31 checks passed",
-      "seconds": 4.6
+      "seconds": 5.0
     },
     {
       "check": "Part 4: dataset files unchanged since commit; inputs hold only id + question",
       "passed": true,
       "detail": "changed since commit: none; input files hold only id+question: True; sizes [14, 14, 18]",
-      "seconds": 0.5
+      "seconds": 0.3
     },
     {
       "check": "Part 4: lesson validation decisions follow the four rules; lessons.json holds only the kept lessons",
@@ -79,7 +81,7 @@
       "check": "Part 4: REAL model - forced incomplete answer is repaired in 2 attempts; off-topic question declined with the kept lesson",
       "passed": true,
       "detail": "forced incomplete answer -> OMITTED_FACT -> revised -> PASS in 2 attempts; off-topic question with lessons ['lesson_001']: PASS ('I do not have that information.')",
-      "seconds": 11.5
+      "seconds": 3.9
     },
     {
       "check": "Ruff passes on the HW9 code",
