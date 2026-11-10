@@ -31,6 +31,7 @@ from pathlib import Path
 
 from confluent_kafka import Consumer, KafkaError, Producer
 
+import tracing
 from common import BOOTSTRAP, PREFIX, setup_logging
 
 INBOX, TASKS, DRAFTS, FINAL = (f"{PREFIX}_{t}" for t in ("inbox", "tasks", "drafts", "final"))
@@ -146,6 +147,10 @@ def run_stage(stage: str, in_topic: str, out_topic: str, group: str, handler) ->
                 commit(msg, "duplicate")
             continue
 
+        t_start = tracing.now_ms()
+        sent_at = tracing.kafka_ms(msg)
+        if sent_at is not None:  # HW10 tracing: time the message sat in the topic before this stage picked it up
+            tracing.emit(corr, f"queue_{in_topic.split('_', 1)[1]}", sent_at, t_start, topic=in_topic, partition=msg.partition(), offset=msg.offset())
         attempt, out, error = 0, None, None
         while running[0]:
             attempt += 1
@@ -159,6 +164,9 @@ def run_stage(stage: str, in_topic: str, out_topic: str, group: str, handler) ->
                 if POISON == "dlq" and attempt >= MAX_ATTEMPTS:
                     break
                 time.sleep(RETRY_PAUSE_S)
+        if out is not None or error:
+            tracing.emit(corr, stage, t_start, tracing.now_ms(), "ok" if out is not None else "error", None if out is not None else error,
+                         attempts=attempt, instance=INSTANCE or None)
         if out is None and not (POISON == "dlq" and attempt >= MAX_ATTEMPTS and error):
             break  # shutting down in the middle of retries: leave the offset uncommitted
         if out is None:

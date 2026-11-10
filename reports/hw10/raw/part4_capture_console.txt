@@ -1,0 +1,57 @@
+2026-11-10 11:46:27.190 [harness] topics reset: s9871_inbox(1 partition), s9871_tasks(2 partitions), s9871_drafts(1 partition), s9871_final(1 partition), s9871_dead_letter(1 partition)
+warm-up (no spans): loading qwen3 through the pipeline ...
+warm-up status: approved
+
+miss : is_cached=False status=approved 4062 ms trace=2505a50d-07d2-4fa4-aa1a-df8b550bcd6c
+hit  : is_cached=True status=approved 11 ms trace=6f8c8309-bd42-4daa-9646-44f334e887a0
+replacing the Writer with one whose model endpoint is unreachable; waiting for the group to rebalance ...
+failed: is_cached=False status=timeout 45236 ms trace=5c4340ff-061d-4449-8e23-17e884e13047
+
+--- cache MISS (successful): trace_id=2505a50d-07d2-4fa4-aa1a-df8b550bcd6c
+  11:46:52.024  11:46:52.035       11.0 ms  cache_lookup  ok     {'path': 'miss'}
+  11:46:52.024  11:46:56.086     4062.4 ms  request       ok     {'path': 'miss', 'pipeline_status': 'approved'}
+  11:46:52.035  11:46:52.066       30.7 ms  facts_lookup  ok     
+  11:46:52.067  11:46:52.069        3.0 ms  queue_inbox   ok     
+  11:46:52.067  11:46:52.069        2.0 ms  inbox         ok     
+  11:46:52.069  11:46:54.159     2089.1 ms  planner       ok     {'attempts': 1}
+  11:46:54.159  11:46:54.210       51.1 ms  queue_tasks   ok     
+  11:46:54.210  11:46:55.163      953.8 ms  writer        ok     {'attempts': 1}
+  11:46:55.164  11:46:55.207       43.4 ms  queue_drafts  ok     
+  11:46:55.207  11:46:56.081      874.4 ms  reviewer      ok     {'attempts': 1}
+  11:46:56.082  11:46:56.084        3.0 ms  final         ok     {'pipeline_status': 'approved'}
+  11:46:56.085  11:46:56.086        0.5 ms  cache_store   ok     {'stored': True}
+
+--- cache HIT: trace_id=6f8c8309-bd42-4daa-9646-44f334e887a0
+  11:46:56.087  11:46:56.097       10.1 ms  cache_lookup  ok     {'path': 'hit', 'similarity': 1.0}
+  11:46:56.087  11:46:56.097       10.5 ms  request       ok     {'path': 'hit', 'pipeline_status': 'approved'}
+
+--- FAILED: trace_id=5c4340ff-061d-4449-8e23-17e884e13047
+  11:47:05.803  11:47:05.819       15.2 ms  cache_lookup  ok     {'path': 'miss', 'similarity': 0.4509}
+  11:47:05.803  11:47:51.039    45235.7 ms  request       error pipeline status=timeout {'path': 'miss', 'pipeline_status': 'timeout'}
+  11:47:05.820  11:47:05.821        1.0 ms  facts_lookup  ok     
+  11:47:05.822  11:47:05.824        2.4 ms  queue_inbox   ok     
+  11:47:05.822  11:47:05.823        1.7 ms  inbox         ok     
+  11:47:05.823  11:47:51.039    45215.8 ms  final         error no message on s9871_final within 45 s 
+  11:47:05.824  11:47:08.216     2392.4 ms  planner       ok     {'attempts': 1}
+  11:47:08.217  11:47:08.274       57.5 ms  queue_tasks   ok     
+  11:47:08.274  11:47:18.582    10308.3 ms  writer        error ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it {'attempts': 3}
+  11:47:51.039  11:47:51.039        0.0 ms  cache_store   ok     {'stored': False}
+
+{
+  "captured_at": "2026-11-10T11:47:53",
+  "spans_file": "spans_traces.jsonl",
+  "cache_miss_success": {
+    "trace_id": "2505a50d-07d2-4fa4-aa1a-df8b550bcd6c",
+    "question": "Which team is the home team for fixture FX-9871-00012?"
+  },
+  "cache_hit": {
+    "trace_id": "6f8c8309-bd42-4daa-9646-44f334e887a0",
+    "question": "Which team is the home team for fixture FX-9871-00012?"
+  },
+  "failed": {
+    "trace_id": "5c4340ff-061d-4449-8e23-17e884e13047",
+    "question": "How many open player slots are left on fixture FX-9871-00031?",
+    "failing_stage": "writer",
+    "error": "ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it"
+  }
+}

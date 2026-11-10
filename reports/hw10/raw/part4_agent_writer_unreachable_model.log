@@ -1,0 +1,11 @@
+2026-11-10 11:47:05.644 [writer] Assigned partitions: [0, 1]
+2026-11-10 11:47:05.644 [writer] Consumer is ready and listening... topic=s9871_tasks group=s9871_writers_hw10_691a27 mode=fixed idempotent=True commit=after poison=dlq
+2026-11-10 11:47:08.274 [writer] RECEIVED topic=s9871_tasks partition=1 offset=1 corr=5c4340ff-061d-4449-8e23-17e884e13047
+2026-11-10 11:47:08.274 [writer] WORK start corr=5c4340ff-061d-4449-8e23-17e884e13047
+2026-11-10 11:47:12.514 [writer] ATTEMPT 1/3 failed corr=5c4340ff-061d-4449-8e23-17e884e13047: ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+2026-11-10 11:47:13.015 [writer] WORK start corr=5c4340ff-061d-4449-8e23-17e884e13047
+2026-11-10 11:47:15.545 [writer] ATTEMPT 2/3 failed corr=5c4340ff-061d-4449-8e23-17e884e13047: ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+2026-11-10 11:47:16.045 [writer] WORK start corr=5c4340ff-061d-4449-8e23-17e884e13047
+2026-11-10 11:47:18.582 [writer] ATTEMPT 3/3 failed corr=5c4340ff-061d-4449-8e23-17e884e13047: ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+2026-11-10 11:47:18.836 [writer] DEAD-LETTERED corr=5c4340ff-061d-4449-8e23-17e884e13047 after 3 attempts -> topic=s9871_dead_letter partition=0 offset=0 error=ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+2026-11-10 11:47:18.837 [writer] COMMITTED after dead-lettering offset=1 (next to read = 2)

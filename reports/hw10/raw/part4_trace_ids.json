@@ -1,0 +1,18 @@
+{
+  "captured_at": "2026-11-10T11:47:53",
+  "spans_file": "spans_traces.jsonl",
+  "cache_miss_success": {
+    "trace_id": "2505a50d-07d2-4fa4-aa1a-df8b550bcd6c",
+    "question": "Which team is the home team for fixture FX-9871-00012?"
+  },
+  "cache_hit": {
+    "trace_id": "6f8c8309-bd42-4daa-9646-44f334e887a0",
+    "question": "Which team is the home team for fixture FX-9871-00012?"
+  },
+  "failed": {
+    "trace_id": "5c4340ff-061d-4449-8e23-17e884e13047",
+    "question": "How many open player slots are left on fixture FX-9871-00031?",
+    "failing_stage": "writer",
+    "error": "ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it"
+  }
+}

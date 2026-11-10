@@ -1,0 +1,12 @@
+2026-11-10 11:46:27.480 [reviewer] Assigned partitions: [0]
+2026-11-10 11:46:27.480 [reviewer] Consumer is ready and listening... topic=s9871_drafts group=s9871_reviewers_hw10_691a27 mode=fixed idempotent=True commit=after poison=dlq
+2026-11-10 11:46:36.501 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=0 corr=978bdf91-32e8-4ed5-8306-f0ddc2c7ec1d
+[turn 1] input_tokens=178 output_tokens=20 total_tokens=198
+2026-11-10 11:46:39.341 [reviewer] PROCESSED corr=978bdf91-32e8-4ed5-8306-f0ddc2c7ec1d partition=0 offset=0
+2026-11-10 11:46:39.345 [reviewer] SENT topic=s9871_final partition=0 offset=0 corr=978bdf91-32e8-4ed5-8306-f0ddc2c7ec1d body={"status": "approved", "answer": "A team sport is basketball. In basketball, two teams of five players compete on a court, aiming to score points by shooting the ball into the opponent's hoop. The game is played with a combination of dribbling, passing, and shooting, and it requires teamwork, strategy, and physical fitness. It is popular worldwide and often played in community leagues to promote fitness and social interaction.", "review": "Draft answers the question and follows the plan.", "correlation_id": "978bdf91-32e8-4ed5-8306-f0ddc2c7ec1d"}
+2026-11-10 11:46:39.350 [reviewer] COMMITTED AFTER successful processing offset=0 (next to read = 1)
+2026-11-10 11:46:55.207 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=1 corr=2505a50d-07d2-4fa4-aa1a-df8b550bcd6c
+[turn 1] input_tokens=253 output_tokens=22 total_tokens=275
+2026-11-10 11:46:56.082 [reviewer] PROCESSED corr=2505a50d-07d2-4fa4-aa1a-df8b550bcd6c partition=0 offset=1
+2026-11-10 11:46:56.084 [reviewer] SENT topic=s9871_final partition=0 offset=1 corr=2505a50d-07d2-4fa4-aa1a-df8b550bcd6c body={"status": "approved", "answer": "The home team for fixture FX-9871-00012 is the Oakland Panthers.", "review": "Answer correctly identifies the home team from the provided facts.", "correlation_id": "2505a50d-07d2-4fa4-aa1a-df8b550bcd6c"}
+2026-11-10 11:46:56.089 [reviewer] COMMITTED AFTER successful processing offset=1 (next to read = 2)
