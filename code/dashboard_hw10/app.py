@@ -106,15 +106,15 @@ elif page == "Evaluation":
         if r["status"] != "ok":
             continue
         sc = r["scores"]
-        rows.append({"case": r["question_no"], "trace_id": r["trace_id"], "question": r["inputs"]["draft"]["value"]["question"].split("Question: ")[-1],
+        rows.append({"case": r["question_no"], "trace (first 8)": r["trace_id"][:8], "question": r["inputs"]["draft"]["value"]["question"].split("Question: ")[-1][:58],
                      "Plan Quality (Planner)": sc["plan_quality"]["score"], "Writer Helpfulness (Writer)": sc["writer_helpfulness"]["score"],
                      "Final Helpfulness (Reviewer)": sc["final_helpfulness"]["score"], "final - draft": sc["final_vs_draft"]["difference"],
                      "final text = draft": sc["final_vs_draft"]["final_equals_draft"], "Reviewer status": sc["final_vs_draft"]["reviewer_status"]})
     df = pd.DataFrame(rows)
-    st.dataframe(df, width="stretch", hide_index=True)
+    st.dataframe(df, width="stretch", hide_index=True, height=35 * (len(df) + 1) + 3)
     stages = ["Plan Quality (Planner)", "Writer Helpfulness (Writer)", "Final Helpfulness (Reviewer)"]
     means = df[stages].mean().rename("mean score").reset_index().rename(columns={"index": "stage"})
-    st.altair_chart(alt.Chart(means).mark_bar().encode(x=alt.X("stage:N", sort=None, title=None), y=alt.Y("mean score:Q", scale=alt.Scale(domain=[0, 5])), tooltip=["stage", "mean score"]), width="stretch")
+    st.altair_chart(alt.Chart(means).mark_bar().encode(x=alt.X("stage:N", sort=None, title=None, axis=alt.Axis(labelAngle=0, labelLimit=300)), y=alt.Y("mean score:Q", scale=alt.Scale(domain=[0, 5])), tooltip=["stage", "mean score"]), width="stretch")
     same = int(df["final text = draft"].sum())
     st.markdown(f"**Interpretation.** Mean scores: Planner {df[stages[0]].mean():.2f}, Writer {df[stages[1]].mean():.2f}, Reviewer output {df[stages[2]].mean():.2f}. "
                 f"The final answer did not improve on the draft (mean difference {df['final - draft'].mean():+.2f}): in {same} of {len(df)} cases the final text is the Writer's draft word for word, "
@@ -131,7 +131,7 @@ elif page == "Evaluation":
     cdf = pd.DataFrame([{"case": c["case_id"], "human": c["human_label"], "judge run 1": c["judge_scores"][0], "judge run 2": c["judge_scores"][1], "judge run 3": c["judge_scores"][2],
                          "judge - human": c["judge_scores"][0] - c["human_label"]} for c in j3["cases"]])
     left, right = st.columns([3, 2])
-    left.dataframe(cdf, width="stretch", hide_index=True)
+    left.dataframe(cdf, width="stretch", hide_index=True, height=35 * (len(cdf) + 1) + 3)
     right.altair_chart(alt.Chart(cdf).mark_circle(size=120, opacity=0.6).encode(x=alt.X("human:Q", scale=alt.Scale(domain=[0.5, 5.5])), y=alt.Y("judge run 1:Q", scale=alt.Scale(domain=[0.5, 5.5])),
                                                                               tooltip=["case", "human", "judge run 1"]).properties(title="judge vs human (perfect agreement = diagonal)"), width="stretch")
     st.markdown(f"**Interpretation.** The judge is perfectly repeatable ({s['pairwise_changed']} changes in {s['pairwise_comparisons']} run comparisons) but only weakly agrees with the human labels "
@@ -163,7 +163,7 @@ else:
             tdf = pd.DataFrame([{"#": i, "stage": s["stage"], "start": s["start"][11:], "end": s["end"][11:], "duration (ms)": s["duration_ms"], "status": s["status"], "error": s["error"] or "",
                                  "details": ", ".join(f"{k}={v}" for k, v in s["attrs"].items() if v is not None and k in ("path", "similarity", "pipeline_status", "attempts", "stored", "topic"))}
                                 for i, s in enumerate(rows, 1)])
-            st.dataframe(tdf, width="stretch", hide_index=True)
+            st.dataframe(tdf, width="stretch", hide_index=True, height=35 * (len(tdf) + 1) + 3, column_config={"error": st.column_config.TextColumn(width="large"), "details": st.column_config.TextColumn(width="large")})
             gdf = pd.DataFrame([{"stage": s["stage"], "from (ms)": s["start_ms"] - t0, "to (ms)": s["end_ms"] - t0, "status": s["status"]} for s in rows])
             st.altair_chart(alt.Chart(gdf).mark_bar().encode(y=alt.Y("stage:N", sort=list(gdf["stage"]), title=None), x=alt.X("from (ms):Q", title="ms since the first span"), x2="to (ms):Q",
                                                               color=alt.Color("status:N", scale=alt.Scale(domain=["ok", "error"], range=["#4c78a8", "#e45756"])),
