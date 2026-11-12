@@ -1,0 +1,95 @@
+judge qwen3:8b temperature=0 seed=9871; 20 drafts x 3 runs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+run 1: [5, 3, 5, 2, 5, 5, 2, 2, 3, 5, 2, 3, 2, 2, 2, 5, 5, 2, 3, 3]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+run 2: [5, 3, 5, 2, 5, 5, 2, 2, 3, 5, 2, 3, 2, 2, 2, 5, 5, 2, 3, 3]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+run 3: [5, 3, 5, 2, 5, 5, 2, 2, 3, 5, 2, 3, 2, 2, 2, 5, 5, 2, 3, 3]
+
+
+human : [5, 5, 5, 2, 5, 5, 5, 4, 4, 4, 3, 4, 2, 3, 3, 1, 1, 5, 1, 1]
+{
+  "n_scored": 20,
+  "spearman_rho_run1": 0.1468,
+  "spearman_p_run1": 0.5367,
+  "spearman_rho_per_run": [
+    0.1468,
+    0.1468,
+    0.1468
+  ],
+  "mean_abs_difference_per_run": [
+    1.4,
+    1.4,
+    1.4
+  ],
+  "mean_abs_difference_run1": 1.4,
+  "mean_judge_minus_mean_human_run1": -0.1,
+  "exact_agreement_run1_pct": 30.0,
+  "within_1_run1_pct": 60.0,
+  "cases_with_any_change_across_runs": 0,
+  "cases_with_any_change_pct": 0.0,
+  "pairwise_comparisons": 60,
+  "pairwise_changed": 0,
+  "pairwise_changed_pct": 0.0,
+  "mean_abs_change": 0,
+  "max_abs_change": 0
+}
+
+wrote raw/part3_judge_scores.json and .csv at 12:02:09
