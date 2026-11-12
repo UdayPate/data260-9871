@@ -1,0 +1,23 @@
+2026-11-10 12:00:18.255 [harness] topics reset: s9871_inbox(1 partition), s9871_tasks(2 partitions), s9871_drafts(1 partition), s9871_final(1 partition), s9871_dead_letter(1 partition)
+warm-up (no spans) ...
+#1 cached=False status=approved 4814 ms trace=5b53057f-2842-4932-834c-3d0e1ee4e1be
+   Which team is the home team for fixture FX-9871-00012?
+#2 cached=False status=approved 4950 ms trace=10cd3bf1-995c-4a3d-af8d-8a3865c5aead
+   What should a league office check before scheduling a Soccer fixture on a shared field?
+#3 cached=False status=approved 5566 ms trace=688bc472-7a34-4703-8ed3-9f8ec30836f0
+   How should a league office handle a team that cannot field enough players on match day?
+#4 cached=False status=rejected 6624 ms trace=6cb93999-9b16-4b59-bc0c-528c6daa0540
+   Explain how a round-robin schedule works for a six-team volleyball league.
+#5 cached=False status=approved 5292 ms trace=556edd3c-0345-4800-b5d1-3a5a58f89df0
+   What information belongs in a fixture cancellation notice sent to both teams?
+#6 cached=False status=approved 5502 ms trace=5f2dffb3-e4ef-4a80-a9fe-1884917f5325
+   Why might a league cap the number of substitutions in a cricket match?
+collecting plan/draft/final messages from Kafka and joining on correlation_id ...
+collect stats: {'messages_read': 20, 'malformed_skipped': 0, 'timed_out': False}
+#1 plan=3 writer=3 final=3 diff=+0 identical=True judge=12441 ms
+#2 plan=2 writer=3 final=2 diff=-1 identical=True judge=13683 ms
+#3 plan=2 writer=3 final=3 diff=+0 identical=True judge=14249 ms
+#4 plan=2 writer=2 final=2 diff=+0 identical=True judge=15207 ms
+#5 plan=2 writer=3 final=3 diff=+0 identical=True judge=13807 ms
+#6 plan=2 writer=3 final=3 diff=+0 identical=True judge=13103 ms
+wrote C:\Users\patel\data260-9871\reports\hw10\raw\part2_eval_results.json (6 records) at 12:02:49
