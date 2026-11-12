@@ -1,0 +1,107 @@
+2026-11-12 12:28:43.850 [harness] topics reset: s9871_inbox(1 partition), s9871_tasks(2 partitions), s9871_drafts(1 partition), s9871_final(1 partition), s9871_dead_letter(1 partition)
+warm-up (no spans) ...
+miss 01/50 status=approved     8401 ms  best_similarity=None  How should a league office decide which field a fixture is p
+miss 02/50 status=approved     7696 ms  best_similarity=0.144  What is a sensible refund policy when a team withdraws after
+miss 03/50 status=approved     7317 ms  best_similarity=0.294  Why do some leagues require shin guards for every soccer pla
+miss 04/50 status=approved     7211 ms  best_similarity=0.169  How can a volunteer scorekeeper avoid recording the wrong sc
+miss 05/50 status=approved     7303 ms  best_similarity=0.224  What should a captain's meeting before the season cover?
+miss 06/50 status=approved     8076 ms  best_similarity=0.276  Describe a fair way to seed teams for a single-elimination p
+miss 07/50 status=approved     7543 ms  best_similarity=0.318  What are the pros and cons of playing league games on weekda
+miss 08/50 status=approved     6534 ms  best_similarity=0.429  How do you handle a player who registers for two teams in th
+miss 09/50 status=approved     7131 ms  best_similarity=0.3  What does a heat-safety rule for summer cricket matches usua
+miss 10/50 status=approved     7604 ms  best_similarity=0.28  Suggest a short checklist for setting up a basketball court 
+miss 11/50 status=approved     8150 ms  best_similarity=0.432  How is a forfeit usually recorded in the standings?
+miss 12/50 status=approved     7016 ms  best_similarity=0.376  What makes a good code of conduct for spectators at youth ga
+miss 13/50 status=approved     7247 ms  best_similarity=0.34  Explain what a bye week is and why a schedule might need one
+miss 14/50 status=approved     7219 ms  best_similarity=0.428  Which records should a league keep about injuries?
+miss 15/50 status=approved     6736 ms  best_similarity=0.531  How do you balance team skill levels when forming a recreati
+miss 16/50 status=approved     7000 ms  best_similarity=0.383  What should happen if a referee does not show up?
+miss 17/50 status=approved     6879 ms  best_similarity=0.433  Why might a league ban metal cleats on artificial turf?
+miss 18/50 status=approved     5694 ms  best_similarity=0.413  Give two ways to communicate a last-minute field closure to 
+miss 19/50 status=approved     8511 ms  best_similarity=0.241  What are typical age-group cutoffs and how are birthdays han
+miss 20/50 status=approved     6789 ms  best_similarity=0.612  How should a league treat a player who joins mid-season?
+miss 21/50 status=approved     7681 ms  best_similarity=0.451  Explain the difference between a league and a tournament.
+miss 22/50 status=approved     7224 ms  best_similarity=0.428  What is a good way to thank volunteers at the end of the sea
+miss 23/50 status=approved     6959 ms  best_similarity=0.571  How do you make the schedule fair for teams that travel far?
+miss 24/50 status=approved     7658 ms  best_similarity=0.375  Describe how a mercy rule works in recreational softball.
+miss 25/50 status=approved     7350 ms  best_similarity=0.512  What insurance questions should a community league ask befor
+miss 26/50 status=approved     5980 ms  best_similarity=0.549  How can a league reduce the time spent warming up between ba
+miss 27/50 status=approved     7251 ms  best_similarity=0.371  What is the purpose of a waiver form for adult players?
+miss 28/50 status=approved     7306 ms  best_similarity=0.293  How should lost-and-found items from game days be handled?
+miss 29/50 status=approved     7328 ms  best_similarity=0.505  Why do volleyball leagues often use rally scoring?
+miss 30/50 status=approved     7438 ms  best_similarity=0.482  What should a league do when lightning is seen near the fiel
+miss 31/50 status=approved     7740 ms  best_similarity=0.539  Explain how goal difference can decide a standings tie.
+miss 32/50 status=approved     7322 ms  best_similarity=0.474  How can a new coach learn the league's rules quickly?
+miss 33/50 status=approved     7538 ms  best_similarity=0.451  What are the benefits of posting the schedule on a shared ca
+miss 34/50 status=approved     7243 ms  best_similarity=0.605  How do you decide how many teams a division can hold?
+miss 35/50 status=approved     7348 ms  best_similarity=0.496  What is a reasonable policy for rescheduling a game after ra
+miss 36/50 status=approved     7250 ms  best_similarity=0.505  Why might a league limit the number of players on a roster?
+miss 37/50 status=approved     6339 ms  best_similarity=0.484  Describe a simple process for approving a team name.
+miss 38/50 status=approved     7383 ms  best_similarity=0.273  What should an incident report after a heated argument inclu
+miss 39/50 status=approved     6622 ms  best_similarity=0.358  How do you keep game-day snacks safe for players with allerg
+miss 40/50 status=approved     7396 ms  best_similarity=0.547  What is the role of a league commissioner?
+miss 41/50 status=approved     6691 ms  best_similarity=0.614  How can teams share a practice field fairly?
+miss 42/50 status=approved     7137 ms  best_similarity=0.496  Explain what overtime rules a basketball league might adopt.
+miss 43/50 status=approved     7404 ms  best_similarity=0.453  What are good questions to ask when interviewing a new refer
+miss 44/50 status=approved     6634 ms  best_similarity=0.496  How do you track attendance at weekly games?
+miss 45/50 status=approved     7662 ms  best_similarity=0.284  What does it mean when a game is called for darkness?
+miss 46/50 status=approved     7613 ms  best_similarity=0.472  Suggest ways to welcome first-time players to a cricket leag
+miss 47/50 status=approved     6372 ms  best_similarity=0.461  How should a league announce its end-of-season awards?
+miss 48/50 status=approved     7757 ms  best_similarity=0.602  What are common reasons a team might lose a registration dep
+miss 49/50 status=approved     6398 ms  best_similarity=0.384  Why is it helpful to label equipment bags with the team name
+miss 50/50 status=approved     6244 ms  best_similarity=0.48  How can the league office prepare for a sudden rise in sign-
+10 repeats: 10 served from cache, mean 16.3 ms
+confirmed misses (response and cache_lookup span agree): 50 of 50
+evaluating the 50 requests (judge runs after the pipeline, so it does not share the GPU with it) ...
+collect: {'messages_read': 153, 'malformed_skipped': 0, 'timed_out': False}
+eval 01 ok
+eval 02 ok
+eval 03 ok
+eval 04 ok
+eval 05 ok
+eval 06 ok
+eval 07 ok
+eval 08 ok
+eval 09 ok
+eval 10 ok
+eval 11 ok
+eval 12 ok
+eval 13 ok
+eval 14 ok
+eval 15 ok
+eval 16 ok
+eval 17 ok
+eval 18 ok
+eval 19 ok
+eval 20 ok
+eval 21 ok
+eval 22 ok
+eval 23 ok
+eval 24 ok
+eval 25 ok
+eval 26 ok
+eval 27 ok
+eval 28 ok
+eval 29 ok
+eval 30 ok
+eval 31 ok
+eval 32 ok
+eval 33 ok
+eval 34 ok
+eval 35 ok
+eval 36 ok
+eval 37 ok
+eval 38 ok
+eval 39 ok
+eval 40 ok
+eval 41 ok
+eval 42 ok
+eval 43 ok
+eval 44 ok
+eval 45 ok
+eval 46 ok
+eval 47 ok
+eval 48 ok
+eval 49 ok
+eval 50 ok
+wrote part4_latency_requests.json

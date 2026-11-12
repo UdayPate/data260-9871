@@ -1,0 +1,835 @@
+{
+  "run_at": "2026-11-12T12:49:42",
+  "target_misses": 50,
+  "confirmed_misses": 50,
+  "skipped_cache_served": [],
+  "collect": {
+    "messages_read": 153,
+    "malformed_skipped": 0,
+    "timed_out": false
+  },
+  "misses": [
+    {
+      "n": 1,
+      "question": "How should a league office decide which field a fixture is played on when two fields are free?",
+      "trace_id": "0a701afd-ab71-4009-93da-e5b5a7a31f54",
+      "status": "approved",
+      "latency_ms": 8401.4,
+      "similarity": null,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 3,
+        "final_helpfulness": 2
+      },
+      "final_minus_draft": -1
+    },
+    {
+      "n": 2,
+      "question": "What is a sensible refund policy when a team withdraws after registration closes?",
+      "trace_id": "463839c4-b0b1-42ce-8cc4-306a194faae7",
+      "status": "approved",
+      "latency_ms": 7696.4,
+      "similarity": 0.1443,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 3,
+        "final_helpfulness": 2
+      },
+      "final_minus_draft": -1
+    },
+    {
+      "n": 3,
+      "question": "Why do some leagues require shin guards for every soccer player?",
+      "trace_id": "414e9f4e-5abb-414b-9234-d695762d0d66",
+      "status": "approved",
+      "latency_ms": 7316.9,
+      "similarity": 0.2941,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 2,
+        "final_helpfulness": 2
+      },
+      "final_minus_draft": 0
+    },
+    {
+      "n": 4,
+      "question": "How can a volunteer scorekeeper avoid recording the wrong score?",
+      "trace_id": "d560095b-0665-47f4-b04d-e18348d9de19",
+      "status": "approved",
+      "latency_ms": 7211.3,
+      "similarity": 0.1686,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 3,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": 0
+    },
+    {
+      "n": 5,
+      "question": "What should a captain's meeting before the season cover?",
+      "trace_id": "8c1a383f-31e4-47b8-b763-92884bdbb0ca",
+      "status": "approved",
+      "latency_ms": 7303.2,
+      "similarity": 0.224,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 3,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": 0
+    },
+    {
+      "n": 6,
+      "question": "Describe a fair way to seed teams for a single-elimination playoff.",
+      "trace_id": "edfec40b-3291-48ff-a286-d6b08efa6aba",
+      "status": "approved",
+      "latency_ms": 8075.9,
+      "similarity": 0.2757,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 2,
+        "final_helpfulness": 2
+      },
+      "final_minus_draft": 0
+    },
+    {
+      "n": 7,
+      "question": "What are the pros and cons of playing league games on weekday evenings?",
+      "trace_id": "e3452785-beb6-413c-89b8-1ddccf419f1e",
+      "status": "approved",
+      "latency_ms": 7542.8,
+      "similarity": 0.3183,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 2,
+        "final_helpfulness": 2
+      },
+      "final_minus_draft": 0
+    },
+    {
+      "n": 8,
+      "question": "How do you handle a player who registers for two teams in the same division?",
+      "trace_id": "265fc9e5-9836-492f-a038-246c45d23ed3",
+      "status": "approved",
+      "latency_ms": 6533.7,
+      "similarity": 0.4292,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 4,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": -1
+    },
+    {
+      "n": 9,
+      "question": "What does a heat-safety rule for summer cricket matches usually say?",
+      "trace_id": "f6d5e55c-e208-4f9c-ba85-12179b1f7ff7",
+      "status": "approved",
+      "latency_ms": 7130.9,
+      "similarity": 0.2997,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 5,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": -2
+    },
+    {
+      "n": 10,
+      "question": "Suggest a short checklist for setting up a basketball court before tip-off.",
+      "trace_id": "0245a801-761c-4bd3-8e0c-c857d574fed4",
+      "status": "approved",
+      "latency_ms": 7604.2,
+      "similarity": 0.2795,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 5,
+        "final_helpfulness": 5
+      },
+      "final_minus_draft": 0
+    },
+    {
+      "n": 11,
+      "question": "How is a forfeit usually recorded in the standings?",
+      "trace_id": "69c5d561-4148-47ea-9c9f-413e7ee82e48",
+      "status": "approved",
+      "latency_ms": 8149.5,
+      "similarity": 0.4325,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 5,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": -2
+    },
+    {
+      "n": 12,
+      "question": "What makes a good code of conduct for spectators at youth games?",
+      "trace_id": "23fc21d8-d594-4707-b327-4a3719603d79",
+      "status": "approved",
+      "latency_ms": 7015.9,
+      "similarity": 0.376,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 3,
+        "final_helpfulness": 2
+      },
+      "final_minus_draft": -1
+    },
+    {
+      "n": 13,
+      "question": "Explain what a bye week is and why a schedule might need one.",
+      "trace_id": "97a513a6-b164-4c09-9005-d02fd0630335",
+      "status": "approved",
+      "latency_ms": 7246.7,
+      "similarity": 0.34,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 3,
+        "writer_helpfulness": 5,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": -2
+    },
+    {
+      "n": 14,
+      "question": "Which records should a league keep about injuries?",
+      "trace_id": "5c180e26-9006-4d92-934e-8515ceb65035",
+      "status": "approved",
+      "latency_ms": 7219.1,
+      "similarity": 0.4277,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 3,
+        "final_helpfulness": 5
+      },
+      "final_minus_draft": 2
+    },
+    {
+      "n": 15,
+      "question": "How do you balance team skill levels when forming a recreational division?",
+      "trace_id": "457b2953-84be-428b-be65-870f673f3e98",
+      "status": "approved",
+      "latency_ms": 6736.0,
+      "similarity": 0.531,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 3,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": 0
+    },
+    {
+      "n": 16,
+      "question": "What should happen if a referee does not show up?",
+      "trace_id": "d5e4a5bd-1ffe-46ca-a18c-d4360cf78454",
+      "status": "approved",
+      "latency_ms": 7000.2,
+      "similarity": 0.3834,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 5,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": -2
+    },
+    {
+      "n": 17,
+      "question": "Why might a league ban metal cleats on artificial turf?",
+      "trace_id": "931db26b-086f-4433-8593-630352578ca3",
+      "status": "approved",
+      "latency_ms": 6879.0,
+      "similarity": 0.4328,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 5,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": -2
+    },
+    {
+      "n": 18,
+      "question": "Give two ways to communicate a last-minute field closure to all players.",
+      "trace_id": "56d6be5f-7a6e-4dee-92de-b8856be8840d",
+      "status": "approved",
+      "latency_ms": 5694.5,
+      "similarity": 0.4126,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 2,
+        "final_helpfulness": 2
+      },
+      "final_minus_draft": 0
+    },
+    {
+      "n": 19,
+      "question": "What are typical age-group cutoffs and how are birthdays handled?",
+      "trace_id": "ecf7d17e-53fc-4433-984b-f11af8818824",
+      "status": "approved",
+      "latency_ms": 8511.1,
+      "similarity": 0.2411,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 2,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": 1
+    },
+    {
+      "n": 20,
+      "question": "How should a league treat a player who joins mid-season?",
+      "trace_id": "61b3bf64-16e4-4ceb-a6f2-ce99b4ffe358",
+      "status": "approved",
+      "latency_ms": 6788.6,
+      "similarity": 0.6122,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 3,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": 0
+    },
+    {
+      "n": 21,
+      "question": "Explain the difference between a league and a tournament.",
+      "trace_id": "d46ec6b0-ff56-41bf-b5b2-a28d2d03406f",
+      "status": "approved",
+      "latency_ms": 7680.8,
+      "similarity": 0.4505,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 3,
+        "writer_helpfulness": 5,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": -2
+    },
+    {
+      "n": 22,
+      "question": "What is a good way to thank volunteers at the end of the season?",
+      "trace_id": "56d279ac-159f-4c88-bc12-35dde913312a",
+      "status": "approved",
+      "latency_ms": 7223.5,
+      "similarity": 0.4281,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 3,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": 0
+    },
+    {
+      "n": 23,
+      "question": "How do you make the schedule fair for teams that travel far?",
+      "trace_id": "ef9583c1-b6a1-4d84-9b03-8c53c307938c",
+      "status": "approved",
+      "latency_ms": 6958.7,
+      "similarity": 0.5714,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 2,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": 1
+    },
+    {
+      "n": 24,
+      "question": "Describe how a mercy rule works in recreational softball.",
+      "trace_id": "05c5b90d-999f-475b-a8ef-83c2379599f6",
+      "status": "approved",
+      "latency_ms": 7658.2,
+      "similarity": 0.3754,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 5,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": -2
+    },
+    {
+      "n": 25,
+      "question": "What insurance questions should a community league ask before the season?",
+      "trace_id": "4c7fba07-e6a7-45cd-afab-007fedee9eeb",
+      "status": "approved",
+      "latency_ms": 7349.5,
+      "similarity": 0.5119,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 3,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": 0
+    },
+    {
+      "n": 26,
+      "question": "How can a league reduce the time spent warming up between back-to-back games?",
+      "trace_id": "58eef2b2-0b39-4be2-9889-48eb08b4d0f0",
+      "status": "approved",
+      "latency_ms": 5980.0,
+      "similarity": 0.5486,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 3,
+        "final_helpfulness": 2
+      },
+      "final_minus_draft": -1
+    },
+    {
+      "n": 27,
+      "question": "What is the purpose of a waiver form for adult players?",
+      "trace_id": "d11e569f-ec04-48c7-9860-f75aae6c41e0",
+      "status": "approved",
+      "latency_ms": 7250.8,
+      "similarity": 0.371,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 3,
+        "final_helpfulness": 2
+      },
+      "final_minus_draft": -1
+    },
+    {
+      "n": 28,
+      "question": "How should lost-and-found items from game days be handled?",
+      "trace_id": "64974595-8699-4505-a70c-1c24d0d32cc4",
+      "status": "approved",
+      "latency_ms": 7305.9,
+      "similarity": 0.2933,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 5,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": -2
+    },
+    {
+      "n": 29,
+      "question": "Why do volleyball leagues often use rally scoring?",
+      "trace_id": "70edc77c-7012-4ef0-8a5b-5468fdbb354b",
+      "status": "approved",
+      "latency_ms": 7328.3,
+      "similarity": 0.5049,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 5,
+        "final_helpfulness": 5
+      },
+      "final_minus_draft": 0
+    },
+    {
+      "n": 30,
+      "question": "What should a league do when lightning is seen near the field?",
+      "trace_id": "6e5eff44-c31b-494a-bdc0-661367d9f50f",
+      "status": "approved",
+      "latency_ms": 7438.1,
+      "similarity": 0.4817,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 5,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": -2
+    },
+    {
+      "n": 31,
+      "question": "Explain how goal difference can decide a standings tie.",
+      "trace_id": "4b9bffeb-1e5a-45ad-9373-1bf9e711606c",
+      "status": "approved",
+      "latency_ms": 7740.0,
+      "similarity": 0.5388,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 5,
+        "final_helpfulness": 2
+      },
+      "final_minus_draft": -3
+    },
+    {
+      "n": 32,
+      "question": "How can a new coach learn the league's rules quickly?",
+      "trace_id": "a7b28aa0-4ffc-443e-a80c-7d77d68e4bcc",
+      "status": "approved",
+      "latency_ms": 7322.2,
+      "similarity": 0.4745,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 3,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": 0
+    },
+    {
+      "n": 33,
+      "question": "What are the benefits of posting the schedule on a shared calendar?",
+      "trace_id": "645876e5-2f5f-4d3b-926b-6b12ac02e804",
+      "status": "approved",
+      "latency_ms": 7537.9,
+      "similarity": 0.4505,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 1,
+        "writer_helpfulness": 5,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": -2
+    },
+    {
+      "n": 34,
+      "question": "How do you decide how many teams a division can hold?",
+      "trace_id": "8acaba65-8291-45ce-9f0a-b1992f836354",
+      "status": "approved",
+      "latency_ms": 7242.9,
+      "similarity": 0.6051,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 2,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": 1
+    },
+    {
+      "n": 35,
+      "question": "What is a reasonable policy for rescheduling a game after rain?",
+      "trace_id": "67488f55-e39f-46a0-b62c-737622e44432",
+      "status": "approved",
+      "latency_ms": 7348.2,
+      "similarity": 0.4959,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 3,
+        "final_helpfulness": 2
+      },
+      "final_minus_draft": -1
+    },
+    {
+      "n": 36,
+      "question": "Why might a league limit the number of players on a roster?",
+      "trace_id": "0e61f92c-d6cc-4107-a5cf-76b7de45aa84",
+      "status": "approved",
+      "latency_ms": 7250.0,
+      "similarity": 0.5055,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 3,
+        "final_helpfulness": 2
+      },
+      "final_minus_draft": -1
+    },
+    {
+      "n": 37,
+      "question": "Describe a simple process for approving a team name.",
+      "trace_id": "5be85237-ab08-4faa-a1ce-703e5fac5595",
+      "status": "approved",
+      "latency_ms": 6339.4,
+      "similarity": 0.4839,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 3,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": 0
+    },
+    {
+      "n": 38,
+      "question": "What should an incident report after a heated argument include?",
+      "trace_id": "ab38be65-3835-4627-a93e-abc0f35127b1",
+      "status": "approved",
+      "latency_ms": 7383.2,
+      "similarity": 0.273,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 3,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": 0
+    },
+    {
+      "n": 39,
+      "question": "How do you keep game-day snacks safe for players with allergies?",
+      "trace_id": "334e45d9-716a-4c74-9e89-ed23823dbd22",
+      "status": "approved",
+      "latency_ms": 6622.1,
+      "similarity": 0.3581,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 3,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": 0
+    },
+    {
+      "n": 40,
+      "question": "What is the role of a league commissioner?",
+      "trace_id": "07d2d6b9-95fc-4c18-9cf3-5b3e001bbbca",
+      "status": "approved",
+      "latency_ms": 7395.5,
+      "similarity": 0.5472,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 5,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": -2
+    },
+    {
+      "n": 41,
+      "question": "How can teams share a practice field fairly?",
+      "trace_id": "47586882-5695-4105-9e6d-62b72546ecf8",
+      "status": "approved",
+      "latency_ms": 6690.7,
+      "similarity": 0.6135,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 5,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": -2
+    },
+    {
+      "n": 42,
+      "question": "Explain what overtime rules a basketball league might adopt.",
+      "trace_id": "93ea43a7-9600-40b5-a146-8e0054d69826",
+      "status": "approved",
+      "latency_ms": 7136.9,
+      "similarity": 0.4965,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 3,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": 0
+    },
+    {
+      "n": 43,
+      "question": "What are good questions to ask when interviewing a new referee?",
+      "trace_id": "c1cb8a41-2105-456a-bb24-3d5b2cf3b009",
+      "status": "approved",
+      "latency_ms": 7403.8,
+      "similarity": 0.4528,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 3,
+        "final_helpfulness": 2
+      },
+      "final_minus_draft": -1
+    },
+    {
+      "n": 44,
+      "question": "How do you track attendance at weekly games?",
+      "trace_id": "1c69aff6-42c3-48a3-ada3-f15cef4a2ab9",
+      "status": "approved",
+      "latency_ms": 6634.1,
+      "similarity": 0.4962,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 3,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": 0
+    },
+    {
+      "n": 45,
+      "question": "What does it mean when a game is called for darkness?",
+      "trace_id": "16282209-8e70-42c9-9d93-bbe81b594c59",
+      "status": "approved",
+      "latency_ms": 7661.7,
+      "similarity": 0.2838,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 2,
+        "final_helpfulness": 2
+      },
+      "final_minus_draft": 0
+    },
+    {
+      "n": 46,
+      "question": "Suggest ways to welcome first-time players to a cricket league.",
+      "trace_id": "ee3e0a4a-6a47-41fd-b4aa-b401a74b054d",
+      "status": "approved",
+      "latency_ms": 7612.6,
+      "similarity": 0.472,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 5,
+        "final_helpfulness": 2
+      },
+      "final_minus_draft": -3
+    },
+    {
+      "n": 47,
+      "question": "How should a league announce its end-of-season awards?",
+      "trace_id": "5da2dbec-60d7-4c14-9682-95359078a4f9",
+      "status": "approved",
+      "latency_ms": 6372.2,
+      "similarity": 0.461,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 3,
+        "final_helpfulness": 2
+      },
+      "final_minus_draft": -1
+    },
+    {
+      "n": 48,
+      "question": "What are common reasons a team might lose a registration deposit?",
+      "trace_id": "ead514d7-724e-4670-b68d-62627f214fca",
+      "status": "approved",
+      "latency_ms": 7757.3,
+      "similarity": 0.6017,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 5,
+        "final_helpfulness": 2
+      },
+      "final_minus_draft": -3
+    },
+    {
+      "n": 49,
+      "question": "Why is it helpful to label equipment bags with the team name?",
+      "trace_id": "5b8aacf4-1f7d-4c55-8393-2de721e1aed0",
+      "status": "approved",
+      "latency_ms": 6397.7,
+      "similarity": 0.3835,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 3,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": 0
+    },
+    {
+      "n": 50,
+      "question": "How can the league office prepare for a sudden rise in sign-ups?",
+      "trace_id": "015b1e69-761e-43d1-8b59-7aab9e3d1cf9",
+      "status": "approved",
+      "latency_ms": 6244.0,
+      "similarity": 0.4799,
+      "evaluation_status": "ok",
+      "evaluation_scores": {
+        "plan_quality": 2,
+        "writer_helpfulness": 3,
+        "final_helpfulness": 3
+      },
+      "final_minus_draft": 0
+    }
+  ],
+  "hit_repeats": [
+    {
+      "question": "How should a league office decide which field a fixture is played on when two fields are free?",
+      "trace_id": "d9467ea1-8cf7-4c76-b207-9de35d3b49ba",
+      "is_cached": true,
+      "latency_ms": 22.0,
+      "similarity": 1.0
+    },
+    {
+      "question": "What is a sensible refund policy when a team withdraws after registration closes?",
+      "trace_id": "d46cfa01-db6d-4466-a85b-1f505fc0f288",
+      "is_cached": true,
+      "latency_ms": 21.8,
+      "similarity": 1.0
+    },
+    {
+      "question": "Why do some leagues require shin guards for every soccer player?",
+      "trace_id": "92af8e3e-2bc0-46ea-b40b-c44a6f113d61",
+      "is_cached": true,
+      "latency_ms": 16.3,
+      "similarity": 1.0
+    },
+    {
+      "question": "How can a volunteer scorekeeper avoid recording the wrong score?",
+      "trace_id": "83131a72-0c90-4ce4-9026-996a23ff4c65",
+      "is_cached": true,
+      "latency_ms": 14.6,
+      "similarity": 1.0
+    },
+    {
+      "question": "What should a captain's meeting before the season cover?",
+      "trace_id": "5947f792-cd4f-4ec4-a5b9-445be3282181",
+      "is_cached": true,
+      "latency_ms": 14.6,
+      "similarity": 1.0
+    },
+    {
+      "question": "Describe a fair way to seed teams for a single-elimination playoff.",
+      "trace_id": "adb35dd5-b856-4630-8a19-45cb71453e18",
+      "is_cached": true,
+      "latency_ms": 13.9,
+      "similarity": 1.0
+    },
+    {
+      "question": "What are the pros and cons of playing league games on weekday evenings?",
+      "trace_id": "1dde910b-27aa-4d9b-9f50-a98730b825ea",
+      "is_cached": true,
+      "latency_ms": 15.5,
+      "similarity": 1.0
+    },
+    {
+      "question": "How do you handle a player who registers for two teams in the same division?",
+      "trace_id": "fb551d07-4ee3-465e-a30d-c6383cb7e69a",
+      "is_cached": true,
+      "latency_ms": 15.3,
+      "similarity": 1.0
+    },
+    {
+      "question": "What does a heat-safety rule for summer cricket matches usually say?",
+      "trace_id": "fb9e23b3-9f66-4505-87a4-fedab0f7c9ce",
+      "is_cached": true,
+      "latency_ms": 13.9,
+      "similarity": 1.0
+    },
+    {
+      "question": "Suggest a short checklist for setting up a basketball court before tip-off.",
+      "trace_id": "cf69d997-8480-4772-89e3-a526da63e48d",
+      "is_cached": true,
+      "latency_ms": 15.3,
+      "similarity": 1.0
+    }
+  ]
+}

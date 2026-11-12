@@ -81,3 +81,33 @@ Would I trust this judge to gate a deployment? No. A gate must catch unsupported
 labels clearly above chance on a larger set (at least 100 labelled drafts, ideally labelled by more than one person so human-human agreement is known); (2) a criterion that checks the draft against the supplied facts, so that unsupported answers
 score low, then re-validated on the same labels; (3) a check of the judge under changes (paraphrased drafts, a different seed, a second judge model), since repeatability under a fixed seed is not robustness; (4) an agreed error budget,
 for example at most one unsupported answer in 20 passed by the gate. The labels were written by one person on 20 cases, so these statistics are indicative only.
+
+## Part 4.3 - Stage-latency experiment (50 confirmed cache misses)
+
+Run at 2026-11-12T12:49:42 (local time), one request at a time, empty semantic cache, threshold 0.85. All 50 requests were confirmed misses: the response said is_cached=False and the
+trace's cache_lookup span said path=miss (0 pool questions were skipped because the cache answered them). Source: `raw/spans_latency.jsonl` (one JSON span per stage and trace_id).
+
+| Stage | p50 (ms) | p95 (ms) | % of cache-miss end-to-end |
+|---|---|---|---|
+| Cache lookup | 18.1 | 27.7 | 0.3% |
+| Planner | 2,070.1 | 2,442.5 | 29.5% |
+| Writer | 3,403.0 | 3,918.1 | 46.7% |
+| Reviewer | 1,469.3 | 1,700.8 | 20.7% |
+| Queue wait (total) | 202.7 | 217.6 | 2.8% |
+| Evaluation (after the request, not part of end-to-end) | 16,344.5 | 17,250.3 | 227.0% |
+| Cache-miss end-to-end (request span) | 7,275.9 | 8,117.2 | 100% |
+
+Other parts of the end-to-end time: database facts lookup 0.0% (p50 0.0 ms); cache store 0.0% (p50 1.2 ms); other / unaccounted (ingress, kafka produce) 0.0% (p50 2.3 ms).
+Queue wait (total) = time messages sat in the inbox, tasks and drafts topics plus the final topic before the next stage took them ("queue_inbox, queue_tasks, queue_drafts, final"). Evaluation is the judge's time per
+request; it runs after the request and is shown against the end-to-end time only for scale. 50 of 50 requests were evaluated successfully.
+
+Cache-hit path (kept separate): 10 exact repeats of answered questions, all served from the cache = True: p50 15.8 ms, p95 21.0 ms, mean 16.5 ms,
+against a cache-miss p50 of 7,275.9 ms.
+
+What this shows: the dominant contributor to cache-miss latency is writer (46.7% of end-to-end). The three agent stages are LLM calls, so together they make up
+96.9% of the time, while queue wait is 2.8% and the cache lookup 0.3%.
+So Kafka hand-offs and the cache lookup are not where time goes; model generation is. A request that hits the cache skips all of it.
+
+What I would optimize first: the Writer stage, because it is the largest single share. The Writer produces the longest text (up to 120 words) so it spends the most time generating; shortening
+its output limit, or using a smaller or faster model for that stage, would cut the most time. The Planner and Reviewer produce short JSON and are next. Improving Kafka or the cache lookup would change under 4% of the time.
+Limits: requests ran one at a time, so queue wait is the floor; under concurrent load the queues would grow. One run of 50 requests on one machine, one model, so the p95 is based on the slowest 2-3 requests.

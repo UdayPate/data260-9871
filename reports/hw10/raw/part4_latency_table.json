@@ -1,0 +1,96 @@
+{
+  "n_requests": 50,
+  "stages": {
+    "cache_lookup": {
+      "label": "Cache lookup",
+      "p50_ms": 18.1,
+      "p95_ms": 27.7,
+      "pct_of_e2e": 0.3
+    },
+    "planner": {
+      "label": "Planner",
+      "p50_ms": 2070.1,
+      "p95_ms": 2442.5,
+      "pct_of_e2e": 29.5
+    },
+    "writer": {
+      "label": "Writer",
+      "p50_ms": 3403.0,
+      "p95_ms": 3918.1,
+      "pct_of_e2e": 46.7
+    },
+    "reviewer": {
+      "label": "Reviewer",
+      "p50_ms": 1469.3,
+      "p95_ms": 1700.8,
+      "pct_of_e2e": 20.7
+    },
+    "queue_wait_total": {
+      "label": "Queue wait (total)",
+      "p50_ms": 202.7,
+      "p95_ms": 217.6,
+      "pct_of_e2e": 2.8
+    },
+    "evaluation": {
+      "label": "Evaluation (after the request, not part of end-to-end)",
+      "p50_ms": 16344.5,
+      "p95_ms": 17250.3,
+      "pct_of_e2e": 227.0
+    },
+    "facts_lookup": {
+      "label": "Database facts lookup",
+      "p50_ms": 0.0,
+      "p95_ms": 0.0,
+      "pct_of_e2e": 0.0
+    },
+    "cache_store": {
+      "label": "Cache store",
+      "p50_ms": 1.2,
+      "p95_ms": 3.1,
+      "pct_of_e2e": 0.0
+    },
+    "other": {
+      "label": "Other / unaccounted (ingress, Kafka produce)",
+      "p50_ms": 2.3,
+      "p95_ms": 4.8,
+      "pct_of_e2e": 0.0
+    },
+    "e2e": {
+      "label": "Cache-miss end-to-end",
+      "p50_ms": 7275.9,
+      "p95_ms": 8117.2,
+      "pct_of_e2e": 100.0
+    },
+    "queue_inbox": {
+      "label": "queue_inbox",
+      "p50_ms": 51.2,
+      "p95_ms": 63.4,
+      "pct_of_e2e": 0.7
+    },
+    "queue_tasks": {
+      "label": "queue_tasks",
+      "p50_ms": 50.2,
+      "p95_ms": 60.4,
+      "pct_of_e2e": 0.7
+    },
+    "queue_drafts": {
+      "label": "queue_drafts",
+      "p50_ms": 49.6,
+      "p95_ms": 61.3,
+      "pct_of_e2e": 0.7
+    },
+    "final": {
+      "label": "final",
+      "p50_ms": 50.2,
+      "p95_ms": 59.0,
+      "pct_of_e2e": 0.7
+    }
+  },
+  "cache_hit": {
+    "n": 10,
+    "all_served_from_cache": true,
+    "p50_ms": 15.8,
+    "p95_ms": 21.0,
+    "mean_ms": 16.5
+  }
+}
