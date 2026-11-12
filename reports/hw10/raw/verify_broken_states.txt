@@ -1,0 +1,84 @@
+################ Broken state 1: reports/hw10/eval_cases.json moved away
+verify_hw10 run at 2026-11-12T13:20:20
+... required files exist
+    [FAIL] MISSING: ['reports/hw10/eval_cases.json']
+... Services: Kafka topics, Redis Stack, MySQL s9871_rel, Ollama qwen3:8b
+    [PASS]
+... Part 4.1/4.2: span fields; miss, hit and failed traces; trace_id equals the Kafka correlation_id
+    [PASS]
+... Part 4.3: 50 confirmed cache misses; the stage-latency table is recomputed from the spans
+    [PASS]
+... Part 3: cases and labels committed before the judge scores and unchanged; Spearman, MAD and repeatability recomputed
+    [FAIL] Exception: FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\patel\\data260-9871\\reports\\hw10\\eval_cases.json'
+... Part 2: evaluation records have four criteria on a 1-5 scale; difference and linkage recomputed
+    [PASS]
+... Part 2: evaluator bounds (judge unavailable, missing message, collect deadline)
+    [PASS]
+... Dashboard: three pages render with numbers matching the span files
+    [PASS]
+... Ruff passes on the HW10 code
+    [PASS]
+7/9 checks passed -> C:\Users\patel\data260-9871\reports\hw10\verification.json
+################ Broken state 2: one human label edited after the judge ran (case_01 5 -> 1)
+verify_hw10 run at 2026-11-12T13:20:44
+... required files exist
+    [PASS]
+... Services: Kafka topics, Redis Stack, MySQL s9871_rel, Ollama qwen3:8b
+    [PASS]
+... Part 4.1/4.2: span fields; miss, hit and failed traces; trace_id equals the Kafka correlation_id
+    [PASS]
+... Part 4.3: 50 confirmed cache misses; the stage-latency table is recomputed from the spans
+    [PASS]
+... Part 3: cases and labels committed before the judge scores and unchanged; Spearman, MAD and repeatability recomputed
+    [FAIL] 20 cases, 20 labels in 1-5: True; Spearman -0.0325, MAD 1.60, mean/max run-to-run change 0.00/0 recomputed = reported: False; cases+labels committed before the judge scores: True; unchanged since their commit: False
+... Part 2: evaluation records have four criteria on a 1-5 scale; difference and linkage recomputed
+    [PASS]
+... Part 2: evaluator bounds (judge unavailable, missing message, collect deadline)
+    [PASS]
+... Dashboard: three pages render with numbers matching the span files
+    [PASS]
+... Ruff passes on the HW10 code
+    [PASS]
+8/9 checks passed -> C:\Users\patel\data260-9871\reports\hw10\verification.json
+################ Broken state 3: the failed trace's writer span status changed from error to ok
+verify_hw10 run at 2026-11-12T13:21:10
+... required files exist
+    [PASS]
+... Services: Kafka topics, Redis Stack, MySQL s9871_rel, Ollama qwen3:8b
+    [PASS]
+... Part 4.1/4.2: span fields; miss, hit and failed traces; trace_id equals the Kafka correlation_id
+    [FAIL] 772 spans, malformed 0; miss trace stages True (cache_lookup path=miss); hit trace True (path=hit, no agent spans); failed trace -> writer error None; Kafka correlation_id == trace_id for 6 requests: True
+... Part 4.3: 50 confirmed cache misses; the stage-latency table is recomputed from the spans
+    [PASS]
+... Part 3: cases and labels committed before the judge scores and unchanged; Spearman, MAD and repeatability recomputed
+    [PASS]
+... Part 2: evaluation records have four criteria on a 1-5 scale; difference and linkage recomputed
+    [PASS]
+... Part 2: evaluator bounds (judge unavailable, missing message, collect deadline)
+    [PASS]
+... Dashboard: three pages render with numbers matching the span files
+    [FAIL] test_dashboard.py: 16 passed, 1 failed (Summary, Evaluation and Trace lookup pages rendered headlessly and compared with the span files)
+... Ruff passes on the HW10 code
+    [PASS]
+7/9 checks passed -> C:\Users\patel\data260-9871\reports\hw10\verification.json
+################ Broken state 4: Redis container stopped
+verify_hw10 run at 2026-11-12T13:21:39
+... required files exist
+    [PASS]
+... Services: Kafka topics, Redis Stack, MySQL s9871_rel, Ollama qwen3:8b
+    [FAIL] Exception: ConnectionError: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.
+... Part 4.1/4.2: span fields; miss, hit and failed traces; trace_id equals the Kafka correlation_id
+    [PASS]
+... Part 4.3: 50 confirmed cache misses; the stage-latency table is recomputed from the spans
+    [PASS]
+... Part 3: cases and labels committed before the judge scores and unchanged; Spearman, MAD and repeatability recomputed
+    [PASS]
+... Part 2: evaluation records have four criteria on a 1-5 scale; difference and linkage recomputed
+    [PASS]
+... Part 2: evaluator bounds (judge unavailable, missing message, collect deadline)
+    [PASS]
+... Dashboard: three pages render with numbers matching the span files
+    [PASS]
+... Ruff passes on the HW10 code
+    [PASS]
+8/9 checks passed -> C:\Users\patel\data260-9871\reports\hw10\verification.json
