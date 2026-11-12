@@ -1,0 +1,24 @@
+2026-11-12 11:01:43.281 [harness] topics reset: s9871_inbox(1 partition), s9871_tasks(2 partitions), s9871_drafts(1 partition), s9871_final(1 partition), s9871_dead_letter(1 partition)
+warm-up ...
+case_01 reviewer=approved  Which team is the home team for fixture FX-9871-00012?
+case_02 reviewer=approved  How many player spots are still open on fixture FX-9871-00031, and which teams are playing?
+case_03 reviewer=approved  Where will fixture FX-9871-00044 be played?
+case_04 reviewer=rejected  Name both teams in fixture FX-9871-00057 and say which one is at home.
+case_05 reviewer=approved  Is there room for 3 more players to register for fixture FX-9871-00063?
+case_06 reviewer=approved  What is the name of fixture FX-9871-00078?
+case_07 reviewer=approved  Which team is the home team for fixture FX-9871-09101?
+case_08 reviewer=approved  How many player spots are open on fixture FX-9871-09102?
+case_09 reviewer=approved  What should a league office check before scheduling a Soccer fixture on a shared field?
+case_10 reviewer=approved  How should a league office handle a team that cannot field enough players on match day?
+case_11 reviewer=rejected  Explain how a round-robin schedule works for a six-team volleyball league.
+case_12 reviewer=approved  What information belongs in a fixture cancellation notice sent to both teams?
+case_13 reviewer=approved  Why might a league cap the number of substitutions in a cricket match?
+case_14 reviewer=approved  What are three ways to reduce no-shows for early-morning basketball fixtures?
+case_15 reviewer=approved  How do you break a tie in league standings when two teams have the same points?
+case_16 reviewer=approved  What was the final score of last season's championship game?
+case_17 reviewer=approved  What is the phone number of the league office?
+case_18 reviewer=approved  Which referee is assigned to fixture FX-9871-00012?
+case_19 reviewer=approved  How much does it cost to register a team this season?
+case_20 reviewer=approved  Summarise the weather forecast for this Saturday's fixtures.
+collect: {'messages_read': 63, 'malformed_skipped': 0, 'timed_out': False}
+wrote eval_cases.json, human_labels.csv (blank), label_sheet.md

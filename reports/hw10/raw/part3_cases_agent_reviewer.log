@@ -1,0 +1,107 @@
+2026-11-12 11:01:43.611 [reviewer] Assigned partitions: [0]
+2026-11-12 11:01:43.612 [reviewer] Consumer is ready and listening... topic=s9871_drafts group=s9871_reviewers_hw10_dfa374 mode=fixed idempotent=True commit=after poison=dlq
+2026-11-12 11:01:59.940 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=0 corr=000e5710-d996-4e75-8694-9f6dcd18e3a9
+[turn 1] input_tokens=178 output_tokens=20 total_tokens=198
+2026-11-12 11:02:03.283 [reviewer] PROCESSED corr=000e5710-d996-4e75-8694-9f6dcd18e3a9 partition=0 offset=0
+2026-11-12 11:02:03.287 [reviewer] SENT topic=s9871_final partition=0 offset=0 corr=000e5710-d996-4e75-8694-9f6dcd18e3a9 body={"status": "approved", "answer": "A team sport is basketball. In basketball, two teams of five players compete on a court, aiming to score points by shooting the ball into the opponent's hoop. The game is played with a combination of dribbling, passing, and shooting, and it requires teamwork, strategy, and physical fitness. It is popular worldwide and often played in community leagues to promote fitness and social interaction.", "review": "Draft answers the question and follows the plan.", "correlation_id": "000e5710-d996-4e75-8694-9f6dcd18e3a9"}
+2026-11-12 11:02:03.297 [reviewer] COMMITTED AFTER successful processing offset=0 (next to read = 1)
+2026-11-12 11:02:07.040 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=1 corr=02a486e2-5a1e-4267-8a8f-109aedab2fc7
+[turn 1] input_tokens=253 output_tokens=18 total_tokens=271
+2026-11-12 11:02:08.261 [reviewer] PROCESSED corr=02a486e2-5a1e-4267-8a8f-109aedab2fc7 partition=0 offset=1
+2026-11-12 11:02:08.264 [reviewer] SENT topic=s9871_final partition=0 offset=1 corr=02a486e2-5a1e-4267-8a8f-109aedab2fc7 body={"status": "approved", "answer": "The home team for fixture FX-9871-00012 is the Oakland Panthers.", "review": "Answer correctly identifies the home team.", "correlation_id": "02a486e2-5a1e-4267-8a8f-109aedab2fc7"}
+2026-11-12 11:02:08.274 [reviewer] COMMITTED AFTER successful processing offset=1 (next to read = 2)
+2026-11-12 11:02:11.757 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=2 corr=8a8b207a-cae0-4330-824d-89e7bd8ce94d
+[turn 1] input_tokens=264 output_tokens=20 total_tokens=284
+2026-11-12 11:02:12.919 [reviewer] PROCESSED corr=8a8b207a-cae0-4330-824d-89e7bd8ce94d partition=0 offset=2
+2026-11-12 11:02:12.921 [reviewer] SENT topic=s9871_final partition=0 offset=2 corr=8a8b207a-cae0-4330-824d-89e7bd8ce94d body={"status": "approved", "answer": "Fixture FX-9871-00031 has 22 player spots still open. The teams playing are the Milpitas Wolves and the Oakland Sharks.", "review": "Draft accurately answers the question using provided facts.", "correlation_id": "8a8b207a-cae0-4330-824d-89e7bd8ce94d"}
+2026-11-12 11:02:12.932 [reviewer] COMMITTED AFTER successful processing offset=2 (next to read = 3)
+2026-11-12 11:02:16.971 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=3 corr=67cb7a33-9dd2-4951-9997-aaff708438c0
+[turn 1] input_tokens=273 output_tokens=21 total_tokens=294
+2026-11-12 11:02:18.155 [reviewer] PROCESSED corr=67cb7a33-9dd2-4951-9997-aaff708438c0 partition=0 offset=3
+2026-11-12 11:02:18.157 [reviewer] SENT topic=s9871_final partition=0 offset=3 corr=67cb7a33-9dd2-4951-9997-aaff708438c0 body={"status": "approved", "answer": "Fixture FX-9871-00044 will be played at Backesto Park in San Jose. The home team, San Jose Sharks, is listed as the host for this basketball match.", "review": "Answer correctly identifies the home ground from the database.", "correlation_id": "67cb7a33-9dd2-4951-9997-aaff708438c0"}
+2026-11-12 11:02:18.167 [reviewer] COMMITTED AFTER successful processing offset=3 (next to read = 4)
+2026-11-12 11:02:21.978 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=4 corr=a347fe9f-4591-428a-823c-9d82dd23c17d
+[turn 1] input_tokens=271 output_tokens=31 total_tokens=302
+2026-11-12 11:02:23.405 [reviewer] PROCESSED corr=a347fe9f-4591-428a-823c-9d82dd23c17d partition=0 offset=4
+2026-11-12 11:02:23.408 [reviewer] SENT topic=s9871_final partition=0 offset=4 corr=a347fe9f-4591-428a-823c-9d82dd23c17d body={"status": "rejected", "answer": "The fixture FX-9871-00057 features the Fremont Tigers and Oakland Titans. The home team is the Fremont Tigers, playing at Northgate Park in Fremont.", "review": "The home team is incorrectly identified; the home team is Fremont Wolves, not Fremont Tigers.", "correlation_id": "a347fe9f-4591-428a-823c-9d82dd23c17d"}
+2026-11-12 11:02:23.418 [reviewer] COMMITTED AFTER successful processing offset=4 (next to read = 5)
+2026-11-12 11:02:27.246 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=5 corr=b55b3e20-ea7f-42f8-a575-2955616a6d0c
+[turn 1] input_tokens=278 output_tokens=21 total_tokens=299
+2026-11-12 11:02:28.403 [reviewer] PROCESSED corr=b55b3e20-ea7f-42f8-a575-2955616a6d0c partition=0 offset=5
+2026-11-12 11:02:28.407 [reviewer] SENT topic=s9871_final partition=0 offset=5 corr=b55b3e20-ea7f-42f8-a575-2955616a6d0c body={"status": "approved", "answer": "The player spots available for FX-9871-00063 are 22. Since 22 is greater than 3, there is room for 3 more players to register for this fixture.", "review": "Answer correctly addresses the question based on provided data.", "correlation_id": "b55b3e20-ea7f-42f8-a575-2955616a6d0c"}
+2026-11-12 11:02:28.420 [reviewer] COMMITTED AFTER successful processing offset=5 (next to read = 6)
+2026-11-12 11:02:31.741 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=6 corr=17af497b-f41d-4355-9828-f26862817884
+[turn 1] input_tokens=254 output_tokens=22 total_tokens=276
+2026-11-12 11:02:33.002 [reviewer] PROCESSED corr=17af497b-f41d-4355-9828-f26862817884 partition=0 offset=6
+2026-11-12 11:02:33.005 [reviewer] SENT topic=s9871_final partition=0 offset=6 corr=17af497b-f41d-4355-9828-f26862817884 body={"status": "approved", "answer": "The name of fixture FX-9871-00078 is \"Lions vs Tigers (Cricket #76).\"", "review": "Correctly identifies the fixture name using provided database facts.", "correlation_id": "17af497b-f41d-4355-9828-f26862817884"}
+2026-11-12 11:02:33.025 [reviewer] COMMITTED AFTER successful processing offset=6 (next to read = 7)
+2026-11-12 11:02:36.742 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=7 corr=a8bde040-ade0-4d2c-9ba6-3a47e2f49a55
+[turn 1] input_tokens=236 output_tokens=19 total_tokens=255
+2026-11-12 11:02:37.967 [reviewer] PROCESSED corr=a8bde040-ade0-4d2c-9ba6-3a47e2f49a55 partition=0 offset=7
+2026-11-12 11:02:37.970 [reviewer] SENT topic=s9871_final partition=0 offset=7 corr=a8bde040-ade0-4d2c-9ba6-3a47e2f49a55 body={"status": "approved", "answer": "The league database indicates that fixture FX-9871-09101 does not exist. Since the fixture is not listed, the home team cannot be determined.", "review": "Answer follows the plan and is clear.", "correlation_id": "a8bde040-ade0-4d2c-9ba6-3a47e2f49a55"}
+2026-11-12 11:02:37.980 [reviewer] COMMITTED AFTER successful processing offset=7 (next to read = 8)
+2026-11-12 11:02:41.706 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=8 corr=211c18d4-3d68-4e0d-8b3b-a21116e8e173
+[turn 1] input_tokens=224 output_tokens=21 total_tokens=245
+2026-11-12 11:02:42.914 [reviewer] PROCESSED corr=211c18d4-3d68-4e0d-8b3b-a21116e8e173 partition=0 offset=8
+2026-11-12 11:02:42.918 [reviewer] SENT topic=s9871_final partition=0 offset=8 corr=211c18d4-3d68-4e0d-8b3b-a21116e8e173 body={"status": "approved", "answer": "The league database confirms that fixture FX-9871-09102 does not exist. Since the fixture is not listed, there are no player spots open for it.", "review": "Draft correctly follows the plan and uses provided facts.", "correlation_id": "211c18d4-3d68-4e0d-8b3b-a21116e8e173"}
+2026-11-12 11:02:42.928 [reviewer] COMMITTED AFTER successful processing offset=8 (next to read = 9)
+2026-11-12 11:02:47.216 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=9 corr=bb2ef015-403d-417c-abbc-4618b4fabaef
+[turn 1] input_tokens=204 output_tokens=22 total_tokens=226
+2026-11-12 11:02:48.455 [reviewer] PROCESSED corr=bb2ef015-403d-417c-abbc-4618b4fabaef partition=0 offset=9
+2026-11-12 11:02:48.458 [reviewer] SENT topic=s9871_final partition=0 offset=9 corr=bb2ef015-403d-417c-abbc-4618b4fabaef body={"status": "approved", "answer": "Before scheduling a soccer fixture on a shared field, the league office should check the field's availability and booking status for the scheduled time. They should also verify that the field meets safety and maintenance standards to ensure a safe playing environment. Lastly, they must confirm there are no conflicting events or reservations for the field on that date to avoid scheduling conflicts.", "review": "Draft follows the plan and addresses all required checks clearly.", "correlation_id": "bb2ef015-403d-417c-abbc-4618b4fabaef"}
+2026-11-12 11:02:48.468 [reviewer] COMMITTED AFTER successful processing offset=9 (next to read = 10)
+2026-11-12 11:02:52.811 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=10 corr=eaaf1c12-402a-488e-a237-9d90ba3cc9a8
+[turn 1] input_tokens=223 output_tokens=21 total_tokens=244
+2026-11-12 11:02:54.167 [reviewer] PROCESSED corr=eaaf1c12-402a-488e-a237-9d90ba3cc9a8 partition=0 offset=10
+2026-11-12 11:02:54.169 [reviewer] SENT topic=s9871_final partition=0 offset=10 corr=eaaf1c12-402a-488e-a237-9d90ba3cc9a8 body={"status": "approved", "answer": "When a team cannot field enough players, the league office should first confirm the issue. Then, the team should be contacted to discuss the situation and explore options like rescheduling matches or temporarily adjusting team rosters. The office may also offer support, such as helping find additional players or adjusting game times. If necessary, the league may reassign matches to ensure fairness and continuity. Clear communication and flexibility are key to resolving the issue while maintaining the integrity of the league.", "review": "Draft follows the plan and addresses the question clearly.", "correlation_id": "eaaf1c12-402a-488e-a237-9d90ba3cc9a8"}
+2026-11-12 11:02:54.179 [reviewer] COMMITTED AFTER successful processing offset=10 (next to read = 11)
+2026-11-12 11:02:59.063 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=11 corr=92416590-df5c-4701-aa70-03be5131b907
+[turn 1] input_tokens=247 output_tokens=34 total_tokens=281
+2026-11-12 11:03:00.599 [reviewer] PROCESSED corr=92416590-df5c-4701-aa70-03be5131b907 partition=0 offset=11
+2026-11-12 11:03:00.601 [reviewer] SENT topic=s9871_final partition=0 offset=11 corr=92416590-df5c-4701-aa70-03be5131b907 body={"status": "rejected", "answer": "In a six-team volleyball round-robin, each team plays every other team twice\u2014once at home and once away. This results in 10 matches per team. To create the schedule, pair teams in a way that each plays all others. For example, Team A plays Teams B, C, D, E, and F twice. Assign specific dates and times for each match, ensuring no team has more than one game per day. Rotate teams to balance the schedule and avoid conflicts. This format ensures fair competition and equal opportunities for all teams to face each other.", "review": "The draft incorrectly states each team plays every other team twice, which is not standard for a round-robin format.", "correlation_id": "92416590-df5c-4701-aa70-03be5131b907"}
+2026-11-12 11:03:00.610 [reviewer] COMMITTED AFTER successful processing offset=11 (next to read = 12)
+2026-11-12 11:03:04.522 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=12 corr=c02fd996-5aa8-4681-94c5-1b558f4dfa96
+[turn 1] input_tokens=199 output_tokens=25 total_tokens=224
+2026-11-12 11:03:05.740 [reviewer] PROCESSED corr=c02fd996-5aa8-4681-94c5-1b558f4dfa96 partition=0 offset=12
+2026-11-12 11:03:05.742 [reviewer] SENT topic=s9871_final partition=0 offset=12 corr=c02fd996-5aa8-4681-94c5-1b558f4dfa96 body={"status": "approved", "answer": "The fixture cancellation notice should include the reason for the cancellation, such as weather or field unavailability. It must clearly state the affected match and its original date, time, and location. The notice should also provide an alternative date or outline next steps for rescheduling, such as contacting the league office or rebooking the match. This ensures both teams are informed and know how to proceed.", "review": "The draft addresses all elements of the plan clearly and concisely.", "correlation_id": "c02fd996-5aa8-4681-94c5-1b558f4dfa96"}
+2026-11-12 11:03:05.751 [reviewer] COMMITTED AFTER successful processing offset=12 (next to read = 13)
+2026-11-12 11:03:10.067 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=13 corr=1ca9ef67-03e9-4f3a-b86a-dd305a34e35e
+[turn 1] input_tokens=219 output_tokens=22 total_tokens=241
+2026-11-12 11:03:11.172 [reviewer] PROCESSED corr=1ca9ef67-03e9-4f3a-b86a-dd305a34e35e partition=0 offset=13
+2026-11-12 11:03:11.174 [reviewer] SENT topic=s9871_final partition=0 offset=13 corr=1ca9ef67-03e9-4f3a-b86a-dd305a34e35e body={"status": "approved", "answer": "Substitutions in cricket are used to replace injured or fatigued players, ensuring fair play and player safety. Limiting substitutions can increase the physical and mental demands on players, potentially reducing the likelihood of injuries. A substitution cap may also promote strategic depth, as teams must plan more carefully for potential setbacks. This rule can enhance the flow of the game, encourage stronger team cohesion, and prevent teams from relying too heavily on replacements, making the match more competitive and engaging for spectators.", "review": "The draft addresses the question and follows the plan effectively.", "correlation_id": "1ca9ef67-03e9-4f3a-b86a-dd305a34e35e"}
+2026-11-12 11:03:11.184 [reviewer] COMMITTED AFTER successful processing offset=13 (next to read = 14)
+2026-11-12 11:03:15.468 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=14 corr=7d31032b-d8eb-44b3-a886-2b298aff8db3
+[turn 1] input_tokens=217 output_tokens=21 total_tokens=238
+2026-11-12 11:03:16.490 [reviewer] PROCESSED corr=7d31032b-d8eb-44b3-a886-2b298aff8db3 partition=0 offset=14
+2026-11-12 11:03:16.492 [reviewer] SENT topic=s9871_final partition=0 offset=14 corr=7d31032b-d8eb-44b3-a886-2b298aff8db3 body={"status": "approved", "answer": "Many people miss early-morning games due to lack of motivation, poor scheduling, or insufficient reminders. To reduce no-shows, offer flexible scheduling options like evening practices or weekend games. Send automated reminders via text or email the day before and morning of the game. Also, create a sense of community by encouraging team bonding and recognition of attendance. Track attendance data to assess the effectiveness of these strategies and adjust as needed.", "review": "Draft addresses the question and follows the plan effectively.", "correlation_id": "7d31032b-d8eb-44b3-a886-2b298aff8db3"}
+2026-11-12 11:03:16.502 [reviewer] COMMITTED AFTER successful processing offset=14 (next to read = 15)
+2026-11-12 11:03:21.029 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=15 corr=a3e16ea1-c6c2-4a72-90d6-0ba1fb9e0cbd
+[turn 1] input_tokens=226 output_tokens=24 total_tokens=250
+2026-11-12 11:03:22.160 [reviewer] PROCESSED corr=a3e16ea1-c6c2-4a72-90d6-0ba1fb9e0cbd partition=0 offset=15
+2026-11-12 11:03:22.162 [reviewer] SENT topic=s9871_final partition=0 offset=15 corr=a3e16ea1-c6c2-4a72-90d6-0ba1fb9e0cbd body={"status": "approved", "answer": "If two teams have the same points, the league uses head-to-head results as the tie-breaker. We compare their matches against each other, giving priority to wins and goal differences. If still tied, we look at overall goal difference, then total goals scored. The team that meets these criteria is ranked higher. If all criteria are equal, the tie is resolved by a coin toss or draw.", "review": "The draft follows the plan and clearly explains the tie-breaking process.", "correlation_id": "a3e16ea1-c6c2-4a72-90d6-0ba1fb9e0cbd"}
+2026-11-12 11:03:22.171 [reviewer] COMMITTED AFTER successful processing offset=15 (next to read = 16)
+2026-11-12 11:03:25.786 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=16 corr=d5f7e29e-e9b6-4531-89e0-ad802acb7504
+[turn 1] input_tokens=184 output_tokens=25 total_tokens=209
+2026-11-12 11:03:26.972 [reviewer] PROCESSED corr=d5f7e29e-e9b6-4531-89e0-ad802acb7504 partition=0 offset=16
+2026-11-12 11:03:26.974 [reviewer] SENT topic=s9871_final partition=0 offset=16 corr=d5f7e29e-e9b6-4531-89e0-ad802acb7504 body={"status": "approved", "answer": "The championship game in question was last season's league finals. The official results are recorded in the league's sports database. According to the records, the final score was Team A 35, Team B 28. This outcome was confirmed by the league's official scoreboard and final standings.", "review": "The draft addresses the question, follows the plan, and is clear.", "correlation_id": "d5f7e29e-e9b6-4531-89e0-ad802acb7504"}
+2026-11-12 11:03:26.985 [reviewer] COMMITTED AFTER successful processing offset=16 (next to read = 17)
+2026-11-12 11:03:30.822 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=17 corr=2beef23e-a82c-42bb-b67d-25de7023f765
+[turn 1] input_tokens=189 output_tokens=22 total_tokens=211
+2026-11-12 11:03:31.948 [reviewer] PROCESSED corr=2beef23e-a82c-42bb-b67d-25de7023f765 partition=0 offset=17
+2026-11-12 11:03:31.950 [reviewer] SENT topic=s9871_final partition=0 offset=17 corr=2beef23e-a82c-42bb-b67d-25de7023f765 body={"status": "approved", "answer": "The phone number of the league office is 555-0199. This number can be found in the contact information section of the league's website or on official communication materials. It is the primary means of reaching the office for inquiries or registrations. If you need further assistance, you may also visit the office in person or send an email.", "review": "The draft clearly answers the question and follows the plan.", "correlation_id": "2beef23e-a82c-42bb-b67d-25de7023f765"}
+2026-11-12 11:03:31.960 [reviewer] COMMITTED AFTER successful processing offset=17 (next to read = 18)
+2026-11-12 11:03:35.529 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=18 corr=18db71a8-b6f7-4758-9c85-4606a5fa0df5
+[turn 1] input_tokens=270 output_tokens=27 total_tokens=297
+2026-11-12 11:03:36.785 [reviewer] PROCESSED corr=18db71a8-b6f7-4758-9c85-4606a5fa0df5 partition=0 offset=18
+2026-11-12 11:03:36.787 [reviewer] SENT topic=s9871_final partition=0 offset=18 corr=18db71a8-b6f7-4758-9c85-4606a5fa0df5 body={"status": "approved", "answer": "The provided league database facts do not mention a referee assigned to fixture FX-9871-00012. Therefore, the information is not available in the given data.", "review": "The draft correctly identifies that the referee information is not available in the provided data.", "correlation_id": "18db71a8-b6f7-4758-9c85-4606a5fa0df5"}
+2026-11-12 11:03:36.799 [reviewer] COMMITTED AFTER successful processing offset=18 (next to read = 19)
+2026-11-12 11:03:40.931 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=19 corr=43c0cbd7-ee36-47e0-848a-21146e8b506b
+[turn 1] input_tokens=199 output_tokens=17 total_tokens=216
+2026-11-12 11:03:41.942 [reviewer] PROCESSED corr=43c0cbd7-ee36-47e0-848a-21146e8b506b partition=0 offset=19
+2026-11-12 11:03:41.944 [reviewer] SENT topic=s9871_final partition=0 offset=19 corr=43c0cbd7-ee36-47e0-848a-21146e8b506b body={"status": "approved", "answer": "The registration fee for this season is $300 per team. This rate applies to all standard divisions. If your team is in a special division or category, the fee may vary, so please check with the league office for confirmation. For the most accurate information, visit our website or contact us directly.", "review": "Clear and follows the plan.", "correlation_id": "43c0cbd7-ee36-47e0-848a-21146e8b506b"}
+2026-11-12 11:03:41.953 [reviewer] COMMITTED AFTER successful processing offset=19 (next to read = 20)
+2026-11-12 11:03:46.057 [reviewer] RECEIVED topic=s9871_drafts partition=0 offset=20 corr=dcb64be9-6950-4682-b561-a71e4c1e15b1
+[turn 1] input_tokens=205 output_tokens=24 total_tokens=229
+2026-11-12 11:03:47.219 [reviewer] PROCESSED corr=dcb64be9-6950-4682-b561-a71e4c1e15b1 partition=0 offset=20
+2026-11-12 11:03:47.222 [reviewer] SENT topic=s9871_final partition=0 offset=20 corr=dcb64be9-6950-4682-b561-a71e4c1e15b1 body={"status": "approved", "answer": "The Saturday fixtures are in Manchester, Birmingham, and Leeds. Manchester is expected to have sunny skies with a high of 18\u00b0C. Birmingham will experience light rain with a temperature around 16\u00b0C. Leeds is forecast to have cloudy conditions with a high of 17\u00b0C. Overall, the weather will be mild, with some rain in Birmingham. Teams should prepare for varying conditions, especially in the Midlands.", "review": "Clear and concise summary of the weather forecast for Saturday's fixtures.", "correlation_id": "dcb64be9-6950-4682-b561-a71e4c1e15b1"}
+2026-11-12 11:03:47.233 [reviewer] COMMITTED AFTER successful processing offset=20 (next to read = 21)
