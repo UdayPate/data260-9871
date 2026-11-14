@@ -1,0 +1,19 @@
+PASS Summary page renders without an exception  ElementList()
+PASS Requests metric = number of request spans  69 vs 69
+PASS Hit rate matches an independent count  15.9% 11 hits / 58 misses
+PASS Error rate matches an independent count  1.4%
+PASS Each summary metric states its window and data source
+PASS Choosing one span file narrows the request count  60
+PASS Evaluation page renders  ElementList()
+PASS Evaluation page shows Spearman, mean absolute difference and repeatability  {'Spearman correlation (human vs judge)': '0.1468', 'Mean absolute difference': '1.4 points', 'Cases whose score changed across 3 runs': '0 of 20', 'Mean / max change between runs': '0 / 0'}
+PASS Trace lookup page renders  ElementList()
+PASS cache_miss_success: shown as CACHE MISS  **CACHE MISS** - 12 spans, trace_id `2505a50d-07d2-4fa4-aa1a-df8b550bcd6c`
+PASS cache_miss_success: table has all 12 spans in stage order
+PASS cache_hit: shown as CACHE HIT  **CACHE HIT** - 2 spans, trace_id `6f8c8309-bd42-4daa-9646-44f334e887a0`
+PASS cache_hit: table has all 2 spans in stage order
+PASS failed: shown as CACHE MISS - FAILED  **CACHE MISS - FAILED** - 10 spans, trace_id `5c4340ff-061d-4449-8e23-17e884e13047` Failin
+PASS failed: table has all 10 spans in stage order
+PASS failed trace names the failing stage and error
+PASS unknown trace_id gives a warning, not a crash
+
+ALL PASSED

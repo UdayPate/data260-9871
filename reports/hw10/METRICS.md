@@ -111,3 +111,75 @@ So Kafka hand-offs and the cache lookup are not where time goes; model generatio
 What I would optimize first: the Writer stage, because it is the largest single share. The Writer produces the longest text (up to 120 words) so it spends the most time generating; shortening
 its output limit, or using a smaller or faster model for that stage, would cut the most time. The Planner and Reviewer produce short JSON and are next. Improving Kafka or the cache lookup would change under 4% of the time.
 Limits: requests ran one at a time, so queue wait is the floor; under concurrent load the queues would grow. One run of 50 requests on one machine, one model, so the p95 is based on the slowest 2-3 requests.
+
+## Part 4.1 / 4.2 - Trace propagation and the three required traces
+
+One identifier per request: the `trace_id` of every span is the HW8 `correlation_id` (the same value is in the Kafka messages), so nothing is joined afterwards. Each stage writes one JSON span with
+trace_id, stage, start, end, status and error (`code/kafka_hw8/tracing.py`; the spans of all three traces are in `raw/spans_traces.jsonl`). `queue_*` spans are the time a message waited in a
+topic before the next stage took it (from the Kafka message timestamp); `final` is the ingress receiving the Reviewer's answer; `request` is the whole request.
+
+### Cache MISS, successful - trace_id 2505a50d-07d2-4fa4-aa1a-df8b550bcd6c
+Question: Which team is the home team for fixture FX-9871-00012?
+
+| # | stage | start | end | duration (ms) | status | error / details |
+|---|---|---|---|---|---|---|
+| 1 | request | 11:46:52.024 | 11:46:56.086 | 4,062.4 | ok | path=miss, pipeline_status=approved |
+| 2 | cache_lookup | 11:46:52.024 | 11:46:52.035 | 11.0 | ok | path=miss |
+| 3 | facts_lookup | 11:46:52.035 | 11:46:52.066 | 30.7 | ok |  |
+| 4 | queue_inbox | 11:46:52.067 | 11:46:52.069 | 3.0 | ok |  |
+| 5 | inbox | 11:46:52.067 | 11:46:52.069 | 2.0 | ok |  |
+| 6 | planner | 11:46:52.069 | 11:46:54.159 | 2,089.1 | ok | attempts=1 |
+| 7 | queue_tasks | 11:46:54.159 | 11:46:54.210 | 51.1 | ok |  |
+| 8 | writer | 11:46:54.210 | 11:46:55.163 | 953.8 | ok | attempts=1 |
+| 9 | queue_drafts | 11:46:55.164 | 11:46:55.207 | 43.4 | ok |  |
+| 10 | reviewer | 11:46:55.207 | 11:46:56.081 | 874.4 | ok | attempts=1 |
+| 11 | final | 11:46:56.082 | 11:46:56.084 | 3.0 | ok | pipeline_status=approved |
+| 12 | cache_store | 11:46:56.085 | 11:46:56.086 | 0.5 | ok | stored=True |
+
+### Cache HIT - trace_id 6f8c8309-bd42-4daa-9646-44f334e887a0
+Question: Which team is the home team for fixture FX-9871-00012? (the same question asked again)
+
+| # | stage | start | end | duration (ms) | status | error / details |
+|---|---|---|---|---|---|---|
+| 1 | request | 11:46:56.087 | 11:46:56.097 | 10.5 | ok | path=hit, pipeline_status=approved |
+| 2 | cache_lookup | 11:46:56.087 | 11:46:56.097 | 10.1 | ok | path=hit, similarity=1.0 |
+
+### FAILED - trace_id 5c4340ff-061d-4449-8e23-17e884e13047
+Question: How many open player slots are left on fixture FX-9871-00031?. The Writer process was replaced by one whose model endpoint was unreachable (OLLAMA_HOST pointed at a closed port), so a real failure was produced rather than a simulated one.
+
+| # | stage | start | end | duration (ms) | status | error / details |
+|---|---|---|---|---|---|---|
+| 1 | request | 11:47:05.803 | 11:47:51.039 | 45,235.7 | error | pipeline status=timeout |
+| 2 | cache_lookup | 11:47:05.803 | 11:47:05.819 | 15.2 | ok | path=miss, similarity=0.4509 |
+| 3 | facts_lookup | 11:47:05.820 | 11:47:05.821 | 1.0 | ok |  |
+| 4 | queue_inbox | 11:47:05.822 | 11:47:05.824 | 2.4 | ok |  |
+| 5 | inbox | 11:47:05.822 | 11:47:05.823 | 1.7 | ok |  |
+| 6 | final | 11:47:05.823 | 11:47:51.039 | 45,215.8 | error | no message on s9871_final within 45 s |
+| 7 | planner | 11:47:05.824 | 11:47:08.216 | 2,392.4 | ok | attempts=1 |
+| 8 | queue_tasks | 11:47:08.217 | 11:47:08.274 | 57.5 | ok |  |
+| 9 | writer | 11:47:08.274 | 11:47:18.582 | 10,308.3 | error | ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it |
+| 10 | cache_store | 11:47:51.039 | 11:47:51.039 | 0.0 | ok | stored=False |
+
+What this shows: the hit trace has only `cache_lookup` (path=hit, 10.1 ms) and the `request` span; no Kafka stage runs. The miss trace has every stage in order
+(cache_lookup, facts_lookup, inbox, planner, writer, reviewer, final, cache_store) with 3 queue-wait spans between the agents. In the failed trace the failing stage is **writer**:
+three attempts, error `ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it`, after which the message was dead-lettered; the ingress then found no answer on the final topic within 45 s, so `final` and `request` carry the status error too, and nothing was cached.
+The trace identifies where it failed (writer) and the symptom the caller saw (no answer), which the single `request` span would not.
+
+## Part 1 - Streamlit operations dashboard
+
+`code/dashboard_hw10/app.py` (run: `streamlit run code/dashboard_hw10/app.py --server.port 8873`). It reads only the files the real runs wrote under `reports/hw10/raw`.
+Spans: spans_latency.jsonl, spans_part2.jsonl, spans_traces.jsonl. Results: part2_eval_results.json, part3_judge_scores.json, part4_trace_ids.json, part4_latency_table.json.
+
+| Page | What it shows |
+|---|---|
+| Summary | request count, semantic-cache hit rate (hits and misses counted separately), error rate, end-to-end p50/p95 for misses and hits separately; each metric's caption states its data source and time window; the 50-miss stage table |
+| Evaluation | Part 2 scores by stage (Planner / Writer / Reviewer output) and case with a chart and interpretation; Part 3 Spearman, mean absolute difference and repeatability with the per-case human-vs-judge table and chart |
+| Trace lookup | `trace_id` input (plus buttons for the three required traces); stages in order with start, end, duration, status and error; cache HIT / MISS / FAILED banner; timeline chart |
+
+Current values on the Summary page (all recorded runs): 69 requests, 11 hits / 58 misses (15.9% hit rate), 1 error (1.4% error rate).
+These are the traces recorded by the HW10 experiments, not live traffic, and the latency experiment deliberately asked 50 new questions, so the hit rate reflects how the experiments were designed.
+Caching: `@st.cache_data` for loading the span and result files (refreshed when a file changes) and `@st.cache_resource` for the trace_id index shared by all sessions.
+
+Checks: `code/dashboard_hw10/test_dashboard.py` runs the real app headlessly (Streamlit AppTest) and compares what each page shows with an independent count of the span files:
+17 passed, 0 failed (`raw/part1_dashboard_test.txt`). The five screenshots (`reports/hw10/screenshots/`) were taken by `take_screenshots.py` (headless Chromium via Playwright): the Summary and Evaluation
+pages and the Trace lookup page for the miss (2505a50d), hit (6f8c8309) and failed (5c4340ff) traces, typed into the input box.

@@ -1,0 +1,443 @@
+DATA-260 HW10 RUN_LOG  (local time; raw files in raw/)
+
+################ Part 4.1/4.2: capture of the three required traces: raw/part4_capture_console.txt  (file written 2026-11-10 11:47:54)
+2026-11-10 11:46:27.190 [harness] topics reset: s9871_inbox(1 partition), s9871_tasks(2 partitions), s9871_drafts(1 partition), s9871_final(1 partition), s9871_dead_letter(1 partition)
+warm-up (no spans): loading qwen3 through the pipeline ...
+warm-up status: approved
+
+miss : is_cached=False status=approved 4062 ms trace=2505a50d-07d2-4fa4-aa1a-df8b550bcd6c
+hit  : is_cached=True status=approved 11 ms trace=6f8c8309-bd42-4daa-9646-44f334e887a0
+replacing the Writer with one whose model endpoint is unreachable; waiting for the group to rebalance ...
+failed: is_cached=False status=timeout 45236 ms trace=5c4340ff-061d-4449-8e23-17e884e13047
+
+--- cache MISS (successful): trace_id=2505a50d-07d2-4fa4-aa1a-df8b550bcd6c
+  11:46:52.024  11:46:52.035       11.0 ms  cache_lookup  ok     {'path': 'miss'}
+  11:46:52.024  11:46:56.086     4062.4 ms  request       ok     {'path': 'miss', 'pipeline_status': 'approved'}
+  11:46:52.035  11:46:52.066       30.7 ms  facts_lookup  ok     
+  11:46:52.067  11:46:52.069        3.0 ms  queue_inbox   ok     
+  11:46:52.067  11:46:52.069        2.0 ms  inbox         ok     
+  11:46:52.069  11:46:54.159     2089.1 ms  planner       ok     {'attempts': 1}
+  11:46:54.159  11:46:54.210       51.1 ms  queue_tasks   ok     
+  11:46:54.210  11:46:55.163      953.8 ms  writer        ok     {'attempts': 1}
+  11:46:55.164  11:46:55.207       43.4 ms  queue_drafts  ok     
+  11:46:55.207  11:46:56.081      874.4 ms  reviewer      ok     {'attempts': 1}
+  11:46:56.082  11:46:56.084        3.0 ms  final         ok     {'pipeline_status': 'approved'}
+  11:46:56.085  11:46:56.086        0.5 ms  cache_store   ok     {'stored': True}
+
+--- cache HIT: trace_id=6f8c8309-bd42-4daa-9646-44f334e887a0
+  11:46:56.087  11:46:56.097       10.1 ms  cache_lookup  ok     {'path': 'hit', 'similarity': 1.0}
+  11:46:56.087  11:46:56.097       10.5 ms  request       ok     {'path': 'hit', 'pipeline_status': 'approved'}
+
+--- FAILED: trace_id=5c4340ff-061d-4449-8e23-17e884e13047
+  11:47:05.803  11:47:05.819       15.2 ms  cache_lookup  ok     {'path': 'miss', 'similarity': 0.4509}
+  11:47:05.803  11:47:51.039    45235.7 ms  request       error pipeline status=timeout {'path': 'miss', 'pipeline_status': 'timeout'}
+  11:47:05.820  11:47:05.821        1.0 ms  facts_lookup  ok     
+  11:47:05.822  11:47:05.824        2.4 ms  queue_inbox   ok     
+  11:47:05.822  11:47:05.823        1.7 ms  inbox         ok     
+  11:47:05.823  11:47:51.039    45215.8 ms  final         error no message on s9871_final within 45 s 
+  11:47:05.824  11:47:08.216     2392.4 ms  planner       ok     {'attempts': 1}
+  11:47:08.217  11:47:08.274       57.5 ms  queue_tasks   ok     
+  11:47:08.274  11:47:18.582    10308.3 ms  writer        error ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it {'attempts': 3}
+  11:47:51.039  11:47:51.039        0.0 ms  cache_store   ok     {'stored': False}
+
+{
+  "captured_at": "2026-11-10T11:47:53",
+  "spans_file": "spans_traces.jsonl",
+  "cache_miss_success": {
+    "trace_id": "2505a50d-07d2-4fa4-aa1a-df8b550bcd6c",
+    "question": "Which team is the home team for fixture FX-9871-00012?"
+  },
+  "cache_hit": {
+    "trace_id": "6f8c8309-bd42-4daa-9646-44f334e887a0",
+    "question": "Which team is the home team for fixture FX-9871-00012?"
+  },
+  "failed": {
+    "trace_id": "5c4340ff-061d-4449-8e23-17e884e13047",
+    "question": "How many open player slots are left on fixture FX-9871-00031?",
+    "failing_stage": "writer",
+    "error": "ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it"
+  }
+}
+
+################ Part 2: evaluator on 6 requests (console): raw/part2_console.txt  (file written 2026-11-10 12:02:55)
+2026-11-10 12:00:18.255 [harness] topics reset: s9871_inbox(1 partition), s9871_tasks(2 partitions), s9871_drafts(1 partition), s9871_final(1 partition), s9871_dead_letter(1 partition)
+warm-up (no spans) ...
+#1 cached=False status=approved 4814 ms trace=5b53057f-2842-4932-834c-3d0e1ee4e1be
+   Which team is the home team for fixture FX-9871-00012?
+#2 cached=False status=approved 4950 ms trace=10cd3bf1-995c-4a3d-af8d-8a3865c5aead
+   What should a league office check before scheduling a Soccer fixture on a shared field?
+#3 cached=False status=approved 5566 ms trace=688bc472-7a34-4703-8ed3-9f8ec30836f0
+   How should a league office handle a team that cannot field enough players on match day?
+#4 cached=False status=rejected 6624 ms trace=6cb93999-9b16-4b59-bc0c-528c6daa0540
+   Explain how a round-robin schedule works for a six-team volleyball league.
+#5 cached=False status=approved 5292 ms trace=556edd3c-0345-4800-b5d1-3a5a58f89df0
+   What information belongs in a fixture cancellation notice sent to both teams?
+#6 cached=False status=approved 5502 ms trace=5f2dffb3-e4ef-4a80-a9fe-1884917f5325
+   Why might a league cap the number of substitutions in a cricket match?
+collecting plan/draft/final messages from Kafka and joining on correlation_id ...
+collect stats: {'messages_read': 20, 'malformed_skipped': 0, 'timed_out': False}
+#1 plan=3 writer=3 final=3 diff=+0 identical=True judge=12441 ms
+#2 plan=2 writer=3 final=2 diff=-1 identical=True judge=13683 ms
+#3 plan=2 writer=3 final=3 diff=+0 identical=True judge=14249 ms
+#4 plan=2 writer=2 final=2 diff=+0 identical=True judge=15207 ms
+#5 plan=2 writer=3 final=3 diff=+0 identical=True judge=13807 ms
+#6 plan=2 writer=3 final=3 diff=+0 identical=True judge=13103 ms
+wrote C:\Users\patel\data260-9871\reports\hw10\raw\part2_eval_results.json (6 records) at 12:02:49
+
+################ Part 2: evaluator bounds tests: raw/part2_test_evaluator.txt  (file written 2026-11-12 13:24:33)
+
+PASS unavailable judge -> judge_unavailable, no scores, returns promptly  status=judge_unavailable in 2.1s error=ConnectionError: Failed to connect to Ollama. Please check t
+PASS missing draft/final -> incomplete, judge never called  missing draft, final message(s) for this correlation_id
+PASS collect for an unknown trace_id gives up at its deadline  4.4s stats={'messages_read': 6, 'malformed_skipped': 0, 'timed_out': True}
+PASS identical text, equal scores -> 'no improvement, as expected'
+PASS identical text, different scores -> judge variation, not improvement
+PASS different text, higher score -> improved
+PASS different text, lower score -> worse
+PASS score bands: 0-2->1, 3-4->2, 5-6->3, 7-8->4, 9-10->5
+
+ALL PASSED
+
+################ Part 3.1: freezing the 20 evaluation cases (console): raw/part3_make_cases_console.txt  (file written 2026-11-12 11:03:48)
+2026-11-12 11:01:43.281 [harness] topics reset: s9871_inbox(1 partition), s9871_tasks(2 partitions), s9871_drafts(1 partition), s9871_final(1 partition), s9871_dead_letter(1 partition)
+warm-up ...
+case_01 reviewer=approved  Which team is the home team for fixture FX-9871-00012?
+case_02 reviewer=approved  How many player spots are still open on fixture FX-9871-00031, and which teams are playing?
+case_03 reviewer=approved  Where will fixture FX-9871-00044 be played?
+case_04 reviewer=rejected  Name both teams in fixture FX-9871-00057 and say which one is at home.
+case_05 reviewer=approved  Is there room for 3 more players to register for fixture FX-9871-00063?
+case_06 reviewer=approved  What is the name of fixture FX-9871-00078?
+case_07 reviewer=approved  Which team is the home team for fixture FX-9871-09101?
+case_08 reviewer=approved  How many player spots are open on fixture FX-9871-09102?
+case_09 reviewer=approved  What should a league office check before scheduling a Soccer fixture on a shared field?
+case_10 reviewer=approved  How should a league office handle a team that cannot field enough players on match day?
+case_11 reviewer=rejected  Explain how a round-robin schedule works for a six-team volleyball league.
+case_12 reviewer=approved  What information belongs in a fixture cancellation notice sent to both teams?
+case_13 reviewer=approved  Why might a league cap the number of substitutions in a cricket match?
+case_14 reviewer=approved  What are three ways to reduce no-shows for early-morning basketball fixtures?
+case_15 reviewer=approved  How do you break a tie in league standings when two teams have the same points?
+case_16 reviewer=approved  What was the final score of last season's championship game?
+case_17 reviewer=approved  What is the phone number of the league office?
+case_18 reviewer=approved  Which referee is assigned to fixture FX-9871-00012?
+case_19 reviewer=approved  How much does it cost to register a team this season?
+case_20 reviewer=approved  Summarise the weather forecast for this Saturday's fixtures.
+collect: {'messages_read': 63, 'malformed_skipped': 0, 'timed_out': False}
+wrote eval_cases.json, human_labels.csv (blank), label_sheet.md
+
+################ Part 3.2/3.3: judge vs human labels, three runs (console): raw/part3_console.txt  (file written 2026-11-12 12:02:18)
+judge qwen3:8b temperature=0 seed=9871; 20 drafts x 3 runs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+run 1: [5, 3, 5, 2, 5, 5, 2, 2, 3, 5, 2, 3, 2, 2, 2, 5, 5, 2, 3, 3]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+run 2: [5, 3, 5, 2, 5, 5, 2, 2, 3, 5, 2, 3, 2, 2, 2, 5, 5, 2, 3, 3]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+run 3: [5, 3, 5, 2, 5, 5, 2, 2, 3, 5, 2, 3, 2, 2, 2, 5, 5, 2, 3, 3]
+
+
+human : [5, 5, 5, 2, 5, 5, 5, 4, 4, 4, 3, 4, 2, 3, 3, 1, 1, 5, 1, 1]
+{
+  "n_scored": 20,
+  "spearman_rho_run1": 0.1468,
+  "spearman_p_run1": 0.5367,
+  "spearman_rho_per_run": [
+    0.1468,
+    0.1468,
+    0.1468
+  ],
+  "mean_abs_difference_per_run": [
+    1.4,
+    1.4,
+    1.4
+  ],
+  "mean_abs_difference_run1": 1.4,
+  "mean_judge_minus_mean_human_run1": -0.1,
+  "exact_agreement_run1_pct": 30.0,
+  "within_1_run1_pct": 60.0,
+  "cases_with_any_change_across_runs": 0,
+  "cases_with_any_change_pct": 0.0,
+  "pairwise_comparisons": 60,
+  "pairwise_changed": 0,
+  "pairwise_changed_pct": 0.0,
+  "mean_abs_change": 0,
+  "max_abs_change": 0
+}
+
+wrote raw/part3_judge_scores.json and .csv at 12:02:09
+
+################ Part 4.3: 50 confirmed cache misses, evaluation and 10 cache hits (console): raw/part4_latency_console.txt  (file written 2026-11-12 12:50:18)
+2026-11-12 12:28:43.850 [harness] topics reset: s9871_inbox(1 partition), s9871_tasks(2 partitions), s9871_drafts(1 partition), s9871_final(1 partition), s9871_dead_letter(1 partition)
+warm-up (no spans) ...
+miss 01/50 status=approved     8401 ms  best_similarity=None  How should a league office decide which field a fixture is p
+miss 02/50 status=approved     7696 ms  best_similarity=0.144  What is a sensible refund policy when a team withdraws after
+miss 03/50 status=approved     7317 ms  best_similarity=0.294  Why do some leagues require shin guards for every soccer pla
+miss 04/50 status=approved     7211 ms  best_similarity=0.169  How can a volunteer scorekeeper avoid recording the wrong sc
+miss 05/50 status=approved     7303 ms  best_similarity=0.224  What should a captain's meeting before the season cover?
+miss 06/50 status=approved     8076 ms  best_similarity=0.276  Describe a fair way to seed teams for a single-elimination p
+miss 07/50 status=approved     7543 ms  best_similarity=0.318  What are the pros and cons of playing league games on weekda
+miss 08/50 status=approved     6534 ms  best_similarity=0.429  How do you handle a player who registers for two teams in th
+miss 09/50 status=approved     7131 ms  best_similarity=0.3  What does a heat-safety rule for summer cricket matches usua
+miss 10/50 status=approved     7604 ms  best_similarity=0.28  Suggest a short checklist for setting up a basketball court 
+miss 11/50 status=approved     8150 ms  best_similarity=0.432  How is a forfeit usually recorded in the standings?
+miss 12/50 status=approved     7016 ms  best_similarity=0.376  What makes a good code of conduct for spectators at youth ga
+miss 13/50 status=approved     7247 ms  best_similarity=0.34  Explain what a bye week is and why a schedule might need one
+miss 14/50 status=approved     7219 ms  best_similarity=0.428  Which records should a league keep about injuries?
+miss 15/50 status=approved     6736 ms  best_similarity=0.531  How do you balance team skill levels when forming a recreati
+miss 16/50 status=approved     7000 ms  best_similarity=0.383  What should happen if a referee does not show up?
+miss 17/50 status=approved     6879 ms  best_similarity=0.433  Why might a league ban metal cleats on artificial turf?
+miss 18/50 status=approved     5694 ms  best_similarity=0.413  Give two ways to communicate a last-minute field closure to 
+miss 19/50 status=approved     8511 ms  best_similarity=0.241  What are typical age-group cutoffs and how are birthdays han
+miss 20/50 status=approved     6789 ms  best_similarity=0.612  How should a league treat a player who joins mid-season?
+miss 21/50 status=approved     7681 ms  best_similarity=0.451  Explain the difference between a league and a tournament.
+miss 22/50 status=approved     7224 ms  best_similarity=0.428  What is a good way to thank volunteers at the end of the sea
+miss 23/50 status=approved     6959 ms  best_similarity=0.571  How do you make the schedule fair for teams that travel far?
+miss 24/50 status=approved     7658 ms  best_similarity=0.375  Describe how a mercy rule works in recreational softball.
+miss 25/50 status=approved     7350 ms  best_similarity=0.512  What insurance questions should a community league ask befor
+miss 26/50 status=approved     5980 ms  best_similarity=0.549  How can a league reduce the time spent warming up between ba
+miss 27/50 status=approved     7251 ms  best_similarity=0.371  What is the purpose of a waiver form for adult players?
+miss 28/50 status=approved     7306 ms  best_similarity=0.293  How should lost-and-found items from game days be handled?
+miss 29/50 status=approved     7328 ms  best_similarity=0.505  Why do volleyball leagues often use rally scoring?
+miss 30/50 status=approved     7438 ms  best_similarity=0.482  What should a league do when lightning is seen near the fiel
+miss 31/50 status=approved     7740 ms  best_similarity=0.539  Explain how goal difference can decide a standings tie.
+miss 32/50 status=approved     7322 ms  best_similarity=0.474  How can a new coach learn the league's rules quickly?
+miss 33/50 status=approved     7538 ms  best_similarity=0.451  What are the benefits of posting the schedule on a shared ca
+miss 34/50 status=approved     7243 ms  best_similarity=0.605  How do you decide how many teams a division can hold?
+miss 35/50 status=approved     7348 ms  best_similarity=0.496  What is a reasonable policy for rescheduling a game after ra
+miss 36/50 status=approved     7250 ms  best_similarity=0.505  Why might a league limit the number of players on a roster?
+miss 37/50 status=approved     6339 ms  best_similarity=0.484  Describe a simple process for approving a team name.
+miss 38/50 status=approved     7383 ms  best_similarity=0.273  What should an incident report after a heated argument inclu
+miss 39/50 status=approved     6622 ms  best_similarity=0.358  How do you keep game-day snacks safe for players with allerg
+miss 40/50 status=approved     7396 ms  best_similarity=0.547  What is the role of a league commissioner?
+miss 41/50 status=approved     6691 ms  best_similarity=0.614  How can teams share a practice field fairly?
+miss 42/50 status=approved     7137 ms  best_similarity=0.496  Explain what overtime rules a basketball league might adopt.
+miss 43/50 status=approved     7404 ms  best_similarity=0.453  What are good questions to ask when interviewing a new refer
+miss 44/50 status=approved     6634 ms  best_similarity=0.496  How do you track attendance at weekly games?
+miss 45/50 status=approved     7662 ms  best_similarity=0.284  What does it mean when a game is called for darkness?
+miss 46/50 status=approved     7613 ms  best_similarity=0.472  Suggest ways to welcome first-time players to a cricket leag
+miss 47/50 status=approved     6372 ms  best_similarity=0.461  How should a league announce its end-of-season awards?
+miss 48/50 status=approved     7757 ms  best_similarity=0.602  What are common reasons a team might lose a registration dep
+miss 49/50 status=approved     6398 ms  best_similarity=0.384  Why is it helpful to label equipment bags with the team name
+miss 50/50 status=approved     6244 ms  best_similarity=0.48  How can the league office prepare for a sudden rise in sign-
+10 repeats: 10 served from cache, mean 16.3 ms
+confirmed misses (response and cache_lookup span agree): 50 of 50
+evaluating the 50 requests (judge runs after the pipeline, so it does not share the GPU with it) ...
+collect: {'messages_read': 153, 'malformed_skipped': 0, 'timed_out': False}
+eval 01 ok
+eval 02 ok
+eval 03 ok
+eval 04 ok
+eval 05 ok
+eval 06 ok
+eval 07 ok
+eval 08 ok
+eval 09 ok
+eval 10 ok
+eval 11 ok
+eval 12 ok
+eval 13 ok
+eval 14 ok
+eval 15 ok
+eval 16 ok
+eval 17 ok
+eval 18 ok
+eval 19 ok
+eval 20 ok
+eval 21 ok
+eval 22 ok
+eval 23 ok
+eval 24 ok
+eval 25 ok
+eval 26 ok
+eval 27 ok
+eval 28 ok
+eval 29 ok
+eval 30 ok
+eval 31 ok
+eval 32 ok
+eval 33 ok
+eval 34 ok
+eval 35 ok
+eval 36 ok
+eval 37 ok
+eval 38 ok
+eval 39 ok
+eval 40 ok
+eval 41 ok
+eval 42 ok
+eval 43 ok
+eval 44 ok
+eval 45 ok
+eval 46 ok
+eval 47 ok
+eval 48 ok
+eval 49 ok
+eval 50 ok
+wrote part4_latency_requests.json
+
+################ Part 1: dashboard tests (headless Streamlit): raw/part1_dashboard_test.txt  (file written 2026-11-12 13:24:19)
+PASS Summary page renders without an exception  ElementList()
+PASS Requests metric = number of request spans  69 vs 69
+PASS Hit rate matches an independent count  15.9% 11 hits / 58 misses
+PASS Error rate matches an independent count  1.4%
+PASS Each summary metric states its window and data source
+PASS Choosing one span file narrows the request count  60
+PASS Evaluation page renders  ElementList()
+PASS Evaluation page shows Spearman, mean absolute difference and repeatability  {'Spearman correlation (human vs judge)': '0.1468', 'Mean absolute difference': '1.4 points', 'Cases whose score changed across 3 runs': '0 of 20', 'Mean / max change between runs': '0 / 0'}
+PASS Trace lookup page renders  ElementList()
+PASS cache_miss_success: shown as CACHE MISS  **CACHE MISS** - 12 spans, trace_id `2505a50d-07d2-4fa4-aa1a-df8b550bcd6c`
+PASS cache_miss_success: table has all 12 spans in stage order
+PASS cache_hit: shown as CACHE HIT  **CACHE HIT** - 2 spans, trace_id `6f8c8309-bd42-4daa-9646-44f334e887a0`
+PASS cache_hit: table has all 2 spans in stage order
+PASS failed: shown as CACHE MISS - FAILED  **CACHE MISS - FAILED** - 10 spans, trace_id `5c4340ff-061d-4449-8e23-17e884e13047` Failin
+PASS failed: table has all 10 spans in stage order
+PASS failed trace names the failing stage and error
+PASS unknown trace_id gives a warning, not a crash
+
+ALL PASSED
+
+################ Part 1: dashboard screenshots (Playwright): raw/part1_screenshots_console.txt  (file written 2026-11-12 13:24:55)
+saved fig3_trace_cache_miss_2505a50d.png for trace 2505a50d-07d2-4fa4-aa1a-df8b550bcd6c
+saved fig4_trace_cache_hit_6f8c8309.png for trace 6f8c8309-bd42-4daa-9646-44f334e887a0
+saved fig5_trace_failed_5c4340ff.png for trace 5c4340ff-061d-4449-8e23-17e884e13047
+saved fig1_summary.png, fig2_evaluation.png
+
+################ verify_hw10.py against deliberately broken states: raw/verify_broken_states.txt  (file written 2026-11-12 13:22:51)
+################ Broken state 1: reports/hw10/eval_cases.json moved away
+verify_hw10 run at 2026-11-12T13:20:20
+... required files exist
+    [FAIL] MISSING: ['reports/hw10/eval_cases.json']
+... Services: Kafka topics, Redis Stack, MySQL s9871_rel, Ollama qwen3:8b
+    [PASS]
+... Part 4.1/4.2: span fields; miss, hit and failed traces; trace_id equals the Kafka correlation_id
+    [PASS]
+... Part 4.3: 50 confirmed cache misses; the stage-latency table is recomputed from the spans
+    [PASS]
+... Part 3: cases and labels committed before the judge scores and unchanged; Spearman, MAD and repeatability recomputed
+    [FAIL] Exception: FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\patel\\data260-9871\\reports\\hw10\\eval_cases.json'
+... Part 2: evaluation records have four criteria on a 1-5 scale; difference and linkage recomputed
+    [PASS]
+... Part 2: evaluator bounds (judge unavailable, missing message, collect deadline)
+    [PASS]
+... Dashboard: three pages render with numbers matching the span files
+    [PASS]
+... Ruff passes on the HW10 code
+    [PASS]
+7/9 checks passed -> C:\Users\patel\data260-9871\reports\hw10\verification.json
+################ Broken state 2: one human label edited after the judge ran (case_01 5 -> 1)
+verify_hw10 run at 2026-11-12T13:20:44
+... required files exist
+    [PASS]
+... Services: Kafka topics, Redis Stack, MySQL s9871_rel, Ollama qwen3:8b
+    [PASS]
+... Part 4.1/4.2: span fields; miss, hit and failed traces; trace_id equals the Kafka correlation_id
+    [PASS]
+... Part 4.3: 50 confirmed cache misses; the stage-latency table is recomputed from the spans
+    [PASS]
+... Part 3: cases and labels committed before the judge scores and unchanged; Spearman, MAD and repeatability recomputed
+    [FAIL] 20 cases, 20 labels in 1-5: True; Spearman -0.0325, MAD 1.60, mean/max run-to-run change 0.00/0 recomputed = reported: False; cases+labels committed before the judge scores: True; unchanged since their commit: False
+... Part 2: evaluation records have four criteria on a 1-5 scale; difference and linkage recomputed
+    [PASS]
+... Part 2: evaluator bounds (judge unavailable, missing message, collect deadline)
+    [PASS]
+... Dashboard: three pages render with numbers matching the span files
+    [PASS]
+... Ruff passes on the HW10 code
+    [PASS]
+8/9 checks passed -> C:\Users\patel\data260-9871\reports\hw10\verification.json
+################ Broken state 3: the failed trace's writer span status changed from error to ok
+verify_hw10 run at 2026-11-12T13:21:10
+... required files exist
+    [PASS]
+... Services: Kafka topics, Redis Stack, MySQL s9871_rel, Ollama qwen3:8b
+    [PASS]
+... Part 4.1/4.2: span fields; miss, hit and failed traces; trace_id equals the Kafka correlation_id
+    [FAIL] 772 spans, malformed 0; miss trace stages True (cache_lookup path=miss); hit trace True (path=hit, no agent spans); failed trace -> writer error None; Kafka correlation_id == trace_id for 6 requests: True
+... Part 4.3: 50 confirmed cache misses; the stage-latency table is recomputed from the spans
+    [PASS]
+... Part 3: cases and labels committed before the judge scores and unchanged; Spearman, MAD and repeatability recomputed
+    [PASS]
+... Part 2: evaluation records have four criteria on a 1-5 scale; difference and linkage recomputed
+    [PASS]
+... Part 2: evaluator bounds (judge unavailable, missing message, collect deadline)
+    [PASS]
+... Dashboard: three pages render with numbers matching the span files
+    [FAIL] test_dashboard.py: 16 passed, 1 failed (Summary, Evaluation and Trace lookup pages rendered headlessly and compared with the span files)
+... Ruff passes on the HW10 code
+    [PASS]
+7/9 checks passed -> C:\Users\patel\data260-9871\reports\hw10\verification.json
+################ Broken state 4: Redis container stopped
+verify_hw10 run at 2026-11-12T13:21:39
+... required files exist
+    [PASS]
+... Services: Kafka topics, Redis Stack, MySQL s9871_rel, Ollama qwen3:8b
+    [FAIL] Exception: ConnectionError: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.
+... Part 4.1/4.2: span fields; miss, hit and failed traces; trace_id equals the Kafka correlation_id
+    [PASS]
+... Part 4.3: 50 confirmed cache misses; the stage-latency table is recomputed from the spans
+    [PASS]
+... Part 3: cases and labels committed before the judge scores and unchanged; Spearman, MAD and repeatability recomputed
+    [PASS]
+... Part 2: evaluation records have four criteria on a 1-5 scale; difference and linkage recomputed
+    [PASS]
+... Part 2: evaluator bounds (judge unavailable, missing message, collect deadline)
+    [PASS]
+... Dashboard: three pages render with numbers matching the span files
+    [PASS]
+... Ruff passes on the HW10 code
+    [PASS]
+8/9 checks passed -> C:\Users\patel\data260-9871\reports\hw10\verification.json
