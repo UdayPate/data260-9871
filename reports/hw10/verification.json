@@ -1,20 +1,13 @@
 {
   "homework": 10,
   "sid4": "9871",
-  "commit_hash": "76df1ef7081fb923e61425b84f3abe5fe5dfb368",
-  "tracked_files_modified_since_commit": [
-    " M reports/hw10/METRICS.md",
-    " M reports/hw10/screenshots/fig1_summary.png",
-    " M reports/hw10/screenshots/fig2_evaluation.png",
-    " M reports/hw10/screenshots/fig3_trace_cache_miss_2505a50d.png",
-    " M reports/hw10/screenshots/fig4_trace_cache_hit_6f8c8309.png",
-    " M reports/hw10/screenshots/fig5_trace_failed_5c4340ff.png"
-  ],
+  "commit_hash": "f92c7ee1c491869efe6898e82b466fc243599163",
+  "tracked_files_modified_since_commit": [],
   "model_config": "judge and agents: qwen3:8b via Ollama (thinking off; judge temperature 0, seed 9871); GEval via DeepEval; embeddings sentence-transformers/all-MiniLM-L6-v2; Redis Stack 7.4; Kafka 3.9 (KRaft); facts from MySQL s9871_rel",
   "SEED": "9871",
   "VERIFY_SEED": "269871",
   "port_base": 8871,
-  "run_at": "2026-11-13T16:02:25",
+  "run_at": "2026-11-13T16:21:46",
   "checks": [
     {
       "check": "required files exist",
@@ -26,13 +19,13 @@
       "check": "Services: Kafka topics, Redis Stack, MySQL s9871_rel, Ollama qwen3:8b",
       "passed": true,
       "detail": "Kafka topics present: ['s9871_drafts', 's9871_final', 's9871_inbox', 's9871_tasks']; Redis modules incl. search: True; MySQL fixtures=5000; qwen3:8b in Ollama: True",
-      "seconds": 32.5
+      "seconds": 8.3
     },
     {
       "check": "Part 4.1/4.2: span fields; miss, hit and failed traces; trace_id equals the Kafka correlation_id",
       "passed": true,
       "detail": "772 spans, malformed 0; miss trace stages True (cache_lookup path=miss); hit trace True (path=hit, no agent spans); failed trace -> writer error 'ConnectError: [WinError 10061] No connec'; Kafka correlation_id == trace_id for 6 requests: True",
-      "seconds": 0.1
+      "seconds": 0.0
     },
     {
       "check": "Part 4.3: 50 confirmed cache misses; the stage-latency table is recomputed from the spans",
@@ -44,7 +37,7 @@
       "check": "Part 3: cases and labels committed before the judge scores and unchanged; Spearman, MAD and repeatability recomputed",
       "passed": true,
       "detail": "20 cases, 20 labels in 1-5: True; Spearman 0.1468, MAD 1.40, mean/max run-to-run change 0.00/0 recomputed = reported: True; cases+labels committed before the judge scores: True; unchanged since their commit: True",
-      "seconds": 55.2
+      "seconds": 5.3
     },
     {
       "check": "Part 2: evaluation records have four criteria on a 1-5 scale; difference and linkage recomputed",
@@ -56,25 +49,25 @@
       "check": "Part 2: evaluator bounds (judge unavailable, missing message, collect deadline)",
       "passed": true,
       "detail": "test_evaluator.py: 8 passed, 0 failed (unavailable judge -> judge_unavailable promptly; missing message -> incomplete; collect stops at its deadline)",
-      "seconds": 164.0
+      "seconds": 36.8
     },
     {
       "check": "REAL system: question -> cache miss -> Kafka agents -> evaluator; repeat -> cache hit; one trace_id throughout",
       "passed": true,
-      "detail": "miss is_cached=False (6232 ms), repeat is_cached=True (51 ms); miss trace has all stages + evaluation: True; hit trace has only cache_lookup + request: True; Kafka correlation_id == trace_id: True; judge scores [2, 3, 3] (status ok)",
-      "seconds": 422.0
+      "detail": "miss is_cached=False (5907 ms), repeat is_cached=True (8 ms); miss trace has all stages + evaluation: True; hit trace has only cache_lookup + request: True; Kafka correlation_id == trace_id: True; judge scores [2, 3, 3] (status ok)",
+      "seconds": 185.8
     },
     {
       "check": "Dashboard: three pages render with numbers matching the span files",
       "passed": true,
       "detail": "test_dashboard.py: 17 passed, 0 failed (Summary, Evaluation and Trace lookup pages rendered headlessly and compared with the span files)",
-      "seconds": 59.0
+      "seconds": 34.1
     },
     {
       "check": "Ruff passes on the HW10 code",
       "passed": true,
       "detail": "All checks passed!",
-      "seconds": 2.5
+      "seconds": 1.2
     }
   ],
   "passed": 10,

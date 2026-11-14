@@ -43,8 +43,8 @@ DOMAIN\_ID & 7 -- Community sports league fixtures \\\hline
 \textbf{Local model used:} qwen3:8b via Ollama for the HW8 Planner/Writer/Reviewer agents and as the \textbf{judge} (DeepEval GEval 4.3.3; temperature 0, seed 9871, thinking off); sentence-transformers/all-MiniLM-L6-v2 for the semantic cache. \\
 \textbf{System evaluated:} HW8 Kafka pipeline (Kafka 3.9, KRaft) behind the HW9 Redis Stack semantic cache; dashboard in Streamlit 1.67.0. \\
 \textbf{Repository:} \url{https://github.com/UdayPate/data260-9871} \\
-\textbf{Tagged commit:} PLACEHOLDER\_HASH (to be filled in after the final commit and hw10 tag) \\
-{\footnotesize\url{https://github.com/UdayPate/data260-9871/tree/PLACEHOLDER_HASH}} \\
+\textbf{Tagged commit:} f92c7ee1c491869efe6898e82b466fc243599163 (tag: hw10) \\
+{\footnotesize\url{https://github.com/UdayPate/data260-9871/tree/f92c7ee1c491869efe6898e82b466fc243599163}} \\
 \textbf{Collaborator access:} confirmed working for Sbnikitha and supriyaselvanganesan.
 
 \section*{Part 1 -- Streamlit Operations Dashboard}
@@ -595,7 +595,7 @@ What I would optimize first: the Writer stage, because it is the largest single 
 The saved table is \texttt{raw/\allowbreak{}part4\_\allowbreak{}latency\_\allowbreak{}table.json}; the spans of all 60 requests are in \texttt{raw/\allowbreak{}spans\_\allowbreak{}latency.jsonl} and \texttt{verify\_\allowbreak{}hw10.py} recomputes the p50, p95 and percentages from them.
 
 \section*{Self-check (verification.json)}
-\texttt{verify\_\allowbreak{}hw10.py} runs the real system and 10 objective checks (commit \texttt{76df1ef}, SEED 9871, VERIFY\_\allowbreak{}SEED 269871): 10/10 passed. It was also run (without the live-model check) against four deliberately broken states and failed where it should (\texttt{raw/\allowbreak{}verify\_\allowbreak{}broken\_\allowbreak{}states.txt}): reports/hw10/eval\_\allowbreak{}cases.json moved away -> 7/9; one human label edited after the judge ran (case\_\allowbreak{}01 5 -> 1) -> 8/9; the failed trace's writer span status changed from error to ok -> 7/9; Redis container stopped -> 8/9.
+\texttt{verify\_\allowbreak{}hw10.py} runs the real system and 10 objective checks (commit \texttt{f92c7ee}, SEED 9871, VERIFY\_\allowbreak{}SEED 269871): 10/10 passed. It was also run (without the live-model check) against four deliberately broken states and failed where it should (\texttt{raw/\allowbreak{}verify\_\allowbreak{}broken\_\allowbreak{}states.txt}): reports/hw10/eval\_\allowbreak{}cases.json moved away -> 7/9; one human label edited after the judge ran (case\_\allowbreak{}01 5 -> 1) -> 8/9; the failed trace's writer span status changed from error to ok -> 7/9; Redis container stopped -> 8/9.
 
 \begin{center}
 {\footnotesize\setlength{\tabcolsep}{3pt}
