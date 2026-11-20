@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- HW11 FIXTURE. Zenith Robotics (ZNTH), Granite Beverage (GRBV) and Harbor Bank (HRBK) are fictional; these filings do not exist. -->
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>EDGAR 8-K filings (HW11 fixture)</title>
+  <entry>
+    <id>urn:tag:sec.gov,2008:accession-number=0009999912-26-000031</id>
+    <updated>2026-11-18T07:00:00-05:00</updated>
+    <title>GRBV: 8-K - Third-quarter results (Item 2.02)</title>
+    <summary>(Fictional company.) Granite Beverage Co. Item 2.02 Results of Operations and Financial Condition: third-quarter revenue up 6% year over year; full-year outlook unchanged.</summary>
+    <link href="https://www.sec.gov/Archives/edgar/data/9999912/000999991226000031/0009999912-26-000031-index.htm" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>urn:tag:sec.gov,2008:accession-number=0009999911-26-000018</id>
+    <updated>2026-11-18T16:05:00-05:00</updated>
+    <title>ZNTH: 8-K - Third-quarter results (Item 2.02)</title>
+    <summary>(Fictional company.) Zenith Robotics Inc. Item 2.02 Results of Operations and Financial Condition: third-quarter revenue of $410M, up 31%; guidance raised.</summary>
+    <link href="https://www.sec.gov/Archives/edgar/data/9999911/000999991126000018/0009999911-26-000018-index.htm" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>urn:tag:sec.gov,2008:accession-number=0009999911-26-000020</id>
+    <updated>2026-11-17T09:30:00-05:00</updated>
+    <title>ZNTH: 8-K - Supply agreement (Item 1.01)</title>
+    <summary>(Fictional company.) Zenith Robotics Inc. Item 1.01 Entry into a Material Definitive Agreement: a three-year, $600M supply agreement with Orion Logistics.</summary>
+    <link href="https://www.sec.gov/Archives/edgar/data/9999911/000999991126000020/0009999911-26-000020-index.htm" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>urn:tag:sec.gov,2008:accession-number=0009999911-26-000024</id>
+    <updated>2026-11-18T08:00:00-05:00</updated>
+    <title>ZNTH: 8-K/A - Amendment to supply agreement filing</title>
+    <summary>(Fictional company.) Zenith Robotics Inc. Amendment No. 1 to the 8-K filed November 17, to correct an exhibit number. No other changes.</summary>
+    <link href="https://www.sec.gov/Archives/edgar/data/9999911/000999991126000024/0009999911-26-000024-index.htm" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>urn:tag:sec.gov,2008:accession-number=0009999913-26-000044</id>
+    <updated>2026-11-17T12:00:00-05:00</updated>
+    <title>HRBK: 8-K - Regulatory settlement (Item 8.01)</title>
+    <summary>(Fictional company.) Harbor Bank Corp. Item 8.01 Other Events: the bank agreed to a $240M settlement with a state regulator over past lending practices and will take a charge in the fourth quarter.</summary>
+    <link href="https://www.sec.gov/Archives/edgar/data/9999913/000999991326000044/0009999913-26-000044-index.htm" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>urn:tag:sec.gov,2008:accession-number=0009999913-26-000045</id>
+    <updated>2026-11-18T09:00:00-05:00</updated>
+    <title>HRBK: 8-K - Chief executive retirement (Item 5.02)</title>
+    <summary>(Fictional company.) Harbor Bank Corp. Item 5.02: the Chief Executive Officer will retire effective December 31; the board has named an interim CEO.</summary>
+    <link href="https://www.sec.gov/Archives/edgar/data/9999913/000999991326000045/0009999913-26-000045-index.htm" rel="alternate"/>
+  </entry>
+</feed>

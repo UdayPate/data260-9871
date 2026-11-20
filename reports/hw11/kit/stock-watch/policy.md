@@ -31,6 +31,9 @@ candidate at or above the digest level (sources.json `threshold_pct` holds the s
 so smaller moves are quiet by construction and cost no tokens. Price scores: at or above the
 notify level: +0.85; between digest and notify level: +0.55.
 
+Test fixtures only (fictional companies, HW golden set): ZNTH is scored with NVDA's levels
+(5.0% / 7.0%), GRBV with KO's (2.5% / 3.5%), HRBK with JPM's (3.0% / 4.5%).
+
 Why this matters: NVDA fell 4.1% on 2026-11-16 and stayed below its 5% digest level, which is
 ordinary for NVDA (27 days in the year moved 4% or more). A 4.1% fall in KO would be the
 largest move KO made all year (its largest was 5.0%), so KO's notify level is 3.5%.

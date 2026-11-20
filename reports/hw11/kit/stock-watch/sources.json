@@ -52,9 +52,17 @@
       "tickers": [
         "nbrx.us",
         "cbds.us",
-        "lksp.us"
+        "lksp.us",
+        "znth.us",
+        "grbv.us",
+        "hrbk.us"
       ],
-      "threshold_pct": 2.0,
+      "threshold_pct": {
+        "default": 2.0,
+        "ZNTH": 5.0,
+        "GRBV": 2.5,
+        "HRBK": 3.0
+      },
       "lookback_days": 3
     },
     {
