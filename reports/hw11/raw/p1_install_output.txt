@@ -1,0 +1,47 @@
+[Muse chat, pasted verbatim by the student, 2026-11-19]
+1. Unzip: ~/stock-watch/watch.py exists
+2. Python: Python 3.12.3
+
+3. Demo test - cd ~/stock-watch && bash demo_test.sh:
+
+1) Day-1 scan crashes after 2 items
+    Simulated crash after 2 items. State is saved. Run `python3 watch.py status`, then `python3 watch.py scan --resume ...`.
+2) After restart: what was I doing?
+    interrupted - stopped after 2 items in source prices_demo -> Resume the scan: python3 watch.py scan --resume [--fixtures DIR]
+3) Resume
+    pending 6 | duplicates suppressed 1
+     - 5 robotics stocks to watch this holiday season
+     - Analyst note: Larkspur Biotech pipeline update
+     - NBRX: 8-K - Current report
+     - LKSP: 8-K - Current report
+     - LKSP closed -3.2% on 2026-11-10
+     - NBRX closed +8.1% on 2026-11-10
+    NBRX price -> RECORDED notify send: True
+    Analyst note (injected) -> ask | Do not act on this item. List it under 'Needs your review' in the digest.
+4) Retry the same alert
+    ALREADY_REPORTED send: False
+5) Day-2 scan (3-day price lookback re-finds day-1 moves; old filings still in the feed; an 8-K/A; a news repost)
+    pending 4 | duplicates suppressed 5
+     - Market wrap: indexes edge higher in quiet trading
+     - LKSP: 8-K/A - Current report, amendment
+     - CBDS: 8-K - Current report
+     - CBDS closed +12.5% on 2026-11-11
+6) Boundary: open a link that is not approved
+    desk.example-newswire.example is not an approved source
+6b) Back up state (as if the cloud computer might be reset)
+    ledger entries saved: 10 | 24791 bytes
+    restored ledger entries: 10
+    retry after restore -> ALREADY_REPORTED send: False
+7) Digest
+    /home/hatch/stock-watch/digests/digest-20261119-173343-9520.md
+8) Metrics
+    {'cases': 10, 'decision_accuracy': 1.0, 'precision_notify': 1.0, 'recall_notify': 1.0, 'unnecessary_notification_rate': 0.0, 'duplicate_notification_rate': 0.0, 'restart_recovery_rate': 1.0, 'blocked_non_allowlisted_urls': 1, 'injection_items_flagged': 1, 'injection_items_notified': 0, 'tokens_per_accepted_notification': 500000}
+5. Reset + init:
+{
+  "ok": true,
+  "deleted": "/home/hatch/stock-watch/state/watch.db"
+}
+{
+  "ok": true,
+  "state": "/home/hatch/stock-watch/state/watch.db"
+}

@@ -1,0 +1,16 @@
+[Muse chat, pasted verbatim by the student, 2026-11-19; kit v2, original policy.md]
+You: run stock-watch
+
+HIGH - NVDA: 8-K - Current report
+What changed: NVDA 8-K filed 2026-11-17 with Item 2.02 Results of Operations. (score 0.85)
+Source: https://www.sec.gov/Archives/edgar/data/1045810/000104581026000088/0001045810-26-000088-index.htm - effect a952460acc0a
+
+HIGH - JPM: 8-K - Current report
+What changed: JPM 8-K filed 2026-11-17 with Item 5.02 executive change. (score 0.85)
+Source: https://www.sec.gov/Archives/edgar/data/19617/000001961726000407/0000019617-26-000407-index.htm - effect 103440f41bcb
+
+HIGH - NVDA: 8-K - Current report
+What changed: NVDA 8-K filed 2026-11-12 with Item 5.02 executive change. (score 0.85)
+Source: https://www.sec.gov/Archives/edgar/data/1045810/000104581026000082/0001045810-26-000082-index.htm - effect 96f0110df99f
+
+Run 20261119-175458-f6ed: 8 new, 0 duplicates suppressed, 3 alerts, 5 digest, 0 need review.

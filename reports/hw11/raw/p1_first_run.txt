@@ -1,0 +1,4 @@
+[Muse chat, pasted verbatim by the student, 2026-11-19]
+You: run stock-watch
+Scan is running in live mode - I'll post the alerts, if any, and the one-line summary when it finishes.
+Run 20261119-174635-945e: 0 new, 0 duplicates suppressed, 0 alerts, 0 digest, 0 need review.
