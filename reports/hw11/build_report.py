@@ -17,7 +17,7 @@ RAW = HW / "raw"
 OUT = HW / "Patel_HW11_report.tex"
 # Leave as PLACEHOLDER_HASH until the final commit is tagged; then set the full 40-character hash of the tag (git rev-parse hw11) and rebuild.
 PREVIEW = "--preview" in sys.argv  # development only: lets the build run before AI_USE.md is filled in (never use the output)
-HASH = "PLACEHOLDER_HASH"
+HASH = "e591f66c5ff5fe8d2477e4175134ad8270995a76"
 
 # lstlisting / pdflatex choke on non-ASCII, so every piece of text is folded to ASCII first
 ASCII = {"\u2014": "-", "\u2013": "-", "\u2019": "'", "\u2018": "'", "\u201c": '"', "\u201d": '"', "\u2026": "...", "\u2192": "->", "\u2190": "<-", "\u2265": ">=",

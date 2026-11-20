@@ -43,8 +43,8 @@ DOMAIN\_ID & 7 -- Community sports league fixtures \\\hline
 \textbf{Local model used:} none for this homework. The agent and the judge are the model behind Meta Muse (free tier), which runs \texttt{watch.py} on its own cloud computer; my laptop was used only to prepare the kit, to test it, and to write the report. \\
 \textbf{Watchlist:} NVDA, TSLA, KO, JPM (live); fictional ZNTH, GRBV, HRBK (test fixtures). \\
 \textbf{Repository:} \url{https://github.com/UdayPate/data260-9871} \\
-\textbf{Tagged commit:} PLACEHOLDER\_HASH (to be filled in after the final commit and hw11 tag) \\
-{\footnotesize\url{https://github.com/UdayPate/data260-9871/tree/PLACEHOLDER_HASH}} \\
+\textbf{Tagged commit:} e591f66c5ff5fe8d2477e4175134ad8270995a76 (tag: hw11) \\
+{\footnotesize\url{https://github.com/UdayPate/data260-9871/tree/e591f66c5ff5fe8d2477e4175134ad8270995a76}} \\
 \textbf{Collaborator access:} confirmed working for Sbnikitha and supriyaselvanganesan.
 
 \textbf{How the evidence is shown.} The Muse chat and the \texttt{watch.py} output are pasted below as text, verbatim from the Muse chat; each block names the chat message that produced it and the file in \texttt{raw/\allowbreak{}} that holds it. The setup of Part 1 (scheduled task, saved memory, first run) is shown as screenshots of the Muse interface. Only the line breaks of the long JSON replies were changed, and where that happened it is stated in the file. The submitted files are \texttt{policy.md}, \texttt{sources.json}, the fixtures in \texttt{fixtures/\allowbreak{}hw11/\allowbreak{}} and \texttt{golden/\allowbreak{}gold\_\allowbreak{}hw11.json}, all under \texttt{reports/\allowbreak{}hw11/\allowbreak{}kit/\allowbreak{}stock-watch/\allowbreak{}}.
@@ -518,7 +518,7 @@ B2, a price series with one missing day, was alerted as a one-day move. A normal
 No, not yet. I would require, on a gold set of at least 30 cases: precision (notify) of at least 0.95 and recall of at least 0.95; an unnecessary notification rate of at most 0.05; duplicate notification rate 0.0 measured on what the user sees, not only on the ledger; restart recovery rate 1.0; zero injection items notified; every source error reported to the user in the run summary; and the snapshot copied off the computer after each run. Measured here: precision 0.857, recall 1.0, unnecessary rate 0.143, duplicate rate 0.0 (but a repeat was seen), recovery 1.0, injections notified 0. Precision and the repeat fail, the sample is only 12 cases, and source errors are still silent, so I would run it only with the digest visible to me and review the first weeks, not leave it alone.
 
 \section*{Self-check (verification.json)}
-\texttt{verify\_\allowbreak{}hw11.py} runs the real kit in a throw-away copy (crash, resume, guard, retry, snapshot and restore, with a scripted judge that applies the gold labels), checks the saved Muse metrics against their own per-case rows, and makes one live scan of Yahoo and EDGAR (commit \texttt{b4036fb}, SEED 9871, VERIFY\_\allowbreak{}SEED 269871): 24/24 passed. It was also run against deliberately broken states and failed where it should (\texttt{raw/\allowbreak{}verify\_\allowbreak{}broken\_\allowbreak{}states.txt}).
+\texttt{verify\_\allowbreak{}hw11.py} runs the real kit in a throw-away copy (crash, resume, guard, retry, snapshot and restore, with a scripted judge that applies the gold labels), checks the saved Muse metrics against their own per-case rows, and makes one live scan of Yahoo and EDGAR (commit \texttt{e591f66}, SEED 9871, VERIFY\_\allowbreak{}SEED 269871): 24/24 passed. It was also run against deliberately broken states and failed where it should (\texttt{raw/\allowbreak{}verify\_\allowbreak{}broken\_\allowbreak{}states.txt}).
 
 \begin{center}
 {\scriptsize\setlength{\tabcolsep}{3pt}
