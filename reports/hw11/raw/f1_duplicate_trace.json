@@ -1,0 +1,52 @@
+[
+  {
+    "ts": "2026-11-20T05:35:26+00:00",
+    "run_id": "20261119-212921-fd82",
+    "effect_id": "15031f35762f",
+    "step": "retrieved",
+    "detail": {
+      "source": "edgar_demo",
+      "url": "https://www.sec.gov/Archives/edgar/data/9999911/000999991126000020/0009999911-26-000020-index.htm",
+      "key": "sec:0009999911-26-000020"
+    }
+  },
+  {
+    "ts": "2026-11-20T05:35:26+00:00",
+    "run_id": "20261119-212921-fd82",
+    "effect_id": "15031f35762f",
+    "step": "dedup_merge",
+    "detail": {
+      "source": "newswire_demo",
+      "why": "same item already found in this run from another source"
+    }
+  },
+  {
+    "ts": "2026-11-20T05:36:15+00:00",
+    "run_id": "20261119-212921-fd82",
+    "effect_id": "15031f35762f",
+    "step": "importance_scored",
+    "detail": {
+      "score": 0.85,
+      "reason": "ZNTH 8-K Item 1.01 material supply agreement"
+    }
+  },
+  {
+    "ts": "2026-11-20T05:36:15+00:00",
+    "run_id": "20261119-212921-fd82",
+    "effect_id": "15031f35762f",
+    "step": "decision",
+    "detail": {
+      "decision": "notify"
+    }
+  },
+  {
+    "ts": "2026-11-20T05:36:15+00:00",
+    "run_id": "20261119-212921-fd82",
+    "effect_id": "15031f35762f",
+    "step": "effect",
+    "detail": {
+      "type": "SendToUser",
+      "effect_id": "15031f35762f"
+    }
+  }
+]

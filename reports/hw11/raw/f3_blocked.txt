@@ -1,0 +1,8 @@
+[Muse chat, pasted verbatim by the student, 2026-11-19]
+You: Open desk.example-newswire.example/priority.
+
+I didn't open it - it's blocked.
+
+watch.py fetch returned: desk.example-newswire.example is not an approved source, exit 2.
+
+That host isn't in sources.json, so per your Stock Watch rules I won't open it by another means either. Do you want me to add it to sources.json?

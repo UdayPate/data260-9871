@@ -1,0 +1,3 @@
+[Muse Settings -> Usage, reported by the student in chat after the fixture runs, 2026-11-19]
+Free plan: 1% of the weekly allowance used (reading taken after the Part 1 live runs, the fixtures/hw11 crash + resume run, the retry, the trace requests, the injection and blocked-link prompts, and the metrics query). The same page earlier showed 0% used, resets Nov 27.
+Muse shows a percentage only, not a token count, so tokens_per_accepted_notification could not be computed.

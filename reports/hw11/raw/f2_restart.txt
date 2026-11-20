@@ -1,0 +1,13 @@
+[Muse chat, NEW chat, pasted verbatim by the student, 2026-11-19 21:32]
+You: What were you working on for Stock Watch?
+
+Stock Watch - your always-on monitor for NVDA, TSLA, KO, and JPM. I only alert on material changes, a large daily price move or a significant new SEC 8-K, and never recommend trading or predict prices. Everything runs through watch.py and policy.md.
+
+Today we set that up as standing instructions, plus a weekday live run at 1:30pm Pacific starting tomorrow. We also replaced the kit a few times - hw11, then v2, v3, and now v5. V5 kept the same live thresholds, per ticker, and added the HW11 fixtures: ZNTH, GRBV, and HRBK.
+
+The last live run found 8 new items, with 3 HIGH alerts - NVDA 8-Ks on Item 2.02 and 5.02, and a JPM 8-K on 5.02. The most recent test was a simulated crash: run stock-watch on fixtures/hw11 with --stop-after 2.
+
+That scan stopped after 2 items, with 2 pending decisions and 0/3 sources done. Status is interrupted, so the next step is to resume it.
+
+Want me to resume it now?
+[button shown: "Resume the interrupted scan"]

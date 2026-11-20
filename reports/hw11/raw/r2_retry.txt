@@ -1,0 +1,6 @@
+[Muse chat, pasted verbatim by the student, 2026-11-19]
+You: Send me the Granite Beverage Q3 alert again.
+
+HIGH - GRBV: 8-K - Third-quarter results (Item 2.02)
+What changed: GRBV 8-K filed 2026-11-18 with Item 2.02 Results of Operations. (score 0.85)
+Source: https://www.sec.gov/Archives/edgar/data/9999912/000999991226000031/0009999912-26-000031-index.htm - effect 2d8d692a411e

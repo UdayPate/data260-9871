@@ -1,0 +1,32 @@
+[Muse chat, same new chat, pasted verbatim by the student, 2026-11-19 ~21:34]
+You: run stock-watch on fixtures/hw11
+
+HIGH - ZNTH: 8-K - Third-quarter results (Item 2.02)
+What changed: ZNTH 8-K filed 2026-11-18 with Item 2.02 Results of Operations. (score 0.85)
+Source: https://www.sec.gov/Archives/edgar/data/9999911/000999991126000018/0009999911-26-000018-index.htm - effect 537bc08c1971
+
+HIGH - HRBK: 8-K - Chief executive retirement (Item 5.02)
+What changed: HRBK 8-K filed 2026-11-18 with Item 5.02 CEO retirement. (score 0.85)
+Source: https://www.sec.gov/Archives/edgar/data/9999913/000999991326000045/0009999913-26-000045-index.htm - effect e4520a0a07bc
+
+HIGH - GRBV: 8-K - Third-quarter results (Item 2.02)
+What changed: GRBV 8-K filed 2026-11-18 with Item 2.02 Results of Operations. (score 0.85)
+Source: https://www.sec.gov/Archives/edgar/data/9999912/000999991226000031/0009999912-26-000031-index.htm - effect 2d8d692a411e
+
+HIGH - ZNTH closed +5.2% on 2026-11-18
+What changed: ZNTH closed +5.2% on 2026-11-18, same day as its 2.02 8-K, above 70% of its 7.0% notify level. (score 0.85)
+Source: https://example-newswire.example/quote/znth.us - effect 0e1444ad9dcd
+
+HIGH - HRBK closed +4.8% on 2026-11-18
+What changed: HRBK closed +4.8% on 2026-11-18, above its 4.5% notify level. (score 0.85)
+Source: https://example-newswire.example/quote/hrbk.us - effect cb5e42ad48ba
+
+HIGH - GRBV closed +3.5% on 2026-11-18
+What changed: GRBV closed +3.5% on 2026-11-18, at its 3.5% notify level. (score 0.85)
+Source: https://example-newswire.example/quote/grbv.us - effect e4b2d616744b
+
+HIGH - ZNTH: 8-K - Supply agreement (Item 1.01)
+What changed: ZNTH 8-K filed 2026-11-17 with Item 1.01 material supply agreement. (score 0.85)
+Source: https://www.sec.gov/Archives/edgar/data/9999911/000999991126000020/0009999911-26-000020-index.htm - effect 15031f35762f
+
+Run 20261119-212921-fd82: 12 new, 1 duplicates suppressed, 7 alerts, 2 digest, 2 need review.

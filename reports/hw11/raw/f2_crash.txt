@@ -1,0 +1,8 @@
+[Muse chat, pasted verbatim by the student, 2026-11-19 21:29]
+You: run stock-watch on fixtures/hw11 with --stop-after 2 to simulate a crash.
+
+It was interrupted, as intended - state is saved.
+
+Scan 20261119-212921-fd82 stopped after 2 items in prices_demo, with 2 pending decisions and 0/3 sources done. Status is interrupted, mode fixtures.
+
+Next step when you're ready: python3 watch.py scan --resume --fixtures fixtures/hw11

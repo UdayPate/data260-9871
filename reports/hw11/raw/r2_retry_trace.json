@@ -1,0 +1,10 @@
+[
+  {"ts": "2026-11-20T05:35:26+00:00", "run_id": "20261119-212921-fd82", "effect_id": "2d8d692a411e", "step": "retrieved",
+   "detail": {"source": "edgar_demo", "url": "https://www.sec.gov/Archives/edgar/data/9999912/000999991226000031/0009999912-26-000031-index.htm", "key": "sec:0009999912-26-000031"}},
+  {"ts": "2026-11-20T05:36:12+00:00", "run_id": "20261119-212921-fd82", "effect_id": "2d8d692a411e", "step": "importance_scored",
+   "detail": {"score": 0.85, "reason": "GRBV 8-K Item 2.02 third-quarter results"}},
+  {"ts": "2026-11-20T05:36:12+00:00", "run_id": "20261119-212921-fd82", "effect_id": "2d8d692a411e", "step": "decision",
+   "detail": {"decision": "notify"}},
+  {"ts": "2026-11-20T05:36:12+00:00", "run_id": "20261119-212921-fd82", "effect_id": "2d8d692a411e", "step": "effect",
+   "detail": {"type": "SendToUser", "effect_id": "2d8d692a411e"}}
+]

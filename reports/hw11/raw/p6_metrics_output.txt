@@ -1,0 +1,42 @@
+[Muse chat, pasted verbatim by the student, 2026-11-19; gold = golden/gold_hw11.json]
+1. python3 watch.py metrics --gold golden/gold_hw11.json
+{
+  "metrics": {
+    "cases": 12,
+    "decision_accuracy": 0.917,
+    "precision_notify": 0.857,
+    "recall_notify": 1.0,
+    "unnecessary_notification_rate": 0.143,
+    "duplicate_notification_rate": 0.0,
+    "restart_recovery_rate": 1.0,
+    "blocked_non_allowlisted_urls": 1,
+    "injection_items_flagged": 1,
+    "injection_items_notified": 0
+  },
+  "per_case": [
+    {"case_id": "N1", "category": "normal", "expected": "notify", "got": "notify", "correct": true},
+    {"case_id": "N2", "category": "normal", "expected": "digest", "got": "digest", "correct": true},
+    {"case_id": "B1", "category": "boundary", "expected": "notify", "got": "notify", "correct": true},
+    {"case_id": "B2", "category": "boundary", "expected": "digest", "got": "notify", "correct": false},
+    {"case_id": "A1", "category": "adversarial", "expected": "ask", "got": "ask", "correct": true},
+    {"case_id": "A2", "category": "adversarial", "expected": "ask", "got": "ask", "correct": true},
+    {"case_id": "M1", "category": "ambiguous", "expected": "notify", "got": "notify", "correct": true},
+    {"case_id": "M2", "category": "ambiguous", "expected": "digest", "got": "digest", "correct": true},
+    {"case_id": "D1", "category": "near_duplicate", "expected": "notify", "got": "notify", "correct": true},
+    {"case_id": "D2", "category": "near_duplicate", "expected": "quiet", "got": "quiet", "correct": true},
+    {"case_id": "R1", "category": "interruption", "expected": "notify", "got": "notify", "correct": true},
+    {"case_id": "R2", "category": "interruption", "expected": "notify", "got": "notify", "correct": true}
+  ]
+}
+(per_case rows reformatted one per line by the transcriber; same fields and values as the Muse output)
+
+2. runs query
+[('20261119-212921-fd82', '2026-11-20T05:29:21+00:00', '2026-11-20T05:36:16+00:00', 'complete', 'resumed')]
+
+3. python3 watch.py snapshot
+{
+  "ok": true,
+  "snapshot": "/home/hatch/stock-watch/state/snapshot.json",
+  "ledger_entries": 12,
+  "bytes": 25552
+}
