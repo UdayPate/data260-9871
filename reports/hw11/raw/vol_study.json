@@ -1,0 +1,50 @@
+{
+  "fetched": "2026-11-20T05:13:20+00:00",
+  "range": "1y",
+  "tickers": {
+    "NVDA": {
+      "days": 250,
+      "stdev_pct": 2.44,
+      "median_abs_pct": 1.54,
+      "days_ge_2pct": 93,
+      "days_ge_3pct": 48,
+      "days_ge_4pct": 27,
+      "days_ge_5pct": 9,
+      "days_ge_8pct": 2,
+      "max_abs_pct": 9.26
+    },
+    "TSLA": {
+      "days": 250,
+      "stdev_pct": 2.87,
+      "median_abs_pct": 1.75,
+      "days_ge_2pct": 112,
+      "days_ge_3pct": 71,
+      "days_ge_4pct": 32,
+      "days_ge_5pct": 16,
+      "days_ge_8pct": 3,
+      "max_abs_pct": 14.52
+    },
+    "KO": {
+      "days": 250,
+      "stdev_pct": 1.21,
+      "median_abs_pct": 0.68,
+      "days_ge_2pct": 25,
+      "days_ge_3pct": 5,
+      "days_ge_4pct": 1,
+      "days_ge_5pct": 0,
+      "days_ge_8pct": 0,
+      "max_abs_pct": 5.0
+    },
+    "JPM": {
+      "days": 250,
+      "stdev_pct": 1.44,
+      "median_abs_pct": 0.86,
+      "days_ge_2pct": 35,
+      "days_ge_3pct": 15,
+      "days_ge_4pct": 5,
+      "days_ge_5pct": 0,
+      "days_ge_8pct": 0,
+      "max_abs_pct": 4.66
+    }
+  }
+}

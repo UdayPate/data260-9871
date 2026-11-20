@@ -16,7 +16,13 @@
         "ko.us",
         "jpm.us"
       ],
-      "threshold_pct": 2.0,
+      "threshold_pct": {
+        "default": 2.0,
+        "NVDA": 5.0,
+        "TSLA": 6.0,
+        "KO": 2.5,
+        "JPM": 3.0
+      },
       "lookback_days": 3
     },
     {
