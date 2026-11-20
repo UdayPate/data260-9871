@@ -1,0 +1,13 @@
+[Muse chat, pasted verbatim by the student, 2026-11-19. Diagnosis of the first live run (kit v1), which reported "0 new" with no warning.]
+You: Run: cd ~/stock-watch && python3 watch.py trace --run-id 20261119-174635-945e
+
+[
+  {"ts": "2026-11-20T01:46:35+00:00", "run_id": "20261119-174635-945e", "effect_id": null, "step": "run_start",
+   "detail": {"mode": "live", "sources": ["prices_live", "edgar_live"]}},
+  {"ts": "2026-11-20T01:47:06+00:00", "run_id": "20261119-174635-945e", "effect_id": null, "step": "source_error",
+   "detail": {"source": "prices_live", "error": "Remote end closed connection without response"}},
+  {"ts": "2026-11-20T01:47:07+00:00", "run_id": "20261119-174635-945e", "effect_id": null, "step": "source_error",
+   "detail": {"source": "edgar_live", "error": "HTTP Error 400: Bad Request"}}
+]
+(reformatted one record per two lines by the transcriber; same fields and values as the Muse output)
+Muse: Yes - both steps after run_start are source_error: prices_live closed the connection without a response, and edgar_live returned HTTP 400 Bad Request.

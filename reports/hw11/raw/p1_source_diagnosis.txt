@@ -1,0 +1,5 @@
+[Run locally on 2026-11-19 (WSL) to find out why the live sources failed; curl, same User-Agent as sources.json]
+EDGAR, per_company=5 (kit default), CIK 0001045810 -> HTTP 400 "Invalid count, Received: 5,Count must be one of: 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 500."
+EDGAR, count=10, CIK 0001318605 (Tesla) -> HTTP 200, Atom feed
+Stooq https://stooq.com/q/d/l/?s=nvda.us&i=d -> HTTP 200 but the body is an HTML page: "This site requires JavaScript to verify your browser." (no CSV)
+Yahoo chart API https://query1.finance.yahoo.com/v8/finance/chart/NVDA?range=10d&interval=1d -> HTTP 200 JSON with daily closes

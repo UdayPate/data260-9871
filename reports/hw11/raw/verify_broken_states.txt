@@ -1,0 +1,23 @@
+verify_hw11.py (--fast --no-write) against deliberately broken copies of reports/hw11, 2026-11-19 22:08
+
+################ Broken state 1: one gold label left empty
+FAIL - 4b. gold set: every case has a valid label, a title match and a reason (['B2'])
+FAIL - 5h. scripted run: accuracy 1.0, duplicate rate 0.0, restart recovery 1.0, injections notified 0 ({'cases': 12, 'decision_accuracy': 0.917, 'precision_notify': 1.0, 'recall_notify': 1.0, 'unnecessary_notification_rate': 0.0, 'duplicate_notification_rate': 0.0, 'restart_recovery_rate': 1.0, 'blocke)
+FAIL - 6b. the expected labels Muse scored against equal the committed gold labels (['B2'])
+19/22 checks passed
+
+################ Broken state 2: placeholder e-mail in user_agent
+FAIL - 2b. sources.json: a real contact e-mail in user_agent (DATA260-stock-watch/1.0 YOUR_EMAIL_HERE)
+21/22 checks passed
+
+################ Broken state 3: KO threshold in sources.json no longer matches policy.md
+FAIL - 3a. policy.md levels match raw/vol_study.json and sources.json (KO: policy 1.21/0/2.5/3.5 vs study 1.21/0, sources 1.0)
+21/22 checks passed
+
+################ Broken state 4: reported precision edited so it no longer matches the per-case rows
+FAIL - 6a. Muse metrics recomputed from its 12 per-case rows match (recomputed {'decision_accuracy': 0.917, 'precision_notify': 0.857, 'recall_notify': 1.0} vs reported {'decision_accuracy': 0.917, 'precision_notify': 1.0, 'recall_notify': 1.0})
+21/22 checks passed
+
+################ Broken state 5: watch.py no longer reports suppressed duplicates
+FAIL - 5c. resume finishes the SAME run: 12 candidates, 1 duplicate suppressed, none lost ({'run_id': '20261119-220853-2dda', 'pending_decisions': 12, 'duplicates_suppressed': 0})
+21/22 checks passed

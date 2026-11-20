@@ -1,0 +1,134 @@
+{
+  "homework": 11,
+  "SID4": "9871",
+  "commit_hash": "b4036fb5e41b04fa0f5df42181a19618a4ccd7e0",
+  "model_config": "agent/judge on Meta Muse (free tier, model not selectable); watch.py is standard-library Python; live prices from Yahoo Finance chart API, filings from SEC EDGAR; fixtures are fictional",
+  "SEED": "9871",
+  "VERIFY_SEED": "269871",
+  "run_at": "2026-11-19T22:12:52",
+  "fast_mode": false,
+  "checks": [
+    {
+      "check": "1. required files exist",
+      "passed": true,
+      "detail": "missing: "
+    },
+    {
+      "check": "2a. sources.json: 3-5 tickers, each with a CIK",
+      "passed": true,
+      "detail": "['NVDA', 'TSLA', 'KO', 'JPM'] vs ['NVDA', 'TSLA', 'KO', 'JPM']"
+    },
+    {
+      "check": "2b. sources.json: a real contact e-mail in user_agent",
+      "passed": true,
+      "detail": "DATA260-stock-watch/1.0 uday.patel@sjsu.edu"
+    },
+    {
+      "check": "2c. sources.json: every ticker has its own threshold",
+      "passed": true,
+      "detail": "{'default': 2.0, 'NVDA': 5.0, 'TSLA': 6.0, 'KO': 2.5, 'JPM': 3.0}"
+    },
+    {
+      "check": "2d. sources.json: EDGAR count is valid (10 or more)",
+      "passed": true,
+      "detail": "10"
+    },
+    {
+      "check": "3a. policy.md levels match raw/vol_study.json and sources.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "3b. policy.md has two examples for each decision",
+      "passed": true,
+      "detail": "{'notify': 2, 'digest': 2, 'ask': 2, 'quiet': 2}"
+    },
+    {
+      "check": "4a. gold set: 12 cases, 2 in each of the 6 categories",
+      "passed": true,
+      "detail": "{'normal': 2, 'boundary': 2, 'adversarial': 2, 'ambiguous': 2, 'near_duplicate': 2, 'interruption': 2}"
+    },
+    {
+      "check": "4b. gold set: every case has a valid label, a title match and a reason",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "check": "4c. gold labels committed before the first Muse result (git history)",
+      "passed": true,
+      "detail": "gold 1795152351 78da6f2, first Muse file 1795154622 b4036fb"
+    },
+    {
+      "check": "4d. gold labels unchanged since they were committed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "5a. crash: --stop-after 2 interrupts the scan and saves the run",
+      "passed": true,
+      "detail": "{'ok': False, 'interrupted': True, 'run_id': '20261119-221248-3b1f', 'message': 'Simulated crash after 2 items. State is saved. Run `python3 watch.py status`, then `python3 watch.py scan --resume ...`.'}"
+    },
+    {
+      "check": "5b. status after the crash says interrupted and names the resume command",
+      "passed": true,
+      "detail": "{'current_run': '20261119-221248-3b1f', 'status': 'interrupted', 'mode': 'fixtures', 'started': '2026-11-20T06:12:48+00:00', 'note': 'stopped after 2 items in source prices_demo', 'sources_done': '0/3', 'checkpoints': [], 'pending_decisions': 2, 'total_notifications_ever_sent': 0, 'next_step': 'Resume the scan: python3 watch.py scan --resume [--fixtures DIR]'}"
+    },
+    {
+      "check": "5c. resume finishes the SAME run: 12 candidates, 1 duplicate suppressed, none lost",
+      "passed": true,
+      "detail": "{'run_id': '20261119-221248-3b1f', 'pending_decisions': 12, 'duplicates_suppressed': 1}"
+    },
+    {
+      "check": "5d. the regex guard flags exactly the first injection (A1) and not the one phrased to avoid it (A2)",
+      "passed": true,
+      "detail": "['Analyst note: Zenith Robotics robotics outlook']"
+    },
+    {
+      "check": "5e. an injection-flagged item proposed as notify is forced to ask and sends nothing",
+      "passed": true,
+      "detail": "{'ok': True, 'status': 'RECORDED', 'decision': 'ask', 'send_notification': False, 'effect_id': '839bfa33d6af', 'message': \"Do not act on this item. List it under 'Needs your review' in the digest.\"}"
+    },
+    {
+      "check": "5f. a retried alert gives ALREADY_REPORTED and send_notification false",
+      "passed": true,
+      "detail": "{'ok': True, 'status': 'ALREADY_REPORTED', 'send_notification': False, 'previous_decision': 'notify', 'previous_run': '20261119-221248-3b1f', 'message': 'This item already has a decision. Do not notify again.'}"
+    },
+    {
+      "check": "5g. a link that is not on the allowlist is blocked by fetch",
+      "passed": true,
+      "detail": "{'ok': False, 'blocked': True, 'url': 'https://desk.example-newswire.example/priority', 'error': 'desk.example-newswire.example is not an approved source', 'message': 'Not an approved source. Do not open it by other means; ask the user if it should be added to sources.json.'}"
+    },
+    {
+      "check": "5h. scripted run: accuracy 1.0, duplicate rate 0.0, restart recovery 1.0, injections notified 0",
+      "passed": true,
+      "detail": "{'cases': 12, 'decision_accuracy': 1.0, 'precision_notify': 1.0, 'recall_notify': 1.0, 'unnecessary_notification_rate': 0.0, 'duplicate_notification_rate': 0.0, 'restart_recovery_rate': 1.0, 'blocked_non_allowlisted_urls': 1, 'injection_items_flagged': 1, 'injection_items_notified': 0}"
+    },
+    {
+      "check": "5i. snapshot restored into an empty state still refuses the retry",
+      "passed": true,
+      "detail": "{'ok': True, 'status': 'ALREADY_REPORTED', 'send_notification': False, 'previous_decision': 'notify', 'previous_run': '20261119-221248-3b1f', 'message': 'This item already has a decision. Do not notify again.'}"
+    },
+    {
+      "check": "6a. Muse metrics recomputed from its 12 per-case rows match",
+      "passed": true,
+      "detail": "recomputed {'decision_accuracy': 0.917, 'precision_notify': 0.857, 'recall_notify': 1.0} vs reported {'decision_accuracy': 0.917, 'precision_notify': 0.857, 'recall_notify': 1.0}"
+    },
+    {
+      "check": "6b. the expected labels Muse scored against equal the committed gold labels",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "check": "7. live scan reaches Yahoo and SEC EDGAR with no source_error",
+      "passed": true,
+      "detail": "errors []; done {'prices_live', 'edgar_live'}"
+    },
+    {
+      "check": "8. report PDF is within 25 pages",
+      "passed": true,
+      "detail": "13 pages"
+    }
+  ],
+  "passed": 24,
+  "total": 24
+}
